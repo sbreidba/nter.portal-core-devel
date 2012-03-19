@@ -1,3 +1,5 @@
 \.idea
 portal-core\.iml
 portlet/portlet\.iml
+layout/layout\.iml
+theme/theme\.iml
