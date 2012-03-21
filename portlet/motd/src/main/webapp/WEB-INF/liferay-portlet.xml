@@ -4,7 +4,7 @@
 <liferay-portlet-app>
 	<portlet>
 		<portlet-name>motd</portlet-name>
-		<icon>/icon.png</icon>
+		<icon>/images/icon.png</icon>
 		<instanceable>false</instanceable>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
@@ -12,7 +12,7 @@
 
     <portlet>
 		<portlet-name>maintenance-warning-cp</portlet-name>
-		<icon>/resources/iconCp.png</icon>
+		<icon>/images/iconCp.png</icon>
         <control-panel-entry-category>portal</control-panel-entry-category>
         <control-panel-entry-weight>2.1</control-panel-entry-weight>
 		<header-portlet-css>/css/main.css</header-portlet-css>
