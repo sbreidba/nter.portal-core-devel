@@ -6,6 +6,7 @@
         <groupId>org.nterlearning</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
+
 	<artifactId>nter-portal-core-theme-nter</artifactId>
 	<packaging>war</packaging>
 	<name>NTER Theme</name>
@@ -13,7 +14,7 @@
 	<dependencies>
         <dependency>
             <groupId>org.nterlearning</groupId>
-            <artifactId>nter-portal-core-theme-base</artifactId>
+            <artifactId>nter-portal-core-base-theme</artifactId>
             <version>1.0.0-SNAPSHOT</version>
             <type>war</type>
             <scope>provided</scope>
@@ -63,7 +64,7 @@
 		</dependency>
 	</dependencies>
 	<properties>
-		<liferay.theme.parent>org.nterlearning:nter-portal-core-theme-base:1.0.0-SNAPSHOT</liferay.theme.parent>
+		<liferay.theme.parent>org.nterlearning:nter-portal-core-base-theme:1.0.0-SNAPSHOT</liferay.theme.parent>
 		<liferay.theme.type>vm</liferay.theme.type>
 	</properties>
 </project>
