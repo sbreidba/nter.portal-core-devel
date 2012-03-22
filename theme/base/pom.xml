@@ -6,7 +6,8 @@
         <groupId>org.nterlearning</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
-	<artifactId>nter-portal-core-theme-base</artifactId>
+
+	<artifactId>nter-base-theme</artifactId>
 	<packaging>war</packaging>
     <version>1.0.0-SNAPSHOT</version>
 	<name>base theme</name>
