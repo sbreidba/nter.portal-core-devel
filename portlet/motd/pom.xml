@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.nterlearning</groupId>
-    <artifactId>motd</artifactId>
+    <artifactId>nter-motd-portlet</artifactId>
     <packaging>war</packaging>
     <name>motd Portlet</name>
     <build>
