@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!DOCTYPE layout-templates PUBLIC "-//Liferay//DTD Layout Templates 6.1.0//EN" "http://www.liferay.com/dtd/liferay-layout-templates_6_1_0.dtd">
+
+<layout-templates>
+	<custom>
+		<layout-template id="1-col-promo" name="1-col-promo">
+			<template-path>/1-col-promo.tpl</template-path>
+			<wap-template-path>/1-col-promo.wap.tpl</wap-template-path>
+			<thumbnail-path>/1-col-promo.png</thumbnail-path>
+		</layout-template>
+	</custom>
+</layout-templates>
