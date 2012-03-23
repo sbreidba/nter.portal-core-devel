@@ -33,6 +33,7 @@
     <modules>
         <module>motd</module>
         <module>language</module>
+        <module>ntersetup</module>
     </modules>
     <name>all portlets</name>
 </project>
