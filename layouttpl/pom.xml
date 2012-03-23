@@ -31,6 +31,8 @@
     <version>1.0.0-SNAPSHOT</version>
     <modules>
         <module>1-col-custom</module>
+        <module>1-col-promo-layouttpl</module>
+        <module>1-col-promo</module>
     </modules>
     <name>all layouts</name>
 </project>
