@@ -25,14 +25,31 @@
         <groupId>org.nterlearning</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
     <artifactId>nter-portal-core-layouttpl</artifactId>
     <packaging>pom</packaging>
     <version>1.0.0-SNAPSHOT</version>
+    <name>all layouts</name>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>com.liferay.maven.plugins</groupId>
+                <artifactId>liferay-maven-plugin</artifactId>
+                <version>${liferay.version}</version>
+                <configuration>
+                    <autoDeployDir>${liferay.auto.deploy.dir}</autoDeployDir>
+                    <liferayVersion>${liferay.version}</liferayVersion>
+                    <pluginType>layouttpl</pluginType>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <modules>
         <module>1-col-custom</module>
         <module>1-col-promo</module>
         <module>1-col-sidenav</module>
     </modules>
-    <name>all layouts</name>
 </project>
