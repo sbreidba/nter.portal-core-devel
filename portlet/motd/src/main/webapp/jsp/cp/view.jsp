@@ -41,7 +41,7 @@
 
     String maintenanceSchedule = LanguageUtil.get(pageContext, "mw-no-messages");
 
-    if ((mwStart != null) && (!mwStart.equals(""))) {
+    if ((mwStart != null) && (!mwStart.equals("unknown"))) {
         startDate.setTime(Long.valueOf(mwStart));
         maintenanceSchedule = "Start Time: " + startDate.toString() + " for " + mwDuration +
                         " hour(s), stating that: \"" + mwMessage + "\"";
