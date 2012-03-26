@@ -157,13 +157,13 @@ public class SetupAction extends SimpleAction {
 	        //liferay 61 requires deleteLayouts method signature to include a serviceContext
 			ServiceContext serviceContext = new ServiceContext();
 
-            //TO-DO create new nter.lar for 61, then activate following if statement
-//            if (guestLayouts.size() == 1) {
-//                LayoutLocalServiceUtil.deleteLayouts(guestGroup.getGroupId(), false, serviceContext);
-//                SetupTools.addDefaultLayoutsByLar(mDefaultUserId,
-//                                guestGroup.getGroupId(), false,
-//                                NterConstants.DEFAULT_LAR_FILENAME);
-//            }
+            //TODO create new nter.lar for 61, then activate following if statement
+            if (guestLayouts.size() == 1) {
+                LayoutLocalServiceUtil.deleteLayouts(guestGroup.getGroupId(), false, serviceContext);
+                SetupTools.addDefaultLayoutsByLar(mDefaultUserId,
+                                guestGroup.getGroupId(), false,
+                               NterConstants.DEFAULT_LAR_FILENAME);
+            }
         }
         catch (NoSuchGroupException e) {
             // guest is a liferay group, this should never happen
