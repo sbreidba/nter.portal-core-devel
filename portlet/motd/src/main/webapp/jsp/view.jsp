@@ -43,7 +43,7 @@
 
     Date localMaintDate = new Date();
 
-    if ((mwStart != null) && (!mwStart.equals(""))) {
+    if ((mwStart != null) && (!mwStart.equals("unknown"))) {
         localMaintDate.setTime(Long.valueOf(mwStart) + themeDisplay.getTimeZone().getRawOffset());
         maintCalStart.setTime(localMaintDate);
 

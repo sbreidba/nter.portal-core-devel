@@ -71,7 +71,7 @@
 	</header>
 	
 	#set ($VOID = $velocityPortletPreferences.setValue('portlet-setup-show-borders', 'false'))
-	$theme.runtime("maintenancewarning_WAR_motdportlet","",$velocityPortletPreferences.toString())
+	$theme.runtime("motd_WAR_ntermotdportlet","",$velocityPortletPreferences.toString())
 	#set ($VOID = $velocityPortletPreferences.reset())
 
 	<div id="content">
