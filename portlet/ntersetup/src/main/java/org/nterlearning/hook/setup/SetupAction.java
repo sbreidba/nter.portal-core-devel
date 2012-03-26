@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.monitoring.statistics.SummaryStatistics;
 import com.liferay.portal.kernel.util.*;
 import com.liferay.portal.model.*;
 import com.liferay.portal.service.*;
@@ -81,6 +82,7 @@ public class SetupAction extends SimpleAction {
         try {
             updateGuestCommunity();
 		    createDefaultOrganizations();
+
             createDefaultWebContent();
             synchronizeTaxonomy();
         }
@@ -150,9 +152,8 @@ public class SetupAction extends SimpleAction {
         Group guestGroup = null;
         try {
             guestGroup = GroupLocalServiceUtil.getGroup(mCompanyId, "Guest");
-            List<Layout> guestLayouts =
+             List<Layout> guestLayouts =
                     LayoutLocalServiceUtil.getLayouts(guestGroup.getGroupId(), false);
-
             // if size == 1, then the lar file hasn't been applied yet, so apply it
 	        //liferay 61 requires deleteLayouts method signature to include a serviceContext
 			ServiceContext serviceContext = new ServiceContext();
