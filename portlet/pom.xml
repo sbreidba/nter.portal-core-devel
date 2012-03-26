@@ -34,6 +34,7 @@
         <module>motd</module>
         <module>language</module>
         <module>ntersetup</module>
+        <module>organization-details</module>
     </modules>
     <name>all portlets</name>
 </project>
