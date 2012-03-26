@@ -1,0 +1,33 @@
+/* == page regions == */
+/* header */
+.ie6 #site-search .submit { background-position: left center; padding-left: 16px; }
+
+
+/* == portlet content styles == */
+.course-description .taglib-ratings { display: inline; top: 0; }
+
+/* call to action */
+section.call-to-action .text { float: left; }
+section.call-to-action img { float: right; }
+
+/* recent courses */
+.course-status-section .course { background-color: white; }
+.course-status-section .actions { margin-top: 20px; zoom: 1; }
+
+/* course listings */
+ul.course-listing { zoom: 1; }
+
+/* carousel */
+.ie6 .carousel-wrapper, .ie6 .carousel-prev, .ie6 .carousel-next { height: 105px; }
+
+/* course reviews */
+.ie6 .taglib-flags, .ie6 .aui-thumbrating, .ie6 .aui-thumbrating-content { display: inline; }
+.reviewlist .actions form, .reviewlist .actions .admin, .reviewlist .actions .metamoderation { display: inline; vertical-align: top; }
+.review header .aui-rating-content { display: inline; }
+.ratings-histogram label { white-space: nowrap; }
+.ratings-histogram .total { display: inline; }
+.ratings-stats .aui-rating { margin-left: 0; margin-bottom: .2em; }
+
+/* course details */
+.course-details .course-image .thumbnails { zoom: 1; }
+.course-details .course-image .thumbnails li { zoom: 1; float: left; }
