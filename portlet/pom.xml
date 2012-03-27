@@ -63,5 +63,6 @@
         <module>organization-details</module>
         <module>shared</module>
         <module>shib-sso</module>
+        <module>registry</module>
     </modules>
 </project>
