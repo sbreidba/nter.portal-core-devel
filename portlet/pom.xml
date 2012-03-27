@@ -61,5 +61,6 @@
         <module>language</module>
         <module>ntersetup</module>
         <module>organization-details</module>
+        <module>shared</module>
     </modules>
 </project>
