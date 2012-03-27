@@ -35,7 +35,13 @@
 
 <%
 Group grp = themeDisplay.getScopeGroup();
-Organization org = OrganizationLocalServiceUtil.getOrganization(grp.getOrganizationId());
+    System.out.print("Grp: " + grp.getPrimaryKey());
+
+    //Note: themeDisplay is returning Guest and it should be returning NTER group
+    //TODO verify that we want the group.classPK
+    //Organization org = OrganizationLocalServiceUtil.getOrganization(grp.getOrganizationId());
+
+Organization org = OrganizationLocalServiceUtil.getOrganization(grp.getClassPK());
 
 String[] tags = AssetTagLocalServiceUtil.getTagNames(grp.getClassNameId(), grp.getClassPK());
 StringBuilder tagString = new StringBuilder();
