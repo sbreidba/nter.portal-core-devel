@@ -149,7 +149,7 @@ public class SetupTools {
         String larDirPath = ".";
         try {
             larDirPath = PrefsPropsUtil.getString(PropsKeys.AUTO_DEPLOY_TOMCAT_DEST_DIR) +
-                                    "/ntersetup-portlet/WEB-INF/lar/";
+                                    "/nter-setup-portlet/webapp/lar/";
             larDir = new File(larDirPath);
         }
         catch (Exception e) {
@@ -197,6 +197,7 @@ public class SetupTools {
                          new String[] {PortletDataHandlerKeys.PORTLETS_MERGE_MODE_REPLACE});
 
         try {
+            System.out.print("Import Layouts for userId: " + userId + "groupId: " + groupId);
             LayoutLocalServiceUtil.importLayouts(userId, groupId, privateLayout,
                     parameterMap, larFile);  
         }
