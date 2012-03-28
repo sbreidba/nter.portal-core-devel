@@ -1,11 +1,11 @@
 <!--
   National Training and Education Resource (NTER)
-  Copyright (C) 2011, 2012  SRI International
+  Copyright (C) 2012 SRI International
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License as published by
   the Free Software Foundation; either version 2 of the License, or (at
-  our option) any later version.
+  your option) any later version.
 
   This program is distributed in the hope that it will be useful, but
   WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -29,22 +29,16 @@
     <groupId>org.nterlearning</groupId>
     <artifactId>nter-registry-portlet</artifactId>
     <packaging>war</packaging>
-    <name>registry Portlet</name>
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.liferay.maven.plugins</groupId>
-                <artifactId>liferay-maven-plugin</artifactId>
-                <version>${liferay.version}</version>
-                <configuration>
-                    <autoDeployDir>${liferay.auto.deploy.dir}</autoDeployDir>
-                    <liferayVersion>${liferay.version}</liferayVersion>
-                    <pluginType>portlet</pluginType>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
+    <name>Service Registry Portlet</name>
+
     <dependencies>
+        <dependency>
+            <groupId>org.nterlearning</groupId>
+            <artifactId>registry-client-proxy</artifactId>
+            <version>0.1.7</version>
+            <scope>compile</scope>
+        </dependency>
+
         <dependency>
             <groupId>com.liferay.portal</groupId>
             <artifactId>portal-service</artifactId>
@@ -165,11 +159,5 @@
             <version>2.0</version>
             <scope>provided</scope>
         </dependency>
-
-        <!--<dependency>-->
-            <!--<groupId></groupId>-->
-            <!--<artifactId>registry-client-proxy</artifactId>-->
-            <!--<scope>compile</scope>-->
-        <!--</dependency>-->
     </dependencies>
 </project>
