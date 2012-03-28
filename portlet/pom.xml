@@ -64,5 +64,6 @@
         <module>shared</module>
         <module>shib-sso</module>
         <module>registry</module>
+        <module>institute-listing</module>
     </modules>
 </project>
