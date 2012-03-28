@@ -26,7 +26,6 @@ import com.sri.nter.registry.proxy.InstitutionBean;
 import com.sri.nter.registry.proxy.Registry;
 import com.sri.nter.registry.proxy.RegistryImpl;
 import com.sri.nter.registry.proxy.ServiceBean;
-import com.sri.nter.utils.ExecutorUtil;
 
 import org.nterlearning.xml.nter_registry.blacklist_objects_0_1_0.ActiveStatusEnum;
 import org.nterlearning.xml.nter_registry.domain_objects_0_1_0.Binding;
