@@ -17,51 +17,9 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
   02110-1301, USA.
   --%>
-
-<%@ page import="com.liferay.portal.kernel.dao.search.ResultRow" %>
-<%@ page import="com.liferay.portal.kernel.dao.search.SearchContainer" %>
-<%@ page import="com.liferay.portal.kernel.language.LanguageUtil"%>
-<%@ page import="com.liferay.portal.kernel.log.Log" %>
-<%@ page import="com.liferay.portal.kernel.log.LogFactoryUtil" %>
-<%@ page import="com.liferay.portal.kernel.search.Field" %>
-<%@ page import="com.liferay.portal.kernel.search.OpenSearch" %>
-<%@ page import="com.liferay.portal.kernel.search.OpenSearchUtil" %>
-<%@ page import="com.liferay.portal.kernel.xml.Document" %>
-<%@ page import="com.liferay.portal.kernel.xml.Element" %>
-<%@ page import="com.liferay.portal.kernel.xml.SAXReaderUtil" %>
-<%@ page import="com.liferay.portal.kernel.util.*" %>
-<%@ page import="com.liferay.portal.model.Group" %>
-<%@ page import="com.liferay.portal.model.Portlet" %>
-<%@ page import="com.liferay.portal.security.permission.ActionKeys" %>
-<%@ page import="com.liferay.portal.service.GroupLocalServiceUtil" %>
-<%@ page import="com.liferay.portal.service.GroupServiceUtil" %>
-<%@ page import="com.liferay.portal.service.permission.PortletPermissionUtil" %>
-<%@ page import="com.liferay.portal.service.PortletLocalServiceUtil" %>
-
-<%@ page import="com.liferay.portal.util.comparator.PortletTitleComparator" %>
-<%@ page import="com.liferay.portal.util.PortalUtil" %>
-<%@ page import="com.liferay.portal.util.PortletKeys" %>
-
-<%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntry" %>
-<%@ page import="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>
-<%@ page import="com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.PortletURLUtil" %>
-
-<%@ page import="com.liferay.util.xml.XMLFormatter" %>
-
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="java.util.Iterator" %>
-<%@ page import="java.util.LinkedHashMap" %>
-<%@ page import="java.util.List" %>
-
-<%@ page import="javax.portlet.PortletRequest" %>
-<%@ page import="javax.portlet.PortletURL" %>
-<%@ page import="javax.portlet.WindowState" %>
-
-<%@ taglib uri="http://java.sun.com/portlet" prefix="portlet" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%--<%@ include file="/custom_jsp/portlet/search/init.jsp" %>--%>
+<%@page import="com.liferay.portal.kernel.util.LocalizationUtil"%>
+<%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
+<%@ include file="/html/portlet/users_admin/init.jsp" %>
 
 <%
 String primarySearch = ParamUtil.getString(request, "primarySearch");
