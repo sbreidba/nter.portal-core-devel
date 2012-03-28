@@ -37,7 +37,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import com.sri.nter.registry.proxy.*;
-import com.sri.nter.service.registry.RegistryUtil;
 
 import org.nterlearning.xml.nter_registry.blacklist_objects_0_1_0.ActiveStatusEnum;
 import org.nterlearning.xml.nter_registry.domain_objects_0_1_0.*;
