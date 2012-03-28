@@ -23,6 +23,6 @@
 
 <hook>
 	<portal-properties>portal.properties</portal-properties>
-
+    <language-properties>content/Language_en_US.properties</language-properties>
     <custom-jsp-dir>/custom_jsp</custom-jsp-dir>
 </hook>

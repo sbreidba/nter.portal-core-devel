@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.monitoring.statistics.SummaryStatistics;
 import com.liferay.portal.kernel.util.*;
 import com.liferay.portal.model.*;
 import com.liferay.portal.service.*;
@@ -44,7 +43,6 @@ import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
-import java.rmi.registry.LocateRegistry;
 import java.util.*;
 
 /**
