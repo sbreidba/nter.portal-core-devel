@@ -1,0 +1,251 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="org.nterlearning.model.Foo">
+		<field name="uuid" type="String" />
+		<field name="fooId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="field1" type="String" />
+		<field name="field2" type="boolean" />
+		<field name="field3" type="int" />
+		<field name="field4" type="Date" />
+		<field name="field5" type="String" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.Component">
+		<field name="componentId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="feedReferenceId" type="long" />
+		<field name="componentIri" type="String" />
+		<field name="updatedDate" type="Date" />
+		<field name="language" type="String" />
+		<field name="href" type="String" />
+		<field name="fullTextHref" type="String" />
+		<field name="title" type="String" />
+		<field name="description" type="String" />
+		<field name="copyright" type="String" localized="true" />
+		<field name="displayWidth" type="int" />
+		<field name="displayHeight" type="int" />
+		<field name="createDate" type="Date" />
+		<field name="removed" type="boolean" />
+		<field name="removedDate" type="Date" />
+		<field name="version" type="String" />
+		<field name="versionDate" type="Date" />
+		<field name="price" type="double" />
+		<field name="priceUnit" type="String" />
+		<field name="priceTerms" type="String" />
+		<field name="priceExpiration" type="String" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.ComponentRecord">
+		<field name="componentRecordId" type="long" />
+		<field name="courseRecordId" type="long" />
+		<field name="componentIri" type="String" />
+		<field name="updatedDate" type="Date" />
+		<field name="completionStatus" type="String" />
+		<field name="completionPercent" type="Integer" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.Contributor">
+		<field name="contributorId" type="long" />
+		<field name="courseId" type="long" />
+		<field name="componentId" type="long" />
+		<field name="role" type="String" />
+		<field name="contributorName" type="String" />
+		<field name="virtualCardData" type="String" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.Course">
+		<field name="courseId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="feedReferenceId" type="long" />
+		<field name="href" type="String" />
+		<field name="fullTextHref" type="String" />
+		<field name="courseIri" type="String" />
+		<field name="updatedDate" type="Date" />
+		<field name="title" type="String" localized="true" />
+		<field name="transcriptAbstract" type="String" localized="true" />
+		<field name="description" type="String" localized="true" />
+		<field name="keywords" type="String" localized="true" />
+		<field name="copyright" type="String" localized="true" />
+		<field name="ratingLevel" type="String" localized="true" />
+		<field name="ratingReason" type="String" localized="true" />
+		<field name="duration" type="String" />
+		<field name="durationStandard" type="String" />
+		<field name="featuredStatus" type="double" />
+		<field name="popularWeight" type="double" />
+		<field name="accessCount" type="long" />
+		<field name="completedCount" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="removed" type="boolean" />
+		<field name="removedDate" type="Date" />
+		<field name="supersedesCourseIri" type="String" />
+		<field name="supersededByCourseIri" type="String" />
+		<field name="releaseOnDate" type="Date" />
+		<field name="acceptUntilDate" type="Date" />
+		<field name="version" type="String" />
+		<field name="versionDate" type="Date" />
+		<field name="price" type="double" />
+		<field name="priceUnit" type="String" />
+		<field name="priceTerms" type="String" />
+		<field name="priceExpiration" type="String" />
+		<field name="oneStarRateCount" type="long" />
+		<field name="twoStarRateCount" type="long" />
+		<field name="threeStarRateCount" type="long" />
+		<field name="fourStarRateCount" type="long" />
+		<field name="fiveStarRateCount" type="long" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.CourseImage">
+		<field name="courseImageId" type="long" />
+		<field name="courseId" type="long" />
+		<field name="orderWeight" type="double" />
+		<field name="language" type="String" />
+		<field name="imageId" type="long" />
+		<field name="alternateText" type="String" />
+		<field name="sourceImageUrl" type="String" />
+		<field name="mimeType" type="String" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.CourseRecord">
+		<field name="courseRecordId" type="long" />
+		<field name="feedReferenceId" type="long" />
+		<field name="courseRecordIri" type="String" />
+		<field name="userId" type="long" />
+		<field name="singleSignOnValue" type="String" />
+		<field name="courseIri" type="String" />
+		<field name="updatedDate" type="Date" />
+		<field name="completionStatus" type="String" />
+		<field name="removed" type="boolean" />
+		<field name="removedDate" type="Date" />
+		<field name="userHidden" type="boolean" />
+		<field name="assigned" type="boolean" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.CourseRelated">
+		<field name="courseRelatedId" type="long" />
+		<field name="courseId" type="long" />
+		<field name="relatedCourseId" type="long" />
+		<field name="relatedCourseIri" type="String" />
+		<field name="relationshipType" type="String" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.CourseRequirement">
+		<field name="courseRequirementId" type="long" />
+		<field name="courseId" type="long" />
+		<field name="requirementType" type="String" />
+		<field name="requirementValue" type="String" localized="true" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.CourseReview">
+		<field name="courseReviewId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="courseId" type="long" />
+		<field name="userId" type="long" />
+		<field name="summary" type="String" />
+		<field name="content" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="weightedScore" type="double" />
+		<field name="removed" type="boolean" />
+		<field name="removedDate" type="Date" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.Courses_Components">
+		<field name="coursesComponentsId" type="long" />
+		<field name="courseId" type="long" />
+		<field name="courseIri" type="String" />
+		<field name="componentId" type="long" />
+		<field name="componentIri" type="String" />
+		<field name="orderWeight" type="double" />
+		<field name="sectionType" type="String" />
+		<field name="componentType" type="String" />
+		<field name="mimeType" type="String" />
+		<field name="coursePaymentRequired" type="boolean" />
+		<field name="componentPaymentRequired" type="boolean" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.ExternalLink">
+		<field name="linkId" type="long" />
+		<field name="courseId" type="long" />
+		<field name="componentId" type="long" />
+		<field name="linkType" type="String" />
+		<field name="linkUrl" type="String" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.FeedReference">
+		<field name="feedReferenceId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="contentProviderId" type="String" />
+		<field name="href" type="String" />
+		<field name="hrefHash" type="String" />
+		<field name="pshb" type="String" />
+		<field name="pshbSubscribed" type="boolean" />
+		<field name="feedIri" type="String" />
+		<field name="feedType" type="String" />
+		<field name="feedVersion" type="String" />
+		<field name="trustworthyWeight" type="double" />
+		<field name="createDate" type="Date" />
+		<field name="removed" type="boolean" />
+		<field name="removedDate" type="Date" />
+		<field name="removedReason" type="String" />
+		<field name="syncDate" type="Date" />
+		<field name="syncSuccess" type="boolean" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.FeedSyncHistory">
+		<field name="syncId" type="long" />
+		<field name="feedReferenceId" type="long" />
+		<field name="syncDate" type="Date" />
+		<field name="success" type="Boolean" />
+		<field name="syncMessage" type="String" />
+		<field name="numberOfEntries" type="Integer" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.FlagReport">
+		<field name="uuid" type="String" />
+		<field name="flagReportId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="title" type="String" />
+		<field name="content" type="String" />
+		<field name="flagReason" type="String" />
+		<field name="flagComment" type="String" />
+		<field name="moderateAction" type="String" />
+		<field name="moderatorComment" type="String" />
+		<field name="status" type="int" />
+		<field name="statusByUserId" type="long" />
+		<field name="statusByUserName" type="String" />
+		<field name="statusDate" type="Date" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.FlagReportStats">
+		<field name="flagReportStatsId" type="long" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
+		<field name="totalEntries" type="Integer" />
+		<field name="totalModerated" type="Integer" />
+		<field name="totalApproved" type="Integer" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.GlobalCourseReview">
+		<field name="globalCourseReviewId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="courseReviewIri" type="String" />
+		<field name="updatedDate" type="Date" />
+		<field name="courseIri" type="String" />
+		<field name="href" type="String" />
+		<field name="nterInstance" type="String" />
+		<field name="courseId" type="long" />
+		<field name="userDisplayName" type="String" />
+		<field name="singleSignOnValue" type="String" />
+		<field name="summary" type="String" />
+		<field name="content" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="starScore" type="double" />
+		<field name="fromTrustedReviewer" type="boolean" />
+		<field name="removed" type="boolean" />
+		<field name="removedDate" type="Date" />
+		<field name="isHidden" type="boolean" />
+	</model>
+</model-hints>

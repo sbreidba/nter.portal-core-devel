@@ -1,0 +1,320 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="org.nterlearning.model.Foo" />
+	<import class="org.nterlearning.datamodel.catalog.model.Component" />
+	<import class="org.nterlearning.datamodel.catalog.model.ComponentRecord" />
+	<import class="org.nterlearning.datamodel.catalog.model.Contributor" />
+	<import class="org.nterlearning.datamodel.catalog.model.Course" />
+	<import class="org.nterlearning.datamodel.catalog.model.CourseImage" />
+	<import class="org.nterlearning.datamodel.catalog.model.CourseRecord" />
+	<import class="org.nterlearning.datamodel.catalog.model.CourseRelated" />
+	<import class="org.nterlearning.datamodel.catalog.model.CourseRequirement" />
+	<import class="org.nterlearning.datamodel.catalog.model.CourseReview" />
+	<import class="org.nterlearning.datamodel.catalog.model.Courses_Components" />
+	<import class="org.nterlearning.datamodel.catalog.model.ExternalLink" />
+	<import class="org.nterlearning.datamodel.catalog.model.FeedReference" />
+	<import class="org.nterlearning.datamodel.catalog.model.FeedSyncHistory" />
+	<import class="org.nterlearning.datamodel.catalog.model.FlagReport" />
+	<import class="org.nterlearning.datamodel.catalog.model.FlagReportStats" />
+	<import class="org.nterlearning.datamodel.catalog.model.GlobalCourseReview" />
+	<class name="org.nterlearning.model.impl.FooImpl" table="course_Foo">
+		<cache usage="read-write" />
+		<id name="fooId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" column="uuid_" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="field1" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="field2" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="field3" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="field4" type="org.hibernate.type.TimestampType" />
+		<property name="field5" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="org.nterlearning.datamodel.catalog.model.impl.ComponentImpl" table="CATALOG_Component">
+		<cache usage="read-write" />
+		<id name="componentId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="feedReferenceId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="componentIri" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="updatedDate" type="org.hibernate.type.TimestampType" />
+		<property name="language" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="href" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="fullTextHref" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="copyright" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="displayWidth" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="displayHeight" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="removed" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="removedDate" type="org.hibernate.type.TimestampType" />
+		<property name="version" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="versionDate" type="org.hibernate.type.TimestampType" />
+		<property name="price" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="priceUnit" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="priceTerms" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="priceExpiration" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="org.nterlearning.datamodel.catalog.model.impl.ComponentRecordImpl" table="CATALOG_ComponentRecord">
+		<cache usage="read-write" />
+		<id name="componentRecordId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="courseRecordId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="componentIri" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="updatedDate" type="org.hibernate.type.TimestampType" />
+		<property name="completionStatus" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="completionPercent" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+	<class name="org.nterlearning.datamodel.catalog.model.impl.ContributorImpl" table="CATALOG_Contributor">
+		<cache usage="read-write" />
+		<id name="contributorId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="courseId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="componentId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="role" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="contributorName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="virtualCardData" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="org.nterlearning.datamodel.catalog.model.impl.CourseImpl" table="CATALOG_Course">
+		<cache usage="read-write" />
+		<id name="courseId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="feedReferenceId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="href" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="fullTextHref" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="courseIri" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="updatedDate" type="org.hibernate.type.TimestampType" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="transcriptAbstract" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="keywords" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="copyright" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="ratingLevel" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="ratingReason" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="duration" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="durationStandard" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="featuredStatus" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="popularWeight" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="accessCount" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="completedCount" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="removed" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="removedDate" type="org.hibernate.type.TimestampType" />
+		<property name="supersedesCourseIri" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="supersededByCourseIri" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="releaseOnDate" type="org.hibernate.type.TimestampType" />
+		<property name="acceptUntilDate" type="org.hibernate.type.TimestampType" />
+		<property name="version" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="versionDate" type="org.hibernate.type.TimestampType" />
+		<property name="price" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="priceUnit" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="priceTerms" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="priceExpiration" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="oneStarRateCount" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="twoStarRateCount" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="threeStarRateCount" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="fourStarRateCount" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="fiveStarRateCount" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="org.nterlearning.datamodel.catalog.model.impl.CourseImageImpl" table="CATALOG_CourseImage">
+		<cache usage="read-write" />
+		<id name="courseImageId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="courseId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="orderWeight" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="language" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="imageId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="alternateText" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sourceImageUrl" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mimeType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="org.nterlearning.datamodel.catalog.model.impl.CourseRecordImpl" table="CATALOG_CourseRecord">
+		<cache usage="read-write" />
+		<id name="courseRecordId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="feedReferenceId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="courseRecordIri" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="singleSignOnValue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="courseIri" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="updatedDate" type="org.hibernate.type.TimestampType" />
+		<property name="completionStatus" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="removed" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="removedDate" type="org.hibernate.type.TimestampType" />
+		<property name="userHidden" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="assigned" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+	</class>
+	<class name="org.nterlearning.datamodel.catalog.model.impl.CourseRelatedImpl" table="CATALOG_CourseRelated">
+		<cache usage="read-write" />
+		<id name="courseRelatedId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="courseId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="relatedCourseId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="relatedCourseIri" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="relationshipType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="org.nterlearning.datamodel.catalog.model.impl.CourseRequirementImpl" table="CATALOG_CourseRequirement">
+		<cache usage="read-write" />
+		<id name="courseRequirementId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="courseId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="requirementType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="requirementValue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="org.nterlearning.datamodel.catalog.model.impl.CourseReviewImpl" table="CATALOG_CourseReview">
+		<cache usage="read-write" />
+		<id name="courseReviewId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="courseId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="summary" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="weightedScore" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="removed" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="removedDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="org.nterlearning.datamodel.catalog.model.impl.Courses_ComponentsImpl" table="CATALOG_Courses_Components">
+		<cache usage="read-write" />
+		<id name="coursesComponentsId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="courseId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="courseIri" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="componentId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="componentIri" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="orderWeight" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="sectionType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="componentType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mimeType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="coursePaymentRequired" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="componentPaymentRequired" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+	</class>
+	<class name="org.nterlearning.datamodel.catalog.model.impl.ExternalLinkImpl" table="CATALOG_ExternalLink">
+		<cache usage="read-write" />
+		<id name="linkId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="courseId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="componentId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="linkType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="linkUrl" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="org.nterlearning.datamodel.catalog.model.impl.FeedReferenceImpl" table="CATALOG_FeedReference">
+		<cache usage="read-write" />
+		<id name="feedReferenceId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="contentProviderId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="href" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="hrefHash" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="pshb" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="pshbSubscribed" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="feedIri" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="feedType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="feedVersion" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="trustworthyWeight" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="removed" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="removedDate" type="org.hibernate.type.TimestampType" />
+		<property name="removedReason" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="syncDate" type="org.hibernate.type.TimestampType" />
+		<property name="syncSuccess" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+	</class>
+	<class name="org.nterlearning.datamodel.catalog.model.impl.FeedSyncHistoryImpl" table="CATALOG_FeedSyncHistory">
+		<cache usage="read-write" />
+		<id name="syncId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="feedReferenceId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="syncDate" type="org.hibernate.type.TimestampType" />
+		<property name="success" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="syncMessage" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="numberOfEntries" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+	<class name="org.nterlearning.datamodel.catalog.model.impl.FlagReportImpl" table="CATALOG_FlagReport">
+		<cache usage="read-write" />
+		<id name="flagReportId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" column="uuid_" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="flagReason" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="flagComment" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="moderateAction" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="moderatorComment" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="status" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="statusByUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="statusByUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="statusDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="org.nterlearning.datamodel.catalog.model.impl.FlagReportStatsImpl" table="CATALOG_FlagReportStats">
+		<cache usage="read-write" />
+		<id name="flagReportStatsId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="classNameId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="totalEntries" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="totalModerated" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="totalApproved" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+	<class name="org.nterlearning.datamodel.catalog.model.impl.GlobalCourseReviewImpl" table="CATALOG_GlobalCourseReview">
+		<cache usage="read-write" />
+		<id name="globalCourseReviewId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="courseReviewIri" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="updatedDate" type="org.hibernate.type.TimestampType" />
+		<property name="courseIri" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="href" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="nterInstance" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="courseId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userDisplayName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="singleSignOnValue" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="summary" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="content" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="starScore" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="fromTrustedReviewer" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="removed" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="removedDate" type="org.hibernate.type.TimestampType" />
+		<property name="isHidden" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+	</class>
+</hibernate-mapping>
