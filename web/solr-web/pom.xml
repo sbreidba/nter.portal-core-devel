@@ -29,9 +29,12 @@
         <version>1.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>solr-web</artifactId>
+    <groupId>org.nterlearning</groupId>
+    <artifactId>solr-web-portlet</artifactId>
     <packaging>war</packaging>
-    <name>solr-web Portlet</name>
+    <name>Solr web Portlet</name>
+
+    <!--
     <build>
         <plugins>
             <plugin>
@@ -60,6 +63,8 @@
             </plugin>
         </plugins>
     </build>
+    -->
+    
     <dependencies>
         <dependency>
             <groupId>com.liferay.portal</groupId>
@@ -103,5 +108,37 @@
             <version>2.0</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- Solr dependencies -->
+        <dependency>
+	        <groupId>org.apache.solr</groupId>
+	        <artifactId>solr-core</artifactId>
+	        <version>3.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.solr</groupId>
+            <artifactId>solr-solrj</artifactId>
+            <version>3.5.0</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.6</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>3.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.5.11</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.5.11</version>
+        </dependency>                                                                  
     </dependencies>
 </project>
