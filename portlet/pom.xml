@@ -65,7 +65,5 @@
         <module>shib-sso</module>
         <module>registry</module>
         <module>institute-listing</module>
-        <module>solr-web</module>
-        <module>solr-web</module>
     </modules>
 </project>
