@@ -27,9 +27,10 @@
         <groupId>org.nterlearning</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.nterlearning</groupId>
     <artifactId>1-col-promo-layouttpl</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>1-col-promo Layout Template</name>
 
