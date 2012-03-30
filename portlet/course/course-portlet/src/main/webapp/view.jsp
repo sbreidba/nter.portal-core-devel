@@ -18,4 +18,4 @@
 
 <portlet:defineObjects />
 
-This is the <b>course</b>.
+This is the <b>course</b> with CATALOG tables.
