@@ -20,7 +20,12 @@
 
 package org.nterlearning.datamodel.catalog.service.impl;
 
+import com.liferay.portal.kernel.exception.SystemException;
+
+import org.nterlearning.datamodel.catalog.model.CourseRelated;
 import org.nterlearning.datamodel.catalog.service.base.CourseRelatedLocalServiceBaseImpl;
+
+import java.util.List;
 
 /**
  * The implementation of the course related local service.
@@ -32,15 +37,27 @@ import org.nterlearning.datamodel.catalog.service.base.CourseRelatedLocalService
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author SRI International
  * @see org.nterlearning.datamodel.catalog.service.base.CourseRelatedLocalServiceBaseImpl
  * @see org.nterlearning.datamodel.catalog.service.CourseRelatedLocalServiceUtil
  */
 public class CourseRelatedLocalServiceImpl
     extends CourseRelatedLocalServiceBaseImpl {
-    /*
-     * NOTE FOR DEVELOPERS:
-     *
-     * Never reference this interface directly. Always use {@link org.nterlearning.datamodel.catalog.service.CourseRelatedLocalServiceUtil} to access the course related local service.
-     */
+
+    @Override
+    public CourseRelated addCourseRelated(CourseRelated courseRelated) throws SystemException {
+        long id = counterLocalService.increment(CourseRelated.class.getName());
+        courseRelated.setPrimaryKey(id);
+        return super.addCourseRelated(courseRelated);
+    }
+
+    public List<CourseRelated> findByRelatedCourseIdWithRelationshipType(Long componentId, String relationshipType)
+            throws SystemException {
+        return courseRelatedPersistence.findByRelatedCourseIdWithRelationshipType(componentId, relationshipType);
+    }
+
+    public List<CourseRelated> findByRelatedCourseIri(String relatedCourseIri)
+            throws SystemException {
+        return courseRelatedPersistence.findByRelatedCourseIri(relatedCourseIri);
+    }
 }

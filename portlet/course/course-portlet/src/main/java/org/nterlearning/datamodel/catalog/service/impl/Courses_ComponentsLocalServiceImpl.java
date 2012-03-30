@@ -20,7 +20,12 @@
 
 package org.nterlearning.datamodel.catalog.service.impl;
 
+import com.liferay.portal.kernel.exception.SystemException;
+
+import org.nterlearning.datamodel.catalog.model.Courses_Components;
 import org.nterlearning.datamodel.catalog.service.base.Courses_ComponentsLocalServiceBaseImpl;
+
+import java.util.List;
 
 /**
  * The implementation of the courses_ components local service.
@@ -32,15 +37,33 @@ import org.nterlearning.datamodel.catalog.service.base.Courses_ComponentsLocalSe
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author SRI International
  * @see org.nterlearning.datamodel.catalog.service.base.Courses_ComponentsLocalServiceBaseImpl
  * @see org.nterlearning.datamodel.catalog.service.Courses_ComponentsLocalServiceUtil
  */
 public class Courses_ComponentsLocalServiceImpl
     extends Courses_ComponentsLocalServiceBaseImpl {
-    /*
-     * NOTE FOR DEVELOPERS:
-     *
-     * Never reference this interface directly. Always use {@link org.nterlearning.datamodel.catalog.service.Courses_ComponentsLocalServiceUtil} to access the courses_ components local service.
-     */
+
+    @Override
+    public Courses_Components addCourses_Components(Courses_Components courses_components) throws SystemException {
+        long id = counterLocalService.increment(Courses_Components.class.getName());
+        courses_components.setPrimaryKey(id);
+        return super.addCourses_Components(courses_components);
+    }
+
+    public List<Courses_Components> findByCourseId(Long courseId) throws SystemException {
+        return courses_ComponentsPersistence.findByCourseId(courseId);
+    }
+
+    public List<Courses_Components> findByCourseIri(String courseIri) throws SystemException {
+        return courses_ComponentsPersistence.findByCourseIri(courseIri);
+    }
+
+    public List<Courses_Components> findByComponentId(Long componentId) throws SystemException {
+        return courses_ComponentsPersistence.findByComponentId(componentId);
+    }
+
+    public List<Courses_Components> findByComponentIri(String componentIri) throws SystemException {
+        return courses_ComponentsPersistence.findByComponentIri(componentIri);
+    }
 }
