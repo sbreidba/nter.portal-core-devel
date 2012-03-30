@@ -39,6 +39,7 @@
 				<version>${liferay.version}</version>
 				<configuration>
 					<apiBaseDir>${basedir}/../course-portlet-service</apiBaseDir>
+                    <autoDeployDir/> <!-- not used for deploy -->
 				</configuration>
 			</plugin>
 		</plugins>
@@ -47,8 +48,7 @@
     <dependencies>
         <dependency>
 			<groupId>org.nterlearning</groupId>
-			<artifactId>course-portlet-service</artifactId>
-            <!--<version>${pom.version}</version>-->
+			<artifactId>nter-course-portlet-service</artifactId>
             <version>${project.version}</version>
 		</dependency>
 		<dependency>
