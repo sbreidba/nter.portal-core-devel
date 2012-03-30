@@ -1,0 +1,446 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<hint-collection name="CHAR">
+		<hint name="max-length">1</hint>
+	</hint-collection>
+	<hint-collection name="TOKENSMALL">
+		<hint name="max-length">10</hint>
+	</hint-collection>
+	<hint-collection name="TOKENMEDIUM">
+		<hint name="max-length">25</hint>
+	</hint-collection>
+	<hint-collection name="TOKENLARGE">
+		<hint name="max-length">50</hint>
+	</hint-collection>
+	<hint-collection name="IDENTIFIER">
+		<hint name="max-length">255</hint>
+	</hint-collection>
+	<hint-collection name="CLOB">
+		<hint name="max-length">2000000</hint>
+	</hint-collection>
+	<hint-collection name="IRI">
+		<hint name="max-length">255</hint>
+	</hint-collection>
+	<hint-collection name="URI">
+		<hint name="max-length">3999</hint>
+	</hint-collection>
+	<hint-collection name="TEXT2000">
+		<hint name="display-height">105</hint>
+		<hint name="display-width">500</hint>
+		<hint name="max-length">2000</hint>
+	</hint-collection>
+	<hint-collection name="TEXT4000">
+		<hint name="display-height">105</hint>
+		<hint name="display-width">500</hint>
+		<hint name="max-length">3999</hint>
+	</hint-collection>
+	<hint-collection name="SEARCHABLE-DATE">
+		<hint name="month-nullable">true</hint>
+		<hint name="day-nullable">true</hint>
+		<hint name="year-nullable">true</hint>
+		<hint name="show-time">false</hint>
+	</hint-collection>
+	<model name="org.nterlearning.datamodel.catalog.model.Component">
+		<field name="componentId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="feedReferenceId" type="long" />
+		<field name="componentIri" type="String">
+			<hint-collection name="IRI" />
+		</field>
+		<field name="updatedDate" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="language" type="String">
+			<hint name="max-length">10</hint>
+		</field>
+		<field name="href" type="String">
+			<hint-collection name="URI" />
+		</field>
+		<field name="fullTextHref" type="String">
+			<hint-collection name="URI" />
+		</field>
+		<field name="title" type="String">
+			<hint-collection name="TEXT2000" />
+		</field>
+		<field name="description" type="String">
+			<hint-collection name="TEXT4000" />
+		</field>
+		<field name="copyright" type="String" localized="true">
+			<hint-collection name="TEXT4000" />
+		</field>
+		<field name="displayWidth" type="int" />
+		<field name="displayHeight" type="int" />
+		<field name="createDate" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="removed" type="boolean" />
+		<field name="removedDate" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+        <field name="version" type="String" />
+        <field name="versionDate" type="Date" />
+		<field name="price" type="double" />
+		<field name="priceUnit" type="String" />
+		<field name="priceTerms" type="String" />
+		<field name="priceExpiration" type="String" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.ComponentRecord">
+		<field name="componentRecordId" type="long" />
+		<field name="courseRecordId" type="long" />
+		<field name="componentIri" ype="String">
+			<hint-collection name="IRI" />
+		</field>
+		<field name="updatedDate" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="completionStatus" type="String">
+			<hint-collection name="TOKENLARGE" />
+		</field>
+		<field name="completionPercent" type="Integer" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.Contributor">
+		<field name="contributorId" type="long" />
+		<field name="courseId" type="long" />
+		<field name="componentId" type="long" />
+		<field name="role" type="String">
+			<hint-collection name="TOKENLARGE" />
+		</field>
+		<field name="contributorName" type="String">
+			<hint name="max-length">200</hint>
+		</field>
+		<field name="virtualCardData" type="String">
+			<hint-collection name="TEXT4000" />
+		</field>
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.Course">
+		<field name="courseId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="feedReferenceId" type="long" />
+		<field name="href" type="String">
+			<hint-collection name="URI" />
+		</field>
+		<field name="fullTextHref" type="String">
+			<hint-collection name="URI" />
+		</field>
+		<field name="courseIri" type="String">
+			<hint-collection name="IRI" />
+		</field>
+		<field name="updatedDate" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="title" type="String" localized="true">
+			<hint-collection name="TEXT4000" />
+		</field>
+		<field name="transcriptAbstract" type="String" localized="true">
+			<hint-collection name="TEXT4000" />
+		</field>
+		<field name="description" type="String" localized="true">
+			<hint-collection name="TEXT4000" />
+		</field>
+		<field name="keywords" type="String" localized="true">
+			<hint-collection name="TEXT4000" />
+		</field>
+		<field name="copyright" type="String" localized="true">
+			<hint-collection name="TEXT4000" />
+		</field>
+		<field name="ratingLevel" type="String" localized="true">
+			<hint-collection name="TEXT4000" />
+		</field>
+		<field name="ratingReason" type="String" localized="true">
+			<hint-collection name="TEXT4000" />
+		</field>
+		<field name="duration" type="String" />
+		<field name="durationStandard" type="String" />
+		<field name="featuredStatus" type="double" />
+		<field name="popularWeight" type="double" />
+		<field name="accessCount" type="long" />
+		<field name="completedCount" type="long" />
+		<field name="createDate" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="removed" type="boolean" />
+		<field name="removedDate" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="supersedesCourseIri" type="String">
+			<hint-collection name="IRI" />
+		</field>
+		<field name="supersededByCourseIri" type="String">
+			<hint-collection name="IRI" />
+		</field>
+		<field name="releaseOnDate" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="acceptUntilDate" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="version" type="String" />
+		<field name="versionDate" type="Date" />
+		<field name="price" type="double" />
+		<field name="priceUnit" type="String" />
+		<field name="priceTerms" type="String" />
+		<field name="priceExpiration" type="String" />
+		<field name="oneStarRateCount" type="long" />
+		<field name="twoStarRateCount" type="long" />
+		<field name="threeStarRateCount" type="long" />
+		<field name="fourStarRateCount" type="long" />
+		<field name="fiveStarRateCount" type="long" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.CourseImage">
+		<field name="courseImageId" type="long" />
+		<field name="courseId" type="long" />
+		<field name="orderWeight" type="double" />
+		<field name="language" type="String">
+			<hint name="max-length">10</hint>
+		</field>
+		<field name="imageId" type="long" />
+		<field name="alternateText" type="String">
+			<hint-collection name="TEXT4000" />
+		</field>
+		<field name="sourceImageUrl" type="String">
+			<hint-collection name="TEXT4000" />
+		</field>
+		<field name="mimeType" type="String">
+			<hint-collection name="TOKENLARGE" />
+		</field>
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.CourseRecord">
+		<field name="courseRecordId" type="long" />
+		<field name="feedReferenceId" type="long" />
+		<field name="courseRecordIri" type="String">
+			<hint-collection name="IRI" />
+		</field>
+		<field name="userId" type="long" />
+		<field name="singleSignOnValue" type="String">
+			<hint-collection name="IDENTIFIER" />
+		</field>
+		<field name="courseIri" type="String">
+			<hint-collection name="IRI" />
+		</field>
+		<field name="updatedDate" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="completionStatus" type="String">
+			<hint-collection name="TOKENLARGE" />
+		</field>
+		<field name="removed" type="boolean" />
+		<field name="removedDate" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="userHidden" type="boolean" />
+		<field name="assigned" type="boolean" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.CourseRelated">
+		<field name="courseRelatedId" type="long" />
+		<field name="courseId" type="long" />
+		<field name="relatedCourseId" type="long" />
+		<field name="relatedCourseIri" type="String">
+			<hint-collection name="IRI" />
+		</field>
+		<field name="relationshipType" type="String">
+			<hint-collection name="TOKENLARGE" />
+		</field>
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.CourseRequirement">
+		<field name="courseRequirementId" type="long" />
+		<field name="courseId" type="long" />
+		<field name="requirementType" type="String">
+			<hint-collection name="TOKENLARGE" />
+		</field>
+		<field name="requirementValue" type="String" localized="true">
+			<hint-collection name="TEXT4000" />
+		</field>
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.CourseReview">
+		<field name="courseReviewId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="courseId" type="long" />
+		<field name="userId" type="long" />
+		<field name="summary" type="String">
+			<hint name="max-length">250</hint>
+		</field>
+		<field name="content" type="String">
+			<hint-collection name="TEXT4000" />
+		</field>
+		<field name="createDate" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="modifiedDate" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="weightedScore" type="double" />
+		<field name="removed" type="boolean" />
+		<field name="removedDate" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.Courses_Components">
+		<field name="coursesComponentsId" type="long" />
+		<field name="courseId" type="long" />
+		<field name="courseIri" type="String">
+			<hint-collection name="IRI" />
+		</field>
+		<field name="componentId" type="long" />
+		<field name="componentIri" type="String">
+			<hint-collection name="IRI" />
+		</field>
+		<field name="orderWeight" type="double" />
+		<field name="sectionType" type="String">
+			<hint-collection name="TOKENLARGE" />
+		</field>
+		<field name="componentType" type="String">
+			<hint-collection name="TOKENLARGE" />
+		</field>
+		<field name="mimeType" type="String">
+			<hint-collection name="TOKENLARGE" />
+		</field>
+		<field name="coursePaymentRequired" type="boolean" />
+		<field name="componentPaymentRequired" type="boolean" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.ExternalLink">
+		<field name="linkId" type="long" />
+		<field name="courseId" type="long" />
+		<field name="componentId" type="long" />
+		<field name="linkType" type="String">
+			<hint-collection name="IDENTIFIER" />
+		</field>
+		<field name="linkUrl" type="String">
+			<hint-collection name="URI" />
+		</field>
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.FeedReference">
+		<field name="feedReferenceId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="contentProviderId" type="String">
+			<hint-collection name="IRI" />
+		</field>
+		<field name="href" type="String">
+			<hint-collection name="URI" />
+		</field>
+		<field name="hrefHash" type="String">
+			<hint-collection name="IDENTIFIER" />
+		</field>
+		<field name="pshb" type="String">
+			<hint-collection name="TEXT4000" />
+		</field>
+		<field name="pshbSubscribed" type="boolean" />
+		<field name="feedIri" type="String">
+			<hint-collection name="IRI" />
+		</field>
+		<field name="feedType" type="String">
+			<hint-collection name="CHAR" />
+		</field>
+		<field name="feedVersion" type="String">
+			<hint-collection name="TOKENMEDIUM" />
+		</field>
+		<field name="trustworthyWeight" type="double" />
+		<field name="createDate" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="removed" type="boolean" />
+		<field name="removedDate" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="removedReason" type="String">
+			<hint-collection name="CHAR" />
+		</field>
+		<field name="syncDate" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="syncSuccess" type="boolean" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.FeedSyncHistory">
+		<field name="syncId" type="long" />
+		<field name="feedReferenceId" type="long" />
+		<field name="syncDate" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="success" type="Boolean" />
+		<field name="syncMessage" type="String">
+			<hint-collection name="TEXT2000" />
+		</field>
+		<field name="numberOfEntries" type="Integer" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.FlagReport">
+		<field name="uuid" type="String" />
+		<field name="flagReportId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="title" type="String">
+			<hint-collection name="TEXT2000" />
+		</field>
+		<field name="content" type="String">
+			<hint-collection name="TEXT4000" />
+		</field>
+		<field name="flagReason" type="String" />
+		<field name="flagComment" type="String">
+			<hint-collection name="TEXT4000" />
+		</field>
+		<field name="moderateAction" type="String" />
+		<field name="moderatorComment" type="String">
+			<hint-collection name="TEXT4000" />
+		</field>
+		<field name="status" type="int" />
+		<field name="statusByUserId" type="long" />
+		<field name="statusByUserName" type="String" />
+		<field name="statusDate" type="Date" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.FlagReportStats">
+		<field name="flagReportStatsId" type="long" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
+		<field name="totalEntries" type="Integer" />
+		<field name="totalModerated" type="Integer" />
+		<field name="totalApproved" type="Integer" />
+	</model>
+	<model name="org.nterlearning.datamodel.catalog.model.GlobalCourseReview">
+		<field name="globalCourseReviewId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="courseReviewIri" type="String">
+			<hint-collection name="IRI" />
+		</field>
+		<field name="updatedDate" type="Date" />
+		<field name="courseIri" type="String">
+			<hint-collection name="IRI" />
+		</field>
+		<field name="href" type="String">
+			<hint-collection name="URI" />
+		</field>
+		<field name="nterInstance" type="String" />
+		<field name="courseId" type="long" />
+		<field name="userDisplayName" type="String">
+			<hint-collection name="IDENTIFIER" />
+		</field>
+		<field name="singleSignOnValue" type="String">
+			<hint-collection name="IDENTIFIER" />
+		</field>
+		<field name="summary" type="String">
+			<hint name="max-length">250</hint>
+		</field>
+		<field name="content" type="String">
+			<hint-collection name="TEXT4000" />
+		</field>
+		<field name="createDate" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="modifiedDate" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="starScore" type="double" />
+		<field name="fromTrustedReviewer" type="boolean" />
+		<field name="removed" type="boolean" />
+		<field name="removedDate" type="Date" />
+		<field name="isHidden" type="boolean" />
+	</model>
+</model-hints>
