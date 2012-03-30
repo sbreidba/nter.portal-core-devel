@@ -53,7 +53,7 @@ public class Courses_ComponentsModelImpl extends BaseModelImpl<Courses_Component
             { "coursePaymentRequired", Types.BOOLEAN },
             { "componentPaymentRequired", Types.BOOLEAN }
         };
-    public static final String TABLE_SQL_CREATE = "create table CATALOG_Courses_Components (coursesComponentsId LONG not null primary key,courseId LONG,courseIri VARCHAR(75) null,componentId LONG,componentIri VARCHAR(75) null,orderWeight DOUBLE,sectionType VARCHAR(75) null,componentType VARCHAR(75) null,mimeType VARCHAR(75) null,coursePaymentRequired BOOLEAN,componentPaymentRequired BOOLEAN)";
+    public static final String TABLE_SQL_CREATE = "create table CATALOG_Courses_Components (coursesComponentsId LONG not null primary key,courseId LONG,courseIri VARCHAR(255) null,componentId LONG,componentIri VARCHAR(255) null,orderWeight DOUBLE,sectionType VARCHAR(50) null,componentType VARCHAR(50) null,mimeType VARCHAR(50) null,coursePaymentRequired BOOLEAN,componentPaymentRequired BOOLEAN)";
     public static final String TABLE_SQL_DROP = "drop table CATALOG_Courses_Components";
     public static final String ORDER_BY_JPQL = " ORDER BY courses_Components.orderWeight ASC";
     public static final String ORDER_BY_SQL = " ORDER BY CATALOG_Courses_Components.orderWeight ASC";

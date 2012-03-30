@@ -54,7 +54,7 @@ public class CourseRequirementModelImpl extends BaseModelImpl<CourseRequirement>
             { "requirementType", Types.VARCHAR },
             { "requirementValue", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table CATALOG_CourseRequirement (courseRequirementId LONG not null primary key,courseId LONG,requirementType VARCHAR(75) null,requirementValue STRING null)";
+    public static final String TABLE_SQL_CREATE = "create table CATALOG_CourseRequirement (courseRequirementId LONG not null primary key,courseId LONG,requirementType VARCHAR(50) null,requirementValue STRING null)";
     public static final String TABLE_SQL_DROP = "drop table CATALOG_CourseRequirement";
     public static final String DATA_SOURCE = "liferayDataSource";
     public static final String SESSION_FACTORY = "liferaySessionFactory";

@@ -59,7 +59,7 @@ public class CourseReviewModelImpl extends BaseModelImpl<CourseReview>
             { "removed", Types.BOOLEAN },
             { "removedDate", Types.TIMESTAMP }
         };
-    public static final String TABLE_SQL_CREATE = "create table CATALOG_CourseReview (courseReviewId LONG not null primary key,companyId LONG,groupId LONG,courseId LONG,userId LONG,summary VARCHAR(75) null,content VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,weightedScore DOUBLE,removed BOOLEAN,removedDate DATE null)";
+    public static final String TABLE_SQL_CREATE = "create table CATALOG_CourseReview (courseReviewId LONG not null primary key,companyId LONG,groupId LONG,courseId LONG,userId LONG,summary VARCHAR(250) null,content VARCHAR(3999) null,createDate DATE null,modifiedDate DATE null,weightedScore DOUBLE,removed BOOLEAN,removedDate DATE null)";
     public static final String TABLE_SQL_DROP = "drop table CATALOG_CourseReview";
     public static final String ORDER_BY_JPQL = " ORDER BY courseReview.weightedScore DESC, courseReview.modifiedDate DESC";
     public static final String ORDER_BY_SQL = " ORDER BY CATALOG_CourseReview.weightedScore DESC, CATALOG_CourseReview.modifiedDate DESC";

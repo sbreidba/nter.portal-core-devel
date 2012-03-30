@@ -3,13 +3,13 @@ create table CATALOG_Component (
 	companyId LONG,
 	groupId LONG,
 	feedReferenceId LONG,
-	componentIri VARCHAR(75) null,
+	componentIri VARCHAR(255) null,
 	updatedDate DATE null,
-	language VARCHAR(75) null,
-	href VARCHAR(75) null,
-	fullTextHref VARCHAR(75) null,
-	title VARCHAR(75) null,
-	description VARCHAR(75) null,
+	language VARCHAR(10) null,
+	href VARCHAR(3999) null,
+	fullTextHref VARCHAR(3999) null,
+	title VARCHAR(2000) null,
+	description VARCHAR(3999) null,
 	copyright STRING null,
 	displayWidth INTEGER,
 	displayHeight INTEGER,
@@ -27,9 +27,9 @@ create table CATALOG_Component (
 create table CATALOG_ComponentRecord (
 	componentRecordId LONG not null primary key,
 	courseRecordId LONG,
-	componentIri VARCHAR(75) null,
+	componentIri VARCHAR(255) null,
 	updatedDate DATE null,
-	completionStatus VARCHAR(75) null,
+	completionStatus VARCHAR(50) null,
 	completionPercent INTEGER
 );
 
@@ -37,9 +37,9 @@ create table CATALOG_Contributor (
 	contributorId LONG not null primary key,
 	courseId LONG,
 	componentId LONG,
-	role VARCHAR(75) null,
-	contributorName VARCHAR(75) null,
-	virtualCardData VARCHAR(75) null
+	role VARCHAR(50) null,
+	contributorName VARCHAR(200) null,
+	virtualCardData VARCHAR(3999) null
 );
 
 create table CATALOG_Course (
@@ -48,9 +48,9 @@ create table CATALOG_Course (
 	groupId LONG,
 	userId LONG,
 	feedReferenceId LONG,
-	href VARCHAR(75) null,
-	fullTextHref VARCHAR(75) null,
-	courseIri VARCHAR(75) null,
+	href VARCHAR(3999) null,
+	fullTextHref VARCHAR(3999) null,
+	courseIri VARCHAR(255) null,
 	updatedDate DATE null,
 	title STRING null,
 	transcriptAbstract STRING null,
@@ -68,8 +68,8 @@ create table CATALOG_Course (
 	createDate DATE null,
 	removed BOOLEAN,
 	removedDate DATE null,
-	supersedesCourseIri VARCHAR(75) null,
-	supersededByCourseIri VARCHAR(75) null,
+	supersedesCourseIri VARCHAR(255) null,
+	supersededByCourseIri VARCHAR(255) null,
 	releaseOnDate DATE null,
 	acceptUntilDate DATE null,
 	version VARCHAR(75) null,
@@ -89,22 +89,22 @@ create table CATALOG_CourseImage (
 	courseImageId LONG not null primary key,
 	courseId LONG,
 	orderWeight DOUBLE,
-	language VARCHAR(75) null,
+	language VARCHAR(10) null,
 	imageId LONG,
-	alternateText VARCHAR(75) null,
-	sourceImageUrl VARCHAR(75) null,
-	mimeType VARCHAR(75) null
+	alternateText VARCHAR(3999) null,
+	sourceImageUrl VARCHAR(3999) null,
+	mimeType VARCHAR(50) null
 );
 
 create table CATALOG_CourseRecord (
 	courseRecordId LONG not null primary key,
 	feedReferenceId LONG,
-	courseRecordIri VARCHAR(75) null,
+	courseRecordIri VARCHAR(255) null,
 	userId LONG,
-	singleSignOnValue VARCHAR(75) null,
-	courseIri VARCHAR(75) null,
+	singleSignOnValue VARCHAR(255) null,
+	courseIri VARCHAR(255) null,
 	updatedDate DATE null,
-	completionStatus VARCHAR(75) null,
+	completionStatus VARCHAR(50) null,
 	removed BOOLEAN,
 	removedDate DATE null,
 	userHidden BOOLEAN,
@@ -115,14 +115,14 @@ create table CATALOG_CourseRelated (
 	courseRelatedId LONG not null primary key,
 	courseId LONG,
 	relatedCourseId LONG,
-	relatedCourseIri VARCHAR(75) null,
-	relationshipType VARCHAR(75) null
+	relatedCourseIri VARCHAR(255) null,
+	relationshipType VARCHAR(50) null
 );
 
 create table CATALOG_CourseRequirement (
 	courseRequirementId LONG not null primary key,
 	courseId LONG,
-	requirementType VARCHAR(75) null,
+	requirementType VARCHAR(50) null,
 	requirementValue STRING null
 );
 
@@ -132,8 +132,8 @@ create table CATALOG_CourseReview (
 	groupId LONG,
 	courseId LONG,
 	userId LONG,
-	summary VARCHAR(75) null,
-	content VARCHAR(75) null,
+	summary VARCHAR(250) null,
+	content VARCHAR(3999) null,
 	createDate DATE null,
 	modifiedDate DATE null,
 	weightedScore DOUBLE,
@@ -144,13 +144,13 @@ create table CATALOG_CourseReview (
 create table CATALOG_Courses_Components (
 	coursesComponentsId LONG not null primary key,
 	courseId LONG,
-	courseIri VARCHAR(75) null,
+	courseIri VARCHAR(255) null,
 	componentId LONG,
-	componentIri VARCHAR(75) null,
+	componentIri VARCHAR(255) null,
 	orderWeight DOUBLE,
-	sectionType VARCHAR(75) null,
-	componentType VARCHAR(75) null,
-	mimeType VARCHAR(75) null,
+	sectionType VARCHAR(50) null,
+	componentType VARCHAR(50) null,
+	mimeType VARCHAR(50) null,
 	coursePaymentRequired BOOLEAN,
 	componentPaymentRequired BOOLEAN
 );
@@ -159,27 +159,27 @@ create table CATALOG_ExternalLink (
 	linkId LONG not null primary key,
 	courseId LONG,
 	componentId LONG,
-	linkType VARCHAR(75) null,
-	linkUrl VARCHAR(75) null
+	linkType VARCHAR(255) null,
+	linkUrl VARCHAR(3999) null
 );
 
 create table CATALOG_FeedReference (
 	feedReferenceId LONG not null primary key,
 	companyId LONG,
 	groupId LONG,
-	contentProviderId VARCHAR(75) null,
-	href VARCHAR(75) null,
-	hrefHash VARCHAR(75) null,
-	pshb VARCHAR(75) null,
+	contentProviderId VARCHAR(255) null,
+	href VARCHAR(3999) null,
+	hrefHash VARCHAR(255) null,
+	pshb VARCHAR(3999) null,
 	pshbSubscribed BOOLEAN,
-	feedIri VARCHAR(75) null,
-	feedType VARCHAR(75) null,
-	feedVersion VARCHAR(75) null,
+	feedIri VARCHAR(255) null,
+	feedType VARCHAR(1) null,
+	feedVersion VARCHAR(25) null,
 	trustworthyWeight DOUBLE,
 	createDate DATE null,
 	removed BOOLEAN,
 	removedDate DATE null,
-	removedReason VARCHAR(75) null,
+	removedReason VARCHAR(1) null,
 	syncDate DATE null,
 	syncSuccess BOOLEAN
 );
@@ -189,7 +189,7 @@ create table CATALOG_FeedSyncHistory (
 	feedReferenceId LONG,
 	syncDate DATE null,
 	success BOOLEAN,
-	syncMessage VARCHAR(75) null,
+	syncMessage VARCHAR(2000) null,
 	numberOfEntries INTEGER
 );
 
@@ -202,12 +202,12 @@ create table CATALOG_FlagReport (
 	classNameId LONG,
 	classPK LONG,
 	createDate DATE null,
-	title VARCHAR(75) null,
-	content VARCHAR(75) null,
+	title VARCHAR(2000) null,
+	content VARCHAR(3999) null,
 	flagReason VARCHAR(75) null,
-	flagComment VARCHAR(75) null,
+	flagComment VARCHAR(3999) null,
 	moderateAction VARCHAR(75) null,
-	moderatorComment VARCHAR(75) null,
+	moderatorComment VARCHAR(3999) null,
 	status INTEGER,
 	statusByUserId LONG,
 	statusByUserName VARCHAR(75) null,
@@ -227,16 +227,16 @@ create table CATALOG_GlobalCourseReview (
 	globalCourseReviewId LONG not null primary key,
 	companyId LONG,
 	groupId LONG,
-	courseReviewIri VARCHAR(75) null,
+	courseReviewIri VARCHAR(255) null,
 	updatedDate DATE null,
-	courseIri VARCHAR(75) null,
-	href VARCHAR(75) null,
+	courseIri VARCHAR(255) null,
+	href VARCHAR(3999) null,
 	nterInstance VARCHAR(75) null,
 	courseId LONG,
-	userDisplayName VARCHAR(75) null,
-	singleSignOnValue VARCHAR(75) null,
-	summary VARCHAR(75) null,
-	content VARCHAR(75) null,
+	userDisplayName VARCHAR(255) null,
+	singleSignOnValue VARCHAR(255) null,
+	summary VARCHAR(250) null,
+	content VARCHAR(3999) null,
 	createDate DATE null,
 	modifiedDate DATE null,
 	starScore DOUBLE,

@@ -50,7 +50,7 @@ public class CourseImageModelImpl extends BaseModelImpl<CourseImage>
             { "sourceImageUrl", Types.VARCHAR },
             { "mimeType", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table CATALOG_CourseImage (courseImageId LONG not null primary key,courseId LONG,orderWeight DOUBLE,language VARCHAR(75) null,imageId LONG,alternateText VARCHAR(75) null,sourceImageUrl VARCHAR(75) null,mimeType VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table CATALOG_CourseImage (courseImageId LONG not null primary key,courseId LONG,orderWeight DOUBLE,language VARCHAR(10) null,imageId LONG,alternateText VARCHAR(3999) null,sourceImageUrl VARCHAR(3999) null,mimeType VARCHAR(50) null)";
     public static final String TABLE_SQL_DROP = "drop table CATALOG_CourseImage";
     public static final String ORDER_BY_JPQL = " ORDER BY courseImage.orderWeight ASC";
     public static final String ORDER_BY_SQL = " ORDER BY CATALOG_CourseImage.orderWeight ASC";

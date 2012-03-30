@@ -48,7 +48,7 @@ public class ContributorModelImpl extends BaseModelImpl<Contributor>
             { "contributorName", Types.VARCHAR },
             { "virtualCardData", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table CATALOG_Contributor (contributorId LONG not null primary key,courseId LONG,componentId LONG,role VARCHAR(75) null,contributorName VARCHAR(75) null,virtualCardData VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table CATALOG_Contributor (contributorId LONG not null primary key,courseId LONG,componentId LONG,role VARCHAR(50) null,contributorName VARCHAR(200) null,virtualCardData VARCHAR(3999) null)";
     public static final String TABLE_SQL_DROP = "drop table CATALOG_Contributor";
     public static final String DATA_SOURCE = "liferayDataSource";
     public static final String SESSION_FACTORY = "liferaySessionFactory";

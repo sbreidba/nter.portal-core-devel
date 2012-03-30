@@ -51,7 +51,7 @@ public class ComponentRecordModelImpl extends BaseModelImpl<ComponentRecord>
             { "completionStatus", Types.VARCHAR },
             { "completionPercent", Types.INTEGER }
         };
-    public static final String TABLE_SQL_CREATE = "create table CATALOG_ComponentRecord (componentRecordId LONG not null primary key,courseRecordId LONG,componentIri VARCHAR(75) null,updatedDate DATE null,completionStatus VARCHAR(75) null,completionPercent INTEGER)";
+    public static final String TABLE_SQL_CREATE = "create table CATALOG_ComponentRecord (componentRecordId LONG not null primary key,courseRecordId LONG,componentIri VARCHAR(255) null,updatedDate DATE null,completionStatus VARCHAR(50) null,completionPercent INTEGER)";
     public static final String TABLE_SQL_DROP = "drop table CATALOG_ComponentRecord";
     public static final String ORDER_BY_JPQL = " ORDER BY componentRecord.updatedDate ASC";
     public static final String ORDER_BY_SQL = " ORDER BY CATALOG_ComponentRecord.updatedDate ASC";

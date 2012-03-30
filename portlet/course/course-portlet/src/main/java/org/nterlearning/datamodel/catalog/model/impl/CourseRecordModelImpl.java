@@ -59,7 +59,7 @@ public class CourseRecordModelImpl extends BaseModelImpl<CourseRecord>
             { "userHidden", Types.BOOLEAN },
             { "assigned", Types.BOOLEAN }
         };
-    public static final String TABLE_SQL_CREATE = "create table CATALOG_CourseRecord (courseRecordId LONG not null primary key,feedReferenceId LONG,courseRecordIri VARCHAR(75) null,userId LONG,singleSignOnValue VARCHAR(75) null,courseIri VARCHAR(75) null,updatedDate DATE null,completionStatus VARCHAR(75) null,removed BOOLEAN,removedDate DATE null,userHidden BOOLEAN,assigned BOOLEAN)";
+    public static final String TABLE_SQL_CREATE = "create table CATALOG_CourseRecord (courseRecordId LONG not null primary key,feedReferenceId LONG,courseRecordIri VARCHAR(255) null,userId LONG,singleSignOnValue VARCHAR(255) null,courseIri VARCHAR(255) null,updatedDate DATE null,completionStatus VARCHAR(50) null,removed BOOLEAN,removedDate DATE null,userHidden BOOLEAN,assigned BOOLEAN)";
     public static final String TABLE_SQL_DROP = "drop table CATALOG_CourseRecord";
     public static final String ORDER_BY_JPQL = " ORDER BY courseRecord.updatedDate ASC";
     public static final String ORDER_BY_SQL = " ORDER BY CATALOG_CourseRecord.updatedDate ASC";
