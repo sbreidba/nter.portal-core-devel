@@ -272,7 +272,8 @@ public class CourseRequirementWrapper implements CourseRequirement,
         return new CourseRequirementWrapper((CourseRequirement) _courseRequirement.clone());
     }
 
-    public int compareTo(CourseRequirement courseRequirement) {
+    public int compareTo(
+        org.nterlearning.datamodel.catalog.model.CourseRequirement courseRequirement) {
         return _courseRequirement.compareTo(courseRequirement);
     }
 
@@ -281,11 +282,11 @@ public class CourseRequirementWrapper implements CourseRequirement,
         return _courseRequirement.hashCode();
     }
 
-    public com.liferay.portal.model.CacheModel<CourseRequirement> toCacheModel() {
+    public com.liferay.portal.model.CacheModel<org.nterlearning.datamodel.catalog.model.CourseRequirement> toCacheModel() {
         return _courseRequirement.toCacheModel();
     }
 
-    public CourseRequirement toEscapedModel() {
+    public org.nterlearning.datamodel.catalog.model.CourseRequirement toEscapedModel() {
         return new CourseRequirementWrapper(_courseRequirement.toEscapedModel());
     }
 

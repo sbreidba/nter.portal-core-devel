@@ -177,7 +177,8 @@ public class ExternalLinkWrapper implements ExternalLink,
         return new ExternalLinkWrapper((ExternalLink) _externalLink.clone());
     }
 
-    public int compareTo(ExternalLink externalLink) {
+    public int compareTo(
+        org.nterlearning.datamodel.catalog.model.ExternalLink externalLink) {
         return _externalLink.compareTo(externalLink);
     }
 
@@ -186,11 +187,11 @@ public class ExternalLinkWrapper implements ExternalLink,
         return _externalLink.hashCode();
     }
 
-    public com.liferay.portal.model.CacheModel<ExternalLink> toCacheModel() {
+    public com.liferay.portal.model.CacheModel<org.nterlearning.datamodel.catalog.model.ExternalLink> toCacheModel() {
         return _externalLink.toCacheModel();
     }
 
-    public ExternalLink toEscapedModel() {
+    public org.nterlearning.datamodel.catalog.model.ExternalLink toEscapedModel() {
         return new ExternalLinkWrapper(_externalLink.toEscapedModel());
     }
 

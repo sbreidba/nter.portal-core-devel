@@ -55,7 +55,7 @@
     <!-- version 24: 3 February 2011: new finders -->
     <!-- version 25: 4 February 2011: new Course column popularWeight     -->
     <!-- version 26: 7 February 2011: changed Course accessCount and completedCount to long -->
-    <!-- versiom 27: 23 February 2011: data dictionary editing for reporting -->
+    <!-- version 27: 23 February 2011: data dictionary editing for reporting -->
     <!-- version 28: 24 March 2011:  added companyId to FeedReference entity -->
     <!-- version 29: 4 April 2011: added FeedReferenceId to CourseRecords and ComponentRecords -->
     <!-- version 30: 19 April 2011: removed/added attributes to CourseRecord -->

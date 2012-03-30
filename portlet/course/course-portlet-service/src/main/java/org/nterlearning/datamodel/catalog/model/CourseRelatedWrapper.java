@@ -177,7 +177,8 @@ public class CourseRelatedWrapper implements CourseRelated,
         return new CourseRelatedWrapper((CourseRelated) _courseRelated.clone());
     }
 
-    public int compareTo(CourseRelated courseRelated) {
+    public int compareTo(
+        org.nterlearning.datamodel.catalog.model.CourseRelated courseRelated) {
         return _courseRelated.compareTo(courseRelated);
     }
 
@@ -186,11 +187,11 @@ public class CourseRelatedWrapper implements CourseRelated,
         return _courseRelated.hashCode();
     }
 
-    public com.liferay.portal.model.CacheModel<CourseRelated> toCacheModel() {
+    public com.liferay.portal.model.CacheModel<org.nterlearning.datamodel.catalog.model.CourseRelated> toCacheModel() {
         return _courseRelated.toCacheModel();
     }
 
-    public CourseRelated toEscapedModel() {
+    public org.nterlearning.datamodel.catalog.model.CourseRelated toEscapedModel() {
         return new CourseRelatedWrapper(_courseRelated.toEscapedModel());
     }
 

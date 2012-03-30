@@ -474,7 +474,8 @@ public class GlobalCourseReviewWrapper implements GlobalCourseReview,
         return new GlobalCourseReviewWrapper((GlobalCourseReview) _globalCourseReview.clone());
     }
 
-    public int compareTo(GlobalCourseReview globalCourseReview) {
+    public int compareTo(
+        org.nterlearning.datamodel.catalog.model.GlobalCourseReview globalCourseReview) {
         return _globalCourseReview.compareTo(globalCourseReview);
     }
 
@@ -483,11 +484,11 @@ public class GlobalCourseReviewWrapper implements GlobalCourseReview,
         return _globalCourseReview.hashCode();
     }
 
-    public com.liferay.portal.model.CacheModel<GlobalCourseReview> toCacheModel() {
+    public com.liferay.portal.model.CacheModel<org.nterlearning.datamodel.catalog.model.GlobalCourseReview> toCacheModel() {
         return _globalCourseReview.toCacheModel();
     }
 
-    public GlobalCourseReview toEscapedModel() {
+    public org.nterlearning.datamodel.catalog.model.GlobalCourseReview toEscapedModel() {
         return new GlobalCourseReviewWrapper(_globalCourseReview.toEscapedModel());
     }
 
