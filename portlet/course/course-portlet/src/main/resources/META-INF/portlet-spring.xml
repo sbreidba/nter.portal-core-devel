@@ -1,15 +1,6 @@
 <?xml version="1.0"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
-	<bean id="org.nterlearning.service.FooLocalService" class="org.nterlearning.service.impl.FooLocalServiceImpl" />
-	<bean id="org.nterlearning.service.FooLocalServiceUtil" class="org.nterlearning.service.FooLocalServiceUtil">
-		<property name="service" ref="org.nterlearning.service.FooLocalService" />
-	</bean>
-	<bean id="org.nterlearning.service.FooService" class="org.nterlearning.service.impl.FooServiceImpl" />
-	<bean id="org.nterlearning.service.FooServiceUtil" class="org.nterlearning.service.FooServiceUtil">
-		<property name="service" ref="org.nterlearning.service.FooService" />
-	</bean>
-	<bean id="org.nterlearning.service.persistence.FooPersistence" class="org.nterlearning.service.persistence.FooPersistenceImpl" parent="basePersistence" />
 	<bean id="org.nterlearning.datamodel.catalog.service.ComponentLocalService" class="org.nterlearning.datamodel.catalog.service.impl.ComponentLocalServiceImpl" />
 	<bean id="org.nterlearning.datamodel.catalog.service.ComponentLocalServiceUtil" class="org.nterlearning.datamodel.catalog.service.ComponentLocalServiceUtil">
 		<property name="service" ref="org.nterlearning.datamodel.catalog.service.ComponentLocalService" />

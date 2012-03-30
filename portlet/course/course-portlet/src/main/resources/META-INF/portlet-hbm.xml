@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-lazy="false" auto-import="false">
-	<import class="org.nterlearning.model.Foo" />
+
 	<import class="org.nterlearning.datamodel.catalog.model.Component" />
 	<import class="org.nterlearning.datamodel.catalog.model.ComponentRecord" />
 	<import class="org.nterlearning.datamodel.catalog.model.Contributor" />
@@ -19,24 +19,7 @@
 	<import class="org.nterlearning.datamodel.catalog.model.FlagReport" />
 	<import class="org.nterlearning.datamodel.catalog.model.FlagReportStats" />
 	<import class="org.nterlearning.datamodel.catalog.model.GlobalCourseReview" />
-	<class name="org.nterlearning.model.impl.FooImpl" table="course_Foo">
-		<cache usage="read-write" />
-		<id name="fooId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="uuid" type="com.liferay.portal.dao.orm.hibernate.StringType" column="uuid_" />
-		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="createDate" type="org.hibernate.type.TimestampType" />
-		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="field1" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="field2" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
-		<property name="field3" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="field4" type="org.hibernate.type.TimestampType" />
-		<property name="field5" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-	</class>
+
 	<class name="org.nterlearning.datamodel.catalog.model.impl.ComponentImpl" table="CATALOG_Component">
 		<cache usage="read-write" />
 		<id name="componentId" type="long">

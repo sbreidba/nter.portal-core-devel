@@ -50,6 +50,7 @@
 			<groupId>org.nterlearning</groupId>
 			<artifactId>course-portlet-service</artifactId>
             <version>${pom.version}</version>
+            <!--<version>${project.version}</version>-->
 		</dependency>
     </dependencies>
 </project>
