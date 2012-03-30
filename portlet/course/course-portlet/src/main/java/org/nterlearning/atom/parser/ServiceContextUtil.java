@@ -169,7 +169,7 @@ public class ServiceContextUtil {
     public static String getDefaultVirtualHost() {
         try {
             return CompanyLocalServiceUtil.getCompanyById(
-                            getDefaultCompanyId()).getVirtualHost();
+                            getDefaultCompanyId()).getVirtualHostname();
         }
         catch (Exception e) {
             mLog.error(ExceptionUtils.getFullStackTrace(e));
@@ -186,7 +186,7 @@ public class ServiceContextUtil {
      */
     public static String getDefaultVirtualHost(Long companyId) {
         try {
-            return CompanyLocalServiceUtil.getCompanyById(companyId).getVirtualHost();
+            return CompanyLocalServiceUtil.getCompanyById(companyId).getVirtualHostname();
         }
         catch (Exception e) {
             mLog.error(ExceptionUtils.getFullStackTrace(e));
