@@ -25,38 +25,78 @@
 		<version>1.0.0-SNAPSHOT</version>
 		<relativePath>../pom.xml</relativePath>
 	</parent>
+
+    <profiles>
+        <profile>
+            <id>course-build-service</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.liferay.maven.plugins</groupId>
+                        <artifactId>liferay-maven-plugin</artifactId>
+                        <version>${liferay.version}</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.jackrabbit</groupId>
+                                <artifactId>jackrabbit-core</artifactId>
+                                <version>2.1.2</version>
+                                <exclusions>
+                                    <exclusion>
+                                        <groupId>org.slf4j</groupId>
+                                        <artifactId>jcl-over-slf4j</artifactId>
+                                    </exclusion>
+                                </exclusions>
+                            </dependency>
+                        </dependencies>
+
+                        <configuration>
+                            <webappBaseDir>${basedir}/../course-portlet</webappBaseDir>
+                            <pluginType>portlet</pluginType>
+                            <autoDeployDir/> <!-- not used for deploy -->
+                        </configuration>
+
+                        <executions>
+                            <execution>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>build-service</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>2.5</version>
+                        <executions>
+                            <execution>
+                                <id>copy-resources</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${basedir}/target/classes</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${basedir}/../course-portlet/src/main/resources</directory>
+                                            <filtering>true</filtering>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 	<modelVersion>4.0.0</modelVersion>
 	<!--<groupId>org.nterlearning</groupId>-->
 	<artifactId>course-portlet-service</artifactId>
 	<packaging>jar</packaging>
 	<name>course Portlet Service</name>
 	<!--<version>1.0-SNAPSHOT</version>-->
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.liferay.maven.plugins</groupId>
-                <artifactId>liferay-maven-plugin</artifactId>
-                <version>${liferay.version}</version>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.apache.jackrabbit</groupId>
-                        <artifactId>jackrabbit-core</artifactId>
-                        <version>2.1.2</version>
-                        <exclusions>
-                            <exclusion>
-                                <groupId>org.slf4j</groupId>
-                                <artifactId>jcl-over-slf4j</artifactId>
-                            </exclusion>
-                        </exclusions>
-                    </dependency>
-                </dependencies>
-                <configuration>
-                    <webappBaseDir>${basedir}/../course-portlet</webappBaseDir>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 
 	<dependencies>
 		<dependency>

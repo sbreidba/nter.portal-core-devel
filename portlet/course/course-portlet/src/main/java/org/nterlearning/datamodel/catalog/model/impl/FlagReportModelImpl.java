@@ -66,7 +66,7 @@ public class FlagReportModelImpl extends BaseModelImpl<FlagReport>
             { "statusByUserName", Types.VARCHAR },
             { "statusDate", Types.TIMESTAMP }
         };
-    public static final String TABLE_SQL_CREATE = "create table CATALOG_FlagReport (uuid_ VARCHAR(75) null,flagReportId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,classNameId LONG,classPK LONG,createDate DATE null,title VARCHAR(75) null,content VARCHAR(75) null,flagReason VARCHAR(75) null,flagComment VARCHAR(75) null,moderateAction VARCHAR(75) null,moderatorComment VARCHAR(75) null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
+    public static final String TABLE_SQL_CREATE = "create table CATALOG_FlagReport (uuid_ VARCHAR(75) null,flagReportId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,classNameId LONG,classPK LONG,createDate DATE null,title VARCHAR(2000) null,content VARCHAR(3999) null,flagReason VARCHAR(75) null,flagComment VARCHAR(3999) null,moderateAction VARCHAR(75) null,moderatorComment VARCHAR(3999) null,status INTEGER,statusByUserId LONG,statusByUserName VARCHAR(75) null,statusDate DATE null)";
     public static final String TABLE_SQL_DROP = "drop table CATALOG_FlagReport";
     public static final String ORDER_BY_JPQL = " ORDER BY flagReport.flagReportId DESC, flagReport.createDate DESC";
     public static final String ORDER_BY_SQL = " ORDER BY CATALOG_FlagReport.flagReportId DESC, CATALOG_FlagReport.createDate DESC";

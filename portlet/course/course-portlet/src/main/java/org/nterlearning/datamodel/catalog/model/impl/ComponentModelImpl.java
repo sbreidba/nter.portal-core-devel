@@ -74,7 +74,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
             { "priceTerms", Types.VARCHAR },
             { "priceExpiration", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table CATALOG_Component (componentId LONG not null primary key,companyId LONG,groupId LONG,feedReferenceId LONG,componentIri VARCHAR(75) null,updatedDate DATE null,language VARCHAR(75) null,href VARCHAR(75) null,fullTextHref VARCHAR(75) null,title VARCHAR(75) null,description VARCHAR(75) null,copyright STRING null,displayWidth INTEGER,displayHeight INTEGER,createDate DATE null,removed BOOLEAN,removedDate DATE null,version VARCHAR(75) null,versionDate DATE null,price DOUBLE,priceUnit VARCHAR(75) null,priceTerms VARCHAR(75) null,priceExpiration VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table CATALOG_Component (componentId LONG not null primary key,companyId LONG,groupId LONG,feedReferenceId LONG,componentIri VARCHAR(255) null,updatedDate DATE null,language VARCHAR(10) null,href VARCHAR(3999) null,fullTextHref VARCHAR(3999) null,title VARCHAR(2000) null,description VARCHAR(3999) null,copyright STRING null,displayWidth INTEGER,displayHeight INTEGER,createDate DATE null,removed BOOLEAN,removedDate DATE null,version VARCHAR(75) null,versionDate DATE null,price DOUBLE,priceUnit VARCHAR(75) null,priceTerms VARCHAR(75) null,priceExpiration VARCHAR(75) null)";
     public static final String TABLE_SQL_DROP = "drop table CATALOG_Component";
     public static final String DATA_SOURCE = "liferayDataSource";
     public static final String SESSION_FACTORY = "liferaySessionFactory";

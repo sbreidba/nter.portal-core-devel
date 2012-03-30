@@ -47,7 +47,7 @@ public class ExternalLinkModelImpl extends BaseModelImpl<ExternalLink>
             { "linkType", Types.VARCHAR },
             { "linkUrl", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table CATALOG_ExternalLink (linkId LONG not null primary key,courseId LONG,componentId LONG,linkType VARCHAR(75) null,linkUrl VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table CATALOG_ExternalLink (linkId LONG not null primary key,courseId LONG,componentId LONG,linkType VARCHAR(255) null,linkUrl VARCHAR(3999) null)";
     public static final String TABLE_SQL_DROP = "drop table CATALOG_ExternalLink";
     public static final String DATA_SOURCE = "liferayDataSource";
     public static final String SESSION_FACTORY = "liferaySessionFactory";

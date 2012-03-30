@@ -47,7 +47,7 @@ public class CourseRelatedModelImpl extends BaseModelImpl<CourseRelated>
             { "relatedCourseIri", Types.VARCHAR },
             { "relationshipType", Types.VARCHAR }
         };
-    public static final String TABLE_SQL_CREATE = "create table CATALOG_CourseRelated (courseRelatedId LONG not null primary key,courseId LONG,relatedCourseId LONG,relatedCourseIri VARCHAR(75) null,relationshipType VARCHAR(75) null)";
+    public static final String TABLE_SQL_CREATE = "create table CATALOG_CourseRelated (courseRelatedId LONG not null primary key,courseId LONG,relatedCourseId LONG,relatedCourseIri VARCHAR(255) null,relationshipType VARCHAR(50) null)";
     public static final String TABLE_SQL_DROP = "drop table CATALOG_CourseRelated";
     public static final String DATA_SOURCE = "liferayDataSource";
     public static final String SESSION_FACTORY = "liferaySessionFactory";

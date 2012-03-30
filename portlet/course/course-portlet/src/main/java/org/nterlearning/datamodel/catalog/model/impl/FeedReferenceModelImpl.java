@@ -62,7 +62,7 @@ public class FeedReferenceModelImpl extends BaseModelImpl<FeedReference>
             { "syncDate", Types.TIMESTAMP },
             { "syncSuccess", Types.BOOLEAN }
         };
-    public static final String TABLE_SQL_CREATE = "create table CATALOG_FeedReference (feedReferenceId LONG not null primary key,companyId LONG,groupId LONG,contentProviderId VARCHAR(75) null,href VARCHAR(75) null,hrefHash VARCHAR(75) null,pshb VARCHAR(75) null,pshbSubscribed BOOLEAN,feedIri VARCHAR(75) null,feedType VARCHAR(75) null,feedVersion VARCHAR(75) null,trustworthyWeight DOUBLE,createDate DATE null,removed BOOLEAN,removedDate DATE null,removedReason VARCHAR(75) null,syncDate DATE null,syncSuccess BOOLEAN)";
+    public static final String TABLE_SQL_CREATE = "create table CATALOG_FeedReference (feedReferenceId LONG not null primary key,companyId LONG,groupId LONG,contentProviderId VARCHAR(255) null,href VARCHAR(3999) null,hrefHash VARCHAR(255) null,pshb VARCHAR(3999) null,pshbSubscribed BOOLEAN,feedIri VARCHAR(255) null,feedType VARCHAR(1) null,feedVersion VARCHAR(25) null,trustworthyWeight DOUBLE,createDate DATE null,removed BOOLEAN,removedDate DATE null,removedReason VARCHAR(1) null,syncDate DATE null,syncSuccess BOOLEAN)";
     public static final String TABLE_SQL_DROP = "drop table CATALOG_FeedReference";
     public static final String DATA_SOURCE = "liferayDataSource";
     public static final String SESSION_FACTORY = "liferaySessionFactory";

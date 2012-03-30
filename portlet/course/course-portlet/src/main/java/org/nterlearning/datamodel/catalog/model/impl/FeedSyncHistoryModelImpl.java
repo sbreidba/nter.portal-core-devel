@@ -50,7 +50,7 @@ public class FeedSyncHistoryModelImpl extends BaseModelImpl<FeedSyncHistory>
             { "syncMessage", Types.VARCHAR },
             { "numberOfEntries", Types.INTEGER }
         };
-    public static final String TABLE_SQL_CREATE = "create table CATALOG_FeedSyncHistory (syncId LONG not null primary key,feedReferenceId LONG,syncDate DATE null,success BOOLEAN,syncMessage VARCHAR(75) null,numberOfEntries INTEGER)";
+    public static final String TABLE_SQL_CREATE = "create table CATALOG_FeedSyncHistory (syncId LONG not null primary key,feedReferenceId LONG,syncDate DATE null,success BOOLEAN,syncMessage VARCHAR(2000) null,numberOfEntries INTEGER)";
     public static final String TABLE_SQL_DROP = "drop table CATALOG_FeedSyncHistory";
     public static final String ORDER_BY_JPQL = " ORDER BY feedSyncHistory.syncId ASC";
     public static final String ORDER_BY_SQL = " ORDER BY CATALOG_FeedSyncHistory.syncId ASC";

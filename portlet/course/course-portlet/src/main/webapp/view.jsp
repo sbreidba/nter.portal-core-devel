@@ -19,3 +19,6 @@
 <portlet:defineObjects />
 
 This is the <b>course</b> with CATALOG tables.
+<p>
+CATALOG table attributes migrated to correct string size.
+</p>
