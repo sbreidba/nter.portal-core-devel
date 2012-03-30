@@ -7,34 +7,7 @@
 			<access>PROPERTY</access>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>
-	<mapped-superclass class="org.nterlearning.model.impl.FooModelImpl">
-		<attributes>
-			<id name="fooId" />
-			<basic name="uuid">
-				<column name="UUID_" />
-			</basic>
-			<basic name="groupId" />
-			<basic name="companyId" />
-			<basic name="userId" />
-			<basic name="userName" />
-			<basic name="createDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="modifiedDate">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="field1" />
-			<basic name="field2" />
-			<basic name="field3" />
-			<basic name="field4">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="field5" />
-			<transient name="primaryKey" />
-			<transient name="primaryKeyObj" />
-			<transient name="userUuid" />
-		</attributes>
-	</mapped-superclass>
+
 	<mapped-superclass class="org.nterlearning.datamodel.catalog.model.impl.ComponentModelImpl">
 		<attributes>
 			<id name="componentId" />
@@ -408,10 +381,6 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
-	<entity class="org.nterlearning.model.impl.FooImpl" name="Foo">
-		<table name="course_Foo" />
-		<attributes />
-	</entity>
 	<entity class="org.nterlearning.datamodel.catalog.model.impl.ComponentImpl" name="Component">
 		<table name="CATALOG_Component" />
 		<attributes />
