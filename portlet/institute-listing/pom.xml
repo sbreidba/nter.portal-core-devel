@@ -25,9 +25,10 @@
         <groupId>org.nterlearning</groupId>
         <version>1.0.0-SNAPSHOT</version>
     </parent>
+
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.nterlearning</groupId>
     <artifactId>nter-institute-listing-portlet</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>Institute Listing Portlet</name>
 
