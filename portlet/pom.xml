@@ -64,5 +64,6 @@
         <module>shib-sso</module>
         <module>registry</module>
         <module>institute-listing</module>
+        <module>course</module>
     </modules>
 </project>
