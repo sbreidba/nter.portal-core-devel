@@ -2,7 +2,6 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-lazy="false" auto-import="false">
-
 	<import class="org.nterlearning.datamodel.catalog.model.Component" />
 	<import class="org.nterlearning.datamodel.catalog.model.ComponentRecord" />
 	<import class="org.nterlearning.datamodel.catalog.model.Contributor" />
@@ -19,7 +18,6 @@
 	<import class="org.nterlearning.datamodel.catalog.model.FlagReport" />
 	<import class="org.nterlearning.datamodel.catalog.model.FlagReportStats" />
 	<import class="org.nterlearning.datamodel.catalog.model.GlobalCourseReview" />
-
 	<class name="org.nterlearning.datamodel.catalog.model.impl.ComponentImpl" table="CATALOG_Component">
 		<cache usage="read-write" />
 		<id name="componentId" type="long">

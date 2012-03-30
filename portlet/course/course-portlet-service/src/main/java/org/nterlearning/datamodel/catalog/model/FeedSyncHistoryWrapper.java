@@ -195,7 +195,8 @@ public class FeedSyncHistoryWrapper implements FeedSyncHistory,
         return new FeedSyncHistoryWrapper((FeedSyncHistory) _feedSyncHistory.clone());
     }
 
-    public int compareTo(FeedSyncHistory feedSyncHistory) {
+    public int compareTo(
+        org.nterlearning.datamodel.catalog.model.FeedSyncHistory feedSyncHistory) {
         return _feedSyncHistory.compareTo(feedSyncHistory);
     }
 
@@ -204,11 +205,11 @@ public class FeedSyncHistoryWrapper implements FeedSyncHistory,
         return _feedSyncHistory.hashCode();
     }
 
-    public com.liferay.portal.model.CacheModel<FeedSyncHistory> toCacheModel() {
+    public com.liferay.portal.model.CacheModel<org.nterlearning.datamodel.catalog.model.FeedSyncHistory> toCacheModel() {
         return _feedSyncHistory.toCacheModel();
     }
 
-    public FeedSyncHistory toEscapedModel() {
+    public org.nterlearning.datamodel.catalog.model.FeedSyncHistory toEscapedModel() {
         return new FeedSyncHistoryWrapper(_feedSyncHistory.toEscapedModel());
     }
 

@@ -618,7 +618,8 @@ public class ComponentWrapper implements Component, ModelWrapper<Component> {
         return new ComponentWrapper((Component) _component.clone());
     }
 
-    public int compareTo(Component component) {
+    public int compareTo(
+        org.nterlearning.datamodel.catalog.model.Component component) {
         return _component.compareTo(component);
     }
 
@@ -627,11 +628,11 @@ public class ComponentWrapper implements Component, ModelWrapper<Component> {
         return _component.hashCode();
     }
 
-    public com.liferay.portal.model.CacheModel<Component> toCacheModel() {
+    public com.liferay.portal.model.CacheModel<org.nterlearning.datamodel.catalog.model.Component> toCacheModel() {
         return _component.toCacheModel();
     }
 
-    public Component toEscapedModel() {
+    public org.nterlearning.datamodel.catalog.model.Component toEscapedModel() {
         return new ComponentWrapper(_component.toEscapedModel());
     }
 

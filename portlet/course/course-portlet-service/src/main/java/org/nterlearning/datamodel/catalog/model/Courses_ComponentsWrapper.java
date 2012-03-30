@@ -303,7 +303,8 @@ public class Courses_ComponentsWrapper implements Courses_Components,
         return new Courses_ComponentsWrapper((Courses_Components) _courses_Components.clone());
     }
 
-    public int compareTo(Courses_Components courses_Components) {
+    public int compareTo(
+        org.nterlearning.datamodel.catalog.model.Courses_Components courses_Components) {
         return _courses_Components.compareTo(courses_Components);
     }
 
@@ -312,11 +313,11 @@ public class Courses_ComponentsWrapper implements Courses_Components,
         return _courses_Components.hashCode();
     }
 
-    public com.liferay.portal.model.CacheModel<Courses_Components> toCacheModel() {
+    public com.liferay.portal.model.CacheModel<org.nterlearning.datamodel.catalog.model.Courses_Components> toCacheModel() {
         return _courses_Components.toCacheModel();
     }
 
-    public Courses_Components toEscapedModel() {
+    public org.nterlearning.datamodel.catalog.model.Courses_Components toEscapedModel() {
         return new Courses_ComponentsWrapper(_courses_Components.toEscapedModel());
     }
 

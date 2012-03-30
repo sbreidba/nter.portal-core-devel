@@ -204,7 +204,8 @@ public class FlagReportStatsWrapper implements FlagReportStats,
         return new FlagReportStatsWrapper((FlagReportStats) _flagReportStats.clone());
     }
 
-    public int compareTo(FlagReportStats flagReportStats) {
+    public int compareTo(
+        org.nterlearning.datamodel.catalog.model.FlagReportStats flagReportStats) {
         return _flagReportStats.compareTo(flagReportStats);
     }
 
@@ -213,11 +214,11 @@ public class FlagReportStatsWrapper implements FlagReportStats,
         return _flagReportStats.hashCode();
     }
 
-    public com.liferay.portal.model.CacheModel<FlagReportStats> toCacheModel() {
+    public com.liferay.portal.model.CacheModel<org.nterlearning.datamodel.catalog.model.FlagReportStats> toCacheModel() {
         return _flagReportStats.toCacheModel();
     }
 
-    public FlagReportStats toEscapedModel() {
+    public org.nterlearning.datamodel.catalog.model.FlagReportStats toEscapedModel() {
         return new FlagReportStatsWrapper(_flagReportStats.toEscapedModel());
     }
 

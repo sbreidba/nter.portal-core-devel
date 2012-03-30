@@ -65,39 +65,19 @@
 		<field name="companyId" type="long" />
 		<field name="groupId" type="long" />
 		<field name="feedReferenceId" type="long" />
-		<field name="componentIri" type="String">
-			<hint-collection name="IRI" />
-		</field>
-		<field name="updatedDate" type="Date">
-			<hint-collection name="SEARCHABLE-DATE" />
-		</field>
-		<field name="language" type="String">
-			<hint name="max-length">10</hint>
-		</field>
-		<field name="href" type="String">
-			<hint-collection name="URI" />
-		</field>
-		<field name="fullTextHref" type="String">
-			<hint-collection name="URI" />
-		</field>
-		<field name="title" type="String">
-			<hint-collection name="TEXT2000" />
-		</field>
-		<field name="description" type="String">
-			<hint-collection name="TEXT4000" />
-		</field>
-		<field name="copyright" type="String" localized="true">
-			<hint-collection name="TEXT4000" />
-		</field>
+		<field name="componentIri" type="String" />
+		<field name="updatedDate" type="Date" />
+		<field name="language" type="String" />
+		<field name="href" type="String" />
+		<field name="fullTextHref" type="String" />
+		<field name="title" type="String" />
+		<field name="description" type="String" />
+		<field name="copyright" type="String" localized="true" />
 		<field name="displayWidth" type="int" />
 		<field name="displayHeight" type="int" />
-		<field name="createDate" type="Date">
-			<hint-collection name="SEARCHABLE-DATE" />
-		</field>
+		<field name="createDate" type="Date" />
 		<field name="removed" type="boolean" />
-		<field name="removedDate" type="Date">
-			<hint-collection name="SEARCHABLE-DATE" />
-		</field>
+		<field name="removedDate" type="Date" />
 		<field name="version" type="String" />
 		<field name="versionDate" type="Date" />
 		<field name="price" type="double" />

@@ -350,7 +350,8 @@ public class CourseRecordWrapper implements CourseRecord,
         return new CourseRecordWrapper((CourseRecord) _courseRecord.clone());
     }
 
-    public int compareTo(CourseRecord courseRecord) {
+    public int compareTo(
+        org.nterlearning.datamodel.catalog.model.CourseRecord courseRecord) {
         return _courseRecord.compareTo(courseRecord);
     }
 
@@ -359,11 +360,11 @@ public class CourseRecordWrapper implements CourseRecord,
         return _courseRecord.hashCode();
     }
 
-    public com.liferay.portal.model.CacheModel<CourseRecord> toCacheModel() {
+    public com.liferay.portal.model.CacheModel<org.nterlearning.datamodel.catalog.model.CourseRecord> toCacheModel() {
         return _courseRecord.toCacheModel();
     }
 
-    public CourseRecord toEscapedModel() {
+    public org.nterlearning.datamodel.catalog.model.CourseRecord toEscapedModel() {
         return new CourseRecordWrapper(_courseRecord.toEscapedModel());
     }
 

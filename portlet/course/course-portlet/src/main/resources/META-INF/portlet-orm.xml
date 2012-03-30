@@ -7,7 +7,6 @@
 			<access>PROPERTY</access>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>
-
 	<mapped-superclass class="org.nterlearning.datamodel.catalog.model.impl.ComponentModelImpl">
 		<attributes>
 			<id name="componentId" />

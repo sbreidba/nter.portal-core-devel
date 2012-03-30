@@ -195,7 +195,8 @@ public class ContributorWrapper implements Contributor,
         return new ContributorWrapper((Contributor) _contributor.clone());
     }
 
-    public int compareTo(Contributor contributor) {
+    public int compareTo(
+        org.nterlearning.datamodel.catalog.model.Contributor contributor) {
         return _contributor.compareTo(contributor);
     }
 
@@ -204,11 +205,11 @@ public class ContributorWrapper implements Contributor,
         return _contributor.hashCode();
     }
 
-    public com.liferay.portal.model.CacheModel<Contributor> toCacheModel() {
+    public com.liferay.portal.model.CacheModel<org.nterlearning.datamodel.catalog.model.Contributor> toCacheModel() {
         return _contributor.toCacheModel();
     }
 
-    public Contributor toEscapedModel() {
+    public org.nterlearning.datamodel.catalog.model.Contributor toEscapedModel() {
         return new ContributorWrapper(_contributor.toEscapedModel());
     }
 
