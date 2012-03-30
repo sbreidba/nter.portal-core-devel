@@ -149,7 +149,7 @@ public class SetupTools {
         String larDirPath = ".";
         try {
             larDirPath = PrefsPropsUtil.getString(PropsKeys.AUTO_DEPLOY_TOMCAT_DEST_DIR) +
-                                    "/nter-setup-portlet/webapp/lar/";
+                                    "/nter-setup-portlet/lar/";
             larDir = new File(larDirPath);
         }
         catch (Exception e) {

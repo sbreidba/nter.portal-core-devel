@@ -18,7 +18,7 @@
 
 <portlet:defineObjects />
 
-This is the <b>course</b> with CATALOG tables.
+This is the <b>nter-course-portlet</b>.
 <p>
 CATALOG table attributes migrated to correct string size.
 </p>
