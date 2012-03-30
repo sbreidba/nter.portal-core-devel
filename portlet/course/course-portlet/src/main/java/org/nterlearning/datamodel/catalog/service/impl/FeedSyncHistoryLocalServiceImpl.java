@@ -20,7 +20,19 @@
 
 package org.nterlearning.datamodel.catalog.service.impl;
 
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.service.PortletLocalServiceUtil;
+
+import org.nterlearning.datamodel.catalog.NoSuchFeedSyncHistoryException;
+import org.nterlearning.datamodel.catalog.model.FeedSyncHistory;
 import org.nterlearning.datamodel.catalog.service.base.FeedSyncHistoryLocalServiceBaseImpl;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The implementation of the feed sync history local service.
@@ -32,15 +44,106 @@ import org.nterlearning.datamodel.catalog.service.base.FeedSyncHistoryLocalServi
  * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author SRI International
  * @see org.nterlearning.datamodel.catalog.service.base.FeedSyncHistoryLocalServiceBaseImpl
  * @see org.nterlearning.datamodel.catalog.service.FeedSyncHistoryLocalServiceUtil
  */
 public class FeedSyncHistoryLocalServiceImpl
     extends FeedSyncHistoryLocalServiceBaseImpl {
-    /*
-     * NOTE FOR DEVELOPERS:
+
+    @Override
+    public FeedSyncHistory addFeedSyncHistory(FeedSyncHistory feedHistory)
+            throws SystemException {
+
+        long id = counterLocalService.increment(FeedSyncHistory.class.getName());
+        feedHistory.setPrimaryKey(id);
+        return super.addFeedSyncHistory(feedHistory);
+    }
+
+    public void deleteFeedSyncHistory(long feedHistoryId)
+            throws PortalException, SystemException {
+        FeedSyncHistory feedHistory = feedSyncHistoryPersistence.findByPrimaryKey(feedHistoryId);
+        deleteFeedSyncHistory(feedHistory);
+    }
+
+    /**
+     * Purges older feedSyncHistory log entries from the database.
      *
-     * Never reference this interface directly. Always use {@link org.nterlearning.datamodel.catalog.service.FeedSyncHistoryLocalServiceUtil} to access the feed sync history local service.
+     * @param feedRefId The feedReferenceId to purge entries for.
+     * @param retainCount The number of entries to retain
+     *
+     * @throws PortalException - Liferay's SystemException
+     * @throws SystemException - Liferay's SystemException
      */
+    public void purgeFeedSyncHistory(long feedRefId, long retainCount)
+            throws PortalException, SystemException {
+
+        List<FeedSyncHistory> historyList = new ArrayList<FeedSyncHistory>();
+
+        if (retainCount == 0) {
+            historyList = findByFeedReference(feedRefId);
+        }
+        else {
+            int historyCount = findByFeedReference(feedRefId).size();
+
+            if (historyCount > retainCount) {
+                int limit = (int)(historyCount - retainCount);
+                historyList = feedSyncHistoryPersistence.findByfeedReferenceId(feedRefId, 0, limit);
+            }
+        }
+
+        for (FeedSyncHistory history : historyList) {
+            feedSyncHistoryPersistence.remove(history);
+        }
+    }
+
+    /**
+     * Prunes the FeedSyncHistory table for a given FeedReference object.  It
+     * retains the latest number of entries based on the configuration parameter
+     * in the portlet.xml file.
+     *
+     * @param feedRefId The id of the FeedReference object to prune entries for.
+     *
+     * @throws PortalException - Standard Liferay exception
+     * @throws SystemException - Standard Liferay exception
+     */
+    public void pruneFeedSyncHistory(long feedRefId)
+            throws PortalException, SystemException {
+
+        int defaultRetentionCount =
+                Integer.valueOf(PortletLocalServiceUtil
+                        .getPortletById("feeds_WAR_courseportlet")
+                        .getInitParams().get("syncHistoryLimit"));
+
+        purgeFeedSyncHistory(feedRefId, (long)defaultRetentionCount);
+    }
+
+    /**
+     * Returns a list of FeedSyncHistory objects corresponding to a particular
+     * feedReference object.
+     *
+     * @param feedRefId The feedReferenceId to search for.
+     *
+     * @return A Collection of FeedSyncHistory objects
+     *
+     * @throws NoSuchFeedSyncHistoryException - Returned if no objects are found
+     * @throws SystemException - Liferay's SystemException
+     */
+    public List<FeedSyncHistory> findByFeedReference(long feedRefId)
+            throws NoSuchFeedSyncHistoryException, SystemException {
+        return feedSyncHistoryPersistence.findByfeedReferenceId(feedRefId);
+    }
+
+    /**
+     * Generates a dynamicQuery object that searches for FeedSyncHistory objects
+     * based on the associated feedReferenceIds.
+     *
+     * @param feedRefId The feedReferenceId to search for
+     *
+     * @return The associated dynamicQuery
+     */
+    public DynamicQuery generateDynamicQuery(long feedRefId) {
+        return DynamicQueryFactoryUtil.forClass(FeedSyncHistory.class)
+                                      .add(PropertyFactoryUtil.forName("feedReferenceId").eq(feedRefId));
+    }
 }
