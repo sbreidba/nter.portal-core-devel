@@ -53,7 +53,6 @@
                     <target>1.5</target>
                 </configuration>
             </plugin>
-            <!--
             <plugin>
                 <artifactId>maven-resources-plugin</artifactId>
                 <configuration>
@@ -61,7 +60,6 @@
                     <outputDirectory></outputDirectory>
                 </configuration>
             </plugin>
-            -->
         </plugins>
     </build>
 
