@@ -41,6 +41,19 @@
         </repository>
     </repositories>
 
+    <distributionManagement>
+		<repository>
+			<id>nterlearning</id>
+			<url>http://repository.nterlearning.org/libs-release-local</url>
+		</repository>
+		<snapshotRepository>
+			<id>nterlearning</id>
+			<name>NTER Learning Snapshots</name>
+			<url>http://repository.nterlearning.org/libs-snapshot-local</url>
+			<uniqueVersion>false</uniqueVersion>
+		</snapshotRepository>
+	</distributionManagement>
+
     <properties>
         <liferay.version>6.1.0</liferay.version>
     </properties>
