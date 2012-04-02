@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.security.auth.AuthTokenUtil;
 import org.nterlearning.xml.nter_registry.domain_objects_0_1_0.*;
-import com.sri.nter.registry.proxy.*;
+import org.nterlearning.registry.proxy.*;
 
 import org.nterlearning.xml.nter_registry.blacklist_objects_0_1_0.ActiveStatusEnum;
 
