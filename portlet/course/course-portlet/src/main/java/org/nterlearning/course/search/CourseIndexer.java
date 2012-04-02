@@ -42,6 +42,7 @@ import org.nterlearning.datamodel.catalog.service.CourseLocalServiceUtil;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import javax.portlet.PortletURL;
 
@@ -59,7 +60,6 @@ public class CourseIndexer extends BaseIndexer {
 		Field.PROPERTIES, Field.TITLE
 	};
 
-	@Override
 	public String[] getClassNames() {
 		return CLASS_NAMES;
 	}
@@ -69,6 +69,36 @@ public class CourseIndexer extends BaseIndexer {
 		return PORTLET_ID;
 	}
 
+    public String getPortletId() {
+        return PORTLET_ID;
+    }
+
+    @Override
+    public Summary doGetSummary(Document doc, Locale locale, String snippet, PortletURL url) {
+
+		try {
+			Course course = CourseLocalServiceUtil.getCourse(
+				GetterUtil.getLong(
+					doc.get(Field.ENTRY_CLASS_PK)));
+			String title = course.getTitle();
+			String content = snippet;
+			if (Validator.isNull(content)) {
+				content = StringUtil.shorten(course.getDescription(), 200);
+			}
+			return new Summary(title, content, url);
+		}
+		catch (NoSuchCourseException ce) {
+			// somehow the index became corrupted, manually remove the course
+			doDelete(doc);
+			_log.warn(ce.getMessage());
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return new Summary("", "", url);
+	}
+
 	/**
 	 * (non-Javadoc)
 	 * @see{com.liferay.portal.kernel.search.CourseIndexer#getSummary(com.liferay
@@ -76,7 +106,7 @@ public class CourseIndexer extends BaseIndexer {
 	 * javax.portlet.PortletURL)}
 	 */
 	@Override
-	public Summary getSummary(Document doc, String snippet, PortletURL url) {
+	public Summary getSummary(Document doc, Locale locale, String snippet, PortletURL url) {
 
 		try {
 			Course course = CourseLocalServiceUtil.getCourse(
@@ -199,7 +229,7 @@ public class CourseIndexer extends BaseIndexer {
 	}
 
 	@Override
-	protected void postProcessSearchQuery(
+	public void postProcessSearchQuery(
 		BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
         String ownerName = searchContext.getKeywords();
