@@ -114,6 +114,16 @@ public class CourseImageClp extends BaseModelImpl<CourseImage>
         _mimeType = mimeType;
     }
 
+    public java.lang.String getLargeImageUrl(
+        com.liferay.portal.theme.ThemeDisplay themeDisplay) {
+        throw new UnsupportedOperationException();
+    }
+
+    public java.lang.String getSmallImageUrl(
+        com.liferay.portal.theme.ThemeDisplay themeDisplay) {
+        throw new UnsupportedOperationException();
+    }
+
     public void persist() throws SystemException {
         if (this.isNew()) {
             CourseImageLocalServiceUtil.addCourseImage(this);

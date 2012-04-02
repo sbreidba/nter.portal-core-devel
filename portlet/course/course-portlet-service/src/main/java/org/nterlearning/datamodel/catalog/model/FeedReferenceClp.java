@@ -218,6 +218,14 @@ public class FeedReferenceClp extends BaseModelImpl<FeedReference>
         _syncSuccess = syncSuccess;
     }
 
+    public java.lang.String getOwnerName() {
+        throw new UnsupportedOperationException();
+    }
+
+    public java.lang.String getTagSubstring() {
+        throw new UnsupportedOperationException();
+    }
+
     public void persist() throws SystemException {
         if (this.isNew()) {
             FeedReferenceLocalServiceUtil.addFeedReference(this);

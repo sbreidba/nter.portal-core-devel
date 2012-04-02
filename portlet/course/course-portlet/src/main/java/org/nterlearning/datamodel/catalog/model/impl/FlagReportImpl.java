@@ -32,7 +32,7 @@ package org.nterlearning.datamodel.catalog.model.impl;
 import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import org.nterlearning.datamodel.catalog.model.FlagReport;
 
-public class FlagReportImpl extends FlagReportModelImpl implements FlagReport {
+public class FlagReportImpl extends FlagReportBaseImpl {
 //public class FlagReportImpl extends FlagReportBaseImpl {
 	public FlagReportImpl() {
 	}

@@ -221,4 +221,53 @@ public interface FeedSyncHistoryLocalService extends PersistedModelLocalService 
     * @param beanIdentifier the Spring bean ID for this bean
     */
     public void setBeanIdentifier(java.lang.String beanIdentifier);
+
+    /**
+    * Purges older feedSyncHistory log entries from the database.
+    *
+    * @param feedRefId The feedReferenceId to purge entries for.
+    * @param retainCount The number of entries to retain
+    * @throws PortalException - Liferay's SystemException
+    * @throws SystemException - Liferay's SystemException
+    */
+    public void purgeFeedSyncHistory(long feedRefId, long retainCount)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * Prunes the FeedSyncHistory table for a given FeedReference object.  It
+    * retains the latest number of entries based on the configuration parameter
+    * in the portlet.xml file.
+    *
+    * @param feedRefId The id of the FeedReference object to prune entries for.
+    * @throws PortalException - Standard Liferay exception
+    * @throws SystemException - Standard Liferay exception
+    */
+    public void pruneFeedSyncHistory(long feedRefId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException;
+
+    /**
+    * Returns a list of FeedSyncHistory objects corresponding to a particular
+    * feedReference object.
+    *
+    * @param feedRefId The feedReferenceId to search for.
+    * @return A Collection of FeedSyncHistory objects
+    * @throws NoSuchFeedSyncHistoryException - Returned if no objects are found
+    * @throws SystemException - Liferay's SystemException
+    */
+    public java.util.List<org.nterlearning.datamodel.catalog.model.FeedSyncHistory> findByFeedReference(
+        long feedRefId)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFeedSyncHistoryException;
+
+    /**
+    * Generates a dynamicQuery object that searches for FeedSyncHistory objects
+    * based on the associated feedReferenceIds.
+    *
+    * @param feedRefId The feedReferenceId to search for
+    * @return The associated dynamicQuery
+    */
+    public com.liferay.portal.kernel.dao.orm.DynamicQuery generateDynamicQuery(
+        long feedRefId);
 }

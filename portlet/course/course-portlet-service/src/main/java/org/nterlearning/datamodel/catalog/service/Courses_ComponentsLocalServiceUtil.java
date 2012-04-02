@@ -250,6 +250,30 @@ public class Courses_ComponentsLocalServiceUtil {
         getService().setBeanIdentifier(beanIdentifier);
     }
 
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.Courses_Components> findByCourseId(
+        java.lang.Long courseId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByCourseId(courseId);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.Courses_Components> findByCourseIri(
+        java.lang.String courseIri)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByCourseIri(courseIri);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.Courses_Components> findByComponentId(
+        java.lang.Long componentId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByComponentId(componentId);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.Courses_Components> findByComponentIri(
+        java.lang.String componentIri)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByComponentIri(componentIri);
+    }
+
     public static void clearService() {
         _service = null;
     }

@@ -175,6 +175,11 @@ public class CourseRecordClp extends BaseModelImpl<CourseRecord>
         _assigned = assigned;
     }
 
+    public java.lang.String getFriendlyUpdatedDate(
+        javax.servlet.jsp.PageContext pageContext) {
+        throw new UnsupportedOperationException();
+    }
+
     public void persist() throws SystemException {
         if (this.isNew()) {
             CourseRecordLocalServiceUtil.addCourseRecord(this);

@@ -222,4 +222,12 @@ public interface ContributorLocalService extends PersistedModelLocalService {
     * @param beanIdentifier the Spring bean ID for this bean
     */
     public void setBeanIdentifier(java.lang.String beanIdentifier);
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Contributor> findByCourseIdWithRole(
+        java.lang.Long courseId, java.lang.String role)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Contributor> findByComponentIdWithRole(
+        java.lang.Long componentId, java.lang.String role)
+        throws com.liferay.portal.kernel.exception.SystemException;
 }

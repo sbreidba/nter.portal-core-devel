@@ -382,7 +382,10 @@
 	</mapped-superclass>
 	<entity class="org.nterlearning.datamodel.catalog.model.impl.ComponentImpl" name="Component">
 		<table name="CATALOG_Component" />
-		<attributes />
+		<attributes>
+			<transient name="searchContext" />
+			<transient name="searchRelevance" />
+		</attributes>
 	</entity>
 	<entity class="org.nterlearning.datamodel.catalog.model.impl.ComponentRecordImpl" name="ComponentRecord">
 		<table name="CATALOG_ComponentRecord" />
@@ -394,7 +397,10 @@
 	</entity>
 	<entity class="org.nterlearning.datamodel.catalog.model.impl.CourseImpl" name="Course">
 		<table name="CATALOG_Course" />
-		<attributes />
+		<attributes>
+			<transient name="searchContext" />
+			<transient name="searchRelevance" />
+		</attributes>
 	</entity>
 	<entity class="org.nterlearning.datamodel.catalog.model.impl.CourseImageImpl" name="CourseImage">
 		<table name="CATALOG_CourseImage" />

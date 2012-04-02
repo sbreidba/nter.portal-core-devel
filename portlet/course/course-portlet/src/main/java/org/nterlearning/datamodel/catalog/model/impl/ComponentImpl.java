@@ -57,7 +57,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 //public class ComponentImpl extends ComponentBaseImpl {
-public class ComponentImpl extends ComponentModelImpl implements Component {
+public class ComponentImpl extends ComponentBaseImpl {
 
 	private String searchContext;
 	private float searchRelevance;

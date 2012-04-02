@@ -260,6 +260,170 @@ public class FlagReportLocalServiceWrapper implements FlagReportLocalService,
         _flagReportLocalService.setBeanIdentifier(beanIdentifier);
     }
 
+    public org.nterlearning.datamodel.catalog.model.FlagReport addFlagReport(
+        long userId, long classNameId, long classPK, java.lang.String title,
+        java.lang.String content, java.lang.String flagReason,
+        java.lang.String flagComment, java.lang.String moderateAction,
+        java.lang.String moderatorComment,
+        com.liferay.portal.service.ServiceContext serviceContext)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _flagReportLocalService.addFlagReport(userId, classNameId,
+            classPK, title, content, flagReason, flagComment, moderateAction,
+            moderatorComment, serviceContext);
+    }
+
+    public void addFlagReportResources(
+        org.nterlearning.datamodel.catalog.model.FlagReport flagReport,
+        boolean addCommunityPermissions, boolean addGuestPermissions)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        _flagReportLocalService.addFlagReportResources(flagReport,
+            addCommunityPermissions, addGuestPermissions);
+    }
+
+    public void addFlagReportResources(
+        org.nterlearning.datamodel.catalog.model.FlagReport flagReport,
+        java.lang.String[] communityPermissions,
+        java.lang.String[] guestPermissions)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        _flagReportLocalService.addFlagReportResources(flagReport,
+            communityPermissions, guestPermissions);
+    }
+
+    public void updateAsset(long userId,
+        org.nterlearning.datamodel.catalog.model.FlagReport flagReport,
+        long[] assetCategoryIds, java.lang.String[] assetTagNames)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        _flagReportLocalService.updateAsset(userId, flagReport,
+            assetCategoryIds, assetTagNames);
+    }
+
+    public void deleteReports(long groupId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        _flagReportLocalService.deleteReports(groupId);
+    }
+
+    public void deleteReport(
+        org.nterlearning.datamodel.catalog.model.FlagReport flagReport)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        _flagReportLocalService.deleteReport(flagReport);
+    }
+
+    public void deleteReport(long flagReportId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        _flagReportLocalService.deleteReport(flagReportId);
+    }
+
+    public org.nterlearning.datamodel.catalog.model.FlagReport updateReport(
+        org.nterlearning.datamodel.catalog.model.FlagReport flagReport)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _flagReportLocalService.updateReport(flagReport);
+    }
+
+    public org.nterlearning.datamodel.catalog.model.FlagReport updateFlagReport(
+        long userId, long flagReportId, long classNameId, long classPK,
+        java.lang.String title, java.lang.String content,
+        java.lang.String flagReason, java.lang.String flagComment,
+        java.lang.String moderateAction, java.lang.String moderatorComment,
+        java.lang.Integer Status, long statusByUserId,
+        java.lang.String statusByUserName, java.util.Date StatusDate,
+        com.liferay.portal.service.ServiceContext serviceContext)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _flagReportLocalService.updateFlagReport(userId, flagReportId,
+            classNameId, classPK, title, content, flagReason, flagComment,
+            moderateAction, moderatorComment, Status, statusByUserId,
+            statusByUserName, StatusDate, serviceContext);
+    }
+
+    public org.nterlearning.datamodel.catalog.model.FlagReport moderateFlagReport(
+        long userId, long flagReportId, java.lang.Integer moderateStatus,
+        java.lang.String moderateAction, java.lang.String moderatorComment,
+        com.liferay.portal.service.ServiceContext serviceContext)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _flagReportLocalService.moderateFlagReport(userId, flagReportId,
+            moderateStatus, moderateAction, moderatorComment, serviceContext);
+    }
+
+    public void updateFlagReportResources(
+        org.nterlearning.datamodel.catalog.model.FlagReport flagReport,
+        java.lang.String[] communityPermissions,
+        java.lang.String[] guestPermissions)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        _flagReportLocalService.updateFlagReportResources(flagReport,
+            communityPermissions, guestPermissions);
+    }
+
+    public void updateFlagReportStats(long classNameId, long classPK)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        _flagReportLocalService.updateFlagReportStats(classNameId, classPK);
+    }
+
+    public org.nterlearning.datamodel.catalog.model.FlagReport updateStatus(
+        long userId, long resourcePrimKey, int status,
+        com.liferay.portal.service.ServiceContext serviceContext)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _flagReportLocalService.updateStatus(userId, resourcePrimKey,
+            status, serviceContext);
+    }
+
+    public void removeWorkflowInstance(long groupId, long companyId,
+        java.lang.String className, long classPK)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        _flagReportLocalService.removeWorkflowInstance(groupId, companyId,
+            className, classPK);
+    }
+
+    public org.nterlearning.datamodel.catalog.model.FlagReport findByFlagReportId(
+        long flagReportId)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFlagReportException {
+        return _flagReportLocalService.findByFlagReportId(flagReportId);
+    }
+
+    public org.nterlearning.datamodel.catalog.model.FlagReport fetchByFlagReportId(
+        long flagReportId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _flagReportLocalService.fetchByFlagReportId(flagReportId);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.FlagReport> findByGroupId(
+        long groupId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _flagReportLocalService.findByGroupId(groupId);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.FlagReport> findByCompanyId(
+        long companyId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _flagReportLocalService.findByCompanyId(companyId);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.FlagReport> findByClassNameIdClassPK(
+        long classNameId, long classPK)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _flagReportLocalService.findByClassNameIdClassPK(classNameId,
+            classPK);
+    }
+
+    public java.util.List<java.lang.Object[]> findByClassNameIdAndFilter(
+        long classNameId, java.lang.String filterType, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _flagReportLocalService.findByClassNameIdAndFilter(classNameId,
+            filterType, start, end);
+    }
+
     /**
      * @deprecated Renamed to {@link #getWrappedService}
      */

@@ -471,6 +471,28 @@ public class FeedReferenceWrapper implements FeedReference,
     }
 
     /**
+    * Determines the correct name of the owner, regardless of whether or not
+    * the owning group is a group, community, organization, or company.
+    *
+    * Typically, returning the name of the group will only return the primary
+    * key in the corresponding owner table.
+    *
+    * @return The name of the owning entity.
+    */
+    public java.lang.String getOwnerName() {
+        return _feedReference.getOwnerName();
+    }
+
+    /**
+    * Parses out the 'tag:...' portion of the Feed IRI.
+    *
+    * @return The tag substring of the Feed IRI
+    */
+    public java.lang.String getTagSubstring() {
+        return _feedReference.getTagSubstring();
+    }
+
+    /**
      * @deprecated Renamed to {@link #getWrappedModel}
      */
     public FeedReference getWrappedFeedReference() {

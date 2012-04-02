@@ -17,4 +17,31 @@ public interface Component extends ComponentModel, PersistedModel {
      *
      * Never modify this interface directly. Add methods to {@link org.nterlearning.datamodel.catalog.model.impl.ComponentImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
      */
+    public java.lang.String getFriendlyVersionDate(
+        javax.servlet.jsp.PageContext pageContext);
+
+    public java.lang.String getFriendlyUpdateDate(
+        javax.servlet.jsp.PageContext pageContext);
+
+    public java.lang.String getSearchContext();
+
+    public void setSearchContext(java.lang.String searchContext);
+
+    public float getSearchRelevance();
+
+    public void setSearchRelevance(float searchRelevance);
+
+    public java.lang.String getUrl()
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException;
+
+    public java.lang.String getUrl(java.lang.String lang)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException;
+
+    public boolean isPurchased(long userId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException;
+
+    public void updateIndex();
 }
