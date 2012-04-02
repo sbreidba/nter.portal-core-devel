@@ -1,0 +1,1813 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ National Training and Education Resource (NTER)
+  ~ Copyright (C) 2011  SRI International
+  ~
+  ~ This program is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or (at
+  ~ your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful, but
+  ~ WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  ~ General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  ~ 02110-1301, USA.
+  -->
+
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:nter="http://nterlearning.org/xml/feeds/atom-extensions-schema_0.6.3.xsd">
+
+    <!-- Sample feed to create 33 test courses for getFriendlyDuration display testing -->
+
+    <title>Course Feed</title>
+    <link rel="self" href="test-0.6.3-course-atom-feed-duration.xml" type="application/atom+xml"/>
+    <updated>2011-07-08T22:52:00Z</updated>
+    <id>tag:nwtp.gov,2011-07-08:/feeds/TEST-duration-display-0003939e0af6</id>
+
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Test duration component</title>
+        <link rel="self" href="https://nwtp.gov/durationComponent1.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <link rel="search" href="https://nwtp.gov/durationComponent1.php?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>test component</summary>
+		<nter:courseComponent>
+			<nter:version>1</nter:version>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+		</nter:courseComponent>
+    </entry>
+
+
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course1</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P2Y2M3DT4H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 1</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course2</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P3YT4H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 2</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course3</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P2M3DT4H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 3</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course4</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P1Y1M3DT4H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 4</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course5</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P1YT4H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 5</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course6</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P1M3DT4H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 6</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course7</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P1Y2M3DT4H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 7</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course8</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P2Y1M3DT4H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 8</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course9</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P3DT4H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 9</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course10</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P3DT1H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 10</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course11</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P3DT4H1M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 11</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course12</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P3DT1H1M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 12</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course13</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P1DT4H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 13</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course14</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P1DT1H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 14</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course15</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P1DT4H1M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 15</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course16</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P1DT1H1M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 16</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course17</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P3DT15M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 17</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course18</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P3DT1M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 18</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course19</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P1DT5M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 19</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course20</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P1DT1M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 20</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course21</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">PT4H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 21</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course22</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">PT1H5M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 22</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course23</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">PT4H1M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 23</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course24</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">PT1H1M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 24</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course25</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P3D</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 25</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course26</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P1D</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 26</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course27</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">PT4H</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 27</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course28</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">PT1H</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 28</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course29</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">PT30M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 29</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course30</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">PT1M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 30</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course31</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">PT25S</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 31</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course32</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">PT1S</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 32</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course33</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+			<nter:version>1</nter:version>
+            <nter:title xml:lang="en-US">TEST Duration Course 33</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course34</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P1Y13M3DT4H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 34</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course35</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P34DT4H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 35</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course36</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P3DT25H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 36</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course37</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P3DT4H65M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 37</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course38</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">PT65S</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 38</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course39</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P3H</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 39</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-07-08:/courses/TEST-duration-display-course40</id>
+        <updated>2011-07-08T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">T3H</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Duration Course 40</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Duration Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Duration Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-07-08:/link/to/test-duration-component/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/testDurationCourse.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+</feed>
+
