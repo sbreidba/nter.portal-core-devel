@@ -52,7 +52,6 @@ import org.nterlearning.datamodel.catalog.model.FeedReference;
  * </p>
  */
 public class FeedReferenceImpl extends FeedReferenceBaseImpl {
-//public class FeedReferenceImpl extends FeedReferenceBaseImpl {
 	public FeedReferenceImpl() {
 	}
 

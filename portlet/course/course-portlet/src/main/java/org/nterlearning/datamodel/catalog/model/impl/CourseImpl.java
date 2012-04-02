@@ -73,7 +73,6 @@ import java.util.*;
  * that expect a course model instance should use the {@link Course} interface instead. </p>
  */
 public class CourseImpl extends CourseBaseImpl {
-//    public class CourseImpl extends CourseBaseImpl {
 
 	private List<CourseImage> cachedImages;
 	private String searchContext;

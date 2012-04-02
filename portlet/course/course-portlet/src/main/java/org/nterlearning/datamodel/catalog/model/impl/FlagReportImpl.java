@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.workflow.WorkflowConstants;
 import org.nterlearning.datamodel.catalog.model.FlagReport;
 
 public class FlagReportImpl extends FlagReportBaseImpl {
-//public class FlagReportImpl extends FlagReportBaseImpl {
 	public FlagReportImpl() {
 	}
 

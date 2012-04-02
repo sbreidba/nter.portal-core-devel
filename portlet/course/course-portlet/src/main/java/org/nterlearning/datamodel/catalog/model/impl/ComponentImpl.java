@@ -56,8 +56,7 @@ import javax.servlet.jsp.PageContext;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-//public class ComponentImpl extends ComponentBaseImpl {
-public class ComponentImpl extends ComponentBaseImpl {
+public class ComponentImpl extends ComponentBaseImpl implements Component {
 
 	private String searchContext;
 	private float searchRelevance;
