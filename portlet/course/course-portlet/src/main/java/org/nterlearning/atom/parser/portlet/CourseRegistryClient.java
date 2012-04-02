@@ -25,7 +25,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import org.nterlearning.datamodel.catalog.NoSuchFeedReferenceException;
 import org.nterlearning.datamodel.catalog.model.FeedReference;
 import org.nterlearning.datamodel.catalog.service.FeedReferenceLocalServiceUtil;
-import org.nterlearning.registry.proxy.ServiceBean;
+import com.sri.nter.registry.proxy.ServiceBean;
 
 import org.nterlearning.xml.nter_registry.blacklist_objects_0_1_0.ActiveStatusEnum;
 import org.nterlearning.xml.nter_registry.domain_objects_0_1_0.Binding;
