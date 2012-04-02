@@ -44,8 +44,8 @@
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
-<%@ page import="org.nterlearning.service.registry.*" %>
-<%@ page import="org.nterlearning.registry.proxy.*" %>
+<%@ page import="com.sri.nter.service.registry.*" %>
+<%@ page import="com.sri.nter.registry.proxy.*" %>
 <%@ page import="org.nterlearning.xml.nter_registry.domain_objects_0_1_0.*" %>
 
 <%@ page import="javax.portlet.PortletURL" %>
@@ -102,7 +102,7 @@ institutionsURL.setParameter(ActionRequest.ACTION_NAME, "viewInstitutions");
     </liferay-ui:search-container-results>
 
     <liferay-ui:search-container-row
-       className="org.nterlearning.registry.proxy.ServiceBean"
+       className="com.sri.nter.registry.proxy.ServiceBean"
        keyProperty="key"
        modelVar="service"
     >   
