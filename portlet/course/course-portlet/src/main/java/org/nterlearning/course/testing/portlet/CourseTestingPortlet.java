@@ -177,7 +177,7 @@ public class CourseTestingPortlet extends MVCPortlet {
 					locale, themeDisplay.getTimeZone()));
 
 			if (Validator.isNotNull(title)) {
-				course.setTitle(locale, title);
+				course.setTitle( title, locale);
 			}
 			course.setUpdatedDate(new Date());
 			course.setDescription( description, request.getLocale());
