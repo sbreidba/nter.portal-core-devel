@@ -34,7 +34,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import org.nterlearning.datamodel.catalog.model.CourseImage;
 
 public class CourseImageImpl extends CourseImageBaseImpl {
-//    public class CourseImageImpl extends CourseImageBaseImpl {
     /*
      * NOTE FOR DEVELOPERS:
      *

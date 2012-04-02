@@ -47,7 +47,6 @@ import javax.servlet.jsp.PageContext;
  * </p>
  */
 public class CourseRecordImpl extends CourseRecordBaseImpl {
-//public class CourseRecordImpl extends CourseRecordBaseImpl {
 	public CourseRecordImpl() {
 	}
 
