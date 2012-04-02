@@ -41,6 +41,7 @@ import org.nterlearning.datamodel.catalog.service.ComponentLocalServiceUtil;
 
 import javax.portlet.PortletURL;
 import java.util.List;
+import java.util.Locale;
 
 public class ComponentIndexer extends BaseIndexer {
 
@@ -58,21 +59,48 @@ public class ComponentIndexer extends BaseIndexer {
 
     private static final Log mLog = LogFactoryUtil.getLog(ComponentIndexer.class);
 
-
-    @Override
     public String[] getClassNames() {
         return CLASS_NAMES;
     }
-
 
     @Override
     protected String getPortletId(SearchContext searchContext) {
         return PORTLET_ID;
     }
 
+    public String getPortletId() {
+        return PORTLET_ID;
+    }
 
     @Override
-    public Summary getSummary(Document document, String snippet, PortletURL portletURL) {
+    public Summary doGetSummary(Document document, Locale locale, String snippet, PortletURL portletURL) {
+        try {
+            Component component =
+                    ComponentLocalServiceUtil.getComponent(
+                            GetterUtil.getLong(document.get(Field.ENTRY_CLASS_PK)));
+            String title = component.getTitle();
+            String content = snippet;
+
+            if (Validator.isNull(content)) {
+                content = StringUtil.shorten(component.getDescription(), 200);
+            }
+
+            return new Summary(title, content, portletURL);
+        }
+        catch (NoSuchComponentException ce) {
+            // somehow the index became corrupted, manually delete doc
+            doDelete(document);
+            mLog.warn(ce.getMessage());
+        }
+        catch (Exception e) {
+            mLog.error(e);
+        }
+
+        return new Summary("", "", portletURL);
+    }
+
+    @Override
+    public Summary getSummary(Document document, Locale locale, String snippet, PortletURL portletURL) {
         try {
             Component component =
                     ComponentLocalServiceUtil.getComponent(
@@ -214,7 +242,7 @@ public class ComponentIndexer extends BaseIndexer {
 
 
     @Override
-    protected void postProcessSearchQuery(BooleanQuery searchQuery,
+    public void postProcessSearchQuery(BooleanQuery searchQuery,
                                           SearchContext searchContext)
             throws Exception {
 
