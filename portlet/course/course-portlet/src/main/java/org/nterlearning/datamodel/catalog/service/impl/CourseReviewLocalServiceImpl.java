@@ -255,8 +255,8 @@ public class CourseReviewLocalServiceImpl
 
         assetEntryLocalService.updateEntry(
                 userId, courseReview.getGroupId(), CourseReview.class.getName(), courseReview.getCourseReviewId(),
-                null, assetCategoryIds, assetTagNames, true, null, null, null, null, ContentTypes.TEXT_HTML,
-                null, null, null, null, 0, 0, null, false);
+                null, 0, assetCategoryIds, assetTagNames, true, null, null, null, null, ContentTypes.TEXT_HTML,
+                null, null, null, null, null, 0, 0, null, false);
     }
 
 

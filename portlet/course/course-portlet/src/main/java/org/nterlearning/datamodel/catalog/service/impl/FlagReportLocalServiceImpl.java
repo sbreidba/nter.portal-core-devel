@@ -157,8 +157,8 @@ public class FlagReportLocalServiceImpl extends FlagReportLocalServiceBaseImpl {
 
         assetEntryLocalService.updateEntry(
                 userId, flagReport.getGroupId(), FlagReport.class.getName(), flagReport.getFlagReportId(),
-                null, assetCategoryIds, assetTagNames, true, null, null, null, null, ContentTypes.TEXT_HTML,
-                null, null, null, null, 0, 0, null, false);
+                null, 0, assetCategoryIds, assetTagNames, true, null, null, null, null, ContentTypes.TEXT_HTML,
+                null, null, null, null, null, 0, 0, null, false);
     }
 
     public void deleteReports(long groupId) throws PortalException, SystemException {
