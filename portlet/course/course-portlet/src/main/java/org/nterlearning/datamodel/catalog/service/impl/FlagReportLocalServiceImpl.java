@@ -104,11 +104,11 @@ public class FlagReportLocalServiceImpl extends FlagReportLocalServiceBaseImpl {
         flagReportPersistence.update(flagReport, false);
 
         // Resources
-        if(serviceContext.getAddCommunityPermissions() ||
-           serviceContext.getAddGuestPermissions()) {
-            addFlagReportResources(flagReport, serviceContext.getAddCommunityPermissions(), serviceContext.getAddGuestPermissions());
+        if(serviceContext.isAddGroupPermissions() ||
+           serviceContext.isAddGuestPermissions()) {
+            addFlagReportResources(flagReport, serviceContext.isAddGroupPermissions(), serviceContext.isAddGuestPermissions());
         } else {
-            addFlagReportResources(flagReport, serviceContext.getCommunityPermissions(), serviceContext.getGuestPermissions());
+            addFlagReportResources(flagReport, serviceContext.getGroupPermissions(), serviceContext.getGuestPermissions());
         }
 
         // Asset
@@ -126,21 +126,21 @@ public class FlagReportLocalServiceImpl extends FlagReportLocalServiceBaseImpl {
         return flagReport;
     }
 
-    public void addFlagReportResources(FlagReport flagReport, boolean addCommunityPermissions,
+    public void addFlagReportResources(FlagReport flagReport, boolean addGroupPermissions,
                                          boolean addGuestPermissions) throws PortalException, SystemException {
         resourceLocalService.addResources(
                 flagReport.getCompanyId(), flagReport.getGroupId(), flagReport.getUserId(),
                 FlagReport.class.getName(), flagReport.getFlagReportId(), false,
-                addCommunityPermissions, addGuestPermissions);
+                addGroupPermissions, addGuestPermissions);
     }
 
-    public void addFlagReportResources(FlagReport flagReport, String[] communityPermissions,
+    public void addFlagReportResources(FlagReport flagReport, String[] groupPermissions,
                                          String[] guestPermissions) throws PortalException, SystemException {
         try {
             resourceLocalService.addModelResources(
                     flagReport.getCompanyId(), flagReport.getGroupId(), flagReport.getUserId(),
                     FlagReport.class.getName(), flagReport.getFlagReportId(),
-                    communityPermissions, guestPermissions);
+                    groupPermissions, guestPermissions);
         }
         catch (PortalException e) {
             e.printStackTrace();
@@ -220,9 +220,9 @@ public class FlagReportLocalServiceImpl extends FlagReportLocalServiceBaseImpl {
         flagReportPersistence.update(flagReport, false);
 
         // Resources
-        if ((serviceContext.getCommunityPermissions() != null) ||
+        if ((serviceContext.getGroupPermissions() != null) ||
                 (serviceContext.getGuestPermissions() != null)) {
-            updateFlagReportResources(flagReport, serviceContext.getCommunityPermissions(),
+            updateFlagReportResources(flagReport, serviceContext.getGroupPermissions(),
                     serviceContext.getGuestPermissions());
         }
 
@@ -255,9 +255,9 @@ public class FlagReportLocalServiceImpl extends FlagReportLocalServiceBaseImpl {
         flagReportPersistence.update(flagReport, false);
 
         // Resources
-        if ((serviceContext.getCommunityPermissions() != null) ||
+        if ((serviceContext.getGroupPermissions() != null) ||
                 (serviceContext.getGuestPermissions() != null)) {
-            updateFlagReportResources(flagReport, serviceContext.getCommunityPermissions(),
+            updateFlagReportResources(flagReport, serviceContext.getGroupPermissions(),
                     serviceContext.getGuestPermissions());
         }
 
@@ -271,12 +271,12 @@ public class FlagReportLocalServiceImpl extends FlagReportLocalServiceBaseImpl {
         return flagReport;
     }
 
-    public void updateFlagReportResources(FlagReport flagReport, String[] communityPermissions,
+    public void updateFlagReportResources(FlagReport flagReport, String[] groupPermissions,
                                             String[] guestPermissions) throws PortalException, SystemException {
         resourceLocalService.updateResources(
                 flagReport.getCompanyId(), flagReport.getGroupId(),
                 FlagReport.class.getName(), flagReport.getFlagReportId(),
-                communityPermissions, guestPermissions);
+                groupPermissions, guestPermissions);
     }
 
     public void updateFlagReportStats(long classNameId, long classPK) throws PortalException, SystemException {

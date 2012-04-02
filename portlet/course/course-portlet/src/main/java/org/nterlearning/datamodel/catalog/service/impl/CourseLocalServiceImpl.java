@@ -266,13 +266,13 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
         coursePersistence.update(course, true);
 
         // Resources
-        if (serviceContext.getAddCommunityPermissions() ||
-                serviceContext.getAddGuestPermissions()) {
-            addCourseResources(course, serviceContext.getAddCommunityPermissions(),
-                    serviceContext.getAddGuestPermissions());
+        if (serviceContext.isAddGroupPermissions() ||
+                serviceContext.isAddGuestPermissions()) {
+            addCourseResources(course, serviceContext.isAddGroupPermissions(),
+                    serviceContext.isAddGuestPermissions());
         }
         else {
-            addCourseResources(course, serviceContext.getCommunityPermissions(),
+            addCourseResources(course, serviceContext.getGroupPermissions(),
                     serviceContext.getGuestPermissions());
         }
 
@@ -317,26 +317,26 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 
 
     public void addCourseResources(
-            Course course, boolean addCommunityPermissions,
+            Course course, boolean addGroupPermissions,
             boolean addGuestPermissions)
             throws PortalException, SystemException {
 
         resourceLocalService.addResources(
                 course.getCompanyId(), course.getGroupId(), course.getUserId(),
                 Course.class.getName(), course.getCourseId(), false,
-                addCommunityPermissions, addGuestPermissions);
+                addGroupPermissions, addGuestPermissions);
     }
 
 
     public void addCourseResources(
-            Course course, String[] communityPermissions, String[] guestPermissions)
+            Course course, String[] groupPermissions, String[] guestPermissions)
             throws PortalException, SystemException {
 
         try {
             resourceLocalService.addModelResources(
                     course.getCompanyId(), course.getGroupId(), course.getUserId(),
                     Course.class.getName(), course.getCourseId(),
-                    communityPermissions, guestPermissions);
+                    groupPermissions, guestPermissions);
         }
         catch (PortalException e) {
             e.printStackTrace();
@@ -350,21 +350,21 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 
 
     public void addCourseResources(
-            long courseId, boolean addCommunityPermissions,
+            long courseId, boolean addGroupPermissions,
             boolean addGuestPermissions)
             throws PortalException, SystemException {
 
         Course course = coursePersistence.findByPrimaryKey(courseId);
-        addCourseResources(course, addCommunityPermissions, addGuestPermissions);
+        addCourseResources(course, addGroupPermissions, addGuestPermissions);
     }
 
 
     public void addCourseResources(
-            long courseId, String[] communityPermissions, String[] guestPermissions)
+            long courseId, String[] groupPermissions, String[] guestPermissions)
             throws PortalException, SystemException {
 
         Course course = coursePersistence.findByPrimaryKey(courseId);
-        addCourseResources(course, communityPermissions, guestPermissions);
+        addCourseResources(course, groupPermissions, guestPermissions);
     }
 
 
@@ -629,10 +629,10 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
         coursePersistence.update(course, true, serviceContext);
 
         // Resources
-        if ((serviceContext.getCommunityPermissions() != null) ||
+        if ((serviceContext.getGroupPermissions() != null) ||
                 (serviceContext.getGuestPermissions() != null)) {
             updateCourseResources(
-                    course, serviceContext.getCommunityPermissions(),
+                    course, serviceContext.getGroupPermissions(),
                     serviceContext.getGuestPermissions());
         }
 
@@ -656,12 +656,12 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 
 
     public void updateCourseResources(
-            Course course, String[] communityPermissions, String[] guestPermissions)
+            Course course, String[] groupPermissions, String[] guestPermissions)
             throws PortalException, SystemException {
 
         resourceLocalService.updateResources(
                 course.getCompanyId(), course.getGroupId(), Course.class.getName(),
-                course.getCourseId(), communityPermissions, guestPermissions);
+                course.getCourseId(), groupPermissions, guestPermissions);
     }
 
 
