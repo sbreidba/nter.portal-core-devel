@@ -491,8 +491,8 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 
         assetEntryLocalService.updateEntry(
                 userId, course.getGroupId(), Course.class.getName(),
-                course.getCourseId(), null, assetCategoryIds, assetTagNames, true,
-                null, null, null, null, ContentTypes.TEXT_HTML, null, null, null,
+                course.getCourseId(), null, 0, assetCategoryIds, assetTagNames, true,
+                null, null, null, null, ContentTypes.TEXT_HTML, null, null, null, null,
                 null, 0, 0, null, false);
 
         // Indexer
