@@ -41,9 +41,9 @@
 %>
 <%@include file="/html/init.jsp" %>
 
-<%@ page import="com.sri.nter.service.registry.RegistryUtil" %>
-<%@ page import="com.sri.nter.registry.proxy.ServiceBean" %>
-<%@ page import="com.sri.nter.registry.proxy.RegistryInstance" %>
+<%@ page import="org.nterlearning.service.registry.RegistryUtil" %>
+<%@ page import="org.nterlearning.registry.proxy.ServiceBean" %>
+<%@ page import="org.nterlearning.registry.proxy.RegistryInstance" %>
 <%@ page import="org.nterlearning.xml.nter_registry.blacklist_objects_0_1_0.ActiveStatusEnum" %>
 
 <%@ page import="java.util.Map" %>
@@ -56,7 +56,7 @@
 <%@ page import="com.liferay.portal.kernel.util.ListUtil" %>
 <%@ page import="javax.portlet.ActionRequest" %>
 
-<jsp:useBean id="institution" type="com.sri.nter.registry.proxy.InstitutionBean" scope="request" />
+<jsp:useBean id="institution" type="org.nterlearning.registry.proxy.InstitutionBean" scope="request" />
 <jsp:useBean id="actionName" type="java.lang.String" scope="request" />
 
 <portlet:actionURL name="<%= actionName %>" var="submitAction"/>
@@ -187,7 +187,7 @@ institutionsURL.setParameter(ActionRequest.ACTION_NAME, "viewInstitutions");
     </liferay-ui:search-container-results>
 
     <liferay-ui:search-container-row
-       className="com.sri.nter.registry.proxy.ServiceBean"
+       className="org.nterlearning.registry.proxy.ServiceBean"
        keyProperty="key"
        modelVar="service"
     >

@@ -47,7 +47,7 @@
 <%@ page import="com.liferay.portal.security.permission.ActionKeys" %>
 <%@ page import="com.liferay.portal.service.permission.PortletPermissionUtil"%>
 
-<%@ page import="com.sri.nter.registry.proxy.ServiceBean" %>
+<%@ page import="org.nterlearning.registry.proxy.ServiceBean" %>
 <%@ page import="org.nterlearning.xml.nter_registry.domain_objects_0_1_0.Binding" %>
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
