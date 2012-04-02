@@ -119,9 +119,8 @@ public class FeedParser_063 extends FeedParser_062 implements FeedParser {
         }
 
         for (NterCopyright copyright : parserComponent.getCopyrights()) {
-            catalogComponent.setCopyright(
-                    FeedParserUtil.parserLangToCatalogLocale(copyright.getLanguage()),
-                    copyright.getText());
+            catalogComponent.setCopyright( copyright.getText(),
+                    FeedParserUtil.parserLangToCatalogLocale(copyright.getLanguage()));
         }
 
         if (componentEntry.getLanguage() == null) {
@@ -180,37 +179,30 @@ public class FeedParser_063 extends FeedParser_062 implements FeedParser {
         }
 
         for (NterTitle title : parserCourse.getTitles()) {
-            catalogCourse.setTitle(
-                    FeedParserUtil.parserLangToCatalogLocale(title.getLanguage()),
-                    title.getText());
+            catalogCourse.setTitle( title.getText(),
+                    FeedParserUtil.parserLangToCatalogLocale(title.getLanguage()));
         }
         for (NterTranscriptAbstract abstract_ : parserCourse.getTranscriptAbstracts()) {
-            catalogCourse.setTranscriptAbstract(
-                    FeedParserUtil.parserLangToCatalogLocale(abstract_.getLanguage()),
-                    abstract_.getText());
+            catalogCourse.setTranscriptAbstract(abstract_.getText(),
+                    FeedParserUtil.parserLangToCatalogLocale(abstract_.getLanguage()));
         }
         for (NterCourseDescription description : parserCourse.getDescriptions()) {
-            catalogCourse.setDescription(
-                    FeedParserUtil.parserLangToCatalogLocale(description.getLanguage()),
-                    description.getText());
+            catalogCourse.setDescription(description.getText(),
+                    FeedParserUtil.parserLangToCatalogLocale(description.getLanguage()));
         }
         for (NterKeyword keyword : parserCourse.getKeywords()) {
-            catalogCourse.setKeywords(
-                    FeedParserUtil.parserLangToCatalogLocale(keyword.getLanguage()),
-                    keyword.getText());
+            catalogCourse.setKeywords(keyword.getText(),
+                    FeedParserUtil.parserLangToCatalogLocale(keyword.getLanguage()));
         }
         for (NterCopyright copyright : parserCourse.getCopyrights()) {
-            catalogCourse.setCopyright(
-                    FeedParserUtil.parserLangToCatalogLocale(copyright.getLanguage()),
-                    copyright.getText());
+            catalogCourse.setCopyright(copyright.getText(),
+                    FeedParserUtil.parserLangToCatalogLocale(copyright.getLanguage()));
         }
         for (NterRating rating : parserCourse.getRatings()) {
-            catalogCourse.setRatingLevel(
-                    FeedParserUtil.parserLangToCatalogLocale(rating.getLanguage()),
-                    rating.getLevel());
-            catalogCourse.setRatingReason(
-                    FeedParserUtil.parserLangToCatalogLocale(rating.getLanguage()),
-                    rating.getReason());
+            catalogCourse.setRatingLevel(rating.getLevel(),
+                    FeedParserUtil.parserLangToCatalogLocale(rating.getLanguage()));
+            catalogCourse.setRatingReason(rating.getReason(),
+                    FeedParserUtil.parserLangToCatalogLocale(rating.getLanguage()));
         }
         for (NterRelated related : parserCourse.getRelateds()) {
             if (related.getRelationship().equals(RelationshipType.SUPERSEDES)) {

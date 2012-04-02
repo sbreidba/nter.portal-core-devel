@@ -149,9 +149,8 @@ public class Converter {
         catalogAssetCategory.setVocabularyId(vocabularyId);
 
         for (NterTitle title : parserAssetCategory.getTitles()) {
-            catalogAssetCategory.setTitle(
-                    parserLangToCatalogLocale(title.getLanguage()),
-                    title.getText());
+            catalogAssetCategory.setTitle(title.getText(),
+                    parserLangToCatalogLocale(title.getLanguage()));
         }
         
         return catalogAssetCategory;
@@ -651,7 +650,7 @@ public class Converter {
         catalogRequirement.setCourseId(courseId);
         Locale locale = parserLangToCatalogLocale(parserRequirement.getLanguage());
         catalogRequirement.setRequirementType(parserRequirement.getRequirementType());
-        catalogRequirement.setRequirementValue(locale, parserRequirement.getText());
+        catalogRequirement.setRequirementValue(parserRequirement.getText().toString(), locale);
 
         return catalogRequirement;
     }
