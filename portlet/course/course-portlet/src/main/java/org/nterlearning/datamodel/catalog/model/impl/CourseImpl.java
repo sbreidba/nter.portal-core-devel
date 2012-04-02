@@ -45,7 +45,7 @@ import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.*;
 import com.liferay.portal.util.PortalUtil;
-import org.nterlearning.commerce.client.CommerceServiceStub;
+import com.sri.nter.commerce.client.CommerceServiceStub;
 import org.nterlearning.datamodel.catalog.model.*;
 import org.nterlearning.datamodel.catalog.service.*;
 import org.nterlearning.utils.DateUtil;
