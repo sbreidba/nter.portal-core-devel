@@ -25,6 +25,10 @@ public class FeedSyncHistoryLocalServiceClp
     private MethodKey _updateFeedSyncHistoryMethodKey14;
     private MethodKey _getBeanIdentifierMethodKey15;
     private MethodKey _setBeanIdentifierMethodKey16;
+    private MethodKey _purgeFeedSyncHistoryMethodKey17;
+    private MethodKey _pruneFeedSyncHistoryMethodKey18;
+    private MethodKey _findByFeedReferenceMethodKey19;
+    private MethodKey _generateDynamicQueryMethodKey20;
 
     public FeedSyncHistoryLocalServiceClp(ClassLoaderProxy classLoaderProxy) {
         _classLoaderProxy = classLoaderProxy;
@@ -91,6 +95,18 @@ public class FeedSyncHistoryLocalServiceClp
 
         _setBeanIdentifierMethodKey16 = new MethodKey(_classLoaderProxy.getClassName(),
                 "setBeanIdentifier", java.lang.String.class);
+
+        _purgeFeedSyncHistoryMethodKey17 = new MethodKey(_classLoaderProxy.getClassName(),
+                "purgeFeedSyncHistory", long.class, long.class);
+
+        _pruneFeedSyncHistoryMethodKey18 = new MethodKey(_classLoaderProxy.getClassName(),
+                "pruneFeedSyncHistory", long.class);
+
+        _findByFeedReferenceMethodKey19 = new MethodKey(_classLoaderProxy.getClassName(),
+                "findByFeedReference", long.class);
+
+        _generateDynamicQueryMethodKey20 = new MethodKey(_classLoaderProxy.getClassName(),
+                "generateDynamicQuery", long.class);
     }
 
     public org.nterlearning.datamodel.catalog.model.FeedSyncHistory addFeedSyncHistory(
@@ -521,6 +537,110 @@ public class FeedSyncHistoryLocalServiceClp
                     " is not a valid exception");
             }
         }
+    }
+
+    public void purgeFeedSyncHistory(long feedRefId, long retainCount)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        MethodHandler methodHandler = new MethodHandler(_purgeFeedSyncHistoryMethodKey17,
+                feedRefId, retainCount);
+
+        try {
+            _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+                throw (com.liferay.portal.kernel.exception.PortalException) t;
+            }
+
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+    }
+
+    public void pruneFeedSyncHistory(long feedRefId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        MethodHandler methodHandler = new MethodHandler(_pruneFeedSyncHistoryMethodKey18,
+                feedRefId);
+
+        try {
+            _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+                throw (com.liferay.portal.kernel.exception.PortalException) t;
+            }
+
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.FeedSyncHistory> findByFeedReference(
+        long feedRefId)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFeedSyncHistoryException {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_findByFeedReferenceMethodKey19,
+                feedRefId);
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof org.nterlearning.datamodel.catalog.NoSuchFeedSyncHistoryException) {
+                throw (org.nterlearning.datamodel.catalog.NoSuchFeedSyncHistoryException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<org.nterlearning.datamodel.catalog.model.FeedSyncHistory>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    public com.liferay.portal.kernel.dao.orm.DynamicQuery generateDynamicQuery(
+        long feedRefId) {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_generateDynamicQueryMethodKey20,
+                feedRefId);
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (com.liferay.portal.kernel.dao.orm.DynamicQuery) ClpSerializer.translateOutput(returnObj);
     }
 
     public ClassLoaderProxy getClassLoaderProxy() {

@@ -246,6 +246,45 @@ public class GlobalCourseReviewLocalServiceWrapper
         _globalCourseReviewLocalService.setBeanIdentifier(beanIdentifier);
     }
 
+    public void setReviewIsHidden(long globalCourseReviewId,
+        java.lang.Boolean hidden)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchGlobalCourseReviewException {
+        _globalCourseReviewLocalService.setReviewIsHidden(globalCourseReviewId,
+            hidden);
+    }
+
+    public org.nterlearning.datamodel.catalog.model.GlobalCourseReview findByCourseReviewIri(
+        java.lang.String courseReviewIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchGlobalCourseReviewException {
+        return _globalCourseReviewLocalService.findByCourseReviewIri(courseReviewIri);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.GlobalCourseReview> findByCourseId(
+        long courseId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _globalCourseReviewLocalService.findByCourseId(courseId);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.GlobalCourseReview> findByCourseIri(
+        java.lang.String courseIri)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _globalCourseReviewLocalService.findByCourseIri(courseIri);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.GlobalCourseReview> findValidByCourseId(
+        long courseId, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _globalCourseReviewLocalService.findValidByCourseId(courseId,
+            start, end);
+    }
+
+    public long countValidByCourseId(long courseId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _globalCourseReviewLocalService.countValidByCourseId(courseId);
+    }
+
     /**
      * @deprecated Renamed to {@link #getWrappedService}
      */

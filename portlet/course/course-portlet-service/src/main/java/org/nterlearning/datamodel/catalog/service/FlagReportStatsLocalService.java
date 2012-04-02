@@ -222,4 +222,43 @@ public interface FlagReportStatsLocalService extends PersistedModelLocalService 
     * @param beanIdentifier the Spring bean ID for this bean
     */
     public void setBeanIdentifier(java.lang.String beanIdentifier);
+
+    public void incrementTotalEntries(long classNameId, long classPK)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFlagReportStatsException;
+
+    public void incrementTotalModerated(long classNameId, long classPK)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFlagReportStatsException;
+
+    public void incrementTotalApproved(long classNameId, long classPK)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFlagReportStatsException;
+
+    public org.nterlearning.datamodel.catalog.model.FlagReportStats findByFlagReportStatsId(
+        long flagReportStatsId)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFlagReportStatsException;
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public org.nterlearning.datamodel.catalog.model.FlagReportStats fetchByFlagReportStatsId(
+        long flagReportStatsId)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public org.nterlearning.datamodel.catalog.model.FlagReportStats findByClassNameIdWithClassPK(
+        long classNameId, long classPK)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFlagReportStatsException;
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public org.nterlearning.datamodel.catalog.model.FlagReportStats fetchByClassNameIdWithClassPK(
+        long classNameId, long classPK)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public java.lang.Integer countAll()
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.FlagReportStats> findAll(
+        int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException;
 }

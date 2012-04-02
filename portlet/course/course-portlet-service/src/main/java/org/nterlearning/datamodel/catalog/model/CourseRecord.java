@@ -17,4 +17,6 @@ public interface CourseRecord extends CourseRecordModel, PersistedModel {
      *
      * Never modify this interface directly. Add methods to {@link org.nterlearning.datamodel.catalog.model.impl.CourseRecordImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
      */
+    public java.lang.String getFriendlyUpdatedDate(
+        javax.servlet.jsp.PageContext pageContext);
 }

@@ -250,6 +250,20 @@ public class CourseRelatedLocalServiceUtil {
         getService().setBeanIdentifier(beanIdentifier);
     }
 
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.CourseRelated> findByRelatedCourseIdWithRelationshipType(
+        java.lang.Long componentId, java.lang.String relationshipType)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService()
+                   .findByRelatedCourseIdWithRelationshipType(componentId,
+            relationshipType);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.CourseRelated> findByRelatedCourseIri(
+        java.lang.String relatedCourseIri)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByRelatedCourseIri(relatedCourseIri);
+    }
+
     public static void clearService() {
         _service = null;
     }

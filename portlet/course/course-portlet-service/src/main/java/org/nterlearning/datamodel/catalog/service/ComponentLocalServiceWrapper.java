@@ -61,11 +61,13 @@ public class ComponentLocalServiceWrapper implements ComponentLocalService,
     * Deletes the component from the database. Also notifies the appropriate model listeners.
     *
     * @param component the component
+    * @throws PortalException
     * @throws SystemException if a system exception occurred
     */
     public void deleteComponent(
         org.nterlearning.datamodel.catalog.model.Component component)
-        throws com.liferay.portal.kernel.exception.SystemException {
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
         _componentLocalService.deleteComponent(component);
     }
 
@@ -241,6 +243,163 @@ public class ComponentLocalServiceWrapper implements ComponentLocalService,
     */
     public void setBeanIdentifier(java.lang.String beanIdentifier) {
         _componentLocalService.setBeanIdentifier(beanIdentifier);
+    }
+
+    public org.nterlearning.datamodel.catalog.model.Component addComponent(
+        long companyId, long feedReferenceId, java.lang.String componentIRI,
+        java.lang.String description, java.lang.String title,
+        java.lang.String href, java.lang.String lang,
+        java.util.Date updateDate, int displayHeight, int displayWidth,
+        java.lang.String version, java.util.Date versionDate, double price,
+        java.lang.String priceUnit, java.lang.String priceTerms,
+        java.lang.String priceExpiration)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _componentLocalService.addComponent(companyId, feedReferenceId,
+            componentIRI, description, title, href, lang, updateDate,
+            displayHeight, displayWidth, version, versionDate, price,
+            priceUnit, priceTerms, priceExpiration);
+    }
+
+    public org.nterlearning.datamodel.catalog.model.Component addComponent(
+        long companyId, long groupId, long feedReferenceId,
+        java.lang.String componentIRI, java.lang.String description,
+        java.lang.String title, java.lang.String href,
+        java.lang.String fullTextHref, java.lang.String lang,
+        java.util.Date updateDate, int displayHeight, int displayWidth,
+        java.lang.String version, java.util.Date versionDate, double price,
+        java.lang.String priceUnit, java.lang.String priceTerms,
+        java.lang.String priceExpiration)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _componentLocalService.addComponent(companyId, groupId,
+            feedReferenceId, componentIRI, description, title, href,
+            fullTextHref, lang, updateDate, displayHeight, displayWidth,
+            version, versionDate, price, priceUnit, priceTerms, priceExpiration);
+    }
+
+    public void deleteAllChildren(
+        org.nterlearning.datamodel.catalog.model.Component component)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        _componentLocalService.deleteAllChildren(component);
+    }
+
+    /**
+    * Clears the cache for all components stored in this session.  This
+    * should only be needed in a multi-threaded environment, where a thread is
+    * not notified of persistence updates done in a different thread.
+    */
+    public void clearCache() {
+        _componentLocalService.clearCache();
+    }
+
+    /**
+    * Clears the cache for all components stored in this session.  This
+    * should only be needed in a multi-threaded environment, where a thread is
+    * not notified of persistence updates done in a different thread.
+    *
+    * @param component Component to remove from the cache
+    */
+    public void clearCache(
+        org.nterlearning.datamodel.catalog.model.Component component) {
+        _componentLocalService.clearCache(component);
+    }
+
+    /**
+    * Clears the cache for all components stored in this session.  This
+    * should only be needed in a multi-threaded environment, where a thread is
+    * not notified of persistence updates done in a different thread.
+    *
+    * @param componentId Id of component to remove from cache
+    */
+    public void clearCache(java.lang.Long componentId) {
+        _componentLocalService.clearCache(componentId);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Component> findByCompanyId(
+        long companyId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _componentLocalService.findByCompanyId(companyId);
+    }
+
+    public org.nterlearning.datamodel.catalog.model.Component findByComponentId(
+        long componentId)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchComponentException {
+        return _componentLocalService.findByComponentId(componentId);
+    }
+
+    public org.nterlearning.datamodel.catalog.model.Component fetchByComponentId(
+        long componentId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _componentLocalService.fetchByComponentId(componentId);
+    }
+
+    public org.nterlearning.datamodel.catalog.model.Component findByComponentIri(
+        java.lang.String componentIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchComponentException {
+        return _componentLocalService.findByComponentIri(componentIri);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Component> findByFeedReferenceId(
+        java.lang.Long feedRefId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _componentLocalService.findByFeedReferenceId(feedRefId);
+    }
+
+    public org.nterlearning.datamodel.catalog.model.Component fetchByComponentIri(
+        java.lang.String componentIri)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _componentLocalService.fetchByComponentIri(componentIri);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Contributor> getAuthors(
+        org.nterlearning.datamodel.catalog.model.Component component)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _componentLocalService.getAuthors(component);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Contributor> getContributors(
+        org.nterlearning.datamodel.catalog.model.Component component)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _componentLocalService.getContributors(component);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Contributor> getContributors(
+        long componentPrimaryKey)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _componentLocalService.getContributors(componentPrimaryKey);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord> getComponentRecords(
+        org.nterlearning.datamodel.catalog.model.Component component)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _componentLocalService.getComponentRecords(component);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Courses_Components> getCourses_Componentses(
+        org.nterlearning.datamodel.catalog.model.Component component)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _componentLocalService.getCourses_Componentses(component);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.ExternalLink> getExternalLinks(
+        org.nterlearning.datamodel.catalog.model.Component component)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _componentLocalService.getExternalLinks(component);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.ExternalLink> getExternalLinks(
+        long componentId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _componentLocalService.getExternalLinks(componentId);
+    }
+
+    public java.util.List<java.lang.Object[]> findByCourseIdLanguageSorted(
+        long courseId, java.util.Locale locale, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _componentLocalService.findByCourseIdLanguageSorted(courseId,
+            locale, start, end);
     }
 
     /**

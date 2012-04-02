@@ -65,11 +65,13 @@ public interface CourseRecordLocalService extends PersistedModelLocalService {
     * Deletes the course record from the database. Also notifies the appropriate model listeners.
     *
     * @param courseRecord the course record
+    * @throws PortalException
     * @throws SystemException if a system exception occurred
     */
     public void deleteCourseRecord(
         org.nterlearning.datamodel.catalog.model.CourseRecord courseRecord)
-        throws com.liferay.portal.kernel.exception.SystemException;
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException;
 
     /**
     * Performs a dynamic query on the database and returns the matching rows.
@@ -222,4 +224,85 @@ public interface CourseRecordLocalService extends PersistedModelLocalService {
     * @param beanIdentifier the Spring bean ID for this bean
     */
     public void setBeanIdentifier(java.lang.String beanIdentifier);
+
+    public org.nterlearning.datamodel.catalog.model.CourseRecord addCourseRecord(
+        java.lang.Long feedRefId, java.lang.String courseRecordIRI,
+        long userId, java.lang.String singleSignOnValue,
+        java.lang.String courseIRI, java.util.Date updatedDate,
+        java.lang.String completionStatus, boolean userHidden, boolean assigned)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public void deleteAllChildren(
+        org.nterlearning.datamodel.catalog.model.CourseRecord courseRecord)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException;
+
+    public void addCourseRecordResource(
+        org.nterlearning.datamodel.catalog.model.CourseRecord record)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public void deleteCourseRecordResource(
+        org.nterlearning.datamodel.catalog.model.CourseRecord record);
+
+    public org.nterlearning.datamodel.catalog.model.CourseRecord findByPrimaryKey(
+        long courseRecordId)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchCourseRecordException;
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public org.nterlearning.datamodel.catalog.model.CourseRecord fetchByPrimaryKey(
+        long courseRecordId)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public org.nterlearning.datamodel.catalog.model.CourseRecord findByCourseRecordIri(
+        java.lang.String courseRecordIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchCourseRecordException;
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public org.nterlearning.datamodel.catalog.model.CourseRecord fetchByCourseRecordIri(
+        java.lang.String courseRecordIri)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findByCourseIri(
+        java.lang.String courseIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchCourseRecordException;
+
+    public java.util.List<java.lang.Object[]> findByUserIdFilterSorted(
+        long userId, long classNameId, java.lang.String filterType,
+        java.lang.String sortType, boolean asc, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public long countByUserIdFilter(long userId, long classNameId,
+        java.lang.String filterType)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findBySingleSignOnValue(
+        java.lang.String singleSignOnValue)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findByUserId(
+        java.lang.Long userId)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public long countAccessedByCourseIri(java.lang.String courseIri)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public long countCompletedByCourseIri(java.lang.String courseIri)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findByFeedReferenceId(
+        long feedRefId)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord> getComponentRecords(
+        org.nterlearning.datamodel.catalog.model.CourseRecord courseRecord)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord> getComponentRecords(
+        long courseRecordPrimaryKey)
+        throws com.liferay.portal.kernel.exception.SystemException;
 }

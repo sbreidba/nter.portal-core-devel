@@ -46,7 +46,7 @@ import javax.servlet.jsp.PageContext;
  * Never reference this class directly. All methods that expect a course record model instance should use the {@link CourseRecord} interface instead.
  * </p>
  */
-public class CourseRecordImpl extends CourseRecordModelImpl
+public class CourseRecordImpl extends CourseRecordBaseImpl {
 //public class CourseRecordImpl extends CourseRecordBaseImpl {
 	public CourseRecordImpl() {
 	}

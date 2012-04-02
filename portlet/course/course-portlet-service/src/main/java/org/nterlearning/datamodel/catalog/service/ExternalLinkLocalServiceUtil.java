@@ -249,6 +249,30 @@ public class ExternalLinkLocalServiceUtil {
         getService().setBeanIdentifier(beanIdentifier);
     }
 
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.ExternalLink> findByCourseId(
+        java.lang.Long courseId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByCourseId(courseId);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.ExternalLink> findByCourseIdWithType(
+        java.lang.Long courseId, java.lang.String type)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByCourseIdWithType(courseId, type);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.ExternalLink> findByComponentId(
+        java.lang.Long componentId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByComponentId(componentId);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.ExternalLink> findByComponentIdWithType(
+        java.lang.Long componentId, java.lang.String type)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByComponentIdWithType(componentId, type);
+    }
+
     public static void clearService() {
         _service = null;
     }

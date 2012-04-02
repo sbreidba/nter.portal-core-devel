@@ -243,6 +243,13 @@ public class CourseImageLocalServiceWrapper implements CourseImageLocalService,
         _courseImageLocalService.setBeanIdentifier(beanIdentifier);
     }
 
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseImage> findByCourseIdWithLanguage(
+        java.lang.Long courseId, java.lang.String language)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _courseImageLocalService.findByCourseIdWithLanguage(courseId,
+            language);
+    }
+
     /**
      * @deprecated Renamed to {@link #getWrappedService}
      */

@@ -51,8 +51,7 @@ import org.nterlearning.datamodel.catalog.model.FeedReference;
  * Never reference this class directly. All methods that expect a feed reference model instance should use the {@link FeedReference} interface instead.
  * </p>
  */
-public class FeedReferenceImpl extends FeedReferenceModelImpl
-	implements FeedReference {
+public class FeedReferenceImpl extends FeedReferenceBaseImpl {
 //public class FeedReferenceImpl extends FeedReferenceBaseImpl {
 	public FeedReferenceImpl() {
 	}

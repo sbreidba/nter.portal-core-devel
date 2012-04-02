@@ -250,6 +250,18 @@ public class ContributorLocalServiceUtil {
         getService().setBeanIdentifier(beanIdentifier);
     }
 
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.Contributor> findByCourseIdWithRole(
+        java.lang.Long courseId, java.lang.String role)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByCourseIdWithRole(courseId, role);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.Contributor> findByComponentIdWithRole(
+        java.lang.Long componentId, java.lang.String role)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByComponentIdWithRole(componentId, role);
+    }
+
     public static void clearService() {
         _service = null;
     }

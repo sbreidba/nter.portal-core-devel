@@ -72,7 +72,7 @@ import java.util.*;
  * org.nterlearning.datamodel.catalog.model.Course} interface. </p> <p> Never reference this class directly. All methods
  * that expect a course model instance should use the {@link Course} interface instead. </p>
  */
-public class CourseImpl extends CourseModelImpl implements Course {
+public class CourseImpl extends CourseBaseImpl {
 //    public class CourseImpl extends CourseBaseImpl {
 
 	private List<CourseImage> cachedImages;

@@ -382,6 +382,11 @@ public class CourseRecordWrapper implements CourseRecord,
         _courseRecord.persist();
     }
 
+    public java.lang.String getFriendlyUpdatedDate(
+        javax.servlet.jsp.PageContext pageContext) {
+        return _courseRecord.getFriendlyUpdatedDate(pageContext);
+    }
+
     /**
      * @deprecated Renamed to {@link #getWrappedModel}
      */

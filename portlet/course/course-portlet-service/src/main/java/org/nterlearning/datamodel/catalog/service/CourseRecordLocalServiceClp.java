@@ -24,6 +24,24 @@ public class CourseRecordLocalServiceClp implements CourseRecordLocalService {
     private MethodKey _updateCourseRecordMethodKey14;
     private MethodKey _getBeanIdentifierMethodKey15;
     private MethodKey _setBeanIdentifierMethodKey16;
+    private MethodKey _addCourseRecordMethodKey17;
+    private MethodKey _deleteAllChildrenMethodKey18;
+    private MethodKey _addCourseRecordResourceMethodKey19;
+    private MethodKey _deleteCourseRecordResourceMethodKey20;
+    private MethodKey _findByPrimaryKeyMethodKey21;
+    private MethodKey _fetchByPrimaryKeyMethodKey22;
+    private MethodKey _findByCourseRecordIriMethodKey23;
+    private MethodKey _fetchByCourseRecordIriMethodKey24;
+    private MethodKey _findByCourseIriMethodKey25;
+    private MethodKey _findByUserIdFilterSortedMethodKey26;
+    private MethodKey _countByUserIdFilterMethodKey27;
+    private MethodKey _findBySingleSignOnValueMethodKey28;
+    private MethodKey _findByUserIdMethodKey29;
+    private MethodKey _countAccessedByCourseIriMethodKey30;
+    private MethodKey _countCompletedByCourseIriMethodKey31;
+    private MethodKey _findByFeedReferenceIdMethodKey32;
+    private MethodKey _getComponentRecordsMethodKey33;
+    private MethodKey _getComponentRecordsMethodKey34;
 
     public CourseRecordLocalServiceClp(ClassLoaderProxy classLoaderProxy) {
         _classLoaderProxy = classLoaderProxy;
@@ -90,6 +108,70 @@ public class CourseRecordLocalServiceClp implements CourseRecordLocalService {
 
         _setBeanIdentifierMethodKey16 = new MethodKey(_classLoaderProxy.getClassName(),
                 "setBeanIdentifier", java.lang.String.class);
+
+        _addCourseRecordMethodKey17 = new MethodKey(_classLoaderProxy.getClassName(),
+                "addCourseRecord", java.lang.Long.class,
+                java.lang.String.class, long.class, java.lang.String.class,
+                java.lang.String.class, java.util.Date.class,
+                java.lang.String.class, boolean.class, boolean.class);
+
+        _deleteAllChildrenMethodKey18 = new MethodKey(_classLoaderProxy.getClassName(),
+                "deleteAllChildren",
+                org.nterlearning.datamodel.catalog.model.CourseRecord.class);
+
+        _addCourseRecordResourceMethodKey19 = new MethodKey(_classLoaderProxy.getClassName(),
+                "addCourseRecordResource",
+                org.nterlearning.datamodel.catalog.model.CourseRecord.class);
+
+        _deleteCourseRecordResourceMethodKey20 = new MethodKey(_classLoaderProxy.getClassName(),
+                "deleteCourseRecordResource",
+                org.nterlearning.datamodel.catalog.model.CourseRecord.class);
+
+        _findByPrimaryKeyMethodKey21 = new MethodKey(_classLoaderProxy.getClassName(),
+                "findByPrimaryKey", long.class);
+
+        _fetchByPrimaryKeyMethodKey22 = new MethodKey(_classLoaderProxy.getClassName(),
+                "fetchByPrimaryKey", long.class);
+
+        _findByCourseRecordIriMethodKey23 = new MethodKey(_classLoaderProxy.getClassName(),
+                "findByCourseRecordIri", java.lang.String.class);
+
+        _fetchByCourseRecordIriMethodKey24 = new MethodKey(_classLoaderProxy.getClassName(),
+                "fetchByCourseRecordIri", java.lang.String.class);
+
+        _findByCourseIriMethodKey25 = new MethodKey(_classLoaderProxy.getClassName(),
+                "findByCourseIri", java.lang.String.class);
+
+        _findByUserIdFilterSortedMethodKey26 = new MethodKey(_classLoaderProxy.getClassName(),
+                "findByUserIdFilterSorted", long.class, long.class,
+                java.lang.String.class, java.lang.String.class, boolean.class,
+                int.class, int.class);
+
+        _countByUserIdFilterMethodKey27 = new MethodKey(_classLoaderProxy.getClassName(),
+                "countByUserIdFilter", long.class, long.class,
+                java.lang.String.class);
+
+        _findBySingleSignOnValueMethodKey28 = new MethodKey(_classLoaderProxy.getClassName(),
+                "findBySingleSignOnValue", java.lang.String.class);
+
+        _findByUserIdMethodKey29 = new MethodKey(_classLoaderProxy.getClassName(),
+                "findByUserId", java.lang.Long.class);
+
+        _countAccessedByCourseIriMethodKey30 = new MethodKey(_classLoaderProxy.getClassName(),
+                "countAccessedByCourseIri", java.lang.String.class);
+
+        _countCompletedByCourseIriMethodKey31 = new MethodKey(_classLoaderProxy.getClassName(),
+                "countCompletedByCourseIri", java.lang.String.class);
+
+        _findByFeedReferenceIdMethodKey32 = new MethodKey(_classLoaderProxy.getClassName(),
+                "findByFeedReferenceId", long.class);
+
+        _getComponentRecordsMethodKey33 = new MethodKey(_classLoaderProxy.getClassName(),
+                "getComponentRecords",
+                org.nterlearning.datamodel.catalog.model.CourseRecord.class);
+
+        _getComponentRecordsMethodKey34 = new MethodKey(_classLoaderProxy.getClassName(),
+                "getComponentRecords", long.class);
     }
 
     public org.nterlearning.datamodel.catalog.model.CourseRecord addCourseRecord(
@@ -167,13 +249,18 @@ public class CourseRecordLocalServiceClp implements CourseRecordLocalService {
 
     public void deleteCourseRecord(
         org.nterlearning.datamodel.catalog.model.CourseRecord courseRecord)
-        throws com.liferay.portal.kernel.exception.SystemException {
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
         MethodHandler methodHandler = new MethodHandler(_deleteCourseRecordMethodKey3,
                 ClpSerializer.translateInput(courseRecord));
 
         try {
             _classLoaderProxy.invoke(methodHandler);
         } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+                throw (com.liferay.portal.kernel.exception.PortalException) t;
+            }
+
             if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
                 throw (com.liferay.portal.kernel.exception.SystemException) t;
             }
@@ -521,6 +608,486 @@ public class CourseRecordLocalServiceClp implements CourseRecordLocalService {
                     " is not a valid exception");
             }
         }
+    }
+
+    public org.nterlearning.datamodel.catalog.model.CourseRecord addCourseRecord(
+        java.lang.Long feedRefId, java.lang.String courseRecordIRI,
+        long userId, java.lang.String singleSignOnValue,
+        java.lang.String courseIRI, java.util.Date updatedDate,
+        java.lang.String completionStatus, boolean userHidden, boolean assigned)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_addCourseRecordMethodKey17,
+                ClpSerializer.translateInput(feedRefId),
+                ClpSerializer.translateInput(courseRecordIRI), userId,
+                ClpSerializer.translateInput(singleSignOnValue),
+                ClpSerializer.translateInput(courseIRI),
+                ClpSerializer.translateInput(updatedDate),
+                ClpSerializer.translateInput(completionStatus), userHidden,
+                assigned);
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (org.nterlearning.datamodel.catalog.model.CourseRecord) ClpSerializer.translateOutput(returnObj);
+    }
+
+    public void deleteAllChildren(
+        org.nterlearning.datamodel.catalog.model.CourseRecord courseRecord)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        MethodHandler methodHandler = new MethodHandler(_deleteAllChildrenMethodKey18,
+                ClpSerializer.translateInput(courseRecord));
+
+        try {
+            _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+                throw (com.liferay.portal.kernel.exception.PortalException) t;
+            }
+
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+    }
+
+    public void addCourseRecordResource(
+        org.nterlearning.datamodel.catalog.model.CourseRecord record)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        MethodHandler methodHandler = new MethodHandler(_addCourseRecordResourceMethodKey19,
+                ClpSerializer.translateInput(record));
+
+        try {
+            _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+    }
+
+    public void deleteCourseRecordResource(
+        org.nterlearning.datamodel.catalog.model.CourseRecord record) {
+        MethodHandler methodHandler = new MethodHandler(_deleteCourseRecordResourceMethodKey20,
+                ClpSerializer.translateInput(record));
+
+        try {
+            _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+    }
+
+    public org.nterlearning.datamodel.catalog.model.CourseRecord findByPrimaryKey(
+        long courseRecordId)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchCourseRecordException {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_findByPrimaryKeyMethodKey21,
+                courseRecordId);
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof org.nterlearning.datamodel.catalog.NoSuchCourseRecordException) {
+                throw (org.nterlearning.datamodel.catalog.NoSuchCourseRecordException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (org.nterlearning.datamodel.catalog.model.CourseRecord) ClpSerializer.translateOutput(returnObj);
+    }
+
+    public org.nterlearning.datamodel.catalog.model.CourseRecord fetchByPrimaryKey(
+        long courseRecordId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_fetchByPrimaryKeyMethodKey22,
+                courseRecordId);
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (org.nterlearning.datamodel.catalog.model.CourseRecord) ClpSerializer.translateOutput(returnObj);
+    }
+
+    public org.nterlearning.datamodel.catalog.model.CourseRecord findByCourseRecordIri(
+        java.lang.String courseRecordIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchCourseRecordException {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_findByCourseRecordIriMethodKey23,
+                ClpSerializer.translateInput(courseRecordIri));
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof org.nterlearning.datamodel.catalog.NoSuchCourseRecordException) {
+                throw (org.nterlearning.datamodel.catalog.NoSuchCourseRecordException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (org.nterlearning.datamodel.catalog.model.CourseRecord) ClpSerializer.translateOutput(returnObj);
+    }
+
+    public org.nterlearning.datamodel.catalog.model.CourseRecord fetchByCourseRecordIri(
+        java.lang.String courseRecordIri)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_fetchByCourseRecordIriMethodKey24,
+                ClpSerializer.translateInput(courseRecordIri));
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (org.nterlearning.datamodel.catalog.model.CourseRecord) ClpSerializer.translateOutput(returnObj);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findByCourseIri(
+        java.lang.String courseIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchCourseRecordException {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_findByCourseIriMethodKey25,
+                ClpSerializer.translateInput(courseIri));
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof org.nterlearning.datamodel.catalog.NoSuchCourseRecordException) {
+                throw (org.nterlearning.datamodel.catalog.NoSuchCourseRecordException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    public java.util.List<java.lang.Object[]> findByUserIdFilterSorted(
+        long userId, long classNameId, java.lang.String filterType,
+        java.lang.String sortType, boolean asc, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_findByUserIdFilterSortedMethodKey26,
+                userId, classNameId, ClpSerializer.translateInput(filterType),
+                ClpSerializer.translateInput(sortType), asc, start, end);
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<java.lang.Object[]>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    public long countByUserIdFilter(long userId, long classNameId,
+        java.lang.String filterType)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_countByUserIdFilterMethodKey27,
+                userId, classNameId, ClpSerializer.translateInput(filterType));
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return ((Long) returnObj).longValue();
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findBySingleSignOnValue(
+        java.lang.String singleSignOnValue)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_findBySingleSignOnValueMethodKey28,
+                ClpSerializer.translateInput(singleSignOnValue));
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findByUserId(
+        java.lang.Long userId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_findByUserIdMethodKey29,
+                ClpSerializer.translateInput(userId));
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    public long countAccessedByCourseIri(java.lang.String courseIri)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_countAccessedByCourseIriMethodKey30,
+                ClpSerializer.translateInput(courseIri));
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return ((Long) returnObj).longValue();
+    }
+
+    public long countCompletedByCourseIri(java.lang.String courseIri)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_countCompletedByCourseIriMethodKey31,
+                ClpSerializer.translateInput(courseIri));
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return ((Long) returnObj).longValue();
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findByFeedReferenceId(
+        long feedRefId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_findByFeedReferenceIdMethodKey32,
+                feedRefId);
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord> getComponentRecords(
+        org.nterlearning.datamodel.catalog.model.CourseRecord courseRecord)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_getComponentRecordsMethodKey33,
+                ClpSerializer.translateInput(courseRecord));
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord> getComponentRecords(
+        long courseRecordPrimaryKey)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_getComponentRecordsMethodKey34,
+                courseRecordPrimaryKey);
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord>) ClpSerializer.translateOutput(returnObj);
     }
 
     public ClassLoaderProxy getClassLoaderProxy() {

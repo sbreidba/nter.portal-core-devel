@@ -237,6 +237,14 @@ public class FlagReportClp extends BaseModelImpl<FlagReport>
         _statusDate = statusDate;
     }
 
+    public boolean isModerated() {
+        throw new UnsupportedOperationException();
+    }
+
+    public boolean isAssigned() {
+        throw new UnsupportedOperationException();
+    }
+
     /**
      * @deprecated {@link #isApproved}
      */
