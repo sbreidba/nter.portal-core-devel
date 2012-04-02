@@ -139,14 +139,14 @@ public class CourseReviewLocalServiceImpl
         courseReviewPersistence.update(courseReview, true);
 
         // Resources
-        if (serviceContext.getAddCommunityPermissions() ||
-                serviceContext.getAddGuestPermissions()) {
-            addCourseReviewResources(courseReview, serviceContext.getAddCommunityPermissions(),
-                                     serviceContext.getAddGuestPermissions());
+        if (serviceContext.isAddGroupPermissions() ||
+                serviceContext.isAddGuestPermissions()) {
+            addCourseReviewResources(courseReview, serviceContext.isAddGroupPermissions(),
+                                     serviceContext.isAddGuestPermissions());
         }
         else {
-            addCourseReviewResources(courseReview, serviceContext.getCommunityPermissions(),
-                                     serviceContext.getGuestPermissions());
+            addCourseReviewResources(courseReview, serviceContext.isAddGroupPermissions(),
+                                     serviceContext.isAddGuestPermissions());
         }
 
         // Asset
@@ -161,23 +161,23 @@ public class CourseReviewLocalServiceImpl
 
 
     public void addCourseReviewResources(CourseReview courseReview,
-            boolean addCommunityPermissions, boolean addGuestPermissions)
+            boolean addGroupPermissions, boolean addGuestPermissions)
             throws PortalException, SystemException {
         resourceLocalService.addResources(
                 courseReview.getCompanyId(), courseReview.getGroupId(), courseReview.getUserId(),
                 CourseReview.class.getName(), courseReview.getCourseReviewId(), false,
-                addCommunityPermissions, addGuestPermissions);
+                addGroupPermissions, addGuestPermissions);
     }
 
 
     public void addCourseReviewResources(CourseReview courseReview,
-            String[] communityPermissions, String[] guestPermissions)
+            String[] groupPermissions, String[] guestPermissions)
             throws PortalException, SystemException {
         try {
             resourceLocalService.addModelResources(
                     courseReview.getCompanyId(), courseReview.getGroupId(), courseReview.getUserId(),
                     CourseReview.class.getName(), courseReview.getCourseReviewId(),
-                    communityPermissions, guestPermissions);
+                    groupPermissions, guestPermissions);
         }
         catch (PortalException e) {
             e.printStackTrace();
@@ -200,17 +200,17 @@ public class CourseReviewLocalServiceImpl
     }
 
 
-    public void addCourseReviewResources(long courseReviewId, boolean addCommunityPermissions,
+    public void addCourseReviewResources(long courseReviewId, boolean addGroupPermissions,
                                          boolean addGuestPermissions) throws PortalException, SystemException {
         CourseReview courseReview = courseReviewPersistence.findByPrimaryKey(courseReviewId);
-        addCourseReviewResources(courseReview, addCommunityPermissions, addGuestPermissions);
+        addCourseReviewResources(courseReview, addGroupPermissions, addGuestPermissions);
     }
 
 
-    public void addCourseReviewResources(long courseReviewId, String[] communityPermissions,
+    public void addCourseReviewResources(long courseReviewId, String[] groupPermissions,
                                          String[] guestPermissions) throws PortalException, SystemException {
         CourseReview courseReview = courseReviewPersistence.findByPrimaryKey(courseReviewId);
-        addCourseReviewResources(courseReview, communityPermissions, guestPermissions);
+        addCourseReviewResources(courseReview, groupPermissions, guestPermissions);
     }
 
 
@@ -290,9 +290,9 @@ public class CourseReviewLocalServiceImpl
         courseReviewPersistence.update(courseReview, true);
 
         // Resources
-        if ((serviceContext.getCommunityPermissions() != null) ||
+        if ((serviceContext.getGroupPermissions() != null) ||
                 (serviceContext.getGuestPermissions() != null)) {
-            updateCourseReviewResources(courseReview, serviceContext.getCommunityPermissions(),
+            updateCourseReviewResources(courseReview, serviceContext.getGroupPermissions(),
                                         serviceContext.getGuestPermissions());
         }
 
@@ -315,12 +315,12 @@ public class CourseReviewLocalServiceImpl
 
 
     public void updateCourseReviewResources(CourseReview courseReview,
-            String[] communityPermissions, String[] guestPermissions)
+            String[] groupPermissions, String[] guestPermissions)
             throws PortalException, SystemException {
         resourceLocalService.updateResources(
                 courseReview.getCompanyId(), courseReview.getGroupId(),
                 CourseReview.class.getName(), courseReview.getCourseReviewId(),
-                communityPermissions, guestPermissions);
+                groupPermissions, guestPermissions);
     }
 
 
