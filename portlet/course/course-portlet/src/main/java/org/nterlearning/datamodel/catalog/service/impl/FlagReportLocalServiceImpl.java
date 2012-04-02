@@ -192,7 +192,6 @@ public class FlagReportLocalServiceImpl extends FlagReportLocalServiceBaseImpl {
         deleteReport(flagReport);
     }
 
-    @Override
     public FlagReport updateReport(FlagReport flagReport) throws SystemException {
         throw new IllegalArgumentException("Must pass userId, Report columns and serviceContext when updating a report.");
     }
@@ -301,7 +300,9 @@ public class FlagReportLocalServiceImpl extends FlagReportLocalServiceBaseImpl {
         User user = userPersistence.findByPrimaryKey(userId);
         Date now = new Date();
         FlagReport flagReport = flagReportPersistence.findByPrimaryKey(resourcePrimKey);
-        WorkflowDefinitionLink workflowDefinitionLink = WorkflowDefinitionLinkUtil.fetchByG_C_C(flagReport.getGroupId(), flagReport.getCompanyId(), ClassNameLocalServiceUtil.getClassNameId(FlagReport.class));
+        WorkflowDefinitionLink workflowDefinitionLink = WorkflowDefinitionLinkUtil.fetchByG_C_C_C_T(flagReport.getGroupId(),
+                flagReport.getCompanyId(), ClassNameLocalServiceUtil.getClassNameId(FlagReport.class),
+                flagReport.getPrimaryKey(), 0);
 
         if (flagReport.getModerateAction().equals("") && workflowDefinitionLink != null ) {
            if (status == WorkflowConstants.STATUS_APPROVED)  {
