@@ -77,7 +77,7 @@ public class CrawlUtil {
             long companyId = PortalUtil.getDefaultCompanyId();
             Company company = CompanyLocalServiceUtil.getCompany(companyId);
 
-            return company.getVirtualHost();
+            return company.getVirtualHostname();
         }
         catch (Exception e) {
             mLog.error("Nutch Crawler: Could not get company virtual Id");
@@ -92,7 +92,7 @@ public class CrawlUtil {
             Company company = CompanyLocalServiceUtil.getCompany(companyId);
             Group guestGroup = GroupLocalServiceUtil.getGroup(companyId, "Guest");
 
-            return company.getVirtualHost() +
+            return company.getVirtualHostname() +
                     PortalUtil.getPathFriendlyURLPublic() + guestGroup.getFriendlyURL();
         }
         catch (Exception e) {
