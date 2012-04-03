@@ -709,12 +709,12 @@ public class FlagReportLocalServiceClp implements FlagReportLocalService {
 
     public void addFlagReportResources(
         org.nterlearning.datamodel.catalog.model.FlagReport flagReport,
-        boolean addCommunityPermissions, boolean addGuestPermissions)
+        boolean addGroupPermissions, boolean addGuestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         MethodHandler methodHandler = new MethodHandler(_addFlagReportResourcesMethodKey19,
-                ClpSerializer.translateInput(flagReport),
-                addCommunityPermissions, addGuestPermissions);
+                ClpSerializer.translateInput(flagReport), addGroupPermissions,
+                addGuestPermissions);
 
         try {
             _classLoaderProxy.invoke(methodHandler);
@@ -738,13 +738,12 @@ public class FlagReportLocalServiceClp implements FlagReportLocalService {
 
     public void addFlagReportResources(
         org.nterlearning.datamodel.catalog.model.FlagReport flagReport,
-        java.lang.String[] communityPermissions,
-        java.lang.String[] guestPermissions)
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         MethodHandler methodHandler = new MethodHandler(_addFlagReportResourcesMethodKey20,
                 ClpSerializer.translateInput(flagReport),
-                ClpSerializer.translateInput(communityPermissions),
+                ClpSerializer.translateInput(groupPermissions),
                 ClpSerializer.translateInput(guestPermissions));
 
         try {
@@ -988,13 +987,12 @@ public class FlagReportLocalServiceClp implements FlagReportLocalService {
 
     public void updateFlagReportResources(
         org.nterlearning.datamodel.catalog.model.FlagReport flagReport,
-        java.lang.String[] communityPermissions,
-        java.lang.String[] guestPermissions)
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         MethodHandler methodHandler = new MethodHandler(_updateFlagReportResourcesMethodKey28,
                 ClpSerializer.translateInput(flagReport),
-                ClpSerializer.translateInput(communityPermissions),
+                ClpSerializer.translateInput(groupPermissions),
                 ClpSerializer.translateInput(guestPermissions));
 
         try {
