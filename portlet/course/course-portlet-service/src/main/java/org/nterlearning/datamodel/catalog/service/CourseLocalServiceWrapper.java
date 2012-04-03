@@ -356,37 +356,35 @@ public class CourseLocalServiceWrapper implements CourseLocalService,
 
     public void addCourseResources(
         org.nterlearning.datamodel.catalog.model.Course course,
-        boolean addCommunityPermissions, boolean addGuestPermissions)
+        boolean addGroupPermissions, boolean addGuestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        _courseLocalService.addCourseResources(course, addCommunityPermissions,
+        _courseLocalService.addCourseResources(course, addGroupPermissions,
             addGuestPermissions);
     }
 
     public void addCourseResources(
         org.nterlearning.datamodel.catalog.model.Course course,
-        java.lang.String[] communityPermissions,
-        java.lang.String[] guestPermissions)
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        _courseLocalService.addCourseResources(course, communityPermissions,
+        _courseLocalService.addCourseResources(course, groupPermissions,
             guestPermissions);
     }
 
-    public void addCourseResources(long courseId,
-        boolean addCommunityPermissions, boolean addGuestPermissions)
+    public void addCourseResources(long courseId, boolean addGroupPermissions,
+        boolean addGuestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        _courseLocalService.addCourseResources(courseId,
-            addCommunityPermissions, addGuestPermissions);
+        _courseLocalService.addCourseResources(courseId, addGroupPermissions,
+            addGuestPermissions);
     }
 
     public void addCourseResources(long courseId,
-        java.lang.String[] communityPermissions,
-        java.lang.String[] guestPermissions)
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        _courseLocalService.addCourseResources(courseId, communityPermissions,
+        _courseLocalService.addCourseResources(courseId, groupPermissions,
             guestPermissions);
     }
 
@@ -513,11 +511,10 @@ public class CourseLocalServiceWrapper implements CourseLocalService,
 
     public void updateCourseResources(
         org.nterlearning.datamodel.catalog.model.Course course,
-        java.lang.String[] communityPermissions,
-        java.lang.String[] guestPermissions)
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        _courseLocalService.updateCourseResources(course, communityPermissions,
+        _courseLocalService.updateCourseResources(course, groupPermissions,
             guestPermissions);
     }
 

@@ -715,12 +715,12 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
 
     public void addCourseReviewResources(
         org.nterlearning.datamodel.catalog.model.CourseReview courseReview,
-        boolean addCommunityPermissions, boolean addGuestPermissions)
+        boolean addGroupPermissions, boolean addGuestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         MethodHandler methodHandler = new MethodHandler(_addCourseReviewResourcesMethodKey19,
                 ClpSerializer.translateInput(courseReview),
-                addCommunityPermissions, addGuestPermissions);
+                addGroupPermissions, addGuestPermissions);
 
         try {
             _classLoaderProxy.invoke(methodHandler);
@@ -744,13 +744,12 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
 
     public void addCourseReviewResources(
         org.nterlearning.datamodel.catalog.model.CourseReview courseReview,
-        java.lang.String[] communityPermissions,
-        java.lang.String[] guestPermissions)
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         MethodHandler methodHandler = new MethodHandler(_addCourseReviewResourcesMethodKey20,
                 ClpSerializer.translateInput(courseReview),
-                ClpSerializer.translateInput(communityPermissions),
+                ClpSerializer.translateInput(groupPermissions),
                 ClpSerializer.translateInput(guestPermissions));
 
         try {
@@ -824,11 +823,11 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
     }
 
     public void addCourseReviewResources(long courseReviewId,
-        boolean addCommunityPermissions, boolean addGuestPermissions)
+        boolean addGroupPermissions, boolean addGuestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         MethodHandler methodHandler = new MethodHandler(_addCourseReviewResourcesMethodKey23,
-                courseReviewId, addCommunityPermissions, addGuestPermissions);
+                courseReviewId, addGroupPermissions, addGuestPermissions);
 
         try {
             _classLoaderProxy.invoke(methodHandler);
@@ -851,13 +850,11 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
     }
 
     public void addCourseReviewResources(long courseReviewId,
-        java.lang.String[] communityPermissions,
-        java.lang.String[] guestPermissions)
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         MethodHandler methodHandler = new MethodHandler(_addCourseReviewResourcesMethodKey24,
-                courseReviewId,
-                ClpSerializer.translateInput(communityPermissions),
+                courseReviewId, ClpSerializer.translateInput(groupPermissions),
                 ClpSerializer.translateInput(guestPermissions));
 
         try {
@@ -1001,13 +998,12 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
 
     public void updateCourseReviewResources(
         org.nterlearning.datamodel.catalog.model.CourseReview courseReview,
-        java.lang.String[] communityPermissions,
-        java.lang.String[] guestPermissions)
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         MethodHandler methodHandler = new MethodHandler(_updateCourseReviewResourcesMethodKey29,
                 ClpSerializer.translateInput(courseReview),
-                ClpSerializer.translateInput(communityPermissions),
+                ClpSerializer.translateInput(groupPermissions),
                 ClpSerializer.translateInput(guestPermissions));
 
         try {
