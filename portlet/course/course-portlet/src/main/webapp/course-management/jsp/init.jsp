@@ -61,7 +61,7 @@
 <%@ page import="java.util.Locale" %>
 
 
-<%@ taglib tagdir="/tags" prefix="nter" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="nter" %>
 
 <liferay-theme:defineObjects />
 <portlet:defineObjects />

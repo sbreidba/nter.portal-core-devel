@@ -25,7 +25,7 @@
 <%@ taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %>
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 
-<%@ taglib tagdir="/tags" prefix="nter" %>
+<%@ taglib tagdir="/WEB-INF/tags" prefix="nter" %>
 
 <%@ page import="com.liferay.portal.kernel.dao.search.SearchContainer" %>
 <%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>

@@ -63,11 +63,11 @@
 		<!--<portlet-class>com.sri.nter.course.carousel.portlet.CourseCarouselPortlet</portlet-class>-->
 		<!--<init-param>-->
 			<!--<name>view-jsp</name>-->
-			<!--<value>/course-carousel/html/view.jsp</value>-->
+			<!--<value>/course-carousel/jsp/view.jsp</value>-->
 		<!--</init-param>-->
 		<!--<init-param>-->
 			<!--<name>edit-jsp</name>-->
-			<!--<value>/course-carousel/html/edit.jsp</value>-->
+			<!--<value>/course-carousel/jsp/edit.jsp</value>-->
 		<!--</init-param>-->
 		<!--<init-param>-->
 			<!--<name>add-process-action-success-action</name>-->
@@ -102,10 +102,10 @@
 	<portlet>
 		<portlet-name>course-management-control-panel</portlet-name>
 		<display-name>Course Management</display-name>
-		<portlet-class>com.sri.nter.course.management.portlet.CourseManagementPortlet</portlet-class>
+		<portlet-class>org.nterlearning.course.management.portlet.CourseManagementPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/course-management/html/view.jsp</value>
+			<value>/course-management/jsp/view.jsp</value>
 		</init-param>
 		<init-param>
 			<name>add-process-action-success-action</name>
@@ -149,7 +149,7 @@
 		<!--<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>-->
 		<!--<init-param>-->
 			<!--<name>view-jsp</name>-->
-			<!--<value>/course-details/html/view.jsp</value>-->
+			<!--<value>/course-details/jsp/view.jsp</value>-->
 		<!--</init-param>-->
 		<!--<expiration-cache>0</expiration-cache>-->
 		<!--<supports>-->
@@ -182,7 +182,7 @@
 		<!--<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>-->
 		<!--<init-param>-->
 			<!--<name>view-jsp</name>-->
-			<!--<value>/component-details/html/view.jsp</value>-->
+			<!--<value>/component-details/jsp/view.jsp</value>-->
 		<!--</init-param>-->
 		<!--<expiration-cache>0</expiration-cache>-->
 		<!--<supports>-->
@@ -212,14 +212,14 @@
 	<!--<portlet>-->
 		<!--<portlet-name>course-listing</portlet-name>-->
 		<!--<display-name>Course Listing</display-name>-->
-		<!--<portlet-class>com.sri.nter.course.listing.portlet.CourseListingPortlet</portlet-class>-->
+		<!--<portlet-class>org.nterlearning.course.listing.portlet.CourseListingPortlet</portlet-class>-->
 		<!--<init-param>-->
 			<!--<name>view-jsp</name>-->
-			<!--<value>/course-listing/html/view.jsp</value>-->
+			<!--<value>/course-listing/jsp/view.jsp</value>-->
 		<!--</init-param>-->
         <!--<init-param>-->
             <!--<name>edit-jsp</name>-->
-            <!--<value>/course-listing/html/edit.jsp</value>-->
+            <!--<value>/course-listing/jsp/edit.jsp</value>-->
         <!--</init-param>-->
         <!--<init-param>-->
             <!--<name>defaultDisplayCount</name>-->
@@ -261,7 +261,7 @@
 		<!--<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>-->
 		<!--<init-param>-->
 			<!--<name>view-jsp</name>-->
-			<!--<value>/partner-top-courses/html/view.jsp</value>-->
+			<!--<value>/partner-top-courses/jsp/view.jsp</value>-->
 		<!--</init-param>-->
 		<!--<expiration-cache>0</expiration-cache>-->
 		<!--<supports>-->
@@ -291,10 +291,10 @@
 	<!--<portlet>-->
 		<!--<portlet-name>course-reviews</portlet-name>-->
 		<!--<display-name>Course Reviews</display-name>-->
-		<!--<portlet-class>com.sri.nter.course.reviews.portlet.CourseReviewsPortlet</portlet-class>-->
+		<!--<portlet-class>org.nterlearning.course.reviews.portlet.CourseReviewsPortlet</portlet-class>-->
 		<!--<init-param>-->
 			<!--<name>view-jsp</name>-->
-			<!--<value>/course-reviews/html/view.jsp</value>-->
+			<!--<value>/course-reviews/jsp/view.jsp</value>-->
 		<!--</init-param>-->
 		<!--<supports>-->
 			<!--<mime-type>text/html</mime-type>-->
@@ -323,10 +323,10 @@
 	<portlet>
 		<portlet-name>feeds</portlet-name>
 		<display-name>Course Feeds</display-name>
-		<portlet-class>com.sri.nter.atom.parser.portlet.AtomParserControlPanelPortlet</portlet-class>
+		<portlet-class>org.nterlearning.atom.parser.portlet.AtomParserControlPanelPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/course-feeds/html/cp/view.jsp</value>
+			<value>/course-feeds/jsp/cp/view.jsp</value>
 		</init-param>
 		<init-param>
 			<name>syncHistoryLimit</name>
@@ -346,7 +346,7 @@
                 Callback URL for PuSH subscriptions to be sent to from a PuSH hub
             </description>
             <name>pushCallbackUrl</name>
-            <value>http://localhost:8080/course-portlet/course-feeds/html/push.jsp</value>
+            <value>http://localhost:8080/course-portlet/course-feeds/jsp/push.jsp</value>
         </init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -366,10 +366,10 @@
 	<!--<portlet>-->
 		<!--<portlet-name>current-course</portlet-name>-->
 		<!--<display-name>Current Course</display-name>-->
-		<!--<portlet-class>com.sri.nter.course.current.portlet.CurrentCoursePortlet</portlet-class>-->
+		<!--<portlet-class>org.nterlearning.course.current.portlet.CurrentCoursePortlet</portlet-class>-->
 		<!--<init-param>-->
 			<!--<name>view-jsp</name>-->
-			<!--<value>/current-course/html/view.jsp</value>-->
+			<!--<value>/current-course/jsp/view.jsp</value>-->
 		<!--</init-param>-->
 		<!--<expiration-cache>0</expiration-cache>-->
 		<!--<supports>-->
@@ -396,10 +396,10 @@
 	<!--<portlet>-->
 		<!--<portlet-name>archived-courses</portlet-name>-->
 		<!--<display-name>Archived Courses</display-name>-->
-		<!--<portlet-class>com.sri.nter.course.archived.portlet.ArchivedCoursesPortlet</portlet-class>-->
+		<!--<portlet-class>org.nterlearning.course.archived.portlet.ArchivedCoursesPortlet</portlet-class>-->
 		<!--<init-param>-->
 			<!--<name>view-jsp</name>-->
-			<!--<value>/archived-courses/html/view.jsp</value>-->
+			<!--<value>/archived-courses/jsp/view.jsp</value>-->
 		<!--</init-param>-->
 		<!--<expiration-cache>0</expiration-cache>-->
 		<!--<supports>-->
@@ -426,10 +426,10 @@
 	<!--<portlet>-->
 		<!--<portlet-name>course-records-control-panel</portlet-name>-->
 		<!--<display-name>Course Records</display-name>-->
-		<!--<portlet-class>com.sri.nter.course.record.portlet.CourseRecordsPortlet</portlet-class>-->
+		<!--<portlet-class>org.nterlearning.course.record.portlet.CourseRecordsPortlet</portlet-class>-->
 		<!--<init-param>-->
 			<!--<name>view-jsp</name>-->
-			<!--<value>/course-records/html/view.jsp</value>-->
+			<!--<value>/course-records/jsp/view.jsp</value>-->
 		<!--</init-param>-->
 		<!--<init-param>-->
 			<!--<name>add-process-action-success-action</name>-->
@@ -507,7 +507,7 @@
 		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/unified-search/html/view.jsp</value>
+			<value>/unified-search/jsp/view.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -536,10 +536,10 @@
 	<portlet>
 		<portlet-name>course-testing-control-panel</portlet-name>
 		<display-name>Course Testing</display-name>
-		<portlet-class>com.sri.nter.course.testing.portlet.CourseTestingPortlet</portlet-class>
+		<portlet-class>org.nterlearning.course.testing.portlet.CourseTestingPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/course-testing/html/view.jsp</value>
+			<value>/course-testing/jsp/view.jsp</value>
 		</init-param>
 		<init-param>
 			<name>add-process-action-success-action</name>
@@ -565,10 +565,10 @@
 	<!--<portlet>-->
 		<!--<portlet-name>flag-report-control-panel</portlet-name>-->
 		<!--<display-name>Flag Report</display-name>-->
-		<!--<portlet-class>com.sri.nter.course.flag.portlet.FlagReportPortlet</portlet-class>-->
+		<!--<portlet-class>org.nterlearning.course.flag.portlet.FlagReportPortlet</portlet-class>-->
 		<!--<init-param>-->
 			<!--<name>view-jsp</name>-->
-			<!--<value>/flag-report/html/newView.jsp</value>-->
+			<!--<value>/flag-report/jsp/newView.jsp</value>-->
 		<!--</init-param>-->
 		<!--<init-param>-->
 			<!--<name>add-process-action-success-action</name>-->
@@ -619,10 +619,10 @@
 	<portlet>
 		<portlet-name>crawl</portlet-name>
 		<display-name>Nutch Crawler</display-name>
-		<portlet-class>com.sri.nter.crawl.nutch.portlet.NutchCrawlerPortlet</portlet-class>
+		<portlet-class>org.nterlearning.crawl.nutch.portlet.NutchCrawlerPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
-			<value>/nutch-crawler/html/cp/view.jsp</value>
+			<value>/nutch-crawler/jsp/cp/view.jsp</value>
 		</init-param>
         <init-param>
             <description>
@@ -669,10 +669,10 @@
 	<!--<portlet>-->
 		<!--<portlet-name>reports-control-panel</portlet-name>-->
 		<!--<display-name>Reports</display-name>-->
-		<!--<portlet-class>com.sri.nter.exporter.portlet.ReportsPortlet</portlet-class>-->
+		<!--<portlet-class>org.nterlearning.exporter.portlet.ReportsPortlet</portlet-class>-->
 		<!--<init-param>-->
 			<!--<name>view-jsp</name>-->
-			<!--<value>/reports/html/view.jsp</value>-->
+			<!--<value>/reports/jsp/view.jsp</value>-->
 		<!--</init-param>-->
 		<!--<init-param>-->
 			<!--<name>add-process-action-success-action</name>-->
