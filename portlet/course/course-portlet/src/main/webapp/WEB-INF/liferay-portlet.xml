@@ -35,7 +35,7 @@
     <!-- course carousel -->
     <!--<portlet>-->
         <!--<portlet-name>course-carousel</portlet-name>-->
-        <!--<icon>/course-carousel/icon.png</icon>-->
+        <!--<icon>/course-carousel/images/icon.png</icon>-->
         <!--<instanceable>true</instanceable>-->
         <!--<header-portlet-javascript>/course-carousel/js/carousel.js</header-portlet-javascript>-->
         <!--<footer-portlet-javascript>/course-carousel/js/main.js</footer-portlet-javascript>-->
@@ -67,7 +67,7 @@
     <!-- component details -->
     <!--<portlet>-->
         <!--<portlet-name>component-details</portlet-name>-->
-        <!--<icon>/component-details/icon.png</icon>-->
+        <!--<icon>/component-details/images/icon.png</icon>-->
         <!--<footer-portlet-javascript>/../shared-portlet/js/anim-custom.js</footer-portlet-javascript>-->
         <!--<footer-portlet-javascript>/../shared-portlet/js/tree-view-html.js</footer-portlet-javascript>-->
         <!--<footer-portlet-javascript>/component-details/js/main.js</footer-portlet-javascript>-->
@@ -77,7 +77,7 @@
     <!-- course listing -->
     <!--<portlet>-->
         <!--<portlet-name>course-listing</portlet-name>-->
-        <!--<icon>/course-listing/icon.png</icon>-->
+        <!--<icon>/course-listing/images/icon.png</icon>-->
         <!--<instanceable>true</instanceable>-->
         <!--<footer-portlet-javascript>/../shared-portlet/js/anim-custom.js</footer-portlet-javascript>-->
         <!--<footer-portlet-javascript>/../shared-portlet/js/tree-view-html.js</footer-portlet-javascript>-->
@@ -88,7 +88,7 @@
     <!-- partner top courses -->
     <!--<portlet>-->
         <!--<portlet-name>partner-top-courses</portlet-name>-->
-        <!--<icon>/partner-top-courses/icon.png</icon>-->
+        <!--<icon>/partner-top-courses/images/icon.png</icon>-->
         <!--<instanceable>true</instanceable>-->
         <!--<footer-portlet-javascript>/partner-top-courses/js/main.js</footer-portlet-javascript>-->
         <!--<css-class-wrapper>partner-top-courses-portlet</css-class-wrapper>-->
@@ -97,7 +97,7 @@
     <!-- course reviews -->
     <!--<portlet>-->
         <!--<portlet-name>course-reviews</portlet-name>-->
-        <!--<icon>/course-reviews/icon.png</icon>-->
+        <!--<icon>/course-reviews/images/icon.png</icon>-->
         <!--<footer-portlet-javascript>/../shared-portlet/js/anim-custom.js</footer-portlet-javascript>-->
         <!--<footer-portlet-javascript>/../shared-portlet/js/remove.js</footer-portlet-javascript>-->
         <!--<footer-portlet-javascript>/../shared-portlet/js/accessible-dialog.js</footer-portlet-javascript>-->
@@ -129,7 +129,7 @@
     <!-- course history - archived courses -->
     <!--<portlet>-->
         <!--<portlet-name>archived-courses</portlet-name>-->
-        <!--<icon>/archived-courses/icon.png</icon>-->
+        <!--<icon>/archived-courses/images/icon.png</icon>-->
         <!--<instanceable>false</instanceable>-->
         <!--<footer-portlet-javascript>/../shared-portlet/js/anim-custom.js</footer-portlet-javascript>-->
         <!--<footer-portlet-javascript>/../shared-portlet/js/tree-view-html.js</footer-portlet-javascript>-->
@@ -142,7 +142,7 @@
     <!-- course records control panel -->
     <!--<portlet>-->
         <!--<portlet-name>course-records-control-panel</portlet-name>-->
-        <!--<icon>/course-records/icon.png</icon>-->
+        <!--<icon>/course-records/images/icon.png</icon>-->
         <!--<control-panel-entry-category>portal</control-panel-entry-category>-->
         <!--<control-panel-entry-weight>1.7</control-panel-entry-weight>-->
         <!--<header-portlet-css>/course-records/css/main.css</header-portlet-css>-->
@@ -190,7 +190,7 @@
     <!-- flag report control panel -->
     <!--<portlet>-->
         <!--<portlet-name>flag-report-control-panel</portlet-name>-->
-        <!--<icon>/flag-report/icon.png</icon>-->
+        <!--<icon>/flag-report/images/icon.png</icon>-->
         <!--<control-panel-entry-category>portal</control-panel-entry-category>-->
         <!--<control-panel-entry-weight>2.4</control-panel-entry-weight>-->
         <!--<css-class-wrapper>flag-report-control-panel-portlet</css-class-wrapper>-->
@@ -203,11 +203,11 @@
     <!--</portlet>-->
 
     <!-- external-search portlet -->
-    <!--<portlet>-->
-        <!--<portlet-name>external-search</portlet-name>-->
-        <!--<open-search-class>com.sri.nter.course.search.ExternalOpenSearchImpl</open-search-class>-->
-        <!--<instanceable>false</instanceable>-->
-    <!--</portlet>-->
+    <portlet>
+        <portlet-name>external-search</portlet-name>
+        <open-search-class>org.nterlearning.course.search.ExternalOpenSearchImpl</open-search-class>
+        <instanceable>false</instanceable>
+    </portlet>
 
     <!-- crawl portlet -->
     <portlet>
@@ -223,7 +223,7 @@
     <!-- reports control panel -->
     <!--<portlet>-->
         <!--<portlet-name>reports-control-panel</portlet-name>-->
-        <!--<icon>/reports/icon.png</icon>-->
+        <!--<icon>/reports/images/icon.png</icon>-->
         <!--<control-panel-entry-category>portal</control-panel-entry-category>-->
         <!--<control-panel-entry-weight>2.5</control-panel-entry-weight>-->
         <!--<css-class-wrapper>reports-control-panel-portlet</css-class-wrapper>-->
