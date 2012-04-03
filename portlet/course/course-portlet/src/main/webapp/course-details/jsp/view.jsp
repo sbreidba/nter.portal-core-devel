@@ -18,7 +18,7 @@
   02110-1301, USA.
   --%>
 
-<%-- course-details/html/view.jsp --%>
+<%-- course-details/jsp/view.jsp --%>
 <%@ page import="org.nterlearning.utils.ReviewUtil" %>
 <%@include file="/course-details/jsp/init.jsp" %>
 <%

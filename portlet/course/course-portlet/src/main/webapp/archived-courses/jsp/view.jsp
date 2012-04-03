@@ -18,7 +18,7 @@
   02110-1301, USA.
   --%>
 
-<%-- archived-courses/html/view.jsp --%>
+<%-- archived-courses/jsp/view.jsp --%>
 <%@ taglib uri="http://java.sun.com/portlet" prefix="portlet" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://liferay.com/tld/security" prefix="liferay-security" %>
