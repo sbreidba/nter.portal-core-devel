@@ -26,7 +26,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 
 <div class="lfr-portlet-toolbar">
 	<portlet:renderURL var="viewUsersURL">
-		<portlet:param name="struts_action" value="/enterprise_admin/view" />
+		<portlet:param name="struts_action" value="/users_admin/view" />
 	</portlet:renderURL>
 
 	<span class="lfr-toolbar-button view-button <%= toolbarItem.equals("view-all") ? "current" : StringPool.BLANK %>">
@@ -36,7 +36,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
     <%--
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER) %>">
 		<portlet:renderURL var="addUserURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
+			<portlet:param name="struts_action" value="/users_admin/edit_user" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 		</portlet:renderURL>
 
@@ -62,7 +62,7 @@ String toolbarItem = ParamUtil.getString(request, "toolbarItem", "view-all");
 
 	<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.EXPORT_USER) %>">
 		<portlet:renderURL var="addUserURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
+			<portlet:param name="struts_action" value="/users_admin/edit_user" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 		</portlet:renderURL>
 
