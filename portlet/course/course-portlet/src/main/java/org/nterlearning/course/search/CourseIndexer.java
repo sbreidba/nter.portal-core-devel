@@ -105,31 +105,31 @@ public class CourseIndexer extends BaseIndexer {
 	 * .portal .kernel.search.Document, java.lang.String,
 	 * javax.portlet.PortletURL)}
 	 */
-	@Override
-	public Summary getSummary(Document doc, Locale locale, String snippet, PortletURL url) {
-
-		try {
-			Course course = CourseLocalServiceUtil.getCourse(
-				GetterUtil.getLong(
-					doc.get(Field.ENTRY_CLASS_PK)));
-			String title = course.getTitle();
-			String content = snippet;
-			if (Validator.isNull(content)) {
-				content = StringUtil.shorten(course.getDescription(), 200);
-			}
-			return new Summary(title, content, url);
-		}
-		catch (NoSuchCourseException ce) {
-			// somehow the index became corrupted, manually remove the course
-			doDelete(doc);
-			_log.warn(ce.getMessage());
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-
-		return new Summary("", "", url);
-	}
+//	@Override
+//	public Summary getSummary(Document doc, Locale locale, String snippet, PortletURL url) {
+//
+//		try {
+//			Course course = CourseLocalServiceUtil.getCourse(
+//				GetterUtil.getLong(
+//					doc.get(Field.ENTRY_CLASS_PK)));
+//			String title = course.getTitle();
+//			String content = snippet;
+//			if (Validator.isNull(content)) {
+//				content = StringUtil.shorten(course.getDescription(), 200);
+//			}
+//			return new Summary(title, content, url);
+//		}
+//		catch (NoSuchCourseException ce) {
+//			// somehow the index became corrupted, manually remove the course
+//			doDelete(doc);
+//			_log.warn(ce.getMessage());
+//		}
+//		catch (Exception e) {
+//			_log.error(e);
+//		}
+//
+//		return new Summary("", "", url);
+//	}
 
 	@Override
 	protected void doDelete(Object o)

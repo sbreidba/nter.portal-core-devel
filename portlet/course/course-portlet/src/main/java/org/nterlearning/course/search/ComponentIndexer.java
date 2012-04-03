@@ -99,32 +99,32 @@ public class ComponentIndexer extends BaseIndexer {
         return new Summary("", "", portletURL);
     }
 
-    @Override
-    public Summary getSummary(Document document, Locale locale, String snippet, PortletURL portletURL) {
-        try {
-            Component component =
-                    ComponentLocalServiceUtil.getComponent(
-                            GetterUtil.getLong(document.get(Field.ENTRY_CLASS_PK)));
-            String title = component.getTitle();
-            String content = snippet;
-
-            if (Validator.isNull(content)) {
-                content = StringUtil.shorten(component.getDescription(), 200);
-            }
-
-            return new Summary(title, content, portletURL);
-        }
-        catch (NoSuchComponentException ce) {
-            // somehow the index became corrupted, manually delete doc
-            doDelete(document);
-            mLog.warn(ce.getMessage());
-        }
-        catch (Exception e) {
-            mLog.error(e);
-        }
-
-        return new Summary("", "", portletURL);
-    }
+//    @Override
+//    public Summary getSummary(Document document, Locale locale, String snippet, PortletURL portletURL) {
+//        try {
+//            Component component =
+//                    ComponentLocalServiceUtil.getComponent(
+//                            GetterUtil.getLong(document.get(Field.ENTRY_CLASS_PK)));
+//            String title = component.getTitle();
+//            String content = snippet;
+//
+//            if (Validator.isNull(content)) {
+//                content = StringUtil.shorten(component.getDescription(), 200);
+//            }
+//
+//            return new Summary(title, content, portletURL);
+//        }
+//        catch (NoSuchComponentException ce) {
+//            // somehow the index became corrupted, manually delete doc
+//            doDelete(document);
+//            mLog.warn(ce.getMessage());
+//        }
+//        catch (Exception e) {
+//            mLog.error(e);
+//        }
+//
+//        return new Summary("", "", portletURL);
+//    }
 
 
     @Override
