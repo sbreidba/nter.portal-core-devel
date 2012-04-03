@@ -298,25 +298,23 @@ public interface CourseLocalService extends PersistedModelLocalService {
 
     public void addCourseResources(
         org.nterlearning.datamodel.catalog.model.Course course,
-        boolean addCommunityPermissions, boolean addGuestPermissions)
+        boolean addGroupPermissions, boolean addGuestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 
     public void addCourseResources(
         org.nterlearning.datamodel.catalog.model.Course course,
-        java.lang.String[] communityPermissions,
-        java.lang.String[] guestPermissions)
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException;
+
+    public void addCourseResources(long courseId, boolean addGroupPermissions,
+        boolean addGuestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 
     public void addCourseResources(long courseId,
-        boolean addCommunityPermissions, boolean addGuestPermissions)
-        throws com.liferay.portal.kernel.exception.PortalException,
-            com.liferay.portal.kernel.exception.SystemException;
-
-    public void addCourseResources(long courseId,
-        java.lang.String[] communityPermissions,
-        java.lang.String[] guestPermissions)
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 
@@ -403,8 +401,7 @@ public interface CourseLocalService extends PersistedModelLocalService {
 
     public void updateCourseResources(
         org.nterlearning.datamodel.catalog.model.Course course,
-        java.lang.String[] communityPermissions,
-        java.lang.String[] guestPermissions)
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 

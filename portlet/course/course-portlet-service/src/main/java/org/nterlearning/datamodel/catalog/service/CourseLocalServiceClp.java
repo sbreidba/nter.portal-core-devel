@@ -1275,11 +1275,11 @@ public class CourseLocalServiceClp implements CourseLocalService {
 
     public void addCourseResources(
         org.nterlearning.datamodel.catalog.model.Course course,
-        boolean addCommunityPermissions, boolean addGuestPermissions)
+        boolean addGroupPermissions, boolean addGuestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         MethodHandler methodHandler = new MethodHandler(_addCourseResourcesMethodKey29,
-                ClpSerializer.translateInput(course), addCommunityPermissions,
+                ClpSerializer.translateInput(course), addGroupPermissions,
                 addGuestPermissions);
 
         try {
@@ -1304,13 +1304,12 @@ public class CourseLocalServiceClp implements CourseLocalService {
 
     public void addCourseResources(
         org.nterlearning.datamodel.catalog.model.Course course,
-        java.lang.String[] communityPermissions,
-        java.lang.String[] guestPermissions)
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         MethodHandler methodHandler = new MethodHandler(_addCourseResourcesMethodKey30,
                 ClpSerializer.translateInput(course),
-                ClpSerializer.translateInput(communityPermissions),
+                ClpSerializer.translateInput(groupPermissions),
                 ClpSerializer.translateInput(guestPermissions));
 
         try {
@@ -1333,12 +1332,12 @@ public class CourseLocalServiceClp implements CourseLocalService {
         }
     }
 
-    public void addCourseResources(long courseId,
-        boolean addCommunityPermissions, boolean addGuestPermissions)
+    public void addCourseResources(long courseId, boolean addGroupPermissions,
+        boolean addGuestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         MethodHandler methodHandler = new MethodHandler(_addCourseResourcesMethodKey31,
-                courseId, addCommunityPermissions, addGuestPermissions);
+                courseId, addGroupPermissions, addGuestPermissions);
 
         try {
             _classLoaderProxy.invoke(methodHandler);
@@ -1361,12 +1360,11 @@ public class CourseLocalServiceClp implements CourseLocalService {
     }
 
     public void addCourseResources(long courseId,
-        java.lang.String[] communityPermissions,
-        java.lang.String[] guestPermissions)
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         MethodHandler methodHandler = new MethodHandler(_addCourseResourcesMethodKey32,
-                courseId, ClpSerializer.translateInput(communityPermissions),
+                courseId, ClpSerializer.translateInput(groupPermissions),
                 ClpSerializer.translateInput(guestPermissions));
 
         try {
@@ -1748,13 +1746,12 @@ public class CourseLocalServiceClp implements CourseLocalService {
 
     public void updateCourseResources(
         org.nterlearning.datamodel.catalog.model.Course course,
-        java.lang.String[] communityPermissions,
-        java.lang.String[] guestPermissions)
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         MethodHandler methodHandler = new MethodHandler(_updateCourseResourcesMethodKey42,
                 ClpSerializer.translateInput(course),
-                ClpSerializer.translateInput(communityPermissions),
+                ClpSerializer.translateInput(groupPermissions),
                 ClpSerializer.translateInput(guestPermissions));
 
         try {
