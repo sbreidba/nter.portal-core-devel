@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ National Training and Education Resource (NTER)
+  ~ Copyright (C) 2011  SRI International
+  ~
+  ~ This program is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or (at
+  ~ your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful, but
+  ~ WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  ~ General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  ~ 02110-1301, USA.
+  -->
+
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:nter="http://nterlearning.org/xml/feeds/atom-extensions-schema_0.6.3.xsd">
+
+    <!-- Sample feed to test display of course with no author, no image, no related, no requirement -->
+
+    <title>Course Feed</title>
+    <link rel="self" href="test-0.6.3-course-atom-feed-no-author.xml" type="application/atom+xml"/>
+    <updated>2011-02-01T22:52:00Z</updated>
+    <id>tag:nwtp.gov,2010-07-01:/feeds/TESTna01-no-author-b93C-0003939e0af6</id>
+
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Test component 1</title>
+        <link rel="self" href="https://nwtp.gov/course1-en.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <link rel="search" href="https://nwtp.gov/course1-en.php?q=search"/>
+        <id>tag:nwtp.gov,2010-01-01:/link/to/test-noauthor-component1/en-US</id>
+        <updated>2011-01-01T18:30:02Z</updated>
+        <author>
+            <name></name>
+        </author>
+        <summary>test component one</summary>
+		<nter:courseComponent>
+			<nter:version>1</nter:version>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+		</nter:courseComponent>
+    </entry>
+
+
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self" href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search" href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2010-01-01:/courses/TESTna01-no-author-course-80da344efa6a</id>
+        <updated>2011-01-01T18:30:02Z</updated>
+        <author>
+            <name></name>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+			<nter:version>1</nter:version>
+            <nter:duration nter:durationStandard="ISO8601:2000">P2DT3H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">Test Course No Author</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Course No Author abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Course No Author description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2011 SRI International</nter:copyright>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2010-01-01:/link/to/test-noauthor-component1/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:keywords xml:lang="en-US">test course </nter:keywords>
+
+        </nter:course>
+    </entry>
+
+
+</feed>
+
