@@ -277,21 +277,20 @@ public class CourseReviewLocalServiceWrapper implements CourseReviewLocalService
 
     public void addCourseReviewResources(
         org.nterlearning.datamodel.catalog.model.CourseReview courseReview,
-        boolean addCommunityPermissions, boolean addGuestPermissions)
+        boolean addGroupPermissions, boolean addGuestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         _courseReviewLocalService.addCourseReviewResources(courseReview,
-            addCommunityPermissions, addGuestPermissions);
+            addGroupPermissions, addGuestPermissions);
     }
 
     public void addCourseReviewResources(
         org.nterlearning.datamodel.catalog.model.CourseReview courseReview,
-        java.lang.String[] communityPermissions,
-        java.lang.String[] guestPermissions)
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         _courseReviewLocalService.addCourseReviewResources(courseReview,
-            communityPermissions, guestPermissions);
+            groupPermissions, guestPermissions);
     }
 
     public double findScoreByReviewId(long reviewId)
@@ -305,20 +304,19 @@ public class CourseReviewLocalServiceWrapper implements CourseReviewLocalService
     }
 
     public void addCourseReviewResources(long courseReviewId,
-        boolean addCommunityPermissions, boolean addGuestPermissions)
+        boolean addGroupPermissions, boolean addGuestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         _courseReviewLocalService.addCourseReviewResources(courseReviewId,
-            addCommunityPermissions, addGuestPermissions);
+            addGroupPermissions, addGuestPermissions);
     }
 
     public void addCourseReviewResources(long courseReviewId,
-        java.lang.String[] communityPermissions,
-        java.lang.String[] guestPermissions)
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         _courseReviewLocalService.addCourseReviewResources(courseReviewId,
-            communityPermissions, guestPermissions);
+            groupPermissions, guestPermissions);
     }
 
     public void deleteCourseReviews(long groupId)
@@ -356,12 +354,11 @@ public class CourseReviewLocalServiceWrapper implements CourseReviewLocalService
 
     public void updateCourseReviewResources(
         org.nterlearning.datamodel.catalog.model.CourseReview courseReview,
-        java.lang.String[] communityPermissions,
-        java.lang.String[] guestPermissions)
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         _courseReviewLocalService.updateCourseReviewResources(courseReview,
-            communityPermissions, guestPermissions);
+            groupPermissions, guestPermissions);
     }
 
     public void setRemoved(long reviewId, boolean removed)
