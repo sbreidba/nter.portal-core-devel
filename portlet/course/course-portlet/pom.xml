@@ -28,7 +28,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>nter-course-portlet</artifactId>
 	<packaging>war</packaging>
-	<name>Course Portlet</name>
+	<name>Course Portlet UI</name>
 
 	<build>
 		<plugins>
@@ -55,7 +55,7 @@
         <dependency>
             <groupId>org.nterlearning</groupId>
             <artifactId>registry-client-proxy</artifactId>
-            <version>0.1.7</version>
+            <version>0.1.8-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
 
