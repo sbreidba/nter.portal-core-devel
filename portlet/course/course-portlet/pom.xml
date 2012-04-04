@@ -30,19 +30,19 @@
 	<packaging>war</packaging>
 	<name>Course Portlet UI</name>
 
-	<!--<build>-->
-		<!--<plugins>-->
-			<!--<plugin>-->
-				<!--<groupId>com.liferay.maven.plugins</groupId>-->
-				<!--<artifactId>liferay-maven-plugin</artifactId>-->
-				<!--<version>${liferay.version}</version>-->
-				<!--<configuration>-->
-					<!--<apiBaseDir>${basedir}/../course-portlet-service</apiBaseDir>-->
-                    <!--<autoDeployDir/> &lt;!&ndash; not used for deploy &ndash;&gt;-->
-				<!--</configuration>-->
-			<!--</plugin>-->
-		<!--</plugins>-->
-	<!--</build>-->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>com.liferay.maven.plugins</groupId>
+				<artifactId>liferay-maven-plugin</artifactId>
+				<version>${liferay.version}</version>
+				<configuration>
+					<apiBaseDir>${basedir}/../course-portlet-service</apiBaseDir>
+                    <autoDeployDir/> <!-- not used for deploy -->
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 
     <dependencies>
         <dependency>
@@ -59,11 +59,11 @@
             <scope>compile</scope>
         </dependency>
 
-        <!--<dependency>-->
-            <!--<groupId>org.nterlearning</groupId>-->
-            <!--<artifactId>commerce-service-client</artifactId>-->
-            <!--<version>0.0.2</version>-->
-        <!--</dependency>-->
+        <dependency>
+            <groupId>org.nterlearning</groupId>
+            <artifactId>commerce-service-client</artifactId>
+            <version>0.0.2</version>
+        </dependency>
 
 		<dependency>
 			<groupId>com.liferay.portal</groupId>
