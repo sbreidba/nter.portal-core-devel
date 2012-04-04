@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ National Training and Education Resource (NTER)
+  ~ Copyright (C) 2011  SRI International
+  ~
+  ~ This program is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or (at
+  ~ your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful, but
+  ~ WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  ~ General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  ~ 02110-1301, USA.
+  -->
+  
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:nter="http://nterlearning.org/xml/feeds/atom-extensions-schema_0.6.1.xsd">
+
+    <title>Course Feed</title>
+    <link rel="self" href="test-0.6.1-no-keywords-feed.xml" type="application/atom+xml"/>
+    <updated>2011-01-28T15:50:08Z</updated>
+    <id>tag:nwtp.gov,2010-10-04:/feeds/1A7B772B-4EC6-457E-82D5-FA0535C6C000</id>
+
+    
+    
+    
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <id>tag:nwtptrunk.localhost,2010-12-09:/nwtp/lp_sqlserver_3/45/181</id>
+        <updated>2010-12-15T12:21:05Z</updated>
+        <summary>star House</summary>
+           <title>3 - House as a System</title>
+		   <link
+           		href="http://nwtptrunk.localhost:80/nwtp/nter.php?client_id=lp_sqlserver_3&amp;ref_id=45"
+           		nter:displayWidth="1100"
+           		nter:displayHeight="800">
+		   </link>
+    </entry>
+
+    
+    <entry nter:entryType="course">
+        <link href="http://example.org/2003/12/13/atom03"/>
+        <id>tag:nwtptrunk.localhost,2010-12-09:/nwtp/lp_sqlserver_3/43/176</id>
+        <updated>2010-12-15T15:44:02Z</updated>
+        <summary>apples are ripe</summary>
+        <nter:course>
+           <nter:title xml:lang="en-US">Course 1</nter:title>
+           <nter:description xml:lang="en-US">apples are ripe</nter:description>
+           <nter:componentRef
+                     nter:componentId="tag:nwtptrunk.localhost,2010-12-09:/nwtp/lp_sqlserver_3/45/181"
+           />
+           <nter:keywords xml:lang="en-US">pocket frogs lily pads</nter:keywords>
+        </nter:course>
+    </entry>
+
+    
+    
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <id>tag:nwtptrunk.localhost,2010-12-10:/nwtp/lp_sqlserver_3/50/192</id>
+        <updated>2010-12-10T17:02:09Z</updated>
+        <summary>apples</summary>
+           <title>apples</title>
+		   <link
+           		href="http://nwtptrunk.localhost:80/nwtp/nter.php?client_id=lp_sqlserver_3&amp;ref_id=50"
+           		nter:displayWidth="1100"
+           		nter:displayHeight="800">
+		   </link>
+    </entry>
+    
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <id>tag:nwtptrunk.localhost,2010-12-10:/nwtp/lp_sqlserver_3/51/193</id>
+        <updated>2010-12-10T17:02:38Z</updated>
+        <summary>apples</summary>
+           <title>apples</title>
+		   <link
+           		href="http://nwtptrunk.localhost:80/nwtp/nter.php?client_id=lp_sqlserver_3&amp;ref_id=51"
+           		nter:displayWidth="1100"
+           		nter:displayHeight="800">
+		   </link>
+    </entry>
+
+    <entry nter:entryType="course">
+        <link href="http://example.org/2003/12/13/atom03"/>
+        <id>tag:nwtptrunk.localhost,2010-12-10:/nwtp/lp_sqlserver_3/46/182</id>
+        <updated>2010-12-10T17:00:52Z</updated>
+        <summary>Twilight Zone</summary>
+        <nter:course>
+           <nter:title xml:lang="en-US">Course 2</nter:title>
+           <nter:description xml:lang="en-US">Twilight Zone</nter:description>
+           <nter:componentRef
+                     nter:componentId="tag:nwtptrunk.localhost,2010-12-10:/nwtp/lp_sqlserver_3/50/192"
+           />
+           <nter:componentRef
+                     nter:componentId="tag:nwtptrunk.localhost,2010-12-10:/nwtp/lp_sqlserver_3/51/193"
+           />
+        </nter:course>
+    </entry>
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <id>tag:nwtptrunk.localhost,2010-12-10:/nwtp/lp_sqlserver_3/52/194</id>
+        <updated>2010-12-15T15:42:45Z</updated>
+        <summary>apples are in season</summary>
+           <title>Conductor</title>
+		   <link
+           		href="http://nwtptrunk.localhost:80/nwtp/nter.php?client_id=lp_sqlserver_3&amp;ref_id=52"
+           		nter:displayWidth="1100"
+           		nter:displayHeight="800">
+		   </link>
+    </entry>
+    
+    <entry nter:entryType="course">
+        <link href="http://example.org/2003/12/13/atom03"/>
+        <id>tag:nwtptrunk.localhost,2010-12-10:/nwtp/lp_sqlserver_3/48/187</id>
+        <updated>2010-12-10T17:01:28Z</updated>
+        <summary>Course 3</summary>
+        <nter:course>
+           <nter:title xml:lang="en-US">Course 3</nter:title>
+           <nter:description xml:lang="en-US">Course 3</nter:description>
+           <nter:componentRef
+                     nter:componentId="tag:nwtptrunk.localhost,2010-12-10:/nwtp/lp_sqlserver_3/52/194"
+           />
+        </nter:course>
+    </entry>
+</feed>
+
+
+
