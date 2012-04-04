@@ -62,6 +62,7 @@
                         <executions>
                             <execution>
                                 <phase>compile</phase>
+                                <!--<phase>generate-sources</phase>-->
                                 <goals>
                                     <goal>build-service</goal>
                                 </goals>
