@@ -45,17 +45,17 @@ import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.*;
 import com.liferay.portal.util.PortalUtil;
-import com.sri.nter.commerce.client.CommerceServiceStub;
+//import com.sri.nter.commerce.client.CommerceServiceStub;
 import org.nterlearning.datamodel.catalog.model.*;
 import org.nterlearning.datamodel.catalog.service.*;
 import org.nterlearning.utils.DateUtil;
 import org.nterlearning.utils.PortalProperties;
 import org.nterlearning.utils.PortalPropertiesUtil;
 import org.nterlearning.xml.commerce.domain_objects_0_1_0.PaymentStatus;
-import org.nterlearning.xml.commerce.transaction_interface_0_1_0.GetPaymentStatus;
-import org.nterlearning.xml.commerce.transaction_interface_0_1_0.GetPaymentStatusResponse;
-import org.nterlearning.xml.commerce.transaction_interface_0_1_0_wsdl.TransactionInterface;
-import org.nterlearning.xml.commerce.transaction_interface_0_1_0_wsdl.ValidationError;
+//import org.nterlearning.xml.commerce.transaction_interface_0_1_0.GetPaymentStatus;
+//import org.nterlearning.xml.commerce.transaction_interface_0_1_0.GetPaymentStatusResponse;
+//import org.nterlearning.xml.commerce.transaction_interface_0_1_0_wsdl.TransactionInterface;
+//import org.nterlearning.xml.commerce.transaction_interface_0_1_0_wsdl.ValidationError;
 
 import javax.servlet.jsp.PageContext;
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -446,38 +446,41 @@ public class CourseImpl extends CourseBaseImpl {
         }
 	}
 
-	public boolean isPurchased(long userId)
-			throws SystemException, PortalException {
-		if (getPrice() > 0.0) {
-			TransactionInterface transactionInterface;
-			String transactionWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_TRANSACTION_URL);
-			String configurationWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_CONFIGURATION_URL);
-			String entitlementWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_ENTITLEMENT_URL);
-
-			CommerceServiceStub commerceService = new CommerceServiceStub(transactionWsdlURL, configurationWsdlURL,
-					entitlementWsdlURL);
-			transactionInterface = commerceService.getTransactionInterface();
-
-			GetPaymentStatus paymentStatus = new GetPaymentStatus();
-            String studentId =
-                    UserIdMapperLocalServiceUtil.getUserIdMapper(
-                            userId, PortalPropertiesUtil.getSsoImplementation()).getExternalUserId();
-			paymentStatus.setStudentId(studentId);
-			paymentStatus.setCourseId(getCourseIri());
-			paymentStatus.setResourceId("NTER");
-			BigDecimal price = new BigDecimal(getPrice());
-			paymentStatus.setPrice(price.setScale(2, RoundingMode.UP));
-			try {
-				GetPaymentStatusResponse paymentResponse = transactionInterface.getPaymentStatus(paymentStatus);
-				return paymentResponse.getStatus() == PaymentStatus.COMPLETED;
-			} catch (ValidationError e) {
-				throw new SystemException(e);
-			}
-		} else {
-			return true;
-		}
-
-	}
+    public boolean isPurchased(long userId) 	throws SystemException, PortalException {
+        return (true);
+    }
+//	public boolean isPurchased(long userId)
+//			throws SystemException, PortalException {
+//		if (getPrice() > 0.0) {
+//			TransactionInterface transactionInterface;
+//			String transactionWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_TRANSACTION_URL);
+//			String configurationWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_CONFIGURATION_URL);
+//			String entitlementWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_ENTITLEMENT_URL);
+//
+//			CommerceServiceStub commerceService = new CommerceServiceStub(transactionWsdlURL, configurationWsdlURL,
+//					entitlementWsdlURL);
+//			transactionInterface = commerceService.getTransactionInterface();
+//
+//			GetPaymentStatus paymentStatus = new GetPaymentStatus();
+//            String studentId =
+//                    UserIdMapperLocalServiceUtil.getUserIdMapper(
+//                            userId, PortalPropertiesUtil.getSsoImplementation()).getExternalUserId();
+//			paymentStatus.setStudentId(studentId);
+//			paymentStatus.setCourseId(getCourseIri());
+//			paymentStatus.setResourceId("NTER");
+//			BigDecimal price = new BigDecimal(getPrice());
+//			paymentStatus.setPrice(price.setScale(2, RoundingMode.UP));
+//			try {
+//				GetPaymentStatusResponse paymentResponse = transactionInterface.getPaymentStatus(paymentStatus);
+//				return paymentResponse.getStatus() == PaymentStatus.COMPLETED;
+//			} catch (ValidationError e) {
+//				throw new SystemException(e);
+//			}
+//		} else {
+//			return true;
+//		}
+//
+//	}
 
 	private static Log _log = LogFactoryUtil.getLog(CourseImpl.class);
 }
