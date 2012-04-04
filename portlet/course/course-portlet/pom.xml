@@ -55,15 +55,15 @@
         <dependency>
             <groupId>org.nterlearning</groupId>
             <artifactId>registry-client-proxy</artifactId>
-            <version>0.1.7</version>
+            <version>0.1.8-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.nterlearning</groupId>
-            <artifactId>commerce-service-client</artifactId>
-            <version>0.0.2</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.nterlearning</groupId>-->
+            <!--<artifactId>commerce-service-client</artifactId>-->
+            <!--<version>0.0.2</version>-->
+        <!--</dependency>-->
 
 		<dependency>
 			<groupId>com.liferay.portal</groupId>
