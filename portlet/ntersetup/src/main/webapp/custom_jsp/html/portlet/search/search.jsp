@@ -17,6 +17,7 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
   02110-1301, USA.
   --%>
+
 <%@page import="com.liferay.portal.kernel.util.LocalizationUtil"%>
 <%@page import="com.liferay.portal.kernel.language.LanguageUtil"%>
 <%@ include file="/html/portlet/users_admin/init.jsp" %>
