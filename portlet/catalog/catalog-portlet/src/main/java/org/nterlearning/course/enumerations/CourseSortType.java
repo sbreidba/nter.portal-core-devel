@@ -19,23 +19,23 @@
  */
 
 
-package course.enumerations;
+package org.nterlearning.course.enumerations;
 
 /**
- * This enumeration is designed to describe the various types of sorting
- * we can apply to the course/courseRecord/ratingsEntry custom query.
+ * This enumeration is designed to describe the various types of sorting we can
+ * apply to the general course query.
  */
-public enum CourseRecordSortType {
+public enum CourseSortType {
 
-    UPDATED_DATE      ("CATALOG_CourseRecord.updatedDate"),
-    COURSE_TITLE      ("CATALOG_Course.title"),
-    COMPLETION_STATUS ("CATALOG_CourseRecord.completionStatus, CATALOG_CourseRecord.updatedDate"),
-	USER_RATING 	  ("RatingsEntry.score");
+    NEW_POPULAR      ("CATALOG_Course.updatedDate DESC, CATALOG_Course.popularWeight DESC "),
+    POPULAR_NEW      ("CATALOG_Course.popularWeight DESC, CATALOG_Course.updatedDate DESC "),
+    FEATURED_NEW     ("CATALOG_Course.featuredStatus ASC, CATALOG_Course.updatedDate DESC "),
+	FEATURED_POPULAR ("CATALOG_COURSE.featuredStatus ASC, CATALOG_Course.popularWeight DESC ");
 
     private final String sortSql;
 
-    CourseRecordSortType(String sortSql) {
-        this.sortSql = sortSql;
+    CourseSortType(String sortSql) {
+         this.sortSql = sortSql;
     }
 
     public String getSortSql() {

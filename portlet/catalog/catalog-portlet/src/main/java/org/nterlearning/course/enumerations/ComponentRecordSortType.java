@@ -18,33 +18,27 @@
  * 02110-1301, USA.
  */
 
-package course.enumerations;
+
+package org.nterlearning.course.enumerations;
+
 /**
- * This enumeration is designed to describe the various types of roles
- * that can be assigned to a course or component.
+ * This enumeration is designed to describe the various types of sorting
+ * we can apply to the component/component custom query.
  */
-public enum ContributorRoleType {
+public enum ComponentRecordSortType {
 
-    AUTHOR              ("author"),
-    CONTRIBUTOR         ("contributor"),
-    ORGANIZATION        ("organization");
+    UPDATED_DATE           ("CATALOG_ComponentRecord.updatedDate"),
+    COMPONENT_TITLE        ("CATALOG_Component.title"),
+    COMPLETION_STATUS      ("CATALOG_ComponentRecord.completionStatus"),
+    COMPONENT_ORDER_WEIGHT ("CATALOG_Courses_Components.orderWeight");
 
-    private final String value;
+    private final String sortSql;
 
-    ContributorRoleType(String v) {
-        value = v;
+    ComponentRecordSortType( String sortSql) {
+        this.sortSql = sortSql;
     }
 
-    public String value() {
-        return value;
-    }
-
-    public static ContributorRoleType fromValue(String v) {
-        for (ContributorRoleType c: ContributorRoleType.values()) {
-            if (c.value.equalsIgnoreCase(v)) {
-                return c;
-            }
-        }
-        throw new IllegalArgumentException(v);
+    public String getSortSql() {
+        return sortSql;
     }
 }

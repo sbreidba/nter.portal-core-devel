@@ -19,25 +19,27 @@
  */
 
 
-package course.enumerations;
+package org.nterlearning.course.enumerations;
 
 /**
- * This enumeration is designed to describe the various types filters we can
- * apply to the general course query.
+ * This enumeration is designed to describe the various types of filters
+ * we can apply to the flagReport custom query.
  */
-public enum CourseFilterType {
+public enum FlagReportFilterType {
 
-    ALL             (" "),
-    FEATURED        (" AND (CATALOG_Course.featuredStatus > 0 ) ");
+    // workflow status: 1 pending, 2 draft, 3 expired, 4 denied, 0 approved
+
+    ALL                  (" "),
+    IN_PROGRESS_STATUS   (" AND CATALOG_FlagReport.status in (1,3,2) "),
+    FINISHED_STATUS      (" AND CATALOG_FlagReport.status in (0,4) ");
 
     private final String whereSql;
 
-    CourseFilterType(String whereSql) {
+    FlagReportFilterType(String whereSql) {
         this.whereSql = whereSql;
     }
 
     public String getWhereSql() {
         return whereSql;
     }
-
 }

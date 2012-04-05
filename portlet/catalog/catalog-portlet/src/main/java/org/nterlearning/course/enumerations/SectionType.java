@@ -19,7 +19,7 @@
  */
 
 
-package course.enumerations;
+package org.nterlearning.course.enumerations;
 
 /**
  * This enumeration is designed to describe the various values found in

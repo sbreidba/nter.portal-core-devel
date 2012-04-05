@@ -19,25 +19,25 @@
  */
 
 
-package course.enumerations;
+package org.nterlearning.course.enumerations;
 
 /**
- * This enumeration is designed to describe the various types of filters
- * we can apply to the component/componentRecord custom query.
+ * This enumeration is designed to describe the various types filters we can
+ * apply to the general course query.
  */
-public enum ComponentRecordFilterType {
+public enum CourseFilterType {
 
-    ALL                  (" "),
-    IN_PROGRESS_STATUS   (" AND (CATALOG_ComponentRecord.completionStatus in ('In Progress', 'Failed Retry')) "),
-    FINISHED_STATUS      (" AND (CATALOG_ComponentRecord.completionStatus in('Completed','Failed')) ");
+    ALL             (" "),
+    FEATURED        (" AND (CATALOG_Course.featuredStatus > 0 ) ");
 
     private final String whereSql;
 
-    ComponentRecordFilterType(String whereSql) {
+    CourseFilterType(String whereSql) {
         this.whereSql = whereSql;
     }
 
     public String getWhereSql() {
         return whereSql;
     }
+
 }

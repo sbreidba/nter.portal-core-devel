@@ -19,27 +19,27 @@
  */
 
 
-package course.enumerations;
+package org.nterlearning.course.enumerations;
 
 /**
- * This enumeration is designed to describe the various types of filters
- * we can apply to the flagReport custom query.
+ * This enumeration is designed to describe the various types of sorting
+ * we can apply to the course/courseRecord/ratingsEntry custom query.
  */
-public enum FlagReportFilterType {
+public enum CourseRecordSortType {
 
-    // workflow status: 1 pending, 2 draft, 3 expired, 4 denied, 0 approved
+    UPDATED_DATE      ("CATALOG_CourseRecord.updatedDate"),
+    COURSE_TITLE      ("CATALOG_Course.title"),
+    COMPLETION_STATUS ("CATALOG_CourseRecord.completionStatus, CATALOG_CourseRecord.updatedDate"),
+	USER_RATING 	  ("RatingsEntry.score");
 
-    ALL                  (" "),
-    IN_PROGRESS_STATUS   (" AND CATALOG_FlagReport.status in (1,3,2) "),
-    FINISHED_STATUS      (" AND CATALOG_FlagReport.status in (0,4) ");
+    private final String sortSql;
 
-    private final String whereSql;
-
-    FlagReportFilterType(String whereSql) {
-        this.whereSql = whereSql;
+    CourseRecordSortType(String sortSql) {
+        this.sortSql = sortSql;
     }
 
-    public String getWhereSql() {
-        return whereSql;
+    public String getSortSql() {
+        return sortSql;
     }
+
 }
