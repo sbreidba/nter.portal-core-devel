@@ -61,11 +61,13 @@ public class CourseReviewLocalServiceWrapper implements CourseReviewLocalService
     * Deletes the course review from the database. Also notifies the appropriate model listeners.
     *
     * @param courseReview the course review
+    * @throws PortalException
     * @throws SystemException if a system exception occurred
     */
     public void deleteCourseReview(
         org.nterlearning.datamodel.catalog.model.CourseReview courseReview)
-        throws com.liferay.portal.kernel.exception.SystemException {
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
         _courseReviewLocalService.deleteCourseReview(courseReview);
     }
 
@@ -241,6 +243,189 @@ public class CourseReviewLocalServiceWrapper implements CourseReviewLocalService
     */
     public void setBeanIdentifier(java.lang.String beanIdentifier) {
         _courseReviewLocalService.setBeanIdentifier(beanIdentifier);
+    }
+
+    /**
+    * Update an existing course review or add it if it does not exists.
+    * Modifies the database.
+    *
+    * @param userId the user's ID
+    * @param courseId the ID of the reviewed course
+    * @param summary the review summary/title
+    * @param content the review text
+    * @param serviceContext the service context
+    */
+    public org.nterlearning.datamodel.catalog.model.CourseReview appendCourseReview(
+        long userId, long courseReviewId, long courseId,
+        java.lang.String summary, java.lang.String content, double rating,
+        com.liferay.portal.service.ServiceContext serviceContext)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _courseReviewLocalService.appendCourseReview(userId,
+            courseReviewId, courseId, summary, content, rating, serviceContext);
+    }
+
+    public org.nterlearning.datamodel.catalog.model.CourseReview addCourseReview(
+        long userId, long courseId, java.lang.String summary,
+        java.lang.String content, double rating,
+        com.liferay.portal.service.ServiceContext serviceContext)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _courseReviewLocalService.addCourseReview(userId, courseId,
+            summary, content, rating, serviceContext);
+    }
+
+    public void addCourseReviewResources(
+        org.nterlearning.datamodel.catalog.model.CourseReview courseReview,
+        boolean addGroupPermissions, boolean addGuestPermissions)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        _courseReviewLocalService.addCourseReviewResources(courseReview,
+            addGroupPermissions, addGuestPermissions);
+    }
+
+    public void addCourseReviewResources(
+        org.nterlearning.datamodel.catalog.model.CourseReview courseReview,
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        _courseReviewLocalService.addCourseReviewResources(courseReview,
+            groupPermissions, guestPermissions);
+    }
+
+    public double findScoreByReviewId(long reviewId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _courseReviewLocalService.findScoreByReviewId(reviewId);
+    }
+
+    public java.util.List<java.lang.Double> findScoreByCourseId(long courseId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _courseReviewLocalService.findScoreByCourseId(courseId);
+    }
+
+    public void addCourseReviewResources(long courseReviewId,
+        boolean addGroupPermissions, boolean addGuestPermissions)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        _courseReviewLocalService.addCourseReviewResources(courseReviewId,
+            addGroupPermissions, addGuestPermissions);
+    }
+
+    public void addCourseReviewResources(long courseReviewId,
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        _courseReviewLocalService.addCourseReviewResources(courseReviewId,
+            groupPermissions, guestPermissions);
+    }
+
+    public void deleteCourseReviews(long groupId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        _courseReviewLocalService.deleteCourseReviews(groupId);
+    }
+
+    public void updateAsset(long userId,
+        org.nterlearning.datamodel.catalog.model.CourseReview courseReview,
+        long[] assetCategoryIds, java.lang.String[] assetTagNames)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        _courseReviewLocalService.updateAsset(userId, courseReview,
+            assetCategoryIds, assetTagNames);
+    }
+
+    public org.nterlearning.datamodel.catalog.model.CourseReview updateCourseReview(
+        long userId, long courseReviewId, long courseId,
+        java.lang.String summary, java.lang.String content, double rating,
+        com.liferay.portal.service.ServiceContext serviceContext)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _courseReviewLocalService.updateCourseReview(userId,
+            courseReviewId, courseId, summary, content, rating, serviceContext);
+    }
+
+    public void updateCourseReviewRating(long courseReviewId,
+        double weightedScore)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        _courseReviewLocalService.updateCourseReviewRating(courseReviewId,
+            weightedScore);
+    }
+
+    public void updateCourseReviewResources(
+        org.nterlearning.datamodel.catalog.model.CourseReview courseReview,
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        _courseReviewLocalService.updateCourseReviewResources(courseReview,
+            groupPermissions, guestPermissions);
+    }
+
+    public void setRemoved(long reviewId, boolean removed)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        _courseReviewLocalService.setRemoved(reviewId, removed);
+    }
+
+    public void purgeAllRemovedOlderThan(java.util.Date date)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        _courseReviewLocalService.purgeAllRemovedOlderThan(date);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseReview> findByCourseId(
+        long courseId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _courseReviewLocalService.findByCourseId(courseId);
+    }
+
+    public long countByCourseId(long courseId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _courseReviewLocalService.countByCourseId(courseId);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseReview> findByCourseId(
+        long courseId, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _courseReviewLocalService.findByCourseId(courseId, start, end);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseReview> findByCourseIdWithUserId(
+        long userId, long courseId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _courseReviewLocalService.findByCourseIdWithUserId(userId,
+            courseId);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseReview> findByCourseIdWithUserId(
+        long userId, long courseId, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _courseReviewLocalService.findByCourseIdWithUserId(userId,
+            courseId, start, end);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseReview> findByUserId(
+        long userId) throws com.liferay.portal.kernel.exception.SystemException {
+        return _courseReviewLocalService.findByUserId(userId);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseReview> findByUserId(
+        long userId, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _courseReviewLocalService.findByUserId(userId, start, end);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseReview> findByCourseIdWithRemoved(
+        long courseId, boolean removed, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _courseReviewLocalService.findByCourseIdWithRemoved(courseId,
+            removed, start, end);
+    }
+
+    public long countByCourseIdWithRemoved(long courseId, boolean removed)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _courseReviewLocalService.countByCourseIdWithRemoved(courseId,
+            removed);
     }
 
     /**

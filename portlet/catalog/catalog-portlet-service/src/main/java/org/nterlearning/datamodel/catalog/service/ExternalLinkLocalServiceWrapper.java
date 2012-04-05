@@ -242,6 +242,31 @@ public class ExternalLinkLocalServiceWrapper implements ExternalLinkLocalService
         _externalLinkLocalService.setBeanIdentifier(beanIdentifier);
     }
 
+    public java.util.List<org.nterlearning.datamodel.catalog.model.ExternalLink> findByCourseId(
+        java.lang.Long courseId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _externalLinkLocalService.findByCourseId(courseId);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.ExternalLink> findByCourseIdWithType(
+        java.lang.Long courseId, java.lang.String type)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _externalLinkLocalService.findByCourseIdWithType(courseId, type);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.ExternalLink> findByComponentId(
+        java.lang.Long componentId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _externalLinkLocalService.findByComponentId(componentId);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.ExternalLink> findByComponentIdWithType(
+        java.lang.Long componentId, java.lang.String type)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _externalLinkLocalService.findByComponentIdWithType(componentId,
+            type);
+    }
+
     /**
      * @deprecated Renamed to {@link #getWrappedService}
      */

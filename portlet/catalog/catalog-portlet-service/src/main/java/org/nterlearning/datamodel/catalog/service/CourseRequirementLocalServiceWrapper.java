@@ -246,6 +246,13 @@ public class CourseRequirementLocalServiceWrapper
         _courseRequirementLocalService.setBeanIdentifier(beanIdentifier);
     }
 
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRequirement> findByCourseIdWithRequirementType(
+        java.lang.Long courseId, java.lang.String requirementType)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _courseRequirementLocalService.findByCourseIdWithRequirementType(courseId,
+            requirementType);
+    }
+
     /**
      * @deprecated Renamed to {@link #getWrappedService}
      */

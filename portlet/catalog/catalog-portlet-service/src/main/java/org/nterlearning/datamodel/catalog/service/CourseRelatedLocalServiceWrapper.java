@@ -245,6 +245,19 @@ public class CourseRelatedLocalServiceWrapper
         _courseRelatedLocalService.setBeanIdentifier(beanIdentifier);
     }
 
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRelated> findByRelatedCourseIdWithRelationshipType(
+        java.lang.Long componentId, java.lang.String relationshipType)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _courseRelatedLocalService.findByRelatedCourseIdWithRelationshipType(componentId,
+            relationshipType);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRelated> findByRelatedCourseIri(
+        java.lang.String relatedCourseIri)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _courseRelatedLocalService.findByRelatedCourseIri(relatedCourseIri);
+    }
+
     /**
      * @deprecated Renamed to {@link #getWrappedService}
      */

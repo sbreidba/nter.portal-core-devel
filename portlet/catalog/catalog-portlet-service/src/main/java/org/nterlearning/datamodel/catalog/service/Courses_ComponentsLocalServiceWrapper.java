@@ -247,6 +247,30 @@ public class Courses_ComponentsLocalServiceWrapper
         _courses_ComponentsLocalService.setBeanIdentifier(beanIdentifier);
     }
 
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Courses_Components> findByCourseId(
+        java.lang.Long courseId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _courses_ComponentsLocalService.findByCourseId(courseId);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Courses_Components> findByCourseIri(
+        java.lang.String courseIri)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _courses_ComponentsLocalService.findByCourseIri(courseIri);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Courses_Components> findByComponentId(
+        java.lang.Long componentId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _courses_ComponentsLocalService.findByComponentId(componentId);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Courses_Components> findByComponentIri(
+        java.lang.String componentIri)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _courses_ComponentsLocalService.findByComponentIri(componentIri);
+    }
+
     /**
      * @deprecated Renamed to {@link #getWrappedService}
      */

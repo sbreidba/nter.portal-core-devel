@@ -221,4 +221,20 @@ public interface ExternalLinkLocalService extends PersistedModelLocalService {
     * @param beanIdentifier the Spring bean ID for this bean
     */
     public void setBeanIdentifier(java.lang.String beanIdentifier);
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.ExternalLink> findByCourseId(
+        java.lang.Long courseId)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.ExternalLink> findByCourseIdWithType(
+        java.lang.Long courseId, java.lang.String type)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.ExternalLink> findByComponentId(
+        java.lang.Long componentId)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.ExternalLink> findByComponentIdWithType(
+        java.lang.Long componentId, java.lang.String type)
+        throws com.liferay.portal.kernel.exception.SystemException;
 }

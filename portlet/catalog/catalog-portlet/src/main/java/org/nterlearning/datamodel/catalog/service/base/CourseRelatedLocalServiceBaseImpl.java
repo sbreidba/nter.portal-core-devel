@@ -43,20 +43,26 @@ import org.nterlearning.datamodel.catalog.service.FlagReportStatsLocalService;
 import org.nterlearning.datamodel.catalog.service.GlobalCourseReviewLocalService;
 import org.nterlearning.datamodel.catalog.service.persistence.ComponentFinder;
 import org.nterlearning.datamodel.catalog.service.persistence.ComponentPersistence;
+import org.nterlearning.datamodel.catalog.service.persistence.ComponentRecordFinder;
 import org.nterlearning.datamodel.catalog.service.persistence.ComponentRecordPersistence;
 import org.nterlearning.datamodel.catalog.service.persistence.ContributorPersistence;
+import org.nterlearning.datamodel.catalog.service.persistence.CourseFinder;
 import org.nterlearning.datamodel.catalog.service.persistence.CourseImagePersistence;
 import org.nterlearning.datamodel.catalog.service.persistence.CoursePersistence;
+import org.nterlearning.datamodel.catalog.service.persistence.CourseRecordFinder;
 import org.nterlearning.datamodel.catalog.service.persistence.CourseRecordPersistence;
 import org.nterlearning.datamodel.catalog.service.persistence.CourseRelatedPersistence;
 import org.nterlearning.datamodel.catalog.service.persistence.CourseRequirementPersistence;
+import org.nterlearning.datamodel.catalog.service.persistence.CourseReviewFinder;
 import org.nterlearning.datamodel.catalog.service.persistence.CourseReviewPersistence;
 import org.nterlearning.datamodel.catalog.service.persistence.Courses_ComponentsPersistence;
 import org.nterlearning.datamodel.catalog.service.persistence.ExternalLinkPersistence;
 import org.nterlearning.datamodel.catalog.service.persistence.FeedReferencePersistence;
 import org.nterlearning.datamodel.catalog.service.persistence.FeedSyncHistoryPersistence;
+import org.nterlearning.datamodel.catalog.service.persistence.FlagReportFinder;
 import org.nterlearning.datamodel.catalog.service.persistence.FlagReportPersistence;
 import org.nterlearning.datamodel.catalog.service.persistence.FlagReportStatsPersistence;
+import org.nterlearning.datamodel.catalog.service.persistence.GlobalCourseReviewFinder;
 import org.nterlearning.datamodel.catalog.service.persistence.GlobalCourseReviewPersistence;
 
 import java.io.Serializable;
@@ -90,6 +96,8 @@ public abstract class CourseRelatedLocalServiceBaseImpl
     protected ComponentRecordLocalService componentRecordLocalService;
     @BeanReference(type = ComponentRecordPersistence.class)
     protected ComponentRecordPersistence componentRecordPersistence;
+    @BeanReference(type = ComponentRecordFinder.class)
+    protected ComponentRecordFinder componentRecordFinder;
     @BeanReference(type = ContributorLocalService.class)
     protected ContributorLocalService contributorLocalService;
     @BeanReference(type = ContributorPersistence.class)
@@ -98,6 +106,8 @@ public abstract class CourseRelatedLocalServiceBaseImpl
     protected CourseLocalService courseLocalService;
     @BeanReference(type = CoursePersistence.class)
     protected CoursePersistence coursePersistence;
+    @BeanReference(type = CourseFinder.class)
+    protected CourseFinder courseFinder;
     @BeanReference(type = CourseImageLocalService.class)
     protected CourseImageLocalService courseImageLocalService;
     @BeanReference(type = CourseImagePersistence.class)
@@ -106,6 +116,8 @@ public abstract class CourseRelatedLocalServiceBaseImpl
     protected CourseRecordLocalService courseRecordLocalService;
     @BeanReference(type = CourseRecordPersistence.class)
     protected CourseRecordPersistence courseRecordPersistence;
+    @BeanReference(type = CourseRecordFinder.class)
+    protected CourseRecordFinder courseRecordFinder;
     @BeanReference(type = CourseRelatedLocalService.class)
     protected CourseRelatedLocalService courseRelatedLocalService;
     @BeanReference(type = CourseRelatedPersistence.class)
@@ -118,6 +130,8 @@ public abstract class CourseRelatedLocalServiceBaseImpl
     protected CourseReviewLocalService courseReviewLocalService;
     @BeanReference(type = CourseReviewPersistence.class)
     protected CourseReviewPersistence courseReviewPersistence;
+    @BeanReference(type = CourseReviewFinder.class)
+    protected CourseReviewFinder courseReviewFinder;
     @BeanReference(type = Courses_ComponentsLocalService.class)
     protected Courses_ComponentsLocalService courses_ComponentsLocalService;
     @BeanReference(type = Courses_ComponentsPersistence.class)
@@ -138,6 +152,8 @@ public abstract class CourseRelatedLocalServiceBaseImpl
     protected FlagReportLocalService flagReportLocalService;
     @BeanReference(type = FlagReportPersistence.class)
     protected FlagReportPersistence flagReportPersistence;
+    @BeanReference(type = FlagReportFinder.class)
+    protected FlagReportFinder flagReportFinder;
     @BeanReference(type = FlagReportStatsLocalService.class)
     protected FlagReportStatsLocalService flagReportStatsLocalService;
     @BeanReference(type = FlagReportStatsPersistence.class)
@@ -146,6 +162,8 @@ public abstract class CourseRelatedLocalServiceBaseImpl
     protected GlobalCourseReviewLocalService globalCourseReviewLocalService;
     @BeanReference(type = GlobalCourseReviewPersistence.class)
     protected GlobalCourseReviewPersistence globalCourseReviewPersistence;
+    @BeanReference(type = GlobalCourseReviewFinder.class)
+    protected GlobalCourseReviewFinder globalCourseReviewFinder;
     @BeanReference(type = CounterLocalService.class)
     protected CounterLocalService counterLocalService;
     @BeanReference(type = ResourceLocalService.class)
@@ -505,6 +523,25 @@ public abstract class CourseRelatedLocalServiceBaseImpl
     }
 
     /**
+     * Returns the component record finder.
+     *
+     * @return the component record finder
+     */
+    public ComponentRecordFinder getComponentRecordFinder() {
+        return componentRecordFinder;
+    }
+
+    /**
+     * Sets the component record finder.
+     *
+     * @param componentRecordFinder the component record finder
+     */
+    public void setComponentRecordFinder(
+        ComponentRecordFinder componentRecordFinder) {
+        this.componentRecordFinder = componentRecordFinder;
+    }
+
+    /**
      * Returns the contributor local service.
      *
      * @return the contributor local service
@@ -576,6 +613,24 @@ public abstract class CourseRelatedLocalServiceBaseImpl
      */
     public void setCoursePersistence(CoursePersistence coursePersistence) {
         this.coursePersistence = coursePersistence;
+    }
+
+    /**
+     * Returns the course finder.
+     *
+     * @return the course finder
+     */
+    public CourseFinder getCourseFinder() {
+        return courseFinder;
+    }
+
+    /**
+     * Sets the course finder.
+     *
+     * @param courseFinder the course finder
+     */
+    public void setCourseFinder(CourseFinder courseFinder) {
+        this.courseFinder = courseFinder;
     }
 
     /**
@@ -652,6 +707,24 @@ public abstract class CourseRelatedLocalServiceBaseImpl
     public void setCourseRecordPersistence(
         CourseRecordPersistence courseRecordPersistence) {
         this.courseRecordPersistence = courseRecordPersistence;
+    }
+
+    /**
+     * Returns the course record finder.
+     *
+     * @return the course record finder
+     */
+    public CourseRecordFinder getCourseRecordFinder() {
+        return courseRecordFinder;
+    }
+
+    /**
+     * Sets the course record finder.
+     *
+     * @param courseRecordFinder the course record finder
+     */
+    public void setCourseRecordFinder(CourseRecordFinder courseRecordFinder) {
+        this.courseRecordFinder = courseRecordFinder;
     }
 
     /**
@@ -766,6 +839,24 @@ public abstract class CourseRelatedLocalServiceBaseImpl
     public void setCourseReviewPersistence(
         CourseReviewPersistence courseReviewPersistence) {
         this.courseReviewPersistence = courseReviewPersistence;
+    }
+
+    /**
+     * Returns the course review finder.
+     *
+     * @return the course review finder
+     */
+    public CourseReviewFinder getCourseReviewFinder() {
+        return courseReviewFinder;
+    }
+
+    /**
+     * Sets the course review finder.
+     *
+     * @param courseReviewFinder the course review finder
+     */
+    public void setCourseReviewFinder(CourseReviewFinder courseReviewFinder) {
+        this.courseReviewFinder = courseReviewFinder;
     }
 
     /**
@@ -959,6 +1050,24 @@ public abstract class CourseRelatedLocalServiceBaseImpl
     }
 
     /**
+     * Returns the flag report finder.
+     *
+     * @return the flag report finder
+     */
+    public FlagReportFinder getFlagReportFinder() {
+        return flagReportFinder;
+    }
+
+    /**
+     * Sets the flag report finder.
+     *
+     * @param flagReportFinder the flag report finder
+     */
+    public void setFlagReportFinder(FlagReportFinder flagReportFinder) {
+        this.flagReportFinder = flagReportFinder;
+    }
+
+    /**
      * Returns the flag report stats local service.
      *
      * @return the flag report stats local service
@@ -1032,6 +1141,25 @@ public abstract class CourseRelatedLocalServiceBaseImpl
     public void setGlobalCourseReviewPersistence(
         GlobalCourseReviewPersistence globalCourseReviewPersistence) {
         this.globalCourseReviewPersistence = globalCourseReviewPersistence;
+    }
+
+    /**
+     * Returns the global course review finder.
+     *
+     * @return the global course review finder
+     */
+    public GlobalCourseReviewFinder getGlobalCourseReviewFinder() {
+        return globalCourseReviewFinder;
+    }
+
+    /**
+     * Sets the global course review finder.
+     *
+     * @param globalCourseReviewFinder the global course review finder
+     */
+    public void setGlobalCourseReviewFinder(
+        GlobalCourseReviewFinder globalCourseReviewFinder) {
+        this.globalCourseReviewFinder = globalCourseReviewFinder;
     }
 
     /**

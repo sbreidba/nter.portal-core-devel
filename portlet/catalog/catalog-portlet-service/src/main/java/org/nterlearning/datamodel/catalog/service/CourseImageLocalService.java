@@ -222,4 +222,8 @@ public interface CourseImageLocalService extends PersistedModelLocalService {
     * @param beanIdentifier the Spring bean ID for this bean
     */
     public void setBeanIdentifier(java.lang.String beanIdentifier);
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseImage> findByCourseIdWithLanguage(
+        java.lang.Long courseId, java.lang.String language)
+        throws com.liferay.portal.kernel.exception.SystemException;
 }
