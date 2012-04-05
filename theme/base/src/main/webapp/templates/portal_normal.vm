@@ -35,8 +35,8 @@
 	<header id="banner" role="banner" aria-labelledby="heading">
 		<hgroup>
 			<h1 class="company-title" id="heading">
-				<a class="logo" href="$company_url" title="$company_name">
-					<span>U.S. Department of Energy | Energy Efficiency and Renewable Energy</span>
+				<a class="$logo_css_class" href="$site_default_url" title="$site_name">
+					<img alt="$logo_description" src="$site_logo" />
 				</a>
 			</h1>
 			<h2 class="company-subtitle">#language("nter-name") <small>#language("beta-note")</small></h2>
