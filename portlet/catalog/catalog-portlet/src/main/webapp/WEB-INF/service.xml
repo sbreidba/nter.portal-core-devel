@@ -1,48 +1,1047 @@
+<!--
+  National Training and Education Resource (NTER)
+  Copyright (C) 2012 SRI International
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or (at
+  your option) any later version.
+
+  This program is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  02110-1301, USA.
+  -->
+
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.1.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_1_0.dtd">
 
-<service-builder package-path="org.nterlearning">
-	<namespace>catalog</namespace>
-	<entity name="Foo" uuid="true" local-service="true" remote-service="true">
+<service-builder package-path="org.nterlearning.datamodel.catalog">
+	<namespace>CATALOG</namespace>
+    <!-- Author: SRI International -->
+    <!-- version 1: 4 October 2010: initial draft -->
+    <!-- version 2: 7 October 2010: changed localization implementation on text
+         columns. -->
+    <!-- version 3: 7 October 2010: added FK constraints so collection getters
+         created -->
+    <!-- version 4: 7 October 2010: adjusted PK column names to establish naming
+         convention -->
+    <!-- version 5: 11 October 2010: added sourceImageUrl -->
+    <!-- version 6: 12 October 2010: added companyId, groupId, desiredOrganization -->
+    <!-- version 7: 13 October 2010: removed desiredOrganization, added groupId
+         to FeedReference, changed CourseLink.alttext to description -->
+    <!-- version 8: 14 October 2010: adjusted Contributor design, moved keyword
+         into Course -->
+    <!-- version 9: 20 October 2010: adjusted duration, course requirement -->
+    <!-- version 10: 2 November 2010" added title to CourseLink and inactive
+         to FeedReference -->
+    <!-- version 11: 4 November 2010: added global scope and CourseReview -->
+    <!-- version 12: 5 November 2010: added userId to Course -->
+    <!-- version 13: 9 November 2010: milestone 2 course student record adjustments -->
+    <!-- version 14: 11 November 2010: added archive and remove boolean flags to CourseRecord -->
+    <!-- version 15: 15 November 2010: adjusted column names -->
+    <!-- version 16: 16 November 2010: adjustments to CourseRecord, added courseRecordIri -->
+    <!-- version 17: 18 November 2010: removed unique constraint from CourseRequirement index -->
+    <!-- version 18: 1 December 2010: added finder to FeedReference, adjusted datatype of CourseRecord completionPercent -->
+    <!-- version 19: 20 December 2010: milestone 3 revision -->
+    <!-- version 20: 20 December 2010: added CourseRecord.courseRecordIri, ComponentRecord.componentRecordIri  -->
+    <!-- version 21: 21 December 2010: added finders for component and mimeType for images -->
+    <!-- version 22: 4 January 2010: changed Course and Component columns deleted and deleteDate to removed and removeDate -->
+    <!-- version 23: 6 January 2010: added fields to FeedReference -->
+    <!-- version 24: 3 February 2011: new finders -->
+    <!-- version 25: 4 February 2011: new Course column popularWeight     -->
+    <!-- version 26: 7 February 2011: changed Course accessCount and completedCount to long -->
+    <!-- version 27: 23 February 2011: data dictionary editing for reporting -->
+    <!-- version 28: 24 March 2011:  added companyId to FeedReference entity -->
+    <!-- version 29: 4 April 2011: added FeedReferenceId to CourseRecords and ComponentRecords -->
+    <!-- version 30: 19 April 2011: removed/added attributes to CourseRecord -->
+    <!-- version 31: 10 May 2011: removed courseRecord and componentRecord unique constraint from email/courseIri -->
+    <!-- version 32: 13 May 2011: added score column to courseReviews and sort order -->
+    <!-- version 33: 19 May 2011: adjusted courseRecord and componentRecord, added SingleSignOn -->
+    <!-- version 34: 27 May 2011: fix to SingleSignOn PK length -->
+    <!-- version 35: 01 June 2011: added removeDate to CourseRecord -->
+    <!-- version 36: 01 July 2011: Beta schema changes courseRelated, Duration, removedDate, singleSignOn, Courses_Components -->
+    <!-- version 37: 12 July 2011: Beta schema change - isTracked removed -->
+    <!-- version 38: 05 August 2011: Alpha 2 schema changes: E-Commerce, Course Review histogram storage attributes -->
+    <!-- version 39: 16 August 2011: Alpha 2 schema changes: GlobalCourseReview entity added. -->
+    <!-- version 40: 19 August 2011: Alpha 2 schema changes: CourseReview entity modified. -->
+    <!-- version 41: 6 September 2011: Added contentProviderId to FeedReference table -->
+    <!-- version 42: 21 September 2011: Added createDate to local and global course review tables -->
+    <!-- version 43: 16 October 2011: Added schema components for feed version 0.6.3 -->
+    <!-- version 44: 5 January 2011: Tweaks for data dictionary entry descriptions -->
+    <!-- version 45: 6 March 2012 : Removed the SingleSignOn table and related columns -->
+    <!-- version 46: 5 December 2011: Added entites for flag reports -->
+    <!-- version 47: 29 March 2012 : Migration to Liferay 6.1 -->
+    <!-- Acronyms -->
+    <!-- id: Identifier -->
+    <!-- FK: Foreign Key -->
+    <!-- PK: Primary Key -->
+    <!-- End Acronyms -->
 
-		<!-- PK fields -->
+    <!-- ********************* Catalog Course Data Model ************************ -->
 
-		<column name="fooId" type="long" primary="true" />
+    <!-- *** Define Feed entities *** -->
+    <entity name="FeedReference" local-service="true"
+            remote-service="false">
+        <!-- Data Dictionary -->
+        <!-- Table: CATALOG_FeedReference contains metadata about atom feeders. -->
+        <!-- Col: feedReferenceId: (mandatory) The unique identifier of a provider. -->
+        <!-- Col: companyId: Liferay element for portal instance. -->
+        <!-- Col: groupId: Liferay element for community / organization. -->
+        <!-- Col: contentProviderId: The E-Commerce provider responsible for the course. -->
+        <!-- Col: href: (mandatory) The href to the atom feed. -->
+        <!-- Col: hrefHash : (mandatory) The SHA1 value of the href.-->
+        <!-- Col: pshb: The href of the pubsubhubbub server used by this feed. -->
+        <!-- Col: pshbSubscribed: True if we've successfully subscribed to the pshb hubs,
+            false, otherwise. -->
+        <!-- Col: feedIri: (mandatory) A string of characters used to identify
+            a feed provider. -->
+        <!-- Col: feedType : (mandatory) A character representing the type of
+            feed. -->
+        <!-- Col: feedVersion : (mandatory) String representation of the feed
+            version. -->
+        <!-- Col: trustworthyWeight: A weighting factor for the the confidence,
+            trust, and reliability of the feed provider. -->
+        <!-- Col: createDate: The date that the feed was first processed. -->
+        <!-- Col: removed: True if the feed has been removed. -->
+        <!-- Col: removedDate: The date the feed was removed. -->
+        <!-- Col: removedReason: The reason the feed was removed. -->
+        <!-- Col: syncDate: The date of the last successful synchronization. -->
+        <!-- Col: syncSuccess: True if the last sync attempt was a success, false
+        otherwise, and null if no sync attempt has been made. -->
+        <!-- End Data Dictionary -->
 
-		<!-- Group instance -->
+        <!-- Primary key columns -->
+        <column name="feedReferenceId" type="long" primary="true"/>
+        <!-- Foreign key columns -->
+        <column name="companyId" type="long"/>
+        <column name="groupId" type="long"/>
+        <!-- Other columns -->
+        <column name="contentProviderId" type="String"/>
+        <column name="href" type="String"/>
+        <column name="hrefHash" type="String"/>
+        <column name="pshb" type="String"/>
+        <column name="pshbSubscribed" type="boolean"/>
+        <column name="feedIri" type="String"/>
+        <column name="feedType" type="String"/>
+        <column name="feedVersion" type="String"/>
+        <column name="trustworthyWeight" type="double"/>
+        <column name="createDate" type="Date"/>
+        <column name="removed" type="boolean"/>
+        <column name="removedDate" type="Date"/>
+        <column name="removedReason" type="String"/>
+        <column name="syncDate" type="Date"/>
+        <column name="syncSuccess" type="boolean"/>
+        <!-- Sort order -->
+        <!-- Finder Methods -->
+        <finder name="GroupId" return-type="Collection">
+            <finder-column name="groupId"/>
+        </finder>
+        <finder name="CompanyId" return-type="Collection">
+            <finder-column name="companyId"/>
+        </finder>
+        <finder name="GroupIdWithRemoved" return-type="Collection">
+            <finder-column name="groupId"/>
+            <finder-column name="removed"/>
+        </finder>
+        <finder name="GroupIdWithType" return-type="Collection">
+            <finder-column name="groupId"/>
+            <finder-column name="feedType"/>
+        </finder>
+        <finder name="FeedIri" return-type="FeedReference" unique="true">
+            <finder-column name="feedIri"/>
+        </finder>
+        <finder name="FeedType" return-type="Collection">
+            <finder-column name="feedType"/>
+        </finder>
+        <finder name="FeedVersion" return-type="Collection">
+            <finder-column name="feedVersion"/>
+        </finder>
+        <finder name="ContentProvider" return-type="Collection">
+            <finder-column name="contentProviderId"/>
+        </finder>
+        <finder name="HrefHash" return-type="Collection">
+            <finder-column name="hrefHash"/>
+        </finder>
+    </entity>
 
-		<column name="groupId" type="long" />
+    <entity name="FeedSyncHistory" local-service="true" remote-service="false">
+        <!-- Data Dictionary -->
+        <!-- Table: CATALOG_FeedSyncHistory contains historical information on
+     past synchronization attempts. -->
 
-		<!-- Audit fields -->
+        <!-- Col: syncId : (mandatory) The unique identifier for the sync event.  -->
+        <!-- Col: feedReferenceId : (mandatory) A reference to an existing
+                FeedReference object. -->
+        <!-- Col: syncDate : (mandatory) The date the sync occurred, regardless of the
+                success of the sync itself.   -->
+        <!-- Col: success : (mandatory) True if the sync was a success, false otherwise.  -->
+        <!-- Col: syncMessage : (optional) Any success or error messages available.   -->
+        <!-- Col: numberOfEntries : (optional) The number of entries that were found
+                in a particular feed for this sync attempt. -->
+        <!-- End Data Dictionary -->
 
-		<column name="companyId" type="long" />
-		<column name="userId" type="long" />
-		<column name="userName" type="String" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />
+        <!-- Primary Key Columns -->
+        <column name="syncId" type="long" primary="true"/>
 
-		<!-- Other fields -->
+        <!-- Other columns -->
+        <column name="feedReferenceId" type="long"/>
+        <column name="syncDate" type="Date"/>
+        <column name="success" type="Boolean"/>
+        <column name="syncMessage" type="String"/>
+        <column name="numberOfEntries" type="Integer"/>
 
-		<column name="field1" type="String" />
-		<column name="field2" type="boolean" />
-		<column name="field3" type="int" />
-		<column name="field4" type="Date" />
-		<column name="field5" type="String" />
+        <!-- Sort order -->
+        <order by="asc">
+            <order-column name="syncId"/>
+        </order>
 
-		<!-- Order -->
+        <!-- finder methods -->
+        <finder name="feedReferenceId" return-type="Collection">
+            <finder-column name="feedReferenceId"/>
+        </finder>
+    </entity>
 
-		<order by="asc">
-			<order-column name="field1" />
-		</order>
 
-		<!-- Finder methods -->
+    <!--  *** Define Course and Component related entities *** -->
 
-		<finder name="Field2" return-type="Collection">
-			<finder-column name="field2" />
+    <entity name="Course" local-service="true" remote-service="false">
+        <!-- Data Dictionary -->
+        <!-- Table: CATALOG_Course contains metadata about the course content. -->
+        <!-- Col: courseId: (mandatory) The unique identifier for a course. -->
+        <!-- Col: companyId: Liferay element for portal instance. -->
+        <!-- Col: groupId: Liferay element for community / organization. -->
+        <!-- Col: userId: Liferay element for user, used in auditing. -->
+        <!-- Col: feedReferenceId: (mandatory) The group responsible for originating
+            the course content. -->
+        <!-- Col: href: (mandatory) The link for activating a course. -->
+        <!-- Col: fullTextHref: (mandatory) The link used to conduct a crawl of
+            the course. -->
+        <!-- Col: courseIri: (mandatory) The Internationalized Resource Identifier
+            for a course. -->
+        <!-- Col: updatedDate: (mandatory) The date the course information was
+            last modified. -->
+        <!-- Col: title: (mandatory) The title of the course. -->
+        <!-- Col: transcriptAbstract: A summary of the course used for a learner's
+            transcript. -->
+        <!-- Col: description: (mandatory) A textual description of the course. -->
+        <!-- Col: keywords: (mandatory) Keywords delimited by a space used to
+            search for a course. -->
+        <!-- Col: copyright: The course copyright or restrictions. -->
+        <!-- Col: ratingLevel: A rating which indicates the course is approved
+            for a specific audience. (token: TBD) -->
+        <!-- Col: ratingReason: Text describing why the course is assigned the
+            rating level. -->
+        <!-- Col: duration: Represents the approximate, typical time it takes to
+            work through the course for the typical intended target audience. -->
+        <!-- Col: durationStandard: The standard used to format the duration value. -->
+        <!-- Col: featuredStatus: A value to indicate if the course is to be highlighted
+            as featured. -->
+        <!-- Col: popularWeight: A value that is used to determine the
+             order in which courses appear by popularity. -->
+        <!-- Col: accessCount: The cumulative number of times a course has been
+            accessed by users. -->
+        <!-- Col: completedCount: The cumulative number of times a course has been
+            completed by users. -->
+        <!-- Col: createDate: The date the course information was created. -->
+        <!-- Col: removed: Indicator the course has been deleted. -->
+        <!-- Col: removedDate: The date the course information was deleted. -->
+        <!-- Col: supersedesCourseIri: The Internationalized Resource Identifier
+            for an older version of the course. -->
+        <!-- Col: supersededByCourseIri: The Internationalized Resource Identifier for a newer version of the course. -->
+        <!-- Col: releaseOnDate: The date the course will be released to appear
+            on the web page. -->
+        <!-- Col: acceptUntilDate: The date the course will no longer be displayed
+            on the web page. -->
+        <!-- Col: version: (mandatory) Text describing the course version. -->
+        <!-- Col: versionDate: (mandatory) Date the version updated in a feed. -->
+        <!-- Col: price: Fee charged for access to a Course. -->
+        <!-- Col: priceUnit: The currency unit of the price, typically "USD" (US dollars). -->
+        <!-- Col: priceTerms: Text describing the terms of use for purchasing the course at this price. Examples "trial", "unlimited". -->
+        <!-- Col: priceExpiration: Text describing the expiration information for the purchase.  Example "10 days". -->
+        <!-- Col: oneStarRateCount: Course Review histogram storage for total count of one star ratings. -->
+        <!-- Col: twoStarRateCount: Course Review histogram storage for total count of two star ratings. -->
+        <!-- Col: threeStarRateCount: Course Review histogram storage for total count of three star ratings. -->
+        <!-- Col: fourStarRateCount: Course Review histogram storage for total count of four star ratings. -->
+        <!-- Col: fiveStarRateCount: Course Review histogram storage for total count of five star ratings. -->
+        <!-- End Data Dictionary -->
+        <!-- Primary key columns -->
+        <column name="courseId" type="long" primary="true"/>
+        <!-- Foreign key columns -->
+        <column name="companyId" type="long"/>
+        <column name="groupId" type="long"/>
+        <column name="userId" type="long"/>
+        <!-- Other columns -->
+        <column name="feedReferenceId" type="long"/>
+        <column name="href" type="String"/>
+        <column name="fullTextHref" type="String"/>
+        <column name="courseIri" type="String"/>
+        <column name="updatedDate" type="Date"/>
+        <column name="title" type="String" localized="true"/>
+        <column name="transcriptAbstract" type="String" localized="true"/>
+        <column name="description" type="String" localized="true"/>
+        <column name="keywords" type="String" localized="true"/>
+        <column name="copyright" type="String" localized="true"/>
+        <column name="ratingLevel" type="String" localized="true"/>
+        <column name="ratingReason" type="String" localized="true"/>
+        <column name="duration" type="String"/>
+        <column name="durationStandard" type="String"/>
+        <column name="featuredStatus" type="double"/>
+        <column name="popularWeight" type="double"/>
+        <column name="accessCount" type="long"/>
+        <column name="completedCount" type="long"/>
+        <column name="createDate" type="Date"/>
+        <column name="removed" type="boolean"/>
+        <column name="removedDate" type="Date"/>
+        <column name="supersedesCourseIri" type="String"/>
+        <column name="supersededByCourseIri" type="String"/>
+        <column name="releaseOnDate" type="Date"/>
+        <column name="acceptUntilDate" type="Date"/>
+        <column name="version" type="String"/>
+        <column name="versionDate" type="Date"/>
+        <column name="price" type="double"/>
+        <column name="priceUnit" type="String"/>
+        <column name="priceTerms" type="String"/>
+        <column name="priceExpiration" type="String"/>
+        <column name="oneStarRateCount" type="long"/>
+        <column name="twoStarRateCount" type="long"/>
+        <column name="threeStarRateCount" type="long"/>
+        <column name="fourStarRateCount" type="long"/>
+        <column name="fiveStarRateCount" type="long"/>
+        <column name="courseContributors" type="Collection" entity="Contributor"
+                mapping-key="courseId"/>
+        <column name="courseImages" type="Collection" entity="CourseImage"
+                mapping-key="courseId"/>
+        <column name="courseRelateds" type="Collection" entity="CourseRelated"
+                mapping-key="courseId"/>
+        <column name="courseRequirements" type="Collection" entity="CourseRequirement"
+                mapping-key="courseId"/>
+        <column name="courseReviews" type="Collection" entity="CourseReview"
+                mapping-key="courseId"/>
+        <column name="courseCourses_Components" type="Collection" entity="Courses_Components"
+                mapping-key="courseId"/>
+        <column name="globalCourseReviews" type="Collection" entity="GlobalCourseReview"
+                mapping-key="courseId"/>
+        <column name="externalLinks" type="Collection" entity="ExternalLink"
+                mapping-key="courseId"/>
+
+        <!-- Sort order -->
+        <order by="asc">
+            <order-column name="featuredStatus"/>
+        </order>
+
+        <!-- Finder Methods -->
+        <finder name="CourseId" return-type="Course" unique="true">
+            <finder-column name="courseId"/>
+        </finder>
+        <finder name="GroupId" return-type="Collection">
+            <finder-column name="groupId"/>
+        </finder>
+        <finder name="CompanyId" return-type="Collection">
+            <finder-column name="companyId"/>
+        </finder>
+        <finder name="CourseIri" return-type="Course" unique="true">
+            <finder-column name="courseIri"/>
+        </finder>
+        <finder name="FeedReferenceId" return-type="Collection">
+            <finder-column name="feedReferenceId"/>
+        </finder>
+
+        <finder name="SupersededByCourseIri" return-type="Collection">
+            <finder-column name="supersededByCourseIri"/>
+        </finder>
+
+        <reference package-path="com.liferay.portal" entity="Company"/>
+        <reference package-path="com.liferay.portal" entity="Group"/>
+        <reference package-path="com.liferay.portal" entity="Organization"/>
+        <reference package-path="com.liferay.portlet.asset" entity="AssetEntry"/>
+        <reference package-path="com.liferay.portlet.asset" entity="AssetTag"/>
+        <reference package-path="com.liferay.portlet.ratings"
+                   entity="RatingsStats"/>
+    </entity>
+
+    <entity name="CourseImage" local-service="true" remote-service="false">
+        <!-- Data Dictionary -->
+        <!-- Table: CATALOG_CourseImage contains metadata about the course images stored in the Liferay image gallery and presented with the course metadata
+            in the catalog. -->
+        <!-- Col: courseImageId: (mandatory) The unique identifier for a course
+            image. -->
+        <!-- Col: courseId: (mandatory) The unique identifier of a course. -->
+        <!-- Col: orderWeight: (mandatory) A value that is used to determine the
+            order in which images appear. -->
+        <!-- Col: language: (mandatory) A human language used for the course
+            image metadata. -->
+        <!-- Col: imageId: (mandatory) The unique identifier for an image stored
+             in the Liferay image gallery. -->
+        <!-- Col: alternateText: (mandatory) Text description used to present information
+            to a user with a visual disability. -->
+        <!-- Col: sourceImageUrl: The original location of the image as identified
+            in the Atom feed. -->
+        <!-- Col: mimeType: The format type of the image. -->
+        <!-- End Data Dictionary -->
+        <!-- Primary key columns -->
+        <column name="courseImageId" type="long" primary="true"/>
+        <!-- Other columns -->
+        <column name="courseId" type="long"/>
+        <column name="orderWeight" type="double"/>
+        <column name="language" type="String"/>
+        <column name="imageId" type="long"/>
+        <column name="alternateText" type="String"/>
+        <column name="sourceImageUrl" type="String"/>
+        <column name="mimeType" type="String"/>
+
+        <!-- Sort order -->
+        <order by="asc">
+            <order-column name="orderWeight"/>
+        </order>
+
+        <!-- Finder Methods -->
+        <finder name="CourseIdWithLanguage" return-type="Collection">
+            <finder-column name="courseId"/>
+            <finder-column name="language"/>
+        </finder>
+
+    </entity>
+
+    <entity name="CourseRelated" local-service="true"
+            remote-service="false">
+        <!-- Data Dictionary -->
+        <!-- Table: CATALOG_CourseRelated contains related course content. -->
+        <!-- Col: courseRelatedId: Used as entity primary key. -->
+        <!-- Col: courseId: (mandatory) The unique identifier of a course. -->
+        <!-- Col: relatedCourseId: (mandatory) The unique identifier of a related
+            course. -->
+        <!-- Col: relatedCourseIri: (mandatory) The Internationalized Resource Identifier
+             for a course. -->
+        <!-- Col: relationshipType: (mandatory) A description how the courses are
+             related. (token: PREREQUISTE, SUPERSEDES) -->
+        <!-- End Data Dictionary -->
+        <!-- Primary key columns -->
+        <column name="courseRelatedId" type="long" primary="true"/>
+        <!-- Other columns -->
+        <column name="courseId" type="long"/>
+        <column name="relatedCourseId" type="long"/>
+        <column name="relatedCourseIri" type="String"/>
+        <column name="relationshipType" type="String"/>
+        <!-- Sort order -->
+        <!-- Finder Methods -->
+        <finder name="RelatedCourseIdWithRelationshipType" return-type="Collection">
+            <finder-column name="courseId"/>
+            <finder-column name="relationshipType"/>
+        </finder>
+        <finder name="RelatedCourseIri" return-type="Collection">
+            <finder-column name="relatedCourseIri"/>
+        </finder>
+    </entity>
+
+    <entity name="CourseRequirement" local-service="true"
+            remote-service="false">
+        <!-- Data Dictionary -->
+        <!-- Table: CATALOG_CourseRequirement contains the required technology
+            to use the course. -->
+        <!-- Col: courseRequirementId: (mandatory) The unique identifier for a
+            requirement. -->
+        <!-- Col: courseId: (mandatory) The unique identifier of a course. -->
+        <!-- Col: requirementType: (mandatory) The type of required technology
+  to use the course. (token: TBD) -->
+        <!-- Col: requirementValue: (mandatory) The required technology to use
+            the course. -->
+        <!-- End Data Dictionary -->
+        <!-- Primary key columns -->
+        <column name="courseRequirementId" type="long" primary="true"/>
+        <!-- Other columns -->
+        <column name="courseId" type="long"/>
+        <column name="requirementType" type="String"/>
+        <column name="requirementValue" type="String" localized="true"/>
+        <!-- Sort order -->
+        <finder name="CourseIdWithRequirementType" return-type="Collection">
+            <finder-column name="courseId"/>
+            <finder-column name="requirementType"/>
+        </finder>
+    </entity>
+
+    <entity name="Component" local-service="true" remote-service="false">
+        <!-- Data Dictionary -->
+        <!-- Table: CATALOG_Component contains metadata about the component content. -->
+        <!-- Col: componentId: (mandatory) The unique identifier of a component entry. -->
+        <!-- Col: companyId: Liferay element for portal instance. -->
+        <!-- Col: groupId: Liferay element for community / organization. -->
+        <!-- Col: feedReferenceId: (mandatory) The group responsible for originating
+            the course content. -->
+        <!-- Col: componentIri: (mandatory) The Internationalized Resource Identifier
+            for a component. -->
+        <!-- Col: updatedDate: (mandatory) The date the component information was
+            last modified. -->
+        <!-- Col: language: (mandatory) A human language used within the component. -->
+        <!-- Col: href: (mandatory) The link for activating a component. -->
+        <!-- Col: fullTextHref: (mandatory) The link used to start a full text crawl. -->
+        <!-- Col: title: (mandatory) The title for the course component. -->
+        <!-- Col: description: (mandatory) Textual description of the component. -->
+        <!-- Col: copyright: (mandatory) Copyright information for the given component. -->
+        <!-- Col: displayWidth: (mandatory) The width of the component display. -->
+        <!-- Col: displayHeight: (mandatory) The height of the component display. -->
+        <!-- Col: createDate: The date the component information was created. -->
+        <!-- Col: removed: Indicator the component has been deleted. -->
+        <!-- Col: removedDate: The date the component information was deleted. -->
+        <!-- Col: version: (mandatory) Text describing the component version. -->
+        <!-- Col: versionDate: (mandatory) Date the version updated in a feed. -->
+        <!-- Col: price: Fee charged for access to a Component. -->
+        <!-- Col: priceUnit: The currency unit of the price, typically "USD" (US dollars). -->
+        <!-- Col: priceTerms: Text describing the terms of use for purchasing the component at this price.  -->
+        <!-- Col: priceExpiration: Text describing the expiration information for the purchase.  -->
+        <!-- End Data Dictionary -->
+        <!-- Primary key columns -->
+        <column name="componentId" type="long" primary="true"/>
+        <!-- Foreign key columns -->
+        <column name="companyId" type="long"/>
+        <column name="groupId" type="long"/>
+        <!-- Other columns -->
+        <column name="feedReferenceId" type="long"/>
+        <column name="componentIri" type="String"/>
+        <column name="updatedDate" type="Date"/>
+        <column name="language" type="String"/>
+        <column name="href" type="String"/>
+        <column name="fullTextHref" type="String"/>
+        <column name="title" type="String"/>
+        <column name="description" type="String"/>
+        <column name="copyright" type="String" localized="true"/>
+        <column name="displayWidth" type="int"/>
+        <column name="displayHeight" type="int"/>
+        <column name="createDate" type="Date"/>
+        <column name="removed" type="boolean"/>
+        <column name="removedDate" type="Date"/>
+        <column name="version" type="String"/>
+        <column name="versionDate" type="Date"/>
+        <column name="price" type="double"/>
+        <column name="priceUnit" type="String"/>
+        <column name="priceTerms" type="String"/>
+        <column name="priceExpiration" type="String"/>
+        <column name="componentCourses_Components" type="Collection" entity="Courses_Components"
+                mapping-key="componentId"/>
+        <column name="componentContributors" type="Collection" entity="Contributor"
+                mapping-key="componentId"/>
+        <column name="componentRecords" type="Collection" entity="ComponentRecord"
+                mapping-key="componentIri"/>
+        <column name="externalLinks" type="Collection" entity="ExternalLink"
+                mapping-key="componentId"/>
+
+        <!-- Sort order -->
+        <!-- Finder Methods -->
+        <finder name="ComponentId" return-type="Component" unique="true">
+            <finder-column name="componentId"/>
+        </finder>
+        <finder name="CompanyId" return-type="Collection">
+            <finder-column name="companyId"/>
+        </finder>
+        <finder name="ComponentIri" return-type="Component" unique="true">
+            <finder-column name="componentIri"/>
+        </finder>
+        <finder name="FeedReferenceId" return-type="Collection">
+            <finder-column name="feedReferenceId"/>
+        </finder>
+    </entity>
+
+    <entity name="Courses_Components" local-service="true" remote-service="false">
+        <!-- Data Dictionary -->
+        <!-- Table: CATALOG_Courses_Components contains links between a course and its components. -->
+        <!-- Col: coursesComponentsId: (mandatory) The unique identifier for a course and component mapping entry. -->
+        <!-- Col: courseId: (mandatory) The unique identifier of a course
+            entry. -->
+        <!-- Col: courseIri: (mandatory) The Internationalized Resource Identifier
+            for a course. -->
+        <!-- Col: componentId: (mandatory) The unique identifier of a component entry. -->
+        <!-- Col: componentIri: (mandatory) The Internationalized Resource Identifier
+            for a component. -->
+        <!-- Col: orderWeight: (mandatory) A value that is used to determine the
+            order in which components appear. -->
+        <!-- Col: sectionType: (optional) A value that is used to determine the
+             section in which components appear. (token: toc, resource) -->
+        <!-- Col: componentType: (optional) A value that is used to specify the
+             the type of component. (SCORM, weblink, test, glossary, forum, etc.) -->
+        <!-- Col: mimeType: (optional) The format of the component. (application/msword, application/pdf,text/plain) -->
+        <!-- Col: coursePaymentRequired: True if fee associated to access course. -->
+        <!-- Col: componentPaymentRequired: True if fee associated to access component. -->
+        <!-- End Data Dictionary -->
+        <!-- Primary key columns -->
+        <column name="coursesComponentsId" type="long" primary="true"/>
+        <!-- Other columns -->
+        <column name="courseId" type="long"/>
+        <column name="courseIri" type="String"/>
+        <column name="componentId" type="long"/>
+        <column name="componentIri" type="String"/>
+        <column name="orderWeight" type="double"/>
+        <column name="sectionType" type="String"/>
+        <column name="componentType" type="String"/>
+        <column name="mimeType" type="String"/>
+        <column name="coursePaymentRequired" type="boolean"/>
+        <column name="componentPaymentRequired" type="boolean"/>
+        <column name="components" type="Collection" entity="Component"
+                mapping-key="componentId"/>
+
+        <!-- Sort order -->
+        <order by="asc">
+            <order-column name="orderWeight"/>
+        </order>
+        <!-- Finder Methods -->
+        <finder name="CourseId" return-type="Collection">
+            <finder-column name="courseId"/>
+        </finder>
+        <finder name="CourseIri" return-type="Collection">
+            <finder-column name="courseIri"/>
+        </finder>
+        <finder name="ComponentId" return-type="Collection">
+            <finder-column name="componentId"/>
+        </finder>
+        <finder name="ComponentIri" return-type="Collection">
+            <finder-column name="componentIri"/>
+        </finder>
+    </entity>
+
+    <entity name="Contributor" local-service="true"
+            remote-service="false">
+        <!-- Data Dictionary -->
+        <!-- Table: CATALOG_Contributor contains the person or organization that
+            has contributed to the state of the course or component content. -->
+        <!-- Col: contributorId: Used as entity primary key. -->
+        <!-- Col: courseId: (mandatory) The unique identifier of a course. -->
+        <!-- Col: componentId: (mandatory) The unique identifier of a component entry. -->
+        <!-- Col: role: (mandatory) The kind or type of contribution made by the
+            contributor. (token: author, contributor, organization) -->
+        <!-- Col: contributorName: The name of the person or organization. -->
+        <!-- Col: virtualCardData: Virtual electronic business card data that can
+            store information such as name, address, telephone number, and e-mail address. -->
+        <!-- End Data Dictionary -->
+        <!-- Primary key columns -->
+        <column name="contributorId" type="long" primary="true"/>
+        <!-- Other columns -->
+        <column name="courseId" type="long"/>
+        <column name="componentId" type="long"/>
+        <column name="role" type="String"/>
+        <column name="contributorName" type="String"/>
+        <column name="virtualCardData" type="String"/>
+        <!-- Sort order -->
+        <!-- Finder Methods -->
+        <finder name="CourseId" return-type="Collection">
+            <finder-column name="courseId"/>
+        </finder>
+        <finder name="CourseIdWithRole" return-type="Collection">
+            <finder-column name="courseId"/>
+            <finder-column name="role"/>
+        </finder>
+        <finder name="ComponentIdWithRole" return-type="Collection">
+            <finder-column name="componentId"/>
+            <finder-column name="role"/>
+        </finder>
+    </entity>
+
+    <entity name="ExternalLink" local-service="true" remote-service="false">
+        <!-- Data Dictionary -->
+        <!-- Table: CATALOG_ExternalLink contains link information used by the courses
+          and components to represent external links, such as download or search pages. -->
+
+        <!-- Col: linkId : (mandatory) The unique identifier for the link. -->
+        <!-- Col: courseId : The unique identifier for a course. -->
+        <!-- Col: componentId : The unique identifier for a component. -->
+        <!-- Col: linkType : (mandatory) A character representing the type of
+            external link (scorm 1.2 download, scorm 2004 downlkoad, search, etc). -->
+        <!-- Col: linkUrl : (mandatory) The url to the external link. -->
+        <!-- End Data Dictionary -->
+
+        <!-- Primary Key Columns -->
+        <column name="linkId" type="long" primary="true"/>
+
+        <!-- Other columns -->
+        <column name="courseId" type="long"/>
+        <column name="componentId" type="long"/>
+        <column name="linkType" type="String"/>
+        <column name="linkUrl" type="String"/>
+
+        <!-- Sort Order -->
+        <!-- Finder Methods -->
+        <finder name="CourseId" return-type="Collection">
+            <finder-column name="courseId"/>
+        </finder>
+        <finder name="CourseIdWithType" return-type="Collection">
+            <finder-column name="courseId"/>
+            <finder-column name="linkType"/>
+        </finder>
+
+        <finder name="ComponentId" return-type="Collection">
+            <finder-column name="componentId"/>
+        </finder>
+        <finder name="ComponentIdWithType" return-type="Collection">
+            <finder-column name="componentId"/>
+            <finder-column name="linkType"/>
+        </finder>
+    </entity>
+
+    <!-- *** Define local and global Course Review entities *** -->
+
+    <entity name="CourseReview" local-service="true" remote-service="false">
+        <!-- Data Dictionary -->
+        <!-- Table: CATALOG_CourseReview contains a course review. It will be entered into the AssetEntry and the RatingsEntry. -->
+        <!-- Col: courseReviewId: (mandatory) The unique identifier for a course review and supplemental ratings entry. -->
+        <!-- Col: companyId: Liferay element for portal instance. -->
+        <!-- Col: groupId: Liferay element for community / organization. -->
+        <!-- Col: courseId: (mandatory) The unique identifier for a course entry. -->
+        <!-- Col: userId: (mandatory) The unique identifier of the person submitting
+            a course review. -->
+        <!-- Col: summary: A summary statement of the user review. -->
+        <!-- Col: content: A detailed statement containing the user review. -->
+        <!-- Col: createDate: The date the course review was created. -->
+        <!-- Col: modifiedDate: The date of the user review was updated. -->
+        <!-- Col: weightedScore: The weighted score of the user review. -->
+        <!-- Col: removed: Flag that the administrator wants to remove the local CourseReview (tombstone entry). -->
+        <!-- Col: removedDate: The date the local CourseReview information was marked for delete. -->
+        <!-- End Data Dictionary -->
+        <!-- Primary key columns -->
+        <column name="courseReviewId" type="long" primary="true"/>
+        <!-- Foreign key columns -->
+        <column name="companyId" type="long"/>
+        <column name="groupId" type="long"/>
+        <!-- Other columns -->
+        <column name="courseId" type="long"/>
+        <column name="userId" type="long"/>
+        <column name="summary" type="String" />
+        <column name="content" type="String" />
+        <column name="createDate" type="Date"/>
+        <column name="modifiedDate" type="Date"/>
+        <column name="weightedScore" type="double"/>
+        <column name="removed" type="boolean"/>
+        <column name="removedDate" type="Date"/>
+
+        <!-- Sort order -->
+        <order by="desc">
+            <order-column name="weightedScore"/>
+            <order-column name="modifiedDate"/>
+        </order>
+        <!-- Finder Methods -->
+        <finder name="CourseId" return-type="Collection">
+            <finder-column name="courseId"/>
+        </finder>
+        <finder name="UserId" return-type="Collection">
+            <finder-column name="userId"/>
+        </finder>
+        <finder name="CourseIdWithUserId" return-type="Collection">
+            <finder-column name="courseId"/>
+            <finder-column name="userId"/>
+        </finder>
+        <finder name="GroupId" return-type="Collection">
+            <finder-column name="groupId"/>
+        </finder>
+        <finder name="CompanyId" return-type="Collection">
+            <finder-column name="companyId"/>
+        </finder>
+		<finder name="Removed" return-type="Collection">
+			<finder-column name="removed"/>
 		</finder>
+        <finder name="CourseIdWithRemoved" return-type="Collection">
+            <finder-column name="courseId"/>
+            <finder-column name="removed"/>
+        </finder>
 
-		<!-- References -->
+        <reference package-path="com.liferay.portlet.asset" entity="AssetEntry"/>
+        <reference package-path="com.liferay.portlet.asset" entity="AssetTag"/>
+        <reference package-path="com.liferay.portlet.ratings"
+                   entity="RatingsStats"/>
+    </entity>
 
-		<reference package-path="com.liferay.portlet.asset" entity="AssetEntry" />
-		<reference package-path="com.liferay.portlet.asset" entity="AssetTag" />
-	</entity>
+    <entity name="GlobalCourseReview" local-service="true" remote-service="false">
+        <!-- Data Dictionary -->
+        <!-- Table: CATALOG_GlobalCourseReview contains a global course review. -->
+        <!-- Col: globalCourseReviewId: (mandatory) The unique identifier for a supplemental
+            ratings entry. -->
+        <!-- Col: companyId: Liferay element for portal instance. -->
+        <!-- Col: groupId: Liferay element for community / organization. -->
+        <!-- Col: courseReviewIri: (mandatory) The Internationalized Resource Identifier
+            for a course review. -->
+        <!-- Col: updatedDate: (mandatory) The date the global course review information was
+            last modified. -->
+        <!-- Col: courseIri: (mandatory) The Internationalized Resource Identifier
+            for a course. -->
+        <!-- Col: href: (mandatory) The link for activating a course with review. -->
+        <!-- Col: nterInstance: (mandatory) The NTER instance identifier. -->
+        <!-- Col: courseId: The unique identifier for a course entry if it exists on the local instance. -->
+        <!-- Col: userDisplayName: The name to display for person submitting a course review. -->
+        <!-- Col: singleSignOnValue: (mandatory) The unique identifier of the person submitting
+            a course review. -->
+        <!-- Col: summary: A summary statement of the user review. -->
+        <!-- Col: content: A detailed statement containing the user review. -->
+        <!-- Col: createDate: The date the course review was created. -->
+        <!-- Col: modifiedDate: The date of the user review was updated. -->
+        <!-- Col: starScore: The star score of the user review. -->
+        <!-- Col: fromTrustedReviewer: True if review created by a Trusted Reviewer. -->
+        <!-- Col: removed: Flag that the provider wants to remove the globalCourseReview (tombstone entry). -->
+        <!-- Col: removedDate: The date the globalCourseReview information was deleted. -->
+        <!-- Col: isHidden: Flag that the administration wants to hide an inappropriate globalCourseReview. -->
+        <!-- End Data Dictionary -->
+        <!-- Primary key columns -->
+        <column name="globalCourseReviewId" type="long" primary="true"/>
+        <!-- Foreign key columns -->
+        <column name="companyId" type="long"/>
+        <column name="groupId" type="long"/>
+        <!-- Other columns -->
+        <column name="courseReviewIri" type="String"/>
+        <column name="updatedDate" type="Date"/>
+        <column name="courseIri" type="String"/>
+        <column name="href" type="String"/>
+        <column name="nterInstance" type="String" />
+        <column name="courseId" type="long"/>
+        <column name="userDisplayName" type="String" />
+        <column name="singleSignOnValue" type="String"/>
+        <column name="summary" type="String" />
+        <column name="content" type="String" />
+        <column name="createDate" type="Date"/>
+        <column name="modifiedDate" type="Date"/>
+        <column name="starScore" type="double"/>
+        <column name="fromTrustedReviewer" type="boolean" />
+        <column name="removed" type="boolean"/>
+        <column name="removedDate" type="Date"/>
+        <column name="isHidden" type="boolean"/>
+
+        <!-- Sort order -->
+        <order by="desc">
+            <order-column name="fromTrustedReviewer"/>
+            <order-column name="starScore"/>
+            <order-column name="modifiedDate"/>
+        </order>
+        <!-- Finder Methods -->
+        <finder name="CourseReviewIri" return-type="CourseReviewIri" unique="true">
+            <finder-column name="courseReviewIri"/>
+        </finder>
+        <finder name="CourseId" return-type="Collection">
+            <finder-column name="courseId"/>
+        </finder>
+        <finder name="CourseIri" return-type="Collection">
+            <finder-column name="courseIri"/>
+        </finder>
+        <finder name="GroupId" return-type="Collection">
+            <finder-column name="groupId"/>
+        </finder>
+        <finder name="CompanyId" return-type="Collection">
+            <finder-column name="companyId"/>
+        </finder>
+    </entity>
+
+    <!-- *** Define Student Progress related entities *** -->
+
+    <entity name="CourseRecord" local-service="true" remote-service="false">
+        <!-- Data Dictionary -->
+        <!-- Table: CATALOG_CourseRecord contains the overall course status and assessment
+            material for a person. -->
+        <!-- Col: courseRecordId: (mandatory) The unique identifier of a person's
+            overall course status and assessment. -->
+        <!-- Col: feedReferenceId : (mandatory) A reference to an existing
+                FeedReference object. -->
+        <!-- Col: courseRecordIri: (mandatory) The International Resource Identifier for a course record. -->
+        <!-- Col: userId: (mandatory) The unique identifier of a person. This may
+             be 0 to represent that the user has not yet been created. -->
+        <!-- Col: singleSignOnValue: (mandatory) The user's global unique identifier as found in the
+             feed.  This is used as a unique identifier until the user's account is
+             created. -->
+        <!-- Col: courseIri: (mandatory) The Internationalized Resource Identifier
+            for a course. -->
+        <!-- Col: updatedDate: (mandatory) The date the course record information was
+            last modified. -->
+        <!-- Col: completionStatus: Enumerated type for the progress and completion
+            of a course. -->
+        <!-- Col: removed: Flag that the provider wants to remove the courseRecord (tombstone entry). -->
+        <!-- Col: removedDate: The date the courseRecord information was deleted. -->
+        <!-- Col: userHidden: Flag that the user wants to remove the courseRecord from the personal desktop. -->
+        <!-- Col: assigned: Flag that the provider has enrolled user in the course. -->
+        <!-- End Data Dictionary -->
+        <!-- Primary key columns -->
+        <column name="courseRecordId" type="long" primary="true"/>
+        <!-- foreign key columns-->
+        <column name="feedReferenceId" type="long"/>
+        <!-- Other columns -->
+        <column name="courseRecordIri" type="String"/>
+        <column name="userId" type="long"/>
+        <column name="singleSignOnValue" type="String"/>
+        <column name="courseIri" type="String"/>
+        <column name="updatedDate" type="Date"/>
+        <column name="completionStatus" type="String"/>
+        <column name="removed" type="boolean"/>
+        <column name="removedDate" type="Date"/>
+        <column name="userHidden" type="boolean"/>
+        <column name="assigned" type="boolean"/>
+        <column name="courseRecordComponents" type="Collection" entity="ComponentRecord"
+                 mapping-key="courseRecordId"/>
+
+        <!-- Sort order -->
+        <order by="asc">
+            <order-column name="updatedDate"/>
+        </order>
+
+        <!-- Finder Methods -->
+        <finder name="CourseRecordIri" return-type="CourseRecord" unique="true">
+            <finder-column name="courseRecordIri"/>
+        </finder>
+        <finder name="CourseIri" return-type="Collection">
+            <finder-column name="courseIri"/>
+        </finder>
+        <finder name="SingleSignOnValue" return-type="Collection">
+            <finder-column name="singleSignOnValue"/>
+        </finder>
+        <finder name="UserId" return-type="Collection">
+            <finder-column name="userId"/>
+        </finder>
+        <finder name="FeedReferenceId" return-type="Collection">
+            <finder-column name="feedReferenceId"/>
+        </finder>
+    </entity>
+
+    <entity name="ComponentRecord" local-service="true" remote-service="false">
+        <!-- Data Dictionary -->
+        <!-- Table: CATALOG_ComponentRecord contains the course component status and assessment
+            material for a person. -->
+        <!-- Col: componentRecordId: (mandatory) The unique identifier of a person's component status and assessment. -->
+        <!-- Col: courseRecordId: (mandatory) The identifier for a courseRecord. -->
+        <!-- Col: componentIri: (mandatory) The Internationalized Resource Identifier
+            for a component. -->
+        <!-- Col: updatedDate: (mandatory) The date the course component record information was
+            last modified. -->
+        <!-- Col: completionStatus: Enumerated type for the progress and completion
+            of a course. -->
+        <!-- Col: completionPercent: Represents the percent of course completion. -->
+        <!-- End Data Dictionary -->
+        <!-- Primary key columns -->
+        <column name="componentRecordId" type="long" primary="true"/>
+        <!-- foreign key columns -->
+        <column name="courseRecordId" type="long"/>
+        <!-- Other columns -->
+        <column name="componentIri" type="String"/>
+        <column name="updatedDate" type="Date"/>
+        <column name="completionStatus" type="String"/>
+        <column name="completionPercent" type="Integer"/>
+
+        <!-- Sort order -->
+        <order by="asc">
+            <order-column name="updatedDate"/>
+        </order>
+
+        <!-- Finder Methods -->
+        <finder name="CourseRecordId" return-type="Collection">
+            <finder-column name="courseRecordId"/>
+        </finder>
+        <finder name="ComponentIri" return-type="Collection">
+            <finder-column name="componentIri"/>
+        </finder>
+
+    </entity>
+
+    <!-- *** Define Inappropriate Content entities to be processed with Kaleo workflow *** -->
+
+    <entity name="FlagReport" uuid="true" local-service="true" remote-service="false">
+        <!-- Data Dictionary -->
+        <!-- Table: CATALOG_FlagReport contains a user inappropriate flag report to be processed with Liferay workflow. -->
+        <!-- Col: flagReportId: (mandatory) The unique identifier for a flagReport ratings entry. -->
+        <!-- Col: groupId: Liferay element for community / organization. -->
+        <!-- Col: companyId: Liferay element for portal instance. -->
+        <!-- Col: userId: Liferay element for user, used in auditing. -->
+        <!-- Col: classNameId: (mandatory) The classNameId used when generating the report. -->
+        <!-- Col: classPK: (mandatory) The primary key used when generating the report. -->
+        <!-- Col: createDate: (mandatory) The date the report was created. -->
+        <!-- Col: title: Descriptive text describing content with an issue. -->
+        <!-- Col: content: The content which was flagged. -->
+        <!-- Col: flagReason: The reason report was flagged. -->
+        <!-- Col: flagComment: Reporter comment about reason report was flagged. -->
+        <!-- Col: moderateAction: The moderator action plan regarding inappropriate content.  (token: REMOVE, IGNORE)  -->
+        <!-- Col: moderatorComment: Informative comments the moderator wishes to convey about the action plan. -->
+        <!-- Col: status: Workflow status. -->
+        <!-- Col: statusByUserId: Workflow moderator userId. -->
+        <!-- Col: statusByUserName: Workflow moderator userName. -->
+        <!-- Col: statusDate: Workflow status date. -->
+        <!-- End Data Dictionary -->
+        <!-- Primary key columns -->
+        <column name="flagReportId" type="long" primary="true"/>
+        <!-- Foreign key columns -->
+        <column name="groupId" type="long"/>
+        <column name="companyId" type="long"/>
+        <column name="userId" type="long"/>
+        <column name="classNameId" type="long"/>
+        <column name="classPK" type="long"/>
+        <!-- Other columns -->
+        <column name="createDate" type="Date"/>
+        <column name="title" type="String" />
+        <column name="content" type="String" />
+        <column name="flagReason" type="String"/>
+        <column name="flagComment" type="String" />
+        <column name="moderateAction" type="String" />
+        <column name="moderatorComment" type="String" />
+        <!-- Workflow columns -->
+        <column name="status" type="int" />
+        <column name="statusByUserId" type="long"/>
+        <column name="statusByUserName" type="String" />
+        <column name="statusDate" type="Date"/>
+
+        <!-- Sort order -->
+        <order by="desc">
+            <order-column name="flagReportId"/>
+            <order-column name="createDate"/>
+        </order>
+        <!-- Finder Methods -->
+        <finder name="flagReportId" return-type="FlagReport" unique="true">
+            <finder-column name="flagReportId"/>
+        </finder>
+         <finder name="GroupId" return-type="Collection">
+            <finder-column name="groupId"/>
+        </finder>
+        <finder name="CompanyId" return-type="Collection">
+            <finder-column name="companyId"/>
+        </finder>
+        <finder name="ClassNameIdWithClassPK" return-type="Collection">
+            <finder-column name="classNameId"/>
+            <finder-column name="classPK"/>
+        </finder>
+
+        <reference package-path="com.liferay.portal" entity="Company"/>
+        <reference package-path="com.liferay.portal" entity="Group"/>
+        <reference package-path="com.liferay.portal" entity="Organization"/>
+        <reference package-path="com.liferay.portal" entity="User"/>
+        <reference package-path="com.liferay.portlet.asset" entity="AssetEntry"/>
+        <reference package-path="com.liferay.portal" entity="WorkflowInstanceLink"/>
+    </entity>
+
+    <!-- Define entity -->
+    <entity name="FlagReportStats" local-service="true" remote-service="false">
+        <!-- Data Dictionary -->
+        <!-- Table: CATALOG_FlagReportStats contains a statistics table for flagReport. -->
+        <!-- Col: flagReportStatsId: (mandatory) The unique identifier for a flagReportStats entry. -->
+        <!-- Col: classNameId: (mandatory) The classNameId used when generating the report. -->
+        <!-- Col: classPK: (mandatory) The primary key used when generating the report. -->
+        <!-- Col: totalEntries: Total entry count in CATALOG_FlagReport for content with classPK. -->
+        <!-- Col: totalModerated: Total CATALOG_FlagReport entries moderated for content with classPK. -->
+        <!-- Col: totalApproved: Total CATALOG_FlagReport entries approved for content with classPK. -->
+        <!-- End Data Dictionary -->
+        <!-- Primary key columns -->
+        <column name="flagReportStatsId" type="long" primary="true"/>
+        <!-- Foreign key columns -->
+        <column name="classNameId" type="long"/>
+        <column name="classPK" type="long"/>
+        <!-- Other columns -->
+        <column name="totalEntries" type="Integer"/>
+        <column name="totalModerated" type="Integer"/>
+        <column name="totalApproved" type="Integer"/>
+
+        <!-- Sort order -->
+        <order by="desc">
+            <order-column name="classNameId"/>
+             <order-column name="classPK"/>
+        </order>
+
+        <!-- Finder Methods -->
+        <finder name="flagReportStatsId" return-type="FlagReportStats" unique="true">
+            <finder-column name="flagReportStatsId"/>
+        </finder>
+        <finder name="ClassNameIdWithClassPK" return-type="FlagReportStats" unique="true">
+            <finder-column name="classNameId"/>
+            <finder-column name="classPK"/>
+        </finder>
+    </entity>
+
 </service-builder>
