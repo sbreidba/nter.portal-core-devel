@@ -99,7 +99,7 @@ Course course = CourseLocalServiceUtil.getCourse(globalReview.getCourseId());
 				<portlet:renderURL var="remoteHideUrl" windowState="<%= LiferayWindowState.MAXIMIZED.toString() %>">
 					<portlet:param name="<%=NterKeys.REVIEW_ID%>" value="<%= Long.toString(globalReview.getPrimaryKey()) %>"/>
 					<portlet:param name="<%=NterKeys.REVIEW_CLASSPK%>" value="<%= Long.toString(globalReview.getCourseId()) %>"/>
-					<portlet:param name="jspPage" value="/course-reviews/html/hide-global-review-confirm.jsp"/>
+					<portlet:param name="jspPage" value="/course-reviews/jsp/hide-global-review-confirm.jsp"/>
 				</portlet:renderURL>
 				<a class="button hide" href="<%= remoteHideUrl %>" data-id-name="review-reviewId" data-id="<%= globalReview.getPrimaryKey() %>"
 						data-url="<portlet:actionURL name='hideGlobalCourseReviewRating' />"><%= LanguageUtil.get(pageContext, "hide") %>
@@ -127,11 +127,11 @@ Course course = CourseLocalServiceUtil.getCourse(globalReview.getCourseId());
 				<portlet:renderURL var="remoteMetaLanding" windowState="<%= LiferayWindowState.MAXIMIZED.toString() %>">
 					<portlet:param name="<%=NterKeys.REVIEW_ID%>" value="<%= Long.toString(globalReview.getPrimaryKey()) %>"/>
 					<portlet:param name="<%=NterKeys.REVIEW_CLASSPK%>" value="<%= Long.toString(globalReview.getCourseId()) %>"/>
-					<portlet:param name="jspPage" value="/course-reviews/html/metareview-landing.jsp"/>
+					<portlet:param name="jspPage" value="/course-reviews/jsp/metareview-landing.jsp"/>
 					<portlet:param name="redirect" value="<%=currentURL%>"/>
 				</portlet:renderURL>
 				<portlet:renderURL var="remoteFlagUrl" windowState="<%= LiferayWindowState.MAXIMIZED.toString() %>">
-					<portlet:param name="jspPage" value="/course-reviews/html/editGlobalFlagEntry.jsp" />
+					<portlet:param name="jspPage" value="/course-reviews/jsp/editGlobalFlagEntry.jsp" />
 				</portlet:renderURL>
 				<label><%= LanguageUtil.get(pageContext, "meta-prompt") %>
 				</label>
