@@ -650,6 +650,54 @@ public class ComponentWrapper implements Component, ModelWrapper<Component> {
         _component.persist();
     }
 
+    public java.lang.String getFriendlyVersionDate(
+        javax.servlet.jsp.PageContext pageContext) {
+        return _component.getFriendlyVersionDate(pageContext);
+    }
+
+    public java.lang.String getFriendlyUpdateDate(
+        javax.servlet.jsp.PageContext pageContext) {
+        return _component.getFriendlyUpdateDate(pageContext);
+    }
+
+    public java.lang.String getSearchContext() {
+        return _component.getSearchContext();
+    }
+
+    public void setSearchContext(java.lang.String searchContext) {
+        _component.setSearchContext(searchContext);
+    }
+
+    public float getSearchRelevance() {
+        return _component.getSearchRelevance();
+    }
+
+    public void setSearchRelevance(float searchRelevance) {
+        _component.setSearchRelevance(searchRelevance);
+    }
+
+    public java.lang.String getUrl()
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _component.getUrl();
+    }
+
+    public java.lang.String getUrl(java.lang.String lang)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _component.getUrl(lang);
+    }
+
+    public boolean isPurchased(long userId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _component.isPurchased(userId);
+    }
+
+    public void updateIndex() {
+        _component.updateIndex();
+    }
+
     /**
      * @deprecated Renamed to {@link #getWrappedModel}
      */
