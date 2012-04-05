@@ -223,4 +223,29 @@ public interface GlobalCourseReviewLocalService
     * @param beanIdentifier the Spring bean ID for this bean
     */
     public void setBeanIdentifier(java.lang.String beanIdentifier);
+
+    public void setReviewIsHidden(long globalCourseReviewId,
+        java.lang.Boolean hidden)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchGlobalCourseReviewException;
+
+    public org.nterlearning.datamodel.catalog.model.GlobalCourseReview findByCourseReviewIri(
+        java.lang.String courseReviewIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchGlobalCourseReviewException;
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.GlobalCourseReview> findByCourseId(
+        long courseId)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.GlobalCourseReview> findByCourseIri(
+        java.lang.String courseIri)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.GlobalCourseReview> findValidByCourseId(
+        long courseId, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public long countValidByCourseId(long courseId)
+        throws com.liferay.portal.kernel.exception.SystemException;
 }

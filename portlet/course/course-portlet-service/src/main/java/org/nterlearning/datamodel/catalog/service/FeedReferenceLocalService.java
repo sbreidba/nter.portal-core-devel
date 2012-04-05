@@ -222,4 +222,59 @@ public interface FeedReferenceLocalService extends PersistedModelLocalService {
     * @param beanIdentifier the Spring bean ID for this bean
     */
     public void setBeanIdentifier(java.lang.String beanIdentifier);
+
+    public org.nterlearning.datamodel.catalog.model.FeedReference findByFeedIri(
+        java.lang.String feedIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFeedReferenceException;
+
+    @Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+    public org.nterlearning.datamodel.catalog.model.FeedReference fetchByFeedIri(
+        java.lang.String feedIri)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public org.nterlearning.datamodel.catalog.model.FeedReference findByFeedHref(
+        java.lang.String href)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFeedReferenceException;
+
+    public com.liferay.portal.kernel.dao.orm.DynamicQuery generateDynamicQuery(
+        long groupId, boolean removed);
+
+    public com.liferay.portal.kernel.dao.orm.DynamicQuery generateDynamicQuery(
+        boolean removed);
+
+    public com.liferay.portal.kernel.dao.orm.DynamicQuery generateDynamicQuery(
+        boolean removed, java.lang.String reasonCode);
+
+    public com.liferay.portal.kernel.dao.orm.DynamicQuery generateDynamicQuery(
+        java.lang.String feedType, long groupId, boolean removed);
+
+    public void removeAssociatedVocabularies(long feedReferenceId);
+
+    /**
+    * Clears the cache for all feedReferences stored in this session.  This
+    * should only be needed in a multi-threaded environment, where a thread is
+    * not notified of persistence updates done in a different thread.
+    */
+    public void clearCache();
+
+    /**
+    * Clears the cache for all feedReferences stored in this session.  This
+    * should only be needed in a multi-threaded environment, where a thread is
+    * not notified of persistence updates done in a different thread.
+    *
+    * @param feedRef the FeedReference object to remove from the cache
+    */
+    public void clearCache(
+        org.nterlearning.datamodel.catalog.model.FeedReference feedRef);
+
+    /**
+    * Clears the cache for all feedReferences stored in this session.  This
+    * should only be needed in a multi-threaded environment, where a thread is
+    * not notified of persistence updates done in a different thread.
+    *
+    * @param feedRefId The Id of the FeedReference to remove from the cache
+    */
+    public void clearCache(java.lang.Long feedRefId);
 }

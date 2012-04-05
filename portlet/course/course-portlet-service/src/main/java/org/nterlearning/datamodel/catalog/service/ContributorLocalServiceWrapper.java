@@ -243,6 +243,19 @@ public class ContributorLocalServiceWrapper implements ContributorLocalService,
         _contributorLocalService.setBeanIdentifier(beanIdentifier);
     }
 
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Contributor> findByCourseIdWithRole(
+        java.lang.Long courseId, java.lang.String role)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _contributorLocalService.findByCourseIdWithRole(courseId, role);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Contributor> findByComponentIdWithRole(
+        java.lang.Long componentId, java.lang.String role)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _contributorLocalService.findByComponentIdWithRole(componentId,
+            role);
+    }
+
     /**
      * @deprecated Renamed to {@link #getWrappedService}
      */

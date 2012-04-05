@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  National Training and Education Resource (NTER)
+  Copyright (C) 2012 SRI International
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or (at
+  your option) any later version.
+
+  This program is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  02110-1301, USA.
+  -->
+  
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:nter="http://nterlearning.org/xml/feeds/atom-extensions-schema_0.6.2.xsd">
+
+    <!-- Usability Test
+               This feed depends on the target courses and links mentioned in it
+               being available in the database.  To enter these in the database,
+               parse the feed https://nwtp.nterlearning.org:443/nwtp/feeds/courses/index.php -->
+    <!-- tester@nter.com is user for student progression through courses -->
+
+    <title>Student Records Feed</title>
+    <link rel="self" href="test-0.6.2-student-records-atom-feed-usability.xml" type="application/atom+xml"/>
+    <author>
+        <uri>nwtp.gov</uri>
+    </author>
+    <updated>2011-08-19T09:00:00Z</updated>
+    <id>tag:nwtp.gov,2011-05-19:/feeds/TEST-USABILITY-STUDENT-PROGRESS</id>
+
+    <!-- Record for course Building Science Basics (In Progress Most Recent) -->
+    <entry nter:entryType="course-record">
+        <title/>
+        <id>tag:nwtp.gov,2011-08-10:/records/Usability-Tester-User-Progress-001</id>
+        <updated>2011-08-19T13:30:02Z</updated>
+        <content/>
+        <nter:courseRecord
+                nter:studentUserId="usability"
+                nter:courseId="tag:nwtp.nterlearning.org,2011-07-28:/nwtp/nwtp/64/225"
+                nter:progress="In Progress"
+                nter:assigned="false"
+                >
+            <nter:componentRecord
+                    nter:componentId="tag:nwtp.nterlearning.org,2011-07-28:/nwtp/nwtp/82/252"
+                    nter:completionPercent="100"
+                    nter:progress="Completed"
+                    nter:progressDate="2011-08-10T13:30:02Z"
+                    />
+             <nter:componentRecord
+                    nter:componentId="tag:nwtp.nterlearning.org,2011-07-28:/nwtp/nwtp/83/253"
+                    nter:completionPercent="100"
+                    nter:progress="Completed"
+                    nter:progressDate="2011-08-15T13:30:02Z"
+                    />
+            <nter:componentRecord
+                    nter:componentId="tag:nwtp.nterlearning.org,2011-08-09:/nwtp/nwtp/135/666"
+                    nter:completionPercent="20"
+                    nter:progress="In Progress"
+                    nter:progressDate="2011-08-19T13:30:02Z"
+                    />
+        </nter:courseRecord>
+    </entry>
+
+    <!-- Record for course Housing and Weatherization (In Progress)-->
+    <entry nter:entryType="course-record">
+        <title/>
+        <id>tag:nwtp.gov,2011-08-17:/records/Usability-Tester-User-Progress-002</id>
+        <updated>2011-08-17T13:30:02Z</updated>
+        <content/>
+        <nter:courseRecord
+                nter:studentUserId="usability"
+                nter:courseId="tag:nwtp.nterlearning.org,2011-07-28:/nwtp/nwtp/67/231"
+                nter:progress="In Progress"
+                nter:assigned="false"
+                >
+            <nter:componentRecord
+                    nter:componentId="tag:nwtp.nterlearning.org,2011-07-28:/nwtp/nwtp/78/248"
+                    nter:completionPercent="50"
+                    nter:progress="In Progress"
+                    nter:progressDate="2011-08-17T13:30:02Z"
+                    />
+             <nter:componentRecord
+                    nter:componentId="tag:nwtp.nterlearning.org,2011-07-28:/nwtp/nwtp/79/249"
+                    nter:completionPercent="80"
+                    nter:progress="In Progress"
+                    nter:progressDate="2011-08-17T13:30:02Z"
+                    />
+            <nter:componentRecord
+                    nter:componentId="tag:nwtp.nterlearning.org,2011-07-28:/nwtp/nwtp/80/250"
+                    nter:completionPercent="20"
+                    nter:progress="In Progress"
+                    nter:progressDate="2011-08-17T13:30:02Z"
+                    />
+        </nter:courseRecord>
+    </entry>
+
+    <!-- Record for course House Unit Air Flow (In Progress, Course Superseded)-->
+    <entry nter:entryType="course-record">
+        <title/>
+        <id>tag:nwtp.gov,2011-08-05:/records/Usability-Tester-User-Progress-003</id>
+        <updated>2011-08-16T13:30:02Z</updated>
+        <content/>
+        <nter:courseRecord
+                nter:studentUserId="usability"
+                nter:courseId="tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COURSE-A/nwtp/69/236"
+                nter:progress="In Progress"
+                nter:assigned="false"
+                >
+            <nter:componentRecord
+                    nter:componentId="tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COMPONENT/nwtp/72/242"
+                    nter:completionPercent="70"
+                    nter:progress="In Progress"
+                    nter:progressDate="2011-08-01T13:30:02Z"
+                    />
+            <nter:componentRecord
+                    nter:componentId="tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COMPONENT/nwtp/73/243"
+                    nter:completionPercent="50"
+                    nter:progress="In Progress"
+                    nter:progressDate="2011-08-05T13:30:02Z"
+                    />
+             <nter:componentRecord
+                    nter:componentId="tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COMPONENT/nwtp/74/244"
+                    nter:completionPercent="10"
+                    nter:progress="In Progress"
+                    nter:progressDate="2011-08-16T13:30:02Z"
+                    />
+        </nter:courseRecord>
+    </entry>
+
+    <!-- Record for course Weatherization Assistance Program Installer Training (Complete)-->
+    <entry nter:entryType="course-record">
+        <title/>
+        <id>tag:nwtp.gov,2011-08-11:/records/Usability-Tester-User-Progress-004</id>
+        <updated>2011-08-16T13:30:02Z</updated>
+        <content/>
+        <nter:courseRecord
+                nter:studentUserId="usability"
+                nter:courseId="tag:nwtp.nterlearning.org,2011-07-30:/nwtp/nwtp/115/579"
+                nter:progress="Completed"
+                nter:assigned="false"
+                >
+            <nter:componentRecord
+                    nter:componentId="tag:nwtp.nterlearning.org,2011-07-30:/nwtp/nwtp/118/585"
+                    nter:completionPercent="100"
+                    nter:progress="Completed"
+                    nter:progressDate="2011-08-11T13:30:02Z"
+                    />
+             <nter:componentRecord
+                    nter:componentId="tag:nwtp.nterlearning.org,2011-08-03:/nwtp/nwtp/125/601"
+                    nter:completionPercent="100"
+                    nter:progress="Completed"
+                    nter:progressDate="2011-08-12T13:30:02Z"
+                    />
+            <nter:componentRecord
+                    nter:componentId="tag:nwtp.nterlearning.org,2011-07-29:/nwtp/nwtp/106/537"
+                    nter:completionPercent="100"
+                    nter:progress="Completed"
+                    nter:progressDate="2011-08-13T13:30:02Z"
+                    />
+            <nter:componentRecord
+                    nter:componentId="tag:nwtp.nterlearning.org,2011-07-30:/nwtp/nwtp/121/588"
+                    nter:completionPercent="100"
+                    nter:progress="Completed"
+                    nter:progressDate="2011-08-14T13:30:02Z"
+                    />
+            <nter:componentRecord
+                    nter:componentId="tag:nwtp.nterlearning.org,2011-07-30:/nwtp/nwtp/122/589"
+                    nter:completionPercent="100"
+                    nter:progress="Completed"
+                    nter:progressDate="2011-08-15T13:30:02Z"
+                    />
+            <nter:componentRecord
+                    nter:componentId="tag:nwtp.nterlearning.org,2011-07-30:/nwtp/nwtp/123/590"
+                    nter:completionPercent="100"
+                    nter:progress="Completed"
+                    nter:progressDate="2011-08-16T13:30:02Z"
+                    />
+        </nter:courseRecord>
+    </entry>
+
+    <!-- Record for course Process Heating (Complete)-->
+    <entry nter:entryType="course-record">
+        <title/>
+        <id>tag:nwtp.gov,2011-08-09:/records/Usability-Tester-User-Progress-005</id>
+        <updated>2011-08-09T13:30:02Z</updated>
+        <content/>
+        <nter:courseRecord
+                nter:studentUserId="usability"
+                nter:courseId="tag:nwtp.nterlearning.org,2011-08-07:/nwtp/nwtp/128/609"
+                nter:progress="Completed"
+                nter:assigned="false"
+                >
+            <nter:componentRecord
+                    nter:componentId="tag:nwtp.nterlearning.org,2011-08-08:/nwtp/nwtp/131/637"
+                    nter:completionPercent="100"
+                    nter:progress="Completed"
+                    nter:progressDate="2011-08-09T13:30:02Z"
+                    />
+        </nter:courseRecord>
+    </entry>
+
+    
+</feed>

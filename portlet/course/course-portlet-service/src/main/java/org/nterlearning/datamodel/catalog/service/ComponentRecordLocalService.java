@@ -222,4 +222,19 @@ public interface ComponentRecordLocalService extends PersistedModelLocalService 
     * @param beanIdentifier the Spring bean ID for this bean
     */
     public void setBeanIdentifier(java.lang.String beanIdentifier);
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord> findByComponentIri(
+        java.lang.String componentIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchComponentRecordException;
+
+    public java.util.List<java.lang.Object[]> findByCourseRecordIdUserIdLanguageFilterSorted(
+        long courseRecordId, long userId, java.util.Locale locale,
+        java.lang.String filterType, java.lang.String sortType, boolean asc,
+        int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public long countByCourseRecordIdUserIdLanguageFilter(long courseRecordId,
+        long userId, java.util.Locale locale, java.lang.String filterType)
+        throws com.liferay.portal.kernel.exception.SystemException;
 }

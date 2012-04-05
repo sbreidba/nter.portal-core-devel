@@ -250,6 +250,61 @@ public class FlagReportStatsLocalServiceUtil {
         getService().setBeanIdentifier(beanIdentifier);
     }
 
+    public static void incrementTotalEntries(long classNameId, long classPK)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFlagReportStatsException {
+        getService().incrementTotalEntries(classNameId, classPK);
+    }
+
+    public static void incrementTotalModerated(long classNameId, long classPK)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFlagReportStatsException {
+        getService().incrementTotalModerated(classNameId, classPK);
+    }
+
+    public static void incrementTotalApproved(long classNameId, long classPK)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFlagReportStatsException {
+        getService().incrementTotalApproved(classNameId, classPK);
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.FlagReportStats findByFlagReportStatsId(
+        long flagReportStatsId)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFlagReportStatsException {
+        return getService().findByFlagReportStatsId(flagReportStatsId);
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.FlagReportStats fetchByFlagReportStatsId(
+        long flagReportStatsId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().fetchByFlagReportStatsId(flagReportStatsId);
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.FlagReportStats findByClassNameIdWithClassPK(
+        long classNameId, long classPK)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFlagReportStatsException {
+        return getService().findByClassNameIdWithClassPK(classNameId, classPK);
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.FlagReportStats fetchByClassNameIdWithClassPK(
+        long classNameId, long classPK)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().fetchByClassNameIdWithClassPK(classNameId, classPK);
+    }
+
+    public static java.lang.Integer countAll()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().countAll();
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.FlagReportStats> findAll(
+        int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findAll(start, end);
+    }
+
     public static void clearService() {
         _service = null;
     }

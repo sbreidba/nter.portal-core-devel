@@ -245,6 +245,84 @@ public class FeedReferenceLocalServiceWrapper
         _feedReferenceLocalService.setBeanIdentifier(beanIdentifier);
     }
 
+    public org.nterlearning.datamodel.catalog.model.FeedReference findByFeedIri(
+        java.lang.String feedIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFeedReferenceException {
+        return _feedReferenceLocalService.findByFeedIri(feedIri);
+    }
+
+    public org.nterlearning.datamodel.catalog.model.FeedReference fetchByFeedIri(
+        java.lang.String feedIri)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _feedReferenceLocalService.fetchByFeedIri(feedIri);
+    }
+
+    public org.nterlearning.datamodel.catalog.model.FeedReference findByFeedHref(
+        java.lang.String href)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFeedReferenceException {
+        return _feedReferenceLocalService.findByFeedHref(href);
+    }
+
+    public com.liferay.portal.kernel.dao.orm.DynamicQuery generateDynamicQuery(
+        long groupId, boolean removed) {
+        return _feedReferenceLocalService.generateDynamicQuery(groupId, removed);
+    }
+
+    public com.liferay.portal.kernel.dao.orm.DynamicQuery generateDynamicQuery(
+        boolean removed) {
+        return _feedReferenceLocalService.generateDynamicQuery(removed);
+    }
+
+    public com.liferay.portal.kernel.dao.orm.DynamicQuery generateDynamicQuery(
+        boolean removed, java.lang.String reasonCode) {
+        return _feedReferenceLocalService.generateDynamicQuery(removed,
+            reasonCode);
+    }
+
+    public com.liferay.portal.kernel.dao.orm.DynamicQuery generateDynamicQuery(
+        java.lang.String feedType, long groupId, boolean removed) {
+        return _feedReferenceLocalService.generateDynamicQuery(feedType,
+            groupId, removed);
+    }
+
+    public void removeAssociatedVocabularies(long feedReferenceId) {
+        _feedReferenceLocalService.removeAssociatedVocabularies(feedReferenceId);
+    }
+
+    /**
+    * Clears the cache for all feedReferences stored in this session.  This
+    * should only be needed in a multi-threaded environment, where a thread is
+    * not notified of persistence updates done in a different thread.
+    */
+    public void clearCache() {
+        _feedReferenceLocalService.clearCache();
+    }
+
+    /**
+    * Clears the cache for all feedReferences stored in this session.  This
+    * should only be needed in a multi-threaded environment, where a thread is
+    * not notified of persistence updates done in a different thread.
+    *
+    * @param feedRef the FeedReference object to remove from the cache
+    */
+    public void clearCache(
+        org.nterlearning.datamodel.catalog.model.FeedReference feedRef) {
+        _feedReferenceLocalService.clearCache(feedRef);
+    }
+
+    /**
+    * Clears the cache for all feedReferences stored in this session.  This
+    * should only be needed in a multi-threaded environment, where a thread is
+    * not notified of persistence updates done in a different thread.
+    *
+    * @param feedRefId The Id of the FeedReference to remove from the cache
+    */
+    public void clearCache(java.lang.Long feedRefId) {
+        _feedReferenceLocalService.clearCache(feedRefId);
+    }
+
     /**
      * @deprecated Renamed to {@link #getWrappedService}
      */

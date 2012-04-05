@@ -24,6 +24,7 @@ public class CourseImageLocalServiceClp implements CourseImageLocalService {
     private MethodKey _updateCourseImageMethodKey14;
     private MethodKey _getBeanIdentifierMethodKey15;
     private MethodKey _setBeanIdentifierMethodKey16;
+    private MethodKey _findByCourseIdWithLanguageMethodKey17;
 
     public CourseImageLocalServiceClp(ClassLoaderProxy classLoaderProxy) {
         _classLoaderProxy = classLoaderProxy;
@@ -90,6 +91,10 @@ public class CourseImageLocalServiceClp implements CourseImageLocalService {
 
         _setBeanIdentifierMethodKey16 = new MethodKey(_classLoaderProxy.getClassName(),
                 "setBeanIdentifier", java.lang.String.class);
+
+        _findByCourseIdWithLanguageMethodKey17 = new MethodKey(_classLoaderProxy.getClassName(),
+                "findByCourseIdWithLanguage", java.lang.Long.class,
+                java.lang.String.class);
     }
 
     public org.nterlearning.datamodel.catalog.model.CourseImage addCourseImage(
@@ -521,6 +526,33 @@ public class CourseImageLocalServiceClp implements CourseImageLocalService {
                     " is not a valid exception");
             }
         }
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseImage> findByCourseIdWithLanguage(
+        java.lang.Long courseId, java.lang.String language)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_findByCourseIdWithLanguageMethodKey17,
+                ClpSerializer.translateInput(courseId),
+                ClpSerializer.translateInput(language));
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<org.nterlearning.datamodel.catalog.model.CourseImage>) ClpSerializer.translateOutput(returnObj);
     }
 
     public ClassLoaderProxy getClassLoaderProxy() {

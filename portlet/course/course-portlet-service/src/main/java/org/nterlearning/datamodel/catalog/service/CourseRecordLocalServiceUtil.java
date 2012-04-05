@@ -68,11 +68,13 @@ public class CourseRecordLocalServiceUtil {
     * Deletes the course record from the database. Also notifies the appropriate model listeners.
     *
     * @param courseRecord the course record
+    * @throws PortalException
     * @throws SystemException if a system exception occurred
     */
     public static void deleteCourseRecord(
         org.nterlearning.datamodel.catalog.model.CourseRecord courseRecord)
-        throws com.liferay.portal.kernel.exception.SystemException {
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
         getService().deleteCourseRecord(courseRecord);
     }
 
@@ -248,6 +250,124 @@ public class CourseRecordLocalServiceUtil {
     */
     public static void setBeanIdentifier(java.lang.String beanIdentifier) {
         getService().setBeanIdentifier(beanIdentifier);
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.CourseRecord addCourseRecord(
+        java.lang.Long feedRefId, java.lang.String courseRecordIRI,
+        long userId, java.lang.String singleSignOnValue,
+        java.lang.String courseIRI, java.util.Date updatedDate,
+        java.lang.String completionStatus, boolean userHidden, boolean assigned)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService()
+                   .addCourseRecord(feedRefId, courseRecordIRI, userId,
+            singleSignOnValue, courseIRI, updatedDate, completionStatus,
+            userHidden, assigned);
+    }
+
+    public static void deleteAllChildren(
+        org.nterlearning.datamodel.catalog.model.CourseRecord courseRecord)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        getService().deleteAllChildren(courseRecord);
+    }
+
+    public static void addCourseRecordResource(
+        org.nterlearning.datamodel.catalog.model.CourseRecord record)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        getService().addCourseRecordResource(record);
+    }
+
+    public static void deleteCourseRecordResource(
+        org.nterlearning.datamodel.catalog.model.CourseRecord record) {
+        getService().deleteCourseRecordResource(record);
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.CourseRecord findByPrimaryKey(
+        long courseRecordId)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchCourseRecordException {
+        return getService().findByPrimaryKey(courseRecordId);
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.CourseRecord fetchByPrimaryKey(
+        long courseRecordId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().fetchByPrimaryKey(courseRecordId);
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.CourseRecord findByCourseRecordIri(
+        java.lang.String courseRecordIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchCourseRecordException {
+        return getService().findByCourseRecordIri(courseRecordIri);
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.CourseRecord fetchByCourseRecordIri(
+        java.lang.String courseRecordIri)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().fetchByCourseRecordIri(courseRecordIri);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findByCourseIri(
+        java.lang.String courseIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchCourseRecordException {
+        return getService().findByCourseIri(courseIri);
+    }
+
+    public static java.util.List<java.lang.Object[]> findByUserIdFilterSorted(
+        long userId, long classNameId, java.lang.String filterType,
+        java.lang.String sortType, boolean asc, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService()
+                   .findByUserIdFilterSorted(userId, classNameId, filterType,
+            sortType, asc, start, end);
+    }
+
+    public static long countByUserIdFilter(long userId, long classNameId,
+        java.lang.String filterType)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().countByUserIdFilter(userId, classNameId, filterType);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findBySingleSignOnValue(
+        java.lang.String singleSignOnValue)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findBySingleSignOnValue(singleSignOnValue);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findByUserId(
+        java.lang.Long userId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByUserId(userId);
+    }
+
+    public static long countAccessedByCourseIri(java.lang.String courseIri)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().countAccessedByCourseIri(courseIri);
+    }
+
+    public static long countCompletedByCourseIri(java.lang.String courseIri)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().countCompletedByCourseIri(courseIri);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findByFeedReferenceId(
+        long feedRefId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByFeedReferenceId(feedRefId);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord> getComponentRecords(
+        org.nterlearning.datamodel.catalog.model.CourseRecord courseRecord)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().getComponentRecords(courseRecord);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord> getComponentRecords(
+        long courseRecordPrimaryKey)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().getComponentRecords(courseRecordPrimaryKey);
     }
 
     public static void clearService() {

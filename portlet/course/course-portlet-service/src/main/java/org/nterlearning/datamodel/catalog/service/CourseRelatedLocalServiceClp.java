@@ -24,6 +24,8 @@ public class CourseRelatedLocalServiceClp implements CourseRelatedLocalService {
     private MethodKey _updateCourseRelatedMethodKey14;
     private MethodKey _getBeanIdentifierMethodKey15;
     private MethodKey _setBeanIdentifierMethodKey16;
+    private MethodKey _findByRelatedCourseIdWithRelationshipTypeMethodKey17;
+    private MethodKey _findByRelatedCourseIriMethodKey18;
 
     public CourseRelatedLocalServiceClp(ClassLoaderProxy classLoaderProxy) {
         _classLoaderProxy = classLoaderProxy;
@@ -90,6 +92,13 @@ public class CourseRelatedLocalServiceClp implements CourseRelatedLocalService {
 
         _setBeanIdentifierMethodKey16 = new MethodKey(_classLoaderProxy.getClassName(),
                 "setBeanIdentifier", java.lang.String.class);
+
+        _findByRelatedCourseIdWithRelationshipTypeMethodKey17 = new MethodKey(_classLoaderProxy.getClassName(),
+                "findByRelatedCourseIdWithRelationshipType",
+                java.lang.Long.class, java.lang.String.class);
+
+        _findByRelatedCourseIriMethodKey18 = new MethodKey(_classLoaderProxy.getClassName(),
+                "findByRelatedCourseIri", java.lang.String.class);
     }
 
     public org.nterlearning.datamodel.catalog.model.CourseRelated addCourseRelated(
@@ -521,6 +530,59 @@ public class CourseRelatedLocalServiceClp implements CourseRelatedLocalService {
                     " is not a valid exception");
             }
         }
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRelated> findByRelatedCourseIdWithRelationshipType(
+        java.lang.Long componentId, java.lang.String relationshipType)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_findByRelatedCourseIdWithRelationshipTypeMethodKey17,
+                ClpSerializer.translateInput(componentId),
+                ClpSerializer.translateInput(relationshipType));
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<org.nterlearning.datamodel.catalog.model.CourseRelated>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRelated> findByRelatedCourseIri(
+        java.lang.String relatedCourseIri)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_findByRelatedCourseIriMethodKey18,
+                ClpSerializer.translateInput(relatedCourseIri));
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<org.nterlearning.datamodel.catalog.model.CourseRelated>) ClpSerializer.translateOutput(returnObj);
     }
 
     public ClassLoaderProxy getClassLoaderProxy() {

@@ -250,6 +250,12 @@ public class CourseImageLocalServiceUtil {
         getService().setBeanIdentifier(beanIdentifier);
     }
 
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.CourseImage> findByCourseIdWithLanguage(
+        java.lang.Long courseId, java.lang.String language)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByCourseIdWithLanguage(courseId, language);
+    }
+
     public static void clearService() {
         _service = null;
     }

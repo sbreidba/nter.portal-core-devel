@@ -250,6 +250,32 @@ public class ComponentRecordLocalServiceUtil {
         getService().setBeanIdentifier(beanIdentifier);
     }
 
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord> findByComponentIri(
+        java.lang.String componentIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchComponentRecordException {
+        return getService().findByComponentIri(componentIri);
+    }
+
+    public static java.util.List<java.lang.Object[]> findByCourseRecordIdUserIdLanguageFilterSorted(
+        long courseRecordId, long userId, java.util.Locale locale,
+        java.lang.String filterType, java.lang.String sortType, boolean asc,
+        int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService()
+                   .findByCourseRecordIdUserIdLanguageFilterSorted(courseRecordId,
+            userId, locale, filterType, sortType, asc, start, end);
+    }
+
+    public static long countByCourseRecordIdUserIdLanguageFilter(
+        long courseRecordId, long userId, java.util.Locale locale,
+        java.lang.String filterType)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService()
+                   .countByCourseRecordIdUserIdLanguageFilter(courseRecordId,
+            userId, locale, filterType);
+    }
+
     public static void clearService() {
         _service = null;
     }
