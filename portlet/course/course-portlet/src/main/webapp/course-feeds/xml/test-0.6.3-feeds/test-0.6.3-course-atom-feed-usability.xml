@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ National Training and Education Resource (NTER)
+  ~ Copyright (C) 2011  SRI International
+  ~
+  ~ This program is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or (at
+  ~ your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful, but
+  ~ WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  ~ General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  ~ 02110-1301, USA.
+  -->
+
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:nter="http://nterlearning.org/xml/feeds/atom-extensions-schema_0.6.3.xsd"
+      xmlns:fh="http://purl.org/syndication/history/1.0"
+	  xmlns:at="http://purl.org/atompub/tombstones/1.0">
+
+   <!-- Usability Test
+               This feed loads the superseded/tombstoned and newer courses and links for the usability test.
+               The production feed, https://nwtp.nterlearning.org:443/nwtp/feeds/courses/index.php, should also be parsed for this test. 
+    -->
+
+    <title>Course Feed</title>
+    <link rel="self" href="test-0.6.3-course-atom-feed-usability.xml" type="application/atom+xml"/>
+    <updated>2011-08-19T15:12:55Z</updated>
+    <id>tag:nwtp.gov,2011-05-19:/feeds/TEST-USABILITY-COURSE-SUPERSEDED-TOMBSTONED</id>
+    
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <id>tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COMPONENT/nwtp/72/242</id>
+        <updated>2011-05-28T15:41:33Z</updated>
+        <summary>1 - Welcome to Weatherization</summary>
+           <title>1 - Welcome to Weatherization</title>
+		   <link rel="self"
+           		href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=72"
+           		nter:displayWidth="1100"
+           		nter:displayHeight="800">
+		   </link>
+		   <link rel="search"
+           		href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=72?q=search"/>
+        <nter:courseComponent>
+            <nter:version>1.0</nter:version>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+        </nter:courseComponent>
+    </entry>
+    
+    
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <id>tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COMPONENT/nwtp/73/243</id>
+        <updated>2011-05-28T15:41:54Z</updated>        
+        <summary>Tale of weatherization of Grandma's House</summary>
+           <title>2 - Story of Grandma's House</title>
+		   <link rel="self"
+           		href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=73"
+           		nter:displayWidth="1100"
+           		nter:displayHeight="800">
+		   </link>
+		   <link rel="search"
+           		href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=73?q=search"/>
+        <nter:courseComponent>
+            <nter:version>1.0</nter:version>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+        </nter:courseComponent>
+    </entry>
+
+    
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <id>tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COMPONENT/nwtp/74/244</id>
+        <updated>2011-05-29T22:22:50Z</updated>
+        <summary>A house is a system of interdependent parts.</summary>
+           <title>3 - House as a System</title>
+		   <link rel="self"
+           		href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=74"
+           		nter:displayWidth="1100"
+           		nter:displayHeight="800">
+		   </link>        
+           <link rel="search"
+                href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=74?q=search"/>
+        <nter:courseComponent>
+            <nter:version>1.0</nter:version>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+        </nter:courseComponent>
+    </entry>
+
+        
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <id>tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COMPONENT/nwtp/75/245</id>
+        <updated>2011-05-28T15:42:38Z</updated>
+        <summary>4 - What is Energy?</summary>
+           <title>4 - What is Energy?</title>
+		   <link rel="self"
+           		href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=75"
+           		nter:displayWidth="1100"
+           		nter:displayHeight="800">
+		   </link>        
+		   <link rel="search"
+           		href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=75?q=search"/>
+        <nter:courseComponent>
+            <nter:version>1.0</nter:version>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+        </nter:courseComponent>
+    </entry>
+    
+    
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <id>tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COMPONENT/nwtp/76/246</id>
+        <updated>2011-05-28T15:42:57Z</updated>
+        <summary>5 - Pressure and Thermal Boundaries</summary>
+           <title>5 - Pressure and Thermal Boundaries</title>
+		   <link rel="self"
+           		href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=76"
+           		nter:displayWidth="1100"
+           		nter:displayHeight="800">
+		   </link>
+		   <link rel="search"
+           		href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=76?q=search"/>
+        <nter:courseComponent>
+            <nter:version>1.0</nter:version>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+        </nter:courseComponent>
+    </entry>
+
+     
+    
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <id>tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COMPONENT/nwtp/77/247</id>
+        <updated>2011-05-28T15:43:13Z</updated>
+        <summary>6 - What is Air Leakage? What are the Driving Forces?</summary>
+           <title>6 - What is Air Leakage? What are the Driving Forces?</title>
+		   <link rel="self"
+           		href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=77"
+           		nter:displayWidth="1100"
+           		nter:displayHeight="800">
+		   </link>
+		   <link rel="search"
+           		href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=77?q=search"/>
+        <nter:courseComponent>
+            <nter:version>1.0</nter:version>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+        </nter:courseComponent>
+    </entry>
+ 
+    
+    <entry nter:entryType="course">
+        <link rel="self" href="https://nwtp.nterlearning.org/nwtp/feeds/course_urls/index.php?client_id=nwtp&amp;ref_id=69&amp;obj_id=236"/>
+        <link rel="search" href="https://nwtp.nterlearning.org/nwtp/feeds/course_urls/index.php?client_id=nwtp&amp;ref_id=69&amp;obj_id=236?q=search"/>
+        <id>tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COURSE-A/nwtp/69/236</id>
+        <updated>2011-07-28T15:43:12Z</updated>
+        <summary>Discusses how air flows in and out of a housing unit.</summary>
+        <nter:course>
+           <nter:version>1</nter:version>
+           <nter:duration nter:durationStandard="ISO8601:2000">P2DT3H15M</nter:duration>
+           <nter:title xml:lang="en-US">House Unit Air Flow</nter:title>
+           <nter:description xml:lang="en-US">Discusses how air flows in and out of a housing unit.</nter:description>
+           <nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COMPONENT/nwtp/72/242"
+           />
+           <nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COMPONENT/nwtp/73/243"
+           />
+           <nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COMPONENT/nwtp/74/244"
+           />
+           <nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COMPONENT/nwtp/75/245"
+           />
+           <nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COMPONENT/nwtp/76/246"
+           />
+           <nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COMPONENT/nwtp/77/247"
+           />
+           <nter:image
+               nter:href="https://nwtp.nterlearning.org/nwtp/data/nwtp/object_images/housingairleaks.jpg"
+               nter:alternateText=""
+               nter:mimeType="image/jpeg"
+           />
+           <nter:keywords xml:lang="en-US"></nter:keywords>
+		   <nter:categoryRef  nter:categoryId="tag:nwtp.nterlearning.org,2011-07-28:/nwtp/nwtp/66/230" />
+        </nter:course>
+    </entry>
+
+    
+    <entry nter:entryType="course">
+        <link rel="self" href="https://nwtp.nterlearning.org/nwtp/feeds/course_urls/index.php?client_id=nwtp&amp;ref_id=69&amp;obj_id=236"/>
+        <link rel="search" href="https://nwtp.nterlearning.org/nwtp/feeds/course_urls/index.php?client_id=nwtp&amp;ref_id=69&amp;obj_id=236?q=search"/>
+        <id>tag:nwtp.nterlearning.org,2011-06-19:/feeds/TEST-USABILITY-COURSE-B/nwtp/69/236</id>
+        <updated>2011-07-28T15:43:12Z</updated>
+        <summary>Discusses how air flows in and out of a housing unit.</summary>
+        <nter:course>
+            <nter:version>2</nter:version>
+            <nter:duration nter:durationStandard="ISO8601:2000">P3DT2H10M</nter:duration>
+           <nter:title xml:lang="en-US">House Unit Air Flow Version 2</nter:title>
+           <nter:description xml:lang="en-US">Discusses how air flows in and out of a housing unit.</nter:description>
+           <nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COMPONENT/nwtp/72/242"
+           />
+           <nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COMPONENT/nwtp/73/243"
+           />
+           <nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COMPONENT/nwtp/74/244"
+           />
+           <nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COMPONENT/nwtp/75/245"
+           />
+           <nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COMPONENT/nwtp/76/246"
+           />
+           <nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COMPONENT/nwtp/77/247"
+           />
+           <nter:image
+               nter:href="https://nwtp.nterlearning.org/nwtp/data/nwtp/object_images/housingairleaks.jpg"
+               nter:alternateText=""
+               nter:mimeType="image/jpeg"
+           />
+           <nter:keywords xml:lang="en-US"></nter:keywords>
+		   <nter:categoryRef  nter:categoryId="tag:nwtp.nterlearning.org,2011-07-28:/nwtp/nwtp/66/230" />
+		   <nter:related
+                 nter:relationship="supersedes"
+                 nter:relatedEntryId="tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COURSE-A/nwtp/69/236"
+            />
+
+        </nter:course>
+    </entry>
+    
+    <at:deleted-entry
+	     nter:entryType="course"
+          ref="tag:nwtp.nterlearning.org,2011-05-19:/feeds/TEST-USABILITY-COURSE-A/nwtp/69/236"
+          when="2011-08-17T10:35:49Z" />
+
+</feed>
