@@ -36,7 +36,7 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import org.nterlearning.registry.proxy.*;
+import com.sri.nter.registry.proxy.*;
 
 import org.nterlearning.xml.nter_registry.blacklist_objects_0_1_0.ActiveStatusEnum;
 import org.nterlearning.xml.nter_registry.domain_objects_0_1_0.*;

@@ -249,14 +249,13 @@ public interface FlagReportLocalService extends PersistedModelLocalService {
 
     public void addFlagReportResources(
         org.nterlearning.datamodel.catalog.model.FlagReport flagReport,
-        boolean addCommunityPermissions, boolean addGuestPermissions)
+        boolean addGroupPermissions, boolean addGuestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 
     public void addFlagReportResources(
         org.nterlearning.datamodel.catalog.model.FlagReport flagReport,
-        java.lang.String[] communityPermissions,
-        java.lang.String[] guestPermissions)
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 
@@ -303,8 +302,7 @@ public interface FlagReportLocalService extends PersistedModelLocalService {
 
     public void updateFlagReportResources(
         org.nterlearning.datamodel.catalog.model.FlagReport flagReport,
-        java.lang.String[] communityPermissions,
-        java.lang.String[] guestPermissions)
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException;
 

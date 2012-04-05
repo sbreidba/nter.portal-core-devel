@@ -104,11 +104,11 @@ public class FlagReportLocalServiceImpl extends FlagReportLocalServiceBaseImpl {
         flagReportPersistence.update(flagReport, false);
 
         // Resources
-        if(serviceContext.getAddCommunityPermissions() ||
-           serviceContext.getAddGuestPermissions()) {
-            addFlagReportResources(flagReport, serviceContext.getAddCommunityPermissions(), serviceContext.getAddGuestPermissions());
+        if(serviceContext.isAddGroupPermissions() ||
+           serviceContext.isAddGuestPermissions()) {
+            addFlagReportResources(flagReport, serviceContext.isAddGroupPermissions(), serviceContext.isAddGuestPermissions());
         } else {
-            addFlagReportResources(flagReport, serviceContext.getCommunityPermissions(), serviceContext.getGuestPermissions());
+            addFlagReportResources(flagReport, serviceContext.getGroupPermissions(), serviceContext.getGuestPermissions());
         }
 
         // Asset
@@ -126,21 +126,21 @@ public class FlagReportLocalServiceImpl extends FlagReportLocalServiceBaseImpl {
         return flagReport;
     }
 
-    public void addFlagReportResources(FlagReport flagReport, boolean addCommunityPermissions,
+    public void addFlagReportResources(FlagReport flagReport, boolean addGroupPermissions,
                                          boolean addGuestPermissions) throws PortalException, SystemException {
         resourceLocalService.addResources(
                 flagReport.getCompanyId(), flagReport.getGroupId(), flagReport.getUserId(),
                 FlagReport.class.getName(), flagReport.getFlagReportId(), false,
-                addCommunityPermissions, addGuestPermissions);
+                addGroupPermissions, addGuestPermissions);
     }
 
-    public void addFlagReportResources(FlagReport flagReport, String[] communityPermissions,
+    public void addFlagReportResources(FlagReport flagReport, String[] groupPermissions,
                                          String[] guestPermissions) throws PortalException, SystemException {
         try {
             resourceLocalService.addModelResources(
                     flagReport.getCompanyId(), flagReport.getGroupId(), flagReport.getUserId(),
                     FlagReport.class.getName(), flagReport.getFlagReportId(),
-                    communityPermissions, guestPermissions);
+                    groupPermissions, guestPermissions);
         }
         catch (PortalException e) {
             e.printStackTrace();
@@ -157,8 +157,8 @@ public class FlagReportLocalServiceImpl extends FlagReportLocalServiceBaseImpl {
 
         assetEntryLocalService.updateEntry(
                 userId, flagReport.getGroupId(), FlagReport.class.getName(), flagReport.getFlagReportId(),
-                null, assetCategoryIds, assetTagNames, true, null, null, null, null, ContentTypes.TEXT_HTML,
-                null, null, null, null, 0, 0, null, false);
+                null, 0, assetCategoryIds, assetTagNames, true, null, null, null, null, ContentTypes.TEXT_HTML,
+                null, null, null, null, null, 0, 0, null, false);
     }
 
     public void deleteReports(long groupId) throws PortalException, SystemException {
@@ -192,7 +192,6 @@ public class FlagReportLocalServiceImpl extends FlagReportLocalServiceBaseImpl {
         deleteReport(flagReport);
     }
 
-    @Override
     public FlagReport updateReport(FlagReport flagReport) throws SystemException {
         throw new IllegalArgumentException("Must pass userId, Report columns and serviceContext when updating a report.");
     }
@@ -220,9 +219,9 @@ public class FlagReportLocalServiceImpl extends FlagReportLocalServiceBaseImpl {
         flagReportPersistence.update(flagReport, false);
 
         // Resources
-        if ((serviceContext.getCommunityPermissions() != null) ||
+        if ((serviceContext.getGroupPermissions() != null) ||
                 (serviceContext.getGuestPermissions() != null)) {
-            updateFlagReportResources(flagReport, serviceContext.getCommunityPermissions(),
+            updateFlagReportResources(flagReport, serviceContext.getGroupPermissions(),
                     serviceContext.getGuestPermissions());
         }
 
@@ -255,9 +254,9 @@ public class FlagReportLocalServiceImpl extends FlagReportLocalServiceBaseImpl {
         flagReportPersistence.update(flagReport, false);
 
         // Resources
-        if ((serviceContext.getCommunityPermissions() != null) ||
+        if ((serviceContext.getGroupPermissions() != null) ||
                 (serviceContext.getGuestPermissions() != null)) {
-            updateFlagReportResources(flagReport, serviceContext.getCommunityPermissions(),
+            updateFlagReportResources(flagReport, serviceContext.getGroupPermissions(),
                     serviceContext.getGuestPermissions());
         }
 
@@ -271,12 +270,12 @@ public class FlagReportLocalServiceImpl extends FlagReportLocalServiceBaseImpl {
         return flagReport;
     }
 
-    public void updateFlagReportResources(FlagReport flagReport, String[] communityPermissions,
+    public void updateFlagReportResources(FlagReport flagReport, String[] groupPermissions,
                                             String[] guestPermissions) throws PortalException, SystemException {
         resourceLocalService.updateResources(
                 flagReport.getCompanyId(), flagReport.getGroupId(),
                 FlagReport.class.getName(), flagReport.getFlagReportId(),
-                communityPermissions, guestPermissions);
+                groupPermissions, guestPermissions);
     }
 
     public void updateFlagReportStats(long classNameId, long classPK) throws PortalException, SystemException {
@@ -301,7 +300,9 @@ public class FlagReportLocalServiceImpl extends FlagReportLocalServiceBaseImpl {
         User user = userPersistence.findByPrimaryKey(userId);
         Date now = new Date();
         FlagReport flagReport = flagReportPersistence.findByPrimaryKey(resourcePrimKey);
-        WorkflowDefinitionLink workflowDefinitionLink = WorkflowDefinitionLinkUtil.fetchByG_C_C(flagReport.getGroupId(), flagReport.getCompanyId(), ClassNameLocalServiceUtil.getClassNameId(FlagReport.class));
+        WorkflowDefinitionLink workflowDefinitionLink = WorkflowDefinitionLinkUtil.fetchByG_C_C_C_T(flagReport.getGroupId(),
+                flagReport.getCompanyId(), ClassNameLocalServiceUtil.getClassNameId(FlagReport.class),
+                flagReport.getPrimaryKey(), 0);
 
         if (flagReport.getModerateAction().equals("") && workflowDefinitionLink != null ) {
            if (status == WorkflowConstants.STATUS_APPROVED)  {

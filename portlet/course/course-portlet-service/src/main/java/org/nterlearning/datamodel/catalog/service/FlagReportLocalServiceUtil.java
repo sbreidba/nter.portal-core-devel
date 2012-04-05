@@ -282,22 +282,21 @@ public class FlagReportLocalServiceUtil {
 
     public static void addFlagReportResources(
         org.nterlearning.datamodel.catalog.model.FlagReport flagReport,
-        boolean addCommunityPermissions, boolean addGuestPermissions)
+        boolean addGroupPermissions, boolean addGuestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         getService()
-            .addFlagReportResources(flagReport, addCommunityPermissions,
+            .addFlagReportResources(flagReport, addGroupPermissions,
             addGuestPermissions);
     }
 
     public static void addFlagReportResources(
         org.nterlearning.datamodel.catalog.model.FlagReport flagReport,
-        java.lang.String[] communityPermissions,
-        java.lang.String[] guestPermissions)
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         getService()
-            .addFlagReportResources(flagReport, communityPermissions,
+            .addFlagReportResources(flagReport, groupPermissions,
             guestPermissions);
     }
 
@@ -365,12 +364,11 @@ public class FlagReportLocalServiceUtil {
 
     public static void updateFlagReportResources(
         org.nterlearning.datamodel.catalog.model.FlagReport flagReport,
-        java.lang.String[] communityPermissions,
-        java.lang.String[] guestPermissions)
+        java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
         getService()
-            .updateFlagReportResources(flagReport, communityPermissions,
+            .updateFlagReportResources(flagReport, groupPermissions,
             guestPermissions);
     }
 

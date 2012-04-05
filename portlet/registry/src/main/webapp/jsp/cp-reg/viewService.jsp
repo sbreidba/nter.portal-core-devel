@@ -41,14 +41,14 @@
 %>
 <%@include file="/html/init.jsp" %>
 
-<%@ page import="org.nterlearning.service.registry.RegistryUtil" %>
+<%@ page import="com.sri.nter.service.registry.RegistryUtil" %>
 
 <%@ page import="org.nterlearning.xml.nter_registry.domain_objects_0_1_0.Binding" %>
 <%@ page import="org.nterlearning.xml.nter_registry.domain_objects_0_1_0.ServiceTypeEnum" %>
 <%@ page import="org.nterlearning.xml.nter_registry.domain_objects_0_1_0.BindingTypeEnum" %>
 <%@ page import="org.nterlearning.xml.nter_registry.blacklist_objects_0_1_0.ActiveStatusEnum" %>
 
-<%@ page import="org.nterlearning.registry.proxy.RegistryInstance" %>
+<%@ page import="com.sri.nter.registry.proxy.RegistryInstance" %>
 
 <%@ page import="java.util.Map" %>
 <%@ page import="java.util.HashMap" %>
@@ -60,7 +60,7 @@
 <%@ page import="com.liferay.portal.kernel.util.ListUtil" %>
 <%@ page import="javax.portlet.ActionRequest" %>
 
-<jsp:useBean id="service" type="org.nterlearning.registry.proxy.ServiceBean" scope="request" />
+<jsp:useBean id="service" type="com.sri.nter.registry.proxy.ServiceBean" scope="request" />
 
 <jsp:useBean id="actionName" type="java.lang.String" scope="request" />
 
