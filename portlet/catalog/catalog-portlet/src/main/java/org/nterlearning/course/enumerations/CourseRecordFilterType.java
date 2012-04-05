@@ -19,26 +19,28 @@
  */
 
 
-package course.enumerations;
+package org.nterlearning.course.enumerations;
 
 /**
- * This enumeration is designed to describe the various types of sorting
- * we can apply to the component/component custom query.
+ * This enumeration is designed to describe the various types of filters
+ * we can apply to the course/courseRecord/ratingsEntry custom query.
  */
-public enum ComponentRecordSortType {
+public enum CourseRecordFilterType {
 
-    UPDATED_DATE           ("CATALOG_ComponentRecord.updatedDate"),
-    COMPONENT_TITLE        ("CATALOG_Component.title"),
-    COMPLETION_STATUS      ("CATALOG_ComponentRecord.completionStatus"),
-    COMPONENT_ORDER_WEIGHT ("CATALOG_Courses_Components.orderWeight");
+    ALL                 (" "),
+    SPECIFIC_COURSE     (" AND (CATALOG_Course.CourseId = ?) "),
+    ASSIGNED            (" AND CATALOG_CourseRecord.assigned = 1 "),
+    IN_PROGRESS_STATUS  (" AND (CATALOG_CourseRecord.completionStatus in ('In Progress', 'Failed Retry')) "),
+    FINISHED_STATUS     (" AND (CATALOG_CourseRecord.completionStatus in ('Completed','Failed')) ");
 
-    private final String sortSql;
+    private final String whereSql;
 
-    ComponentRecordSortType( String sortSql) {
-        this.sortSql = sortSql;
+    CourseRecordFilterType( String whereSql) {
+        this.whereSql = whereSql;
     }
 
-    public String getSortSql() {
-        return sortSql;
+    public String getWhereSql() {
+         return whereSql;
     }
+
 }

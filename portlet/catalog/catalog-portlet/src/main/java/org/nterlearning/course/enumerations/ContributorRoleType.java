@@ -18,29 +18,33 @@
  * 02110-1301, USA.
  */
 
-
-package course.enumerations;
-
+package org.nterlearning.course.enumerations;
 /**
- * This enumeration is designed to describe the various types of filters
- * we can apply to the course/courseRecord/ratingsEntry custom query.
+ * This enumeration is designed to describe the various types of roles
+ * that can be assigned to a course or component.
  */
-public enum CourseRecordFilterType {
+public enum ContributorRoleType {
 
-    ALL                 (" "),
-    SPECIFIC_COURSE     (" AND (CATALOG_Course.CourseId = ?) "),
-    ASSIGNED            (" AND CATALOG_CourseRecord.assigned = 1 "),
-    IN_PROGRESS_STATUS  (" AND (CATALOG_CourseRecord.completionStatus in ('In Progress', 'Failed Retry')) "),
-    FINISHED_STATUS     (" AND (CATALOG_CourseRecord.completionStatus in ('Completed','Failed')) ");
+    AUTHOR              ("author"),
+    CONTRIBUTOR         ("contributor"),
+    ORGANIZATION        ("organization");
 
-    private final String whereSql;
+    private final String value;
 
-    CourseRecordFilterType( String whereSql) {
-        this.whereSql = whereSql;
+    ContributorRoleType(String v) {
+        value = v;
     }
 
-    public String getWhereSql() {
-         return whereSql;
+    public String value() {
+        return value;
     }
 
+    public static ContributorRoleType fromValue(String v) {
+        for (ContributorRoleType c: ContributorRoleType.values()) {
+            if (c.value.equalsIgnoreCase(v)) {
+                return c;
+            }
+        }
+        throw new IllegalArgumentException(v);
+    }
 }
