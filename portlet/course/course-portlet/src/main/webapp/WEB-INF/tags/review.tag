@@ -114,13 +114,13 @@ int upVotes = (int) totalEntries - downVotes;
 				<portlet:renderURL var="editUrl">
 					<portlet:param name="<%=NterKeys.REVIEW_ID%>" value="<%= Long.toString(review.getPrimaryKey()) %>"/>
 					<portlet:param name="<%=NterKeys.REVIEW_CLASSPK%>" value="<%= Long.toString(review.getCourseId()) %>"/>
-					<portlet:param name="jspPage" value="/course-reviews/html/edit-review.jsp"/>
+					<portlet:param name="jspPage" value="/course-reviews/jsp/edit-review.jsp"/>
 					<portlet:param name="redirect" value="<%=currentURL%>"/>
 				</portlet:renderURL>
 				<portlet:renderURL var="deleteUrl" windowState="<%= LiferayWindowState.MAXIMIZED.toString() %>">
 					<portlet:param name="<%=NterKeys.REVIEW_ID%>" value="<%= Long.toString(review.getPrimaryKey()) %>"/>
 					<portlet:param name="<%=NterKeys.REVIEW_CLASSPK%>" value="<%= Long.toString(review.getCourseId()) %>"/>
-                    <portlet:param name="jspPage" value="/course-reviews/html/delete-review-confirm.jsp"/>
+                    <portlet:param name="jspPage" value="/course-reviews/jsp/delete-review-confirm.jsp"/>
 				</portlet:renderURL>
 				<a class="button edit" href="<%= editUrl %>&cid=<%=review.getCourseId()%>#review-form"><%= LanguageUtil.get(pageContext,
 						"edit") %>
@@ -136,7 +136,7 @@ int upVotes = (int) totalEntries - downVotes;
 				<portlet:renderURL var="metaLanding" windowState="<%= LiferayWindowState.MAXIMIZED.toString() %>">
 					<portlet:param name="<%=NterKeys.REVIEW_ID%>" value="<%= Long.toString(review.getPrimaryKey()) %>"/>
 					<portlet:param name="<%=NterKeys.REVIEW_CLASSPK%>" value="<%= Long.toString(review.getCourseId()) %>"/>
-					<portlet:param name="jspPage" value="/course-reviews/html/metareview-landing.jsp"/>
+					<portlet:param name="jspPage" value="/course-reviews/jsp/metareview-landing.jsp"/>
 					<portlet:param name="redirect" value="<%=currentURL%>"/>
 				</portlet:renderURL>
 				<portlet:actionURL var="metaUrl" name="updateReviewRating"
@@ -144,7 +144,7 @@ int upVotes = (int) totalEntries - downVotes;
 					<portlet:param name="redirect" value="<%=metaLanding%>"/>
 				</portlet:actionURL>
                 <portlet:renderURL var="flagEntryUrl" windowState="<%= LiferayWindowState.MAXIMIZED.toString() %>">
-                    <portlet:param name="jspPage" value="/course-reviews/html/editFlagEntry.jsp"/>
+                    <portlet:param name="jspPage" value="/course-reviews/jsp/editFlagEntry.jsp"/>
                 </portlet:renderURL>
 				<label><%= LanguageUtil.get(pageContext, "meta-prompt") %>
 				</label>
