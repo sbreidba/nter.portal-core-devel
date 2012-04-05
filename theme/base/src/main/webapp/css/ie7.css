@@ -1,0 +1,53 @@
+/*
+ * National Training and Education Resource (NTER)
+ * Copyright (C) 2012 SRI International
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301, USA.
+ */
+
+/* == page regions == */
+/* header */
+.ie6 #site-search .submit { background-position: left center; padding-left: 16px; }
+
+
+/* == portlet content styles == */
+.course-description .taglib-ratings { display: inline; top: 0; }
+
+/* call to action */
+section.call-to-action .text { float: left; }
+section.call-to-action img { float: right; }
+
+/* recent courses */
+.course-status-section .course { background-color: white; }
+.course-status-section .actions { margin-top: 20px; zoom: 1; }
+
+/* course listings */
+ul.course-listing { zoom: 1; }
+
+/* carousel */
+.ie6 .carousel-wrapper, .ie6 .carousel-prev, .ie6 .carousel-next { height: 105px; }
+
+/* course reviews */
+.ie6 .taglib-flags, .ie6 .aui-thumbrating, .ie6 .aui-thumbrating-content { display: inline; }
+.reviewlist .actions form, .reviewlist .actions .admin, .reviewlist .actions .metamoderation { display: inline; vertical-align: top; }
+.review header .aui-rating-content { display: inline; }
+.ratings-histogram label { white-space: nowrap; }
+.ratings-histogram .total { display: inline; }
+.ratings-stats .aui-rating { margin-left: 0; margin-bottom: .2em; }
+
+/* course details */
+.course-details .course-image .thumbnails { zoom: 1; }
+.course-details .course-image .thumbnails li { zoom: 1; float: left; }
