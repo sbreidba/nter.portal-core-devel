@@ -354,6 +354,48 @@ public class ComponentClp extends BaseModelImpl<Component> implements Component 
         _priceExpiration = priceExpiration;
     }
 
+    public java.lang.String getFriendlyVersionDate(
+        javax.servlet.jsp.PageContext pageContext) {
+        throw new UnsupportedOperationException();
+    }
+
+    public java.lang.String getFriendlyUpdateDate(
+        javax.servlet.jsp.PageContext pageContext) {
+        throw new UnsupportedOperationException();
+    }
+
+    public java.lang.String getSearchContext() {
+        throw new UnsupportedOperationException();
+    }
+
+    public void setSearchContext(java.lang.String searchContext) {
+        throw new UnsupportedOperationException();
+    }
+
+    public float getSearchRelevance() {
+        throw new UnsupportedOperationException();
+    }
+
+    public void setSearchRelevance(float searchRelevance) {
+        throw new UnsupportedOperationException();
+    }
+
+    public java.lang.String getUrl() {
+        throw new UnsupportedOperationException();
+    }
+
+    public java.lang.String getUrl(java.lang.String lang) {
+        throw new UnsupportedOperationException();
+    }
+
+    public boolean isPurchased(long userId) {
+        throw new UnsupportedOperationException();
+    }
+
+    public void updateIndex() {
+        throw new UnsupportedOperationException();
+    }
+
     public void persist() throws SystemException {
         if (this.isNew()) {
             ComponentLocalServiceUtil.addComponent(this);
