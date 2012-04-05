@@ -93,5 +93,12 @@
             <artifactId>commons-codec</artifactId>
             <version>1.6</version>       <!-- liferay uses 1.5 -->
         </dependency>
+
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>2.1</version>
+        </dependency>
 	</dependencies>
+
 </project>
