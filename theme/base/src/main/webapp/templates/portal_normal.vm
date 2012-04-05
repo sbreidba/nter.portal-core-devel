@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+
+#parse ($init)
+
+<html class="#language("lang.dir") no-js" dir="#language("lang.dir")" lang="$w3c_language_id">
+
+<head>
+	#if ($community_name == $company_name)
+		#set($pagename = "${the_title} - ${community_name}")
+	#else
+		#set($pagename = "${the_title} - ${community_name} - ${company_name}")
+	#end
+	<title>$pagename</title>
+
+	$theme.include($top_head_include)
+	
+	<!--[if lte IE 7]>
+	<link rel="stylesheet" type="text/css" href="${css_folder}/ie7.css" />
+	<![endif]-->
+	
+	<script src="${javascript_folder}/modernizr.2.0.6.configured.min.js"></script>
+</head>
+
+<body class="$css_class">
+
+	<a href="#main-content" class="skiplink">#language("skip-to-content")</a>
+	<a href="#banner" class="skiplink">#language("skip-to-header")</a>
+
+#if($is_signed_in && $show_doc)
+	#dockbar()
+#end
+
+<div id="wrapper">
+
+	<header id="banner" role="banner" aria-labelledby="heading">
+		<hgroup>
+			<h1 class="company-title" id="heading">
+				<a class="$logo_css_class" href="$site_default_url" title="$site_name">
+					<img alt="$logo_description" src="$site_logo" />
+				</a>
+			</h1>
+			<h2 class="company-subtitle">#language("nter-name") <small>#language("beta-note")</small></h2>
+		</hgroup>
+		
+		<div id="header-actions">
+			<div id="login-actions">
+			#if(!$is_signed_in)
+				<a href="$sign_in_url" id="sign-in" rel="nofollow">$sign_in_text</a>
+				<a href="$themeDisplay.getURLCreateAccount().toString()" id="create-account">#language ("create-account")</a>
+			#else
+				<span class="welcome-message">$user_greeting</span>
+				<a href="$company_url/account" id="account" rel="nofollow">#language("account")</a>
+				<a href="$sign_out_url" id="sign-in" rel="nofollow">$sign_out_text</a>
+			#end
+			</div>
+			
+			<div id="site-search" role="search">
+				$theme.search()
+			</div>
+		</div>
+
+		#if ($update_available_url)
+			<div class="popup-alert-notice">
+				<a class="update-available" href="$update_available_url">#language("updates-are-available-for-liferay")</a>
+			</div>
+		#end
+
+		#if ($has_navigation)
+			#parse ("$full_templates_path/navigation.vm")
+		#end
+	</header>
+	
+	#set ($VOID = $velocityPortletPreferences.setValue('portlet-setup-show-borders', 'false'))
+	$theme.runtime("motd_WAR_ntermotdportlet","",$velocityPortletPreferences.toString())
+	#set ($VOID = $velocityPortletPreferences.reset())
+
+	<div id="content">
+		<h2 id="page-title">$the_title</h2>
+		#if ($selectable)
+			$theme.include($content_include)
+		#else
+			$portletDisplay.recycle()
+
+			$portletDisplay.setTitle($the_title)
+
+			$theme.wrapPortlet("portlet.vm", $content_include)
+		#end
+	</div>
+
+	<footer id="footer" role="contentinfo">
+		<h2 class="footer-title">#language("nter-name")</h2>
+		<ul class="footer-links">
+			<li><a href="$company_url">#language("footer-home")</a></li>
+			<li><a href="$company_url/courses">#language("footer-courses")</a></li>
+			<li><a href="$company_url/about">#language("footer-about")</a></li>
+			<li><a href="$company_url/tos">#language("footer-tos")</a></li>
+			<li><a href="$company_url/privacy">#language("footer-privacy")</a></li>
+			<li><a href="$company_url/contact">#language("footer-contact")</a></li>
+		</ul>
+		<div class="footer-version">
+            #set ($versionContent = $journalContentUtil.getContent(
+                        $guestGroup.getGroupId(), "VERSION", null, "$locale", $theme_display))
+            $versionContent
+        </div>
+	</footer>
+</div>
+
+</body>
+
+$theme.include($bottom_include)
+
+</html>

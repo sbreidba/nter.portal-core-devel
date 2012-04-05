@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  National Training and Education Resource (NTER)
+  Copyright (C) 2012 SRI International
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or (at
+  your option) any later version.
+
+  This program is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  02110-1301, USA.
+  -->
+  
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:nter="http://nterlearning.org/xml/feeds/atom-extensions-schema_0.6.1.xsd">
+
+    <!-- Test for parent-child update logic for student activity and completion progress. -->
+    <!-- Student test@nter.com -->
+
+    <title>Student Records Feed</title>
+    <link rel="self" href="test-0.6.1-student-records-atom-feed-parent-child-1.xml" type="application/atom+xml"/>
+    <author>
+        <uri>nwtp.gov</uri>
+    </author>
+    <updated>2011-02-15T18:52:00Z</updated>
+    <id>tag:nwtp.gov,2011-01-30:/feeds/TEST-parent-child-progress-2011</id>
+
+    <!-- Record for a course -->
+    <entry nter:entryType="course-record">
+        <title/>
+        <id>tag:nwtp.gov,2011-01-30:/records/TEST-parent-child-progress-bike-part-course</id>
+        <updated>2011-02-15T13:30:02Z</updated>
+        <content/>
+        <nter:courseRecord
+                nter:studentUserId="test@nter.com"
+                nter:courseId="tag:nwtp.gov,2011-01-14:/courses/bicycle-parts-80da344efa6a"
+                nter:progress="In Progress"
+                nter:assigned="true"
+                >
+            <nter:componentRecord
+                    nter:componentId="tag:nwtp.gov,2011-01-14:/link/to/wheel/en-US"
+                    nter:completionPercent="60"
+                    nter:progress="In Progress"
+                    nter:progressDate="2011-02-15T13:30:02Z"
+                    />
+            <nter:componentRecord
+                    nter:componentId="tag:nwtp.gov,2011-01-14:/link/to/handlebar/en-US"
+                    nter:completionPercent="10"
+                    nter:progress="In Progress"
+                    nter:progressDate="2011-02-15T13:30:02Z"
+                    />
+            <nter:componentRecord
+                    nter:componentId="tag:nwtp.gov,2011-01-14:/link/to/frame/en-US"
+                    nter:completionPercent="50"
+                    nter:progress="In Progress"
+                    nter:progressDate="2011-01-30T13:30:02Z"
+                    />
+        </nter:courseRecord>
+    </entry>
+
+</feed>
