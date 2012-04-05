@@ -6,6 +6,7 @@
 		<property name="service" ref="org.nterlearning.datamodel.catalog.service.ComponentLocalService" />
 	</bean>
 	<bean id="org.nterlearning.datamodel.catalog.service.persistence.ComponentPersistence" class="org.nterlearning.datamodel.catalog.service.persistence.ComponentPersistenceImpl" parent="basePersistence" />
+	<bean id="org.nterlearning.datamodel.catalog.service.persistence.ComponentFinder" class="org.nterlearning.datamodel.catalog.service.persistence.ComponentFinderImpl" parent="basePersistence" />
 	<bean id="org.nterlearning.datamodel.catalog.service.ComponentRecordLocalService" class="org.nterlearning.datamodel.catalog.service.impl.ComponentRecordLocalServiceImpl" />
 	<bean id="org.nterlearning.datamodel.catalog.service.ComponentRecordLocalServiceUtil" class="org.nterlearning.datamodel.catalog.service.ComponentRecordLocalServiceUtil">
 		<property name="service" ref="org.nterlearning.datamodel.catalog.service.ComponentRecordLocalService" />

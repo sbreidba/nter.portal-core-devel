@@ -41,6 +41,7 @@ import org.nterlearning.datamodel.catalog.service.FeedSyncHistoryLocalService;
 import org.nterlearning.datamodel.catalog.service.FlagReportLocalService;
 import org.nterlearning.datamodel.catalog.service.FlagReportStatsLocalService;
 import org.nterlearning.datamodel.catalog.service.GlobalCourseReviewLocalService;
+import org.nterlearning.datamodel.catalog.service.persistence.ComponentFinder;
 import org.nterlearning.datamodel.catalog.service.persistence.ComponentPersistence;
 import org.nterlearning.datamodel.catalog.service.persistence.ComponentRecordPersistence;
 import org.nterlearning.datamodel.catalog.service.persistence.ContributorPersistence;
@@ -83,6 +84,8 @@ public abstract class CourseImageLocalServiceBaseImpl
     protected ComponentLocalService componentLocalService;
     @BeanReference(type = ComponentPersistence.class)
     protected ComponentPersistence componentPersistence;
+    @BeanReference(type = ComponentFinder.class)
+    protected ComponentFinder componentFinder;
     @BeanReference(type = ComponentRecordLocalService.class)
     protected ComponentRecordLocalService componentRecordLocalService;
     @BeanReference(type = ComponentRecordPersistence.class)
@@ -443,6 +446,24 @@ public abstract class CourseImageLocalServiceBaseImpl
     public void setComponentPersistence(
         ComponentPersistence componentPersistence) {
         this.componentPersistence = componentPersistence;
+    }
+
+    /**
+     * Returns the component finder.
+     *
+     * @return the component finder
+     */
+    public ComponentFinder getComponentFinder() {
+        return componentFinder;
+    }
+
+    /**
+     * Sets the component finder.
+     *
+     * @param componentFinder the component finder
+     */
+    public void setComponentFinder(ComponentFinder componentFinder) {
+        this.componentFinder = componentFinder;
     }
 
     /**
