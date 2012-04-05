@@ -18,8 +18,6 @@
   02110-1301, USA.
   --%>
 
-%>
-
 <%@ taglib uri="http://java.sun.com/portlet" prefix="portlet" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
