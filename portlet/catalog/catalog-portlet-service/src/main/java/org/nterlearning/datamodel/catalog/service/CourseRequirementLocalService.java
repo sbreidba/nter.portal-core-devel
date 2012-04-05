@@ -223,4 +223,8 @@ public interface CourseRequirementLocalService
     * @param beanIdentifier the Spring bean ID for this bean
     */
     public void setBeanIdentifier(java.lang.String beanIdentifier);
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRequirement> findByCourseIdWithRequirementType(
+        java.lang.Long courseId, java.lang.String requirementType)
+        throws com.liferay.portal.kernel.exception.SystemException;
 }

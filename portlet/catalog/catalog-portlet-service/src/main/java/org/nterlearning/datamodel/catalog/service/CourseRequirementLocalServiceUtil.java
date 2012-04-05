@@ -250,6 +250,13 @@ public class CourseRequirementLocalServiceUtil {
         getService().setBeanIdentifier(beanIdentifier);
     }
 
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.CourseRequirement> findByCourseIdWithRequirementType(
+        java.lang.Long courseId, java.lang.String requirementType)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService()
+                   .findByCourseIdWithRequirementType(courseId, requirementType);
+    }
+
     public static void clearService() {
         _service = null;
     }

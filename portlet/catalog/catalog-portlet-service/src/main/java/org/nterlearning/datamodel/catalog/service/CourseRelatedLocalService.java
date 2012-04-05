@@ -222,4 +222,12 @@ public interface CourseRelatedLocalService extends PersistedModelLocalService {
     * @param beanIdentifier the Spring bean ID for this bean
     */
     public void setBeanIdentifier(java.lang.String beanIdentifier);
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRelated> findByRelatedCourseIdWithRelationshipType(
+        java.lang.Long componentId, java.lang.String relationshipType)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRelated> findByRelatedCourseIri(
+        java.lang.String relatedCourseIri)
+        throws com.liferay.portal.kernel.exception.SystemException;
 }
