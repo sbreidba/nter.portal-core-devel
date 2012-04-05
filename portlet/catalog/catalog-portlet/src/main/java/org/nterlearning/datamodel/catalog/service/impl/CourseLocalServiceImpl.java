@@ -42,7 +42,7 @@ import com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil;
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 import org.nterlearning.course.enumerations.CourseSortType;
-import org.nterlearning.crawl.nutch.CrawlTool;
+//import org.nterlearning.crawl.nutch.CrawlTool;
 import org.nterlearning.datamodel.catalog.NoSuchCourseException;
 import org.nterlearning.datamodel.catalog.model.*;
 import org.nterlearning.datamodel.catalog.service.*;
@@ -383,7 +383,7 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 
         coursePersistence.update(course, true);
 
-        course.updateIndex();
+//        course.updateIndex();
         removeCourseFromIndex(course);
     }
 
@@ -397,7 +397,7 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 
         coursePersistence.update(course, true);
 
-        course.updateIndex();
+//        course.updateIndex();
     }
 
 
@@ -496,9 +496,9 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
                 null, 0, 0, null, false);
 
         // Indexer
-        if (reIndex) {
-            course.updateIndex();
-        }
+//        if (reIndex) {
+//            course.updateIndex();
+//        }
     }
 
 
@@ -516,7 +516,7 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
             throws SystemException {
 
         // Indexer
-        course.updateIndex();
+//        course.updateIndex();
 
         if (course.isRemoved()) {
             removeCourseFromIndex(course);
@@ -640,7 +640,7 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 
         // Indexer
         try {
-            course.updateIndex();
+//            course.updateIndex();
 
             if (course.isRemoved()) {
                 removeCourseFromIndex(course);
@@ -672,7 +672,7 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
         Course course = coursePersistence.findByPrimaryKey(courseId);
 
         // Indexer
-        course.updateIndex();
+//        course.updateIndex();
 
         return course;
     }
