@@ -438,7 +438,8 @@ public class FeedReferenceWrapper implements FeedReference,
         return new FeedReferenceWrapper((FeedReference) _feedReference.clone());
     }
 
-    public int compareTo(FeedReference feedReference) {
+    public int compareTo(
+        org.nterlearning.datamodel.catalog.model.FeedReference feedReference) {
         return _feedReference.compareTo(feedReference);
     }
 
@@ -447,11 +448,11 @@ public class FeedReferenceWrapper implements FeedReference,
         return _feedReference.hashCode();
     }
 
-    public com.liferay.portal.model.CacheModel<FeedReference> toCacheModel() {
+    public com.liferay.portal.model.CacheModel<org.nterlearning.datamodel.catalog.model.FeedReference> toCacheModel() {
         return _feedReference.toCacheModel();
     }
 
-    public FeedReference toEscapedModel() {
+    public org.nterlearning.datamodel.catalog.model.FeedReference toEscapedModel() {
         return new FeedReferenceWrapper(_feedReference.toEscapedModel());
     }
 

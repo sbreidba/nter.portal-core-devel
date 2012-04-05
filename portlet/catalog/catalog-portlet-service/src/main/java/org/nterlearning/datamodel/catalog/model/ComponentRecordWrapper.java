@@ -195,7 +195,8 @@ public class ComponentRecordWrapper implements ComponentRecord,
         return new ComponentRecordWrapper((ComponentRecord) _componentRecord.clone());
     }
 
-    public int compareTo(ComponentRecord componentRecord) {
+    public int compareTo(
+        org.nterlearning.datamodel.catalog.model.ComponentRecord componentRecord) {
         return _componentRecord.compareTo(componentRecord);
     }
 
@@ -204,11 +205,11 @@ public class ComponentRecordWrapper implements ComponentRecord,
         return _componentRecord.hashCode();
     }
 
-    public com.liferay.portal.model.CacheModel<ComponentRecord> toCacheModel() {
+    public com.liferay.portal.model.CacheModel<org.nterlearning.datamodel.catalog.model.ComponentRecord> toCacheModel() {
         return _componentRecord.toCacheModel();
     }
 
-    public ComponentRecord toEscapedModel() {
+    public org.nterlearning.datamodel.catalog.model.ComponentRecord toEscapedModel() {
         return new ComponentRecordWrapper(_componentRecord.toEscapedModel());
     }
 

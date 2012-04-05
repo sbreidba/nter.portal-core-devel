@@ -231,7 +231,8 @@ public class CourseImageWrapper implements CourseImage,
         return new CourseImageWrapper((CourseImage) _courseImage.clone());
     }
 
-    public int compareTo(CourseImage courseImage) {
+    public int compareTo(
+        org.nterlearning.datamodel.catalog.model.CourseImage courseImage) {
         return _courseImage.compareTo(courseImage);
     }
 
@@ -240,11 +241,11 @@ public class CourseImageWrapper implements CourseImage,
         return _courseImage.hashCode();
     }
 
-    public com.liferay.portal.model.CacheModel<CourseImage> toCacheModel() {
+    public com.liferay.portal.model.CacheModel<org.nterlearning.datamodel.catalog.model.CourseImage> toCacheModel() {
         return _courseImage.toCacheModel();
     }
 
-    public CourseImage toEscapedModel() {
+    public org.nterlearning.datamodel.catalog.model.CourseImage toEscapedModel() {
         return new CourseImageWrapper(_courseImage.toEscapedModel());
     }
 

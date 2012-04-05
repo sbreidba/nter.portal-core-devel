@@ -332,7 +332,8 @@ public class CourseReviewWrapper implements CourseReview,
         return new CourseReviewWrapper((CourseReview) _courseReview.clone());
     }
 
-    public int compareTo(CourseReview courseReview) {
+    public int compareTo(
+        org.nterlearning.datamodel.catalog.model.CourseReview courseReview) {
         return _courseReview.compareTo(courseReview);
     }
 
@@ -341,11 +342,11 @@ public class CourseReviewWrapper implements CourseReview,
         return _courseReview.hashCode();
     }
 
-    public com.liferay.portal.model.CacheModel<CourseReview> toCacheModel() {
+    public com.liferay.portal.model.CacheModel<org.nterlearning.datamodel.catalog.model.CourseReview> toCacheModel() {
         return _courseReview.toCacheModel();
     }
 
-    public CourseReview toEscapedModel() {
+    public org.nterlearning.datamodel.catalog.model.CourseReview toEscapedModel() {
         return new CourseReviewWrapper(_courseReview.toEscapedModel());
     }
 

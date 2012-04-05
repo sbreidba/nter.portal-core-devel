@@ -1602,7 +1602,7 @@ public class CourseWrapper implements Course, ModelWrapper<Course> {
         return new CourseWrapper((Course) _course.clone());
     }
 
-    public int compareTo(Course course) {
+    public int compareTo(org.nterlearning.datamodel.catalog.model.Course course) {
         return _course.compareTo(course);
     }
 
@@ -1611,11 +1611,11 @@ public class CourseWrapper implements Course, ModelWrapper<Course> {
         return _course.hashCode();
     }
 
-    public com.liferay.portal.model.CacheModel<Course> toCacheModel() {
+    public com.liferay.portal.model.CacheModel<org.nterlearning.datamodel.catalog.model.Course> toCacheModel() {
         return _course.toCacheModel();
     }
 
-    public Course toEscapedModel() {
+    public org.nterlearning.datamodel.catalog.model.Course toEscapedModel() {
         return new CourseWrapper(_course.toEscapedModel());
     }
 
