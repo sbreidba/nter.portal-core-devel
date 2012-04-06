@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ National Training and Education Resource (NTER)
+  ~ Copyright (C) 2011  SRI International
+  ~
+  ~ This program is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or (at
+  ~ your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful, but
+  ~ WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  ~ General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  ~ 02110-1301, USA.
+  -->
+
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:nter="http://nterlearning.org/xml/feeds/atom-extensions-schema_0.6.3.xsd">
+
+    <!-- Update Feed; New vocabulary and category -->
+    <!-- one new course-->
+    <!-- two existing courses from sample are not here to test that course-category assignments maintained on update -->
+    <!-- two existing course category assignments adjusted in next update feed -->
+
+    <title>Course Feed</title>
+    <link rel="self" href="test-0.6.3-course-atom-feed-category-update1.xml" type="application/atom+xml"/>
+    <updated>2010-12-13T22:52:00Z</updated>
+    <id>tag:nwtp.gov,2010-10-04:/feeds/sample02-vcc1-11d9-b93C-0003939e0af6</id>
+
+    <entry xml:lang="en-US" nter:entryType="vocabulary">
+        <id>tag:nwtp.gov,2010-10-04:/vocabulary/V0001011-C34C-4A99-C38A-C97D87AF8AA2</id>
+        <updated>2010-10-13T18:30:02Z</updated>
+		<title>This title will be ignored by NTER in favor of the language specific vocabulary titles</title>
+		<summary>Updated Vocabulary of dynamic taxonomy for the Department of Energy. </summary>
+		<nter:vocabulary>
+			<nter:title xml:lang="en-US">Department of Energy</nter:title>
+			<nter:title xml:lang="fr-FR">Departement de Energy</nter:title>
+			<nter:title xml:lang="es-ES">DOE-ES</nter:title>
+				<nter:category>
+						<nter:id>tag:nwtp.gov,2010-10-04:/category/CAT02000-C34C-4A99-C38A-C97D87AF8AA2</nter:id>
+						<nter:title xml:lang="en-US">Foreman</nter:title>
+						<nter:title xml:lang="fr-FR">Foreman</nter:title>
+						<nter:title xml:lang="es-ES">Capataz</nter:title>
+				</nter:category>
+				<nter:category>
+					<nter:id>tag:nwtp.gov,2010-10-04:/category/CAT03000-C34C-4A99-C38A-C97D87AF8AA2</nter:id>
+					<nter:title xml:lang="en-US">Auditor</nter:title>
+					<nter:title xml:lang="fr-FR">verificateur</nter:title>
+					<nter:title xml:lang="es-ES">Auditor</nter:title>
+                    	<nter:category>
+						    <nter:id>tag:nwtp.gov,2010-10-04:/category/CAT03100-C34C-4A99-C38A-C97D87AF8AA2</nter:id>
+						    <nter:title xml:lang="en-US">materials</nter:title>
+						    <nter:title xml:lang="fr-FR">materiels</nter:title>
+						    <nter:title xml:lang="es-ES">materiels</nter:title>
+                            <nter:category>
+						        <nter:id>tag:nwtp.gov,2010-10-04:/category/CAT03110-C34C-4A99-C38A-C97D87AF8AA2</nter:id>
+						        <nter:title xml:lang="en-US">lumber</nter:title>
+						        <nter:title xml:lang="fr-FR">bois</nter:title>
+						        <nter:title xml:lang="es-ES">madera</nter:title>
+					        </nter:category>
+                            <nter:category>
+						        <nter:id>tag:nwtp.gov,2010-10-04:/category/CAT03120-C34C-4A99-C38A-C97D87AF8AA2</nter:id>
+						        <nter:title xml:lang="en-US">roofing</nter:title>
+						        <nter:title xml:lang="fr-FR">toiture</nter:title>
+						        <nter:title xml:lang="es-ES">material para techos</nter:title>
+                                <nter:category>
+                                     <nter:id>tag:nwtp.gov,2010-10-04:/category/CAT03121-C34C-4A99-C38A-C97D87AF8AA2</nter:id>
+                                     <nter:title xml:lang="en-US">shingle</nter:title>
+                                     <nter:title xml:lang="fr-FR">galets</nter:title>
+                                     <nter:title xml:lang="es-ES">guijarros</nter:title>
+                                </nter:category>
+                                <nter:category>
+                                     <nter:id>tag:nwtp.gov,2010-10-04:/category/CAT03122-C34C-4A99-C38A-C97D87AF8AA2</nter:id>
+                                     <nter:title xml:lang="en-US">gutter</nter:title>
+                                     <nter:title xml:lang="fr-FR">gouttière</nter:title>
+                                     <nter:title xml:lang="es-ES">cuneta</nter:title>
+                                </nter:category>
+					        </nter:category>
+					</nter:category>
+				</nter:category>
+				<nter:category>
+					<nter:id>tag:nwtp.gov,2010-10-04:/category/CAT04000-C34C-4A99-C38A-C97D87AF8AA2</nter:id>
+					<nter:title xml:lang="en-US">Inspector</nter:title>
+					<nter:title xml:lang="fr-FR">Inspecteur</nter:title>
+					<nter:title xml:lang="es-ES">Inspector</nter:title>
+                    <nter:category>
+						<nter:id>tag:nwtp.gov,2010-10-04:/category/CAT01020-C34C-4A99-C38A-C97D87AF8AA2</nter:id>
+						<nter:title xml:lang="en-US">door</nter:title>
+						<nter:title xml:lang="fr-FR">porte</nter:title>
+						<nter:title xml:lang="es-ES">puerta</nter:title>
+					</nter:category>
+				</nter:category>
+            	<nter:category>
+					<nter:id>tag:nwtp.gov,2010-10-04:/category/CAT05000-C34C-4A99-C38A-C97D87AF8AA2</nter:id>
+					<nter:title xml:lang="en-US">CEO</nter:title>
+					<nter:title xml:lang="fr-FR">CEO-FR</nter:title>
+					<nter:title xml:lang="es-ES">CEO_ES</nter:title>
+				</nter:category>
+		</nter:vocabulary>
+    </entry>
+    // brand new course
+    <entry xml:lang="en-US" nter:entryType="course-component">
+         <title>Introduction to Air Condition Installation</title>
+         <link rel="self" href="https://nwtp.gov/course25.php?lang=fr-FR"
+               nter:displayWidth="444" nter:displayHeight="204"/>
+         <link rel="search" href="https://nwtp.gov/course25.php?lang=fr-FR?q=search"/>
+         <id>tag:nwtp.gov,2010-12-07:/link/to/cours25cat/fr-FR</id>
+         <updated>2010-12-12T10:33:00Z</updated>
+         <author>
+             <name>Paula Peters</name>
+         </author>
+         <summary>Intro to Air Condition Install</summary>
+		 <nter:courseComponent>
+			<nter:version>1.0</nter:version>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+		</nter:courseComponent>
+     </entry>
+
+     <entry nter:entryType="course">
+         <link rel="self" href="http://example.org/2003/12/13/atom03"/>
+         <link rel="search" href="http://example.org/2003/12/13/atom03?q=search"/>
+         <id>tag:nwtp.gov,2010-12-04:/courses/cat54321-C34C-4A99-C38A-C97D87AF8AA2</id>
+         <updated>2010-12-13T18:30:02Z</updated>
+         <author>
+             <name>Paula Peters</name>
+         </author>
+         <contributor>
+             <name>Paula Peters</name>
+         </contributor>
+         <summary>Home Cooling fFundamentals</summary>
+         <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P4DT2H15M</nter:duration>
+
+             <nter:title xml:lang="en-US">Home Cooling Fundamentals</nter:title>
+             <nter:title xml:lang="es-ES">Accueil refroidissement Fundamentals</nter:title>
+
+             <nter:transcriptAbstract xml:lang="en-US">Home Cooling Fundamentals</nter:transcriptAbstract>
+             <nter:transcriptAbstract xml:lang="es-ES">Accueil refroidissement Fundamentals</nter:transcriptAbstract>
+
+             <nter:description xml:lang="en-US">More Home Improvement Fundamentals</nter:description>
+             <nter:description xml:lang="es-ES">Más Fundamentos de mejoras para el hogar</nter:description>
+
+             <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+             <nter:copyright xml:lang="es-ES">International de 2010 SRI</nter:copyright>
+
+             <nter:componentRef
+                 nter:componentId="tag:nwtp.gov,2010-12-07:/link/to/cours25cat/fr-FR"
+                 nter:orderWeight="1.0"
+             />
+              <nter:categoryRef  nter:categoryId="tag:nwtp.gov,2010-10-04:/category/CAT02000-C34C-4A99-C38A-C97D87AF8AA2" />
+              <nter:categoryRef  nter:categoryId="tag:nwtp.gov,2010-10-04:/category/CAT02000-C34C-4A99-C38A-C97D87AF8AA2" />
+              <nter:categoryRef  nter:categoryId="tag:nwtp.gov,2010-10-04:/category/CAT01000-C34C-4A99-C38A-C97D87AF8AA2" />
+              <nter:categoryRef  nter:categoryId="tag:nwtp.gov,2010-10-04:/category/CAT04000-C34C-4A99-C38A-C97D87AF8AA2" />
+              <nter:categoryRef  nter:categoryId="tag:nwtp.gov,2010-10-04:/category/CAT03122-C34C-4A99-C38A-C97D87AF8AA2" />
+
+              <nter:keywords xml:lang="en-US">home fundamentals</nter:keywords>
+             <nter:keywords xml:lang="es-ES">Fundamentos casa</nter:keywords>
+        </nter:course>
+     </entry>
+
+</feed>
+
