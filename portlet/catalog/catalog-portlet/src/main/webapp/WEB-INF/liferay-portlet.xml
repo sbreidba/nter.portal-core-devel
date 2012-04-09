@@ -40,6 +40,16 @@
         <css-class-wrapper>course-carousel-portlet</css-class-wrapper>
     </portlet>
 
+    <!-- course management control panel -->
+    <portlet>
+        <portlet-name>course-management-control-panel</portlet-name>
+        <icon>/course-management/images/icon.png</icon>
+        <control-panel-entry-category>content</control-panel-entry-category>
+        <control-panel-entry-weight>1.5</control-panel-entry-weight>
+        <header-portlet-css>/course-management/css/main.css</header-portlet-css>
+        <css-class-wrapper>course-management-control-panel-portlet</css-class-wrapper>
+    </portlet>
+
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

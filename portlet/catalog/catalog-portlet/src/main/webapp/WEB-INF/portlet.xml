@@ -99,4 +99,48 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+    	<!-- course management control panel -->
+	<portlet>
+		<portlet-name>course-management-control-panel</portlet-name>
+		<display-name>Course Management</display-name>
+		<portlet-class>org.nterlearning.course.management.portlet.CourseManagementPortlet</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/course-management/jsp/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>add-process-action-success-action</name>
+			<value>true</value>
+		</init-param>
+		<init-param>
+			<name>access-count-weight</name>
+			<value>.4</value>
+		</init-param>
+		<init-param>
+			<name>completed-count-weight</name>
+			<value>.15</value>
+		</init-param>
+		<init-param>
+			<name>total-entries-weight</name>
+			<value>.15</value>
+		</init-param>
+		<init-param>
+			<name>average-score-weight</name>
+			<value>.3</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Course Management</title>
+			<short-title>Course Management</short-title>
+			<keywords>Course Management</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>
