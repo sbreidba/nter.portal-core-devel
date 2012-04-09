@@ -765,6 +765,19 @@ public class CourseLocalServiceUtil {
     }
 
     /**
+    * Assigns the ranking score tall all courses based on a "popularity" weighting
+    * system. This system takes into account the access count, completed count,
+    * and user rating according to a Bayesian Average rating system.
+    */
+    public static void assignAllPopularWeights(double accessCountWeight,
+        double completedCountWeight, double scoreWeight)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        getService()
+            .assignAllPopularWeights(accessCountWeight, completedCountWeight,
+            scoreWeight);
+    }
+
+    /**
     * Clears the cache for all courses stored in this session.  This should
     * only be needed in a multi-threaded environment, where a thread is not
     * notified of persistence updates done in a different thread.
