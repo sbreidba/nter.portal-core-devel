@@ -49,7 +49,7 @@ import org.nterlearning.datamodel.catalog.service.*;
 import org.nterlearning.datamodel.catalog.service.base.CourseLocalServiceBaseImpl;
 import org.nterlearning.datamodel.catalog.service.persistence.CourseFinderUtil;
 import org.nterlearning.datamodel.catalog.service.persistence.CourseUtil;
-//import org.nterlearning.utils.ReviewUtil;
+import org.nterlearning.utils.ReviewUtil;
 
 import java.util.*;
 
@@ -973,41 +973,41 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
      * system. This system takes into account the access count, completed count,
      * and user rating according to a Bayesian Average rating system.
      */
-//    public void assignAllPopularWeights(double accessCountWeight,
-//            double completedCountWeight, double scoreWeight)
-//            throws SystemException {
-//
-//        double popularWeight = 0.0;
-//        List<Course> courses =
-//                CourseLocalServiceUtil.getCourses(
-//                        QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-//        for (Course course : courses) {
-//
-//            RatingsStats stats =
-//                    RatingsStatsLocalServiceUtil.getStats(
-//                            Course.class.getName(), course.getCourseId());
-//
-//            popularWeight =
-//                    (accessCountWeight * course.getAccessCount()) +
-//                            (completedCountWeight * course.getCompletedCount()) +
-//                            (ReviewUtil.bayesianAverage(
-//                                    stats.getAverageScore(), stats.getTotalEntries(),
-//                                    Course.class.getName()) * scoreWeight);
-//
-//            if (_log.isDebugEnabled()) {
-//                _log.debug("Setting course id " + course.getCourseId() +
-//                        " popularWeight value " + course.getPopularWeight());
-//            }
-//            course.setPopularWeight(popularWeight);
-//            coursePersistence.update(course, true);
-//            try {
-//                IndexerRegistryUtil.getIndexer(Course.class.getName()).reindex(course);
-//            }
-//            catch (SearchException e) {
-//                _log.error("Cannot reindex course", e);
-//            }
-//        }
-//    }
+    public void assignAllPopularWeights(double accessCountWeight,
+            double completedCountWeight, double scoreWeight)
+            throws SystemException {
+
+        double popularWeight = 0.0;
+        List<Course> courses =
+                CourseLocalServiceUtil.getCourses(
+                        QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+        for (Course course : courses) {
+
+            RatingsStats stats =
+                    RatingsStatsLocalServiceUtil.getStats(
+                            Course.class.getName(), course.getCourseId());
+
+            popularWeight =
+                    (accessCountWeight * course.getAccessCount()) +
+                            (completedCountWeight * course.getCompletedCount()) +
+                            (ReviewUtil.bayesianAverage(
+                                    stats.getAverageScore(), stats.getTotalEntries(),
+                                    Course.class.getName()) * scoreWeight);
+
+            if (_log.isDebugEnabled()) {
+                _log.debug("Setting course id " + course.getCourseId() +
+                        " popularWeight value " + course.getPopularWeight());
+            }
+            course.setPopularWeight(popularWeight);
+            coursePersistence.update(course, true);
+            try {
+                IndexerRegistryUtil.getIndexer(Course.class.getName()).reindex(course);
+            }
+            catch (SearchException e) {
+                _log.error("Cannot reindex course", e);
+            }
+        }
+    }
 
 
 //    private void removeCourseFromIndex(Course course) {

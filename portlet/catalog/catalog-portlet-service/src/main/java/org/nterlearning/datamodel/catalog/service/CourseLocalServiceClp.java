@@ -89,9 +89,10 @@ public class CourseLocalServiceClp implements CourseLocalService {
     private MethodKey _searchMethodKey79;
     private MethodKey _assignAllAccessCountsMethodKey80;
     private MethodKey _assignAllCompletedCountsMethodKey81;
-    private MethodKey _clearCacheMethodKey82;
+    private MethodKey _assignAllPopularWeightsMethodKey82;
     private MethodKey _clearCacheMethodKey83;
     private MethodKey _clearCacheMethodKey84;
+    private MethodKey _clearCacheMethodKey85;
 
     public CourseLocalServiceClp(ClassLoaderProxy classLoaderProxy) {
         _classLoaderProxy = classLoaderProxy;
@@ -436,14 +437,18 @@ public class CourseLocalServiceClp implements CourseLocalService {
         _assignAllCompletedCountsMethodKey81 = new MethodKey(_classLoaderProxy.getClassName(),
                 "assignAllCompletedCounts");
 
-        _clearCacheMethodKey82 = new MethodKey(_classLoaderProxy.getClassName(),
-                "clearCache");
+        _assignAllPopularWeightsMethodKey82 = new MethodKey(_classLoaderProxy.getClassName(),
+                "assignAllPopularWeights", double.class, double.class,
+                double.class);
 
         _clearCacheMethodKey83 = new MethodKey(_classLoaderProxy.getClassName(),
+                "clearCache");
+
+        _clearCacheMethodKey84 = new MethodKey(_classLoaderProxy.getClassName(),
                 "clearCache",
                 org.nterlearning.datamodel.catalog.model.Course.class);
 
-        _clearCacheMethodKey84 = new MethodKey(_classLoaderProxy.getClassName(),
+        _clearCacheMethodKey85 = new MethodKey(_classLoaderProxy.getClassName(),
                 "clearCache", java.lang.Long.class);
     }
 
@@ -2787,8 +2792,30 @@ public class CourseLocalServiceClp implements CourseLocalService {
         }
     }
 
+    public void assignAllPopularWeights(double accessCountWeight,
+        double completedCountWeight, double scoreWeight)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        MethodHandler methodHandler = new MethodHandler(_assignAllPopularWeightsMethodKey82,
+                accessCountWeight, completedCountWeight, scoreWeight);
+
+        try {
+            _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+    }
+
     public void clearCache() {
-        MethodHandler methodHandler = new MethodHandler(_clearCacheMethodKey82);
+        MethodHandler methodHandler = new MethodHandler(_clearCacheMethodKey83);
 
         try {
             _classLoaderProxy.invoke(methodHandler);
@@ -2804,7 +2831,7 @@ public class CourseLocalServiceClp implements CourseLocalService {
 
     public void clearCache(
         org.nterlearning.datamodel.catalog.model.Course course) {
-        MethodHandler methodHandler = new MethodHandler(_clearCacheMethodKey83,
+        MethodHandler methodHandler = new MethodHandler(_clearCacheMethodKey84,
                 ClpSerializer.translateInput(course));
 
         try {
@@ -2820,7 +2847,7 @@ public class CourseLocalServiceClp implements CourseLocalService {
     }
 
     public void clearCache(java.lang.Long courseId) {
-        MethodHandler methodHandler = new MethodHandler(_clearCacheMethodKey84,
+        MethodHandler methodHandler = new MethodHandler(_clearCacheMethodKey85,
                 ClpSerializer.translateInput(courseId));
 
         try {
