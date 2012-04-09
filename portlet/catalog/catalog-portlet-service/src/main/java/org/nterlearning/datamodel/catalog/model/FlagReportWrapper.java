@@ -534,6 +534,14 @@ public class FlagReportWrapper implements FlagReport, ModelWrapper<FlagReport> {
         _flagReport.persist();
     }
 
+    public boolean isModerated() {
+        return _flagReport.isModerated();
+    }
+
+    public boolean isAssigned() {
+        return _flagReport.isAssigned();
+    }
+
     /**
      * @deprecated Renamed to {@link #getWrappedModel}
      */

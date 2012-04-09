@@ -1079,6 +1079,130 @@ public class CourseClp extends BaseModelImpl<Course> implements Course {
         _fiveStarRateCount = fiveStarRateCount;
     }
 
+    public void startSafeImageEnumeration(java.util.Locale locale,
+        java.util.Locale defaultLocale) {
+        throw new UnsupportedOperationException();
+    }
+
+    public org.nterlearning.datamodel.catalog.model.CourseImage getSafeImage(
+        int index) {
+        throw new UnsupportedOperationException();
+    }
+
+    public int getSafeImageCount() {
+        throw new UnsupportedOperationException();
+    }
+
+    public java.util.List<java.lang.String> getAvailableLanguageIds() {
+        throw new UnsupportedOperationException();
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Contributor> getContributors() {
+        throw new UnsupportedOperationException();
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseImage> getCourseImages() {
+        throw new UnsupportedOperationException();
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRelated> getCourseRelateds() {
+        throw new UnsupportedOperationException();
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRequirement> getCourseRequirements() {
+        throw new UnsupportedOperationException();
+    }
+
+    public org.nterlearning.datamodel.catalog.model.Contributor getCourseAuthor() {
+        throw new UnsupportedOperationException();
+    }
+
+    public org.nterlearning.datamodel.catalog.model.Contributor getCourseOrganization() {
+        throw new UnsupportedOperationException();
+    }
+
+    public java.lang.String getCourseDomain() {
+        throw new UnsupportedOperationException();
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseReview> getCourseReviews() {
+        throw new UnsupportedOperationException();
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Courses_Components> getCourses_componentses() {
+        throw new UnsupportedOperationException();
+    }
+
+    public java.lang.String getFriendlyDuration(
+        javax.servlet.jsp.PageContext pageContext) {
+        throw new UnsupportedOperationException();
+    }
+
+    public java.lang.String getFriendlyVersionDate(
+        javax.servlet.jsp.PageContext pageContext) {
+        throw new UnsupportedOperationException();
+    }
+
+    public java.lang.String getUrl() {
+        throw new UnsupportedOperationException();
+    }
+
+    public java.lang.String getUrl(java.lang.String languageId) {
+        throw new UnsupportedOperationException();
+    }
+
+    public java.lang.String getOwnerName(long themeCompanyId) {
+        throw new UnsupportedOperationException();
+    }
+
+    public java.lang.String getOwnerUrl(long themeCompanyId) {
+        throw new UnsupportedOperationException();
+    }
+
+    public boolean isFeatured() {
+        throw new UnsupportedOperationException();
+    }
+
+    public boolean hasNewerVersion() {
+        throw new UnsupportedOperationException();
+    }
+
+    public org.nterlearning.datamodel.catalog.model.Course getMostRecentVersion() {
+        throw new UnsupportedOperationException();
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Course> getAllVersions() {
+        throw new UnsupportedOperationException();
+    }
+
+    public java.lang.String getSearchContext() {
+        throw new UnsupportedOperationException();
+    }
+
+    public void setSearchContext(java.lang.String searchContext) {
+        throw new UnsupportedOperationException();
+    }
+
+    public float getSearchRelevance() {
+        throw new UnsupportedOperationException();
+    }
+
+    public void setSearchRelevance(float searchRelevance) {
+        throw new UnsupportedOperationException();
+    }
+
+    public boolean isIndexable() {
+        throw new UnsupportedOperationException();
+    }
+
+    public void updateIndex() {
+        throw new UnsupportedOperationException();
+    }
+
+    public boolean isPurchased(long userId) {
+        throw new UnsupportedOperationException();
+    }
+
     public void persist() throws SystemException {
         if (this.isNew()) {
             CourseLocalServiceUtil.addCourse(this);
