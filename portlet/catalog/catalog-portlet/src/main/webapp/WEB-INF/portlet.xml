@@ -143,4 +143,50 @@
 			<role-name>administrator</role-name>
 		</security-role-ref>
 	</portlet>
+    <!-- course listing -->
+	<portlet>
+		<portlet-name>course-listing</portlet-name>
+		<display-name>Course Listing</display-name>
+		<portlet-class>org.nterlearning.course.listing.portlet.CourseListingPortlet</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/course-listing/jsp/view.jsp</value>
+		</init-param>
+        <init-param>
+            <name>edit-jsp</name>
+            <value>/course-listing/jsp/edit.jsp</value>
+        </init-param>
+        <init-param>
+            <name>defaultDisplayCount</name>
+            <value>20</value>
+        </init-param>
+        <init-param>
+            <name>add-process-action-success-action</name>
+            <value>false</value>
+        </init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+            <portlet-mode>edit</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Course Listing</title>
+			<short-title>Course Listing</short-title>
+			<keywords>Course Listing</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>

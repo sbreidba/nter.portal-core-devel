@@ -50,6 +50,17 @@
         <css-class-wrapper>course-management-control-panel-portlet</css-class-wrapper>
     </portlet>
 
+    <!-- course listing -->
+    <portlet>
+        <portlet-name>course-listing</portlet-name>
+        <icon>/course-listing/images/icon.png</icon>
+        <instanceable>true</instanceable>
+        <footer-portlet-javascript>/../shared-portlet/js/anim-custom.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../shared-portlet/js/tree-view-html.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/course-listing/js/main.js</footer-portlet-javascript>
+        <css-class-wrapper>course-listing-portlet</css-class-wrapper>
+    </portlet>
+
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>
