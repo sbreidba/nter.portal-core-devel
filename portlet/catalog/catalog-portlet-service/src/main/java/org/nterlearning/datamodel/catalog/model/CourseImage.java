@@ -17,4 +17,9 @@ public interface CourseImage extends CourseImageModel, PersistedModel {
      *
      * Never modify this interface directly. Add methods to {@link org.nterlearning.datamodel.catalog.model.impl.CourseImageImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
      */
+    public java.lang.String getLargeImageUrl(
+        com.liferay.portal.theme.ThemeDisplay themeDisplay);
+
+    public java.lang.String getSmallImageUrl(
+        com.liferay.portal.theme.ThemeDisplay themeDisplay);
 }

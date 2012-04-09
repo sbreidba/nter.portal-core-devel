@@ -1633,6 +1633,173 @@ public class CourseWrapper implements Course, ModelWrapper<Course> {
         _course.persist();
     }
 
+    public void startSafeImageEnumeration(java.util.Locale locale,
+        java.util.Locale defaultLocale) {
+        _course.startSafeImageEnumeration(locale, defaultLocale);
+    }
+
+    public org.nterlearning.datamodel.catalog.model.CourseImage getSafeImage(
+        int index) {
+        return _course.getSafeImage(index);
+    }
+
+    public int getSafeImageCount() {
+        return _course.getSafeImageCount();
+    }
+
+    public java.util.List<java.lang.String> getAvailableLanguageIds()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _course.getAvailableLanguageIds();
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Contributor> getContributors()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _course.getContributors();
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseImage> getCourseImages()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _course.getCourseImages();
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRelated> getCourseRelateds()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _course.getCourseRelateds();
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRequirement> getCourseRequirements()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _course.getCourseRequirements();
+    }
+
+    public org.nterlearning.datamodel.catalog.model.Contributor getCourseAuthor()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _course.getCourseAuthor();
+    }
+
+    public org.nterlearning.datamodel.catalog.model.Contributor getCourseOrganization()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _course.getCourseOrganization();
+    }
+
+    public java.lang.String getCourseDomain()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _course.getCourseDomain();
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseReview> getCourseReviews()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _course.getCourseReviews();
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Courses_Components> getCourses_componentses()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _course.getCourses_componentses();
+    }
+
+    public java.lang.String getFriendlyDuration(
+        javax.servlet.jsp.PageContext pageContext)
+        throws javax.xml.datatype.DatatypeConfigurationException {
+        return _course.getFriendlyDuration(pageContext);
+    }
+
+    public java.lang.String getFriendlyVersionDate(
+        javax.servlet.jsp.PageContext pageContext) {
+        return _course.getFriendlyVersionDate(pageContext);
+    }
+
+    public java.lang.String getUrl()
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _course.getUrl();
+    }
+
+    public java.lang.String getUrl(java.lang.String languageId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _course.getUrl(languageId);
+    }
+
+    /**
+    * Determines the correct name of the owner, regardless of whether or not the owning group is a group, community,
+    * organization, or company. Typically, returning the name of the group will only return the primary key in the
+    * corresponding owner table. Note that if the course is owned by the "Guest" community, a special value is returned.
+    *
+    * @return The name of the owning entity.
+    */
+    public java.lang.String getOwnerName(long themeCompanyId) {
+        return _course.getOwnerName(themeCompanyId);
+    }
+
+    public java.lang.String getOwnerUrl(long themeCompanyId) {
+        return _course.getOwnerUrl(themeCompanyId);
+    }
+
+    public boolean isFeatured() {
+        return _course.isFeatured();
+    }
+
+    public boolean hasNewerVersion() {
+        return _course.hasNewerVersion();
+    }
+
+    public org.nterlearning.datamodel.catalog.model.Course getMostRecentVersion()
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _course.getMostRecentVersion();
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Course> getAllVersions()
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _course.getAllVersions();
+    }
+
+    public java.lang.String getSearchContext() {
+        return _course.getSearchContext();
+    }
+
+    public void setSearchContext(java.lang.String searchContext) {
+        _course.setSearchContext(searchContext);
+    }
+
+    public float getSearchRelevance() {
+        return _course.getSearchRelevance();
+    }
+
+    public void setSearchRelevance(float searchRelevance) {
+        _course.setSearchRelevance(searchRelevance);
+    }
+
+    /**
+    * Determines if the course should be indexed or not.
+    *
+    * @return Returns true if the course should be indexed, false otherwise.
+    */
+    public boolean isIndexable() {
+        return _course.isIndexable();
+    }
+
+    /**
+    * Performs the appropriate index operations on the course. If the course is
+    * new, not removed, and is not superseded by another course, add it to the
+    * index. If the course is removed, or superseded by another course, remove
+    * it from the index. If the course supersedes another course, ensure the
+    * superseded course is removed.
+    *
+    * @throws SystemException - Liferay Exception
+    */
+    public void updateIndex()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        _course.updateIndex();
+    }
+
+    public boolean isPurchased(long userId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _course.isPurchased(userId);
+    }
+
     /**
      * @deprecated Renamed to {@link #getWrappedModel}
      */

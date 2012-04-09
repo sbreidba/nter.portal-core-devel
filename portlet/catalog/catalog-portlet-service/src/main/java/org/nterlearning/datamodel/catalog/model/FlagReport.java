@@ -17,4 +17,7 @@ public interface FlagReport extends FlagReportModel, PersistedModel {
      *
      * Never modify this interface directly. Add methods to {@link org.nterlearning.datamodel.catalog.model.impl.FlagReportImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
      */
+    public boolean isModerated();
+
+    public boolean isAssigned();
 }

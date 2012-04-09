@@ -263,6 +263,16 @@ public class CourseImageWrapper implements CourseImage,
         _courseImage.persist();
     }
 
+    public java.lang.String getLargeImageUrl(
+        com.liferay.portal.theme.ThemeDisplay themeDisplay) {
+        return _courseImage.getLargeImageUrl(themeDisplay);
+    }
+
+    public java.lang.String getSmallImageUrl(
+        com.liferay.portal.theme.ThemeDisplay themeDisplay) {
+        return _courseImage.getSmallImageUrl(themeDisplay);
+    }
+
     /**
      * @deprecated Renamed to {@link #getWrappedModel}
      */

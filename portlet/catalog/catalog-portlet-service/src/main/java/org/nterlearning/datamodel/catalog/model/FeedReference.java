@@ -17,4 +17,22 @@ public interface FeedReference extends FeedReferenceModel, PersistedModel {
      *
      * Never modify this interface directly. Add methods to {@link org.nterlearning.datamodel.catalog.model.impl.FeedReferenceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
      */
+
+    /**
+    * Determines the correct name of the owner, regardless of whether or not
+    * the owning group is a group, community, organization, or company.
+    *
+    * Typically, returning the name of the group will only return the primary
+    * key in the corresponding owner table.
+    *
+    * @return The name of the owning entity.
+    */
+    public java.lang.String getOwnerName();
+
+    /**
+    * Parses out the 'tag:...' portion of the Feed IRI.
+    *
+    * @return The tag substring of the Feed IRI
+    */
+    public java.lang.String getTagSubstring();
 }
