@@ -64,7 +64,7 @@ public class CourseManagementPortlet extends MVCPortlet {
         completedCountWeight = Double.valueOf(getInitParameter("completed-count-weight"));
         averageScoreWeight = Double.valueOf(getInitParameter("average-score-weight"));
 
-//        CourseManagementTask.getInstance().initiateScheduledTask();
+        CourseManagementTask.getInstance().initiateScheduledTask();
 
         super.init();
     }
