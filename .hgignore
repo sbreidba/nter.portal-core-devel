@@ -3,3 +3,4 @@ syntax: glob
 .idea/
 *.iml
 *.DS_Store
+*.orig
