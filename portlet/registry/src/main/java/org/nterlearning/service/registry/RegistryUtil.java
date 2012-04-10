@@ -38,8 +38,6 @@ import org.nterlearning.xml.nter_registry.blacklist_objects_0_1_0.ActiveStatusEn
 public class RegistryUtil {
 
     private static final String PORTLET_ID = "registry_WAR_registryportlet";
-    private static final String LIFERAY_PROP_BLACKLIST_DEFAULT_STATUS =
-            "com.sri.nter.blacklist.status";
     private static Registry registry;
     private static ActiveStatusEnum defaultActiveStatus = null;
     private static Log log = LogFactoryUtil.getLog(RegistryUtil.class);
@@ -388,11 +386,11 @@ public class RegistryUtil {
         if (defaultActiveStatus == null) {
             try {
                 String status =
-                        PropsUtil.get(LIFERAY_PROP_BLACKLIST_DEFAULT_STATUS);
+                        PropsUtil.get(PropKeyConst.BLACKLIST_DEFAULT_STATUS);
                 defaultActiveStatus = ActiveStatusEnum.fromValue(status);
             } catch (Exception e) {
                 log.error("Error setting blacklist default status setting [" +
-                        LIFERAY_PROP_BLACKLIST_DEFAULT_STATUS + "]", e);
+                        PropKeyConst.BLACKLIST_DEFAULT_STATUS + "]", e);
             }
         }
 
