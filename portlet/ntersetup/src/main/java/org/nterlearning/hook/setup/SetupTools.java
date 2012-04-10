@@ -21,7 +21,6 @@
 
 package org.nterlearning.hook.setup;
 
-//import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -128,84 +127,5 @@ public class SetupTools {
         }
 
         return findCategoryByNameAndVocabulary(name, vocab);
-    }
-
-
-    /**
-     * Imports a given LAR (Liferay Archive File) and applies it to a particular
-     * group.
-     *
-     * @param userId The userId to manage the import (can be default user)
-     * @param groupId The groupId to apply the LAR to.
-     * @param privateLayout True to apply this to the group's private pages,
-     * false otherwise.
-     * @param larFileName The LAR filename.  The file should be stored in the
-     * default 'deploy' directory and the name should not include this path.
-     */
-    public static void addDefaultLayoutsByLar(long userId, long groupId,
-                              boolean privateLayout, String larFileName) {
-
-        File larDir;
-        String larDirPath = ".";
-        try {
-            larDirPath = PrefsPropsUtil.getString(PropsKeys.AUTO_DEPLOY_TOMCAT_DEST_DIR) +
-                                    "/nter-setup-portlet/lar/";
-            larDir = new File(larDirPath);
-        }
-        catch (Exception e) {
-            mLog.error("Could not find deploy directory at: " + larDirPath + " Using current directory instead");
-            larDir = new File(".");
-        }
-
-        File larFile = new File(larDir, larFileName);
-        if (!larFile.exists()) {
-            mLog.error("Could not find the LAR file: " + larDirPath + larFile.getName());
-            return;
-        }
-
-        Map<String, String[]> parameterMap = new HashMap<String, String[]>();
-
-        parameterMap.put(PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
-                         new String[] {Boolean.FALSE.toString()});
-        
-        parameterMap.put(PortletDataHandlerKeys.PORTLET_SETUP,
-                         new String[] {Boolean.TRUE.toString()});
-        parameterMap.put(PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS,
-                         new String[] {Boolean.FALSE.toString()});
-        parameterMap.put(PortletDataHandlerKeys.PORTLET_USER_PREFERENCES,
-                         new String[] {Boolean.FALSE.toString()});
-        parameterMap.put(PortletDataHandlerKeys.DELETE_PORTLET_DATA,
-                         new String[] {Boolean.FALSE.toString()});
-        parameterMap.put(PortletDataHandlerKeys.PORTLET_DATA,
-                         new String[] {Boolean.TRUE.toString()});
-        parameterMap.put(PortletDataHandlerKeys.DATA_STRATEGY,
-                         new String[] {PortletDataHandlerKeys.DATA_STRATEGY_COPY_AS_NEW});
-
-        parameterMap.put(PortletDataHandlerKeys.PERMISSIONS,
-                         new String[] {Boolean.FALSE.toString()});
-        parameterMap.put(PortletDataHandlerKeys.USER_PERMISSIONS,
-                         new String[] {Boolean.FALSE.toString()});
-
-        parameterMap.put(PortletDataHandlerKeys.THEME,
-                         new String[] {Boolean.FALSE.toString()});
-        parameterMap.put(PortletDataHandlerKeys.CATEGORIES,
-                         new String[] {Boolean.FALSE.toString()});
-
-        parameterMap.put(PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE,
-                         new String[] {PortletDataHandlerKeys.LAYOUTS_IMPORT_MODE_MERGE_BY_LAYOUT_UUID});
-        parameterMap.put(PortletDataHandlerKeys.PORTLETS_MERGE_MODE,
-                         new String[] {PortletDataHandlerKeys.PORTLETS_MERGE_MODE_REPLACE});
-
-        try {
-            System.out.print("Import Layouts for userId: " + userId + "groupId: " + groupId);
-            LayoutLocalServiceUtil.importLayouts(userId, groupId, privateLayout,
-                    parameterMap, larFile);  
-        }
-//        catch (DuplicateFileException de) {
-//            mLog.info("Data already exists for groupId" + groupId + "\n" + de.getMessage());
-//        }
-        catch (Exception e) {
-            mLog.error("Error processing groupId: " + groupId + "\n" + e.getMessage());
-        }
     }
 }
