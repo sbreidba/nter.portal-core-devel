@@ -219,4 +219,47 @@
         </security-role-ref>
     </portlet>
 
+    	<portlet>
+		<portlet-name>feeds</portlet-name>
+		<display-name>Course Feeds</display-name>
+		<portlet-class>org.nterlearning.atom.parser.portlet.AtomParserControlPanelPortlet</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/course-feeds/jsp/cp/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>syncHistoryLimit</name>
+			<value>1000</value>
+		</init-param>
+        <!-- default timer values, change to update frequency of runs -->
+        <init-param>
+            <description>
+                The number of minutes between processing of course feeds.
+            </description>
+            <name>feedTimer</name>
+            <value>10</value>
+        </init-param>
+        <!-- update at least the root part of the URL to match NTER instance -->
+        <init-param>
+            <description>
+                Callback URL for PuSH subscriptions to be sent to from a PuSH hub
+            </description>
+            <name>pushCallbackUrl</name>
+            <value>http://localhost:8080/course-portlet/course-feeds/jsp/push.jsp</value>
+        </init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Course Feeds</title>
+			<short-title>Course Feeds</short-title>
+			<keywords>Course Feeds</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+	</portlet>
+
 </portlet-app>
