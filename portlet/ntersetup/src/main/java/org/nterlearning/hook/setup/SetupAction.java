@@ -23,7 +23,6 @@ package org.nterlearning.hook.setup;
 
 import com.liferay.portal.DuplicateOrganizationException;
 import com.liferay.portal.DuplicateUserScreenNameException;
-import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
@@ -78,7 +77,6 @@ public class SetupAction extends SimpleAction {
         initHook(companyId);
 
         try {
-            updateGuestCommunity();
 		    createDefaultOrganizations();
 
             createDefaultWebContent();
@@ -140,38 +138,6 @@ public class SetupAction extends SimpleAction {
                 createOrganization(mDefaultUserId, parentOrgId, mCompanyId,
                        "NTER", orgType, true, 0, 0, null);
     }
-
-
-    /**
-     * Applies the appropriate layout template to the guest group and configures
-     * the virtual host. 
-     */
-    protected void updateGuestCommunity() {
-        Group guestGroup = null;
-        try {
-            guestGroup = GroupLocalServiceUtil.getGroup(mCompanyId, "Guest");
-             List<Layout> guestLayouts =
-                    LayoutLocalServiceUtil.getLayouts(guestGroup.getGroupId(), false);
-            // if size == 1, then the lar file hasn't been applied yet, so apply it
-	        //liferay 61 requires deleteLayouts method signature to include a serviceContext
-			ServiceContext serviceContext = new ServiceContext();
-
-            //TODO create new nter.lar for 61, then activate following if statement
-            if (guestLayouts.size() == 1) {
-                LayoutLocalServiceUtil.deleteLayouts(guestGroup.getGroupId(), false, serviceContext);
-                SetupTools.addDefaultLayoutsByLar(mDefaultUserId,
-                                guestGroup.getGroupId(), false,
-                               NterConstants.DEFAULT_LAR_FILENAME);
-            }
-        }
-        catch (NoSuchGroupException e) {
-            // guest is a liferay group, this should never happen
-            mLog.error("Could not find guest group because: " + e.getMessage());
-        }
-        catch (Exception se) {
-            mLog.error("Error updating guest group: " + se.getMessage());
-        }
-    }
 	
 	
 	/**
@@ -179,8 +145,8 @@ public class SetupAction extends SimpleAction {
      *
 	 * @param companyId Company creating the users
      *
-	 * @throws com.liferay.portal.kernel.exception.SystemException Liferay's SystemException
-	 * @throws com.liferay.portal.kernel.exception.PortalException Liferay's PortalException
+	 * @throws SystemException Liferay's SystemException
+	 * @throws PortalException Liferay's PortalException
 	 */
 	protected void createDefaultUsers(long companyId)
 			throws PortalException, SystemException {
@@ -198,7 +164,7 @@ public class SetupAction extends SimpleAction {
                     true, "Administrator", roleIds);
 		}
 		catch (Exception e) {
-            // user already exists
+            mLog.error("Could not create the default users: " + e.getMessage());
 		}
 	}
 
@@ -212,7 +178,9 @@ public class SetupAction extends SimpleAction {
 		    long[] roleIds =
                 new long[] {adminRole.getRoleId(), powerUserRole.getRoleId()};
 
-            String admins[] = PrefsPropsUtil.getStringArray(mCompanyId, "nter.default.admin.accounts", ",");
+            String admins[] =
+                    PrefsPropsUtil.getStringArray(mCompanyId,
+                            "nter.default.admin.accounts", ",");
             for (String admin : admins) {
                 admin = admin.trim();
                 String screenName = admin.substring(0, admin.indexOf("@"));
@@ -293,7 +261,7 @@ public class SetupAction extends SimpleAction {
 
             try {
                 AssetVocabularyLocalServiceUtil.addVocabulary(mDefaultUserId,
-                            titleMap, descriptionMap, null, mServiceContext);
+                    orgName, titleMap, descriptionMap, null, mServiceContext);
             }
             catch (DuplicateVocabularyException e) {
                 // vocabulary already exists for this organization
