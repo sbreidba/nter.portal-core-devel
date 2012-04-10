@@ -192,8 +192,8 @@ AUI.add("carousel", function(Y) {
 				newItemPos--;
 				if (newItemPos < 0) newItemPos += total;
 				var newItem = itemsCopy[newItemPos].clone(true);
-				var originalMargin = parseInt(newItem.getStyle('marginLeft'));
 				itemList.prepend(newItem);
+				var originalMargin = parseInt(newItem.getStyle('marginLeft'));
 				newItem.setStyle('marginLeft', (-1 * (context._outerWidth(newItem) - originalMargin)) + 'px');
 				var lastItem = itemList.one('li:last-child');
 				transition.set('node', newItem);
