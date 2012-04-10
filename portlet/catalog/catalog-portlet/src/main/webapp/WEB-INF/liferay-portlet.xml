@@ -81,6 +81,16 @@
         <css-class-wrapper>course-feeds-portlet</css-class-wrapper>
     </portlet>
 
+    <!-- component details -->
+    <portlet>
+        <portlet-name>component-details</portlet-name>
+        <icon>/component-details/images/icon.png</icon>
+        <footer-portlet-javascript>/../shared-portlet/js/anim-custom.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../shared-portlet/js/tree-view-html.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/component-details/js/main.js</footer-portlet-javascript>
+        <css-class-wrapper>component-details-portlet</css-class-wrapper>
+    </portlet>
+
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>
