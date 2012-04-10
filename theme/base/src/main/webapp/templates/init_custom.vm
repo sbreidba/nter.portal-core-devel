@@ -1,0 +1,19 @@
+#*
+This file allows you to override and define new Velocity variables.
+*#
+
+#set ($roles = $serviceLocator.findService("com.liferay.portal.service.RoleService").getUserRoles($user_id))
+#set ($show_doc = false)
+#foreach ($role in $roles)
+	#if ($role.name != 'User' && $role.name != 'Power User')
+		#set($show_doc = true)
+		#break
+	#end
+#end
+
+#* overrides user greeting set in profile *#
+#set ($user_greeting = $languageUtil.format($companyId, $locale, "banner-welcome-text", $user_first_name, $user_last_name))
+
+#* configure services *#
+#set ($groupService = $serviceLocator.findService("com.liferay.portal.service.GroupService"))
+#set ($guestGroup = $groupService.getGroup($company_id, "Guest"))
