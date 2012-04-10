@@ -96,6 +96,15 @@
         <css-class-wrapper>component-details-portlet</css-class-wrapper>
     </portlet>
 
+    <!-- course history - current course -->
+    <portlet>
+        <portlet-name>current-course</portlet-name>
+        <icon>/current-course/images/icon.png</icon>
+        <instanceable>true</instanceable>
+        <footer-portlet-javascript>/current-course/js/main.js</footer-portlet-javascript>
+        <css-class-wrapper>current-course-portlet</css-class-wrapper>
+    </portlet>
+
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

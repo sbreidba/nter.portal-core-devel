@@ -68,7 +68,7 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
-    	<!-- course management control panel -->
+    <!-- course management, control panel -->
 	<portlet>
 		<portlet-name>course-management-control-panel</portlet-name>
 		<display-name>Course Management</display-name>
@@ -159,7 +159,7 @@
 		</security-role-ref>
 	</portlet>
 
-    <!-- course records control panel -->
+    <!-- course records, control panel -->
     <portlet>
         <portlet-name>course-records-control-panel</portlet-name>
         <display-name>Course Records</display-name>
@@ -188,7 +188,8 @@
         </security-role-ref>
     </portlet>
 
-    	<portlet>
+    <!-- Course Feeds, control panel -->
+    <portlet>
 		<portlet-name>feeds</portlet-name>
 		<display-name>Course Feeds</display-name>
 		<portlet-class>org.nterlearning.atom.parser.portlet.AtomParserControlPanelPortlet</portlet-class>
@@ -299,4 +300,35 @@
 		</security-role-ref>
 	</portlet>
 
+
+	<!-- course history - current course -->
+	<portlet>
+		<portlet-name>current-course</portlet-name>
+		<display-name>Current Course</display-name>
+		<portlet-class>org.nterlearning.course.current.portlet.CurrentCoursePortlet</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/current-course/jsp/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Current Course</title>
+			<short-title>Current Course</short-title>
+			<keywords>Current Course</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>
