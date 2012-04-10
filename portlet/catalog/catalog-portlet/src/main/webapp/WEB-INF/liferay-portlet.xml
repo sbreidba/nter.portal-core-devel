@@ -48,8 +48,8 @@
         <portlet-name>course-listing</portlet-name>
         <icon>/course-listing/images/icon.png</icon>
         <instanceable>true</instanceable>
-        <footer-portlet-javascript>/../shared-portlet/js/anim-custom.js</footer-portlet-javascript>
-        <footer-portlet-javascript>/../shared-portlet/js/tree-view-html.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/anim-custom.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/tree-view-html.js</footer-portlet-javascript>
         <footer-portlet-javascript>/course-listing/js/main.js</footer-portlet-javascript>
         <css-class-wrapper>course-listing-portlet</css-class-wrapper>
     </portlet>
@@ -78,8 +78,8 @@
     <portlet>
         <portlet-name>course-details</portlet-name>
         <icon>/course-details/icon.png</icon>
-        <footer-portlet-javascript>/../shared-portlet/js/anim-custom.js</footer-portlet-javascript>
-        <footer-portlet-javascript>/../shared-portlet/js/tree-view-html.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/anim-custom.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/tree-view-html.js</footer-portlet-javascript>
         <footer-portlet-javascript>/course-details/js/course-thumbnails.js</footer-portlet-javascript>
         <footer-portlet-javascript>/course-details/js/course-popup.js</footer-portlet-javascript>
         <footer-portlet-javascript>/course-details/js/main.js</footer-portlet-javascript>
@@ -90,8 +90,8 @@
     <portlet>
         <portlet-name>component-details</portlet-name>
         <icon>/component-details/images/icon.png</icon>
-        <footer-portlet-javascript>/../shared-portlet/js/anim-custom.js</footer-portlet-javascript>
-        <footer-portlet-javascript>/../shared-portlet/js/tree-view-html.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/anim-custom.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/tree-view-html.js</footer-portlet-javascript>
         <footer-portlet-javascript>/component-details/js/main.js</footer-portlet-javascript>
         <css-class-wrapper>component-details-portlet</css-class-wrapper>
     </portlet>
