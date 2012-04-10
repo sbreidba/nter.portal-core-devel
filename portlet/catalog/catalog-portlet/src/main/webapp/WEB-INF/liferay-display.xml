@@ -38,7 +38,7 @@
     <!--</category>-->
 	<category name="category.hidden">
 		<portlet id="course-management-control-panel" />
-		<!--<portlet id="feeds" />-->
+		<portlet id="feeds" />
 		<!--<portlet id="course-search" />-->
 		<portlet id="course-records-control-panel" />
 		<!--<portlet id="course-testing-control-panel" />-->
