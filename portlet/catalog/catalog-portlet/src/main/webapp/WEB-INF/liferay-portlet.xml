@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!--
+  National Training and Education Resource (NTER)
+  Copyright (C) 2012 SRI International
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or (at
+  your option) any later version.
+
+  This program is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  02110-1301, USA.
+  -->
+
+<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.1.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_1_0.dtd">
+
+<liferay-portlet-app>
+	<!--<portlet>-->
+		<!--<portlet-name>catalog</portlet-name>-->
+		<!--<icon>/icon.png</icon>-->
+		<!--<instanceable>false</instanceable>-->
+		<!--<header-portlet-css>/css/main.css</header-portlet-css>-->
+		<!--<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>-->
+	<!--</portlet>-->
+
+    <!-- course carousel -->
+    <portlet>
+        <portlet-name>course-carousel</portlet-name>
+        <icon>/course-carousel/images/icon.png</icon>
+        <instanceable>true</instanceable>
+        <header-portlet-javascript>/course-carousel/js/carousel.js</header-portlet-javascript>
+        <footer-portlet-javascript>/course-carousel/js/main.js</footer-portlet-javascript>
+        <css-class-wrapper>course-carousel-portlet</css-class-wrapper>
+    </portlet>
+
+    <!-- course management control panel -->
+    <portlet>
+        <portlet-name>course-management-control-panel</portlet-name>
+        <icon>/course-management/images/icon.png</icon>
+        <control-panel-entry-category>content</control-panel-entry-category>
+        <control-panel-entry-weight>1.5</control-panel-entry-weight>
+        <header-portlet-css>/course-management/css/main.css</header-portlet-css>
+        <css-class-wrapper>course-management-control-panel-portlet</css-class-wrapper>
+    </portlet>
+
+    <!-- course listing -->
+    <portlet>
+        <portlet-name>course-listing</portlet-name>
+        <icon>/course-listing/images/icon.png</icon>
+        <instanceable>true</instanceable>
+        <footer-portlet-javascript>/../shared-portlet/js/anim-custom.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../shared-portlet/js/tree-view-html.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/course-listing/js/main.js</footer-portlet-javascript>
+        <css-class-wrapper>course-listing-portlet</css-class-wrapper>
+    </portlet>
+
+    <!-- course records control panel -->
+    <portlet>
+        <portlet-name>course-records-control-panel</portlet-name>
+        <icon>/course-records/images/icon.png</icon>
+        <control-panel-entry-category>portal</control-panel-entry-category>
+        <control-panel-entry-weight>1.7</control-panel-entry-weight>
+        <header-portlet-css>/course-records/css/main.css</header-portlet-css>
+        <css-class-wrapper>course-records-control-panel-portlet</css-class-wrapper>
+    </portlet>
+	<role-mapper>
+		<role-name>administrator</role-name>
+		<role-link>Administrator</role-link>
+	</role-mapper>
+	<role-mapper>
+		<role-name>guest</role-name>
+		<role-link>Guest</role-link>
+	</role-mapper>
+	<role-mapper>
+		<role-name>power-user</role-name>
+		<role-link>Power User</role-link>
+	</role-mapper>
+	<role-mapper>
+		<role-name>user</role-name>
+		<role-link>User</role-link>
+	</role-mapper>
+</liferay-portlet-app>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ National Training and Education Resource (NTER)
+  ~ Copyright (C) 2011  SRI International
+  ~
+  ~ This program is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or (at
+  ~ your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful, but
+  ~ WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  ~ General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  ~ 02110-1301, USA.
+  -->
+  
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:nter="http://nterlearning.org/xml/feeds/atom-extensions-schema_0.6.2.xsd">
+
+    <!-- Sample feed to test display of course with no components -->
+    <!-- Test requires components to be flagged removed via a separate pre-stored query -->
+
+    <title>Course Feed</title>
+    <link rel="self" href="test-0.6.2-course-atom-feed-no-component.xml" type="application/atom+xml"/>
+    <updated>2010-07-01T22:52:00Z</updated>
+    <id>tag:nwtp.gov,2010-07-01:/feeds/TESTnc01-c001-11d9-b93C-0003939e0af6</id>
+
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Test component 15</title>
+        <link href="https://nwtp.gov/course15-en.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <id>tag:nwtp.gov,2010-01-01:/link/to/test-nocomponent-component15/en-US</id>
+        <updated>2010-01-01T18:30:02Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+        </author>
+        <summary>test component fifteen</summary>
+		<nter:courseComponent>
+			<nter:version>1</nter:version>
+		</nter:courseComponent>
+    </entry>
+    <entry xml:lang="en-US" nter:entryType="course-component">
+         <title>Test component 16</title>
+         <link href="https://nwtp.gov/course16-en.php"
+               nter:displayWidth="334" nter:displayHeight="189"/>
+         <id>tag:nwtp.gov,2010-01-01:/link/to/test-nocomponent-component16/en-US</id>
+         <updated>2010-01-01T18:30:02Z</updated>
+         <author>
+             <name>Robby Bailey</name>
+         </author>
+         <summary>test component sixteen</summary>
+		 <nter:courseComponent>
+			<nter:version>1</nter:version>
+		</nter:courseComponent>
+     </entry>
+
+
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link href="http://example.org/2003/12/13/atom03"/>
+        <id>tag:nwtp.gov,2010-01-01:/courses/TESTnc01-cfb8-4ebb-aaaa-80da344efa6a</id>
+        <updated>2010-01-01T18:30:02Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Robby Bailey&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P2DT3H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">Test Course No Component</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Course No Component abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Course No Component  description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2010-01-01:/link/to/test-nocomponent-component15/en-US"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2010-01-01:/link/to/test-nocomponent-component16/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:image
+                    xml:lang="en-US"
+                    nter:href="http://nwtp.gov/course15-1.png"
+                    nter:alternateText="page one"
+                    nter:mimeType="image/png"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:keywords xml:lang="en-US">test course </nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+
+
+</feed>
+
