@@ -189,4 +189,34 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+
+    <!-- course records control panel -->
+    <portlet>
+        <portlet-name>course-records-control-panel</portlet-name>
+        <display-name>Course Records</display-name>
+        <portlet-class>org.nterlearning.course.record.portlet.CourseRecordsPortlet</portlet-class>
+        <init-param>
+            <name>view-jsp</name>
+            <value>/course-records/jsp/view.jsp</value>
+        </init-param>
+        <init-param>
+            <name>add-process-action-success-action</name>
+            <value>true</value>
+        </init-param>
+        <expiration-cache>0</expiration-cache>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>view</portlet-mode>
+        </supports>
+        <resource-bundle>content.Language</resource-bundle>
+        <portlet-info>
+            <title>Course Student Records</title>
+            <short-title>Course Records</short-title>
+            <keywords>Course Records</keywords>
+        </portlet-info>
+        <security-role-ref>
+            <role-name>administrator</role-name>
+        </security-role-ref>
+    </portlet>
+
 </portlet-app>

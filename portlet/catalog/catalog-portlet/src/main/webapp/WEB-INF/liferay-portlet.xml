@@ -61,6 +61,15 @@
         <css-class-wrapper>course-listing-portlet</css-class-wrapper>
     </portlet>
 
+    <!-- course records control panel -->
+    <portlet>
+        <portlet-name>course-records-control-panel</portlet-name>
+        <icon>/course-records/images/icon.png</icon>
+        <control-panel-entry-category>portal</control-panel-entry-category>
+        <control-panel-entry-weight>1.7</control-panel-entry-weight>
+        <header-portlet-css>/course-records/css/main.css</header-portlet-css>
+        <css-class-wrapper>course-records-control-panel-portlet</css-class-wrapper>
+    </portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>
