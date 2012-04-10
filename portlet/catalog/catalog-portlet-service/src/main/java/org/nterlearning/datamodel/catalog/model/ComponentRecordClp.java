@@ -99,6 +99,11 @@ public class ComponentRecordClp extends BaseModelImpl<ComponentRecord>
         _completionPercent = completionPercent;
     }
 
+    public java.lang.String getFriendlyUpdatedDate(
+        javax.servlet.jsp.PageContext pageContext) {
+        throw new UnsupportedOperationException();
+    }
+
     public void persist() throws SystemException {
         if (this.isNew()) {
             ComponentRecordLocalServiceUtil.addComponentRecord(this);

@@ -17,4 +17,6 @@ public interface ComponentRecord extends ComponentRecordModel, PersistedModel {
      *
      * Never modify this interface directly. Add methods to {@link org.nterlearning.datamodel.catalog.model.impl.ComponentRecordImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
      */
+    public java.lang.String getFriendlyUpdatedDate(
+        javax.servlet.jsp.PageContext pageContext);
 }

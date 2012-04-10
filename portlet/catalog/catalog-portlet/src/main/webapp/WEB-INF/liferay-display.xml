@@ -25,7 +25,7 @@
 	<category name="NTER">
         <portlet id="component-details"/>
 		<portlet id="course-carousel" />
-		<!--<portlet id="course-details" />-->
+		<portlet id="course-details" />
 		<portlet id="course-listing" />
 		<!--<portlet id="partner-top-courses" />-->
 		<!--<portlet id="course-reviews" />-->
