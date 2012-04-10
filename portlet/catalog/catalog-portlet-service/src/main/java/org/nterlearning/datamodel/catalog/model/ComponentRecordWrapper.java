@@ -227,6 +227,11 @@ public class ComponentRecordWrapper implements ComponentRecord,
         _componentRecord.persist();
     }
 
+    public java.lang.String getFriendlyUpdatedDate(
+        javax.servlet.jsp.PageContext pageContext) {
+        return _componentRecord.getFriendlyUpdatedDate(pageContext);
+    }
+
     /**
      * @deprecated Renamed to {@link #getWrappedModel}
      */
