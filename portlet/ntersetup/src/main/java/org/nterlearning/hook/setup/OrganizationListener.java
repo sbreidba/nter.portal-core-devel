@@ -113,7 +113,7 @@ public class OrganizationListener implements ModelListener<Organization> {
 
         // create the vocabulary
         try {
-            AssetVocabularyLocalServiceUtil.addVocabulary(mUserId, titleMap,
+            AssetVocabularyLocalServiceUtil.addVocabulary(mUserId, name, titleMap,
                                 descriptionMap, null, mServiceContext);
         }
         catch (DuplicateVocabularyException e) {
