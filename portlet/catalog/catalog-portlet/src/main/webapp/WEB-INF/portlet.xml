@@ -331,4 +331,35 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+
+    <!-- course history - archived courses -->
+	<portlet>
+		<portlet-name>archived-courses</portlet-name>
+		<display-name>Archived Courses</display-name>
+		<portlet-class>org.nterlearning.course.archived.portlet.ArchivedCoursesPortlet</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/archived-courses/jsp/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Archived Courses</title>
+			<short-title>Archived Courses</short-title>
+			<keywords>Archived Courses</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>
