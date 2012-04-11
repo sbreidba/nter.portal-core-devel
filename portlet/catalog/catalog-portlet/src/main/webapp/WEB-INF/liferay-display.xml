@@ -28,7 +28,7 @@
 		<portlet id="course-details" />
 		<portlet id="course-listing" />
 		<!--<portlet id="partner-top-courses" />-->
-		<!--<portlet id="course-reviews" />-->
+		<portlet id="course-reviews" />
 		<portlet id="current-course" />
 		<portlet id="archived-courses" />
 		<!--<portlet id="unified-search"/>-->
