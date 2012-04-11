@@ -112,7 +112,7 @@
 				if (activeCourseCount > 0) {
 					if ((courseRecordQueryResults.size() == finishedCourseCount) &&
 						(courseRecordQueryResults.size() < courseRecordGrandTotal) ) {
-						String historyUrl = PortalUtil.getPathFriendlyURLPublic() + GroupLocalServiceUtil.getGroup(themeDisplay.getScopeGroupId()).getFriendlyURL() + "/course-history?_archivedcourses_WAR_courseportlet_orderByCol=COMPLETION_STATUS&_archivedcourses_WAR_courseportlet_orderByType=asc&p_p_id=archivedcourses_WAR_courseportlet";
+						String historyUrl = PortalUtil.getPathFriendlyURLPublic() + GroupLocalServiceUtil.getGroup(themeDisplay.getScopeGroupId()).getFriendlyURL() + "/course-history?_archivedcourses_WAR_ntercatalogportlet_orderByCol=COMPLETION_STATUS&_archivedcourses_WAR_ntercatalogportlet_orderByType=asc&p_p_id=archivedcourses_WAR_ntercatalogportlet";
 						String[] callout_args = {Integer.toString(activeCourseCount), historyUrl};
 						if (activeCourseCount == 1) {
 							calloutText = LanguageUtil.format(pageContext, "current-course-callout-history-link-single", callout_args);

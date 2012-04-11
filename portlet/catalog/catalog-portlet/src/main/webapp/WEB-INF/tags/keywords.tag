@@ -72,4 +72,4 @@
     }
 %>
 
-<%! private static final Log _log = LogFactoryUtil.getLog("courseportlet.docroot.tags.keywords.tag"); %>
+<%! private static final Log _log = LogFactoryUtil.getLog("ntercatalogportlet.docroot.tags.keywords.tag"); %>
