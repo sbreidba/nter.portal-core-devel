@@ -118,6 +118,21 @@
         <css-class-wrapper>archived-courses-portlet</css-class-wrapper>
     </portlet>
 
+    <!--flag report control panel -->
+    <portlet>
+        <portlet-name>flag-report-control-panel</portlet-name>
+        <icon>/flag-report/images/icon.png</icon>
+        <control-panel-entry-category>portal</control-panel-entry-category>
+        <control-panel-entry-weight>2.4</control-panel-entry-weight>
+        <asset-renderer-factory>
+              org.nterlearning.course.asset.AssetRendererFactory
+        </asset-renderer-factory>
+        <workflow-handler>
+             org.nterlearning.course.workflow.FlagReportWorkflowHandler
+        </workflow-handler>
+        <css-class-wrapper>flag-report-control-panel-portlet</css-class-wrapper>
+    </portlet>
+
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>
