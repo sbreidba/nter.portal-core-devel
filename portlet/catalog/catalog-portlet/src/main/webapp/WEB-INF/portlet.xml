@@ -363,6 +363,39 @@
 		</security-role-ref>
 	</portlet>
 
+    <!-- course reviews -->
+	<portlet>
+		<portlet-name>course-reviews</portlet-name>
+		<display-name>Course Reviews</display-name>
+		<portlet-class>org.nterlearning.course.reviews.portlet.CourseReviewsPortlet</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/course-reviews/jsp/view.jsp</value>
+		</init-param>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Course Reviews</title>
+			<short-title>Course Reviews</short-title>
+			<keywords>Course Reviews</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+
     <!-- flag report control panel -->
      <portlet>
          <portlet-name>flag-report-control-panel</portlet-name>

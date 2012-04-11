@@ -118,6 +118,19 @@
         <css-class-wrapper>archived-courses-portlet</css-class-wrapper>
     </portlet>
 
+    <!-- course reviews -->
+    <portlet>
+        <portlet-name>course-reviews</portlet-name>
+        <icon>/course-reviews/images/icon.png</icon>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/anim-custom.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/remove.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/accessible-dialog.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/course-reviews/js/review-form.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/course-reviews/js/load-more.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/course-reviews/js/main.js</footer-portlet-javascript>
+        <css-class-wrapper>course-reviews-portlet</css-class-wrapper>
+    </portlet>
+
     <!--flag report control panel -->
     <portlet>
         <portlet-name>flag-report-control-panel</portlet-name>
