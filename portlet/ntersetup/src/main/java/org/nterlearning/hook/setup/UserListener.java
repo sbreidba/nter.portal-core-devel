@@ -45,14 +45,15 @@ public class UserListener implements ModelListener<User> {
      * Ensures that each user is associated with a default group and
      * organization.
      *
-     * @param user
-     * @throws com.liferay.portal.ModelListenerException
+     * @param user The newly created user
+     * @throws ModelListenerException
      */
     public void onAfterCreate(User user) throws ModelListenerException {
         initHook();
 
         try {
-            GroupLocalServiceUtil.addUserGroups(user.getUserId(), new long[] {mGuestGroupId});
+            GroupLocalServiceUtil.addUserGroups(user.getUserId(),
+                    new long[] {mGuestGroupId});
         }
         catch (Exception e) {
             mLog.error(e.getMessage());    

@@ -23,6 +23,4 @@ package org.nterlearning.hook.setup;
 public class NterConstants {
 
     public static final String DEFAULT_NTER_ORGANIZATION = "NTER";
-
-    public static final String DEFAULT_LAR_FILENAME = "NTER.lar";
 }

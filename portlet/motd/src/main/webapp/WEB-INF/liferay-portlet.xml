@@ -32,7 +32,7 @@
 
     <portlet>
 		<portlet-name>maintenance-warning-cp</portlet-name>
-		<icon>/images/iconCp.png</icon>
+		<icon>/images/tool.png</icon>
         <control-panel-entry-category>portal</control-panel-entry-category>
         <control-panel-entry-weight>2.1</control-panel-entry-weight>
 		<header-portlet-css>/css/main.css</header-portlet-css>
