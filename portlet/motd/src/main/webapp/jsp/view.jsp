@@ -29,7 +29,7 @@
 
     PortletPreferences  mwPref = PortalPreferencesLocalServiceUtil.getPreferences(companyId, ownerId, ownerType);
 
-    String mwStart = mwPref.getValue(MaintenanceConstants.START_DATE_TIME_PROPERTY,"unknown");
+    String mwStart = mwPref.getValue(MaintenanceConstants.START_DATE_TIME_PROPERTY, "unknown");
     String mwDuration = mwPref.getValue(MaintenanceConstants.DURATION_PROPERTY, "unknown");
     String mwMessage = mwPref.getValue(MaintenanceConstants.MESSAGE_PROPERTY, "unknown");
 
