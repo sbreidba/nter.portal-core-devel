@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 import org.nterlearning.course.CourseUtil;
-//import org.nterlearning.exporter.reports.StudentTranscript;
+import org.nterlearning.exporter.reports.StudentTranscript;
 
 public class ArchivedCoursesPortlet extends MVCPortlet {
 	
@@ -53,7 +53,7 @@ public class ArchivedCoursesPortlet extends MVCPortlet {
 		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
 		long userId = themeDisplay.getUserId(); // get the current user's ID
 		
-//		StudentTranscript.exportToPdfAndRedirect(userId, request.getLocale(),request, response);
+		StudentTranscript.exportToPdfAndRedirect(userId, request.getLocale(),request, response);
 	}
 
 }
