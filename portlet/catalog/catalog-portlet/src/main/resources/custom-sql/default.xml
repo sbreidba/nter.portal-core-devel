@@ -20,11 +20,11 @@
   -->
 
 <custom-sql>
-    <sql file="custom_sql/course.xml"/>
-    <sql file="custom_sql/component.xml"/>
-    <sql file="custom_sql/componentrecord.xml"/>
-    <sql file="custom_sql/courserecord.xml"/>
+    <sql file="custom-sql/course.xml"/>
+    <sql file="custom-sql/component.xml"/>
+    <sql file="custom-sql/componentrecord.xml"/>
+    <sql file="custom-sql/courserecord.xml"/>
     <sql file="custom-sql/flagreport.xml"/>
-    <sql file="custom_sql/globalcoursereview.xml"/>
-    <sql file="custom_sql/coursereview.xml"/>
+    <sql file="custom-sql/globalcoursereview.xml"/>
+    <sql file="custom-sql/coursereview.xml"/>
 </custom-sql>
