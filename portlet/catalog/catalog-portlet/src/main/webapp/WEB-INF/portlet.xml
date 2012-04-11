@@ -362,4 +362,34 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+
+    <!-- flag report control panel -->
+     <portlet>
+         <portlet-name>flag-report-control-panel</portlet-name>
+         <display-name>Flag Report</display-name>
+         <portlet-class>org.nterlearning.course.flag.portlet.FlagReportPortlet</portlet-class>
+         <init-param>
+             <name>view-jsp</name>
+             <value>/flag-report/jsp/view.jsp</value>
+         </init-param>
+         <init-param>
+             <name>add-process-action-success-action</name>
+             <value>false</value>
+         </init-param>
+         <expiration-cache>0</expiration-cache>
+         <supports>
+             <mime-type>text/html</mime-type>
+             <portlet-mode>view</portlet-mode>
+         </supports>
+         <resource-bundle>content.Language</resource-bundle>
+         <portlet-info>
+             <title>Flag Report</title>
+             <short-title>Flag Report</short-title>
+             <keywords>Flag Report</keywords>
+         </portlet-info>
+         <security-role-ref>
+             <role-name>administrator</role-name>
+         </security-role-ref>
+     </portlet>
+
 </portlet-app>

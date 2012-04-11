@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  National Training and Education Resource (NTER)
+  Copyright (C) 2012 SRI International
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or (at
+  your option) any later version.
+
+  This program is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  02110-1301, USA.
+  -->
+
+<resource-action-mapping>
+    <portlet-resource>
+        <portlet-name>course-management-control-panel</portlet-name>
+        <permissions>
+            <supports>
+                <action-key>VIEW</action-key>
+                <action-key>UPDATE</action-key>
+                <action-key>PERMISSIONS</action-key>
+            </supports>
+            <community-defaults>
+                <action-key>VIEW</action-key>
+            </community-defaults>
+            <guest-defaults>
+                <action-key>VIEW</action-key>
+            </guest-defaults>
+            <guest-unsupported />
+        </permissions>
+    </portlet-resource>
+
+    <portlet-resource>
+        <portlet-name>feeds</portlet-name>
+        <permissions>
+            <supports>
+                <action-key>VIEW</action-key>
+                <action-key>UPDATE</action-key>
+                <action-key>PERMISSIONS</action-key>
+            </supports>
+            <community-defaults>
+                <action-key>VIEW</action-key>
+            </community-defaults>
+            <guest-defaults>
+                <action-key>VIEW</action-key>
+            </guest-defaults>
+            <guest-unsupported />
+        </permissions>
+    </portlet-resource>
+
+    <!--<portlet-resource>-->
+        <!--<portlet-name>course-reviews</portlet-name>-->
+        <!--<permissions>-->
+            <!--<supports>-->
+                <!--<action-key>VIEW</action-key>-->
+            <!--</supports>-->
+            <!--<community-defaults>-->
+                <!--<action-key>VIEW</action-key>-->
+            <!--</community-defaults>-->
+            <!--<guest-defaults>-->
+                <!--<action-key>VIEW</action-key>-->
+            <!--</guest-defaults>-->
+            <!--<guest-unsupported />-->
+        <!--</permissions>-->
+    <!--</portlet-resource>-->
+
+    <!--<portlet-resource>-->
+        <!--<portlet-name>course-search</portlet-name>-->
+        <!--<permissions>-->
+            <!--<supports>-->
+                <!--<action-key>VIEW</action-key>-->
+            <!--</supports>-->
+            <!--<community-defaults>-->
+                <!--<action-key>VIEW</action-key>-->
+            <!--</community-defaults>-->
+            <!--<guest-defaults>-->
+                <!--<action-key>VIEW</action-key>-->
+            <!--</guest-defaults>-->
+            <!--<guest-unsupported />-->
+        <!--</permissions>-->
+    <!--</portlet-resource>-->
+
+    <!--<portlet-resource>-->
+        <!--<portlet-name>component-search</portlet-name>-->
+        <!--<permissions>-->
+            <!--<supports>-->
+                <!--<action-key>VIEW</action-key>-->
+            <!--</supports>-->
+            <!--<community-defaults />-->
+            <!--<guest-defaults />-->
+            <!--<guest-unsupported>-->
+                <!--<action-key>VIEW</action-key>-->
+            <!--</guest-unsupported>-->
+        <!--</permissions>-->
+    <!--</portlet-resource>-->
+
+    <!--<portlet-resource>-->
+        <!--<portlet-name>federated-search</portlet-name>-->
+        <!--<permissions>-->
+            <!--<supports>-->
+                <!--<action-key>VIEW</action-key>-->
+            <!--</supports>-->
+            <!--<community-defaults>-->
+                <!--<action-key>VIEW</action-key>-->
+            <!--</community-defaults>-->
+            <!--<guest-defaults>-->
+                <!--<action-key>VIEW</action-key>-->
+            <!--</guest-defaults>-->
+            <!--<guest-unsupported />-->
+        <!--</permissions>-->
+    <!--</portlet-resource>-->
+
+    <model-resource>
+        <model-name>org.nterlearning.datamodel.catalog.model.Course</model-name>
+        <portlet-ref>
+            <portlet-name>course-management-control-panel</portlet-name>
+        </portlet-ref>
+        <supports>
+            <action-key>ADD</action-key>
+            <action-key>DELETE</action-key>
+            <action-key>UPDATE</action-key>
+            <action-key>VIEW</action-key>
+            <action-key>REVIEW</action-key>
+            <action-key>PERMISSIONS</action-key>
+        </supports>
+        <community-defaults>
+            <action-key>VIEW</action-key>
+        </community-defaults>
+        <guest-defaults>
+            <action-key>VIEW</action-key>
+        </guest-defaults>
+        <guest-unsupported>
+            <action-key>ADD</action-key>
+            <action-key>DELETE</action-key>
+            <action-key>UPDATE</action-key>
+            <action-key>REVIEW</action-key>
+            <action-key>PERMISSIONS</action-key>
+        </guest-unsupported>
+    </model-resource>
+
+    <!--<model-resource>-->
+        <!--<model-name>org.nterlearning.datamodel.catalog.model.CourseReview</model-name>-->
+        <!--<portlet-ref>-->
+            <!--<portlet-name>course-reviews</portlet-name>-->
+        <!--</portlet-ref>-->
+        <!--<supports>-->
+            <!--<action-key>DELETE</action-key>-->
+            <!--<action-key>UPDATE</action-key>-->
+            <!--<action-key>VIEW</action-key>-->
+            <!--<action-key>PERMISSIONS</action-key>-->
+        <!--</supports>-->
+        <!--<community-defaults>-->
+            <!--<action-key>VIEW</action-key>-->
+        <!--</community-defaults>-->
+        <!--<guest-defaults>-->
+            <!--<action-key>VIEW</action-key>-->
+        <!--</guest-defaults>-->
+        <!--<guest-unsupported>-->
+            <!--<action-key>DELETE</action-key>-->
+            <!--<action-key>UPDATE</action-key>-->
+            <!--<action-key>PERMISSIONS</action-key>-->
+        <!--</guest-unsupported>-->
+    <!--</model-resource>-->
+
+    <model-resource>
+        <model-name>org.nterlearning.datamodel.catalog.model.CourseRecord</model-name>
+        <portlet-ref>
+            <portlet-name>archived-courses</portlet-name>
+        </portlet-ref>
+        <supports>
+            <action-key>ADD</action-key>
+            <action-key>DELETE</action-key>
+            <action-key>UPDATE</action-key>
+            <action-key>VIEW</action-key>
+        </supports>
+        <community-defaults>
+            <action-key>VIEW</action-key>
+        </community-defaults>
+        <guest-defaults>
+            <action-key>VIEW</action-key>
+        </guest-defaults>
+        <guest-unsupported>
+            <action-key>ADD</action-key>
+            <action-key>DELETE</action-key>
+            <action-key>UPDATE</action-key>
+        </guest-unsupported>
+    </model-resource>
+
+    <model-resource>
+        <model-name>org.nterlearning.datamodel.catalog.model.FlagReport</model-name>
+        <portlet-ref>
+            <portlet-name>flag-report-control-panel</portlet-name>
+        </portlet-ref>
+        <supports>
+            <action-key>ADD</action-key>
+            <action-key>DELETE</action-key>
+            <action-key>UPDATE</action-key>
+            <action-key>VIEW</action-key>
+            <action-key>REVIEW</action-key>
+            <action-key>PERMISSIONS</action-key>
+        </supports>
+        <community-defaults>
+            <action-key>VIEW</action-key>
+        </community-defaults>
+        <guest-defaults>
+            <action-key>VIEW</action-key>
+        </guest-defaults>
+        <guest-unsupported>
+            <action-key>ADD</action-key>
+            <action-key>DELETE</action-key>
+            <action-key>UPDATE</action-key>
+            <action-key>REVIEW</action-key>
+            <action-key>PERMISSIONS</action-key>
+        </guest-unsupported>
+    </model-resource>
+
+</resource-action-mapping>
