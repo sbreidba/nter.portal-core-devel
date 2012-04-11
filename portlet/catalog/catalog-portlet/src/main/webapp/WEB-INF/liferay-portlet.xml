@@ -105,6 +105,19 @@
         <css-class-wrapper>current-course-portlet</css-class-wrapper>
     </portlet>
 
+    <!--course history - archived courses -->
+    <portlet>
+        <portlet-name>archived-courses</portlet-name>
+        <icon>/archived-courses/images/icon.png</icon>
+        <instanceable>false</instanceable>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/anim-custom.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/tree-view-html.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/accessible-dialog.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/remove.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/archived-courses/js/main.js</footer-portlet-javascript>
+        <css-class-wrapper>archived-courses-portlet</css-class-wrapper>
+    </portlet>
+
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>
