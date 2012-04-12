@@ -28,8 +28,10 @@ import java.util.Map;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.security.auth.AuthTokenUtil;
+import com.liferay.portal.kernel.util.PropsUtil;
+
 import org.nterlearning.xml.nter_registry.domain_objects_0_1_0.*;
-import com.sri.nter.registry.proxy.*;
+import org.nterlearning.registry.proxy.*;
 
 import org.nterlearning.xml.nter_registry.blacklist_objects_0_1_0.ActiveStatusEnum;
 
@@ -37,26 +39,27 @@ public class RegistryUtil {
 
     private static final String PORTLET_ID = "registry_WAR_registryportlet";
     private static Registry registry;
+    private static ActiveStatusEnum defaultActiveStatus = null;
     private static Log log = LogFactoryUtil.getLog(RegistryUtil.class);
-    
+
     private RegistryUtil() {
     }
-    
+
     public static Registry getRegistryService() {
         if (registry == null) {
             registry = new RegistryImpl();
         }
         return registry;
     }
-    
+
     public static List<ServiceTypeEnum> getServiceTypes() {
         return getRegistryService().getServiceTypes();
     }
-    
+
     public static List<BindingTypeEnum> getBindingTypes() {
         return getRegistryService().getBindingTypes();
     }
-    
+
     public static List<ActiveStatusEnum> getStatusTypes() {
         List<ActiveStatusEnum> statusTypes = new ArrayList<ActiveStatusEnum>();
         for (ActiveStatusEnum status : getRegistryService().getStatusTypes()) {
@@ -66,43 +69,46 @@ public class RegistryUtil {
         }
         return statusTypes;
     }
-    
+
     public static List<InstitutionBean> getInstitutions() {
         List<InstitutionBean> institutionBeans = new ArrayList<InstitutionBean>();
         institutionBeans.addAll(getLocalInstitutions());
         institutionBeans.addAll(getGlobalInstitutions());
-        
+
         return institutionBeans;
     }
-    
-    public static List<InstitutionBean> getLocalInstitutions() { 
+
+    public static List<InstitutionBean> getLocalInstitutions() {
         List<InstitutionBean> institutions = new ArrayList<InstitutionBean>();
-                
+
         institutions.addAll(getRegistryService().getInstitutions(
                 ActiveStatusEnum.UNSPECIFIED, ActiveStatusEnum.UNSPECIFIED, RegistryInstance.LOCAL));
-        
+
         return institutions;
     }
-    
+
     private static List<InstitutionBean> getGlobalInstitutions() {
         List<InstitutionBean> institutions = new ArrayList<InstitutionBean>();
-               
+        // Retrieve 'Active' global institutions
         institutions.addAll(getRegistryService().getInstitutions(
                 ActiveStatusEnum.UNSPECIFIED, ActiveStatusEnum.ACTIVE, RegistryInstance.GLOBAL));
-        
-        institutions.addAll(getRegistryService().getInstitutions(
+
+        // If default status is 'unspecified' retrieve global "Inactive" institutions
+        if (getDefaultBlacklistStatus() == ActiveStatusEnum.UNSPECIFIED) {
+            institutions.addAll(getRegistryService().getInstitutions(
                 ActiveStatusEnum.UNSPECIFIED, ActiveStatusEnum.INACTIVE, RegistryInstance.GLOBAL));
-        
+        }
+
         return institutions;
     }
-    
+
     public static List<InstitutionBean> getInstitutions(
             List<InstitutionBean> institutions,
             int start, int end) {
 
         return getInstitutions(start, end, institutions);
      }
-    
+
     private static List<InstitutionBean> getInstitutions(
             int start, int end, List<InstitutionBean> institutionList) {
 
@@ -116,55 +122,66 @@ public class RegistryUtil {
         }
         return institutions;
     }
-    
+
     public static class InstitutionNameComparator implements Comparator<InstitutionBean> {
         public int compare(InstitutionBean inst1, InstitutionBean inst2) {
-             
+
             RegistryInstance inst1R = inst1.getRegistryInstance();
             RegistryInstance inst2R = inst2.getRegistryInstance();
-   
+
             return inst2R.compareTo(inst1R);
         }
     }
-    
+
     public static InstitutionBean getInstitutionByName(String name) {
+
+        InstitutionBean inst = getRegistryService().getInstitutionByName(name);
+        for (ServiceBean service : inst.getServiceBeans()) {
+          System.out.println(
+           "RegistryUtil.getInstitutionByName.service [" +
+           service.getName() + "] status [" + service.getActiveStatus() + "]");
+        }
+
+
         return getRegistryService().getInstitutionByName(name);
     }
-      
+
     public static List<ServiceBean> getServices() {
         List<ServiceBean> serviceBeans = new ArrayList<ServiceBean>();
         serviceBeans.addAll(getLocalServices());
         serviceBeans.addAll(getGlobalServices());
-        
+
         return serviceBeans;
     }
-    
+
     private static List<ServiceBean> getLocalServices() {
         List<ServiceBean> services = new ArrayList<ServiceBean>();
-        
+
         services.addAll(getRegistryService().getServices(
                 ActiveStatusEnum.UNSPECIFIED, ActiveStatusEnum.UNSPECIFIED, RegistryInstance.LOCAL));
-           
+
         return services;
     }
-    
+
     private static List<ServiceBean> getGlobalServices() {
         List<ServiceBean> services = new ArrayList<ServiceBean>();
-           
+        // Retrieve 'Active' global institutions
         services.addAll(getRegistryService().getServices(
                 ActiveStatusEnum.UNSPECIFIED, ActiveStatusEnum.ACTIVE, RegistryInstance.GLOBAL));
-          
-        services.addAll(getRegistryService().getServices(
+        // If default status is 'unspecified' retrieve global "Inactive" services
+        if (getDefaultBlacklistStatus() == ActiveStatusEnum.UNSPECIFIED) {
+            services.addAll(getRegistryService().getServices(
                 ActiveStatusEnum.UNSPECIFIED, ActiveStatusEnum.INACTIVE, RegistryInstance.GLOBAL));
-         
+        }
+
         return services;
     }
-    
+
     public static List<ServiceBean> getServices(List<ServiceBean> services,
             int start, int end) {
         return getServices(start, end, services);
     }
-    
+
     private static List<ServiceBean> getServices(
             int start, int end, List<ServiceBean> serviceList) {
 
@@ -178,26 +195,26 @@ public class RegistryUtil {
         }
         return services;
     }
-    
+
     public static class ServiceNameComparator implements Comparator<ServiceBean> {
         public int compare(ServiceBean serv1, ServiceBean serv2) {
-  
+
             RegistryInstance serv1R = serv1.getRegistryInstance();
             RegistryInstance serv2R = serv2.getRegistryInstance();
-   
+
             return serv2R.compareTo(serv1R);
         }
     }
-    
+
     public static ServiceBean getServiceByName(String institutionName, String serviceName) {
         return getRegistryService().getServiceByName(institutionName, serviceName);
-    }   
-    
+    }
+
     public static List<Binding> getBindings(List<Binding> services,
             int start, int end) {
         return getBindings(start, end, services);
     }
-    
+
     private static List<Binding> getBindings(
             int start, int end, List<Binding> bindingList) {
 
@@ -211,20 +228,20 @@ public class RegistryUtil {
         }
         return bindings;
     }
-    
+
     public static class BindingNameComparator implements Comparator<Binding> {
         public int compare(Binding x, Binding y) {
-  
+
           String xName = x.getDescription();
           String yName = y.getDescription();
-   
+
           return xName.compareTo(yName);
         }
     }
-    
+
     public static String getActionURL(javax.servlet.http.HttpServletRequest request,
             String action, Map<String, String> paramMap) {
-        
+
         StringBuilder sb = new StringBuilder();
         sb.append("'manage?");
         sb.append("p_auth=");
@@ -243,7 +260,7 @@ public class RegistryUtil {
         sb.append(PORTLET_ID);
         sb.append("_javax.portlet.action=");
         sb.append(action);
-        
+
         if (paramMap != null) {
             for (String key : paramMap.keySet()) {
                 sb.append("&amp;");
@@ -252,25 +269,25 @@ public class RegistryUtil {
                 sb.append("_");
                 sb.append(key);
                 sb.append("=");
-                
+
                 String encodedString = null;
                 try {
-                    encodedString = URLEncoder.encode(paramMap.get(key), "UTF-8");    
+                    encodedString = URLEncoder.encode(paramMap.get(key), "UTF-8");
                 } catch (Exception e) {
-                    log.error("Error encoding URL value [" + paramMap.get(key) + "]", e);    
+                    log.error("Error encoding URL value [" + paramMap.get(key) + "]", e);
                 }
                 if (encodedString != null) {
                     sb.append(encodedString);
                 }
             }
         }
-            
-        return sb.toString();      
+
+        return sb.toString();
     }
-    
+
     public static String getActionHREF(
             javax.servlet.http.HttpServletRequest request,
-            String urlLabel, String action, 
+            String urlLabel, String action,
             Map<String, String> paramMap) {
 
         StringBuilder sb = new StringBuilder();
@@ -291,7 +308,7 @@ public class RegistryUtil {
         sb.append(PORTLET_ID);
         sb.append("_javax.portlet.action=");
         sb.append(action);
-        
+
         if (paramMap != null) {
             for (String key : paramMap.keySet()) {
                 sb.append("&amp;");
@@ -300,45 +317,45 @@ public class RegistryUtil {
                 sb.append("_");
                 sb.append(key);
                 sb.append("=");
-                
+
                 String encodedString = null;
                 try {
-                    encodedString = URLEncoder.encode(paramMap.get(key), "UTF-8");    
+                    encodedString = URLEncoder.encode(paramMap.get(key), "UTF-8");
                 } catch (Exception e) {
-                    log.error("Error encoding URL value [" + paramMap.get(key) + "]", e);    
+                    log.error("Error encoding URL value [" + paramMap.get(key) + "]", e);
                 }
                 if (encodedString != null) {
                     sb.append(encodedString);
                 }
             }
         }
-        
-        sb.append("'>");  
+
+        sb.append("'>");
         sb.append(urlLabel);
         sb.append("</a>");
-    
+
         return sb.toString();
     }
-    
+
     public static RegistryInstance getRegistryInstanceFromValue(String value) {
-        RegistryInstance registryInstance = null;       
+        RegistryInstance registryInstance = null;
         if (value != null && !value.isEmpty()) {
             try {
                 registryInstance = RegistryInstance.valueOf(value.toUpperCase());
             } catch (Exception e) {
                 log.warn("Unexpected exception creating RegistryInstance enum from value [" +
-                    value + "], acceptable values are [" + 
-                    getPrintableRegistryInstanceValues() + "]. Will try fromValue"                   
+                    value + "], acceptable values are [" +
+                    getPrintableRegistryInstanceValues() + "]. Will try fromValue"
                 );
             }
-            
+
             if (registryInstance == null) {
                 try {
                     registryInstance = RegistryInstance.fromValue(value);
                 } catch (Exception e) {
                     log.error("Unexpected exception creating RegistryInstance enum from value [" +
-                        value + "], acceptable values are [" + 
-                        getPrintableRegistryInstanceValues() + "]"                        
+                        value + "], acceptable values are [" +
+                        getPrintableRegistryInstanceValues() + "]"
                     );
                 }
             }
@@ -347,7 +364,7 @@ public class RegistryUtil {
         }
         return registryInstance;
     }
-    
+
     public static ActiveStatusEnum getActiveStatusFromValue(String value) {
         ActiveStatusEnum activeStatus = null;
         if (value != null && !value.isEmpty()) {
@@ -364,7 +381,27 @@ public class RegistryUtil {
         }
         return activeStatus;
     }
-    
+
+    private static ActiveStatusEnum getDefaultBlacklistStatus() {
+        if (defaultActiveStatus == null) {
+            try {
+                String status =
+                        PropsUtil.get(PropKeyConst.BLACKLIST_DEFAULT_STATUS);
+                defaultActiveStatus = ActiveStatusEnum.fromValue(status);
+            } catch (Exception e) {
+                log.error("Error setting blacklist default status setting [" +
+                        PropKeyConst.BLACKLIST_DEFAULT_STATUS + "]", e);
+            }
+        }
+
+        if (defaultActiveStatus == null) {
+            defaultActiveStatus = ActiveStatusEnum.ACTIVE;
+            log.info("Setting default blacklist status to [" + defaultActiveStatus + "]");
+        }
+
+        return defaultActiveStatus;
+    }
+
     private static String getPrintableStatusTypeValues() {
         StringBuilder sb = new StringBuilder();
         ActiveStatusEnum[] values =
@@ -377,7 +414,7 @@ public class RegistryUtil {
         }
         return sb.toString();
     }
-    
+
     private static String getPrintableRegistryInstanceValues() {
         StringBuilder sb = new StringBuilder();
         RegistryInstance[] values = RegistryInstance.values();
@@ -389,6 +426,5 @@ public class RegistryUtil {
         }
         return sb.toString();
     }
-    
-    
+
 }

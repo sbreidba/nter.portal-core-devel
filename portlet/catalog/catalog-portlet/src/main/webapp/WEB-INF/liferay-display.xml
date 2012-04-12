@@ -43,7 +43,7 @@
 		<portlet id="course-records-control-panel" />
 		<portlet id="course-testing-control-panel" />
         <portlet id="flag-report-control-panel" />
-		<!--<portlet id="crawl" />-->
+		<portlet id="crawl" />
 		<!--<portlet id="external-search"/>-->
 		<portlet id="reports-control-panel" />
 	</category>
