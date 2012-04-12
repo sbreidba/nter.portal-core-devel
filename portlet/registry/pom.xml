@@ -32,11 +32,23 @@
     <packaging>war</packaging>
     <name>Service Registry Portlet</name>
 
+    <properties>
+        <basedir>.</basedir>
+        <registry-proxy.version>1.0.0-SNAPSHOT</registry-proxy.version>
+        <cxf.version>2.5.2</cxf.version>
+        <servlet.version>2.3</servlet.version>
+        <portlet-api.version>2.0</portlet-api.version>
+        <jsp-api.version>2.0</jsp-api.version>
+        <neethi.version>3.0.1</neethi.version>
+        <wsdl4j.version>1.6.2</wsdl4j.version>
+        <xmlschema-core.version>2.0.1</xmlschema-core.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.nterlearning</groupId>
-            <artifactId>registry-client-proxy</artifactId>
-            <version>0.1.7</version>
+            <artifactId>registry-proxy</artifactId>
+            <version>${registry-proxy.version}</version>
             <scope>compile</scope>
         </dependency>
 
@@ -67,98 +79,99 @@
         <dependency>
             <groupId>javax.portlet</groupId>
             <artifactId>portlet-api</artifactId>
-            <version>2.0</version>
+            <version>${portlet-api.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
-            <version>2.4</version>
+            <version>${servlet.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>javax.servlet.jsp</groupId>
             <artifactId>jsp-api</artifactId>
-            <version>2.0</version>
+            <version>${jsp-api.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-api</artifactId>
-            <version>2.4.1</version>
-            <scope>provided</scope>
+            <version>${cxf.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-common-utilities</artifactId>
-            <version>2.4.1</version>
-            <scope>provided</scope>
+            <version>${cxf.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-bindings-soap</artifactId>
-            <version>2.4.1</version>
-            <scope>provided</scope>
+            <version>${cxf.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-core</artifactId>
-            <version>2.4.1</version>
-            <scope>provided</scope>
+            <version>${cxf.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-databinding-jaxb</artifactId>
-            <version>2.4.1</version>
-            <scope>provided</scope>
+            <version>${cxf.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-jaxws</artifactId>
-            <version>2.4.1</version>
-            <scope>provided</scope>
+            <version>${cxf.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-frontend-simple</artifactId>
-            <version>2.4.1</version>
-            <scope>provided</scope>
+            <version>${cxf.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-transports-http</artifactId>
-            <version>2.4.1</version>
-            <scope>provided</scope>
+            <version>${cxf.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-rt-ws-addr</artifactId>
-            <version>2.4.1</version>
-            <scope>provided</scope>
+            <version>${cxf.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.cxf</groupId>
             <artifactId>cxf-tools-common</artifactId>
-            <version>2.4.1</version>
-            <scope>provided</scope>
+            <version>${cxf.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.neethi</groupId>
             <artifactId>neethi</artifactId>
-            <version>3.0.0</version>
-            <scope>provided</scope>
+            <version>${neethi.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>wsdl4j</groupId>
             <artifactId>wsdl4j</artifactId>
-            <version>1.6.2</version>
-            <scope>provided</scope>
+            <version>${wsdl4j.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.apache.ws.xmlschema</groupId>
             <artifactId>xmlschema-core</artifactId>
-            <version>2.0</version>
-            <scope>provided</scope>
+            <version>${xmlschema-core.version}</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
+
 </project>
