@@ -56,21 +56,21 @@
         </permissions>
     </portlet-resource>
 
-    <!--<portlet-resource>-->
-        <!--<portlet-name>course-reviews</portlet-name>-->
-        <!--<permissions>-->
-            <!--<supports>-->
-                <!--<action-key>VIEW</action-key>-->
-            <!--</supports>-->
-            <!--<community-defaults>-->
-                <!--<action-key>VIEW</action-key>-->
-            <!--</community-defaults>-->
-            <!--<guest-defaults>-->
-                <!--<action-key>VIEW</action-key>-->
-            <!--</guest-defaults>-->
-            <!--<guest-unsupported />-->
-        <!--</permissions>-->
-    <!--</portlet-resource>-->
+    <portlet-resource>
+        <portlet-name>course-reviews</portlet-name>
+        <permissions>
+            <supports>
+                <action-key>VIEW</action-key>
+            </supports>
+            <community-defaults>
+                <action-key>VIEW</action-key>
+            </community-defaults>
+            <guest-defaults>
+                <action-key>VIEW</action-key>
+            </guest-defaults>
+            <guest-unsupported />
+        </permissions>
+    </portlet-resource>
 
     <!--<portlet-resource>-->
         <!--<portlet-name>course-search</portlet-name>-->
@@ -146,29 +146,29 @@
         </guest-unsupported>
     </model-resource>
 
-    <!--<model-resource>-->
-        <!--<model-name>org.nterlearning.datamodel.catalog.model.CourseReview</model-name>-->
-        <!--<portlet-ref>-->
-            <!--<portlet-name>course-reviews</portlet-name>-->
-        <!--</portlet-ref>-->
-        <!--<supports>-->
-            <!--<action-key>DELETE</action-key>-->
-            <!--<action-key>UPDATE</action-key>-->
-            <!--<action-key>VIEW</action-key>-->
-            <!--<action-key>PERMISSIONS</action-key>-->
-        <!--</supports>-->
-        <!--<community-defaults>-->
-            <!--<action-key>VIEW</action-key>-->
-        <!--</community-defaults>-->
-        <!--<guest-defaults>-->
-            <!--<action-key>VIEW</action-key>-->
-        <!--</guest-defaults>-->
-        <!--<guest-unsupported>-->
-            <!--<action-key>DELETE</action-key>-->
-            <!--<action-key>UPDATE</action-key>-->
-            <!--<action-key>PERMISSIONS</action-key>-->
-        <!--</guest-unsupported>-->
-    <!--</model-resource>-->
+    <model-resource>
+        <model-name>org.nterlearning.datamodel.catalog.model.CourseReview</model-name>
+        <portlet-ref>
+            <portlet-name>course-reviews</portlet-name>
+        </portlet-ref>
+        <supports>
+            <action-key>DELETE</action-key>
+            <action-key>UPDATE</action-key>
+            <action-key>VIEW</action-key>
+            <action-key>PERMISSIONS</action-key>
+        </supports>
+        <community-defaults>
+            <action-key>VIEW</action-key>
+        </community-defaults>
+        <guest-defaults>
+            <action-key>VIEW</action-key>
+        </guest-defaults>
+        <guest-unsupported>
+            <action-key>DELETE</action-key>
+            <action-key>UPDATE</action-key>
+            <action-key>PERMISSIONS</action-key>
+        </guest-unsupported>
+    </model-resource>
 
     <model-resource>
         <model-name>org.nterlearning.datamodel.catalog.model.CourseRecord</model-name>
