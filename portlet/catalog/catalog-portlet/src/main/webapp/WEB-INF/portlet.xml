@@ -539,4 +539,33 @@
             <role-name>administrator</role-name>
         </security-role-ref>
     </portlet>
+    <!-- course testing control panel -->
+    <portlet>
+        <portlet-name>course-testing-control-panel</portlet-name>
+        <display-name>Course Testing</display-name>
+        <portlet-class>org.nterlearning.course.testing.portlet.CourseTestingPortlet</portlet-class>
+        <init-param>
+            <name>view-jsp</name>
+            <value>/course-testing/jsp/view.jsp</value>
+        </init-param>
+        <init-param>
+            <name>add-process-action-success-action</name>
+            <value>false</value>
+        </init-param>
+        <expiration-cache>0</expiration-cache>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>view</portlet-mode>
+        </supports>
+        <resource-bundle>content.Language</resource-bundle>
+        <portlet-info>
+            <title>Course Testing</title>
+            <short-title>Course Testing</short-title>
+            <keywords>Course Testing</keywords>
+        </portlet-info>
+        <security-role-ref>
+            <role-name>administrator</role-name>
+        </security-role-ref>
+    </portlet>
+
 </portlet-app>

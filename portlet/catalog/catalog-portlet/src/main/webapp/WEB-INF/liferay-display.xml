@@ -41,7 +41,7 @@
 		<portlet id="feeds" />
 		<!--<portlet id="course-search" />-->
 		<portlet id="course-records-control-panel" />
-		<!--<portlet id="course-testing-control-panel" />-->
+		<portlet id="course-testing-control-panel" />
         <portlet id="flag-report-control-panel" />
 		<portlet id="crawl" />
 		<!--<portlet id="external-search"/>-->
