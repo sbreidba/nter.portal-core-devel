@@ -165,7 +165,7 @@
     </portlet>
 
    
-        <!-- crawl portlet -->
+    <!-- crawl portlet -->
     <portlet>
         <portlet-name>crawl</portlet-name>
         <icon>/nutch-crawler/images/icon.png</icon>
