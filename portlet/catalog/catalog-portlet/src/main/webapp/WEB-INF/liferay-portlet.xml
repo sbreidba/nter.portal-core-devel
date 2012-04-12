@@ -54,6 +54,15 @@
         <css-class-wrapper>course-listing-portlet</css-class-wrapper>
     </portlet>
 
+    <!-- partner top courses -->
+    <portlet>
+        <portlet-name>partner-top-courses</portlet-name>
+        <icon>/partner-top-courses/images/icon.png</icon>
+        <instanceable>true</instanceable>
+        <footer-portlet-javascript>/partner-top-courses/js/main.js</footer-portlet-javascript>
+        <css-class-wrapper>partner-top-courses-portlet</css-class-wrapper>
+    </portlet>
+
     <!-- course records control panel -->
     <portlet>
         <portlet-name>course-records-control-panel</portlet-name>
