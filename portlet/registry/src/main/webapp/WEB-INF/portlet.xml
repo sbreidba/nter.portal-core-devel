@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-
 <!--
   National Training and Education Resource (NTER)
   Copyright (C) 2012 SRI International
@@ -27,9 +26,9 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
 >
 	<portlet>
-		<portlet-name>registry</portlet-name>
+		<portlet-name>nter-registry-portlet</portlet-name>
 		<display-name>Service Registry</display-name>
-		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<portlet-class>org.nterlearning.service.registry.RegistryPortlet</portlet-class>
 		<init-param>
 			<name>view-jsp</name>
 			<value>/jsp/cp-reg/viewInstitutions.jsp</value>

@@ -161,6 +161,40 @@
 		</security-role-ref>
 	</portlet>
 
+	<!-- partner top courses -->
+	<portlet>
+		<portlet-name>partner-top-courses</portlet-name>
+		<display-name>Partner Top Courses</display-name>
+		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/partner-top-courses/jsp/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Partner Top Courses</title>
+			<short-title>Partner Top Courses</short-title>
+			<keywords>Partner Top Courses</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+
     <!-- course records, control panel -->
     <portlet>
         <portlet-name>course-records-control-panel</portlet-name>
@@ -302,7 +336,6 @@
 		</security-role-ref>
 	</portlet>
 
-
 	<!-- course history - current course -->
 	<portlet>
 		<portlet-name>current-course</portlet-name>
@@ -379,6 +412,128 @@
             <title>Nutch Crawler</title>
             <short-title>Nutch Crawler</short-title>
             <keywords>nutch crawler</keywords>
+        </portlet-info>
+        <security-role-ref>
+            <role-name>administrator</role-name>
+        </security-role-ref>
+    </portlet>
+
+    <!-- course history - archived courses -->
+    <portlet>
+        <portlet-name>archived-courses</portlet-name>
+        <display-name>Archived Courses</display-name>
+        <portlet-class>org.nterlearning.course.archived.portlet.ArchivedCoursesPortlet</portlet-class>
+        <init-param>
+            <name>view-jsp</name>
+            <value>/archived-courses/jsp/view.jsp</value>
+        </init-param>
+        <expiration-cache>0</expiration-cache>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>view</portlet-mode>
+        </supports>
+        <resource-bundle>content.Language</resource-bundle>
+        <portlet-info>
+            <title>Archived Courses</title>
+            <short-title>Archived Courses</short-title>
+            <keywords>Archived Courses</keywords>
+        </portlet-info>
+        <security-role-ref>
+            <role-name>administrator</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>power-user</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>user</role-name>
+        </security-role-ref>
+    </portlet>
+
+    <!-- course reviews -->
+    <portlet>
+        <portlet-name>course-reviews</portlet-name>
+        <display-name>Course Reviews</display-name>
+        <portlet-class>org.nterlearning.course.reviews.portlet.CourseReviewsPortlet</portlet-class>
+        <init-param>
+            <name>view-jsp</name>
+            <value>/course-reviews/jsp/view.jsp</value>
+        </init-param>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>view</portlet-mode>
+        </supports>
+        <resource-bundle>content.Language</resource-bundle>
+        <portlet-info>
+            <title>Course Reviews</title>
+            <short-title>Course Reviews</short-title>
+            <keywords>Course Reviews</keywords>
+        </portlet-info>
+        <security-role-ref>
+            <role-name>administrator</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>guest</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>power-user</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>user</role-name>
+        </security-role-ref>
+    </portlet>
+
+    <!-- flag report control panel -->
+    <portlet>
+        <portlet-name>flag-report-control-panel</portlet-name>
+        <display-name>Flag Report</display-name>
+        <portlet-class>org.nterlearning.course.flag.portlet.FlagReportPortlet</portlet-class>
+        <init-param>
+            <name>view-jsp</name>
+            <value>/flag-report/jsp/view.jsp</value>
+        </init-param>
+        <init-param>
+            <name>add-process-action-success-action</name>
+            <value>false</value>
+        </init-param>
+        <expiration-cache>0</expiration-cache>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>view</portlet-mode>
+        </supports>
+        <resource-bundle>content.Language</resource-bundle>
+        <portlet-info>
+            <title>Flag Report</title>
+            <short-title>Flag Report</short-title>
+            <keywords>Flag Report</keywords>
+        </portlet-info>
+        <security-role-ref>
+            <role-name>administrator</role-name>
+        </security-role-ref>
+    </portlet>
+
+    <!-- reports control panel -->
+    <portlet>
+        <portlet-name>reports-control-panel</portlet-name>
+        <display-name>Reports</display-name>
+        <portlet-class>org.nterlearning.exporter.portlet.ReportsPortlet</portlet-class>
+        <init-param>
+            <name>view-jsp</name>
+            <value>/reports/jsp/view.jsp</value>
+        </init-param>
+        <init-param>
+            <name>add-process-action-success-action</name>
+            <value>false</value>
+        </init-param>
+        <expiration-cache>0</expiration-cache>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>view</portlet-mode>
+        </supports>
+        <resource-bundle>content.Language</resource-bundle>
+        <portlet-info>
+            <title>Reports</title>
+            <short-title>Reports</short-title>
+            <keywords>Reports</keywords>
         </portlet-info>
         <security-role-ref>
             <role-name>administrator</role-name>
