@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!--
+<%--
   National Training and Education Resource (NTER)
   Copyright (C) 2012 SRI International
 
@@ -17,12 +16,12 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
   02110-1301, USA.
-  -->
+  --%>
+<%@ page import="com.liferay.portal.model.User" %>
+<%@ include file="/html/portlet/users_admin/init.jsp" %>
 
-<!DOCTYPE hook PUBLIC "-//Liferay//DTD Hook 6.1.0//EN" "http://www.liferay.com/dtd/liferay-hook_6_1_0.dtd">
+<%
+    User selUser = (User)request.getAttribute("user.selUser");
+%>
 
-<hook>
-    <portal-properties>portlet.properties</portal-properties>
-    <language-properties>content/Language_en.properties</language-properties>
-    <custom-jsp-dir>/custom-jsp</custom-jsp-dir>
-</hook>
+Student records will be displayed here.

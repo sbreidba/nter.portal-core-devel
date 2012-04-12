@@ -27,7 +27,7 @@
 		<portlet id="course-carousel" />
 		<portlet id="course-details" />
 		<portlet id="course-listing" />
-		<!--<portlet id="partner-top-courses" />-->
+		<portlet id="partner-top-courses" />
 		<portlet id="course-reviews" />
 		<portlet id="current-course" />
 		<portlet id="archived-courses" />
@@ -45,6 +45,6 @@
         <portlet id="flag-report-control-panel" />
 		<!--<portlet id="crawl" />-->
 		<!--<portlet id="external-search"/>-->
-		<!--<portlet id="reports-control-panel" />-->
+		<portlet id="reports-control-panel" />
 	</category>
 </display>

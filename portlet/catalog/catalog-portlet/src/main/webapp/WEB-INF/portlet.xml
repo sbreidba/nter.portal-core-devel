@@ -159,6 +159,40 @@
 		</security-role-ref>
 	</portlet>
 
+	<!-- partner top courses -->
+	<portlet>
+		<portlet-name>partner-top-courses</portlet-name>
+		<display-name>Partner Top Courses</display-name>
+		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/partner-top-courses/jsp/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Partner Top Courses</title>
+			<short-title>Partner Top Courses</short-title>
+			<keywords>Partner Top Courses</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+
     <!-- course records, control panel -->
     <portlet>
         <portlet-name>course-records-control-panel</portlet-name>
@@ -424,5 +458,34 @@
              <role-name>administrator</role-name>
          </security-role-ref>
      </portlet>
+
+	<!-- reports control panel -->
+	<portlet>
+		<portlet-name>reports-control-panel</portlet-name>
+		<display-name>Reports</display-name>
+		<portlet-class>org.nterlearning.exporter.portlet.ReportsPortlet</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/reports/jsp/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>add-process-action-success-action</name>
+			<value>false</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Reports</title>
+			<short-title>Reports</short-title>
+			<keywords>Reports</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+	</portlet>
 
 </portlet-app>
