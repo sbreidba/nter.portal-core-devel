@@ -1,6 +1,4 @@
-<?xml version="1.0"?>
-
-<!--
+<%--
   National Training and Education Resource (NTER)
   Copyright (C) 2012 SRI International
 
@@ -18,13 +16,14 @@
   along with this program; if not, write to the Free Software
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
   02110-1301, USA.
-  -->
+  --%>
 
-<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
-    <jsp-config>
-	    <taglib>
-		    <taglib-uri>http://java.sun.com/jsp/jstl/core</taglib-uri>
-		    <taglib-location>/WEB-INF/tld/c.tld</taglib-location>
-	    </taglib>
-    </jsp-config>
-</web-app>
+<%@ include file="init.jsp" %>
+
+<%
+    CrawlTool mCrawlTool = CrawlTool.getInstance();
+%>
+
+<div class="nutch-attribute"><dt><%= LanguageUtil.get(pageContext, "crawl-cp-current-status") %>&nbsp;&nbsp;</dt><dd><%= mCrawlTool.getStatus() %></dd></div>
+<% String[] args = {Integer.toString((int) mCrawlTool.getCourseListCount()), Integer.toString((int) mCrawlTool.getComponentListCount())}; %>
+<div class="nutch-attribute"><dt><%= LanguageUtil.get(pageContext, "crawl-cp-process") %>&nbsp;&nbsp;</dt><dd><%= LanguageUtil.format(pageContext, "crawl-cp-courses-next-crawl-label", args) %></dd></div>
