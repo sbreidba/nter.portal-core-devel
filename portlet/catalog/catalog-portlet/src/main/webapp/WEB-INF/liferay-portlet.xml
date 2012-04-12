@@ -164,6 +164,15 @@
         <css-class-wrapper>reports-control-panel-portlet</css-class-wrapper>
     </portlet>
 
+    <!-- course testing control panel -->
+    <portlet>
+        <portlet-name>course-testing-control-panel</portlet-name>
+        <icon>/course-testing/images/icon.png</icon>
+        <control-panel-entry-category>portal</control-panel-entry-category>
+        <control-panel-entry-weight>2.1</control-panel-entry-weight>
+        <css-class-wrapper>course-testing-control-panel-portlet</css-class-wrapper>
+    </portlet>
+
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>
