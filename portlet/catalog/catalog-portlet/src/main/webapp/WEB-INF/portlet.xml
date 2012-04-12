@@ -68,6 +68,7 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+
     <!-- course management, control panel -->
 	<portlet>
 		<portlet-name>course-management-control-panel</portlet-name>
@@ -112,6 +113,7 @@
 			<role-name>administrator</role-name>
 		</security-role-ref>
 	</portlet>
+
     <!-- course listing -->
 	<portlet>
 		<portlet-name>course-listing</portlet-name>
@@ -334,7 +336,6 @@
 		</security-role-ref>
 	</portlet>
 
-
 	<!-- course history - current course -->
 	<portlet>
 		<portlet-name>current-course</portlet-name>
@@ -366,126 +367,176 @@
 		</security-role-ref>
 	</portlet>
 
+    <!-- Nutch Crawl Control Panel -->
+    <portlet>
+        <portlet-name>crawl</portlet-name>
+        <display-name>Nutch Crawler</display-name>
+        <portlet-class>org.nterlearning.crawl.nutch.portlet.NutchCrawlerPortlet</portlet-class>
+        <init-param>
+            <name>view-jsp</name>
+            <value>/nutch-crawler/jsp/cp/view.jsp</value>
+        </init-param>
+        <init-param>
+            <description>
+                The number of minutes between automatic crawls.
+            </description>
+            <name>crawlTimer</name>
+            <value>60</value>
+        </init-param>
+        <init-param>
+            <description>
+                The maximum number of concurrent threads used to fetch web
+                pages.  Increasing this value can improve performance since more
+                threads are used concurrently. However, too high of a value can
+                cause performance issues.
+            </description>
+            <name>threadsLimit</name>
+            <value>5</value>
+        </init-param>
+        <init-param>
+            <description>
+                The maximum URL depth to traverse.  Decreasing this value will
+                speed up indexing, but reduce the number of pages crawled while
+                increasing this value will increase index time, and increase
+                the depth of information.
+            </description>
+            <name>depthLimit</name>
+            <value>10</value>
+        </init-param>
+        <expiration-cache>0</expiration-cache>
+        <supports>
+            <mime-type>text/html</mime-type>
+        </supports>
+        <resource-bundle>content.Language</resource-bundle>
+        <portlet-info>
+            <title>Nutch Crawler</title>
+            <short-title>Nutch Crawler</short-title>
+            <keywords>nutch crawler</keywords>
+        </portlet-info>
+        <security-role-ref>
+            <role-name>administrator</role-name>
+        </security-role-ref>
+    </portlet>
+
     <!-- course history - archived courses -->
-	<portlet>
-		<portlet-name>archived-courses</portlet-name>
-		<display-name>Archived Courses</display-name>
-		<portlet-class>org.nterlearning.course.archived.portlet.ArchivedCoursesPortlet</portlet-class>
-		<init-param>
-			<name>view-jsp</name>
-			<value>/archived-courses/jsp/view.jsp</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-			<portlet-mode>view</portlet-mode>
-		</supports>
-		<resource-bundle>content.Language</resource-bundle>
-		<portlet-info>
-			<title>Archived Courses</title>
-			<short-title>Archived Courses</short-title>
-			<keywords>Archived Courses</keywords>
-		</portlet-info>
-		<security-role-ref>
-			<role-name>administrator</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
+    <portlet>
+        <portlet-name>archived-courses</portlet-name>
+        <display-name>Archived Courses</display-name>
+        <portlet-class>org.nterlearning.course.archived.portlet.ArchivedCoursesPortlet</portlet-class>
+        <init-param>
+            <name>view-jsp</name>
+            <value>/archived-courses/jsp/view.jsp</value>
+        </init-param>
+        <expiration-cache>0</expiration-cache>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>view</portlet-mode>
+        </supports>
+        <resource-bundle>content.Language</resource-bundle>
+        <portlet-info>
+            <title>Archived Courses</title>
+            <short-title>Archived Courses</short-title>
+            <keywords>Archived Courses</keywords>
+        </portlet-info>
+        <security-role-ref>
+            <role-name>administrator</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>power-user</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>user</role-name>
+        </security-role-ref>
+    </portlet>
 
     <!-- course reviews -->
-	<portlet>
-		<portlet-name>course-reviews</portlet-name>
-		<display-name>Course Reviews</display-name>
-		<portlet-class>org.nterlearning.course.reviews.portlet.CourseReviewsPortlet</portlet-class>
-		<init-param>
-			<name>view-jsp</name>
-			<value>/course-reviews/jsp/view.jsp</value>
-		</init-param>
-		<supports>
-			<mime-type>text/html</mime-type>
-			<portlet-mode>view</portlet-mode>
-		</supports>
-		<resource-bundle>content.Language</resource-bundle>
-		<portlet-info>
-			<title>Course Reviews</title>
-			<short-title>Course Reviews</short-title>
-			<keywords>Course Reviews</keywords>
-		</portlet-info>
-		<security-role-ref>
-			<role-name>administrator</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
+    <portlet>
+        <portlet-name>course-reviews</portlet-name>
+        <display-name>Course Reviews</display-name>
+        <portlet-class>org.nterlearning.course.reviews.portlet.CourseReviewsPortlet</portlet-class>
+        <init-param>
+            <name>view-jsp</name>
+            <value>/course-reviews/jsp/view.jsp</value>
+        </init-param>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>view</portlet-mode>
+        </supports>
+        <resource-bundle>content.Language</resource-bundle>
+        <portlet-info>
+            <title>Course Reviews</title>
+            <short-title>Course Reviews</short-title>
+            <keywords>Course Reviews</keywords>
+        </portlet-info>
+        <security-role-ref>
+            <role-name>administrator</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>guest</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>power-user</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>user</role-name>
+        </security-role-ref>
+    </portlet>
 
     <!-- flag report control panel -->
-     <portlet>
-         <portlet-name>flag-report-control-panel</portlet-name>
-         <display-name>Flag Report</display-name>
-         <portlet-class>org.nterlearning.course.flag.portlet.FlagReportPortlet</portlet-class>
-         <init-param>
-             <name>view-jsp</name>
-             <value>/flag-report/jsp/view.jsp</value>
-         </init-param>
-         <init-param>
-             <name>add-process-action-success-action</name>
-             <value>false</value>
-         </init-param>
-         <expiration-cache>0</expiration-cache>
-         <supports>
-             <mime-type>text/html</mime-type>
-             <portlet-mode>view</portlet-mode>
-         </supports>
-         <resource-bundle>content.Language</resource-bundle>
-         <portlet-info>
-             <title>Flag Report</title>
-             <short-title>Flag Report</short-title>
-             <keywords>Flag Report</keywords>
-         </portlet-info>
-         <security-role-ref>
-             <role-name>administrator</role-name>
-         </security-role-ref>
-     </portlet>
+    <portlet>
+        <portlet-name>flag-report-control-panel</portlet-name>
+        <display-name>Flag Report</display-name>
+        <portlet-class>org.nterlearning.course.flag.portlet.FlagReportPortlet</portlet-class>
+        <init-param>
+            <name>view-jsp</name>
+            <value>/flag-report/jsp/view.jsp</value>
+        </init-param>
+        <init-param>
+            <name>add-process-action-success-action</name>
+            <value>false</value>
+        </init-param>
+        <expiration-cache>0</expiration-cache>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>view</portlet-mode>
+        </supports>
+        <resource-bundle>content.Language</resource-bundle>
+        <portlet-info>
+            <title>Flag Report</title>
+            <short-title>Flag Report</short-title>
+            <keywords>Flag Report</keywords>
+        </portlet-info>
+        <security-role-ref>
+            <role-name>administrator</role-name>
+        </security-role-ref>
+    </portlet>
 
-	<!-- reports control panel -->
-	<portlet>
-		<portlet-name>reports-control-panel</portlet-name>
-		<display-name>Reports</display-name>
-		<portlet-class>org.nterlearning.exporter.portlet.ReportsPortlet</portlet-class>
-		<init-param>
-			<name>view-jsp</name>
-			<value>/reports/jsp/view.jsp</value>
-		</init-param>
-		<init-param>
-			<name>add-process-action-success-action</name>
-			<value>false</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-			<portlet-mode>view</portlet-mode>
-		</supports>
-		<resource-bundle>content.Language</resource-bundle>
-		<portlet-info>
-			<title>Reports</title>
-			<short-title>Reports</short-title>
-			<keywords>Reports</keywords>
-		</portlet-info>
-		<security-role-ref>
-			<role-name>administrator</role-name>
-		</security-role-ref>
-	</portlet>
-
+    <!-- reports control panel -->
+    <portlet>
+        <portlet-name>reports-control-panel</portlet-name>
+        <display-name>Reports</display-name>
+        <portlet-class>org.nterlearning.exporter.portlet.ReportsPortlet</portlet-class>
+        <init-param>
+            <name>view-jsp</name>
+            <value>/reports/jsp/view.jsp</value>
+        </init-param>
+        <init-param>
+            <name>add-process-action-success-action</name>
+            <value>false</value>
+        </init-param>
+        <expiration-cache>0</expiration-cache>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>view</portlet-mode>
+        </supports>
+        <resource-bundle>content.Language</resource-bundle>
+        <portlet-info>
+            <title>Reports</title>
+            <short-title>Reports</short-title>
+            <keywords>Reports</keywords>
+        </portlet-info>
+        <security-role-ref>
+            <role-name>administrator</role-name>
+        </security-role-ref>
+    </portlet>
 </portlet-app>
