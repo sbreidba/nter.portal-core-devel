@@ -45,6 +45,6 @@
         <portlet id="flag-report-control-panel" />
 		<!--<portlet id="crawl" />-->
 		<!--<portlet id="external-search"/>-->
-		<!--<portlet id="reports-control-panel" />-->
+		<portlet id="reports-control-panel" />
 	</category>
 </display>
