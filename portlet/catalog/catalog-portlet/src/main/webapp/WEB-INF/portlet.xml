@@ -1,0 +1,387 @@
+<?xml version="1.0"?>
+
+<!--
+  National Training and Education Resource (NTER)
+  Copyright (C) 2012 SRI International
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or (at
+  your option) any later version.
+
+  This program is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  02110-1301, USA.
+  -->
+
+<portlet-app
+	version="2.0"
+	xmlns="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd"
+>
+    <!-- course carousel -->
+	<portlet>
+		<portlet-name>course-carousel</portlet-name>
+		<display-name>Course Carousel</display-name>
+		<portlet-class>org.nterlearning.course.carousel.portlet.CourseCarouselPortlet</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/course-carousel/jsp/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>edit-jsp</name>
+			<value>/course-carousel/jsp/edit.jsp</value>
+		</init-param>
+		<init-param>
+			<name>add-process-action-success-action</name>
+			<value>false</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+			<portlet-mode>edit</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Course Carousel</title>
+			<short-title>Course Carousel</short-title>
+			<keywords>Course Carousel</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+
+    <!-- course management, control panel -->
+	<portlet>
+		<portlet-name>course-management-control-panel</portlet-name>
+		<display-name>Course Management</display-name>
+		<portlet-class>org.nterlearning.course.management.portlet.CourseManagementPortlet</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/course-management/jsp/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>add-process-action-success-action</name>
+			<value>true</value>
+		</init-param>
+		<init-param>
+			<name>access-count-weight</name>
+			<value>.4</value>
+		</init-param>
+		<init-param>
+			<name>completed-count-weight</name>
+			<value>.15</value>
+		</init-param>
+		<init-param>
+			<name>total-entries-weight</name>
+			<value>.15</value>
+		</init-param>
+		<init-param>
+			<name>average-score-weight</name>
+			<value>.3</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Course Management</title>
+			<short-title>Course Management</short-title>
+			<keywords>Course Management</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+	</portlet>
+
+    <!-- course listing -->
+	<portlet>
+		<portlet-name>course-listing</portlet-name>
+		<display-name>Course Listing</display-name>
+		<portlet-class>org.nterlearning.course.listing.portlet.CourseListingPortlet</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/course-listing/jsp/view.jsp</value>
+		</init-param>
+        <init-param>
+            <name>edit-jsp</name>
+            <value>/course-listing/jsp/edit.jsp</value>
+        </init-param>
+        <init-param>
+            <name>defaultDisplayCount</name>
+            <value>20</value>
+        </init-param>
+        <init-param>
+            <name>add-process-action-success-action</name>
+            <value>false</value>
+        </init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+            <portlet-mode>edit</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Course Listing</title>
+			<short-title>Course Listing</short-title>
+			<keywords>Course Listing</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+
+    <!-- course records, control panel -->
+    <portlet>
+        <portlet-name>course-records-control-panel</portlet-name>
+        <display-name>Course Records</display-name>
+        <portlet-class>org.nterlearning.course.record.portlet.CourseRecordsPortlet</portlet-class>
+        <init-param>
+            <name>view-jsp</name>
+            <value>/course-records/jsp/view.jsp</value>
+        </init-param>
+        <init-param>
+            <name>add-process-action-success-action</name>
+            <value>true</value>
+        </init-param>
+        <expiration-cache>0</expiration-cache>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>view</portlet-mode>
+        </supports>
+        <resource-bundle>content.Language</resource-bundle>
+        <portlet-info>
+            <title>Course Student Records</title>
+            <short-title>Course Records</short-title>
+            <keywords>Course Records</keywords>
+        </portlet-info>
+        <security-role-ref>
+            <role-name>administrator</role-name>
+        </security-role-ref>
+    </portlet>
+
+    <!-- Course Feeds, control panel -->
+    <portlet>
+		<portlet-name>feeds</portlet-name>
+		<display-name>Course Feeds</display-name>
+		<portlet-class>org.nterlearning.atom.parser.portlet.AtomParserControlPanelPortlet</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/course-feeds/jsp/cp/view.jsp</value>
+		</init-param>
+		<init-param>
+			<name>syncHistoryLimit</name>
+			<value>1000</value>
+		</init-param>
+        <!-- default timer values, change to update frequency of runs -->
+        <init-param>
+            <description>
+                The number of minutes between processing of course feeds.
+            </description>
+            <name>feedTimer</name>
+            <value>10</value>
+        </init-param>
+        <!-- update at least the root part of the URL to match NTER instance -->
+        <init-param>
+            <description>
+                Callback URL for PuSH subscriptions to be sent to from a PuSH hub
+            </description>
+            <name>pushCallbackUrl</name>
+            <value>http://localhost:8080/catalog-portlet/course-feeds/jsp/push.jsp</value>
+        </init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Course Feeds</title>
+			<short-title>Course Feeds</short-title>
+			<keywords>Course Feeds</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+	</portlet>
+
+    <!-- course details -->
+	<portlet>
+		<portlet-name>course-details</portlet-name>
+		<display-name>Course Details</display-name>
+		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/course-details/jsp/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Course Details</title>
+			<short-title>Course Details</short-title>
+			<keywords>Course Details</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+
+    <!-- component details -->
+	<portlet>
+		<portlet-name>component-details</portlet-name>
+		<display-name>Component Details</display-name>
+		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/component-details/jsp/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Component Details</title>
+			<short-title>Component Details</short-title>
+			<keywords>Component Details</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+
+
+	<!-- course history - current course -->
+	<portlet>
+		<portlet-name>current-course</portlet-name>
+		<display-name>Current Course</display-name>
+		<portlet-class>org.nterlearning.course.current.portlet.CurrentCoursePortlet</portlet-class>
+		<init-param>
+			<name>view-jsp</name>
+			<value>/current-course/jsp/view.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>view</portlet-mode>
+		</supports>
+		<resource-bundle>content.Language</resource-bundle>
+		<portlet-info>
+			<title>Current Course</title>
+			<short-title>Current Course</short-title>
+			<keywords>Current Course</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+
+    <!-- Nutch Crawl Control Panel -->
+    <portlet>
+        <portlet-name>crawl</portlet-name>
+        <display-name>Nutch Crawler</display-name>
+        <portlet-class>org.nterlearning.crawl.nutch.portlet.NutchCrawlerPortlet</portlet-class>
+        <init-param>
+            <name>view-jsp</name>
+            <value>/nutch-crawler/jsp/cp/view.jsp</value>
+        </init-param>
+        <init-param>
+            <description>
+                The number of minutes between automatic crawls.
+            </description>
+            <name>crawlTimer</name>
+            <value>60</value>
+        </init-param>
+        <init-param>
+            <description>
+                The maximum number of concurrent threads used to fetch web
+                pages.  Increasing this value can improve performance since more
+                threads are used concurrently. However, too high of a value can
+                cause performance issues.
+            </description>
+            <name>threadsLimit</name>
+            <value>5</value>
+        </init-param>
+        <init-param>
+            <description>
+                The maximum URL depth to traverse.  Decreasing this value will
+                speed up indexing, but reduce the number of pages crawled while
+                increasing this value will increase index time, and increase
+                the depth of information.
+            </description>
+            <name>depthLimit</name>
+            <value>10</value>
+        </init-param>
+        <expiration-cache>0</expiration-cache>
+        <supports>
+            <mime-type>text/html</mime-type>
+        </supports>
+        <resource-bundle>content.Language</resource-bundle>
+        <portlet-info>
+            <title>Nutch Crawler</title>
+            <short-title>Nutch Crawler</short-title>
+            <keywords>nutch crawler</keywords>
+        </portlet-info>
+        <security-role-ref>
+            <role-name>administrator</role-name>
+        </security-role-ref>
+    </portlet>
+</portlet-app>
