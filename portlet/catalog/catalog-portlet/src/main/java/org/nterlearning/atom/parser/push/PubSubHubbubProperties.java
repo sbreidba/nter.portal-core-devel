@@ -67,7 +67,7 @@ public class PubSubHubbubProperties {
         try {
             long companyId = PortalUtil.getDefaultCompanyId();
             Company company = CompanyLocalServiceUtil.getCompany(companyId);
-            String virtualHost = company.getVirtualHost();
+            String virtualHost = company.getVirtualHostname();
 
             String httpScheme = PortalPropertiesUtil.getWebServerProtocol();
             String port = PortalPropertiesUtil.getWebServerPort();
