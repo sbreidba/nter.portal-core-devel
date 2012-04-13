@@ -26,8 +26,8 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
-//import org.nterlearning.atom.parser.FeedParser;
-//import org.nterlearning.atom.parser.push.PubSubHubbubSubscriber;
+import org.nterlearning.atom.parser.FeedParser;
+import org.nterlearning.atom.parser.push.PubSubHubbubSubscriber;
 import org.nterlearning.course.enumerations.FeedRemovalReasonType;
 import org.nterlearning.datamodel.catalog.model.FeedReference;
 import org.nterlearning.datamodel.catalog.service.FeedReferenceLocalServiceUtil;
@@ -56,27 +56,27 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
 	public static final String PARAM_URL_TO_PARSE = "feeds-url-to-parse";
     public static final String FEED_TIMER_PROPERTY = "feedTimer";
 
-//    private FeedParser mFeedParser = FeedParser.getInstance();
-//    private PubSubHubbubSubscriber mPushSubscriber = PubSubHubbubSubscriber.getInstance();
+    private FeedParser mFeedParser = FeedParser.getInstance();
+    private PubSubHubbubSubscriber mPushSubscriber = PubSubHubbubSubscriber.getInstance();
 
     @Override
     public void init() throws PortletException {
 
     	// configure the feed timer interval
         String feedTimer = getInitParameter(FEED_TIMER_PROPERTY);
-//        if (feedTimer != null) {
-//        	mLog.info("Setting feed timer interval from init-param '" +
-//        			FEED_TIMER_PROPERTY + "' to [" + feedTimer + "]");
-//            mFeedParser.setFeedTimerInterval(Long.valueOf(feedTimer));
-//        }
-//        else {
-//        	mLog.warn("The init-param '" + FEED_TIMER_PROPERTY +
-//        			"' is not set. The default feed timer interval of [" +
-//        			mFeedParser.getFeedTimerInterval() + "] will be used.");
-//        }
-//
-//        // initialize the feed parser timer task
-//        mFeedParser.initiateFeedParserSchedule();
+        if (feedTimer != null) {
+        	mLog.info("Setting feed timer interval from init-param '" +
+        			FEED_TIMER_PROPERTY + "' to [" + feedTimer + "]");
+            mFeedParser.setFeedTimerInterval(Long.valueOf(feedTimer));
+        }
+        else {
+        	mLog.warn("The init-param '" + FEED_TIMER_PROPERTY +
+        			"' is not set. The default feed timer interval of [" +
+        			mFeedParser.getFeedTimerInterval() + "] will be used.");
+        }
+
+        // initialize the feed parser timer task
+        mFeedParser.initiateFeedParserSchedule();
 
         super.init();
     }
@@ -84,7 +84,7 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
     @Override
     public void destroy() {
         // destroy the feed parser timer task
-//        mFeedParser.shutdownTask();
+        mFeedParser.shutdownTask();
         super.destroy();
     }
 
@@ -102,9 +102,9 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
         throws Exception{
 
 		String urlToParse = request.getParameter(PARAM_URL_TO_PARSE);
-//        if ((urlToParse != null) && !urlToParse.equals("")) {
-//		    mFeedParser.runFeedParser(urlToParse);
-//        }
+        if ((urlToParse != null) && !urlToParse.equals("")) {
+		    mFeedParser.runFeedParser(urlToParse);
+        }
 	}
 
 	/**
@@ -114,7 +114,7 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
 	 * @param response HTTP response handler
 	 */
 	public void processCourseRegistryFeeds(ActionRequest request, ActionResponse response) {
-//        mFeedParser.runFeedParser();
+        mFeedParser.runFeedParser();
 	}
     
 
@@ -135,7 +135,7 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
         try {
             Long feedId = ParamUtil.getLong(request, "feedRefId");
             String feedIri = FeedReferenceLocalServiceUtil.getFeedReference(feedId).getFeedIri();
-//            mFeedParser.runFeedParser(feedIri);
+            mFeedParser.runFeedParser(feedIri);
         }
         catch (Exception e) {
             SessionErrors.add(request, e.getMessage());
@@ -168,12 +168,12 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
         FeedReferenceLocalServiceUtil.updateFeedReference(feedRef, true);
 
         // unsubscribe from any hubs
-//        if (feedRef.getPshbSubscribed()) {
-//            String hubs[] = feedRef.getPshb().split(",");
-//            for (String hub : hubs) {
-//                mPushSubscriber.unsubscribe(hub, feedRef.getHref());
-//            }
-//        }
+        if (feedRef.getPshbSubscribed()) {
+            String hubs[] = feedRef.getPshb().split(",");
+            for (String hub : hubs) {
+                mPushSubscriber.unsubscribe(hub, feedRef.getHref());
+            }
+        }
 
         response.setRenderParameter("feedCur", request.getParameter("feedCur"));
         response.setRenderParameter("feedDelta", request.getParameter("feedDelta"));
@@ -206,12 +206,12 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
         FeedReferenceLocalServiceUtil.updateFeedReference(feedRef, true);
 
         // subscribe to any hubs
-//        if (!feedRef.getPshb().equals("")) {
-//            String hubs[] = feedRef.getPshb().split(",");
-//            for (String hub : hubs) {
-//                mPushSubscriber.subscribe(hub, feedRef.getHref());
-//            }
-//        }
+        if (!feedRef.getPshb().equals("")) {
+            String hubs[] = feedRef.getPshb().split(",");
+            for (String hub : hubs) {
+                mPushSubscriber.subscribe(hub, feedRef.getHref());
+            }
+        }
 
         response.setRenderParameter("feedCur", request.getParameter("feedCur"));
         response.setRenderParameter("feedDelta", request.getParameter("feedDelta"));
@@ -294,15 +294,15 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
         FeedReference feedRef = FeedReferenceLocalServiceUtil.getFeedReference(feedRefId);
         int responseCode;
 
-//        List<String> hubs = Arrays.asList(feedRef.getPshb().split(","));
-//        for (String hub : hubs) {
-//            // the unsubscribe routine updates the feedref object if successful
-//            responseCode = mPushSubscriber.unsubscribe(hub, feedRef.getHref());
-//
-//            if (responseCode == HttpServletResponse.SC_BAD_REQUEST) {
-//                SessionErrors.add(request, "course-feed-details-push-unsubscribe-failed", hub);
-//            }
-//        }
+        List<String> hubs = Arrays.asList(feedRef.getPshb().split(","));
+        for (String hub : hubs) {
+            // the unsubscribe routine updates the feedref object if successful
+            responseCode = mPushSubscriber.unsubscribe(hub, feedRef.getHref());
+
+            if (responseCode == HttpServletResponse.SC_BAD_REQUEST) {
+                SessionErrors.add(request, "course-feed-details-push-unsubscribe-failed", hub);
+            }
+        }
 
         if (request.getParameter("jspPage") != null) {
         response.setRenderParameter("jspPage", request.getParameter("jspPage"));
@@ -332,30 +332,30 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
         FeedReference feedRef = FeedReferenceLocalServiceUtil.getFeedReference(feedRefId);
         int responseCode;
 
-//        List<String> hubs = Arrays.asList(feedRef.getPshb().split(","));
-//        if (feedRef.getPshbSubscribed()) {
-//            for (String hub : hubs) {
-//                // the unsubscribe routine updates the feedref object if successful
-//                responseCode = mPushSubscriber.unsubscribe(hub, feedRef.getHref());
-//
-//                if (responseCode == HttpServletResponse.SC_BAD_REQUEST) {
-//                    SessionErrors.add(request, "course-feed-details-push-unsubscribe-failed", hub);
-//                }
-//            }
-//
-//            // pause for a few seconds to ensure the unsubscribe messages went through
-//            Thread.sleep(2000);
-//        }
-//
-//        for (String hub : hubs) {
-//            // the subscribe routine updates the feedref object if successful
-//            responseCode = mPushSubscriber.subscribe(hub, feedRef.getHref());
-//
-//            if (!((responseCode == HttpServletResponse.SC_ACCEPTED) ||
-//                  (responseCode == HttpServletResponse.SC_NO_CONTENT))) {
-//                SessionErrors.add(request, "course-feed-details-push-resubscribe-failed", hub);
-//            }
-//        }
+        List<String> hubs = Arrays.asList(feedRef.getPshb().split(","));
+        if (feedRef.getPshbSubscribed()) {
+            for (String hub : hubs) {
+                // the unsubscribe routine updates the feedref object if successful
+                responseCode = mPushSubscriber.unsubscribe(hub, feedRef.getHref());
+
+                if (responseCode == HttpServletResponse.SC_BAD_REQUEST) {
+                    SessionErrors.add(request, "course-feed-details-push-unsubscribe-failed", hub);
+                }
+            }
+
+            // pause for a few seconds to ensure the unsubscribe messages went through
+            Thread.sleep(2000);
+        }
+
+        for (String hub : hubs) {
+            // the subscribe routine updates the feedref object if successful
+            responseCode = mPushSubscriber.subscribe(hub, feedRef.getHref());
+
+            if (!((responseCode == HttpServletResponse.SC_ACCEPTED) ||
+                  (responseCode == HttpServletResponse.SC_NO_CONTENT))) {
+                SessionErrors.add(request, "course-feed-details-push-resubscribe-failed", hub);
+            }
+        }
 
         if (request.getParameter("jspPage") != null) {
         response.setRenderParameter("jspPage", request.getParameter("jspPage"));
