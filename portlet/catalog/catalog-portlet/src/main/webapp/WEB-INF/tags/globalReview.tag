@@ -94,7 +94,7 @@ Course course = CourseLocalServiceUtil.getCourse(globalReview.getCourseId());
 
 		<% if (!course.isRemoved() || permissionChecker.isOmniadmin()) { %>
 		<div class="actions <%= randomNamespace %>">
-			<% if (permissionChecker.isCommunityAdmin(scopeGroupId)) { %>
+			<% if (permissionChecker.isGroupAdmin(scopeGroupId)) { %>
 			<div class="admin">
 				<portlet:renderURL var="remoteHideUrl" windowState="<%= LiferayWindowState.MAXIMIZED.toString() %>">
 					<portlet:param name="<%=NterKeys.REVIEW_ID%>" value="<%= Long.toString(globalReview.getPrimaryKey()) %>"/>

@@ -210,7 +210,7 @@ public class SetupAction extends SimpleAction {
         };
 
         ServiceContext serviceContext = new ServiceContext();
-        serviceContext.setAddCommunityPermissions(true);
+        serviceContext.setAddGroupPermissions(true);
         serviceContext.setAddGuestPermissions(true);
         serviceContext.setCompanyId(companyId);
         long groupId = GroupLocalServiceUtil.getCompanyGroup(companyId).getGroupId();

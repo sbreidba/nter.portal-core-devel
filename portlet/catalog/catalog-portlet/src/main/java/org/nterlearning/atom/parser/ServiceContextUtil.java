@@ -60,7 +60,7 @@ public class ServiceContextUtil {
         long companyId = getDefaultCompanyId();
 
         ServiceContext sc = new ServiceContext();
-        sc.setAddCommunityPermissions(false);
+        sc.setAddGroupPermissions(false);
         sc.setAddGuestPermissions(false);
         sc.setCompanyId(companyId);
 
@@ -93,7 +93,7 @@ public class ServiceContextUtil {
         long companyId = themeDisplay.getCompanyId();
 
         ServiceContext sc = new ServiceContext();
-        sc.setAddCommunityPermissions(false);
+        sc.setAddGroupPermissions(false);
         sc.setAddGuestPermissions(false);
         sc.setCompanyId(companyId);
 

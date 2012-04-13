@@ -56,7 +56,7 @@ if (review == null && reviewId != 0) {
 	meta.add("<meta name=\"robots\" content=\"noindex\" />");
 	httpRequest.setAttribute(MimeResponse.MARKUP_HEAD_ELEMENT, meta);
 
-	if (review != null && review.getUserId() != user.getUserId() && !permissionChecker.isCommunityAdmin(scopeGroupId)) { %>
+	if (review != null && review.getUserId() != user.getUserId() && !permissionChecker.isGroupAdmin(scopeGroupId)) { %>
 		<p><liferay-ui:message key="not-allowed-to-edit-review" /></p>
 		<a href="<%= course.getUrl() %>" class="button"><%= LanguageUtil.get(pageContext,"back-to-course") %></a>
 	<% } else { %>

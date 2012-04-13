@@ -52,7 +52,7 @@ if (review == null && reviewId != 0) {
 	Course course = CourseLocalServiceUtil.getCourse(courseId);
 	PortalUtil.addPageSubtitle(" - " + course.getTitle(locale), PortalUtil.getHttpServletRequest(renderRequest));
 	
-	if (review != null && review.getUserId() != user.getUserId() && !permissionChecker.isCommunityAdmin(scopeGroupId)) { %>
+	if (review != null && review.getUserId() != user.getUserId() && !permissionChecker.isGroupAdmin(scopeGroupId)) { %>
 		<p><liferay-ui:message key="not-allowed-to-remove-review" /></p>
 		<a href="<%= course.getUrl() %>" class="button"><%= LanguageUtil.get(pageContext,"back-to-course") %></a>
 	<% } else { %>
