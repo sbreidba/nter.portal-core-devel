@@ -146,7 +146,7 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
     /**
      * Manually disables the selected course-feed, defined via the request
      * parameter <code>feedRefId</code>.  This routine is called from
-     * /course-feeds/html/cp/editActions.jsp.
+     * /course-feeds/jsp/cp/editActions.jsp.
      *
      * @param request HTTP Request handler
      * @param response HTTP response handler
@@ -184,7 +184,7 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
 
     /**
      * Manually enables the selected course-feed.  This routine is called from
-     * /course-feeds/html/cp/editActions.jsp.
+     * /course-feeds/jsp/cp/editActions.jsp.
      *
      * @param request HTTP Request handler
      * @param response HTTP response handler
@@ -222,7 +222,7 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
 
     /**
      * Deletes all entries for a particular feed from the FeedSyncHistory table.
-     * This routine is called from /course-feeds/html/cp/feedDetails.jsp.
+     * This routine is called from /course-feeds/jsp/cp/feedDetails.jsp.
      *
      * @param request HTTP Request handler
      * @param response HTTP response handler
@@ -238,7 +238,7 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
 
     /**
      * Updates the owners of the FeedReference objects.  This routine is called
-     * from /course-feeds/html/cp/view.jsp
+     * from /course-feeds/jsp/cp/view.jsp
      *
      * @param request HTTP Request handler
      * @param response HTTP Response handler
@@ -280,7 +280,7 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
 
     /**
      * Unsubscribes a feed from its respective PubSubHubbub hubs.  This routine
-     * is called from /course-feeds/html/cp/view.jsp
+     * is called from /course-feeds/jsp/cp/view.jsp
      *
      * @param request HTTP Request handler
      * @param response HTTP Response handler
@@ -318,7 +318,7 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
 
     /**
      * Resubscribes a feed from its respective PubSubHubbub hubs.  This routine
-     * is called from /course-feeds/html/cp/view.jsp
+     * is called from /course-feeds/jsp/cp/view.jsp
      *
      * @param request HTTP Request handler
      * @param response HTTP Response handler

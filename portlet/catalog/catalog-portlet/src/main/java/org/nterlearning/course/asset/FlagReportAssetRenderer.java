@@ -69,7 +69,7 @@ public class FlagReportAssetRenderer extends BaseAssetRenderer {
 		if (template.equals(TEMPLATE_FULL_CONTENT)) {
 			renderRequest.setAttribute(WebKeys.FLAG_REPORT, _flagReport);
 
-			return "/flagreport/html/" + template + ".jsp";
+			return "/flagreport/jsp/" + template + ".jsp";
 		}
 		else {
 			return null;
