@@ -112,7 +112,7 @@ public class FeedSyncHistoryLocalServiceImpl
 
         int defaultRetentionCount =
                 Integer.valueOf(PortletLocalServiceUtil
-                        .getPortletById("feeds_WAR_courseportlet")
+                        .getPortletById("feeds_WAR_ntercatalogportlet")
                         .getInitParams().get("syncHistoryLimit"));
 
         purgeFeedSyncHistory(feedRefId, (long)defaultRetentionCount);
