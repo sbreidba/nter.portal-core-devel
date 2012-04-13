@@ -20,9 +20,7 @@
 
 package org.nterlearning.course.search;
 
-import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
+import com.liferay.portal.kernel.search.*;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
@@ -30,11 +28,18 @@ import com.liferay.portal.theme.ThemeDisplay;
 import org.nterlearning.course.util.NterKeys;
 
 import javax.portlet.PortletURL;
+import java.awt.*;
 
 public class ComponentOpenSearchImpl extends HitsOpenSearchImpl {
 
     public static final String SEARCH_PATH = "/c/component/open_search";
     public static final String TITLE = "NTER Component Search";
+
+    @Override
+    public Indexer getIndexer() {
+        return IndexerRegistryUtil.getIndexer(Component.class);
+    }
+
 
     @Override
     public String getPortletId() {
@@ -68,5 +73,5 @@ public class ComponentOpenSearchImpl extends HitsOpenSearchImpl {
     public static boolean isSearchAuthorized(PermissionChecker permissionChecker) {
         return permissionChecker.hasPermission(0, NterKeys.COMPONENT_SEARCH_PORTLET,
                 permissionChecker.getCompanyId(), ActionKeys.VIEW);
-    }    
+    }
 }
