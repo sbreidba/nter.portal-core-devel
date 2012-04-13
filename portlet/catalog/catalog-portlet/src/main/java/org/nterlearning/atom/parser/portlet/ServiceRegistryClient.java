@@ -22,10 +22,10 @@ package org.nterlearning.atom.parser.portlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.sri.nter.registry.proxy.InstitutionBean;
-import com.sri.nter.registry.proxy.Registry;
-import com.sri.nter.registry.proxy.RegistryImpl;
-import com.sri.nter.registry.proxy.ServiceBean;
+import org.nterlearning.registry.proxy.InstitutionBean;
+import org.nterlearning.registry.proxy.Registry;
+import org.nterlearning.registry.proxy.RegistryImpl;
+import org.nterlearning.registry.proxy.ServiceBean;
 import org.nterlearning.utils.ExecutorUtil;
 
 import org.nterlearning.xml.nter_registry.blacklist_objects_0_1_0.ActiveStatusEnum;
