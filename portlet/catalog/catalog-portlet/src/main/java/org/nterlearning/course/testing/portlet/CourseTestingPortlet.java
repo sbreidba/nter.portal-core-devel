@@ -48,8 +48,8 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 //import org.nterlearning.atom.parser.FeedParser;
 //import org.nterlearning.atom.parser.ServiceContextUtil;
 import org.nterlearning.course.management.portlet.CourseManagementPortlet;
-//import org.nterlearning.course.search.ExternalOpenSearchImpl;
-//import org.nterlearning.crawl.nutch.CrawlTool;
+import org.nterlearning.course.search.ExternalOpenSearchImpl;
+import org.nterlearning.crawl.nutch.CrawlTool;
 import org.nterlearning.datamodel.catalog.model.*;
 import org.nterlearning.datamodel.catalog.service.*;
 import org.nterlearning.utils.PortalPropertiesUtil;
@@ -516,15 +516,15 @@ public class CourseTestingPortlet extends MVCPortlet {
      * @param response
      */
     public void purgeNutchIndex(ActionRequest request, ActionResponse response) {
-//        CrawlTool crawlTool = CrawlTool.getInstance();
-//
-//        if (crawlTool.isMaster()) {
-//            crawlTool.purgeIndex();
-//        }
+        CrawlTool crawlTool = CrawlTool.getInstance();
+
+        if (crawlTool.isMaster()) {
+            crawlTool.purgeIndex();
+        }
     }
 
 	public void setSearchAddressFromRegistry(ActionRequest request, ActionResponse response) {
-//		ExternalOpenSearchImpl.setSearchAddressFromRegistry();
+		ExternalOpenSearchImpl.setSearchAddressFromRegistry();
 	}
 
 	public void reloadTopReviewerThreshold(ActionRequest request, ActionResponse response) {

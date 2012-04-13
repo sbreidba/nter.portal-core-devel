@@ -33,12 +33,9 @@ String componentParam = httpRequest.getParameter("ccid");
 // only someone signed in, and who has view rights to the component-search portlet
 // can view this page
 
-    //TODO temporary commented out as we migrate - adjust back once search is migrated.
-//if (!themeDisplay.isSignedIn() ||
-//    !permissionChecker.hasPermission(0, NterKeys.COMPONENT_SEARCH_PORTLET,
-//            themeDisplay.getCompanyId(), ActionKeys.VIEW)) {
-if (!themeDisplay.isSignedIn()) {
-
+if (!themeDisplay.isSignedIn() ||
+    !permissionChecker.hasPermission(0, NterKeys.COMPONENT_SEARCH_PORTLET,
+            themeDisplay.getCompanyId(), ActionKeys.VIEW)) {
 
     %>
     <div class="portlet-msg-alert"><%= LanguageUtil.get(pageContext, "component-details-log-in") %></div>

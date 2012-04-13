@@ -42,7 +42,7 @@ import com.liferay.portlet.asset.service.persistence.AssetVocabularyUtil;
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 import org.nterlearning.course.enumerations.CourseSortType;
-//import org.nterlearning.crawl.nutch.CrawlTool;
+import org.nterlearning.crawl.nutch.CrawlTool;
 import org.nterlearning.datamodel.catalog.NoSuchCourseException;
 import org.nterlearning.datamodel.catalog.model.*;
 import org.nterlearning.datamodel.catalog.service.*;
@@ -134,7 +134,6 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
     }
 
 
-    @Override
     public void updateReviewHistogram(long courseId)
             throws SystemException, PortalException {
 
@@ -284,13 +283,13 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
         // user.getCompanyId(), groupId, userId, Course.class.getName(),
         // course.getCourseId(), course, serviceContext);
         // Indexer
-//        try {
-//            course.updateIndex();
-//        }
-//        catch (Exception e) {
-//            _log.error("Could not index course: " + course.getCourseIri() +
-//                    " due to: " + e.getMessage());
-//        }
+        try {
+            course.updateIndex();
+        }
+        catch (Exception e) {
+            _log.error("Could not index course: " + course.getCourseIri() +
+                    " due to: " + e.getMessage());
+        }
 
         return course;
     }
@@ -383,8 +382,8 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 
         coursePersistence.update(course, true);
 
-//        course.updateIndex();
-//        removeCourseFromIndex(course);
+        course.updateIndex();
+        removeCourseFromIndex(course);
     }
 
 
@@ -397,7 +396,7 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 
         coursePersistence.update(course, true);
 
-//        course.updateIndex();
+        course.updateIndex();
     }
 
 
@@ -418,9 +417,9 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
         // TODO - once workflow is setup, the indexer delete may be moved
         // similar to blogs
         // Indexer - the course must be removed from indexer prior to removal
-//        Indexer indexer = IndexerRegistryUtil.getIndexer(Course.class);
-//        indexer.delete(course);
-//        removeCourseFromIndex(course);
+        Indexer indexer = IndexerRegistryUtil.getIndexer(Course.class);
+        indexer.delete(course);
+        removeCourseFromIndex(course);
 
         // Course
         coursePersistence.remove(course);
@@ -496,9 +495,9 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
                 null, 0, 0, null, false);
 
         // Indexer
-//        if (reIndex) {
-//            course.updateIndex();
-//        }
+        if (reIndex) {
+            course.updateIndex();
+        }
     }
 
 
@@ -516,11 +515,11 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
             throws SystemException {
 
         // Indexer
-//        course.updateIndex();
-//
-//        if (course.isRemoved()) {
-//            removeCourseFromIndex(course);
-//        }
+        course.updateIndex();
+
+        if (course.isRemoved()) {
+            removeCourseFromIndex(course);
+        }
 
         return super.updateCourse(course, merge);
     }
@@ -639,17 +638,17 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
         updateAsset(userId, serviceContext, course);
 
         // Indexer
-//        try {
-//            course.updateIndex();
-//
-//            if (course.isRemoved()) {
-//                removeCourseFromIndex(course);
-//            }
-//        }
-//        catch (Exception e) {
-//            _log.error("Could not reindex course: " + course.getCourseIri() +
-//                    " due to: " + e.getMessage());
-//        }
+        try {
+            course.updateIndex();
+
+            if (course.isRemoved()) {
+                removeCourseFromIndex(course);
+            }
+        }
+        catch (Exception e) {
+            _log.error("Could not reindex course: " + course.getCourseIri() +
+                    " due to: " + e.getMessage());
+        }
 
         return course;
     }
@@ -672,7 +671,7 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
         Course course = coursePersistence.findByPrimaryKey(courseId);
 
         // Indexer
-//        course.updateIndex();
+        course.updateIndex();
 
         return course;
     }
@@ -1010,11 +1009,11 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
     }
 
 
-//    private void removeCourseFromIndex(Course course) {
-//        if (CrawlTool.getInstance().isMaster()) {
-//            CrawlTool.getInstance().removeFromIndex(course);
-//        }
-//    }
+    private void removeCourseFromIndex(Course course) {
+        if (CrawlTool.getInstance().isMaster()) {
+            CrawlTool.getInstance().removeFromIndex(course);
+        }
+    }
 
 
     /**

@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portlet.asset.model.AssetEntry;
-import org.nterlearning.atom.generator.NterActivityStreamGenerator;
+//import org.nterlearning.atom.generator.NterActivityStreamGenerator;
 import org.nterlearning.datamodel.catalog.model.CourseReview;
 
 public class AssetEntryListener implements ModelListener<AssetEntry> {
@@ -59,19 +59,19 @@ public class AssetEntryListener implements ModelListener<AssetEntry> {
         try {
             if (CourseReview.class.getName().equals(assetEntry.getClassName())) {
                 mLog.info("Course Review created with id: " + assetEntry.getClassPK());
-                NterActivityStreamGenerator.courseReviewCreated(assetEntry.getClassPK());
+//                NterActivityStreamGenerator.courseReviewCreated(assetEntry.getClassPK());
             }
         }
         catch (Exception e) {
             mLog.error(ExceptionUtils.getFullStackTrace(e));
-        }    
+        }
     }
 
     public void onBeforeRemove(AssetEntry assetEntry) throws ModelListenerException {
     	try {
             if (CourseReview.class.getName().equals(assetEntry.getClassName())) {
                 mLog.info("Course Review deleted with id: " + assetEntry.getClassPK());
-                NterActivityStreamGenerator.courseReviewDeleted(assetEntry.getClassPK());
+//                NterActivityStreamGenerator.courseReviewDeleted(assetEntry.getClassPK());
             }
         }
         catch (Exception e) {
@@ -101,7 +101,7 @@ public class AssetEntryListener implements ModelListener<AssetEntry> {
         try {
             if (CourseReview.class.getName().equals(assetEntry.getClassName())) {
                 mLog.info("Course Review updated with id: " + assetEntry.getClassPK());
-                NterActivityStreamGenerator.courseReviewUpdated(assetEntry.getClassPK());
+//                NterActivityStreamGenerator.courseReviewUpdated(assetEntry.getClassPK());
             }
         }
         catch (Exception e) {
