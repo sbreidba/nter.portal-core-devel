@@ -51,6 +51,13 @@
             <scope>compile</scope>
 		</dependency>
 
+        <dependency>
+            <groupId>org.nterlearning</groupId>
+            <artifactId>registry-client-proxy</artifactId>
+            <version>0.1.8-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
+
 		<dependency>
 			<groupId>com.liferay.portal</groupId>
 			<artifactId>portal-service</artifactId>
@@ -213,12 +220,14 @@
             <version>1.4</version>
             <scope>provided</scope>
         </dependency>
+        <!-- duplicate from reporting app
         <dependency>
             <groupId>commons-lang</groupId>
             <artifactId>commons-lang</artifactId>
             <version>2.6</version>
             <scope>provided</scope>
         </dependency>
+        -->
         <dependency>
             <groupId>commons-logging</groupId>
             <artifactId>commons-logging</artifactId>

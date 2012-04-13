@@ -187,6 +187,43 @@
     </portlet>
 
 
+    <!-- course searches -->
+    <portlet>
+        <portlet-name>course-search</portlet-name>
+        <indexer-class>org.nterlearning.course.search.CourseIndexer</indexer-class>
+        <open-search-class>org.nterlearning.course.search.CourseOpenSearchImpl</open-search-class>
+        <instanceable>false</instanceable>
+        <add-default-resource>true</add-default-resource>
+    </portlet>
+
+    <!-- course-component searches -->
+    <portlet>
+        <portlet-name>component-search</portlet-name>
+        <indexer-class>org.nterlearning.course.search.ComponentIndexer</indexer-class>
+        <open-search-class>org.nterlearning.course.search.ComponentOpenSearchImpl</open-search-class>
+        <instanceable>false</instanceable>
+        <add-default-resource>true</add-default-resource>
+    </portlet>
+
+    <!-- external-search portlet -->
+    <portlet>
+        <portlet-name>external-search</portlet-name>
+        <open-search-class>org.nterlearning.course.search.ExternalOpenSearchImpl</open-search-class>
+        <instanceable>false</instanceable>
+    </portlet>
+
+    <!-- Unified Search -->
+    <portlet>
+        <portlet-name>unified-search</portlet-name>
+        <icon>/unified-search/images/icon.png</icon>
+        <instanceable>false</instanceable>
+        <footer-portlet-javascript>/../shared-portlet/js/anim-custom.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../shared-portlet/js/tree-view-html.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../shared-portlet/js/accessible-dialog.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../shared-portlet/js/remove.js</footer-portlet-javascript>
+        <css-class-wrapper>search-portlet</css-class-wrapper>
+    </portlet>
+
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

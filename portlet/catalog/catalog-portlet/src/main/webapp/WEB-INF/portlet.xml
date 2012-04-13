@@ -568,4 +568,116 @@
         </security-role-ref>
     </portlet>
 
+
+    <!-- course searches -->
+    <portlet>
+        <portlet-name>course-search</portlet-name>
+        <display-name>Course Search</display-name>
+        <portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+        <expiration-cache>0</expiration-cache>
+        <supports>
+            <mime-type>text/html</mime-type>
+        </supports>
+        <resource-bundle>content.Language</resource-bundle>
+        <portlet-info>
+            <title>Course Search</title>
+            <short-title>Course Search</short-title>
+            <keywords>Course Search</keywords>
+        </portlet-info>
+        <security-role-ref>
+            <role-name>administrator</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>power-user</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>user</role-name>
+        </security-role-ref>
+    </portlet>
+
+    <!-- component searches -->
+    <portlet>
+        <portlet-name>component-search</portlet-name>
+        <display-name>Component Search</display-name>
+        <portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+        <expiration-cache>0</expiration-cache>
+        <supports>
+            <mime-type>text/html</mime-type>
+        </supports>
+        <resource-bundle>content.Language</resource-bundle>
+        <portlet-info>
+            <title>Course Component Search</title>
+            <short-title>Course Component Search</short-title>
+            <keywords>Course Component Search</keywords>
+        </portlet-info>
+        <security-role-ref>
+            <role-name>administrator</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>power-user</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>user</role-name>
+        </security-role-ref>
+    </portlet>
+
+    <!-- External Search -->
+    <portlet>
+        <portlet-name>external-search</portlet-name>
+        <display-name>External Search</display-name>
+        <portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+        <supports>
+            <mime-type>text/html</mime-type>
+        </supports>
+        <portlet-info>
+            <title>Remote Courses</title>
+            <short-title>Remote Courses</short-title>
+            <keywords></keywords>
+        </portlet-info>
+        <security-role-ref>
+            <role-name>administrator</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>guest</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>power-user</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>user</role-name>
+        </security-role-ref>
+    </portlet>
+
+    <!-- Unified search -->
+    <portlet>
+        <portlet-name>unified-search</portlet-name>
+        <display-name>Unified Search</display-name>
+        <portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+        <init-param>
+            <name>view-jsp</name>
+            <value>/unified-search/jsp/view.jsp</value>
+        </init-param>
+        <expiration-cache>0</expiration-cache>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>VIEW</portlet-mode>
+        </supports>
+        <resource-bundle>content.Language</resource-bundle>
+        <portlet-info>
+            <title>Search</title>
+            <keywords>Unified Search</keywords>
+        </portlet-info>
+        <security-role-ref>
+            <role-name>administrator</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>guest</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>power-user</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>user</role-name>
+        </security-role-ref>
+    </portlet>
 </portlet-app>
