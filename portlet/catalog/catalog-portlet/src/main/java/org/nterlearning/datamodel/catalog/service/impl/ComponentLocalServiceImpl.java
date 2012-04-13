@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.IndexerRegistryUtil;
 import org.nterlearning.course.enumerations.ContributorRoleType;
-//import org.nterlearning.crawl.nutch.CrawlTool;
+import org.nterlearning.crawl.nutch.CrawlTool;
 import org.nterlearning.datamodel.catalog.NoSuchComponentException;
 import org.nterlearning.datamodel.catalog.model.*;
 import org.nterlearning.datamodel.catalog.service.ContributorLocalServiceUtil;
@@ -71,7 +71,7 @@ public class ComponentLocalServiceImpl extends ComponentLocalServiceBaseImpl {
             component.setGroupId(feedRef.getGroupId());
         }
 
-//        component.updateIndex();
+        component.updateIndex();
 
         return super.addComponent(component);
     }
@@ -126,7 +126,7 @@ public class ComponentLocalServiceImpl extends ComponentLocalServiceBaseImpl {
         component.setPriceTerms(priceTerms);
         component.setPriceExpiration(priceExpiration);
 
-//        component.updateIndex();
+        component.updateIndex();
 
         return super.addComponent(component);
     }
@@ -171,7 +171,7 @@ public class ComponentLocalServiceImpl extends ComponentLocalServiceBaseImpl {
     public Component updateComponent(Component component, boolean merge)
             throws SystemException {
 
-//        component.updateIndex();
+        component.updateIndex();
 
         if (component.isRemoved()) {
             removeComponentFromNutchIndex(component);
@@ -186,7 +186,7 @@ public class ComponentLocalServiceImpl extends ComponentLocalServiceBaseImpl {
     public Component updateComponent(Component component)
             throws SystemException {
 
-//        component.updateIndex();
+        component.updateIndex();
 
         if (component.isRemoved()) {
             removeComponentFromNutchIndex(component);
@@ -319,8 +319,8 @@ public class ComponentLocalServiceImpl extends ComponentLocalServiceBaseImpl {
 
 
     private void removeComponentFromNutchIndex(Component component) {
-//        if (CrawlTool.getInstance().isMaster()) {
-//            CrawlTool.getInstance().removeFromIndex(component);
-//        }
+        if (CrawlTool.getInstance().isMaster()) {
+            CrawlTool.getInstance().removeFromIndex(component);
+        }
     }
 }

@@ -57,8 +57,8 @@
 <%@ page import="org.nterlearning.course.current.portlet.ComponentUtil" %>
 <%@ page import="org.nterlearning.course.enumerations.FeedType" %>
 
-<%--<%@ page import="org.nterlearning.course.search.ExternalOpenSearchImpl" %>--%>
-<%--<%@ page import="org.nterlearning.crawl.nutch.CrawlTool" %>--%>
+<%@ page import="org.nterlearning.course.search.ExternalOpenSearchImpl" %>
+<%@ page import="org.nterlearning.crawl.nutch.CrawlTool" %>
 
 <%@ page import="org.nterlearning.datamodel.catalog.model.*" %>
 <%@ page import="org.nterlearning.datamodel.catalog.service.*" %>
