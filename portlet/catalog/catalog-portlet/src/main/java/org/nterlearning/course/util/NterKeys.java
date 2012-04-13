@@ -50,10 +50,10 @@ public class NterKeys {
 
     // PORTLETS
 	public static final String SEARCH_TERMS = "search-terms";
-    public static final String COMPONENT_SEARCH_PORTLET = "componentsearch_WAR_courseportlet";
-	public static final String COURSE_SEARCH_PORTLET = "coursesearch_WAR_courseportlet";
-	public static final String EXTERNAL_SEARCH_PORTLET = "externalsearch_WAR_courseportlet";
-    public static final String SEARCH = "unifiedsearch_WAR_courseportlet";
+    public static final String COMPONENT_SEARCH_PORTLET = "componentsearch_WAR_ntercatalogportlet";
+	public static final String COURSE_SEARCH_PORTLET = "coursesearch_WAR_ntercatalogportlet";
+	public static final String EXTERNAL_SEARCH_PORTLET = "externalsearch_WAR_ntercatalogportlet";
+    public static final String SEARCH = "unifiedsearch_WAR_ntercatalogportlet";
 
 	public static final String COURSE_IRI = "courseIri";
 	public static final String COMPONENT_IRI = "componentIri";
