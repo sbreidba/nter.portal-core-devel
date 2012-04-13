@@ -47,7 +47,7 @@ import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 import com.liferay.portlet.expando.service.persistence.ExpandoValueUtil;
 
-//import org.nterlearning.atom.parser.push.PubSubHubbubSubscriber;
+import org.nterlearning.atom.parser.push.PubSubHubbubSubscriber;
 import org.nterlearning.course.util.FeedReferenceUtil;
 import org.nterlearning.datamodel.catalog.NoSuchFeedReferenceException;
 import org.nterlearning.datamodel.catalog.model.*;
@@ -157,10 +157,10 @@ public class FeedReferenceLocalServiceImpl
                     feedReference.getFeedReferenceId());
         }
 
-//        // handle any push hubs
-//        if (updateRemovalState) {
-//            subscribeToHubs(feedReference, !feedReference.isRemoved());
-//        }
+        // handle any push hubs
+        if (updateRemovalState) {
+            subscribeToHubs(feedReference, !feedReference.isRemoved());
+        }
 
         // update all associated courses
         List<Course> courses =
@@ -470,22 +470,22 @@ public class FeedReferenceLocalServiceImpl
      * @param feedRef The FeedReference to process
      * @param subscribe True to subscribe to the hubs, false to unsubscribe
      */
-//    private void subscribeToHubs(FeedReference feedRef, Boolean subscribe) {
-//        // if already subscribed to a hub, and supposed to unsubscribe
-//        // or if not subscribed, and supposed to subscribe
-//        // otherwise, do nothing
-//        String hubs[] = feedRef.getPshb().split(",");
-//        if (feedRef.getPshbSubscribed() && !subscribe) {
-//            for (String hub : hubs) {
-//                PubSubHubbubSubscriber.getInstance().unsubscribe(hub, feedRef.getHref());
-//            }
-//        }
-//        else if (!feedRef.getPshbSubscribed() && subscribe) {
-//            for (String hub : hubs) {
-//                PubSubHubbubSubscriber.getInstance().subscribe(hub, feedRef.getHref());
-//            }
-//        }
-//    }
+    private void subscribeToHubs(FeedReference feedRef, Boolean subscribe) {
+        // if already subscribed to a hub, and supposed to unsubscribe
+        // or if not subscribed, and supposed to subscribe
+        // otherwise, do nothing
+        String hubs[] = feedRef.getPshb().split(",");
+        if (feedRef.getPshbSubscribed() && !subscribe) {
+            for (String hub : hubs) {
+                PubSubHubbubSubscriber.getInstance().unsubscribe(hub, feedRef.getHref());
+            }
+        }
+        else if (!feedRef.getPshbSubscribed() && subscribe) {
+            for (String hub : hubs) {
+                PubSubHubbubSubscriber.getInstance().subscribe(hub, feedRef.getHref());
+            }
+        }
+    }
 
 
     /**

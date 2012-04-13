@@ -40,7 +40,7 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserIdMapperLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 
-//import com.sri.nter.commerce.client.CommerceServiceStub;
+//import org.nterlearning.commerce.client.CommerceServiceStub;
 import org.nterlearning.datamodel.catalog.model.Component;
 import org.nterlearning.utils.DateUtil;
 import org.nterlearning.utils.PortalProperties;

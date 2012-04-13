@@ -20,7 +20,7 @@
 
 <%@include file="init.jsp" %>
 
-<%                                                                            com.sri.nter
+<%
 String redirectUrl = ParamUtil.getString(request, "redirect");
 
 PortalUtil.addPageSubtitle(LanguageUtil.get(pageContext, "rate-review"), PortalUtil.getHttpServletRequest(renderRequest));

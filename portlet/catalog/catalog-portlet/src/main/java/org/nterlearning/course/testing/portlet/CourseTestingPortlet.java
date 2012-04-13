@@ -45,8 +45,8 @@ import com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
-//import org.nterlearning.atom.parser.FeedParser;
-//import org.nterlearning.atom.parser.ServiceContextUtil;
+import org.nterlearning.atom.parser.FeedParser;
+import org.nterlearning.atom.parser.ServiceContextUtil;
 import org.nterlearning.course.management.portlet.CourseManagementPortlet;
 import org.nterlearning.course.search.ExternalOpenSearchImpl;
 import org.nterlearning.crawl.nutch.CrawlTool;
@@ -86,12 +86,12 @@ public class CourseTestingPortlet extends MVCPortlet {
             return;
         }
 
-//		try {
-//            FeedParser.getInstance().runFeedParser(urlToParse);
-//		}
-//		catch (Exception e) {
-//			SessionErrors.add(request, e.getMessage());
-//		}
+		try {
+            FeedParser.getInstance().runFeedParser(urlToParse);
+		}
+		catch (Exception e) {
+			SessionErrors.add(request, e.getMessage());
+		}
 	}
 
 	/**
@@ -496,11 +496,11 @@ public class CourseTestingPortlet extends MVCPortlet {
         String content = "This is the review content";
         double rating = 4;
         
-//        CourseReview review =
-//                CourseReviewLocalServiceUtil.addCourseReview(userId,
-//                        course.getCourseId(), summary, content, rating,
-//                        ServiceContextUtil.createDefaultServiceContext(request));
-//        CourseReviewLocalServiceUtil.updateCourseReviewRating(review.getCourseReviewId(), 4);
+        CourseReview review =
+                CourseReviewLocalServiceUtil.addCourseReview(userId,
+                        course.getCourseId(), summary, content, rating,
+                        ServiceContextUtil.createDefaultServiceContext(request));
+        CourseReviewLocalServiceUtil.updateCourseReviewRating(review.getCourseReviewId(), 4);
 	}
 	
 	public void updateUserHelpfulness(ActionRequest request, ActionResponse response)
