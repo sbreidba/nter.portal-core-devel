@@ -21,12 +21,11 @@
 
 package org.nterlearning.course.search;
 
-import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.kernel.search.Field;
-import com.liferay.portal.kernel.search.HitsOpenSearchImpl;
+import com.liferay.portal.kernel.search.*;
 import com.liferay.portal.theme.ThemeDisplay;
 
 import org.nterlearning.course.util.NterKeys;
+import org.nterlearning.datamodel.catalog.model.Course;
 
 import javax.portlet.PortletURL;
 
@@ -37,6 +36,11 @@ public class CourseOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public static final String SEARCH_PATH = "/c/course/open_search";
 	public static final String TITLE = "Liferay Course Search";
+
+    @Override
+    public Indexer getIndexer() {
+         return IndexerRegistryUtil.getIndexer(Course.class);
+    }
 
 	@Override
 	public String getPortletId() {
