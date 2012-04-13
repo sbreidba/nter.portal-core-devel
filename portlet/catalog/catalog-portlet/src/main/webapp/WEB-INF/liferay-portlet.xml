@@ -33,16 +33,6 @@
         <css-class-wrapper>course-carousel-portlet</css-class-wrapper>
     </portlet>
 
-    <!-- course management control panel -->
-    <portlet>
-        <portlet-name>course-management-control-panel</portlet-name>
-        <icon>/course-management/images/icon.png</icon>
-        <control-panel-entry-category>content</control-panel-entry-category>
-        <control-panel-entry-weight>1.5</control-panel-entry-weight>
-        <header-portlet-css>/course-management/css/main.css</header-portlet-css>
-        <css-class-wrapper>course-management-control-panel-portlet</css-class-wrapper>
-    </portlet>
-
     <!-- course listing -->
     <portlet>
         <portlet-name>course-listing</portlet-name>
@@ -52,35 +42,6 @@
         <footer-portlet-javascript>/../nter-shared-portlet/js/tree-view-html.js</footer-portlet-javascript>
         <footer-portlet-javascript>/course-listing/js/main.js</footer-portlet-javascript>
         <css-class-wrapper>course-listing-portlet</css-class-wrapper>
-    </portlet>
-
-    <!-- partner top courses -->
-    <portlet>
-        <portlet-name>partner-top-courses</portlet-name>
-        <icon>/partner-top-courses/images/icon.png</icon>
-        <instanceable>true</instanceable>
-        <footer-portlet-javascript>/partner-top-courses/js/main.js</footer-portlet-javascript>
-        <css-class-wrapper>partner-top-courses-portlet</css-class-wrapper>
-    </portlet>
-
-    <!-- course records control panel -->
-    <portlet>
-        <portlet-name>course-records-control-panel</portlet-name>
-        <icon>/course-records/images/icon.png</icon>
-        <control-panel-entry-category>portal</control-panel-entry-category>
-        <control-panel-entry-weight>1.7</control-panel-entry-weight>
-        <header-portlet-css>/course-records/css/main.css</header-portlet-css>
-        <css-class-wrapper>course-records-control-panel-portlet</css-class-wrapper>
-    </portlet>
-
-    <!-- Feeds -->
-    <portlet>
-        <portlet-name>feeds</portlet-name>
-        <icon>/course-feeds/images/icon.png</icon>
-        <control-panel-entry-category>content</control-panel-entry-category>
-        <control-panel-entry-weight>1.6</control-panel-entry-weight>
-        <header-portlet-css>/course-feeds/css/main.css</header-portlet-css>
-        <css-class-wrapper>course-feeds-portlet</css-class-wrapper>
     </portlet>
 
     <!-- course details -->
@@ -140,6 +101,45 @@
         <css-class-wrapper>course-reviews-portlet</css-class-wrapper>
     </portlet>
 
+    <!-- partner top courses -->
+    <portlet>
+        <portlet-name>partner-top-courses</portlet-name>
+        <icon>/partner-top-courses/images/icon.png</icon>
+        <instanceable>true</instanceable>
+        <footer-portlet-javascript>/partner-top-courses/js/main.js</footer-portlet-javascript>
+        <css-class-wrapper>partner-top-courses-portlet</css-class-wrapper>
+    </portlet>
+
+    <!-- course management control panel -->
+    <portlet>
+        <portlet-name>course-management-control-panel</portlet-name>
+        <icon>/course-management/images/icon.png</icon>
+        <control-panel-entry-category>content</control-panel-entry-category>
+        <control-panel-entry-weight>1.5</control-panel-entry-weight>
+        <header-portlet-css>/course-management/css/main.css</header-portlet-css>
+        <css-class-wrapper>course-management-control-panel-portlet</css-class-wrapper>
+    </portlet>
+
+    <!-- course records control panel -->
+    <portlet>
+        <portlet-name>course-records-control-panel</portlet-name>
+        <icon>/course-records/images/icon.png</icon>
+        <control-panel-entry-category>portal</control-panel-entry-category>
+        <control-panel-entry-weight>1.7</control-panel-entry-weight>
+        <header-portlet-css>/course-records/css/main.css</header-portlet-css>
+        <css-class-wrapper>course-records-control-panel-portlet</css-class-wrapper>
+    </portlet>
+
+    <!-- Feeds, control panel -->
+    <portlet>
+        <portlet-name>feeds</portlet-name>
+        <icon>/course-feeds/images/icon.png</icon>
+        <control-panel-entry-category>content</control-panel-entry-category>
+        <control-panel-entry-weight>1.6</control-panel-entry-weight>
+        <header-portlet-css>/course-feeds/css/main.css</header-portlet-css>
+        <css-class-wrapper>course-feeds-portlet</css-class-wrapper>
+    </portlet>
+
     <!--flag report control panel -->
     <portlet>
         <portlet-name>flag-report-control-panel</portlet-name>
@@ -164,6 +164,15 @@
         <css-class-wrapper>reports-control-panel-portlet</css-class-wrapper>
     </portlet>
 
+    <!-- course testing control panel -->
+    <portlet>
+        <portlet-name>course-testing-control-panel</portlet-name>
+        <icon>/course-testing/images/icon.png</icon>
+        <control-panel-entry-category>portal</control-panel-entry-category>
+        <control-panel-entry-category>portal</control-panel-entry-category>
+        <control-panel-entry-weight>2.1</control-panel-entry-weight>
+        <css-class-wrapper>course-testing-control-panel-portlet</css-class-wrapper>
+    </portlet>
    
     <!-- crawl portlet -->
     <portlet>
@@ -175,17 +184,6 @@
         <footer-portlet-javascript>/nutch-crawler/js/main.js</footer-portlet-javascript>
         <css-class-wrapper>crawl-portlet</css-class-wrapper>
     </portlet>
-
-     <!-- course testing control panel -->
-    <portlet>
-        <portlet-name>course-testing-control-panel</portlet-name>
-        <icon>/course-testing/images/icon.png</icon>
-        <control-panel-entry-category>portal</control-panel-entry-category>
-        <control-panel-entry-category>portal</control-panel-entry-category>
-        <control-panel-entry-weight>2.1</control-panel-entry-weight>
-        <css-class-wrapper>course-testing-control-panel-portlet</css-class-wrapper>
-    </portlet>
-
 
     <!-- course searches -->
     <portlet>
@@ -217,10 +215,10 @@
         <portlet-name>unified-search</portlet-name>
         <icon>/unified-search/images/icon.png</icon>
         <instanceable>false</instanceable>
-        <footer-portlet-javascript>/../shared-portlet/js/anim-custom.js</footer-portlet-javascript>
-        <footer-portlet-javascript>/../shared-portlet/js/tree-view-html.js</footer-portlet-javascript>
-        <footer-portlet-javascript>/../shared-portlet/js/accessible-dialog.js</footer-portlet-javascript>
-        <footer-portlet-javascript>/../shared-portlet/js/remove.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/anim-custom.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/tree-view-html.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/accessible-dialog.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/remove.js</footer-portlet-javascript>
         <css-class-wrapper>search-portlet</css-class-wrapper>
     </portlet>
 
