@@ -276,8 +276,9 @@ img.course-image, .main-image { width: 290px; height: 217px; }
 .paged-thumbnail-listing li { margin-bottom: 15px; }
 .paged-thumbnail-listing li:nth-child(6n) { padding-right: 0; }
 .paged-thumbnail-listing li:nth-child(6n+1) { clear: left; padding-left: 0; }
-.thumbnail-listing h4 { padding-top: .1em; }
-.thumbnail-listing .rating { padding-top: .3em; }
+.thumbnail-listing h4 { padding: .2em 0; font-size: 1em; }
+.thumbnail-listing .rating { padding-top: .2em; }
+.thumbnail-listing .organization { padding-top: .2em; }
 
 /* header styles */
 .course-title, .main-page-heading { margin-top: 0; margin-bottom: 0; }
