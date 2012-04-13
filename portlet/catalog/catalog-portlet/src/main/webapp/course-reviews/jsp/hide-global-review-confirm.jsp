@@ -52,7 +52,7 @@ if (globalReview == null && reviewId != 0) {
 	Course course = CourseLocalServiceUtil.getCourse(courseId);
 	PortalUtil.addPageSubtitle(" - " + course.getTitle(locale), PortalUtil.getHttpServletRequest(renderRequest));
 	
-	if (globalReview != null && !permissionChecker.isCommunityAdmin(scopeGroupId)) { %>
+	if (globalReview != null && !permissionChecker.isGroupAdmin(scopeGroupId)) { %>
 		<p><liferay-ui:message key="not-allowed-to-hide-review" /></p>
 		<a href="<%= course.getUrl() %>" class="button"><%= LanguageUtil.get(pageContext,"back-to-course") %></a>
 	<% } else { %>

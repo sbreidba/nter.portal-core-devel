@@ -109,7 +109,7 @@ int upVotes = (int) totalEntries - downVotes;
 
 		<% if ((!course.isRemoved() || permissionChecker.isOmniadmin())) { %>
 		<div class="actions <%= randomNamespace %>">
-			<% if (review.getUserId() == user.getUserId() || permissionChecker.isCommunityAdmin(scopeGroupId)) { %>
+			<% if (review.getUserId() == user.getUserId() || permissionChecker.isGroupAdmin(scopeGroupId)) { %>
 			<div class="admin">
 				<portlet:renderURL var="editUrl">
 					<portlet:param name="<%=NterKeys.REVIEW_ID%>" value="<%= Long.toString(review.getPrimaryKey()) %>"/>
