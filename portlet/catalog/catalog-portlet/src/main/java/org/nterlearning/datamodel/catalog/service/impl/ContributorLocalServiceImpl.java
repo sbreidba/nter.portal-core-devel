@@ -20,9 +20,17 @@
 
 package org.nterlearning.datamodel.catalog.service.impl;
 
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import org.nterlearning.datamodel.catalog.model.Component;
 import org.nterlearning.datamodel.catalog.model.Contributor;
+import org.nterlearning.datamodel.catalog.model.Course;
+import org.nterlearning.datamodel.catalog.service.ComponentLocalServiceUtil;
+import org.nterlearning.datamodel.catalog.service.ContributorLocalServiceUtil;
+import org.nterlearning.datamodel.catalog.service.CourseLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.service.base.ContributorLocalServiceBaseImpl;
 
 import java.util.List;
@@ -43,21 +51,75 @@ import java.util.List;
  */
 public class ContributorLocalServiceImpl extends ContributorLocalServiceBaseImpl {
 
+
+    private static Log mLog = LogFactoryUtil.getLog(ContributorLocalServiceImpl.class);
+
     @Override
     public Contributor addContributor(Contributor contributor)
             throws SystemException {
         long id = counterLocalService.increment(Contributor.class.getName());
         contributor.setPrimaryKey(id);
+
+        updateIndex(contributor);
+
         return super.addContributor(contributor);
     }
+
+
+    @Override
+    public Contributor updateContributor(Contributor contributor) throws SystemException {
+        updateIndex(contributor);
+        return super.updateContributor(contributor);
+    }
+
+
+    @Override
+    public Contributor updateContributor(Contributor contributor, boolean merge) throws
+            SystemException {
+        updateIndex(contributor);
+        return super.updateContributor(contributor, merge);
+    }
+
+
+    @Override
+    public void deleteContributor(long contributorId) throws PortalException, SystemException {
+        updateIndex(ContributorLocalServiceUtil.getContributor(contributorId));
+        super.deleteContributor(contributorId);
+    }
+
+
+    @Override
+    public void deleteContributor(Contributor contributor) throws SystemException {
+        updateIndex(contributor);
+        super.deleteContributor(contributor);
+    }
+
 
     public List<Contributor> findByCourseIdWithRole(Long courseId, String role)
             throws SystemException {
         return contributorPersistence.findByCourseIdWithRole(courseId, role);
     }
 
+
     public List<Contributor> findByComponentIdWithRole(Long componentId, String role)
             throws SystemException {
         return contributorPersistence.findByComponentIdWithRole(componentId,role);
+    }
+
+
+    private void updateIndex(Contributor contributor) {
+        try {
+            if (contributor.getComponentId() > 0) {
+                Component component = ComponentLocalServiceUtil.getComponent(contributor.getComponentId());
+                component.updateIndex();
+            }
+            else if (contributor.getCourseId() > 0) {
+                Course course = CourseLocalServiceUtil.getCourse(contributor.getCourseId());
+                course.updateIndex();
+            }
+        }
+        catch (Exception e) {
+            mLog.error("Could not update index related to contributor: " + contributor.getContributorId());
+        }
     }
 }

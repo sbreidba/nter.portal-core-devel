@@ -402,7 +402,8 @@ public class FeedReferenceLocalServiceImpl
                 for (CourseReview review : coursePersistence.getCourseReviews(course.getCourseId())) {
                     CourseReviewLocalServiceUtil.deleteCourseReview(review);
                 }
-                coursePersistence.remove(course);
+
+                CourseLocalServiceUtil.deleteCourse(course);
             }
         }
         catch (Exception e) {
@@ -421,7 +422,7 @@ public class FeedReferenceLocalServiceImpl
             List<Component> components =
                      componentPersistence.findByFeedReferenceId(feedReferenceId);
             for (Component component : components) {
-                componentPersistence.remove(component);
+                ComponentLocalServiceUtil.deleteComponent(component);
             }
         }
         catch (Exception e) {

@@ -354,6 +354,14 @@ public class ComponentClp extends BaseModelImpl<Component> implements Component 
         _priceExpiration = priceExpiration;
     }
 
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Contributor> getContributors() {
+        throw new UnsupportedOperationException();
+    }
+
+    public org.nterlearning.datamodel.catalog.model.Contributor getComponentAuthor() {
+        throw new UnsupportedOperationException();
+    }
+
     public java.lang.String getFriendlyVersionDate(
         javax.servlet.jsp.PageContext pageContext) {
         throw new UnsupportedOperationException();

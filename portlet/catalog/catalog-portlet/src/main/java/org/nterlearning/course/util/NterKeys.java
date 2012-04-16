@@ -55,9 +55,11 @@ public class NterKeys {
 	public static final String EXTERNAL_SEARCH_PORTLET = "externalsearch_WAR_ntercatalogportlet";
     public static final String SEARCH = "unifiedsearch_WAR_ntercatalogportlet";
 
+    // Search and Index properties
 	public static final String COURSE_IRI = "courseIri";
 	public static final String COMPONENT_IRI = "componentIri";
 	public static final String POPULARITY = "popularity";
+    public static final String CONTRIBUTOR_NAME = "contributor";
 	public static final String OWNER_NAME = "ownerName";
 	public static final String AVERAGE_RATING = "average-rating";
 	public static final String REVIEW_HISTOGRAM = "review-histogram";

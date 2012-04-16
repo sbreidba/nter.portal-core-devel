@@ -45,6 +45,7 @@ import java.util.*;
 import org.apache.commons.beanutils.BeanComparator;
 import org.apache.commons.collections.comparators.ComparableComparator;
 import org.apache.commons.collections.comparators.ReverseComparator;
+
 public class CourseSearchUtil {
 
 	/**
