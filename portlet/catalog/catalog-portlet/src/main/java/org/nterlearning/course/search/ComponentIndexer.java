@@ -37,9 +37,11 @@ import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 import org.nterlearning.course.util.NterKeys;
 import org.nterlearning.datamodel.catalog.NoSuchComponentException;
 import org.nterlearning.datamodel.catalog.model.Component;
+import org.nterlearning.datamodel.catalog.model.Contributor;
 import org.nterlearning.datamodel.catalog.service.ComponentLocalServiceUtil;
 
 import javax.portlet.PortletURL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -54,7 +56,8 @@ public class ComponentIndexer extends BaseIndexer {
             Field.CONTENT,
             Field.DESCRIPTION,
             Field.PROPERTIES,
-            Field.TITLE
+            Field.TITLE,
+            NterKeys.CONTRIBUTOR_NAME
     };
 
     private static final Log mLog = LogFactoryUtil.getLog(ComponentIndexer.class);
@@ -99,33 +102,6 @@ public class ComponentIndexer extends BaseIndexer {
         return new Summary("", "", portletURL);
     }
 
-//    @Override
-//    public Summary getSummary(Document document, Locale locale, String snippet, PortletURL portletURL) {
-//        try {
-//            Component component =
-//                    ComponentLocalServiceUtil.getComponent(
-//                            GetterUtil.getLong(document.get(Field.ENTRY_CLASS_PK)));
-//            String title = component.getTitle();
-//            String content = snippet;
-//
-//            if (Validator.isNull(content)) {
-//                content = StringUtil.shorten(component.getDescription(), 200);
-//            }
-//
-//            return new Summary(title, content, portletURL);
-//        }
-//        catch (NoSuchComponentException ce) {
-//            // somehow the index became corrupted, manually delete doc
-//            doDelete(document);
-//            mLog.warn(ce.getMessage());
-//        }
-//        catch (Exception e) {
-//            mLog.error(e);
-//        }
-//
-//        return new Summary("", "", portletURL);
-//    }
-
 
     @Override
     protected void doDelete(Object obj) throws Exception {
@@ -156,7 +132,6 @@ public class ComponentIndexer extends BaseIndexer {
 
         Company company = CompanyLocalServiceUtil.getCompany(component.getCompanyId());
         Group defaultGroup = company.getGroup();
-        User defaultUser = company.getDefaultUser();
 
         long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
                                     Component.class.getName(), componentId);
@@ -182,12 +157,17 @@ public class ComponentIndexer extends BaseIndexer {
         doc.addKeyword(Field.GROUP_ID, defaultGroup.getGroupId());
         doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
         doc.addKeyword(Field.SCOPE_GROUP_ID, defaultGroup.getGroupId());
-        doc.addKeyword(Field.USER_ID, defaultUser.getUserId());
+        doc.addKeyword(Field.USER_ID, company.getDefaultUser().getUserId());
         doc.addKeyword(Field.URL, component.getUrl());
 
         doc.addText(Field.COMMENTS, localeCategoryTitles);
         doc.addText(Field.DESCRIPTION, component.getDescription());
         doc.addText(Field.TITLE, component.getTitle());
+
+        Contributor author = component.getComponentAuthor();
+        if (author != null) {
+            doc.addText(NterKeys.CONTRIBUTOR_NAME, author.getContributorName());
+        }
 
         ExpandoBridge expandoBridge = component.getExpandoBridge();
         ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);

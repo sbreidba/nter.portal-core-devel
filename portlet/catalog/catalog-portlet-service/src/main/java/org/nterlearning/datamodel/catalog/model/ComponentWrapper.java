@@ -650,6 +650,16 @@ public class ComponentWrapper implements Component, ModelWrapper<Component> {
         _component.persist();
     }
 
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Contributor> getContributors()
+        throws java.lang.Exception {
+        return _component.getContributors();
+    }
+
+    public org.nterlearning.datamodel.catalog.model.Contributor getComponentAuthor()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _component.getComponentAuthor();
+    }
+
     public java.lang.String getFriendlyVersionDate(
         javax.servlet.jsp.PageContext pageContext) {
         return _component.getFriendlyVersionDate(pageContext);

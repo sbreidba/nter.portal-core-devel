@@ -37,10 +37,10 @@ import com.liferay.portlet.expando.util.ExpandoBridgeIndexerUtil;
 
 import org.nterlearning.course.util.NterKeys;
 import org.nterlearning.datamodel.catalog.NoSuchCourseException;
+import org.nterlearning.datamodel.catalog.model.Contributor;
 import org.nterlearning.datamodel.catalog.model.Course;
 import org.nterlearning.datamodel.catalog.service.CourseLocalServiceUtil;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -56,8 +56,13 @@ public class CourseIndexer extends BaseIndexer {
 	private static final String PORTLET_ID = NterKeys.COURSE_SEARCH_PORTLET;
 
 	private static final String[] COURSE_KEYWORDS_FIELDS = {
-		Field.ASSET_TAG_NAMES, Field.COMMENTS, Field.CONTENT, Field.DESCRIPTION,
-		Field.PROPERTIES, Field.TITLE
+		    Field.ASSET_TAG_NAMES,
+            Field.COMMENTS,
+            Field.CONTENT,
+            Field.DESCRIPTION,
+            Field.PROPERTIES,
+            Field.TITLE,
+            NterKeys.CONTRIBUTOR_NAME
 	};
 
 	public String[] getClassNames() {
@@ -72,6 +77,7 @@ public class CourseIndexer extends BaseIndexer {
     public String getPortletId() {
         return PORTLET_ID;
     }
+
 
     @Override
     public Summary doGetSummary(Document doc, Locale locale, String snippet, PortletURL url) {
@@ -99,37 +105,6 @@ public class CourseIndexer extends BaseIndexer {
 		return new Summary("", "", url);
 	}
 
-	/**
-	 * (non-Javadoc)
-	 * @see{com.liferay.portal.kernel.search.CourseIndexer#getSummary(com.liferay
-	 * .portal .kernel.search.Document, java.lang.String,
-	 * javax.portlet.PortletURL)}
-	 */
-//	@Override
-//	public Summary getSummary(Document doc, Locale locale, String snippet, PortletURL url) {
-//
-//		try {
-//			Course course = CourseLocalServiceUtil.getCourse(
-//				GetterUtil.getLong(
-//					doc.get(Field.ENTRY_CLASS_PK)));
-//			String title = course.getTitle();
-//			String content = snippet;
-//			if (Validator.isNull(content)) {
-//				content = StringUtil.shorten(course.getDescription(), 200);
-//			}
-//			return new Summary(title, content, url);
-//		}
-//		catch (NoSuchCourseException ce) {
-//			// somehow the index became corrupted, manually remove the course
-//			doDelete(doc);
-//			_log.warn(ce.getMessage());
-//		}
-//		catch (Exception e) {
-//			_log.error(e);
-//		}
-//
-//		return new Summary("", "", url);
-//	}
 
 	@Override
 	protected void doDelete(Object o)
@@ -163,12 +138,9 @@ public class CourseIndexer extends BaseIndexer {
 		long groupId = getParentGroupId(scopeGroupId);
 		long userId = course.getUserId();
 		long courseId = course.getCourseId();
-		String courseIri = course.getCourseIri();
 		String title = course.getTitle();
-		String url = course.getUrl();
 		String description = course.getDescription();
-		Date modifiedDate = course.getUpdatedDate();
-		String ownerName = course.getOwnerName(companyId);
+
 		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
 			Course.class.getName(), courseId);
 		List<AssetCategory> assetCategories = AssetCategoryLocalServiceUtil.getCategories(
@@ -178,7 +150,7 @@ public class CourseIndexer extends BaseIndexer {
 
 		Document doc = new DocumentImpl();
 		doc.addUID(PORTLET_ID, courseId);
-		doc.addModifiedDate(modifiedDate);
+		doc.addModifiedDate(course.getUpdatedDate());
 		doc.addKeyword(Field.COMPANY_ID, companyId);
 		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		doc.addKeyword(Field.GROUP_ID, groupId);
@@ -188,10 +160,9 @@ public class CourseIndexer extends BaseIndexer {
 		doc.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
 		doc.addKeyword(Field.ENTRY_CLASS_NAME, Course.class.getName());
 		doc.addKeyword(Field.ENTRY_CLASS_PK, courseId);
-		doc.addKeyword(Field.URL, url);
+		doc.addKeyword(Field.URL, course.getUrl());
 		doc.addKeyword(NterKeys.POPULARITY, course.getPopularWeight());
-		// Add courseIri for unique identifier across databases
-		doc.addKeyword(NterKeys.COURSE_IRI, courseIri);
+		doc.addText(NterKeys.COURSE_IRI, course.getCourseIri());
 
 		// Strip out xml characters and add all localizations to title and
 		// description
@@ -201,12 +172,14 @@ public class CourseIndexer extends BaseIndexer {
 				LocalizationUtil.getLocalization(
 					title, localeId) + StringPool.SPACE);
 		}
+
 		String localeDescription = StringPool.BLANK;
 		for (String localeId : LocalizationUtil.getAvailableLocales(title)) {
 			localeDescription = localeDescription.concat(
 				LocalizationUtil.getLocalization(
 					description, localeId) + StringPool.SPACE);
 		}
+
 		String localeCategoryTitles = StringPool.BLANK;
 		for (AssetCategory assetCategory : assetCategories) {
 			String categoryTitle = assetCategory.getTitle();
@@ -218,13 +191,20 @@ public class CourseIndexer extends BaseIndexer {
 			}
 			localeCategoryTitles += localeCategoryTitle;
 		}
+
 		doc.addText(Field.COMMENTS, localeCategoryTitles);
 		doc.addText(Field.TITLE, localeTitle);
 		doc.addText(Field.DESCRIPTION, localeDescription);
-		doc.addText(NterKeys.OWNER_NAME, ownerName);
+		doc.addText(NterKeys.OWNER_NAME, course.getOwnerName(companyId));
+
+        Contributor author = course.getCourseAuthor();
+        if (author != null) {
+            doc.addText(NterKeys.CONTRIBUTOR_NAME, author.getContributorName());
+        }
 
 		ExpandoBridge expandoBridge = course.getExpandoBridge();
 		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
+
 		return doc;
 	}
 
@@ -233,7 +213,7 @@ public class CourseIndexer extends BaseIndexer {
 		BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
         String ownerName = searchContext.getKeywords();
-        // ensure an ownername is present, and that it does not represent a
+        // ensure an owner name is present, and that it does not represent a
         // field query (field:keyword)
 		if (Validator.isNotNull(ownerName) && (!ownerName.contains(":"))) {
 			if (searchContext.isAndSearch()) {

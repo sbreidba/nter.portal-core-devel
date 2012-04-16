@@ -42,6 +42,9 @@ import com.liferay.portal.util.PortalUtil;
 
 //import org.nterlearning.commerce.client.CommerceServiceStub;
 import org.nterlearning.datamodel.catalog.model.Component;
+import org.nterlearning.datamodel.catalog.model.Contributor;
+import org.nterlearning.datamodel.catalog.service.ComponentLocalServiceUtil;
+import org.nterlearning.datamodel.catalog.service.ContributorLocalServiceUtil;
 import org.nterlearning.utils.DateUtil;
 import org.nterlearning.utils.PortalProperties;
 
@@ -55,17 +58,31 @@ import org.nterlearning.utils.PortalPropertiesUtil;
 import javax.servlet.jsp.PageContext;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.List;
 
 public class ComponentImpl extends ComponentBaseImpl implements Component {
 
 	private String searchContext;
 	private float searchRelevance;
 
-
 	private static Log mLog = LogFactoryUtil.getLog(ComponentImpl.class);
 
 	public ComponentImpl() {
 	}
+
+
+    public List<Contributor> getContributors()
+            throws Exception {
+        return ComponentLocalServiceUtil.getContributors(this);
+    }
+
+
+    public Contributor getComponentAuthor()
+            throws SystemException {
+        List<Contributor> authors = ContributorLocalServiceUtil.findByComponentIdWithRole(this.getComponentId(), "author");
+        return (authors.size() > 0) ? authors.get(0) : null;
+    }
+
 
     public String getFriendlyVersionDate(PageContext pageContext) {
           return  DateUtil.getFriendlyDate(pageContext,this.getVersionDate());
