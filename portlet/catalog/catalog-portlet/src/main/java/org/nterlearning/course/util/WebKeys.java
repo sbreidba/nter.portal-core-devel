@@ -24,6 +24,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
     public static final String FLAG_REPORT = "FLAG REPORT";
 
-    public static final String FLAG_REPORT_PORTLET_ID = "flagreport_WAR_flagreportportlet";
+    public static final String FLAG_REPORT_PORTLET_ID = "flagreport_WAR_ntercatalogportlet";
 
 }
