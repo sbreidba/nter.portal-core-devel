@@ -234,6 +234,16 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
 
         Long feedRefId = ParamUtil.getLong(request, "feedRefId");
         FeedSyncHistoryLocalServiceUtil.purgeFeedSyncHistory(feedRefId, 0);
+
+        if (request.getParameter("jspPage") != null) {
+            response.setRenderParameter("jspPage", request.getParameter("jspPage"));
+        }
+
+        response.setRenderParameter("feedCur", request.getParameter("feedCur"));
+        response.setRenderParameter("feedDelta", request.getParameter("feedDelta"));
+        response.setRenderParameter("feedRedirect", request.getParameter("feedRedirect"));
+        response.setRenderParameter("feedRefId", feedRefId.toString());
+        response.setRenderParameter("feedTabs", request.getParameter("feedTabs"));
     }
 
     /**
