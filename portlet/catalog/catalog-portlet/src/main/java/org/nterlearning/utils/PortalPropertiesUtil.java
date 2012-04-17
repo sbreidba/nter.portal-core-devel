@@ -96,7 +96,7 @@ public class PortalPropertiesUtil {
             }
             else {
                 // try to determine if one of the sso portlets is installed
-                Portlet portlet  = PortletLocalServiceUtil.getPortletById("shibsso_WAR_shibssoportlet");
+                Portlet portlet  = PortletLocalServiceUtil.getPortletById("shibsso_WAR_ntershibssoportlet");
                 if (portlet != null) {
                     return PortalProperties.SSO_SHIB_PROPERTY_VALUE;
                 }
