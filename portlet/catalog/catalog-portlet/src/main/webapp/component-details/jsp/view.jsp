@@ -71,7 +71,7 @@ else {
 
 <article class="course-details" itemscope itemtype="http://schema.org/CreativeWork">
     <div class="course-image">
-        <img src="/nter-theme/images/default_images/course_default_large.jpg"
+        <img src="/nter-nter-theme/images/default_images/course_default_large.jpg"
              class="main-image" itemprop="image" />
         <ul class="thumbnails"></ul>
     </div>
