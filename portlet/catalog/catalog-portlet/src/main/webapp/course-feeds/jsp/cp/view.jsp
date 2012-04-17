@@ -107,32 +107,33 @@
             </liferay-ui:search-container-column-text>
 
             <liferay-ui:search-container-column-text
-                    name="">
+                    name="course-feed-status"
+                    align="center">
                 <%
                     String iconRef;
                     String title;
                     if (feedReference.getPshbSubscribed() && feedReference.getSyncSuccess()) {
-                        iconRef = request.getContextPath() + "/images/feed.png";
+                        iconRef = request.getContextPath() + "/course-feeds/images/feed.png";
                         title = LanguageUtil.get(pageContext, "course-feed-icon-subscribed");
                     }
                     else if (feedReference.getPshbSubscribed() && !feedReference.getSyncSuccess()) {
-                        iconRef = request.getContextPath() + "/images/feed_error.png";
+                        iconRef = request.getContextPath() + "/course-feeds/images/feed_error.png";
                         title = LanguageUtil.get(pageContext, "course-feed-icon-error-subscribed");
                     }
                     else if (!feedReference.getPshb().equals("") && !feedReference.getPshbSubscribed()) {
-                        iconRef = request.getContextPath() + "/images/feed_error.png";
+                        iconRef = request.getContextPath() + "/course-feeds/images/feed_error.png";
                         title = LanguageUtil.get(pageContext, "course-feed-icon-subscribed-error");
                     }
                     else if (feedReference.getSyncDate() == null) {
-                        iconRef = request.getContextPath() + "/images/error.png";
+                        iconRef = request.getContextPath() + "/course-feeds/images/error.png";
                         title = LanguageUtil.get(pageContext, "course-feed-icon-no-sync");
                     }
                     else if (feedReference.getSyncSuccess()) {
-                        iconRef = request.getContextPath() + "/images/accept.png";
+                        iconRef = request.getContextPath() + "/course-feeds/images/accept.png";
                         title = LanguageUtil.get(pageContext, "course-feed-icon-ok");
                     }
                     else  {
-                        iconRef = request.getContextPath() + "/images/exclamation.png";
+                        iconRef = request.getContextPath() + "/course-feeds/images/exclamation.png";
                         title = LanguageUtil.get(pageContext, "course-feed-icon-error");
                     }
                 %>
@@ -180,7 +181,7 @@
 
                         <% for (Organization org : orgs) { %>
                             <aui:option label='<%= org.getName() %>'
-                                        value='<%= GroupLocalServiceUtil.getGroup(themeCompanyId, String.valueOf(org.getOrganizationId())).getGroupId() %>' />
+                                        value='<%= GroupLocalServiceUtil.getOrganizationGroup(themeCompanyId, org.getOrganizationId()).getGroupId() %>' />
                         <% } %>
 
                         <% if (showUnassign) { %>
