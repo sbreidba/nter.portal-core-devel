@@ -82,7 +82,6 @@ public class SolrIndexer implements IndexServer {
         }
     }
 
-    @Override
     public void index() {
         FileStatus fstats[];
 
@@ -98,7 +97,6 @@ public class SolrIndexer implements IndexServer {
     }
 
 
-    @Override
     public void removeFromIndex(Query[] queries) {
         try {
             SolrServer solr =  createSolrServer();
@@ -114,7 +112,6 @@ public class SolrIndexer implements IndexServer {
     }
 
 
-    @Override
     public void purgeIndex() {
         try {
             SolrServer solr =  createSolrServer();
