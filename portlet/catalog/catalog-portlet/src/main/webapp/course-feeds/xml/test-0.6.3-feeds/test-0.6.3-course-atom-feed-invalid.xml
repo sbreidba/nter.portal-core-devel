@@ -275,17 +275,17 @@
 		</nter:courseComponent>
     </entry>
 
-    <!-- invalid component - missing search link -->
+    <!-- valid component - even though missing search link -->
     <entry xml:lang="en-US" nter:entryType="course-component">
-        <title>Invalid Test Component 7</title>
-        <link rel="self"  href="https://nwtp.gov/courseinvalid-en.php"
+        <title>Valid Test Component 4</title>
+        <link rel="self"  href="https://nwtp.gov/component-valid-en.php"
               nter:displayWidth="334" nter:displayHeight="189"/>
-        <id>tag:nwtp.gov,2011-01-01:/link/to/test-invalid-component-7/en-US</id>
+        <id>tag:nwtp.gov,2011-01-01:/link/to/test-valid-component-4/en-US</id>
         <updated>2011-01-01T18:30:02Z</updated>
         <author>
             <name>paula</name>
         </author>
-        <summary>invalid component test</summary>
+        <summary>valid component test</summary>
 		<nter:courseComponent>
             <nter:version>1.0</nter:version>
             <nter:organization>first</nter:organization>
@@ -595,11 +595,11 @@
         </nter:course>
     </entry>
 
-    <!-- invalid course - missing link search entry-->
+    <!-- Valid course - even though missing link search entry-->
     <entry nter:entryType="course">
         <title>This title will be ignored by NTER in favor of the language specific course titles</title>
         <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
-        <id>tag:nwtp.gov,2011-01-02:/courses/TEST-INVALID-COURSE-9</id>
+        <id>tag:nwtp.gov,2011-01-02:/courses/test-valid-course-4</id>
         <updated>2011-02-02T18:30:02Z</updated>
         <author>
             <name>PAULA</name>
@@ -613,7 +613,7 @@
             <nter:organization>1</nter:organization>
             <nter:duration nter:durationStandard="ISO8601:2000">P2M2D</nter:duration>
 
-            <nter:title xml:lang="en-US">Invalid Course 9</nter:title>
+            <nter:title xml:lang="en-US">Valid Course 4</nter:title>
 
             <nter:transcriptAbstract xml:lang="en-US">Test Course abstract</nter:transcriptAbstract>
 
@@ -769,7 +769,7 @@
     <entry nter:entryType="course">
         <title>This title will be ignored by NTER in favor of the language specific course titles</title>
         <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
-        <id>tag:nwtp.gov,2011-01-02:/courses/TEST-VALID-COURSE-3</id>
+        <id>tag:nwtp.gov,2011-01-02:/courses/test-valid-course-3</id>
         <updated>2011-02-02T18:30:02Z</updated>
         <author>
             <name>PAULA</name>

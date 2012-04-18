@@ -149,6 +149,11 @@ public class FeedValidator_063 extends FeedValidator_062 implements FeedValidato
                 validEntry = false;
             }
 
+            // copyright is required
+            if (course.getCopyrights().size() == 0) {
+                mLog.info(errorPrefix + "Course copyright is required.");
+                validEntry=false;
+            }
             // at most one copyright per language
             validEntry = FeedValidatorUtil.detectDuplicateLanguage(
                     course.getCopyrights(), errorPrefix, "copyright", validEntry, mLog);

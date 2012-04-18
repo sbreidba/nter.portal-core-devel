@@ -42,12 +42,12 @@
     <fh:complete />
 
     <entry xml:lang="en-US" nter:entryType="course-component">
-        <title>Invalid Component 18</title>
+        <title>Valid Component 18</title>
         <link rel="self"
               href="https://nwtp.gov/course18-en.php"
               nter:displayWidth="334"
               nter:displayHeight="189"/>
-        <!-- course components must contain a search link
+        <!-- course components do NOT need to contain a search link
         <link rel="search"
               href="http://nwtp.gov/course18-en.php?q=search"/>
         -->
@@ -57,7 +57,7 @@
         <link rel="download"
               href="http://nwtp.gov/courses/download?course=course18-en&amp;type=3"
               type="application/vnd.nter.scorm2004_3"/>
-        <id>tag:nwtp.gov,2010-11-04:/link/to/course18_invalid/en-US</id>
+        <id>tag:nwtp.gov,2010-11-04:/link/to/course18_valid/en-US</id>
         <updated>2010-11-13T18:30:02Z</updated>
         <author>
             <name>Robby Bailey</name>
@@ -130,16 +130,16 @@
 		</nter:courseComponent>		
     </entry>
 
-    <!-- invalid course entry -->
+    <!-- Valid course entry -->
     <entry nter:entryType="course">
         <title>This title will be ignored by NTER in favor of the language specific course titles</title>
-        <!-- courses require a search but not a self link
+        <!-- courses do NOT require a search or self link
         <link rel="self" href="http://example.org/2003/12/13/atom03"/>
         -->
         <!--
         <link rel="search" href="http://example.org/2003/12/13/atom03?q=search"/>
         -->
-        <id>tag:nwtp.gov,2010-10-04:/courses/98bce282-6e0b-41e8-bfd9-df3b123f2a49</id>
+        <id>tag:nwtp.gov,2010-10-04:/courses/98bce282-valid-1</id>
         <updated>2010-11-20T18:30:02Z</updated>
         <author>
             <name>Robby Bailey</name>
@@ -161,9 +161,9 @@
 			<nter:organization>test organization</nter:organization>
             <nter:duration nter:durationStandard="ISO8601:2000">PT3H15M</nter:duration>
             
-            <nter:title lang="en-US">Invalid Course: Insulation</nter:title>
-            <nter:title lang="fr-FR">Invalid Course : Isolation</nter:title>
-            <nter:title lang="es-ES">Invalid Course: Aislamiento</nter:title>
+            <nter:title lang="en-US">Valid Course: Insulation</nter:title>
+            <nter:title lang="fr-FR">Valid Course : Isolation</nter:title>
+            <nter:title lang="es-ES">Valid Course: Aislamiento</nter:title>
 
             <nter:transcriptAbstract lang="en-US">This course covers single-family, multi-family, and mobile home insulation.</nter:transcriptAbstract>
             <nter:transcriptAbstract lang="fr-FR">Ce cours couvre l'isolation unifamiliale, multifamiliale, et de caravane résidentielle.</nter:transcriptAbstract>
@@ -223,7 +223,7 @@
         <title>This title will be ignored by NTER in favor of the language specific course titles</title>
         <link rel="self" href="http://example.org/2003/12/13/atom03"/>
         <link rel="search" href="http://example.org/2003/12/13/atom03?q=search"/>
-        <id>tag:nwtp.gov,2010-10-04:/courses/98bce282-6e0b-41e8-bfd9-df3b123f2a49</id>
+        <id>tag:nwtp.gov,2010-10-04:/courses/98bce282-valid-2</id>
         <updated>2010-11-20T18:30:02Z</updated>
         <author>
             <name>Robby Bailey</name>
