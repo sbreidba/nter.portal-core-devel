@@ -83,13 +83,14 @@ public class Config {
         config.set("http.agent.name", companyName);
         config.set("http.robots.agents", companyName + ",*");
 
+        config.set("ftp.password", "anonymous@" + companyName);
+
         config.set("mapred.child.tmp", nutchDataDir + "/tmp");
         config.set("mapred.job.tracker.persist.jobstatus.dir", nutchDataDir + "/jobtracker/jobsInfo");
         config.set("mapred.temp.dir", nutchDataDir + "/tmp");
 
         // plugins
         config.set("plugin.folders", nutchHome + "/plugins");
-        config.set("protocol.plugin.check.robots", "true");
 
         config = configureSolrSecurity(config);
 
@@ -240,7 +241,8 @@ public class Config {
             log.error("Could not read Solr configuration information from portal-ext.properties");
         }
 
-        if ((solrUser.isEmpty()) || (solrPassword.isEmpty())) {
+        if ((solrUser == null) || solrUser.isEmpty() ||
+             (solrPassword == null) || solrPassword.isEmpty()) {
             conf.set(NutchConstants.SOLR_AUTH_PROPERTY, "false");
         }
         else {
