@@ -90,7 +90,6 @@
 </div>
 
 
-
 <div class="separator"></div>
 <article class="course-feed">
 <div class="course-feed-detail">
@@ -192,9 +191,13 @@
 </liferay-ui:search-container>
 
 
-
 <portlet:actionURL name="clearFeedSyncHistory" var="clearFeedSyncHistoryUrl">
-    <portlet:param name="feedRefId" value="<%= feedId.toString() %>" />
+    <portlet:param name="feedCur" value='<%= ParamUtil.getString(request, "feedCur", "1") %>'/>
+    <portlet:param name="feedDelta" value='<%= ParamUtil.getString(request, "feedDelta", "5") %>'/>
+    <portlet:param name="feedRedirect" value='<%= ParamUtil.getString(request, "feedRedirect") %>'/>
+    <portlet:param name="feedRefId" value='<%= feedId.toString() %>'/>
+    <portlet:param name="feedTabs" value='<%= ParamUtil.getString(request, "feedTabs", "Active") %>'/>
+    <portlet:param name="jspPage" value='/course-feeds/jsp/cp/feedDetails.jsp'/>
 </portlet:actionURL>
 
 <aui:form method="post" action="<%= clearFeedSyncHistoryUrl.toString() %>">
