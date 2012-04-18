@@ -240,7 +240,8 @@ public class Config {
             log.error("Could not read Solr configuration information from portal-ext.properties");
         }
 
-        if ((solrUser.isEmpty()) || (solrPassword.isEmpty())) {
+        if ((solrUser == null) || solrUser.isEmpty() ||
+             (solrPassword == null) || solrPassword.isEmpty()) {
             conf.set(NutchConstants.SOLR_AUTH_PROPERTY, "false");
         }
         else {
