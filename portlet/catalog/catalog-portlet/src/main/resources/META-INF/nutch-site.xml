@@ -35,6 +35,10 @@
 
     <!-- web db properties -->
     <property>
+        <name>db.ignore.external.links</name>
+        <value>true</value>
+    </property>
+    <property>
         <name>db.ignore.internal.links</name>
         <value>false</value>
     </property>
@@ -52,11 +56,15 @@
     </property>
     <property>
         <name>db.score.link.external</name>
-        <vale>1.0</vale>
+        <value>1.0</value>
     </property>
     <property>
         <name>db.score.link.internal</name>
-        <vale>2.0</vale>
+        <value>2.0</value>
+    </property>
+    <property>
+        <name>db.update.purge.404</name>
+        <value>true</value>
     </property>
 
     <!-- fetcher properties -->
@@ -104,7 +112,7 @@
     </property>
     <property>
         <name>parser.html.outlinks.ignore_tags</name>
-        <value>script</value>
+        <value>form,script</value>
     </property>
     <property>
         <name>parser.timeout</name>
@@ -178,10 +186,18 @@
     </property>
     <property>
         <name>solr.commit.size</name>
-        <vale>500</vale>
+        <value>500</value>
     </property>
 	
 	<!-- misc. plugin properties -->
+    <property>
+        <name>mapred.used.genericoptionsparser</name>
+        <value>true</value>
+    </property>
+    <property>
+        <name>protocol.plugin.check.robots</name>
+        <value>true</value>
+    </property>
 	<property>
 		<name>subcollections.config</name>
 		<value>META-INF/nutch-subcollections.xml</value>

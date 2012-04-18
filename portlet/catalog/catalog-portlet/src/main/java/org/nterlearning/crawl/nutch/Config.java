@@ -83,13 +83,14 @@ public class Config {
         config.set("http.agent.name", companyName);
         config.set("http.robots.agents", companyName + ",*");
 
+        config.set("ftp.password", "anonymous@" + companyName);
+
         config.set("mapred.child.tmp", nutchDataDir + "/tmp");
         config.set("mapred.job.tracker.persist.jobstatus.dir", nutchDataDir + "/jobtracker/jobsInfo");
         config.set("mapred.temp.dir", nutchDataDir + "/tmp");
 
         // plugins
         config.set("plugin.folders", nutchHome + "/plugins");
-        config.set("protocol.plugin.check.robots", "true");
 
         config = configureSolrSecurity(config);
 
