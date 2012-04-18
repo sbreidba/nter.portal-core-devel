@@ -51,16 +51,19 @@
         <appender-ref ref="CONSOLE"/>
     </category>
 
-    <category name="org.apache.hadoop">
+    <category name="org.apache.hadoop" additivity="false">
         <level value="WARN"/>
+        <appender-ref ref="CONSOLE"/>
     </category>
 
     <category name="org.apache.http">
         <level value="WARN"/>
+        <appender-ref ref="CONSOLE"/>
     </category>
 
     <category name="org.apache.nutch" additivity="false">
         <level value="WARN"/>
+        <appender-ref ref="CONSOLE"/>
     </category>
 
     <category name="org.apache.nutch.crawl">

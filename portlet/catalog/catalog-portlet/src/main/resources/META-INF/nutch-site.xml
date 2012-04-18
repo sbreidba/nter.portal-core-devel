@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+
+    <!-- File Properties -->
+    <property>
+        <name>file.content.limit</name>
+        <value>-1</value>
+    </property>
+    <property>
+        <name>file.crawl.parent</name>
+        <value>false</value>
+    </property>
+
+    <!-- HTTP Properties -->
+    <property>
+        <name>http.content.limit</name>
+        <value>-1</value>
+    </property>
+    <property>
+        <name>http.auth.file</name>
+        <value>META-INF/nutch-httpclient-auth.xml</value>
+    </property>
+    <property>
+        <name>http.redirect.max</name>
+        <value>5</value>
+    </property>
+    <property>
+        <name>http.userHttp11</name>
+        <value>true</value>
+    </property>
+
+    <!-- web db properties -->
+    <property>
+        <name>db.ignore.internal.links</name>
+        <value>false</value>
+    </property>
+    <property>
+        <name>db.max.outlinks.per.page</name>
+        <value>-1</value>
+    </property>
+    <property>
+        <name>db.max.anchor.length</name>
+        <value>512</value>
+    </property>
+    <property>
+        <name>db.parsemeta.to.crawldb</name>
+        <value>lang,entryClassName,entryIri,entryTitle,feedIri,courseDetail</value>
+    </property>
+    <property>
+        <name>db.score.link.external</name>
+        <vale>1.0</vale>
+    </property>
+    <property>
+        <name>db.score.link.internal</name>
+        <vale>2.0</vale>
+    </property>
+
+    <!-- fetcher properties -->
+    <property>
+        <name>fetcher.server.delay</name>
+        <value>1.0</value>
+    </property>
+
+    <!-- indexingfilter plugin properties -->
+    <property>
+        <name>indexer.max.title.length</name>
+        <value>255</value>
+    </property>
+
+    <!-- URL normalizer properties -->
+    <property>
+        <name>urlnormalizer.regex.file</name>
+        <value>META-INF/nutch-regex-normalize.xml</value>
+    </property>
+
+    <!-- mime properties -->
+    <property>
+        <name>mime.types.file</name>
+        <value>META-INF/nuch-tika-mimetypes.xml</value>
+    </property>
+
+    <!-- plugin properties -->
+    <property>
+        <name>plugin.includes</name>
+        <value>index-(anchor|basic|more)|languageidentifier|microformats-reltag|nutch-extensionpoints|parse-(html|msexcel|mspowerpoint|msword|pdf|swf|text|tika)|protocol-httpclient|scoring-opic|urlfilter-regex|urlmeta|urlnormalizer-(pass|regex|basic)</value>        
+    </property>
+    <property>
+        <name>urlmeta.tags</name>
+        <value>lang,entryClassName,entryIri,entryTitle,feedIri,courseDetail</value>
+    </property>
+
+    <!-- parser properties -->
+    <property>
+        <name>parse.plugin.file</name>
+        <value>META-INF/nutch-parse-plugins.xml</value>
+    </property>
+    <property>
+        <name>mime.types.file</name>
+        <value>META-INF/nutch-tika-mimetypes.xml</value>
+    </property>
+    <property>
+        <name>parser.html.outlinks.ignore_tags</name>
+        <value>script</value>
+    </property>
+    <property>
+        <name>parser.timeout</name>
+        <value>60</value>
+    </property>
+
+    <!-- urlfilter plugin properties -->
+    <property>
+        <name>urlfilter.domain.file</name>
+        <value>META-INF/nutch-domain-urlfilter.txt</value>
+    </property>
+    <property>
+        <name>urlfilter.regex.file</name>
+        <value>META-INF/nutch-regex-urlfilter.txt</value>
+    </property>
+    <property>
+        <name>urlfilter.automaton.file</name>
+        <value>META-INF/nutch-automaton-urlfilter.txt</value>
+    </property>
+    <property>
+        <name>urlfilter.prefix.file</name>
+        <value>META-INF/nutch-prefix-urlfilter.txt</value>
+    </property>
+    <property>
+        <name>urlfilter.suffix.file</name>
+        <value>META-INF/nutch-suffix-urlfilter.txt</value>
+    </property>
+
+    <!-- urlnormalizer properties -->
+    <property>
+        <name>urlnormalizer.regex.file</name>
+        <value>META-INF/nutch-regex-normalize.xml</value>
+    </property>
+    <property>
+        <name>urlnormalizer.regex.file.crawldb</name>
+        <value>META-INF/nutch-regex-normalize.xml</value>
+    </property>
+    <property>
+        <name>urlnormalizer.regex.file.default</name>
+        <value>META-INF/nutch-regex-normalize.xml</value>
+    </property>
+    <property>
+        <name>urlnormalizer.regex.file.fetcher</name>
+        <value>META-INF/nutch-regex-normalize.xml</value>
+    </property>
+    <property>
+        <name>urlnormalizer.regex.file.generate_host_count</name>
+        <value>META-INF/nutch-regex-normalize.xml</value>
+    </property>
+    <property>
+        <name>urlnormalizer.regex.file.inject</name>
+        <value>META-INF/nutch-regex-normalize.xml</value>
+    </property>
+    <property>
+        <name>urlnormalizer.regex.file.linkdb</name>
+        <value>META-INF/nutch-regex-normalize.xml</value>
+    </property>
+    <property>
+        <name>urlnormalizer.regex.file.outlink</name>
+        <value>META-INF/nutch-regex-normalize.xml</value>
+    </property>
+    <property>
+        <name>urlnormalizer.regex.file.partition</name>
+        <value>META-INF/nutch-regex-normalize.xml</value>
+    </property>
+
+    <!-- solr index properties -->
+    <property>
+        <name>solr.mapping.file</name>
+        <value>META-INF/nutch-solrindex-mapping.xml</value>
+    </property>
+    <property>
+        <name>solr.commit.size</name>
+        <vale>500</vale>
+    </property>
+	
+	<!-- misc. plugin properties -->
+	<property>
+		<name>subcollections.config</name>
+		<value>META-INF/nutch-subcollections.xml</value>
+	</property>
+
+</configuration>

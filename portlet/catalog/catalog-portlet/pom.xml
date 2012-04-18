@@ -247,6 +247,7 @@
         <dependency>
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-core</artifactId>
+            <!--<version>0.20.2</version>-->
             <version>1.0.2</version>
             <exclusions>
                 <exclusion>
@@ -273,6 +274,20 @@
                     <artifactId>jasper-compiler</artifactId>
                     <groupId>tomcat</groupId>
                 </exclusion>
+                <!--
+                <exclusion>
+                    <artifactId>kfs</artifactId>
+                    <groupId>net.sf.kosmosfs</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>hsqldb</artifactId>
+                    <groupId>hsqldb</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>jets3t</artifactId>
+                    <groupId>net.java.dev.jets3t</groupId>
+                </exclusion>
+                -->
             </exclusions>
         </dependency>
         <dependency>
@@ -345,6 +360,7 @@
         <dependency>
             <groupId>org.apache.tika</groupId>
             <artifactId>tika-core</artifactId>
+            <!--<version>0.10</version>-->
             <version>1.1</version>
         </dependency>
         <dependency>
@@ -378,6 +394,12 @@
             <artifactId>registry-proxy</artifactId>
             <version>1.0.0-SNAPSHOT</version>
             <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.6.1</version>
+            <scope>provided</scope>
         </dependency>
 
         <!-- parser -->
