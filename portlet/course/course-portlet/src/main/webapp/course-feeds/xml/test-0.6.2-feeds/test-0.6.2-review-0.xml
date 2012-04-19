@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ National Training and Education Resource (NTER)
+  ~ Copyright (C) 2011  SRI International
+  ~
+  ~ This program is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or (at
+  ~ your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful, but
+  ~ WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  ~ General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  ~ 02110-1301, USA.
+  -->
+  
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:activity="http://activitystrea.ms/spec/1.0/"
+      xmlns:atom="http://www.w3.org/2005/Atom"
+      xmlns:nter="http://nterlearning.org/xml/feeds/atom-extensions-schema_0.6.2.xsd">
+
+    <title>Review Feed</title>
+    <link rel="self" href="sample-0.0.0-review-activity.xml" type="application/atom+xml"/>
+    <updated>2011-08-01T22:52:00Z</updated>
+    <id>tag:nwtp.gov,2011-08-01:/feeds/test-activity-feed-global-review</id>
+    
+    <entry xml:lang="en-US" nter:entryType="review">
+        <id>tag:nterlearning.com,2011-10-15:/link/to/activity/boat1234</id>
+        <title>Test TestAccount added a review of Boat Parts</title>
+        <published>2011-08-01T08:15:15Z</published>
+        <updated>2011-08-03T08:22:45Z</updated>
+        <link rel="alternate" type="text/html" href="http://nterlearning.com/link/to/activity/boat1234" />
+        <author nter:studentUserId="test@nter.com" nter:trustedReviewer="true">
+            <activity:object-type>person</activity:object-type>
+            <name>Test TestAccount</name>
+            <uri>http://nterlearning.com/test-TestAccount</uri>
+        </author>
+        <activity:verb>add</activity:verb>
+        <activity:object>
+            <activity:object-type>review</activity:object-type>
+            <activity:id>tag:nterlearning.com,2011-10-15:/link/to/review/101</activity:id>
+            <activity:name>Review of Boat Parts</activity:name>
+            <activity:updated>2011-08-03T08:22:45Z</activity:updated>
+            <activity:published>2011-08-01T08:15:15Z</activity:published>
+            <activity:rating>5</activity:rating>
+            <activity:permalinkUrl atom:rel="alternate" atom:type="text/html" atom:href="http://nterlearning.com/link/to/review/101" />
+            <activity:summary>I enjoyed the course</activity:summary>
+            <activity:content type="string">The boat parts course was very informative.  I learned about motors.</activity:content>
+        </activity:object>
+        <activity:target>
+            <activity:object-type>course</activity:object-type>
+            <activity:id>tag:nwtp.gov,2011-01-14:/courses/test-boat-parts</activity:id>
+            <activity:name>Review of Boat Parts</activity:name>
+            <activity:permalinkUrl atom:rel="alternate" atom:type="text/html" atom:href="http://example.org/2003/12/13/atom03" />
+        </activity:target>
+    </entry>
+
+    <entry xml:lang="en-US" nter:entryType="review">
+        <id>tag:nterlearning.com,2011-10-15:/link/to/activity/truck1234</id>
+        <title>Test TestAccount added a review of Truck Parts</title>
+        <published>2011-07-03T08:15:15Z</published>
+        <updated>2011-08-03T08:22:45Z</updated>
+        <link rel="alternate" type="text/html" href="http://nterlearning.com/link/to/activity/truck1234" />
+        <author nter:studentUserId="test@nter.com" nter:trustedReviewer="false">
+            <activity:object-type>person</activity:object-type>
+            <name>Test TestAccount</name>
+            <uri>http://nterlearning.com/test-TestAccount</uri>
+        </author>
+        <activity:verb>add</activity:verb>
+        <activity:object>
+            <activity:object-type>review</activity:object-type>
+            <activity:id>tag:nterlearning.com,2011-10-15:/link/to/review/102</activity:id>
+            <activity:name>Review of Truck Parts</activity:name>
+            <activity:updated>2011-08-03T08:22:45Z</activity:updated>
+            <activity:published>2011-07-03T08:15:15Z</activity:published>
+            <activity:rating>3</activity:rating>
+            <activity:permalinkUrl atom:rel="alternate" atom:type="text/html" atom:href="http://nterlearning.com/link/to/review/102" />
+            <activity:summary>Boring course</activity:summary>
+            <activity:content type="string">The truck parts course was very boring.  I learned about engines.</activity:content>
+        </activity:object>
+        <activity:target>
+            <activity:object-type>course</activity:object-type>
+            <activity:id>tag:nwtp.gov,2011-01-14:/courses/test-truck-parts</activity:id>
+            <activity:name>Review of Truck Parts</activity:name>
+            <activity:permalinkUrl atom:rel="alternate" atom:type="text/html" atom:href="http://example.org/2003/12/13/atom03" />
+        </activity:target>
+    </entry>
+
+    <!-- the corresponding course will not exist and this global review should be rejected -->
+    <entry xml:lang="en-US" nter:entryType="review">
+        <id>tag:nterlearning.com,2011-10-15:/link/to/activity/bike1234</id>
+        <title>Test TestAccount added a review of Bicycle Parts</title>
+        <published>2011-08-01T08:15:15Z</published>
+        <updated>2011-08-03T08:22:45Z</updated>
+        <link rel="alternate" type="text/html" href="http://nterlearning.com/link/to/activity/bike1234" />
+        <author nter:studentUserId="test@nter.com" nter:trustedReviewer="false">
+            <activity:object-type>person</activity:object-type>
+            <name>Test TestAccount</name>
+            <uri>http://nterlearning.com/test-TestAccount</uri>
+        </author>
+        <activity:verb>add</activity:verb>
+        <activity:object>
+            <activity:object-type>review</activity:object-type>
+            <activity:id>tag:nterlearning.com,2011-10-15:/link/to/review/104</activity:id>
+            <activity:name>Review of Bicycle Parts</activity:name>
+            <activity:updated>2011-08-03T08:22:45Z</activity:updated>
+            <activity:published>2011-08-01T08:15:15Z</activity:published>
+            <activity:rating>5</activity:rating>
+            <activity:permalinkUrl atom:rel="alternate" atom:type="text/html" atom:href="http://nterlearning.com/link/to/review/104" />
+            <activity:summary>Excellent course</activity:summary>
+            <activity:content type="string">The bicycle parts course was excellent.</activity:content>
+        </activity:object>
+        <activity:target>
+            <activity:object-type>course</activity:object-type>
+            <activity:id>tag:nwtp.gov,2011-01-14:/courses/bicycle-parts-80da344efa6a</activity:id>
+            <activity:name>Review of Bicycle Parts</activity:name>
+            <activity:permalinkUrl atom:rel="alternate" atom:type="text/html" atom:href="http://example.org/2003/12/13/atom03" />
+        </activity:target>
+    </entry>
+
+    <!-- verify that processing continues after previous global review rejected -->
+    <entry xml:lang="en-US" nter:entryType="review">
+        <id>tag:nterlearning.com,2011-10-15:/link/to/activity/car1234</id>
+        <title>Test TestAccount added a review of Car Parts</title>
+        <published>2011-08-03T08:22:45Z</published>
+        <updated>2011-08-03T08:22:45Z</updated>
+        <link rel="alternate" type="text/html" href="http://nterlearning.com/link/to/activity/car1234" />
+        <author nter:studentUserId="test@nter.com" nter:trustedReviewer="false">
+            <activity:object-type>person</activity:object-type>
+            <name>Test TestAccount</name>
+            <uri>http://nterlearning.com/test-TestAccount</uri>
+        </author>
+        <activity:verb>add</activity:verb>
+        <activity:object>
+            <activity:object-type>review</activity:object-type>
+            <activity:id>tag:nterlearning.com,2011-10-15:/link/to/review/103</activity:id>
+            <activity:name>Review of Car Parts</activity:name>
+            <activity:updated>2011-08-03T08:22:45Z</activity:updated>
+            <activity:published>2011-08-03T08:22:45Z</activity:published>
+            <activity:rating>4</activity:rating>
+            <activity:permalinkUrl atom:rel="alternate" atom:type="text/html" atom:href="http://nterlearning.com/link/to/review/103" />
+            <activity:summary>Good course</activity:summary>
+            <activity:content type="string">The car parts course was very good.  I learned about wheels, brakes, seats, and windows.</activity:content>
+        </activity:object>
+        <activity:target>
+            <activity:object-type>course</activity:object-type>
+            <activity:id>tag:nwtp.gov,2011-01-14:/courses/test-car-parts</activity:id>
+            <activity:name>Review of Car Parts</activity:name>
+            <activity:permalinkUrl atom:rel="alternate" atom:type="text/html" atom:href="http://example.org/2003/12/13/atom03" />
+        </activity:target>
+    </entry>
+	
+    <entry xml:lang="en-US" nter:entryType="review">
+        <id>tag:nterlearning.com,2011-10-15:/link/to/activity/boat5678</id>
+        <title>Unknown GlobalReviewer added a review of Boat Parts</title>
+        <published>2011-08-03T08:22:45Z</published>
+        <updated>2011-08-03T08:22:45Z</updated>
+        <link rel="alternate" type="text/html" href="http://nterlearning.com/link/to/activity/boat5678" />
+        <author nter:studentUserId="tbd@nter.com" nter:trustedReviewer="true">
+            <activity:object-type>person</activity:object-type>
+            <name>Unknown GlobalReviewer</name>
+            <uri>http://nterlearning.com/test-TestAccount</uri>
+        </author>
+        <activity:verb>add</activity:verb>
+        <activity:object>
+            <activity:object-type>review</activity:object-type>
+            <activity:id>tag:nterlearning.com,2011-10-15:/link/to/review/105</activity:id>
+            <activity:name>Review of Boat Parts</activity:name>
+            <activity:updated>2011-08-03T08:22:45Z</activity:updated>
+            <activity:published>2011-08-03T08:22:45Z</activity:published>
+            <activity:rating>5</activity:rating>
+            <activity:permalinkUrl atom:rel="alternate" atom:type="text/html" atom:href="http://nterlearning.com/link/to/review/105" />
+            <activity:summary>Excellent course</activity:summary>
+            <activity:content type="string">Excellent course.</activity:content>
+        </activity:object>
+        <activity:target>
+            <activity:object-type>course</activity:object-type>
+            <activity:id>tag:nwtp.gov,2011-01-14:/courses/test-boat-parts</activity:id>
+            <activity:name>Review of Boat Parts</activity:name>
+            <activity:permalinkUrl atom:rel="alternate" atom:type="text/html" atom:href="http://example.org/2003/12/13/atom03" />
+        </activity:target>
+    </entry>
+
+</feed>

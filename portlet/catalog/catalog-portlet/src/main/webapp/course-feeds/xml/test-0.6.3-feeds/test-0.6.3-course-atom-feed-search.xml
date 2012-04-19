@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ National Training and Education Resource (NTER)
+  ~ Copyright (C) 2011  SRI International
+  ~
+  ~ This program is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or (at
+  ~ your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful, but
+  ~ WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  ~ General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  ~ 02110-1301, USA.
+  -->
+
+<!--
+This feed includes actual courses that exist (at least at one time) on
+nwtp.nterlearning.org.  They have been broken apart to allow for the individual
+components to be searched.
+-->
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:nter="http://nterlearning.org/xml/feeds/atom-extensions-schema_0.6.3.xsd"
+      xmlns:fh="http://purl.org/syndication/history/1.0"
+	  xmlns:at="http://purl.org/atompub/tombstones/1.0">
+
+	<title>Course Feed</title>
+	<link rel="self"
+		  href="http://localhost:8080/course-portlet/course-feeds/xml/test-0.6.3-feeds/test-0.6.3-course-atom-feed-search.xml"
+		  type="application/atom+xml"/>
+    
+	<updated>2011-11-10T21:05:58Z</updated>
+	<id>tag:nwtp.nterlearning.org,2010-10-04:/feeds/course/nwtp/nwtp</id>
+	<fh:complete />
+
+	<entry xml:lang="en-US" nter:entryType="vocabulary">
+		<id>tag:nwtp.nterlearning.org,2010-10-04:/vocabulary/nwtp/nwtp</id>
+		<updated>2011-11-10T21:05:58Z</updated>
+		<summary>Vocabulary of dynamic taxonomy for the Department of Energy.</summary>
+		<title>This title will be ignored by NTER in favor of the language specific vocabulary titles.</title>
+		<nter:vocabulary>
+			<nter:title lang="en-US">NWTP</nter:title>
+		</nter:vocabulary>
+	</entry>
+
+	<entry xml:lang="en-US" nter:entryType="course-component">
+		<id>tag:nwtp.nterlearning.org,2011-09-23:/nwtp/nwtp/45/206</id>
+		<updated>2011-09-23T23:17:50Z</updated>
+		<summary>After completing this module, you will understand energy use in U.S industries, where it is used, and how it is distr.</summary>
+		<nter:courseComponent>
+			<nter:version>0.0</nter:version>
+		</nter:courseComponent>
+		<title>Process Heating Systems Online Course</title>
+		<link	rel="self"
+           		href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=45"
+           		nter:displayWidth="1100"
+           		nter:displayHeight="800"/>
+        <link rel="search"
+              href="https://nwtp.nterlearning.org/nwtp/feeds/course_urls/index.php?client_id=nwtp&amp;ref_id=42&amp;obj_id=180"/>
+	</entry>
+
+    <!--
+	<entry xml:lang="en-US" nter:entryType="course">
+		<link rel="self"
+              href="https://nwtp.nterlearning.org/nwtp/feeds/course_urls/index.php?client_id=nwtp&amp;ref_id=42&amp;obj_id=180"/>
+		<link rel="search"
+              href="https://nwtp.nterlearning.org/nwtp/feeds/course_urls/index.php?client_id=nwtp&amp;ref_id=42&amp;obj_id=180"/>
+		<id>tag:nwtp.nterlearning.org,2011-09-23:/nwtp/nwtp/42/180</id>
+		<updated>2011-09-26T20:37:19Z</updated>
+		<summary>Process Heating</summary>
+		<nter:course>
+			<nter:version>0.0</nter:version>
+			<nter:title>Process Heating</nter:title>
+			<nter:description>Process Heating</nter:description>
+			<nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-09-23:/nwtp/nwtp/45/206"/>
+			<nter:image
+               nter:href="https://nwtp.nterlearning.org/nwtp/data/nwtp/object_images/Process Heating 180x135.PNG"
+               nter:alternateText=""
+               nter:mimeType="unknown"/>
+		</nter:course>
+	</entry>
+    -->
+
+	<entry xml:lang="en-US" nter:entryType="course-component">
+		<id>tag:nwtp.nterlearning.org,2011-10-09:/nwtp/nwtp/56/240</id>
+		<updated>2011-10-09T14:05:14Z</updated>
+		<summary>Welcome</summary>
+		<nter:courseComponent>
+			<nter:version>0.0</nter:version>
+		</nter:courseComponent>
+		<title>Welcome</title>
+		<link   rel="self"
+           		href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=56"
+           		nter:displayWidth="1100"
+           		nter:displayHeight="800"/>
+	</entry>
+
+	<entry xml:lang="en-US" nter:entryType="course-component">
+		<id>tag:nwtp.nterlearning.org,2011-10-09:/nwtp/nwtp/57/241</id>
+		<updated>2011-10-09T13:45:23Z</updated>
+		<summary>Navigation Tutorial</summary>
+		<nter:courseComponent>
+			<nter:version>0.0</nter:version>
+		</nter:courseComponent>
+		<title>Navigation Tutorial</title>
+		<link   rel="self"
+           		href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=57"
+           		nter:displayWidth="1100"
+           		nter:displayHeight="800"/>
+	</entry>
+
+	<entry xml:lang="en-US" nter:entryType="course-component">
+		<id>tag:nwtp.nterlearning.org,2011-10-09:/nwtp/nwtp/58/242</id>
+		<updated>2011-10-09T13:46:02Z</updated>
+		<summary>The Introduction provides the course development history, the need for the course, course objectives, and the investigation.</summary>
+		<nter:courseComponent>
+			<nter:version>0.0</nter:version>
+		</nter:courseComponent>
+		<title>Introduction</title>
+		<link   rel="self"
+           		href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=58"
+           		nter:displayWidth="1100"
+           		nter:displayHeight="800"/>
+	</entry>
+
+	<entry xml:lang="en-US" nter:entryType="course-component">
+		<id>tag:nwtp.nterlearning.org,2011-10-09:/nwtp/nwtp/59/243</id>
+		<updated>2011-10-09T14:07:10Z</updated>
+		<summary>This module will cover steam generation efficiency, the primary factors that affect it and general concepts of boiler efficiency.</summary>
+		<nter:courseComponent>
+			<nter:version>0.0</nter:version>
+		</nter:courseComponent>
+		<title>Boiler Effeciency</title>
+		<link   rel="self"
+           		href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=59"
+           		nter:displayWidth="1100"
+           		nter:displayHeight="800"/>
+	</entry>
+
+	<entry xml:lang="en-US" nter:entryType="course-component">
+		<id>tag:nwtp.nterlearning.org,2011-10-09:/nwtp/nwtp/60/244</id>
+		<updated>2011-10-09T14:07:33Z</updated>
+		<summary>This module will identify the methods used to investigate, quantify, and control Radiation, Convection and Shell losses.</summary>
+		<nter:courseComponent>
+			<nter:version>0.0</nter:version>
+		</nter:courseComponent>
+		<title>Shell Loss</title>
+		<link   rel="self"
+           		href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=60"
+           		nter:displayWidth="1100"
+           		nter:displayHeight="800"/>
+	</entry>
+
+	<entry xml:lang="en-US" nter:entryType="course-component">
+		<id>tag:nwtp.nterlearning.org,2011-10-09:/nwtp/nwtp/61/245</id>
+		<updated>2011-10-09T14:07:54Z</updated>
+		<summary>This module will cover blowdown loss and its affect on boiler efficiency.</summary>
+		<nter:courseComponent>
+			<nter:version>0.0</nter:version>
+		</nter:courseComponent>
+		<title>Blowdown Loss</title>
+		<link   rel="self"
+           		href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=61"
+           		nter:displayWidth="1100"
+           		nter:displayHeight="800"/>
+	</entry>
+
+	<entry xml:lang="en-US" nter:entryType="course-component">
+		<id>tag:nwtp.nterlearning.org,2011-10-09:/nwtp/nwtp/62/246</id>
+		<updated>2011-10-09T14:08:27Z</updated>
+		<summary>This module will cover stack loss, temperature, and combustion (or excess air), managing stack loss and boiler performance.</summary>
+		<nter:courseComponent>
+			<nter:version>0.0</nter:version>
+		</nter:courseComponent>
+		<title>Stack Losses</title>
+		<link   rel="self"
+           		href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=62"
+           		nter:displayWidth="1100"
+           		nter:displayHeight="800"/>
+	</entry>
+
+	<entry xml:lang="en-US" nter:entryType="course-component">
+		<id>tag:nwtp.nterlearning.org,2011-10-09:/nwtp/nwtp/63/247</id>
+		<updated>2011-10-09T14:03:45Z</updated>
+		<summary>This module examines the management activities associated with the various energy resources available to a site. These include fuel selection, steam end-use or demand management, and combined heat and power activities. In this broad section we will examine the main factors influencing fuel selection.</summary>
+		<nter:courseComponent>
+			<nter:version>0.0</nter:version>
+		</nter:courseComponent>
+		<title>Resource Utilization Effectiveness</title>
+		<link   rel="self"
+           		href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=63"
+           		nter:displayWidth="1100"
+           		nter:displayHeight="800"/>
+	</entry>
+
+	<entry xml:lang="en-US" nter:entryType="course-component">
+		<id>tag:nwtp.nterlearning.org,2011-10-09:/nwtp/nwtp/64/248</id>
+		<updated>2011-10-09T14:02:55Z</updated>
+		<summary>This module examines the steam distribution system, main steam headers, secondary and branch headers, condensate return piping, condensate collection equipment, as well as pipe and equipment condensate draining components.</summary>
+		<nter:courseComponent>
+			<nter:version>0.0</nter:version>
+		</nter:courseComponent>
+		<title>Distribution Losses</title>
+		<link   rel="self"
+           		href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=64"
+           		nter:displayWidth="1100"
+           		nter:displayHeight="800"/>
+	</entry>
+
+	<entry xml:lang="en-US" nter:entryType="course-component">
+		<id>tag:nwtp.nterlearning.org,2011-10-09:/nwtp/nwtp/65/249</id>
+		<updated>2011-10-09T14:04:53Z</updated>
+		<summary>This module will review all topics covered and major points.</summary>
+		<nter:courseComponent>
+			<nter:version>0.0</nter:version>
+		</nter:courseComponent>
+		<title>Conclusion</title>
+		<link   rel="self"
+           		href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=65"
+           		nter:displayWidth="1100"
+           		nter:displayHeight="800"/>
+	</entry>
+
+    <!--
+	<entry xml:lang="en-US" nter:entryType="course">
+		<link rel="self"
+              href="https://nwtp.nterlearning.org/nwtp/feeds/course_urls/index.php?client_id=nwtp&amp;ref_id=54&amp;obj_id=233"/>
+		<link rel="search"
+              href="https://nwtp.nterlearning.org/nwtp/feeds/course_urls/index.php?client_id=nwtp&amp;ref_id=54&amp;obj_id=233"/>
+		<id>tag:nwtp.nterlearning.org,2011-10-06:/nwtp/nwtp/54/233</id>
+		<updated>2011-10-09T14:10:58Z</updated>
+		<summary>After completing this course, a participant will know how to assess, evaluate, and manage steam systems. This course covers the operation of typical steam systems and discusses methods of system efficiency improvement. A brief demonstration of the BestPractices Steam System Tool Suite software is highlighted to help identify and quantify savings from selected potential improvement examples.</summary>
+		<nter:course>
+			<nter:version>0.0</nter:version>
+			<nter:title>Steam End User Training</nter:title>
+			<nter:description>After completing this course, a participant will know how to assess, evaluate, and manage steam systems. This course covers the operation of typical steam systems and discusses methods of system efficiency improvement. A brief demonstration of the BestPractices Steam System Tool Suite software is highlighted to help identify and quantify savings from selected potential improvement examples.</nter:description>
+			<nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-10-09:/nwtp/nwtp/56/240"/>
+			<nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-10-09:/nwtp/nwtp/57/241"/>
+			<nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-10-09:/nwtp/nwtp/58/242"/>
+			<nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-10-09:/nwtp/nwtp/59/243"/>
+			<nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-10-09:/nwtp/nwtp/60/244"/>
+			<nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-10-09:/nwtp/nwtp/61/245"/>
+			<nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-10-09:/nwtp/nwtp/62/246"/>
+			<nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-10-09:/nwtp/nwtp/63/247"/>
+			<nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-10-09:/nwtp/nwtp/64/248"/>
+			<nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-10-09:/nwtp/nwtp/65/249"/>
+			<nter:image
+               nter:href="https://nwtp.nterlearning.org/nwtp/data/nwtp/object_images/Best practices steam 180x135.PNG"
+               nter:alternateText=""
+               nter:mimeType="unknown"/>
+		</nter:course>
+	</entry>
+	-->
+
+	<entry xml:lang="en-US" nter:entryType="course-component">
+		<id>tag:nwtp.nterlearning.org,2011-10-09:/nwtp/nwtp/68/255</id>
+		<updated>2011-11-03T14:03:15Z</updated>
+		<summary>There are eight different sections in this training. The navigational tutorial will provide you with a brief demonstration on how to navigate through the training. Then, you will learn how to use each one of the tools in the suite, including the Steam System Scoping Tool, the Steam System Assessment Tool, and the 3E Plus Insulation Tool. </summary>
+		<nter:courseComponent>
+			<nter:version>0.0</nter:version>
+		</nter:courseComponent>
+		<title>Steam System Tool Suite Interactive Training</title>
+		<link   rel="self"
+           		href="https://nwtp.nterlearning.org/nwtp/nter.php?client_id=nwtp&amp;ref_id=68"
+           		nter:displayWidth="1100"
+           		nter:displayHeight="800"/>
+		<link rel="search"
+              href="https://nwtp.nterlearning.org/nwtp/feeds/course_urls/index.php?client_id=nwtp&amp;ref_id=66&amp;obj_id=250"/>
+	</entry>
+
+    <!--
+	<entry xml:lang="en-US" nter:entryType="course">
+		<link rel="self"
+              href="https://nwtp.nterlearning.org/nwtp/feeds/course_urls/index.php?client_id=nwtp&amp;ref_id=66&amp;obj_id=250"/>
+		<link rel="search"
+              href="https://nwtp.nterlearning.org/nwtp/feeds/course_urls/index.php?client_id=nwtp&amp;ref_id=66&amp;obj_id=250"/>
+		<id>tag:nwtp.nterlearning.org,2011-10-09:/nwtp/nwtp/66/250</id>
+		<updated>2011-10-09T14:23:33Z</updated>
+		<summary>This course will provide an overview of the BestPractices Steam Tool Suite, which consists of:
+Steam System Scoping Tool
+Steam System Assessment Tool
+3EPlus Insulation Tool</summary>
+		<nter:course>
+			<nter:version>0.0</nter:version>
+			<nter:title>Steam Tool Suite Training</nter:title>
+			<nter:description>This course will provide an overview of the BestPractices Steam Tool Suite, which consists of:
+Steam System Scoping Tool
+Steam System Assessment Tool
+3EPlus Insulation Tool</nter:description>
+			<nter:componentRef
+                     nter:componentId="tag:nwtp.nterlearning.org,2011-10-09:/nwtp/nwtp/68/255"/>
+			<nter:image
+               nter:href="https://nwtp.nterlearning.org/nwtp/data/nwtp/object_images/steam tool 180x135.PNG"
+               nter:alternateText=""
+               nter:mimeType="unknown"/>
+		</nter:course>
+	</entry>
+	-->
+</feed>
