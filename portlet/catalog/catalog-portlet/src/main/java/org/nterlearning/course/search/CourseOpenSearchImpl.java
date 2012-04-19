@@ -35,7 +35,7 @@ import javax.portlet.PortletURL;
 public class CourseOpenSearchImpl extends HitsOpenSearchImpl {
 
 	public static final String SEARCH_PATH = "/c/course/open_search";
-	public static final String TITLE = "Liferay Course Search";
+	public static final String TITLE = "NTER Course Search";
 
     @Override
     public Indexer getIndexer() {
