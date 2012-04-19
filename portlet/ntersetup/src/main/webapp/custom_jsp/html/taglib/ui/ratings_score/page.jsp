@@ -18,8 +18,6 @@
   02110-1301, USA.
   --%>
 
-%>
-
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
