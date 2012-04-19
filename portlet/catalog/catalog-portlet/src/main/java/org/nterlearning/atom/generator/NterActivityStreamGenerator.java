@@ -49,7 +49,7 @@ import org.nterlearning.datamodel.catalog.service.CourseReviewLocalServiceUtil;
 public class NterActivityStreamGenerator {
 
     public static final String DEFAULT_STREAM_URL = "stream-url-has-not-been-set";
-    public static final String ACTIVITY_STREAM_SERVLET = "/course-portlet/activity-stream";
+    public static final String ACTIVITY_STREAM_SERVLET = "/nter-catalog-portlet/activity-stream";
 
     private static Log log = LogFactoryUtil.getLog(NterActivityStreamGenerator.class);
     private static Feed singletonFeed = null;
@@ -62,7 +62,7 @@ public class NterActivityStreamGenerator {
     @Deprecated
     private static String feedFileName = "reviews.xml";    
     @Deprecated
-    private static String[] feedFilePathElements = {"course-portlet", "course-feeds", feedFileName};
+    private static String[] feedFilePathElements = {"nter-catalog-portlet", "course-feeds", feedFileName};
     @Deprecated
     private static String feedFileRootPath = System.getenv("CATALINA_BASE") + File.separatorChar + "webapps";
 

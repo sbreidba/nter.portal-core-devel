@@ -78,6 +78,7 @@
         <summary>handlebar</summary>
 		<nter:courseComponent>
 			<nter:version>zero</nter:version>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
 		</nter:courseComponent>
     </entry>
 
