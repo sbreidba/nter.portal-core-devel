@@ -49,7 +49,7 @@ import org.nterlearning.datamodel.catalog.service.CourseReviewLocalServiceUtil;
 public class NterActivityStreamGenerator {
 
     public static final String DEFAULT_STREAM_URL = "stream-url-has-not-been-set";
-    public static final String ACTIVITY_STREAM_SERVLET = "/course-portlet/activity-stream";
+    public static final String ACTIVITY_STREAM_SERVLET = "/nter-catalog-portlet/activity-stream";
 
     private static Log log = LogFactoryUtil.getLog(NterActivityStreamGenerator.class);
     private static Feed singletonFeed = null;
