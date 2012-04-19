@@ -196,7 +196,7 @@
 					    <img src="<%= searchResult.imgURL %>" class="course-mini-thumbnail" alt="<%= searchResult.imgAltTxt %>" />
 					</c:when>
 					<c:otherwise>
-					    <img src="/nter-nter-theme/images/default_images/course_default_small.jpg" class="course-mini-thumbnail" alt="<%= LanguageUtil.get(locale,"no-course-image") %>" />
+					    <img src="<%= themeDisplay.getPathThemeImages() + "/default_images/course_default_small.jpg"%>" class="course-mini-thumbnail" alt="<%= LanguageUtil.get(locale,"no-course-image") %>" />
 					</c:otherwise>
 				</c:choose>
 			</a>
