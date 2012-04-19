@@ -44,7 +44,7 @@ if (Validator.isNull(reviewParam)){
     long classNameId = ClassNameLocalServiceUtil.getClassNameId(CourseReview.class);
     String className = CourseReview.class.getName();
 
-    ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
+//    ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
     long userId = themeDisplay.getUserId();
     String reporterEmailAddress = themeDisplay.getUser().getEmailAddress();
     String contentURL = course.getUrl();
