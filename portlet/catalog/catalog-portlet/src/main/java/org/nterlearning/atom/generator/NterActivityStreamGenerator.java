@@ -62,7 +62,7 @@ public class NterActivityStreamGenerator {
     @Deprecated
     private static String feedFileName = "reviews.xml";    
     @Deprecated
-    private static String[] feedFilePathElements = {"course-portlet", "course-feeds", feedFileName};
+    private static String[] feedFilePathElements = {"nter-catalog-portlet", "course-feeds", feedFileName};
     @Deprecated
     private static String feedFileRootPath = System.getenv("CATALINA_BASE") + File.separatorChar + "webapps";
 
