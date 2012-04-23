@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ National Training and Education Resource (NTER)
+  ~ Copyright (C) 2011  SRI International
+  ~
+  ~ This program is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or (at
+  ~ your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful, but
+  ~ WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  ~ General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  ~ 02110-1301, USA.
+  -->
+  
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:nter="http://nterlearning.org/xml/feeds/atom-extensions-schema_0.6.1.xsd">
+
+    <!-- Test series for out of order course and component entry. -->
+    <!-- Feed zero loads Course.  -->
+    <!-- Feed one loads Components.-->
+    <!-- Verify parser does cleanup so that CATALOG_Courses_Components entity ID assignments correct. -->
+
+
+    <title>Course Feed</title>
+    <link rel="self" href="test-0.6.1-course-atom-feed-outoforder-1.xml" type="application/atom+xml"/>
+    <updated>2011-03-22T22:52:00Z</updated>
+    <id>tag:nwtp.gov,2010-10-04:/feeds/testOOO-a123-11d9-b93C-0003939e0af6</id>
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Cat Activities</title>
+        <link href="https://nwtp.gov/course18-en.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <id>tag:nwtp.gov,2010-11-05:/link/to/course-CAT-activities/en-US</id>
+        <updated>2011-02-13T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>daily activities of the modern day cat</summary>
+    </entry>
+
+</feed>
+
