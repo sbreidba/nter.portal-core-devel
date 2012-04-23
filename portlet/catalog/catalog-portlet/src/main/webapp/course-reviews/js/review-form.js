@@ -120,7 +120,7 @@ YUI.add('review-form', function(Y) {
 			this.form = Y.Node.create(Y.substitute(ReviewForm.FORM_TEMPLATE, {
 				widgetId: this.get('id') + '-reviewform',
 				action: this.get('submitUrl'),
-				contentValue: Y.Lang.trim(this.get('dataNodes').content()),
+				contentValue: Y.Lang.trim(this.get('dataNodes').content.html()),
 				subjectId: this.get('subjectId'),
 				reviewId: this.get('reviewId')
 			})); 
