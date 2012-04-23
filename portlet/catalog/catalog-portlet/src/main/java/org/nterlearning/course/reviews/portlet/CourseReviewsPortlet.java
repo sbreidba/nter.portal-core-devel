@@ -31,9 +31,11 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.flags.service.FlagsEntryServiceUtil;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil;
@@ -378,6 +380,12 @@ public class CourseReviewsPortlet extends MVCPortlet {
         ServiceContext serviceContext = ServiceContextFactory.getInstance(
 			"com.liferay.portlet.flags.model.FlagsEntry", request);
 
+        if (reportedUserId == 0) {
+            //get company for user reporting the issue
+            User user = UserLocalServiceUtil.getUser(userId);
+            //use that company to retrieve a default user for global review user
+            reportedUserId = UserLocalServiceUtil.getDefaultUserId(user.getCompanyId());
+        }
 		FlagsEntryServiceUtil.addEntry(
 			className, classPK, reporterEmailAddress, reportedUserId,
 			contentTitle, contentURL, flagReason, serviceContext);
