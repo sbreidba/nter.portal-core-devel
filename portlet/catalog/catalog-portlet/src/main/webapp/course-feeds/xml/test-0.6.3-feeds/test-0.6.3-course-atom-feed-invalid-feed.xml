@@ -1,0 +1,304 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ National Training and Education Resource (NTER)
+  ~ Copyright (C) 2011  SRI International
+  ~
+  ~ This program is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or (at
+  ~ your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful, but
+  ~ WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  ~ General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  ~ 02110-1301, USA.
+  -->
+
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:nter="http://nterlearning.org/xml/feeds/atom-extensions-schema_0.6.3.xsd"
+      xmlns:at="http://purl.org/atompub/tombstones/1.0"
+      xmlns:fh="http://purl.org/syndication/history/1.0">
+
+    <title>Course Feed</title>
+    <link rel="self"
+          href="test-0.6.3-course-atom-feed-invalid-feed.xml"
+          type="application/atom+xml"/>
+
+    <updated>2010-12-13T22:52:00Z</updated>
+    <id>tag:nwtp.gov,2010-10-04:/feeds/e562a419-4459-404a-be6c-a5aa6ac8abb0</id>
+
+    <!--
+    Include the fh:complete entry to indicate that this feed represents a
+    complete listing of courses, components, or student records.  If this is
+    set, and the feed was previously processed, anything missing from the feed
+    will be removed.
+    -->
+    <fh:complete />
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Valid Component 18</title>
+        <link rel="self"
+              href="https://nwtp.gov/course18-en.php"
+              nter:displayWidth="334"
+              nter:displayHeight="189"/>
+        <!-- course components do NOT need to contain a search link
+        <link rel="search"
+              href="http://nwtp.gov/course18-en.php?q=search"/>
+        -->
+        <link rel="download"
+              href="http://nwtp.gov/courses/download?course=course18-en&amp;type=2"
+              type="application/vnd.nter.scorm2004_4"/>
+        <link rel="download"
+              href="http://nwtp.gov/courses/download?course=course18-en&amp;type=3"
+              type="application/vnd.nter.scorm2004_3"/>
+        <id>tag:nwtp.gov,2010-11-04:/link/to/course18_valid/en-US</id>
+        <updated>2010-11-13T18:30:02Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+        </author>
+        <summary>course eighteen</summary>
+		<nter:courseComponent>
+			<nter:version>1.0</nter:version>
+			<nter:organization>test organization</nter:organization>
+			<nter:price nter:value="118.00" nter:unit="USD"/>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+		</nter:courseComponent>
+    </entry>
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Invalid Component 19</title>
+        <link rel="self"
+              href="https://nwtp.gov/course19.php"
+              nter:displayWidth="444"
+              nter:displayHeight="204"/>
+        <link rel="search"
+              href="http://nwtp.gov/course19.php?q=search"/>
+        <link rel="download"
+              href="http://nwtp.gov/courses/download?course=course19&amp;type=2"
+              type="application/vnd.nter.scorm2004_4"/>
+        <link rel="download"
+              href="http://nwtp.gov/courses/download?course=course19&amp;type=3"
+              type="application/vnd.nter.scorm2004_3"/>
+        <id>tag:nwtp.gov,2010-11-07:/link/to/course19_test/en-US</id>
+        <updated>2010-11-13T08:30:59Z</updated>
+        <author>
+            <name>Pam Griffith</name>
+        </author>
+        <summary>course nineteen</summary>
+		<nter:courseComponent>
+			<nter:version>2.0</nter:version>
+			<nter:organization>test organization</nter:organization>
+			<nter:price nter:value="119.00" nter:unit="USD"/>
+            <!-- components must have copyright information
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+            -->
+		</nter:courseComponent>
+	</entry>
+
+    <!-- valid entry -->
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Valid Component for Course 20</title>
+        <link rel="self"
+              href="https://nwtp.gov/course20.php"
+              nter:displayWidth="433"
+              nter:displayHeight="197"/>
+        <link rel="search"
+              href="http://nwtp.gov/course20.php?q=search"/>
+        <link rel="download"
+              href="http://nwtp.gov/courses/download?course=course20&amp;type=2"
+              type="application/vnd.nter.scorm2004_4"/>
+        <link rel="download"
+              href="http://nwtp.gov/courses/download?course=course20&amp;type=3"
+              type="application/vnd.nter.scorm2004_3"/>
+        <id>tag:nwtp.gov,2010-11-12:/link/to/course20_test/en-US</id>
+        <updated>2010-11-03T01:03:02Z</updated>
+        <author>
+            <name>Gabriel Jiva</name>
+        </author>
+        <summary>course twenty</summary>
+		<nter:courseComponent>
+			<nter:version>3.0</nter:version>
+			<nter:organization>test organization</nter:organization>
+			<nter:price nter:value="120" nter:unit="USD"/>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+		</nter:courseComponent>		
+    </entry>
+
+    <!-- Valid course entry -->
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <!-- courses do NOT require a search or self link
+        <link rel="self" href="http://example.org/2003/12/13/atom03"/>
+        -->
+        <!--
+        <link rel="search" href="http://example.org/2003/12/13/atom03?q=search"/>
+        -->
+        <id>tag:nwtp.gov,2010-10-04:/courses/98bce282-valid-1</id>
+        <updated>2010-11-20T18:30:02Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Robby Bailey&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <contributor>
+            <name>Paula Peters</name>
+        </contributor>
+        <contributor>
+            <name>Gabriel Jiva</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Gabriel Jiva&#13;&#10;n:Jiva;Gabriel&#13;&#10;org:SRI;SWEP&#13;&#10;adr:;;450 8th Ave SE;St Petersburg;FL;33701;USA&#13;&#10;email;internet:gabriel.jiva@sri.com&#13;&#10;title:Software Engineer&#13;&#10;tel;work:727-553-3539&#13;&#10;url:http://www.sri.com&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+			<nter:version>1.0</nter:version>
+			<nter:organization>test organization</nter:organization>
+            <nter:duration nter:durationStandard="ISO8601:2000">PT3H15M</nter:duration>
+            
+            <nter:title lang="en-US">Valid Course: Insulation</nter:title>
+            <nter:title lang="fr-FR">Valid Course : Isolation</nter:title>
+            <nter:title lang="es-ES">Valid Course: Aislamiento</nter:title>
+
+            <nter:transcriptAbstract lang="en-US">This course covers single-family, multi-family, and mobile home insulation.</nter:transcriptAbstract>
+            <nter:transcriptAbstract lang="fr-FR">Ce cours couvre l'isolation unifamiliale, multifamiliale, et de caravane résidentielle.</nter:transcriptAbstract>
+
+            <nter:description lang="en-US">This course covers single-family, multi-family, and mobile home insulation.</nter:description>
+            <nter:description lang="fr-FR">Ce cours couvre l'isolation unifamiliale, multifamiliale, et de caravane résidentielle.</nter:description>
+            <nter:description lang="es-ES">Este curso cubre el aislamiento unifamiliar, multifamiliar, y de la caravana.</nter:description>
+
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+            <nter:copyright lang="fr-FR">International de 2010-2011 SRI</nter:copyright>
+            <nter:copyright lang="es-ES">International de 2010-2011 SRI</nter:copyright>
+
+            <nter:rating lang="en-US" nter:ratingLevel="E (Everyone)" nter:ratingReason="Contains no objectionable or material that could be found in appropriate." />
+
+            <nter:componentRef 
+                nter:componentId="tag:nwtp.gov,2010-11-04:/link/to/course18_invalid/en-US"
+                nter:orderWeight="1.0" />
+            <nter:componentRef 
+                nter:componentId="tag:nwtp.gov,2010-11-07:/link/to/course19_test/en-US"
+                nter:orderWeight="1.5"
+                nter:paymentRequired="true"/>
+            <nter:componentRef 
+                nter:componentId="tag:nwtp.gov,2010-11-12:/link/to/course20_test/en-US"
+                nter:orderWeight="2.5"
+                nter:paymentRequired="true"/>
+
+            <nter:image
+                lang="en-US"
+                nter:href="http://nwtp.gov/course18-1.png"
+                nter:alternateText="page one"
+                nter:mimeType="image/png"
+                nter:orderWeight="1.0"/>
+            <nter:image
+                lang="en-US"
+                nter:href="http://nwtp.gov/course18-2.png"
+                nter:alternateText="page two"
+                nter:mimeType="image/png"
+                nter:orderWeight="2.0"/>
+            <nter:image
+                lang="en-US"
+                nter:href="http://nwtp.gov/course18-3.png"
+                nter:alternateText="page three"
+                nter:mimeType="image/png"
+                nter:orderWeight="3.0"/>
+
+            <nter:keywords lang="en-US">supervising weatherization insulation multi-family single-family</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" lang="en-US">Firefox 4.0 beta</nter:requirement>
+            
+			<nter:price nter:value="357" nter:unit="USD" />
+        </nter:course>
+    </entry>
+
+    <!-- valid course entry -->
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self" href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search" href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2010-10-04:/courses/98bce282-valid-2</id>
+        <updated>2010-11-20T18:30:02Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Robby Bailey&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <contributor>
+            <name>Paula Peters</name>
+        </contributor>
+        <contributor>
+            <name>Gabriel Jiva</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Gabriel Jiva&#13;&#10;n:Jiva;Gabriel&#13;&#10;org:SRI;SWEP&#13;&#10;adr:;;450 8th Ave SE;St Petersburg;FL;33701;USA&#13;&#10;email;internet:gabriel.jiva@sri.com&#13;&#10;title:Software Engineer&#13;&#10;tel;work:727-553-3539&#13;&#10;url:http://www.sri.com&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+			<nter:version>1.0</nter:version>
+			<nter:organization>test organization</nter:organization>
+            <nter:duration nter:durationStandard="ISO8601:2000">PT3H15M</nter:duration>
+
+            <nter:title lang="en-US">Supervising weatherization measures: Insulation</nter:title>
+            <nter:title lang="fr-FR">Mesures surveillées de weatherization : Isolation</nter:title>
+            <nter:title lang="es-ES">Medidas supervisoras del weatherization: Aislamiento</nter:title>
+
+            <nter:transcriptAbstract lang="en-US">This course covers single-family, multi-family, and mobile home insulation.</nter:transcriptAbstract>
+            <nter:transcriptAbstract lang="fr-FR">Ce cours couvre l'isolation unifamiliale, multifamiliale, et de caravane résidentielle.</nter:transcriptAbstract>
+
+            <nter:description lang="en-US">This course covers single-family, multi-family, and mobile home insulation.</nter:description>
+            <nter:description lang="fr-FR">Ce cours couvre l'isolation unifamiliale, multifamiliale, et de caravane résidentielle.</nter:description>
+            <nter:description lang="es-ES">Este curso cubre el aislamiento unifamiliar, multifamiliar, y de la caravana.</nter:description>
+
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+            <nter:copyright lang="fr-FR">International de 2010-2011 SRI</nter:copyright>
+            <nter:copyright lang="es-ES">International de 2010-2011 SRI</nter:copyright>
+
+            <nter:rating lang="en-US" nter:ratingLevel="E (Everyone)" nter:ratingReason="Contains no objectionable or material that could be found in appropriate." />
+
+            <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2010-11-04:/link/to/course18_invalid/en-US"
+                nter:orderWeight="1.0" />
+            <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2010-11-07:/link/to/course19_test/en-US"
+                nter:orderWeight="1.5"
+                nter:paymentRequired="true"/>
+            <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2010-11-12:/link/to/course20_test/en-US"
+                nter:orderWeight="2.5"
+                nter:paymentRequired="true"/>
+
+            <nter:image
+                lang="en-US"
+                nter:href="http://nwtp.gov/course18-1.png"
+                nter:alternateText="page one"
+                nter:mimeType="image/png"
+                nter:orderWeight="1.0"/>
+            <nter:image
+                lang="en-US"
+                nter:href="http://nwtp.gov/course18-2.png"
+                nter:alternateText="page two"
+                nter:mimeType="image/png"
+                nter:orderWeight="2.0"/>
+            <nter:image
+                lang="en-US"
+                nter:href="http://nwtp.gov/course18-3.png"
+                nter:alternateText="page three"
+                nter:mimeType="image/png"
+                nter:orderWeight="3.0"/>
+
+            <nter:keywords lang="en-US">supervising weatherization insulation multi-family single-family</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+			<nter:price nter:value="357" nter:unit="USD" />
+        </nter:course>
+    </entry>
+</feed>
