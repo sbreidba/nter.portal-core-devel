@@ -50,12 +50,12 @@
 				.getStats(Course.class.getName(), course.getPrimaryKey());
 		List<CourseReview> usersCourseReviews = CourseReviewLocalServiceUtil
 				.findByCourseIdWithUserId(themeDisplay.getUserId(), courseId);
-        CourseReview userCourseReivew = null;
+        CourseReview userCourseReview = null;
         for(CourseReview review : usersCourseReviews) {
             if(review.isRemoved()) {
                 CourseReviewLocalServiceUtil.deleteCourseReview(review);
             }else {
-                userCourseReivew = review;
+                userCourseReview = review;
             }
         }
 
@@ -202,7 +202,7 @@
 			if (userHasTakenCourse) { /* has taken course */
 				if (!expertReviews || userIsExpert) { /* can write full text review */
 					if (!course.isRemoved()) { /* course is not removed */
-						if (userCourseReivew == null) { /* has not reviewed course */ %>
+						if (userCourseReview == null) { /* has not reviewed course */ %>
 							<h4><%= LanguageUtil.get(pageContext,"write-a-review") %></h4>
 							<nter:review-form courseId="<%=courseId%>"
 										  pageContext="<%=pageContext%>"
@@ -214,13 +214,13 @@
 								<liferay-ui:ratings-score score="<%= userScore %>" />
 								<div class="update-review">
 									<portlet:renderURL var="editUrl">
-										<portlet:param name="<%=NterKeys.REVIEW_ID%>" value="<%= Long.toString(userCourseReivew.getPrimaryKey()) %>" />
-										<portlet:param name="<%=NterKeys.REVIEW_CLASSPK%>" value="<%= Long.toString(userCourseReivew.getCourseId()) %>" />
-										<portlet:param name="userId" value="<%= Long.toString(userCourseReivew.getUserId()) %>" />
+										<portlet:param name="<%=NterKeys.REVIEW_ID%>" value="<%= Long.toString(userCourseReview.getPrimaryKey()) %>" />
+										<portlet:param name="<%=NterKeys.REVIEW_CLASSPK%>" value="<%= Long.toString(userCourseReview.getCourseId()) %>" />
+										<portlet:param name="userId" value="<%= Long.toString(userCourseReview.getUserId()) %>" />
 										<portlet:param name="jspPage" value="/course-reviews/jsp/edit-review.jsp" />
 										<portlet:param name="redirect" value="<%= redirectUrl %>" />
 									</portlet:renderURL>
-									<a href="<%= editUrl %>&cid=<%=userCourseReivew.getCourseId() %>#review-form" class="button"><liferay-ui:message key="edit-your-review" /></a>
+									<a href="<%= editUrl %>&cid=<%=userCourseReview.getCourseId() %>#review-form" class="button"><liferay-ui:message key="edit-your-review" /></a>
 								</div>
 							</div>
 						<% } %>
@@ -230,12 +230,12 @@
 							<liferay-ui:ratings-score score="<%= userScore %>" />
 							<div class="update-review">
 								<portlet:renderURL var="viewUrl">
-										<portlet:param name="<%=NterKeys.REVIEW_ID%>" value="<%= Long.toString(userCourseReivew.getPrimaryKey()) %>" />
-										<portlet:param name="<%=NterKeys.REVIEW_CLASSPK%>" value="<%= Long.toString(userCourseReivew.getCourseId()) %>" />
-										<portlet:param name="userId" value="<%= Long.toString(userCourseReivew.getUserId()) %>" />
+										<portlet:param name="<%=NterKeys.REVIEW_ID%>" value="<%= Long.toString(userCourseReview.getPrimaryKey()) %>" />
+										<portlet:param name="<%=NterKeys.REVIEW_CLASSPK%>" value="<%= Long.toString(userCourseReview.getCourseId()) %>" />
+										<portlet:param name="userId" value="<%= Long.toString(userCourseReview.getUserId()) %>" />
 										<portlet:param name="jspPage" value="/course-reviews/jsp/single-review.jsp" />
 								</portlet:renderURL>
-								<a href="<%= viewUrl %>&cid=<%=userCourseReivew.getCourseId() %>#review" class="button"><liferay-ui:message key="view-your-review" /></a>
+								<a href="<%= viewUrl %>&cid=<%=userCourseReview.getCourseId() %>#review" class="button"><liferay-ui:message key="view-your-review" /></a>
 							</div>
 						</div>
 					<% } %>
