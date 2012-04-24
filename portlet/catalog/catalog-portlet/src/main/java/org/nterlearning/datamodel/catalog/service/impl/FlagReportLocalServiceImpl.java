@@ -300,9 +300,11 @@ public class FlagReportLocalServiceImpl extends FlagReportLocalServiceBaseImpl {
         User user = userPersistence.findByPrimaryKey(userId);
         Date now = new Date();
         FlagReport flagReport = flagReportPersistence.findByPrimaryKey(resourcePrimKey);
+        //Liferay 6.1 added in a classPK and Type. They are both zero by default when configured.
+        //Liferay 6.1 you must configure the workflow in order for the groupId to be set properly.
         WorkflowDefinitionLink workflowDefinitionLink = WorkflowDefinitionLinkUtil.fetchByG_C_C_C_T(flagReport.getGroupId(),
                 flagReport.getCompanyId(), ClassNameLocalServiceUtil.getClassNameId(FlagReport.class),
-                flagReport.getPrimaryKey(), 0);
+                0, 0);
 
         if (flagReport.getModerateAction().equals("") && workflowDefinitionLink != null ) {
            if (status == WorkflowConstants.STATUS_APPROVED)  {
