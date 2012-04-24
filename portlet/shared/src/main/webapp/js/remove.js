@@ -324,14 +324,14 @@ AUI.add("confirm-dialog", function(A) {
 				bodyContent: this.get('confirmMsg'),
 				buttons: [
 					{
-						text: '<span class="icon-accessibility-text">' + this.get('confirmAccTxt') + ' </span>' + this.get('confirmBtn'),
+						label: this.get('confirmBtn'),
 						handler: function () {
 							this.close();
 							context.get('handler')();
 						}
 					},
 					{
-						text: this.get('cancelBtn'),
+						label: this.get('cancelBtn'),
 						handler: function() {
 							this.close();
 						}
