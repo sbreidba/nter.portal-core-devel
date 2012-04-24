@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  National Training and Education Resource (NTER)
+  Copyright (C) 2012 SRI International
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or (at
+  your option) any later version.
+
+  This program is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  02110-1301, USA.
+  -->
+
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:http.service.nter.sri.com" xmlns:intf="urn:http.service.nter.sri.com" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns1="http://model.nter.sri.com" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:http.service.nter.sri.com">
+	<!--WSDL created by Apache Axis version: 1.4Built on Apr 22, 2006 (06:55:48 PDT)-->
+	<wsdl:types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://model.nter.sri.com">
+			<import namespace="urn:http.service.nter.sri.com"/>
+			<import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+			<complexType name="CourseRegistrySoap">
+				<sequence>
+					<element name="companyId" type="xsd:long"/>
+					<element name="courseRegistryId" type="xsd:long"/>
+					<element name="dateCreated" nillable="true" type="xsd:dateTime"/>
+					<element name="description" nillable="true" type="soapenc:string"/>
+					<element name="endpoint" nillable="true" type="soapenc:string"/>
+					<element name="lastModified" nillable="true" type="xsd:dateTime"/>
+					<element name="primaryKey" type="xsd:long"/>
+					<element name="provider" nillable="true" type="soapenc:string"/>
+				</sequence>
+			</complexType>
+		</schema>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="urn:http.service.nter.sri.com">
+			<import namespace="http://model.nter.sri.com"/>
+			<import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+			<complexType name="ArrayOf_tns2_CourseRegistrySoap">
+				<complexContent>
+					<restriction base="soapenc:Array">
+						<attribute ref="soapenc:arrayType" wsdl:arrayType="tns1:CourseRegistrySoap[]"/>
+					</restriction>
+				</complexContent>
+			</complexType>
+		</schema>
+	</wsdl:types>
+	<wsdl:message name="updateProviderRequest">
+		<wsdl:part name="providerName" type="xsd:string"/>
+		<wsdl:part name="endpoint" type="xsd:string"/>
+		<wsdl:part name="description" type="xsd:string"/>
+	</wsdl:message>
+	<wsdl:message name="addProviderRequest">
+		<wsdl:part name="companyId" type="xsd:long"/>
+		<wsdl:part name="providerName" type="xsd:string"/>
+		<wsdl:part name="endpoint" type="xsd:string"/>
+		<wsdl:part name="description" type="xsd:string"/>
+	</wsdl:message>
+	<wsdl:message name="getProvidersResponse">
+		<wsdl:part name="getProvidersReturn" type="impl:ArrayOf_tns2_CourseRegistrySoap"/>
+	</wsdl:message>
+	<wsdl:message name="getProviderRequest">
+		<wsdl:part name="providerName" type="xsd:string"/>
+	</wsdl:message>
+	<wsdl:message name="addProviderResponse">
+		<wsdl:part name="addProviderReturn" type="xsd:string"/>
+	</wsdl:message>
+	<wsdl:message name="updateProviderResponse">
+		<wsdl:part name="updateProviderReturn" type="xsd:string"/>
+	</wsdl:message>
+	<wsdl:message name="getProviderResponse">
+		<wsdl:part name="getProviderReturn" type="tns1:CourseRegistrySoap"/>
+	</wsdl:message>
+	<wsdl:message name="getProvidersRequest"/>
+	<wsdl:portType name="CourseRegistryInterface">
+		<wsdl:operation name="getProvider" parameterOrder="providerName">
+			<wsdl:input message="impl:getProviderRequest" name="getProviderRequest"/>
+			<wsdl:output message="impl:getProviderResponse" name="getProviderResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="addProvider" parameterOrder="companyId providerName endpoint description">
+			<wsdl:input message="impl:addProviderRequest" name="addProviderRequest"/>
+			<wsdl:output message="impl:addProviderResponse" name="addProviderResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="getProviders">
+			<wsdl:input message="impl:getProvidersRequest" name="getProvidersRequest"/>
+			<wsdl:output message="impl:getProvidersResponse" name="getProvidersResponse"/>
+		</wsdl:operation>
+		<wsdl:operation name="updateProvider" parameterOrder="providerName endpoint description">
+			<wsdl:input message="impl:updateProviderRequest" name="updateProviderRequest"/>
+			<wsdl:output message="impl:updateProviderResponse" name="updateProviderResponse"/>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="CourseRegistryPortSoapBinding" type="impl:CourseRegistryInterface">
+		<wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="getProvider">
+			<wsdlsoap:operation soapAction="urn:getProvider"/>
+			<wsdl:input name="getProviderRequest">
+				<wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:http.service.nter.sri.com" use="encoded"/>
+			</wsdl:input>
+			<wsdl:output name="getProviderResponse">
+				<wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:http.service.nter.sri.com" use="encoded"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="addProvider">
+			<wsdlsoap:operation soapAction="urn:addProvider"/>
+			<wsdl:input name="addProviderRequest">
+				<wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:http.service.nter.sri.com" use="encoded"/>
+			</wsdl:input>
+			<wsdl:output name="addProviderResponse">
+				<wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:http.service.nter.sri.com" use="encoded"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getProviders">
+			<wsdlsoap:operation soapAction="urn:getProviders"/>
+			<wsdl:input name="getProvidersRequest">
+				<wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:http.service.nter.sri.com" use="encoded"/>
+			</wsdl:input>
+			<wsdl:output name="getProvidersResponse">
+				<wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:http.service.nter.sri.com" use="encoded"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateProvider">
+			<wsdlsoap:operation soapAction="urn:updateProvider"/>
+			<wsdl:input name="updateProviderRequest">
+				<wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:http.service.nter.sri.com" use="encoded"/>
+			</wsdl:input>
+			<wsdl:output name="updateProviderResponse">
+				<wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:http.service.nter.sri.com" use="encoded"/>
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="CourseRegistryService">
+		<wsdl:port binding="impl:CourseRegistryPortSoapBinding" name="CourseRegistryPort">
+			<wsdlsoap:address location="http://127.0.0.1:8080/course-registry-portlet/axis/CourseRegistryService"/>
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>
