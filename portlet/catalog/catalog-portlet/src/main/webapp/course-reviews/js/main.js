@@ -310,7 +310,7 @@ AUI().ready('anim-custom', 'aui-rating', 'removable', 'io-form', 'review-form', 
 				var form = targetButton.ancestor(function (el) {
 					if (el.get('nodeName').toLowerCase() == 'form') return true;
 				});
-				var score = form.one('input[name="score"]').item(0);
+				var score = form.one('input[name="score"]');
 				if (!container || !score) return;
 
 				container.all('button.selected').removeClass('selected');
