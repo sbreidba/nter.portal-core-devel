@@ -1,0 +1,812 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ National Training and Education Resource (NTER)
+  ~ Copyright (C) 2011  SRI International
+  ~
+  ~ This program is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or (at
+  ~ your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful, but
+  ~ WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  ~ General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  ~ 02110-1301, USA.
+  -->
+
+<!-- This atom feed is a test for feed parsers.  It is invalid for the following reasons:
+    * the first course contains 3 titles but only 2 descriptions.  The number of titles and descriptions must be equal.
+    The
+-->
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:nter="http://nterlearning.org/xml/feeds/atom-extensions-schema_0.6.3.xsd">
+
+    <title>Course Feed</title>
+    <link rel="self" href="test-0.6.3-course-atom-feed-invalid.xml" type="application/atom+xml"/>
+    <updated>2010-10-04T18:52:00Z</updated>
+    <id>tag:nwtp.gov,2010-10-04:/feeds/INVALID-ENTRY-TEST-FEED-</id>
+
+     <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Valid Test Component 1</title>
+        <link rel="self" href="https://nwtp.gov/course18-en.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <link rel="search" href="https://nwtp.gov/course18-en.php?q=search"/>
+         <id>tag:nwtp.gov,2010-12-04:/link/to/test-valid-component-1/en-US</id>
+        <updated>2010-12-13T18:30:02Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+        </author>
+        <summary>course eighteen</summary>
+		<nter:courseComponent>
+			<nter:version>1</nter:version>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+		</nter:courseComponent>
+    </entry>
+    <entry nter:entryType="course">
+        <title>Pocket Frogs! (This title will be ignored by NTER in favor of the language specific course titles)
+        </title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2010-10-04:/courses/TEST-INVALID-COURSE-1</id>
+        <updated>2003-12-13T18:30:02Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Robby Bailey&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <contributor>
+            <name>Paula Peters</name>
+        </contributor>
+        <contributor>
+            <name>Gabriel Jiva</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Gabriel Jiva&#13;&#10;n:Jiva;Gabriel&#13;&#10;org:SRI;SWEP&#13;&#10;adr:;;450 8th Ave SE;St Petersburg;FL;33701;USA&#13;&#10;email;internet:gabriel.jiva@sri.com&#13;&#10;title:Software Engineer&#13;&#10;tel;work:727-553-3539&#13;&#10;url:http://www.sri.com&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">PT3H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">Test Invalid Course 1</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">This course covers single-family, multi-family, and mobile home insulation.</nter:transcriptAbstract>
+            <nter:transcriptAbstract xml:lang="fr-FR">Ce cours couvre l'isolation unifamiliale, multifamiliale, et de caravane résidentielle.</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">This course covers single-family, multi-family, and mobile home insulation.</nter:description>
+            <nter:description xml:lang="fr-FR">Ce cours couvre l'isolation unifamiliale, multifamiliale, et de caravane résidentielle.</nter:description>
+            <nter:description xml:lang="es-ES">Este curso cubre el aislamiento unifamiliar, multifamiliar, y de la caravana.</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010-2011 SRI International</nter:copyright>
+            <nter:copyright xml:lang="fr-FR">International de 2010-2011 SRI</nter:copyright>
+            <nter:copyright xml:lang="es-ES">International de 2010-2011 SRI</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="E (Everyone)" nter:ratingReason="Contains no objectionable or material that could be found in appropriate." />
+
+            <nter:componentRef 
+                nter:componentId="tag:nwtp.gov,2010-12-04:/link/to/VALID-COMPONENT-1/en-US"
+                nter:orderWeight="1.0" 
+            />
+        <nter:image nter:orderWeight="2.0"
+                    xml:lang="en-US" 
+                    nter:href="http://nwtp.gov/course18-2.png"
+                    nter:alternateText="page two" 
+                    nter:mimeType="image/png" 
+            />
+            <nter:image
+                    xml:lang="en-US" 
+                    nter:href="http://nwtp.gov/course18-2.png" 
+                    nter:alternateText="page two" 
+                    nter:mimeType="image/png" 
+            />
+
+            <nter:keywords xml:lang="en-US">pocket frogs lily pads</nter:keywords>
+            <nter:keywords xml:lang="fr-FR">poche grenouilles</nter:keywords>
+            
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+            
+        </nter:course>
+    </entry>
+
+
+    <entry nter:entryType="course">
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2010-10-04:/courses/TEST-INVALID-COURSE-2</id>
+        <updated>2010-09-13T18:30:02Z</updated>
+        <author>
+            <name>Leigh Moulder</name>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <summary xml:lang="en-US" >Installer fundamentals.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P1M3DT4H20M</nter:duration>
+
+            <nter:title xml:lang="en-US">Invalid Course 2</nter:title>
+            <nter:title xml:lang="es-ES">Más Instalador de Fundamentos</nter:title>
+            <nter:title xml:lang="fr-FR">Le fufu</nter:title>
+            
+            <nter:transcriptAbstract xml:lang="en-US">More Installer Fundamentals</nter:transcriptAbstract>
+            <nter:transcriptAbstract xml:lang="es-ES">Más Instalador de Fundamentos</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">More Installer Fundamentals</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+            <nter:copyright xml:lang="es-ES">International de 2010 SRI</nter:copyright>
+
+            <nter:componentRef
+                      nter:componentId="tag:nwtp.gov,2010-12-04:/link/to/VALID-COMPONENT-1/en-US"
+                      nter:orderWeight="1.0"
+            />
+
+            <nter:keywords xml:lang="en-US">supervising weatherization insulation multi-family single-family</nter:keywords>
+            <nter:keywords xml:lang="es-ES">unifamiliar multifamiliar supervisor aislamiento weatherization</nter:keywords>
+
+            <nter:related
+                nter:relationship="prerequisite"
+                nter:relatedEntryId="tag:nwtp.gov,2010-10-04:/courses/INVALID1-crs1-4ebb-aaaa-80da344efa6aa" />
+
+        </nter:course>
+    </entry>
+
+    <!-- invalid component - too many versions entries-->
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Invalid Test Component 1</title>
+        <link rel="self"  href="https://nwtp.gov/courseinvalid-en.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <link rel="search"  href="https://nwtp.gov/courseinvalid-en.php?q=search"/>
+        <id>tag:nwtp.gov,2011-01-01:/link/to/test-invalid-component-1/en-US</id>
+        <updated>2011-01-01T18:30:02Z</updated>
+        <author>
+            <name>paula</name>
+        </author>
+        <summary>invalid component test</summary>
+		<nter:courseComponent>
+			<nter:version>1.0</nter:version>
+            <nter:version>1.0</nter:version>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+		</nter:courseComponent>
+    </entry>
+
+    <!-- invalid component - too many organization entries-->
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Invalid Test Component 2</title>
+        <link rel="self"  href="https://nwtp.gov/courseinvalid-en.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <link rel="search"  href="https://nwtp.gov/courseinvalid-en.php?q=search"/>
+        <id>tag:nwtp.gov,2011-01-01:/link/to/test-invalid-component-2/en-US</id>
+        <updated>2011-01-01T18:30:02Z</updated>
+        <author>
+            <name>paula</name>
+        </author>
+        <summary>invalid component test</summary>
+		<nter:courseComponent>
+			<nter:version>1.0</nter:version>
+            <nter:organization>first</nter:organization>
+            <nter:organization>second</nter:organization>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+		</nter:courseComponent>
+    </entry>
+
+    <!-- invalid component - too many price entries-->
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Invalid Test Component 3</title>
+        <link rel="self"  href="https://nwtp.gov/courseinvalid-en.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <link rel="search"  href="https://nwtp.gov/courseinvalid-en.php?q=search"/>
+        <id>tag:nwtp.gov,2011-01-01:/link/to/test-invalid-component-3/en-US</id>
+        <updated>2011-01-01T18:30:02Z</updated>
+        <author>
+            <name>paula</name>
+        </author>
+        <summary>invalid component test</summary>
+		<nter:courseComponent>
+			<nter:version>1.0</nter:version>
+            <nter:organization>first</nter:organization>
+            <nter:price nter:value="100" nter:unit="USD"/>
+            <nter:price nter:value="200" nter:unit="USD"/>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+		</nter:courseComponent>
+    </entry>
+
+    <!-- invalid component - missing version -->
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Invalid Test Component 4</title>
+        <link rel="self"  href="https://nwtp.gov/courseinvalid-en.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <link rel="search"  href="https://nwtp.gov/courseinvalid-en.php?q=search"/>
+        <id>tag:nwtp.gov,2011-01-01:/link/to/test-invalid-component-4/en-US</id>
+        <updated>2011-01-01T18:30:02Z</updated>
+        <author>
+            <name>paula</name>
+        </author>
+        <summary>invalid component test</summary>
+		<nter:courseComponent>
+            <nter:organization>first</nter:organization>
+            <nter:price nter:value="100" nter:unit="USD"/>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+		</nter:courseComponent>
+    </entry>
+
+    <!-- invalid component - missing copyright -->
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Invalid Test Component 5</title>
+        <link rel="self"  href="https://nwtp.gov/courseinvalid-en.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <link rel="search"  href="https://nwtp.gov/courseinvalid-en.php?q=search"/>
+        <id>tag:nwtp.gov,2011-01-01:/link/to/test-invalid-component-5/en-US</id>
+        <updated>2011-01-01T18:30:02Z</updated>
+        <author>
+            <name>paula</name>
+        </author>
+        <summary>invalid component test</summary>
+		<nter:courseComponent>
+            <nter:version>1.0</nter:version>
+            <nter:organization>first</nter:organization>
+            <nter:price nter:value="100" nter:unit="USD"/>
+		</nter:courseComponent>
+    </entry>
+
+    <!-- invalid component - missing self link -->
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Invalid Test Component 6</title>
+        <link rel="search"  href="https://nwtp.gov/courseinvalid-en.php?q=search"/>
+        <id>tag:nwtp.gov,2011-01-01:/link/to/test-invalid-component-6/en-US</id>
+        <updated>2011-01-01T18:30:02Z</updated>
+        <author>
+            <name>paula</name>
+        </author>
+        <summary>invalid component test</summary>
+		<nter:courseComponent>
+            <nter:version>1.0</nter:version>
+            <nter:organization>first</nter:organization>
+            <nter:price nter:value="100" nter:unit="USD"/>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+		</nter:courseComponent>
+    </entry>
+
+    <!-- valid component - even though missing search link -->
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Valid Test Component 4</title>
+        <link rel="self"  href="https://nwtp.gov/component-valid-en.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <id>tag:nwtp.gov,2011-01-01:/link/to/test-valid-component-4/en-US</id>
+        <updated>2011-01-01T18:30:02Z</updated>
+        <author>
+            <name>paula</name>
+        </author>
+        <summary>valid component test</summary>
+		<nter:courseComponent>
+            <nter:version>1.0</nter:version>
+            <nter:organization>first</nter:organization>
+            <nter:price nter:value="100" nter:unit="USD"/>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+		</nter:courseComponent>
+    </entry>
+
+    <!-- VALID component version, organization, and price -->
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Valid Test Component 2</title>
+        <link rel="self"  href="https://nwtp.gov/component-valid-en.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <link rel="search"  href="https://nwtp.gov/component-valid-en.php?q=search"/>
+        <id>tag:nwtp.gov,2011-01-01:/link/to/test-valid-component-2/en-US</id>
+        <updated>2011-01-01T18:30:02Z</updated>
+        <author>
+            <name>paula</name>
+        </author>
+        <summary>valid test component 2</summary>
+		<nter:courseComponent>
+			<nter:version>1.0</nter:version>
+            <nter:organization>first</nter:organization>
+            <nter:price nter:value="100" nter:unit="USD"/>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+		</nter:courseComponent>
+    </entry>
+
+        <!-- VALID component version but no organization or price-->
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Valid Test Component 3</title>
+        <link rel="self"  href="https://nwtp.gov/component-valid-en.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <link rel="search"  href="https://nwtp.gov/component-valid-en.php?q=search"/>
+        <id>tag:nwtp.gov,2011-01-01:/link/to/test-valid-component-3/en-US</id>
+        <updated>2011-01-01T18:30:02Z</updated>
+        <author>
+            <name>paula</name>
+        </author>
+        <summary>valid test component 3</summary>
+		<nter:courseComponent>
+			<nter:version>1.0</nter:version>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+		</nter:courseComponent>
+    </entry>
+
+    <!-- invalid course - too many versions entries-->
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-01-02:/courses/TEST-INVALID-COURSE-3</id>
+        <updated>2011-02-02T18:30:02Z</updated>
+        <author>
+            <name>PAULA</name>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+			<nter:version>1</nter:version>
+            <nter:version>2</nter:version>
+            <nter:duration nter:durationStandard="ISO8601:2000">P1M3D</nter:duration>
+
+            <nter:title xml:lang="en-US">Invalid Course 3</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-01-01:/link/to/test-valid-component-2/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:keywords xml:lang="en-US">test course </nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+        </nter:course>
+    </entry>
+
+    <!-- invalid course - too many organization entries-->
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-01-02:/courses/TEST-INVALID-COURSE-4</id>
+        <updated>2011-02-02T18:30:02Z</updated>
+        <author>
+            <name>PAULA</name>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+			<nter:version>1</nter:version>
+            <nter:organization>1</nter:organization>
+            <nter:organization>2</nter:organization>
+            <nter:duration nter:durationStandard="ISO8601:2000">P1M3D</nter:duration>
+
+            <nter:title xml:lang="en-US">Invalid Course 4</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-01-01:/link/to/test-valid-component-2/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:keywords xml:lang="en-US">test course </nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+        </nter:course>
+    </entry>
+
+    <!-- invalid course - too many duration entries-->
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-01-02:/courses/TEST-INVALID-COURSE-5</id>
+        <updated>2011-02-02T18:30:02Z</updated>
+        <author>
+            <name>PAULA</name>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+			<nter:version>1</nter:version>
+            <nter:organization>1</nter:organization>
+            <nter:duration nter:durationStandard="ISO8601:2000">P2M2D</nter:duration>
+            <nter:duration nter:durationStandard="ISO8601:2000">P1M3D</nter:duration>
+
+            <nter:title xml:lang="en-US">Invalid Course 5</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-01-01:/link/to/test-valid-component-2/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:keywords xml:lang="en-US">test course </nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+        </nter:course>
+    </entry>
+
+    <!-- invalid course - too many price entries-->
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-01-02:/courses/TEST-INVALID-COURSE-6</id>
+        <updated>2011-02-02T18:30:02Z</updated>
+        <author>
+            <name>PAULA</name>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+			<nter:version>1</nter:version>
+            <nter:organization>1</nter:organization>
+            <nter:duration nter:durationStandard="ISO8601:2000">P2M2D</nter:duration>
+
+            <nter:title xml:lang="en-US">Invalid Course 6</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-01-01:/link/to/test-valid-component-2/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:keywords xml:lang="en-US">test course </nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+            <nter:price nter:value="100" nter:unit="USD"/>
+            <nter:price nter:value="200" nter:unit="USD"/>
+        </nter:course>
+    </entry>
+
+    <!-- invalid course - missing version entry-->
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-01-02:/courses/TEST-INVALID-COURSE-7</id>
+        <updated>2011-02-02T18:30:02Z</updated>
+        <author>
+            <name>PAULA</name>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:organization>1</nter:organization>
+            <nter:duration nter:durationStandard="ISO8601:2000">P2M2D</nter:duration>
+
+            <nter:title xml:lang="en-US">Invalid Course 7</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-01-01:/link/to/test-valid-component-2/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:keywords xml:lang="en-US">test course </nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+            <nter:price nter:value="100" nter:unit="USD"/>
+        </nter:course>
+    </entry>
+
+    <!-- invalid course - duplicate language entry-->
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-01-02:/courses/TEST-INVALID-COURSE-8</id>
+        <updated>2011-02-02T18:30:02Z</updated>
+        <author>
+            <name>PAULA</name>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+            <nter:organization>1</nter:organization>
+            <nter:duration nter:durationStandard="ISO8601:2000">P2M2D</nter:duration>
+
+            <nter:title xml:lang="en-US">Invalid Course 8</nter:title>
+            <nter:title xml:lang="en-US">Invalid Course 8</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Course abstract</nter:transcriptAbstract>
+            <nter:transcriptAbstract xml:lang="en-US">Test Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Course description</nter:description>
+            <nter:description xml:lang="en-US">Test Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-01-01:/link/to/test-valid-component-2/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:keywords xml:lang="en-US">test course </nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+            <nter:price nter:value="100" nter:unit="USD"/>
+        </nter:course>
+    </entry>
+
+    <!-- Valid course - even though missing link search entry-->
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <id>tag:nwtp.gov,2011-01-02:/courses/test-valid-course-4</id>
+        <updated>2011-02-02T18:30:02Z</updated>
+        <author>
+            <name>PAULA</name>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+            <nter:organization>1</nter:organization>
+            <nter:duration nter:durationStandard="ISO8601:2000">P2M2D</nter:duration>
+
+            <nter:title xml:lang="en-US">Valid Course 4</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-01-01:/link/to/test-valid-component-2/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:keywords xml:lang="en-US">test course </nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+            <nter:price nter:value="100" nter:unit="USD"/>
+        </nter:course>
+    </entry>
+
+    <!-- invalid course - missing copyright entry-->
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-01-02:/courses/TEST-INVALID-COURSE-10</id>
+        <updated>2011-02-02T18:30:02Z</updated>
+        <author>
+            <name>PAULA</name>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+            <nter:organization>1</nter:organization>
+            <nter:duration nter:durationStandard="ISO8601:2000">P2M2D</nter:duration>
+
+            <nter:title xml:lang="en-US">Invalid Course 10</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Course description</nter:description>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-01-01:/link/to/test-valid-component-2/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:keywords xml:lang="en-US">test course </nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+            <nter:price nter:value="100" nter:unit="USD"/>
+        </nter:course>
+    </entry>
+
+    <!-- valid course with optional entries-->
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-01-02:/courses/test-valid-course-1</id>
+        <updated>2011-02-02T18:30:02Z</updated>
+        <author>
+            <name>PAULA</name>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+			<nter:version>1</nter:version>
+            <nter:organization>1</nter:organization>
+            <nter:duration nter:durationStandard="ISO8601:2000">P2M2D</nter:duration>
+
+            <nter:title xml:lang="en-US">Valid Test Course 1</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-01-01:/link/to/test-valid-component-2/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:keywords xml:lang="en-US">test course </nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+            <nter:price nter:value="100" nter:unit="USD"/>
+        </nter:course>
+    </entry>
+
+    <!-- valid course without optional entries-->
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self"  href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-01-02:/courses/test-valid-course-2</id>
+        <updated>2011-02-02T18:30:02Z</updated>
+        <author>
+            <name>PAULA</name>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+			<nter:version>1</nter:version>
+
+            <nter:title xml:lang="en-US">Valid Test Course 2</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-01-01:/link/to/test-valid-component-2/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:keywords xml:lang="en-US">test course </nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>             
+    </entry>
+
+    <!-- Valid course - missing link self entry-->
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="search"  href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2011-01-02:/courses/test-valid-course-3</id>
+        <updated>2011-02-02T18:30:02Z</updated>
+        <author>
+            <name>PAULA</name>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+            <nter:organization>1</nter:organization>
+            <nter:duration nter:durationStandard="ISO8601:2000">P2M2D</nter:duration>
+
+            <nter:title xml:lang="en-US">Valid Test Course 3</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Course abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Course description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2011-01-01:/link/to/test-valid-component-2/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:keywords xml:lang="en-US">test course </nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+            <nter:price nter:value="100" nter:unit="USD"/>
+        </nter:course>
+    </entry>
+
+</feed>
+

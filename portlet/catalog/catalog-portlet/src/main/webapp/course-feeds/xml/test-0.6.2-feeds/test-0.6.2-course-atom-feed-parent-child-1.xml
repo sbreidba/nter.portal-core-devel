@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ National Training and Education Resource (NTER)
+  ~ Copyright (C) 2011  SRI International
+  ~
+  ~ This program is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or (at
+  ~ your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful, but
+  ~ WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  ~ General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  ~ 02110-1301, USA.
+  -->
+  
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:nter="http://nterlearning.org/xml/feeds/atom-extensions-schema_0.6.2.xsd">
+
+    <!-- Test for parent-child update processing and rollback. -->
+
+
+    <title>Course Feed</title>
+    <link rel="self" href="test-0.6.2-course-atom-feed-parent-child-1.xml" type="application/atom+xml"/>
+    <updated>2011-02-15T22:52:00Z</updated>
+    <id>tag:nwtp.gov,2011-01-14:/feeds/test-parent-child-course-components-2011</id>
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>wheel</title>
+        <link href="https://nwtp.gov/course-wheel.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <id>tag:nwtp.gov,2011-01-14:/link/to/wheel/en-US</id>
+        <updated>2011-02-15T18:30:02Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Robby Bailey&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <summary>wheel</summary>
+		<nter:courseComponent>
+			<nter:version>1.0</nter:version>
+		</nter:courseComponent>	
+    </entry>
+
+    <entry  xml:lang="en-US" nter:entryType="course-component">
+        <title>seat</title>
+        <link href="https://nwtp.gov/course-seat.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <id>tag:nwtp.gov,2011-01-14:/link/to/seat/en-US</id>
+        <updated>2011-02-15T12:12:42Z</updated>
+        <author>
+            <name>Skip Breidbach</name>
+        </author>
+        <summary>seat</summary>
+		<nter:courseComponent>
+			<nter:version>1.0</nter:version>
+		</nter:courseComponent>
+    </entry>
+
+    <entry  xml:lang="en-US" nter:entryType="course-component">
+        <title>handlebar</title>
+        <link href="https://nwtp.gov/course-handlebar.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <id>tag:nwtp.gov,2011-01-14:/link/to/handlebar/en-US</id>
+        <updated>2011-02-15T12:12:42Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <contributor>
+            <name>Gabriel Jiva</name>
+        </contributor>
+        <summary>handlebar</summary>
+		<nter:courseComponent>
+			<nter:version>1.0</nter:version>
+		</nter:courseComponent>
+    </entry>
+
+    <entry  xml:lang="en-US" nter:entryType="course-component">
+        <title>frame</title>
+        <link href="https://nwtp.gov/course-frame.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <id>tag:nwtp.gov,2011-01-14:/link/to/frame/en-US</id>
+        <updated>2011-01-14T12:12:42Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>frame</summary>
+		<nter:courseComponent>
+			<nter:version>1.0</nter:version>
+		</nter:courseComponent>
+    </entry>
+
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link href="http://example.org/2003/12/13/atom03"/>
+        <id>tag:nwtp.gov,2011-01-14:/courses/bicycle-parts-80da344efa6a</id>
+        <updated>2011-02-16T18:30:02Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Robby Bailey&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <contributor>
+            <name>Paula Peters</name>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:version>1</nter:version>
+			<nter:duration nter:durationStandard="ISO8601:2000">P2DT3H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">Bicycle Parts</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">bicycle parts</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">bicycle parts</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010-2011 SRI</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="U (Unknown)" nter:ratingReason="Not yet rated" />
+
+            <nter:componentRef 
+                nter:componentId="tag:nwtp.gov,2011-01-14:/link/to/wheel/en-US"
+                nter:orderWeight="1.0" 
+            />
+
+            <nter:componentRef 
+                nter:componentId="tag:nwtp.gov,2011-01-14:/link/to/seat/en-US"
+                nter:orderWeight="1.5" 
+            />
+
+            <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2011-01-14:/link/to/frame/en-US"
+                nter:orderWeight="2.0"
+            />
+
+            <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2011-01-14:/link/to/handlebar/en-US"
+                nter:orderWeight="3.0"
+            />
+
+            <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2011-02-16:/link/to/gear/en-US"
+                nter:orderWeight="4.0"
+            />
+
+            <nter:image
+                xml:lang="en-US"
+                nter:href="http://nwtp.gov/courseBikeParts1.png"
+                nter:alternateText="bike part wheel"
+                nter:mimeType="image/png"
+                nter:orderWeight="1.0"
+            />
+            <nter:image
+                xml:lang="en-US"
+                nter:href="http://nwtp.gov/courseBikeParts2.png"
+                nter:alternateText="bike part seat"
+                nter:mimeType="image/png"
+                nter:orderWeight="1.0"
+            />
+            <nter:image
+                xml:lang="en-US"
+                nter:href="http://nwtp.gov/courseBikeParts3.png"
+                nter:alternateText="bike part handlebar"
+                nter:mimeType="image/png"
+                nter:orderWeight="1.0"
+            />
+
+            <nter:related
+                nter:relationship="prerequisite"
+                nter:relatedEntryId="tag:nwtp.gov,2009-01-14:/courses/bicycle-safety-80da344efa6a"
+            />
+            <nter:related
+                nter:relationship="prerequisite"
+                nter:relatedEntryId="tag:nwtp.gov,2009-01-14:/courses/bicycle-history-2011"
+            />
+            <nter:related
+                nter:relationship="prerequisite"
+                nter:relatedEntryId="tag:nwtp.gov,2009-01-14:/courses/bicycle-manufacturing-2011"
+            />
+            <nter:keywords xml:lang="en-US">bicycle seat wheel frame</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 3</nter:requirement>
+            <nter:requirement nter:requirementType="os" xml:lang="en-US">windows vista</nter:requirement>
+            
+        </nter:course>
+    </entry>
+
+
+</feed>
+
