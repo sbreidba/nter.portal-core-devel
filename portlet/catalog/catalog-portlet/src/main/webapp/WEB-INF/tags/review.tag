@@ -173,7 +173,7 @@ int upVotes = (int) totalEntries - downVotes;
 					%>
 					<small class="votes"><%= LanguageUtil.format(pageContext, downLabel, downVotes) %></small>
 				</form>
-     			<a class="button flagEntryX" href="<%= flagEntryUrl %>&cid=<%=review.getCourseId()%>&crid=<%=review.getPrimaryKey()%>#review-form"><%= LanguageUtil.get(pageContext,
+     			<a class="button flagEntry" href="<%= flagEntryUrl %>&cid=<%=review.getCourseId()%>&crid=<%=review.getPrimaryKey()%>#review-form"><%= LanguageUtil.get(pageContext,
 						"inappropriate") %>
 				</a>
 			</div>
