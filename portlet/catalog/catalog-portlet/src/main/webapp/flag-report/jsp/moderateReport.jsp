@@ -48,6 +48,8 @@
 
     List<String> contentList = FlagReportUtil.previousContentList(flagReports,currentContent);
 
+    List<FlagReportModeratorActivityResult> moderatorActivityResults = FlagReportUtil.moderatorActivity(flagReports);
+
     PortletURL portletURL = renderResponse.createRenderURL();
 %>
 
@@ -136,10 +138,70 @@
 </div>
 <div class="separator"></div>
 <h3 id="report-moderator-activity"><%= LanguageUtil.get(pageContext, "flag-moderate-moderator-activity")%></h3>
-<nter:flag-moderator-activity
-    reviewId="<%=reviewId%>"
-    classNameId="<%=classNameId%>"
-    pageContext="<%=pageContext%>" />
+<%--<nter:flag-moderator-activity--%>
+    <%--reviewId="<%=reviewId%>"--%>
+    <%--classNameId="<%=classNameId%>"--%>
+    <%--pageContext="<%=pageContext%>" />--%>
+    <liferay-ui:search-container
+        searchContainer='<%= new SearchContainer(renderRequest, null, null, "curModerateReport", 5,  portletURL, null, "flag-report-no-moderates") %>'
+        id="moderatorSearchContainer"
+        delta="<%= moderatorActivityResults.size() %>">
+        <liferay-ui:search-container-results>
+        <%
+            // set the total number of results in the search container.
+            searchContainer.setResults(moderatorActivityResults);
+            searchContainer.setTotal(moderatorActivityResults.size());
+
+            // set the pagination sublist of results on the page.
+            pageContext.setAttribute("results", moderatorActivityResults);
+            pageContext.setAttribute("total", moderatorActivityResults.size());
+        %>
+        </liferay-ui:search-container-results>
+        <liferay-ui:search-container-row
+            className="FlagReportModeratorActivityResult"
+            modelVar="moderatorActivityResult"
+            rowVar="thisrow"  >
+            <%
+
+                DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.SHORT, themeDisplay.getLocale());
+                String moderateDateString = "";
+                if (moderatorActivityResult.getModerateDate() != null) {
+                    moderateDateString = df.format(moderatorActivityResult.getModerateDate());
+                }
+                String calloutModeratorString ="";
+                String moderatorComment="";
+                if (moderatorActivityResult.getModeratorComment().isEmpty() && moderatorActivityResult.getModerateAction().isEmpty()) {
+                    String [] moderator_callout_args = {String.format("%d", moderatorActivityResult.getModerateReportCnt())};
+                    calloutModeratorString = LanguageUtil.format(pageContext, "flag-moderate-activity-entry-no-reason-comment", moderator_callout_args);
+                } else if (moderatorActivityResult.getModeratorComment().isEmpty()) {
+                    String [] moderator_callout_args = {moderatorActivityResult.getModerateAction(),
+                        String.format("%d", moderatorActivityResult.getModerateReportCnt()),
+                        moderatorActivityResult.getModeratorUserName()};
+                        calloutModeratorString = LanguageUtil.format(pageContext, "flag-moderate-activity-entry-reason", moderator_callout_args);
+                } else {
+                    String [] moderator_callout_args = {moderatorActivityResult.getModerateAction(),
+                        String.format("%d", moderatorActivityResult.getModerateReportCnt()),
+                        moderatorActivityResult.getModeratorUserName()};
+                        calloutModeratorString = LanguageUtil.format(pageContext, "flag-moderate-activity-entry-reason", moderator_callout_args);
+                        moderatorComment = moderatorActivityResult.getModeratorComment();
+                }
+
+            %>
+            <liferay-ui:search-container-column-text
+                 name="<%= LanguageUtil.get(pageContext, \"moderate-table-column-date\") %>">
+                <%= moderateDateString %>
+            </liferay-ui:search-container-column-text>
+            <liferay-ui:search-container-column-text
+                 name="<%= LanguageUtil.get(pageContext, \"moderate-table-column-moderate-action\") %>">
+                 <%= calloutModeratorString %>
+            </liferay-ui:search-container-column-text>
+            <liferay-ui:search-container-column-text
+                 name="<%= LanguageUtil.get(pageContext, \"moderate-table-column-moderate-comment\") %>">
+                 <%= moderatorComment %>
+            </liferay-ui:search-container-column-text>
+        </liferay-ui:search-container-row>
+        <liferay-ui:search-iterator paginate="<%= false %>" />
+    </liferay-ui:search-container>
 
 <%
     // Only allow moderate action if there are new flag reports
@@ -165,15 +227,11 @@
                        label='<%= LanguageUtil.get(pageContext, "flag-moderate-comment") %>'></aui:input>
 
                 <aui:button-row>
-                    <aui:button type="submit" class="submit primaryAction" value="submit">
-                        <%= LanguageUtil.get(pageContext, "flag-moderate-form-submit") %>
-                    </aui:button>
+                    <aui:button type="submit" class="submit primaryAction" value="submit"/>
                     <%
                     String backURL = ParamUtil.getString(request, "redirect", "location.href='';");
                     %>
-                    <aui:button type="cancel" class="button secondaryAction cancel" onClick="<%=backURL %>" >
-                        <%= LanguageUtil.get(pageContext, "flag-moderate-form-cancel" ) %>
-                    </aui:button>
+                    <aui:button type="cancel" class="button secondaryAction cancel" onClick="<%=backURL %>" />
                 </aui:button-row>
             </aui:fieldset>
     </aui:form>
