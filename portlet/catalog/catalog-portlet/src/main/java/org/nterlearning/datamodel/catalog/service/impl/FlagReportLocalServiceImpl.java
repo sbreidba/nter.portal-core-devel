@@ -44,7 +44,9 @@ import org.nterlearning.datamodel.catalog.service.FlagReportStatsLocalServiceUti
 import org.nterlearning.datamodel.catalog.service.GlobalCourseReviewLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.service.base.FlagReportLocalServiceBaseImpl;
 import org.nterlearning.datamodel.catalog.service.persistence.FlagReportFinderUtil;
+import org.nterlearning.utils.FlagReportConstants;
 
+import javax.mail.Flags;
 import java.util.Date;
 import java.util.List;
 
@@ -64,8 +66,7 @@ import java.util.List;
  */
 public class FlagReportLocalServiceImpl extends FlagReportLocalServiceBaseImpl {
 
-    public static final String MODERATE_ACTION_REMOVE = "REMOVE";
-    public static final String MODERATE_ACTION_IGNORE = "IGNORE";
+
 
     @Override
     public FlagReport addFlagReport(FlagReport flagReport) throws SystemException
@@ -300,17 +301,25 @@ public class FlagReportLocalServiceImpl extends FlagReportLocalServiceBaseImpl {
         User user = userPersistence.findByPrimaryKey(userId);
         Date now = new Date();
         FlagReport flagReport = flagReportPersistence.findByPrimaryKey(resourcePrimKey);
+        //Liferay 6.1 added in a classPK and Type. They are both zero by default when configured.
+        //Liferay 6.1 you must configure the workflow in order for the groupId to be set properly.
         WorkflowDefinitionLink workflowDefinitionLink = WorkflowDefinitionLinkUtil.fetchByG_C_C_C_T(flagReport.getGroupId(),
                 flagReport.getCompanyId(), ClassNameLocalServiceUtil.getClassNameId(FlagReport.class),
-                flagReport.getPrimaryKey(), 0);
+                0, 0);
 
-        if (flagReport.getModerateAction().equals("") && workflowDefinitionLink != null ) {
-           if (status == WorkflowConstants.STATUS_APPROVED)  {
-               flagReport.setModerateAction(MODERATE_ACTION_REMOVE);
-               flagReport.setModeratorComment("Moderated via Kaleo");
-           } else if (status == WorkflowConstants.STATUS_DENIED) {
-               flagReport.setModerateAction(MODERATE_ACTION_IGNORE);
-               flagReport.setModeratorComment("Moderated via Kaleo");          }
+        if (flagReport.getModerateAction().equals("") && workflowDefinitionLink == null) {
+            //Comment indicates workflow NOT configured and auto processing occurred.
+            flagReport.setModerateAction(FlagReportConstants.MODERATE_ACTION_NONE);
+            flagReport.setModeratorComment("Kaleo workflow OFF");
+        } else if (flagReport.getModerateAction().equals("") && workflowDefinitionLink != null) {
+            //Workflow processed with default Kaleo workflow portlet.
+            if (status == WorkflowConstants.STATUS_APPROVED) {
+                flagReport.setModerateAction(FlagReportConstants.MODERATE_ACTION_REMOVE);
+                flagReport.setModeratorComment("Processed with My Workflow Tasks portlet");
+            } else if (status == WorkflowConstants.STATUS_DENIED) {
+                flagReport.setModerateAction(FlagReportConstants.MODERATE_ACTION_IGNORE);
+                flagReport.setModeratorComment("Processed with My Workflow Tasks portlet");
+            }
         }
 
         flagReport.setStatus(status);

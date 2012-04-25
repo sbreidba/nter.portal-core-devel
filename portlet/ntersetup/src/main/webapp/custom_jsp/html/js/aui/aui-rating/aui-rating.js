@@ -81,7 +81,7 @@ var L = A.Lang,
 	EV_RATING_ITEM_OUT = 'itemOut',
 	EV_RATING_ITEM_OVER = 'itemOver',
 
-	getCN = A.ClassNameManager.getClassName,
+	getCN = A.getClassName,
 
 	CSS_CLEAR_FIX = getCN(HELPER, CLEARFIX),
 	CSS_ACCESSIBLE = getCN(HELPER, HIDDEN, ACCESSIBLE),

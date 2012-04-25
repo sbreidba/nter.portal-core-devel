@@ -18,6 +18,8 @@
  * 02110-1301, USA.
  */
 
+Liferay.Language.get = function () { return "smurf"; };
+
 AUI().ready('anim-custom', 'aui-rating', 'removable', 'io-form', 'review-form', 'load-more', 'aui-dialog', 'liferay-portlet-url', 'selector-css3', 'accessible-dialog', 'change-spinner', 'json-parse', function(A) {
 	
 	
@@ -179,20 +181,21 @@ AUI().ready('anim-custom', 'aui-rating', 'removable', 'io-form', 'review-form', 
 			list.delegate('click', function (event) {
 				event.preventDefault();
 				var review = event.currentTarget.ancestor(function (el) { if (el.hasClass('review')) return true; });
-				var reviewId = review.getAttribute('data-review-id');
-				var reviewIdParam = review.getAttribute('data-review-id-param');
-				var reviewCourseId = review.getAttribute('data-course-id');
-				var reviewCourseIdParam = review.getAttribute('data-course-id-param');
-				var reviewUserId = review.getAttribute('data-user-id');
-				var currentUserId = Liferay.ThemeDisplay.getUserId();
-				var editRedirect = review.getAttribute('data-redirect-url');
-				var cancelUrl = Liferay.PortletURL.createActionURL()
-					.setPortletId('coursereviews_WAR_ntercatalogportlet')
-					.setParameter('ajax', true)
-					.setWindowState('EXCLUSIVE')
-					.setName('undoDeleteCourseReview')
-					.toString();
 				if (!review.Removable) {
+					var reviewId = review.getAttribute('data-review-id');
+					var reviewIdParam = review.getAttribute('data-review-id-param');
+					var reviewCourseId = review.getAttribute('data-course-id');
+					var reviewCourseIdParam = review.getAttribute('data-course-id-param');
+					var reviewUserId = review.getAttribute('data-user-id');
+					var currentUserId = Liferay.ThemeDisplay.getUserId();
+					var editRedirect = review.getAttribute('data-redirect-url');
+					var cancelUrl = Liferay.PortletURL.createActionURL()
+						.setPortletId('coursereviews_WAR_ntercatalogportlet')
+						.setParameter('ajax', true)
+						.setWindowState('EXCLUSIVE')
+						.setName('undoDeleteCourseReview')
+						.toString();
+						
 					review.plug(A.NTER.Removable);
 					var itemName = escape(review.one('.reviewer-name').text());
 					review.Removable.registerBtn({
@@ -209,64 +212,64 @@ AUI().ready('anim-custom', 'aui-rating', 'removable', 'io-form', 'review-form', 
 						, cancelUrl: cancelUrl
 					});
 					event.currentTarget.simulate('click');
-				}
 				
-				review.Removable.on('remove', function (event) {
-					// "write a review" button
-					if (reviewUserId == currentUserId) {
-						var reviewArea = A.one('#review .ratings-stats');
-						reviewArea.empty();
-						var editUrl = Liferay.PortletURL.createRenderURL()
-							.setPortletId('coursereviews_WAR_ntercatalogportlet')
-							.setParameter(reviewCourseIdParam, reviewCourseId)
-							.setParameter('userId', currentUserId)
-							.setParameter('jspPage', '/course-reviews/jsp/edit-review.jsp')
-							.setParameter('redirect', editRedirect)
-							.toString() + '&cid='+reviewCourseId+'#review-form';
-						var editButton = A.Node.create('<a href="' + editUrl + '" class="button"></a>');
-						editButton.text(Liferay.Language.get('write-a-review'));
-						reviewArea.append(Liferay.Language.get('you-have-not-reviewed-this-course'));
-						reviewArea.append('<div class="update-review"></div>').append(editButton);
-					}
-					
-					var returnData = review.Removable.get('returnData');
-					// update "average rating" stars
-					updateAverage(returnData['average-rating'], returnData['review-count']);
-					// update histogram
-					updateHistogram(returnData['review-histogram'], returnData['review-count']);
-				});
-				review.Removable.on('unremove', function (event) {
-					// "edit review" button and stars
-					if (reviewUserId == currentUserId) {
-						var reviewArea = A.one('#review .ratings-stats');
-						var editButton = reviewArea.one('.button').clone();
-						reviewArea.empty();
-						editButton.text(Liferay.Language.get('edit-your-review'));
-						editButton.setAttribute('href', Liferay.PortletURL.createRenderURL()
-															.setPortletId('coursereviews_WAR_ntercatalogportlet')
-															.setParameter(reviewIdParam, reviewId)
-															.setParameter(reviewCourseIdParam, reviewCourseId)
-															.setParameter('userId', currentUserId)
-															.setParameter('jspPage', '/course-reviews/jsp/edit-review.jsp')
-															.setParameter('redirect', editRedirect)
-															.toString() + '&cid='+reviewCourseId+'#review-form');
-						reviewArea.append(Liferay.Language.get('your-rating-for-this-course'));
-						reviewArea.append('<div class="aui-starrating"></div>');
-						reviewArea.append('<div class="update-review"></div>').append(editButton);
-						var ratingBox = A.one('#review .aui-starrating');
-						var rating = new A.StarRating({
-							boundingBox: ratingBox,
-							disabled: true,
-							defaultSelected: parseInt(review.one('.user-rating').getAttribute('data-rating'))
-						}).render();
-					}
-					
-					var returnData = review.Removable.get('returnData');
-					// update "average rating" stars
-					updateAverage(returnData['average-rating'], returnData['review-count']);
-					// update histogram
-					updateHistogram(returnData['review-histogram'], returnData['review-count']);
-				});
+					review.Removable.on('remove', function (event) {
+						// "write a review" button
+						if (reviewUserId == currentUserId) {
+							var reviewArea = A.one('#review .ratings-stats');
+							reviewArea.empty();
+							var editUrl = Liferay.PortletURL.createRenderURL()
+								.setPortletId('coursereviews_WAR_ntercatalogportlet')
+								.setParameter(reviewCourseIdParam, reviewCourseId)
+								.setParameter('userId', currentUserId)
+								.setParameter('jspPage', '/course-reviews/jsp/edit-review.jsp')
+								.setParameter('redirect', editRedirect)
+								.toString() + '&cid='+reviewCourseId+'#review-form';
+							var editButton = A.Node.create('<a href="' + editUrl + '" class="button"></a>');
+							editButton.text(Liferay.Language.get('write-a-review'));
+							reviewArea.append(Liferay.Language.get('you-have-not-reviewed-this-course'));
+							reviewArea.append('<div class="update-review"></div>').append(editButton);
+						}
+						
+						var returnData = review.Removable.get('returnData');
+						// update "average rating" stars
+						updateAverage(returnData['average-rating'], returnData['review-count']);
+						// update histogram
+						updateHistogram(returnData['review-histogram'], returnData['review-count']);
+					});
+					review.Removable.on('unremove', function (event) {
+						// "edit review" button and stars
+						if (reviewUserId == currentUserId) {
+							var reviewArea = A.one('#review .ratings-stats');
+							var editButton = reviewArea.one('.button').clone();
+							reviewArea.empty();
+							editButton.text(Liferay.Language.get('edit-your-review'));
+							editButton.setAttribute('href', Liferay.PortletURL.createRenderURL()
+																.setPortletId('coursereviews_WAR_ntercatalogportlet')
+																.setParameter(reviewIdParam, reviewId)
+																.setParameter(reviewCourseIdParam, reviewCourseId)
+																.setParameter('userId', currentUserId)
+																.setParameter('jspPage', '/course-reviews/jsp/edit-review.jsp')
+																.setParameter('redirect', editRedirect)
+																.toString() + '&cid='+reviewCourseId+'#review-form');
+							reviewArea.append(Liferay.Language.get('your-rating-for-this-course'));
+							reviewArea.append('<div class="aui-starrating"></div>');
+							reviewArea.append('<div class="update-review"></div>').append(editButton);
+							var ratingBox = A.one('#review .aui-starrating');
+							var rating = new A.StarRating({
+								boundingBox: ratingBox,
+								disabled: true,
+								defaultSelected: parseInt(review.one('.user-rating').getAttribute('data-rating'))
+							}).render();
+						}
+						
+						var returnData = review.Removable.get('returnData');
+						// update "average rating" stars
+						updateAverage(returnData['average-rating'], returnData['review-count']);
+						// update histogram
+						updateHistogram(returnData['review-histogram'], returnData['review-count']);
+					});
+				}
 			}, '.delete');
 
             // hide button
@@ -307,7 +310,7 @@ AUI().ready('anim-custom', 'aui-rating', 'removable', 'io-form', 'review-form', 
 				var form = targetButton.ancestor(function (el) {
 					if (el.get('nodeName').toLowerCase() == 'form') return true;
 				});
-				var score = form.one('input[name="score"]').item(0);
+				var score = form.one('input[name="score"]');
 				if (!container || !score) return;
 
 				container.all('button.selected').removeClass('selected');
