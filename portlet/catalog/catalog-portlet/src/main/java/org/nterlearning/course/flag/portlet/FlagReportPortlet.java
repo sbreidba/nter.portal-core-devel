@@ -34,6 +34,7 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 import org.nterlearning.course.util.NterKeys;
 import org.nterlearning.datamodel.catalog.model.FlagReport;
 import org.nterlearning.datamodel.catalog.service.FlagReportLocalServiceUtil;
+import org.nterlearning.utils.FlagReportConstants;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -41,8 +42,6 @@ import java.io.IOException;
 import java.util.List;
 
 public class FlagReportPortlet extends MVCPortlet {
-    public static final String MODERATE_ACTION_REMOVE = "REMOVE";
-    public static final String MODERATE_ACTION_IGNORE = "IGNORE";
 
     public void moderateReport(ActionRequest request, ActionResponse response)
             throws Exception {
@@ -55,10 +54,10 @@ public class FlagReportPortlet extends MVCPortlet {
         String moderateAction = ParamUtil.getString(request, NterKeys.MODERATE_ACTION);
         String moderatorComment = ParamUtil.getString(request,NterKeys.MODERATOR_COMMENT);
 
-       if (Validator.isNotNull(flagReportId) && (moderateAction .equals(MODERATE_ACTION_REMOVE))) {
+       if (Validator.isNotNull(flagReportId) && (moderateAction .equals(FlagReportConstants.MODERATE_ACTION_REMOVE))) {
             _log.debug("Moderating flag report: " + flagReportId + ", action: " + moderateAction);
             FlagReportLocalServiceUtil.moderateFlagReport(userId, flagReportId, WorkflowConstants.STATUS_APPROVED, moderateAction, moderatorComment, serviceContext);
-        } else if (Validator.isNotNull(flagReportId) && (moderateAction .equals(MODERATE_ACTION_IGNORE))) {
+        } else if (Validator.isNotNull(flagReportId) && (moderateAction .equals(FlagReportConstants.MODERATE_ACTION_IGNORE))) {
                 _log.debug("Moderating flag report: " + flagReportId + ", action: " + moderateAction);
                 FlagReportLocalServiceUtil.moderateFlagReport(userId, flagReportId, WorkflowConstants.STATUS_DENIED, moderateAction, moderatorComment, serviceContext);
         } else {
@@ -84,13 +83,13 @@ public class FlagReportPortlet extends MVCPortlet {
 
            for (FlagReport flagReport : flagReports) {
 
-               if (!flagReport.isModerated() && moderateAction.equals(MODERATE_ACTION_REMOVE)) {
+               if (!flagReport.isModerated() && moderateAction.equals(FlagReportConstants.MODERATE_ACTION_REMOVE)) {
                    _log.debug("Moderating flag report: " + flagReport.getPrimaryKey() + ", action: " + moderateAction);
                    FlagReportLocalServiceUtil.moderateFlagReport(userId, flagReport.getPrimaryKey(), WorkflowConstants.STATUS_APPROVED, moderateAction, moderatorComment, serviceContext);
                    // remove workflow instance since we used custom portlet for moderation instead of kaleo's
                    FlagReportLocalServiceUtil.removeWorkflowInstance(flagReport.getGroupId(), flagReport.getCompanyId(), FlagReport.class.getName(), flagReport.getFlagReportId());
 
-               } else if (!flagReport.isModerated() && moderateAction.equals(MODERATE_ACTION_IGNORE)) {
+               } else if (!flagReport.isModerated() && moderateAction.equals(FlagReportConstants.MODERATE_ACTION_IGNORE)) {
                    _log.debug("Moderating flag report: " + flagReport.getPrimaryKey() + ", action: " + moderateAction);
                    FlagReportLocalServiceUtil.moderateFlagReport(userId, flagReport.getPrimaryKey(), WorkflowConstants.STATUS_DENIED, moderateAction, moderatorComment, serviceContext);
                    // remove workflow instance since we used custom portlet for moderation instead of kaleo's
