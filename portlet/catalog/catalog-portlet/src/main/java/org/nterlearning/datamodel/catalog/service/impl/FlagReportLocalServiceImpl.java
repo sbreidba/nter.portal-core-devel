@@ -44,7 +44,9 @@ import org.nterlearning.datamodel.catalog.service.FlagReportStatsLocalServiceUti
 import org.nterlearning.datamodel.catalog.service.GlobalCourseReviewLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.service.base.FlagReportLocalServiceBaseImpl;
 import org.nterlearning.datamodel.catalog.service.persistence.FlagReportFinderUtil;
+import org.nterlearning.utils.FlagReportConstants;
 
+import javax.mail.Flags;
 import java.util.Date;
 import java.util.List;
 
@@ -64,8 +66,7 @@ import java.util.List;
  */
 public class FlagReportLocalServiceImpl extends FlagReportLocalServiceBaseImpl {
 
-    public static final String MODERATE_ACTION_REMOVE = "REMOVE";
-    public static final String MODERATE_ACTION_IGNORE = "IGNORE";
+
 
     @Override
     public FlagReport addFlagReport(FlagReport flagReport) throws SystemException
@@ -306,13 +307,19 @@ public class FlagReportLocalServiceImpl extends FlagReportLocalServiceBaseImpl {
                 flagReport.getCompanyId(), ClassNameLocalServiceUtil.getClassNameId(FlagReport.class),
                 0, 0);
 
-        if (flagReport.getModerateAction().equals("") && workflowDefinitionLink != null ) {
-           if (status == WorkflowConstants.STATUS_APPROVED)  {
-               flagReport.setModerateAction(MODERATE_ACTION_REMOVE);
-               flagReport.setModeratorComment("Moderated via Kaleo");
-           } else if (status == WorkflowConstants.STATUS_DENIED) {
-               flagReport.setModerateAction(MODERATE_ACTION_IGNORE);
-               flagReport.setModeratorComment("Moderated via Kaleo");          }
+        if (flagReport.getModerateAction().equals("") && workflowDefinitionLink == null) {
+            //Comment indicates workflow NOT configured and auto processing occurred.
+            flagReport.setModerateAction(FlagReportConstants.MODERATE_ACTION_NONE);
+            flagReport.setModeratorComment("Kaleo workflow OFF");
+        } else if (flagReport.getModerateAction().equals("") && workflowDefinitionLink != null) {
+            //Workflow processed with default Kaleo workflow portlet.
+            if (status == WorkflowConstants.STATUS_APPROVED) {
+                flagReport.setModerateAction(FlagReportConstants.MODERATE_ACTION_REMOVE);
+                flagReport.setModeratorComment("Processed with My Workflow Tasks portlet");
+            } else if (status == WorkflowConstants.STATUS_DENIED) {
+                flagReport.setModerateAction(FlagReportConstants.MODERATE_ACTION_IGNORE);
+                flagReport.setModeratorComment("Processed with My Workflow Tasks portlet");
+            }
         }
 
         flagReport.setStatus(status);
