@@ -178,9 +178,13 @@ AUI().ready('anim-custom', 'aui-rating', 'removable', 'io-form', 'review-form', 
 			}, '.edit');
 			
 			// remove button
-			list.delegate('click', function (event) {
-				event.preventDefault();
-				var review = event.currentTarget.ancestor(function (el) { if (el.hasClass('review')) return true; });
+			var cancelUrl = Liferay.PortletURL.createActionURL()
+				.setPortletId('coursereviews_WAR_ntercatalogportlet')
+				.setParameter('ajax', true)
+				.setWindowState('EXCLUSIVE')
+				.setName('undoDeleteCourseReview')
+				.toString();
+			list.all('.review').each(function (review) {
 				var reviewId = review.getAttribute('data-review-id');
 				var reviewIdParam = review.getAttribute('data-review-id-param');
 				var reviewCourseId = review.getAttribute('data-course-id');
@@ -188,12 +192,7 @@ AUI().ready('anim-custom', 'aui-rating', 'removable', 'io-form', 'review-form', 
 				var reviewUserId = review.getAttribute('data-user-id');
 				var currentUserId = Liferay.ThemeDisplay.getUserId();
 				var editRedirect = review.getAttribute('data-redirect-url');
-				var cancelUrl = Liferay.PortletURL.createActionURL()
-					.setPortletId('coursereviews_WAR_ntercatalogportlet')
-					.setParameter('ajax', true)
-					.setWindowState('EXCLUSIVE')
-					.setName('undoDeleteCourseReview')
-					.toString();
+
 				if (!review.Removable) {
 					review.plug(A.NTER.Removable);
 					var itemName = escape(review.one('.reviewer-name').text());
@@ -210,7 +209,6 @@ AUI().ready('anim-custom', 'aui-rating', 'removable', 'io-form', 'review-form', 
 						, confirm: true
 						, cancelUrl: cancelUrl
 					});
-					event.currentTarget.simulate('click');
 				}
 				
 				review.Removable.on('remove', function (event) {
@@ -269,7 +267,7 @@ AUI().ready('anim-custom', 'aui-rating', 'removable', 'io-form', 'review-form', 
 					// update histogram
 					updateHistogram(returnData['review-histogram'], returnData['review-count']);
 				});
-			}, '.delete');
+			});
 
             // hide button
 			list.delegate('click', function (event) {
