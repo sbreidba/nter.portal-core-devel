@@ -67,17 +67,17 @@ AUI.add('accessible-dialog', function(A) {
         _setupAria : function() {
 			var contentBox = this.get('contentBox');
 			var dialogId = contentBox.get('id');
-			var titleId = contentBox.one('.aui-widget-hd').get('id');
-			var contentId = contentBox.one('.aui-widget-bd').get('id');
+			var titleId = contentBox.one('.yui3-widget-hd').get('id');
+			var contentId = contentBox.one('.yui3-widget-bd').get('id');
 			/*if (titleId == '') {
 				titleId = dialogId + '-title';
-				contentBox.one('.aui-widget-hd').set('id',titleId);
+				contentBox.one('.yui3-widget-hd').set('id',titleId);
 			}*/
 			if (contentId == '') {
 				contentId = dialogId + '-content';
-				contentBox.one('.aui-widget-bd').set('id',contentId);
+				contentBox.one('.yui3-widget-bd').set('id',contentId);
 			}
-			contentBox.one('.aui-widget-bd').addClass('aui-dialog-bd');
+			contentBox.one('.yui3-widget-bd').addClass('aui-dialog-bd');
 			contentBox.setAttribute('role','dialog');
 			contentBox.setAttribute('tabindex',-1);
 			contentBox.setAttribute('aria-labelledby',titleId);
