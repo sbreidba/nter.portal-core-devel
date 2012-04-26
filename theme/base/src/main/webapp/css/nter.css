@@ -1,0 +1,634 @@
+/*
+ * National Training and Education Resource (NTER)
+ * Copyright (C) 2012 SRI International
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or (at
+ * your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful, but
+ * WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+ * 02110-1301, USA.
+ */
+
+/* == override bad styling from the base theme == */
+.portlet-title-text { cursor: auto; }		/* portlet.css line 21 */
+.aui-dd-draggable .portlet-title-text { cursor: pointer; }
+.aui-rating { display: inline-block; vertical-align: top; }
+.aui-starrating { width: 85px; }
+.aui-rating-disabled .aui-rating-element { cursor: default; }
+.aui-column:first-child .aui-column-content { padding-left: 0; }	/* registration form table */
+.taglib-asset-tags-summary .tag { display: inline-block; }
+.portlet-borderless-container { min-height: 0; }
+h4 { font-size: 1.2em; }
+/* missing from default form styles */
+input[type="date"] {
+    background-image: url("../images/forms/input_shadow.png");
+    background-repeat: no-repeat;
+    border-color: #BFBFBF #DEDEDE #DEDEDE #BFBFBF;
+    border-style: solid;
+    border-width: 1px;
+    font: 1em Arial,Helvetica,Verdana,sans-serif;
+    padding: 2px 1px;
+}
+
+/* == global tag styles == */
+html{ min-width: 100%; min-height: 100%; }
+body {
+	width: 100%;
+	height: 100%;
+}
+
+/* buttons */
+.button, input[type="button"], input[type="submit"], input[type="reset"], button {
+	display: inline-block;
+	text-decoration: none;
+	text-shadow: none;
+	-moz-user-select: none; -webkit-user-select:none;
+	padding: .2em .4em;
+	line-height: 1.4;
+}
+.button:hover, .button:focus, input[type="button"]:hover, input[type="button"]:focus, input[type="submit"]:hover, input[type="submit"]:focus, input[type="reset"]:hover, input[type="reset"]:focus, button:hover, button:focus {
+	text-decoration: none;
+}
+.button:active, input[type="button"]:active, input[type="submit"]:active, input[type="reset"]:active, button:active {
+	text-decoration: none;
+}
+.actions form { display: inline; }
+/* small action buttons on lists of items */
+.reviewlist .actions button, .reviewlist .actions a.button,
+.my-courses .actions button, .my-courses .actions a.button
+	{ padding: 0 .5em; }
+
+
+/* == layout == */
+#wrapper { 
+	width: 932px;
+	margin: 0 auto;
+	position: relative;
+}
+/* get rid of table cell layout so carousel overflow works properly */
+.portlet-layout, .portlet-column { display: block; }
+.portlet-column, .portlet-column-only { float: none; }
+.portlet-layout:after { content: ' '; clear: both; display: block; height: 0; width: 0; visibility: hidden; }
+footer { clear: both; }
+.aui-overlaymask-content { position: fixed; left: 0; top: 0; width: 100%; }
+
+
+
+/* == page regions == */
+/* header */
+#banner {
+	position: relative;
+	z-index: 1;
+	zoom: 1;
+}
+#heading {
+	margin: 0;
+	padding: 0 10px;
+}
+#heading span { clip: rect(0 0 0 0); position: absolute; }
+.company-subtitle {
+	position: absolute;
+	top: 0;
+	right: 10px;
+	margin: .7em 0 0;
+	line-height: 1;
+}
+.landmark-title, #page-title { left: -9999px; position: absolute; }
+
+#header-actions {
+	margin-top: -18px;
+	position:absolute;right: 10px;
+}
+#login-actions {
+	margin-bottom: 7px;
+}
+#header-actions a {
+	margin-right: 10px;
+}
+
+#site-search {
+	float: left;
+	margin-top: -2px;
+}
+#site-search label {
+	clip: rect(0 0 0 0);
+	position: absolute;
+}
+#site-search .textbox {
+	padding: 2px 1px;
+	width: 279px;
+}
+#site-search select {
+	display: none;
+}
+#site-search .submit {
+	background:url('../images/common/search.png') no-repeat center;
+	border:none;
+	text-indent:-9999px;
+	width:16px;
+	height:16px;
+	overflow:hidden;
+	padding:0;
+	vertical-align:baseline;
+	box-shadow: none;
+}
+.welcome-message { padding-right: 10px; }
+
+/* navigation */
+.nav {
+	margin: 0;
+	zoom: 1;
+	list-style: none;
+}
+.nav li {
+	float: left;
+	margin: 0;
+}
+.nav li a {
+	padding:0 10px;
+	display: block;
+}
+.nav:after { content: ' '; display: block; clear: both; height: 0; width: 0; visibility: hidden; }
+.nav .child-menu { display: none; }
+
+/* footer */
+footer {
+	padding: 10px;
+	margin: 10px 0;
+	-moz-background-clip:padding; -webkit-background-clip:padding-box; background-clip:padding-box;
+	position: relative;
+}
+.footer-title { margin: 0; padding: 0; }
+.footer-links { margin: 0; padding: 0; }
+.footer-links li { list-style-type: none; display: inline; padding-right: 1em; }
+.footer-version { position: absolute; top: 10px; right: 10px; }
+.no-js footer { padding: 0; }
+.no-js .footer-version { position: static; padding: 0 10px; }
+
+/* portlet containers */
+.portlet-body:after { content: ' '; height: 0px; display: block; clear: both; }
+.portlet-body { zoom: 1 }
+#content {
+	padding: 10px;
+	border-width: 0 1px 1px;
+	border-style: solid;
+	-moz-background-clip:padding; -webkit-background-clip:padding-box; background-clip:padding-box;
+}
+.portlet-content { padding: 10px 0; }
+.portlet-column-content { padding: 0; }
+/*.portlet-content:last-child { padding-bottom: 0; }*/
+
+/* portlet headers */
+.portlet-topper .portlet-title {
+	clear: left;
+	position: relative;
+}
+.portlet-topper .portlet-title .icon {
+	display: none;
+}
+
+
+
+
+/* == specific template element styles == */
+.skiplink {
+	position: absolute;
+	left: -9999px;
+	display: block;
+	margin: 33px 5px 5px;
+	padding: 5px;
+}
+.skiplink:focus { left: 0px; position: fixed; z-index: 3; }
+#language-selector { position: absolute; top: 51px; right: 10px; z-index: 2; }
+#shut-down-notice { 
+	padding: 10px 10px 10px 30px;
+}
+
+
+/* == specific content styles ==  */
+.highlightbox {
+	padding: 5px;
+	margin: 0 0 1em;
+}
+.highlightbox ul { margin: 0; list-style-type: disc; }
+.highlightbox li { list-style-position: inside; padding: 3px 0 0 16px; text-indent: -12px; }
+
+.icon-accessibility-text {
+	clip: rect(0 0 0 0);
+	position: absolute;
+}
+.notification-area .icon-accessibility-text { display: block; overflow: visible; text-indent: -9999px; width: auto; height: auto; line-height: 1px; }
+
+.load-content-spinner { height: 16px; background: center no-repeat url('../images/nter/ajax-loader.gif'); text-indent: -9999px; }
+.change-content-spinner {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background-image: url('../images/nter/ajax-loader.gif');
+	background-repeat: no-repeat;
+	background-position: center;
+}
+
+.portlet-msg-alert, .portlet-msg-error { margin: .5em 0 .3em; background-position: 6px 6px; }
+
+/* treeview */
+.toc, .toc ul { margin: 0; list-style-type: disc; }
+.toc ul { display: none; }
+.toc .expanded>ul { display: block; }
+.toc li { padding: 3px 0 0 16px; list-style-position: inside; text-indent: -12px; }
+.toc li li { list-style-position: outside; margin-left: 20px; padding-left: 0; text-indent: 0; }
+.toc .tree-description { font-weight: bold; }
+.toc .expanded .state-collapsed, .toc .collapsed .state-expanded { display: none; }
+.toc .current-course-section { background-color: #F2F2F2; }
+.toc li .status, .toc li .visited { margin-left: 1em; }
+.toc li .updated { font-weight: bold; color: #660000; display: block; text-indent: 0; margin-left: -5px; }
+.toc li .status { font-style: italic; }
+.treeview, .treeview ul { margin: 0; list-style: none; }
+.treeview li { padding-left: 20px; text-indent: 0; }
+.treeview .collapsible .toggle, .treeview .expanded .toggle { background: no-repeat center url('../images/nter/minus.gif'); cursor: pointer; width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin: -2px 0 0 -20px; }
+.treeview .collapsed .toggle { background-image: url('../images/nter/plus.gif'); }
+.treeview .nochildren { list-style: disc; margin-left: 16px; padding-left: 0; }
+.treeview .nochildren .toggle { display: none; }
+.treeview .focused { font-weight: bold; }
+.treeview .focused ul { font-weight: normal; }
+
+/* thumbnail image styles */
+img.course-image, .main-image { width: 290px; height: 217px; }
+.course-thumbnail, .org-thumbnail{ width: 135px; height: 101px; vertical-align: middle; }
+.course-mini-thumbnail, .course-mini-thumbnail img { width: 90px; height: 67px; vertical-align: middle; }
+.thumbnail-link { display: block; } /* fix for block image in inline element in IE and Chrome */
+
+/* listing styles */
+.thumbnail-listing { margin: 0; list-style-type: none; position: relative; }
+.thumbnail-listing:after { content: " "; line-height: 0; clear: both; display: block;}
+.thumbnail-listing li { float: left; padding: 5px 10px; width: 135px; position: relative; }
+.paged-thumbnail-listing li { margin-bottom: 15px; }
+.paged-thumbnail-listing li:nth-child(6n) { padding-right: 0; }
+.paged-thumbnail-listing li:nth-child(6n+1) { clear: left; padding-left: 0; }
+.thumbnail-listing h4 { padding: .2em 0; font-size: 1em; }
+.thumbnail-listing .rating { padding-top: .2em; }
+.thumbnail-listing .organization { padding-top: .2em; }
+
+/* header styles */
+.course-title, .main-page-heading { margin-top: 0; margin-bottom: 0; }
+.carousel h3, .course-listing h3, .org-listing h3 { margin: .5em 0 .1em; }
+.carousel .description, .course-listing .description, .org-listing .description { margin-top: .5em; }
+.label-heading { display: inline-block; vertical-align: middle; margin-right: .2em; }
+
+.morelink { display: block; text-align: right; font-weight: bold; margin-top: 10px; }
+
+.layout-sidenav nav { float: left; width: 150px; }
+.layout-sidenav .portlet-column-content { float: right; width: 760px; }
+.layout-sidenav .portlet-column:after { content: ' '; display: block; clear: both; visibility: hidden; line-height: 0; width: 0; height: 0; }
+.layout-sidenav nav h2 { margin: 0 0 .2em; }
+.layout-sidenav nav ul { margin: 0 0 0 .5em; }
+.layout-sidenav nav li { margin-bottom: .2em; }
+
+
+/* == portlet content styles == */
+.aui-loadmore-content > * {
+	margin-left: 310px;
+	padding: 0.5em;
+}
+.load-more-items {
+	display: block;
+}
+
+.one-col-promo .portlet-column:first-child {
+	margin: -10px -10px 10px;
+	padding: 10px 9px;
+	zoom: 1;
+	position: relative;
+}
+.one-col-promo .portlet-column:first-child h2 {
+	margin: 0 0 .3em;
+}
+.one-col-promo .portlet-column:first-child .button, .one-col-promo .portlet-column:first-child button {
+	padding: .3em .6em;
+}
+
+
+.call-to-action {
+	font-size: 1.2em;
+}
+.call-to-action img {
+	width: 445px;
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 20px;
+}
+.call-to-action .text {
+	width: 445px;
+	display: inline-block;
+	vertical-align: middle;
+}
+.call-to-action .button {
+	font-size: 1.2em;
+}
+.beta-disclaimer {
+	font-size: 0.833333em;
+	margin-bottom: 0;
+	margin-top: 0.5em;
+}
+
+.promo-boxes .portlet-boundary {
+	width: 290px;
+	margin-left: 20px;
+	padding-bottom: 10px;
+	float: left;
+}
+.promo-boxes .portlet-boundary:first-child { margin-left: 0; }
+.promo-boxes:after { content: ' '; display: block; clear: both; visibility: hidden; line-height: 0; width: 0; height: 0; }
+.promo-box h2 {
+	margin: .1em 0 .3em;
+}
+.promo-box img, .promo-boxes object, .promo-boxes video {
+	width: 290px;
+	height: 217px;
+}
+
+
+.course-image, .reviewlist header { width: 290px; display: block; float: left; }
+.course-description, .review-body { width: 600px; margin-left: 20px; display: block; float: left; }
+.course-details:after { content: ' '; display: block; clear: both; visibility: hidden; line-height: 0; width: 0; height: 0; }
+.course-description .visited { margin: .2em 0 .5em; font-style: italic; }
+
+.course-description dl { margin: 0 0 1em; }
+.course-description .course-attribute { padding-left: 40px; text-indent: -40px; }
+.course-description dt { display: inline; font-weight: bold; line-height: 1.8; }
+.course-description dd { display: inline; }
+.course-description .taglib-ratings { margin-right: 1ex; top: 2px; position: relative; }
+
+.course-filter { list-style-type: none; margin: 0 0 .5em; padding: 0; font-size: 1.1em; zoom: 1; }
+.course-filter li { float: left; vertical-align: middle; display: inline-block; }
+.course-filter li a { padding: .2em .5em; display: block; }
+.course-filter .current { padding: .2em .5em; font-weight: bold; }
+.course-filter li:first-child a, .course-filter li:first-child { padding-left: 0; }
+.course-filter:after { content:' '; clear: both; height: 0; display: block; }
+
+/* this may be too narrow for the filter, we may want it to match the search filter instead (200px) but the courses won't fit nicely anymore */
+.category-filter { width: 140px; margin: 1em 10px 0 0; padding-right: 9px; padding-bottom: 10px; float: left; border-width: 0 1px 0 0; border-style: none solid none none; }
+.category-filter h4 { font-size: 1.2em; }
+.listing-with-filter { margin: 1em 0 0; width: 780px; float: right; }
+.listing-with-filter li:nth-child(6n) { padding-right: 10px; }
+.listing-with-filter li:nth-child(6n+1) { clear: none; padding-left: 10px; }
+.listing-with-filter li:nth-child(5n) { padding-right: 0; }
+.listing-with-filter li:nth-child(5n+1) { clear: left; padding-left: 0; }
+
+/* carousel */
+.carousel { overflow: hidden; margin: 0 -10px; }
+.carousel-wrapper { margin-top: -5px; }
+.carousel-prev, .carousel-next { position: absolute; height: 41px; width: 28px; top: 65px; z-index: 2; cursor: pointer; background: url('../images/nter/carousel-arrows.png') no-repeat; }
+.carousel-prev { left: 0; background-position: 0px -41px; }
+.carousel-next { right: 0; background-image: 0px 0px; }
+.carousel-prev:hover, .carousel-prev:focus { background-position: -28px -41px; }
+.carousel-next:hover, .carousel-next:focus { background-position: -28px 0px; }
+.carousel-prev:active { background-position: -56px -41px; }
+.carousel-next:active { background-position: -56px 0px; }
+.carousel-prev-disabled { background-position: -84px -41px !important; cursor: default; }
+.carousel-next-disabled { background-position: -84px 0px !important; cursor: default; }
+.ie6 .carousel-wrapper, .ie6 .carousel-prev, .ie6 .carousel-next { height: 105px; }
+
+/* course details */
+.course-details { padding-bottom: 10px; }
+.course-details .course-image .main-image { display: block; margin-bottom: 10px; }
+.course-details .course-image .thumbnails { list-style-type: none; margin: 0 -10px 0 0; }
+.course-details .course-image .course-mini-thumbnail { float: left; margin: 0 10px 10px 0; cursor: pointer; }
+.course-details .course-image .selected { border-width: 2px; border-style: solid; margin: -2px 8px 8px -2px; cursor: default; }
+.course-details .actions { clear: left; }
+.course-details dl:after, .course-details .course-image:after { content: ' '; display: block; clear: both; visibility: hidden; line-height: 0; width: 0; height: 0; }
+.course-details dl .price { font-size: 1.2em; margin-top: .2em; }
+.versions span { margin-left: 1em; }
+.versions li { list-style: none; padding: 3px 0; text-indent: 0; }
+.versions li.current-version { margin: 0 -5px; padding: 3px 5px; }
+.versions .title { margin-left: 0; }
+.versions span.best-version { font-weight: bold; }
+.versions span.current-version { font-style: italic; }
+
+/* course reviews */
+.open-review .button { font-size: 1.2em; }
+.ratings-stats { font-size: 1.2em; margin-bottom: 1em; zoom: 1;}
+.ratings-stats .rating-label { font-weight: bold; }
+.ratings-stats .aui-rating { margin-left: .5em; }
+.ratings-stats form .aui-rating { margin-left: 0; }
+.ratings-stats #review { font-size: 0.8333333333333333em; }
+#review { margin-top: 1em; }
+.ratings-stats .aui-rating-label-element, .ratings-stats .update-rating .liferay-rating-score { display: none; }
+.ratings-stats .taglib-ratings, .ratings-stats .update-rating { display: inline-block; padding-top: 0; }
+.ratings-stats:after { content: ' '; display: block; height: 0; clear: both; }
+.ratings-with-histogram #review { width: 600px; float: right; }
+
+.uniForm fieldset { margin: 0; padding: 0 ; border: none; }
+.uniForm label, .uniForm p.label { display: block; font-weight: bold; margin-bottom: .2em; }
+.uniForm .textInput, .uniForm textarea, .uniForm .aui-rating { margin-bottom: .7em; }
+.uniForm textarea { height: 100px; }
+.uniForm .buttonHolder { margin-top: .3em; }
+.uniForm button { margin-right: .4em; }
+
+.review .uniForm, #review-form { margin: 1em 0; display: block; }
+.review .uniForm .textInput, .review .uniForm textarea, .review .uniForm .aui-rating, #review-form .textInput, #review-form textarea, #review-form .aui-rating { width: 99.33333333333333%; }
+
+.ratings-histogram { float: left; width: 290px; margin-right: 20px; font-size: .8em; }
+.ratings-histogram label { display: block; float: right; clear: both; }
+.ratings-histogram .total { width: 135px; height: 1.4em; display: inline-block; border-width: 1px 0px; border-style: solid; margin-top: -1px; margin-left: .3em; }
+.ratings-histogram label:first-child .total { border-top-width: 0; }
+.ratings-histogram label:last-child .total { border-bottom-width: 0; }
+.ratings-histogram .percent { height: 100%; text-indent: -999px; min-width: 1px;
+}
+
+.reviewlist { margin: 0; padding: 1em 0; list-style-type: none; clear: both; zoom: 1; }
+.reviewlist li { clear: both; margin-bottom: 1.5em; }
+.reviewlist li:last-child { margin-bottom: 0; }
+.reviewlist li:after { content: ' '; display: block; clear: both; line-height: 0; }
+.reviewlist header { text-align: right; }
+.reviewlist header > div:not(:first-child) { margin-top: .3em; }
+.reviewlist .reviewer-name { font-size: 1.1em; }
+.reviewlist .review-date { clear: both; }
+.reviewlist .review-title { font-weight: bold; font-size: 1.1em; margin-bottom: .3em; }
+.reviewlist .aui-rating-label-element { display: none; }
+.reviewlist .actions { padding: .7em 0 0; clear: both; font-size: .9em; }
+.reviewlist .actions .admin { display: inline-block; margin-right: .8em; }
+.reviewlist .actions .admin button { margin-right: .2em; }
+.reviewlist .actions form { display: inline-block; }
+.reviewlist .metamoderation { clear: both; zoom: 1; display: inline-block; }
+.metamoderation label { margin-right: 0.2em; padding-bottom: 1.35em; display: inline-block; }
+.metamoderation form { display: inline-block; text-align: center; margin-right: 0.2em; vertical-align: bottom; }
+.metamoderation small { display: block; }
+.metamoderation .summary { display: inline; }
+.reviewlist .load-content-spinner { margin-left: 310px; }
+.review .badge { float: right; clear: both; padding: .2em .5em .2em 23px; margin-top: .2em; font-size: .9em; background-position:  .3em center; background-repeat: no-repeat; }
+.review .top-reviewer-badge { background-image: url('../images/nter/top-reviewer-badge.png'); }
+.review .trusted-reviewer-badge { background-image: url('../images/nter/trusted-reviewer-badge.png'); }
+.remote-reviews { margin-top: 1.5em; }
+.remote-reviews .metamoderation form { vertical-align: middle; }
+
+.single-review { margin: 1em 0; }
+.single-review .review-title { font-weight: bold; font-size: 1.1em; margin-bottom: .3em; }
+.single-review .user-rating { margin-bottom: .3em; }
+
+/* current course */
+.current-courses { zoom: 1; }
+.course-status-section .highlightbox .button {
+	font-size: 1em;
+}
+.course-status-section .course-status-title { font-size: 1.6em; }
+.course-status-section .courses { list-style-type: none; margin: 0 -10px; padding: 0; zoom: 1; }
+.course-status-section .course {
+	float: left;
+	padding: 10px 9px;
+	-moz-background-clip:padding; -webkit-background-clip:padding-box; background-clip:padding-box;
+	margin: 0 10px 20px;
+}
+.course-status-section .course:nth-child(odd) { clear: left; }
+.course-status-section .course-title { font-size: 1.3em; }
+.course-status-section .visited { font-size: 1.2em; display: block; margin-top: .2em; }
+.course-status-section .thumbnail-link { float: left; }
+.course-status-section .course-description { width: 280px; margin-left: 10px; }
+.course-status-section .course-description dl { margin-bottom: 0; margin-top: .2em; }
+.course-status-section .course-description dt { line-height: 1.4; }
+.course-status-section .completed-msg { font-size: 1.1em; }
+.course-status-section .your-rating { display: block; margin-top: .2em; }
+.course-status-section .course .actions { margin-top: .6em; font-size: 1em; }
+.course-status-section .actions { font-size: 1.2em; margin: 0; padding: 0; list-style: none; }
+.course-status-section .actions li { float: left; width: 445px; }
+.course-status-section .actions li:first-child { text-align: right; margin-right: 20px; }
+.current-course-callout { font-size: 1.2em; }
+.current-course-callout .button { font-size: 1.2em; }
+.course-status-section .one-course-record .course-description { width: 745px; }
+  .current-course-callout:after
+, .course-status-section .course:after
+, .course-status-section .courses:after
+, .current-courses:after
+{ content: ' '; display: block; width: 0; height: 0; clear: both; }
+
+/* archived courses */
+.my-courses { width: 100%; zoom: 1; }
+.my-courses .results-row td { padding: 5px; vertical-align: top; text-align: left; }
+.my-courses .results-header th { padding: 5px; vertical-align: bottom; text-align: left; }
+.my-courses .course-mini-thumbnail { float: left; }
+.my-courses .course-description { width: 395px; margin-left: 10px; float: left; }
+.my-courses .course-description dl { margin-bottom: 0; }
+.my-courses .course-title { font-size: 1.3em; }
+.my-courses td, .my-courses th { width: 125px; }
+.my-courses .details { width: 495px; overflow: visible; position: relative; padding-bottom: 25px; }
+.my-courses tr.alert { background: none; }
+.my-courses tr.alert .portlet-msg-success, .my-courses tr.alert .portlet-msg-error { margin: 0; }
+.my-courses .actions { list-style: none; margin: 0 -5px; padding: 0 5px; width: 900px; clear: left; position: absolute; bottom: -5px; line-height: 25px; }
+.my-courses .actions li { float: left; display: block; padding: 0; margin-right: 10px; font-weight: bold; }
+.my-courses .actions:after, .my-courses .details:after { content: ' '; display: block; clear: both; visibility: hidden; line-height: 0; width: 0; height: 0; }
+.my-courses .activate-course { display: none; }
+.my-courses .archived-course .archive-course { display: none; }
+.my-courses .archived-course .activate-course { display: inline-block; }
+.course-status-message { font-weight: bold; font-size: 1.1em; }
+
+/* tabs */
+.yui3-tabview-list { padding: 0; margin: 0; }
+.yui3-tab { list-style-type: none; display: block; float: left; padding: 0; margin: 0; }
+.yui3-tab a { display: block; font-size: 1.2em; padding: 3px 10px; margin-right: -1px; border-style: solid; border-width: 1px 1px 0; }
+.yui3-tab-selected a { top: 1px; position: relative; }
+.yui3-tab-panel { display: none; clear: both; border-width: 1px; border-style: solid; padding: 5px; margin-bottom: .5em; }
+.yui3-tab-panel-selected { display: block; }
+#partner-top-courses { margin: 0 -1px; }
+#partner-top-courses .course-listing { padding-left: 295px; position: relative; width: auto; }
+#partner-top-courses li.main-course { width: 290px; margin-left: -295px; padding-left: 5px; }
+#partner-top-courses .course-listing li:nth-child(4n+1) { padding-right: 0; }
+#partner-top-courses .course-listing li:nth-child(4n+2) { clear: left; }
+#partner-top-courses .course-listing li:nth-child(2) { clear: none; }
+.main-course .course-thumbnail { display: block; float: left; margin: 0 10px .5em 0; }
+.main-course .description { clear: left; }
+.main-course dl { margin: .2em 0; }
+.main-course dt { font-weight: bold; margin-top: .2em; }
+.yui3-tab-panel .morelink { margin-top: .5em; }
+
+
+/* search */
+.main-search-form input[type="text"] { width: 25em; }
+.search-filter { width: 220px; margin: 1em 10px 0 0; padding-right: 9px; padding-bottom: 10px; float: left; border-width: 0 1px 0 0; border-style: none solid none none; }
+.search-filter section { padding-top: .5em; margin-top: .5em; border-top: 1px solid #999; }
+.search-filter section:first-child { border-top: 0; padding-top: 0; margin-top: 0; }
+.search-filter ul { list-style: none; padding: 0; margin: 0; }
+
+.search-filter .types { font-size: 120%; }
+.search-filter .types .current { font-weight: bold; }
+
+.search-filter .daterange label { display: block; float: left; clear: left; width: 6ex; margin-left: 15px; margin-top: 1ex; }
+.search-filter .daterange input { display: block; float: left; margin-top: .5ex; }
+.search-filter .daterange:after { clear: both; content: ' '; display: block; height: 0; }
+
+.search-filter .access li { padding: .3ex 0 .3ex 2ex; text-indent: -2ex; }
+
+/* listing styles */
+.search-listing { margin: 1em 0 0; width: 670px; /*width: 940px;*/ float: right; }
+.search-listing ul { margin: 0; list-style-type: none; }
+.search-listing .item { margin: 0; padding: 5px 0; border-bottom: 1px solid #ccc; zoom: 1; }
+.search-listing .item:after { content: " "; line-height: 0; clear: both; display: block;}
+
+/* header styles */
+.search-listing h3 { margin-bottom: .1em; margin-top: 0; font-size:120%; }
+.search-listing .description, .search-listing .score { margin-top: .5em; }
+.search-listing .thumbnail-listing .score { margin-top: 0; }
+.search-listing .origin a { font-weight: bold; }
+.search-listing .status { font-style: italic; }
+.search-listing .entry-tags { margin-top: .5em; }
+
+
+.search-listing .course-mini-thumbnail { float: left; margin-right: 10px; }
+
+.has-photo .details { float: left; width: 570px; /*width: 840px;*/ }
+
+.search-listing .categories li { padding: 0; display: inline; }
+.search-listing .categories a { font-weight: bold; }
+
+
+.search-listing .subcontents ul { margin: 0; list-style-type: none; }
+.search-listing .subcontents .page-list { padding: 0; }
+.subcontents-title { margin-top: .5em; }
+
+.user .subcontents { width: 48%; margin-right: 1%; float: left; }
+.community .subcontents { width: 32%; margin-right: 1%; float: left; }
+
+.page .origin, .page .status { font-size: .9em; display: inline; padding-right: 1em; }
+
+.search-listing .portlet-msg-alert { margin: .5em 0 0; }
+
+.search-listing .thumbnail-listing li { width: 220px; }
+.search-listing .thumbnail-listing li:nth-child(3n) { margin-right: 0; padding-right: 0; }
+.search-listing .thumbnail-listing li:nth-child(3n+1) { margin-left: 0; padding-left: 0; clear: both; }
+
+.search-listing .more-results { clear:both; }
+
+.search-results-form .textbox { width: 200px; }
+.search-results-form { margin: 10px 0; }
+
+/* institution list */
+dl.institution-list { margin: 0; }
+.institution-list p { margin: 0; }
+.institution-list dt { font-weight: bold; }
+.institution-list dd { margin: 0 0 1em; }
+.institution-list .institution { font-size: .9em; opacity: .8; }
+
+
+
+/* == Course Feeds == */
+.course-feed-detail { width: 100%; margin-left: 10px; display: block; float: none; }
+.course-feed-title { font-size: 1.3em; }
+.course-feed-detail .course-attribute { padding-left: 40px; text-indent: -40px; }
+.course-feed-detail dl { margin: 0 0 1em; }
+.course-feed-detail dt { display: inline; font-weight: bold; line-height: 1.8; }
+.course-feed-detail dd { display: inline; }
+
+
+ul.asset-categories { padding:0; margin:0; }
+li.asset-category { padding:0; margin:0; list-style-type:none; }
+.vocabulary-title, .vocabulary-ancestor { padding-right: 9px; background: url("../images/nter/small_right_arrow.png") right center no-repeat; }
