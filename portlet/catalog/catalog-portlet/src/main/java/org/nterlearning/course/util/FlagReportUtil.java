@@ -111,8 +111,9 @@ public class FlagReportUtil {
                 moderateReportCnt++;
             }
         }
-        activityList.add(new FlagReportModeratorActivityResult(moderateDate, moderatorUserName, moderateAction, moderatorComment, moderateReportCnt) );
-        
+        if (moderateReportCnt > 0) {
+            activityList.add(new FlagReportModeratorActivityResult(moderateDate, moderatorUserName, moderateAction, moderatorComment, moderateReportCnt) );
+        }
         return activityList;
     }
 }
