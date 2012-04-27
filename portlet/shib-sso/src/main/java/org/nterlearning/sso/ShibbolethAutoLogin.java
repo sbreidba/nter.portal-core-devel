@@ -50,7 +50,6 @@ public class ShibbolethAutoLogin implements AutoLogin {
 
     private static Log _log = LogFactoryUtil.getLog(ShibbolethAutoLogin.class);
 
-    @Override
     public String[] login(HttpServletRequest request, HttpServletResponse response)
             throws AutoLoginException {
 
@@ -83,10 +82,10 @@ public class ShibbolethAutoLogin implements AutoLogin {
                 throw new AutoLoginException("Email address is null");
             }
             if (Validator.isNull(firstName)) {
-                throw new AutoLoginException("First name is null");
+                firstName = "-";
             }
             if (Validator.isNull(lastName)) {
-                throw new AutoLoginException("Last name is null");
+                lastName = "-";
             }
 
             UserIdMapper userMapper;
