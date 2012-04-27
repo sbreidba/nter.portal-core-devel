@@ -138,10 +138,7 @@
 </div>
 <div class="separator"></div>
 <h3 id="report-moderator-activity"><%= LanguageUtil.get(pageContext, "flag-moderate-moderator-activity")%></h3>
-<%--<nter:flag-moderator-activity--%>
-    <%--reviewId="<%=reviewId%>"--%>
-    <%--classNameId="<%=classNameId%>"--%>
-    <%--pageContext="<%=pageContext%>" />--%>
+
     <liferay-ui:search-container
         searchContainer='<%= new SearchContainer(renderRequest, null, null, "curModerateReport", 5,  portletURL, null, "flag-report-no-moderates") %>'
         id="moderatorSearchContainer"
