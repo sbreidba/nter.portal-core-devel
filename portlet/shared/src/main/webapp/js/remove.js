@@ -147,7 +147,9 @@ AUI.add("removable", function(A) {
 						}
 						if (data.success) {
 							context.set('returnData', data);
-							context.fire('remove', {text:text, alertArea:alertArea, item:item, cancelUrl:cancelUrl, cancelData:cancelData, showUndoButton:btnCfg.showUndoButton, button:btnCfg.button});
+							setTimeout(function () {
+								context.fire('remove', {text:text, alertArea:alertArea, item:item, cancelUrl:cancelUrl, cancelData:cancelData, showUndoButton:btnCfg.showUndoButton, button:btnCfg.button});
+							}, 0);
 						} else {
 							// TODO: handle this when all the json responses are consistent
 						}
@@ -198,7 +200,9 @@ AUI.add("removable", function(A) {
 								}
 								if (data.success) {
 									context.set('returnData', data);
-									context.fire('unremove', {text:text, alertArea:alertArea, item:item, button:cfg.button});
+									setTimeout(function () {
+										context.fire('unremove', {text:text, alertArea:alertArea, item:item, button:cfg.button});
+									}, 0);
 								} else {
 									// TODO: handle this when all the json responses are consistent
 								}
