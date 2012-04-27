@@ -85,7 +85,7 @@ public class FlagReportUtil {
         List<FlagReport> flagReportSortList = new ArrayList(flagReports);
         Collections.sort(flagReportSortList, new FlagReportDateComparator(false, false));
 
-        //create list of distinct moderator activity
+        //create list of DISTINCT moderator activity, tally count for activity
         List<FlagReportModeratorActivityResult> activityList = new ArrayList<FlagReportModeratorActivityResult>();
 
         Date moderateDate = flagReportSortList.get(0).getStatusDate();
@@ -94,23 +94,32 @@ public class FlagReportUtil {
         String moderatorComment = flagReportSortList.get(0).getModeratorComment();
         long moderateReportCnt = 0;
 
-        for (FlagReport flagReportSort:flagReportSortList) {
-             if (flagReportSort.isModerated() && (!moderateDate.equals(flagReportSort.getStatusDate()) ||
+        for (FlagReport flagReportSort : flagReportSortList) {
+            if (!moderateDate.equals(flagReportSort.getStatusDate()) ||
                     !moderatorUserName.equals(flagReportSort.getStatusByUserName()) ||
                     !moderateAction.equals(flagReportSort.getModerateAction()) ||
-                    !moderatorComment.equals(flagReportSort.getModeratorComment())) )  {
+                    !moderatorComment.equals(flagReportSort.getModeratorComment())) {
 
-                activityList.add(new FlagReportModeratorActivityResult(moderateDate, moderatorUserName, moderateAction, moderatorComment, moderateReportCnt) );
-
+                if (moderateReportCnt > 0) {
+                    //only return moderated activities
+                    activityList.add(new FlagReportModeratorActivityResult(moderateDate, moderatorUserName, moderateAction, moderatorComment, moderateReportCnt));
+                }
                 moderateDate = flagReportSort.getStatusDate();
                 moderatorUserName = flagReportSort.getStatusByUserName();
                 moderateAction = flagReportSort.getModerateAction();
                 moderatorComment = flagReportSort.getModeratorComment();
-                moderateReportCnt = 1;
-            } else if ( flagReportSort.isModerated() ) {
+
+                if (flagReportSort.isModerated()) {
+                    moderateReportCnt = 1;
+                } else {
+                    moderateReportCnt = 0;
+
+                }
+            } else if (flagReportSort.isModerated()) {
                 moderateReportCnt++;
             }
         }
+
         if (moderateReportCnt > 0) {
             activityList.add(new FlagReportModeratorActivityResult(moderateDate, moderatorUserName, moderateAction, moderatorComment, moderateReportCnt) );
         }
