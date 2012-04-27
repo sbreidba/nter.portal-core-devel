@@ -45,8 +45,10 @@
         localMaintDate.setTime(Long.valueOf(mwStart) + themeDisplay.getTimeZone().getRawOffset());
         maintCalStart.setTime(localMaintDate);
 
+        // convert duration from hours to minutes
+        int durationMin = (int)(Float.valueOf(mwDuration) * 60);
         maintCalEnd.setTime(localMaintDate);
-        maintCalEnd.add(Calendar.HOUR, Integer.valueOf(mwDuration));
+        maintCalEnd.add(Calendar.MINUTE, durationMin);
 
         if (now.after(maintCalStart) && now.before(maintCalEnd)) {
             maintMessage = mwMessage;

@@ -18,9 +18,7 @@
  * 02110-1301, USA.
  */
 
-
 package org.nterlearning.motd;
-
 
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.service.PortalPreferencesLocalServiceUtil;
@@ -50,8 +48,6 @@ public class MaintenanceProperties {
 
     public static void setStartDate(long companyId, long ownerId, int ownerType, String value)
         throws SystemException, ReadOnlyException, ValidatorException, IOException {
-        // v 606
-        // PortletPreferences prefs = getPreferences(companyId);
 
         PortletPreferences prefs = PortalPreferencesLocalServiceUtil.getPreferences(companyId, ownerId, ownerType);
         prefs.setValue(MaintenanceConstants.START_DATE_TIME_PROPERTY, value);
@@ -81,9 +77,9 @@ public class MaintenanceProperties {
         throws SystemException, ReadOnlyException, ValidatorException, IOException {
 
         PortletPreferences preferences = PortalPreferencesLocalServiceUtil.getPreferences(companyId, ownerId, ownerType);
-        preferences.setValue(MaintenanceConstants.START_DATE_TIME_PROPERTY, "");
-        preferences.setValue(MaintenanceConstants.DURATION_PROPERTY, "");
-        preferences.setValue(MaintenanceConstants.MESSAGE_PROPERTY, "");
+        preferences.setValue(MaintenanceConstants.START_DATE_TIME_PROPERTY, null);
+        preferences.setValue(MaintenanceConstants.DURATION_PROPERTY, null);
+        preferences.setValue(MaintenanceConstants.MESSAGE_PROPERTY, null);
         preferences.store();
     }
 }

@@ -79,7 +79,6 @@
 
     <aui:button-row>
         <aui:button type="submit" value='mw-submit-button'/>
-        <aui:button type="cancel" value='mw-clear-button' onClick="<%= clearMaintenanceUrl.toString() %>"/>
     </aui:button-row>
 </aui:form>
 
@@ -87,6 +86,13 @@
 <h3><%= LanguageUtil.get(pageContext, "mw-current-warning") %></h3>
 <div>
     <%= maintenanceSchedule %>
+    <aui:form action="<%= clearMaintenanceUrl.toString() %>"
+              method="post">
+        <aui:button-row>
+            <aui:button type="submit" value='mw-clear-button'
+                        disabled='<%= maintenanceSchedule == LanguageUtil.get(pageContext, "mw-no-messages")%>'/>
+        </aui:button-row>
+    </aui:form>
 </div>
 
 

@@ -65,7 +65,7 @@ public class MaintenanceWarning extends MVCPortlet {
             errorFlag = true;
             SessionErrors.add(request, "mw-error-no-duration");
         }
-        else if (Integer.valueOf(duration) <= 0) {
+        else if (Float.valueOf(duration) <= 0) {
             errorFlag = true;
             SessionErrors.add(request, "mw-error-invalid-duration");
         }
