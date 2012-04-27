@@ -35,6 +35,7 @@
 <%@ tag import="com.liferay.portal.kernel.util.StringUtil" %>
 <%@ tag import="com.liferay.portal.model.UserIdMapper" %>
 <%@ tag import="com.liferay.portal.NoSuchUserIdMapperException" %>
+<%@ tag import="com.liferay.portal.service.ClassNameLocalServiceUtil" %>
 <%@ tag import="com.liferay.portal.service.UserIdMapperLocalServiceUtil" %>
 <%@ tag import="com.liferay.portal.service.UserLocalServiceUtil" %>
 <%@ tag import="com.liferay.portal.util.PortalUtil" %>
@@ -66,9 +67,8 @@ Course course = CourseLocalServiceUtil.getCourse(globalReview.getCourseId());
 
 %>
 
-<li class="review" data-review-id="<%= globalReview.getPrimaryKey() %>" data-user-id="<%= globalReview.getSingleSignOnValue() %>"
-	data-course-id="<%= globalReview.getCourseId() %>" data-course-id-param="<%=NterKeys.REVIEW_CLASSPK%>" data-redirect-url="<%= PortalUtil.getCurrentURL(request) %>"
-	itemscope itemtype="http://schema.org/Review">
+<li class="review" data-review-id="<%= globalReview.getPrimaryKey() %>" data-review-id-param="<%=NterKeys.REVIEW_ID%>" data-user-id="<%= globalReview.getSingleSignOnValue() %>"
+	data-course-id="<%= globalReview.getCourseId() %>" data-course-id-param="<%=NterKeys.REVIEW_CLASSPK%>" data-redirect-url="<%= PortalUtil.getCurrentURL(request) %>" data-class-id="<%=ClassNameLocalServiceUtil.getClassNameId(GlobalCourseReview.class)%>" itemscope itemtype="http://schema.org/Review">
     <header>
         <!-- will users really upload their pictures? <a href="#"><img class="reviewer-portrait" src="/course-reviews-portlet/images/user_male_portrait.jpg" title="Student Name" alt="Student Name" /></a> -->
         <div class="reviewer-name" itemprop="author"><%= globalReview.getUserDisplayName() %> </div>
@@ -131,35 +131,15 @@ Course course = CourseLocalServiceUtil.getCourse(globalReview.getCourseId());
 					<portlet:param name="redirect" value="<%=currentURL%>"/>
 				</portlet:renderURL>
 				<portlet:renderURL var="remoteFlagUrl" windowState="<%= LiferayWindowState.MAXIMIZED.toString() %>">
-					<portlet:param name="jspPage" value="/course-reviews/jsp/editGlobalFlagEntry.jsp" />
+					<portlet:param name="jspPage" value="/course-reviews/jsp/editFlagEntry.jsp" />
 				</portlet:renderURL>
 				<label><%= LanguageUtil.get(pageContext, "meta-prompt") %>
 				</label>
 
-				<!-- workaround for the input named className overriding the form class in ie7 -->
-				<!--[if lte IE 7]>
-				<!--span class="flag">
-				<!--[endif]
-				//replaced this form code with new button code.
-				<form class="flag" action="< remoteFlagUrl %>" method="post">
-					<input type="hidden" name="className" value="< className %>"/>
-					<input type="hidden" name="classPK" value="< classPK %>"/>
-                    <input type="hidden" name="contentTitle" value="< reviewTitle %>"/>
-					<input type="hidden" name="contentURL" value="< PortalUtil.getPortalURL(request) + currentURL %>"/>
-                    <input type="hidden" name="reportedUserId" value="< reviewUser %>"/>
-     				<button>< LanguageUtil.get(pageContext, "remote-inappropriate") %>
-					</button>
-				</form>
-				-->
-				<!-- end of workaround tag -->
-				<!--[if lte IE 7]-->
-
-	            <a class="button remoteFlagEntry" href="<%= remoteFlagUrl %>&cid=<%=course.getCourseId()%>&crid=<%=classPK%>#review-form"><%= LanguageUtil.get(pageContext,
+	            <a class="button flagEntry" href="<%= remoteFlagUrl %>&cid=<%=course.getCourseId()%>&crid=<%=classPK%>&classid=<%=ClassNameLocalServiceUtil.getClassNameId(GlobalCourseReview.class)%>#review-form"><%= LanguageUtil.get(pageContext,
                            "inappropriate") %>
                 </a>
-                <!--
-				</span>
-				[endif]-->
+
 			</div>
 			<% }  %>
 		</div>
