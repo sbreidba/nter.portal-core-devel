@@ -364,6 +364,7 @@ AUI().ready('anim-custom', 'aui-rating', 'removable', 'io-form', 'review-form', 
 				var reviewIdParam = review.getAttribute('data-review-id-param');
 				var reviewCourseId = review.getAttribute('data-course-id');
 				var reviewCourseIdParam = review.getAttribute('data-course-id-param');
+				var classId = review.getAttribute('data-class-id');
 				var reviewUserId = review.getAttribute('data-user-id');
 				var currentUserId = Liferay.ThemeDisplay.getUserId();
 				var portletId = 'coursereviews_WAR_ntercatalogportlet';
@@ -373,7 +374,8 @@ AUI().ready('anim-custom', 'aui-rating', 'removable', 'io-form', 'review-form', 
 								 .setParameter('jspPage', '/course-reviews/jsp/editFlagEntry.jsp')
 								 .toString()
 								 + '&cid=' + reviewCourseId
-								 + '&crid=' + reviewId;
+								 + '&crid=' + reviewId
+								 + '&classid=' + classId;
 				var popup = new A.NTER.AccessibleDialog(
 						{
 							centered: true,

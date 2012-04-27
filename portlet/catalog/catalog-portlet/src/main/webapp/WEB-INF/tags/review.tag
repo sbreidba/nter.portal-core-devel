@@ -32,6 +32,7 @@
 <%@ tag import="com.liferay.portal.kernel.portlet.LiferayWindowState" %>
 <%@ tag import="com.liferay.portal.kernel.util.StringPool" %>
 <%@ tag import="com.liferay.portal.kernel.util.StringUtil" %>
+<%@ tag import="com.liferay.portal.service.ClassNameLocalServiceUtil" %>
 <%@ tag import="com.liferay.portal.service.UserLocalServiceUtil" %>
 <%@ tag import="com.liferay.portal.util.PortalUtil" %>
 <%@ tag import="com.liferay.portlet.ratings.NoSuchEntryException" %>
@@ -84,8 +85,7 @@ int upVotes = (int) totalEntries - downVotes;
 %>
 
 <li class="review" data-review-id="<%= review.getPrimaryKey() %>" data-review-id-param="<%=NterKeys.REVIEW_ID%>" data-user-id="<%= review.getUserId() %>"
-	data-course-id="<%= review.getCourseId() %>" data-course-id-param="<%=NterKeys.REVIEW_CLASSPK%>" data-redirect-url="<%= PortalUtil.getCurrentURL(request) %>"
-	itemscope itemtype="http://schema.org/Review">
+	data-course-id="<%= review.getCourseId() %>" data-course-id-param="<%=NterKeys.REVIEW_CLASSPK%>" data-redirect-url="<%= PortalUtil.getCurrentURL(request) %>" data-class-id="<%=ClassNameLocalServiceUtil.getClassNameId(CourseReview.class)%>" itemscope itemtype="http://schema.org/Review">
     <header>
         <!-- will users really upload their pictures? <a href="#"><img class="reviewer-portrait" src="/course-reviews-portlet/images/user_male_portrait.jpg" title="Student Name" alt="Student Name" /></a> -->
         <div class="reviewer-name" itemprop="author"><%= UserLocalServiceUtil.getUserById(review.getUserId()).getFullName() %> </div>
@@ -173,7 +173,7 @@ int upVotes = (int) totalEntries - downVotes;
 					%>
 					<small class="votes"><%= LanguageUtil.format(pageContext, downLabel, downVotes) %></small>
 				</form>
-     			<a class="button flagEntry" href="<%= flagEntryUrl %>&cid=<%=review.getCourseId()%>&crid=<%=review.getPrimaryKey()%>#review-form"><%= LanguageUtil.get(pageContext,
+     			<a class="button flagEntry" href="<%= flagEntryUrl %>&cid=<%=review.getCourseId()%>&crid=<%=review.getPrimaryKey()%>&classid=<%=ClassNameLocalServiceUtil.getClassNameId(CourseReview.class)%>#review-form"><%= LanguageUtil.get(pageContext,
 						"inappropriate") %>
 				</a>
 			</div>

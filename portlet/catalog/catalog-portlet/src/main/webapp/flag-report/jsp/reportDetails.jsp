@@ -54,10 +54,7 @@
 <div class="separator"></div>
 
    <h3 id="report-table"><%= LanguageUtil.get(pageContext, "flag-detail-table-title") %> </h3>
-    <%--<nter:flag-report-list--%>
-        <%--reviewId="<%=reviewId%>"--%>
-        <%--classNameId="<%=classNameId%>"--%>
-        <%--pageContext="<%=pageContext%>" />--%>
+
     <liferay-ui:search-container
         searchContainer='<%= new SearchContainer(renderRequest, null, null, "curFlagReport", 5,  portletURL, null, "flag-report-no-reports") %>'
         id="flagReportSearchContainer"
@@ -124,10 +121,6 @@
 <div class="separator"></div>
 <div>
     <h3 id="report-moderator-activity"><%= LanguageUtil.get(pageContext, "flag-moderate-moderator-activity")%></h3>
-    <%--<nter:flag-moderator-activity--%>
-    <%--reviewId="<%=reviewId%>"--%>
-    <%--classNameId="<%=classNameId%>"--%>
-    <%--pageContext="<%=pageContext%>" />--%>
 
     <liferay-ui:search-container
         searchContainer='<%= new SearchContainer(renderRequest, null, null, "curModerateReport", 5,  portletURL, null, "flag-report-no-moderates") %>'
@@ -194,14 +187,21 @@
 <div class="flag-report-group-stats">
 <%  if (flagReportStats == null) {  %>
         <h3><%= LanguageUtil.get(pageContext, "flag-detail-no-stats") %></h3>
-<%  } else {  %>
+<%  } else {
+        String [] total_entry_callout_args = {String.format("%d",flagReportStats.getTotalEntries() )};
+        String [] total_moderate_callout_args = {String.format("%d",flagReportStats.getTotalModerated() )};
+        String [] total_approve_callout_args = {String.format("%d",flagReportStats.getTotalApproved() )};
+        String total_entry_callout_string = LanguageUtil.format(pageContext, "flag-detail-total-entries", total_entry_callout_args);
+        String total_moderate_callout_string = LanguageUtil.format(pageContext, "flag-detail-total-moderated", total_moderate_callout_args);
+        String total_approve_callout_string = LanguageUtil.format(pageContext, "flag-detail-total-approved", total_approve_callout_args);
+
+%>
     <h3><%= LanguageUtil.get(pageContext, "flag-detail-stats") %></h3>
-        <div class="flag-report-stats-attribute"><dt><%= LanguageUtil.get(pageContext, "flag-detail-total-entries") %></dt><dd><%= flagReportStats.getTotalEntries() %></dd></div>
-        <div class="flag-report-stats-attribute"><dt><%= LanguageUtil.get(pageContext, "flag-detail-total-moderated") %></dt><dd><%= flagReportStats.getTotalModerated() %></dd></div>
-        <div class="flag-report-stats-attribute"><dt><%= LanguageUtil.get(pageContext, "flag-detail-total-approved") %></dt><dd><%= flagReportStats.getTotalApproved() %></dd></div>
+        <div class="flag-report-stats-attribute"><h4><%= total_entry_callout_string %> </h4> </div>
+        <div class="flag-report-stats-attribute"><h4><%= total_moderate_callout_string %> </h4> </div>
+        <div class="flag-report-stats-attribute"><h4><%= total_approve_callout_string %> </h4> </div>
 <%  } %>
 </div>
-
 
 <aui:button-row>
     <%
