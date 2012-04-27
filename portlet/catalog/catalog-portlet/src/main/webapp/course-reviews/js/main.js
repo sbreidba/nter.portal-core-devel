@@ -18,8 +18,6 @@
  * 02110-1301, USA.
  */
 
-Liferay.Language.get = function () { return "smurf"; };
-
 AUI().ready('anim-custom', 'aui-rating', 'removable', 'io-form', 'review-form', 'load-more', 'aui-dialog', 'liferay-portlet-url', 'selector-css3', 'accessible-dialog', 'change-spinner', 'json-parse', function(A) {
 	
 	
