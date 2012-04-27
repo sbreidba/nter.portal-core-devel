@@ -164,7 +164,9 @@ public class CrawlTool {
             catch (Exception e) {
                 shutdownTasks();
                 mCrawlTool = null;
-                mStatus = "Error occurred during initialization. Please check log files for details.";
+                mStatus = "Error occurred during initialization. " +
+                        "Please check log files for details. " + e.getMessage();
+                e.printStackTrace();
             }
         }
     }
