@@ -138,6 +138,7 @@
         <control-panel-entry-weight>1.6</control-panel-entry-weight>
         <header-portlet-css>/course-feeds/css/main.css</header-portlet-css>
         <css-class-wrapper>course-feeds-portlet</css-class-wrapper>
+        <portlet-data-handler-class>org.nterlearning.atom.parser.portlet.AtomParserPortletDataHandler</portlet-data-handler-class>
     </portlet>
 
     <!--flag report control panel -->

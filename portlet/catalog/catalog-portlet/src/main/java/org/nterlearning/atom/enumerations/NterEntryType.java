@@ -25,7 +25,8 @@ public enum NterEntryType {
     COURSE                  ("course"),
     COURSE_COMPONENT        ("course-component"),
     COURSE_RECORD           ("course-record"),
-    REVIEW                  ("review"),
+    GLOBAL_REVIEW           ("global-review"),
+    LOCAL_REVIEW			("local-review"),
     VOCABULARY              ("vocabulary"),
     NONE                    ("none");
 

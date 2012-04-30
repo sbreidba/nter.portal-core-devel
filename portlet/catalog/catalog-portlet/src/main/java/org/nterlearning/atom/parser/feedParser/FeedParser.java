@@ -20,6 +20,9 @@
 
 package org.nterlearning.atom.parser.feedParser;
 
+import org.apache.abdera.model.Entry;
+import org.apache.abdera.model.Feed;
+
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portlet.asset.model.AssetVocabulary;
@@ -27,9 +30,12 @@ import org.nterlearning.atom.enumerations.NterNameSpace;
 import org.nterlearning.atom.parser.FeedContext;
 import org.nterlearning.atom.parser.dao.NterCatalogRecordDependencyException;
 import org.nterlearning.atom.parser.model.AsVerb;
-import org.nterlearning.datamodel.catalog.model.*;
-import org.apache.abdera.model.Entry;
-import org.apache.abdera.model.Feed;
+import org.nterlearning.datamodel.catalog.model.Component;
+import org.nterlearning.datamodel.catalog.model.Course;
+import org.nterlearning.datamodel.catalog.model.CourseRecord;
+import org.nterlearning.datamodel.catalog.model.CourseReview;
+import org.nterlearning.datamodel.catalog.model.FeedReference;
+import org.nterlearning.datamodel.catalog.model.GlobalCourseReview;
 
 public interface FeedParser {
 
@@ -55,11 +61,18 @@ public interface FeedParser {
 
     public AssetVocabulary parserVocabularyToCatalog(Entry parserEntry, FeedContext fc);
 
-    public GlobalCourseReview parserReviewToCatalog(Entry reviewEntry, FeedContext fc)
+    public GlobalCourseReview parserReviewToCatalogGlobal(Entry reviewEntry, FeedContext fc)
             throws SystemException;
 
-    public Entry catalogReviewToParser(CourseReview courseReview, Entry entry,
-                                       AsVerb.VerbType verbType)
+    public CourseReview parserReviewToCatalogLocal(Entry reviewEntry, FeedContext fc)
+    	throws SystemException, PortalException;
+
+    public Entry catalogReviewToParserGlobal(CourseReview courseReview, Entry entry,
+            AsVerb.VerbType verbType)
+            throws SystemException, PortalException;
+
+    public Entry catalogReviewToParserLocal(CourseReview courseReview, Entry entry,
+            AsVerb.VerbType verbType)
             throws SystemException, PortalException;
 
 }

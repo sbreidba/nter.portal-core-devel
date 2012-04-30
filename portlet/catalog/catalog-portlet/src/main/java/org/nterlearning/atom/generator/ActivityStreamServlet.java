@@ -45,7 +45,8 @@ public class ActivityStreamServlet extends HttpServlet{
 	
 	public static final String CLIENT_ETAG_PARAM = "If-None-Match";
 	public static final String SERVER_ETAG_PARAM = "Etag";
-    
+    public static final String LOCAL_REVIEWS_PARAM = "local";
+
 
     @Override
     public void init() throws ServletException {
@@ -77,7 +78,16 @@ public class ActivityStreamServlet extends HttpServlet{
 
 			// get the activity stream
 			String serverEtag = createEtag(); // create one now to ensure no loss of data
-			Feed as = NterActivityStreamGenerator.getActivityStream(req.getRequestURL().toString(),getTimestampFromEtag(clientEtag));
+            String local = req.getParameter(LOCAL_REVIEWS_PARAM);
+            Feed as = null;
+            if (local != null){
+                log.info("local param: " + local); //TODO: debug, remove
+                as = NterActivityStreamGenerator.getLocalReviews(req.getRequestURL().toString());
+            }
+            else {
+                as = NterActivityStreamGenerator.getActivityStream(req.getRequestURL().toString(),
+                        getTimestampFromEtag(clientEtag));
+            }
 			
 			int status;
 			String content;

@@ -130,9 +130,10 @@ public class NterActivityStreamUtils {
      * @param reviews
      * @param as
      * @param cutoffDate
+     * @param global - true if the reviews are global; false otherwise
      */
     public static void addReviewsToStream(List<CourseReview> reviews,
-            Feed as, Date cutoffDate)
+            Feed as, Date cutoffDate, boolean global)
             throws PortalException, SystemException {
 
         Entry entry;
@@ -143,10 +144,10 @@ public class NterActivityStreamUtils {
                 if ((entry == null) && dbRev.getModifiedDate().after(cutoffDate)) {
 
                     if (dbRev.getModifiedDate().equals(dbRev.getCreateDate())) {
-                        addReviewActivity(as, dbRev.getCourseReviewId(), AsVerb.VerbType.ADD);
+                        addReviewActivity(as, dbRev.getCourseReviewId(), AsVerb.VerbType.ADD, global);
                     }
                     else if (dbRev.getModifiedDate().after(dbRev.getCreateDate())) {
-                        addReviewActivity(as, dbRev.getCourseReviewId(), AsVerb.VerbType.UPDATE);
+                        addReviewActivity(as, dbRev.getCourseReviewId(), AsVerb.VerbType.UPDATE, global);
                     }
                     else {
                         log.warn("Course review ID " + dbRev.getCourseReviewId() +
@@ -163,6 +164,7 @@ public class NterActivityStreamUtils {
      * @param as - The feed to add the review to
      * @param dbCourseReviewId - the id of the course review in persistence
      * @param verbType - the AS verb type
+     * @param global - true if it's a global review, false otherwise
      *
      * @return the id of the entry added
      *
@@ -170,7 +172,7 @@ public class NterActivityStreamUtils {
      * @throws com.liferay.portal.kernel.exception.SystemException
      */
     public static String addReviewActivity(Feed as,
-            long dbCourseReviewId, AsVerb.VerbType verbType)
+            long dbCourseReviewId, AsVerb.VerbType verbType, boolean global)
             throws PortalException, SystemException {
 
         FeedParser parser = FeedParserFactory.getFeedParser(as);
@@ -195,7 +197,13 @@ public class NterActivityStreamUtils {
         }
 
         // populate it with the review
-        parser.catalogReviewToParser(catalogReview, entry, verbType);
+        if (global){
+        	parser.catalogReviewToParserGlobal(catalogReview, entry, verbType);
+        }
+        else {
+        	parser.catalogReviewToParserLocal(catalogReview, entry, verbType);
+        }
+
         return entryId;
     }
 

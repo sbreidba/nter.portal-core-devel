@@ -72,11 +72,21 @@ public class AtomFeedProcessor {
     }
 
 
+    /**
+     * Processes an Atom feed given as an Abdera Feed object
+     *
+     * @param fc - the associated Feed Context
+     * @param feed - the Abdera Feed
+     */
     public static void processFeed(FeedContext fc, Feed feed) {
-        AbderaAtomParser parser = new AbderaAtomParser(feed);
-        parser.persistFeed(fc);
+        try {
+			AbderaAtomParser parser = new AbderaAtomParser(feed);
+			parser.persistFeed(fc);
+		}
+		catch (Exception e) {
+			mLog.error("Error processing feed at [" + fc.getFeedUrl() + "]: " + e.getMessage());
+		}
     }
-
 
     /**
      * Processes an Atom feed at the given URL

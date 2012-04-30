@@ -223,14 +223,14 @@ public class FeedParser {
 				mLog.info("Feed processing from service registry complete");
             }
             catch (Throwable e) {
-                mLog.error("FeedProcess threw exception: " + e);
+                mLog.error("FeedProcess threw exception: " + e,e);
             }
 
 			try {
 				CourseManagementPortlet.updateUserHelpfulness();
 			}
             catch (Exception e) {
-				mLog.error("Error updating User Helpfulness");
+				mLog.error("Error updating User Helpfulness" + e,e);
 			}
 
 			try {
