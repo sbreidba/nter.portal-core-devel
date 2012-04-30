@@ -53,8 +53,8 @@ AUI().ready('tree-view-html', 'removable', function(A) {
 				, cancelUrl: ''
 				, confirm: true
 			});
-			course.Removable.after('remove', function (event) { Liferay.fire('courseRemovedChange', {courseRecordId:courseRecordId, isRemoved:true, portletOrigin:portletClass}) });
-			course.Removable.after('unremove', function (event) { Liferay.fire('courseRemovedChange', {courseRecordId:courseRecordId, isRemoved:false, portletOrigin:portletClass}) });
+			course.Removable.after('removeSuccess', function (event) { Liferay.fire('courseRemovedChange', {courseRecordId:courseRecordId, isRemoved:true, portletOrigin:portletClass}) });
+			course.Removable.after('unremoveSuccess', function (event) { Liferay.fire('courseRemovedChange', {courseRecordId:courseRecordId, isRemoved:false, portletOrigin:portletClass}) });
 		});
 	};
 	var tableSetup = function () {
