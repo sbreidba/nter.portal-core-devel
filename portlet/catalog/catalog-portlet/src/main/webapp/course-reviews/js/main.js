@@ -211,7 +211,7 @@ AUI().ready('anim-custom', 'aui-rating', 'removable', 'io-form', 'review-form', 
 					});
 					event.currentTarget.simulate('click');
 				
-					review.Removable.on('remove', function (event) {
+					review.Removable.on('removeSuccess', function (event) {
 						// "write a review" button
 						if (reviewUserId == currentUserId) {
 							var reviewArea = A.one('#review .ratings-stats');
@@ -235,7 +235,7 @@ AUI().ready('anim-custom', 'aui-rating', 'removable', 'io-form', 'review-form', 
 						// update histogram
 						updateHistogram(returnData['review-histogram'], returnData['review-count']);
 					});
-					review.Removable.on('unremove', function (event) {
+					review.Removable.on('unremoveSuccess', function (event) {
 						// "edit review" button and stars
 						if (reviewUserId == currentUserId) {
 							var reviewArea = A.one('#review .ratings-stats');
