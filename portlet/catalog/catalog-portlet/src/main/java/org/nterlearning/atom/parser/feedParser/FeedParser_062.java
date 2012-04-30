@@ -44,6 +44,7 @@ import org.nterlearning.course.enumerations.RelationshipType;
 import org.nterlearning.datamodel.catalog.model.*;
 import org.nterlearning.datamodel.catalog.model.impl.ComponentImpl;
 import org.nterlearning.datamodel.catalog.model.impl.CourseImpl;
+import org.nterlearning.datamodel.catalog.model.impl.CourseReviewImpl;
 import org.nterlearning.datamodel.catalog.model.impl.GlobalCourseReviewImpl;
 import org.nterlearning.datamodel.catalog.service.CourseLocalServiceUtil;
 import org.nterlearning.utils.PortalPropertiesUtil;
@@ -245,11 +246,11 @@ public class FeedParser_062 extends FeedParser_061 implements FeedParser {
 
 
     @Override
-    public GlobalCourseReview parserReviewToCatalog(Entry reviewEntry, FeedContext fc)
+    public GlobalCourseReview parserReviewToCatalogGlobal(Entry reviewEntry, FeedContext fc)
             throws SystemException {
 
-        AsObject review = mStaticParser.getObject(reviewEntry);
-        AsTarget target = mStaticParser.getTarget(reviewEntry);
+        AsObject review = StaticNterAtomParser.getObject(reviewEntry);
+        AsTarget target = StaticNterAtomParser.getTarget(reviewEntry);
         Person actor = reviewEntry.getAuthor();
         boolean trustedReviewer =
                 Boolean.parseBoolean(mStaticParser.getTrustedReviewer(actor));
@@ -271,35 +272,166 @@ public class FeedParser_062 extends FeedParser_061 implements FeedParser {
             href = permalinks.get(0).getHref();
         }
 
+
         GlobalCourseReview gcr = new GlobalCourseReviewImpl();
         gcr.setCompanyId(fc.getCompanyId());
         gcr.setContent(review.getContent().getText());
         gcr.setCourseId(course.getCourseId());
+        gcr.setGroupId(fc.getScopeGroupId());
+        gcr.setCreateDate(review.getPublished());
+        gcr.setModifiedDate(review.getUpdated());
+        gcr.setUpdatedDate(reviewEntry.getUpdated());
+
         gcr.setCourseIri(target.getId());
         gcr.setCourseReviewIri(review.getId());
         gcr.setFromTrustedReviewer(trustedReviewer);
-        gcr.setGroupId(fc.getScopeGroupId());
-
-        if (href != null) {
-            gcr.setHref(href);
-        }
-
         gcr.setIsHidden(false);
-        gcr.setCreateDate(review.getPublished());
-        gcr.setModifiedDate(review.getUpdated());
         gcr.setNterInstance(nterInstance);
         gcr.setSingleSignOnValue(singleSignOnValue);
         gcr.setStarScore(review.getRating());
         gcr.setSummary(review.getSummary());
-        gcr.setUpdatedDate(reviewEntry.getUpdated());
         gcr.setUserDisplayName(actor.getName());
+        if (href != null) {
+            gcr.setHref(href);
+        }
 
         return gcr;
     }
 
+    @Override
+    public CourseReview parserReviewToCatalogLocal(Entry reviewEntry, FeedContext fc)
+            throws SystemException, PortalException {
+
+        AsObject review = StaticNterAtomParser.getObject(reviewEntry);
+        AsTarget target = StaticNterAtomParser.getTarget(reviewEntry);
+        Person actor = reviewEntry.getAuthor();
+
+        Course course = CourseLocalServiceUtil.fetchByCourseIri(target.getId());
+        Validate.notNull(course, "Review with ID [" + review.getId() +
+                "] in entry with ID [" + reviewEntry.getId() +
+                "} has a target course with ID [" + target.getId() +
+                "], but this course cannot be found in persistence.");
+
+        // Use the global unique identifier of the course reviewer to assign the local review to the same user
+        // on import
+        UserIdMapper userMapper;
+        try {
+            userMapper =
+                    UserIdMapperLocalServiceUtil.getUserIdMapperByExternalUserId(
+                            PortalPropertiesUtil.getSsoImplementation(), mStaticParser.getActorId(actor));
+        }
+        catch (NoSuchUserIdMapperException ne) {
+            throw new SystemException(
+                    "When trying to create a local course review export from local review ID " +
+                    review.getId() + ", no SSO users were found with ID " + mStaticParser.getActorId(actor) +
+                    ", when exactly one user with that ID was expected.");
+       }
+        //long userId = Long.valueOf(mStaticParser.getActorId(actor));
+        long userId = userMapper.getUserId();
+
+        CourseReview cr = new CourseReviewImpl();
+        cr.setCourseReviewId(AbderaAtomGenerator.extractIdFromAtomId(review.getId(), AsExtension.ATOM_ID_DATA_TYPE_REVIEW));
+        cr.setCompanyId(fc.getCompanyId());
+        cr.setContent(review.getContent().getText());
+        cr.setCourseId(course.getCourseId());
+        cr.setGroupId(fc.getScopeGroupId());
+        cr.setCreateDate(review.getPublished());
+        cr.setModifiedDate(review.getUpdated());
+        cr.setSummary(review.getSummary());
+
+        cr.setUserId(userId);
+
+        return cr;
+    }
+
 
     @Override
-    public Entry catalogReviewToParser(CourseReview courseReview, Entry entry,
+    public Entry catalogReviewToParserLocal(CourseReview courseReview, Entry entry,
+            AsVerb.VerbType verbType)
+            throws SystemException, PortalException {
+
+    	catalogReviewToParser(courseReview,entry,verbType);
+    	entry.setAttributeValue(
+                mNterExtension.getQName(NterExtension.ENTRY_TYPE_ATTRIBUTE_NAME),
+                NterEntryType.LOCAL_REVIEW.value());
+
+        //replace the userId PK of the local NTER instance with the userIdMapper global unique value
+    	Person author = entry.getAuthor();
+        UserIdMapper userMapper;
+        try {
+            userMapper =
+                    UserIdMapperLocalServiceUtil.getUserIdMapper(
+                            courseReview.getUserId(), PortalPropertiesUtil.getSsoImplementation());
+        }
+        catch (NoSuchUserIdMapperException ne) {
+            throw new SystemException(
+                    "When trying to create a local course review export from local review ID " +
+                    courseReview.getCourseReviewId() + ", no SSO users were found with ID " + courseReview.getUserId() +
+                    ", when exactly one user with that ID was expected.");
+       }
+
+        author.setAttributeValue(
+                mNterExtension.getQName(NterExtension.STUDENT_USER_ID_ATTRIBUTE_NAME),
+                String.valueOf(userMapper.getExternalUserId()));
+
+    	return entry;
+
+    }
+
+
+    @Override
+    public Entry catalogReviewToParserGlobal(CourseReview courseReview, Entry entry,
+            AsVerb.VerbType verbType)
+            throws SystemException, PortalException {
+
+    	catalogReviewToParser(courseReview,entry,verbType);
+    	entry.setAttributeValue(
+                mNterExtension.getQName(NterExtension.ENTRY_TYPE_ATTRIBUTE_NAME),
+                NterEntryType.GLOBAL_REVIEW.value());
+
+    	long userId = courseReview.getUserId();
+    	 // TODO: add trusted reviewer
+        String trustedReviewer = String.valueOf(false);
+
+        // the sso value
+    	String ssoValue;
+        try {
+            UserIdMapper userMapper =
+                    UserIdMapperLocalServiceUtil.getUserIdMapper(
+                            userId, PortalPropertiesUtil.getSsoImplementation());
+            ssoValue = userMapper.getExternalUserId();
+        }
+        catch (NoSuchUserIdMapperException e) {
+            throw new SystemException(
+                    "When trying to create a global course review from local review ID " +
+                    courseReview.getCourseReviewId() + ", no SSO users were found with ID " + userId +
+                    ", when exactly one user with that ID was expected.");
+        }
+
+        Person author = entry.getAuthor();
+        author.setAttributeValue(
+                mNterExtension.getQName(NterExtension.STUDENT_USER_ID_ATTRIBUTE_NAME),
+                ssoValue);
+        author.setAttributeValue(
+                mNterExtension.getQName(NterExtension.TRUSTED_REVIEWER_ATTRIBUTE_NAME),
+                trustedReviewer);
+
+    	return entry;
+
+    }
+
+    /**
+     * Populates the Parser Review encoded as an Entry with fields common to both
+     * local and global reviews
+     *
+     * @param courseReview
+     * @param entry
+     * @param verbType
+     * @return
+     * @throws SystemException
+     * @throws PortalException
+     */
+    private Entry catalogReviewToParser(CourseReview courseReview, Entry entry,
             AsVerb.VerbType verbType)
             throws SystemException, PortalException {
 
@@ -321,19 +453,17 @@ public class FeedParser_062 extends FeedParser_061 implements FeedParser {
         long userId = courseReview.getUserId();
         double score = RatingsEntryLocalServiceUtil.getEntry(userId,
                 Course.class.getCanonicalName(), courseId).getScore();
-        // TODO: add trusted reviewer
-        String trustedReviewer = String.valueOf(false);
 
         // error checking
         Validate.notNull(entry.getId(),
                 "The entry in which to convert course review ID " + reviewId + " has no ID");
 
         // create parameters we need to fetch from elsewhere
-        String courseIri, userName, ssoValue, courseName, reviewName;
+        String courseIri, userName, courseName, reviewName;
 
         // the course IRI
         Course course = CourseLocalServiceUtil.fetchByCourseId(courseId);
-        Validate.notNull(course, "When trying to create a global course review from local review ID " +
+        Validate.notNull(course, "When trying to create a course review from local review ID " +
                 reviewId + ", cannot find the target course with ID " + courseId);
         courseIri = course.getCourseIri();
         courseName = course.getTitle(catalogLanguage);
@@ -341,23 +471,9 @@ public class FeedParser_062 extends FeedParser_061 implements FeedParser {
 
         // the user name
         User user = UserLocalServiceUtil.getUser(userId);
-        Validate.notNull(user, "When trying to create a global course review from local review ID " +
+        Validate.notNull(user, "When trying to create a course review from local review ID " +
                 reviewId + ", cannot find the review author, user with ID " + userId);
         userName = user.getFullName();
-
-        // the sso value
-        try {
-            UserIdMapper userMapper =
-                    UserIdMapperLocalServiceUtil.getUserIdMapper(
-                            userId, PortalPropertiesUtil.getSsoImplementation());
-            ssoValue = userMapper.getExternalUserId();
-        }
-        catch (NoSuchUserIdMapperException e) {
-            throw new SystemException(
-                    "When trying to create a global course review from local review ID " +
-                    reviewId + ", no SSO users were found with ID " + userId +
-                    ", when exactly one user with that ID was expected.");
-        }
 
         review.setContent(content, AsContent.AsContentTypeType.TEXT);
         review.setId(AbderaAtomGenerator.generateAtomId(
@@ -379,12 +495,6 @@ public class FeedParser_062 extends FeedParser_061 implements FeedParser {
             author = entry.addAuthor(userName);
         }
         author.setName(userName);
-        author.setAttributeValue(
-                mNterExtension.getQName(NterExtension.STUDENT_USER_ID_ATTRIBUTE_NAME),
-                ssoValue);
-        author.setAttributeValue(
-                mNterExtension.getQName(NterExtension.TRUSTED_REVIEWER_ATTRIBUTE_NAME),
-                trustedReviewer);
         author.addSimpleExtension(
                 AsExtension.OBJECT_TYPE_ELEMENT,
                 AsObjectType.AsObjectTypeType.PERSON.value());
@@ -393,11 +503,9 @@ public class FeedParser_062 extends FeedParser_061 implements FeedParser {
         entry.setTitle(author.getName() + " " + verbType.getActionTense() +
                 " a review of " + courseName);
         entry.setUpdated(new Date(System.currentTimeMillis()));
-        entry.setAttributeValue(
-                mNterExtension.getQName(NterExtension.ENTRY_TYPE_ATTRIBUTE_NAME),
-                NterEntryType.REVIEW.value());
         entry.setLanguage(xmlLanguage);
         entry.setPublished(publishedDate);
+        // entry type left up to the local or global method to add
 
         return entry;
     }

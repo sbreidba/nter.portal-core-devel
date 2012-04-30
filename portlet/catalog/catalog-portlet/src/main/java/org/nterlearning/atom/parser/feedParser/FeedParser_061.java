@@ -20,6 +20,16 @@
 
 package org.nterlearning.atom.parser.feedParser;
 
+import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import org.apache.abdera.model.Entry;
+import org.apache.abdera.model.ExtensibleElement;
+import org.apache.abdera.model.Feed;
+import org.apache.abdera.model.Link;
+
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.NoSuchUserIdMapperException;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -39,27 +49,35 @@ import org.nterlearning.atom.extension.NterExtension;
 import org.nterlearning.atom.parser.FeedContext;
 import org.nterlearning.atom.parser.dao.CatalogDataModelUtils;
 import org.nterlearning.atom.parser.dao.NterCatalogRecordDependencyException;
-import org.nterlearning.atom.parser.model.*;
+import org.nterlearning.atom.parser.model.AsVerb;
+import org.nterlearning.atom.parser.model.NterCategoryRef;
+import org.nterlearning.atom.parser.model.NterCopyright;
+import org.nterlearning.atom.parser.model.NterCourse;
+import org.nterlearning.atom.parser.model.NterCourseDescription;
+import org.nterlearning.atom.parser.model.NterCourseRecord;
+import org.nterlearning.atom.parser.model.NterDuration;
+import org.nterlearning.atom.parser.model.NterKeyword;
+import org.nterlearning.atom.parser.model.NterRating;
+import org.nterlearning.atom.parser.model.NterRelated;
+import org.nterlearning.atom.parser.model.NterTitle;
+import org.nterlearning.atom.parser.model.NterTranscriptAbstract;
+import org.nterlearning.atom.parser.model.NterVocabulary;
 import org.nterlearning.atom.parser.staticParser.StaticNterAtomParser;
 import org.nterlearning.course.enumerations.FeedType;
 import org.nterlearning.course.enumerations.RelationshipType;
 import org.nterlearning.course.util.FeedReferenceUtil;
-import org.nterlearning.datamodel.catalog.model.*;
+import org.nterlearning.datamodel.catalog.model.Component;
+import org.nterlearning.datamodel.catalog.model.Course;
+import org.nterlearning.datamodel.catalog.model.CourseRecord;
+import org.nterlearning.datamodel.catalog.model.CourseReview;
+import org.nterlearning.datamodel.catalog.model.FeedReference;
+import org.nterlearning.datamodel.catalog.model.GlobalCourseReview;
 import org.nterlearning.datamodel.catalog.model.impl.ComponentImpl;
 import org.nterlearning.datamodel.catalog.model.impl.CourseImpl;
 import org.nterlearning.datamodel.catalog.model.impl.FeedReferenceImpl;
 import org.nterlearning.datamodel.catalog.service.CourseLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.service.FeedReferenceLocalServiceUtil;
 import org.nterlearning.utils.PortalPropertiesUtil;
-import org.apache.abdera.model.Entry;
-import org.apache.abdera.model.ExtensibleElement;
-import org.apache.abdera.model.Feed;
-import org.apache.abdera.model.Link;
-
-import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class FeedParser_061 implements FeedParser {
 
@@ -400,16 +418,32 @@ public class FeedParser_061 implements FeedParser {
 
 
     @Override
-    public GlobalCourseReview parserReviewToCatalog(Entry reviewEntry, FeedContext fc)
+    public GlobalCourseReview parserReviewToCatalogGlobal(Entry reviewEntry, FeedContext fc)
             throws SystemException {
         return null;
     }
 
-
     @Override
-    public Entry catalogReviewToParser(CourseReview courseReview, Entry entry,
-            AsVerb.VerbType verbType)
+    public CourseReview parserReviewToCatalogLocal(Entry reviewEntry, FeedContext fc)
             throws SystemException, PortalException {
         return null;
+    }
+
+    @Override
+    public Entry catalogReviewToParserLocal(CourseReview courseReview, Entry entry,
+            AsVerb.VerbType verbType)
+            throws SystemException, PortalException {
+
+    	return null;
+
+    }
+
+    @Override
+    public Entry catalogReviewToParserGlobal(CourseReview courseReview, Entry entry,
+            AsVerb.VerbType verbType)
+            throws SystemException, PortalException {
+
+    	return null;
+
     }
 }

@@ -198,17 +198,36 @@ public class StaticNterAtomParser {
 
 
     /**
-     * Returns a list of entries containing course reviews.
+     * Returns a list of entries containing global course reviews.
      *
      * @param feed Feed to parse course review entries from.
      *
      * @return List of course review entries.
      */
-    public List<Entry> getReviewEntries(Feed feed) {
+    public List<Entry> getGlobalReviewEntries(Feed feed) {
 
         List<Entry> reviewEntries = new Vector<Entry>();
         for (Entry entry : feed.getEntries()) {
-            if (getEntryType(entry).equals(NterEntryType.REVIEW)) {
+            if (getEntryType(entry).equals(NterEntryType.GLOBAL_REVIEW)) {
+                reviewEntries.add(entry);
+            }
+        }
+
+        return reviewEntries;
+    }
+
+    /**
+     * Returns a list of entries containing local course reviews.
+     *
+     * @param feed Feed to parse local course review entries from.
+     *
+     * @return List of local course review entries.
+     */
+    public List<Entry> getLocalReviewEntries(Feed feed) {
+
+        List<Entry> reviewEntries = new Vector<Entry>();
+        for (Entry entry : feed.getEntries()) {
+            if (getEntryType(entry).equals(NterEntryType.LOCAL_REVIEW)) {
                 reviewEntries.add(entry);
             }
         }
@@ -271,8 +290,11 @@ public class StaticNterAtomParser {
         else if (entryType.equals(NterEntryType.COURSE_RECORD)) {
             return NterFeedType.RECORDS;
         }
-        else if (entryType.equals(NterEntryType.REVIEW)) {
-            return NterFeedType.REVIEW;
+        else if (entryType.equals(NterEntryType.GLOBAL_REVIEW)) {
+            return NterFeedType.GLOBAL_REVIEW;
+        }
+        else if (entryType.equals(NterEntryType.LOCAL_REVIEW)){
+        	return NterFeedType.LOCAL_REVIEW;
         }
         else if (entryType.equals(NterEntryType.NONE)) {
             return NterFeedType.NONE;

@@ -153,6 +153,14 @@ public class AtomParserPortletDataHandler implements PortletDataHandler {
 	}
 
 	/* non-Javadoc)
+	 * @see com.liferay.portal.kernel.lar.PortletDataHandler#isAlwaysStaged()
+	 */
+	@Override
+	public boolean isAlwaysStaged() {
+		return true;
+	}
+
+	/* non-Javadoc)
 	 * @see com.liferay.portal.kernel.lar.PortletDataHandler#isAlwaysExportable()
 	 */
 	@Override
