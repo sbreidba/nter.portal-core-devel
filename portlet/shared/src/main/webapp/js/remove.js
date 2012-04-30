@@ -93,7 +93,7 @@ AUI.add("removable", function(A) {
 			} else {
 				var id = btn.getAttribute('id');
 				if (id == '') {
-					id = Y.guid();
+					id = A.guid();
 					btn.setAttribute('id', id);
 				}
 				btnCfg.btn = btn;
