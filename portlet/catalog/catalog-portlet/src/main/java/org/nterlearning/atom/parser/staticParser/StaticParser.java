@@ -59,6 +59,7 @@ import org.nterlearning.atom.parser.validator.FeedValidatorFactory;
 import org.nterlearning.course.enumerations.FeedType;
 import org.nterlearning.course.enumerations.RelationshipType;
 import org.nterlearning.crawl.nutch.CrawlTool;
+import org.nterlearning.datamodel.catalog.NoSuchCourseReviewException;
 import org.nterlearning.datamodel.catalog.NoSuchGlobalCourseReviewException;
 import org.nterlearning.datamodel.catalog.model.*;
 import org.nterlearning.datamodel.catalog.model.impl.FeedSyncHistoryImpl;
@@ -136,7 +137,10 @@ public class StaticParser {
 
         String ourHost = ServiceContextUtil.getDefaultVirtualHost();
         String feedHost = AbderaAtomGenerator.extractHostFromAtomId(feed.getId().toString());
-        if (ourHost.equals(feedHost)) {
+        NterFeedType feedType = mNterParser.getFeedType(feed);
+
+        if (ourHost.equals(feedHost) && !feedType.equals(NterFeedType.LOCAL_REVIEW)) {
+        	// local reviews will have obviously been created by this server
             mLog.info("Not persisting feed with ID " + feed.getId() +
                     " because it appears to have been created by this server.");
             return;
@@ -145,7 +149,6 @@ public class StaticParser {
         FeedSyncHistory feedHistory = new FeedSyncHistoryImpl();
         Boolean completeFeed = mNterParser.isFeedComplete(feed);
 
-        NterFeedType feedType = mNterParser.getFeedType(feed);
         mLog.info("Persisting " + feedType + " feed with ID [" + feed.getId().toString() + "]");
 
         FeedReference feedReference = mFeedParser.parserToCatalog(feed, fc);
@@ -243,10 +246,10 @@ public class StaticParser {
                 feedHistory.setSuccess(true);
                 feedHistory.setNumberOfEntries(tombstones.size());
             }
-            else if (feedType.equals(NterFeedType.REVIEW)) {
-                List<Entry> reviews = mNterParser.getReviewEntries(feed);
-                mLog.info("Persisting " + reviews.size() + " REVIEW feed entries");
-                persistReviewEntries(reviews, fc);
+            else if (feedType.equals(NterFeedType.GLOBAL_REVIEW)) {
+                List<Entry> reviews = mNterParser.getGlobalReviewEntries(feed);
+                mLog.info("Persisting " + reviews.size() + " GLOBAL REVIEW feed entries");
+                persistGlobalReviewEntries(reviews, fc);
 
                 // since everything processed correctly, update the sync time
                 feedReference.setSyncDate(new Date());
@@ -256,6 +259,22 @@ public class StaticParser {
 
                 feedHistory.setSuccess(true);
                 feedHistory.setNumberOfEntries(reviews.size());
+            }
+            else if (feedType.equals(NterFeedType.LOCAL_REVIEW)){
+
+            	List<Entry> reviews = mNterParser.getLocalReviewEntries(feed);
+                mLog.info("Persisting " + reviews.size() + " LOCAL REVIEW feed entries");
+                persistLocalReviewEntries(reviews, fc);
+
+                // since everything processed correctly, update the sync time
+                feedReference.setSyncDate(new Date());
+                feedReference.setSyncSuccess(true);
+                feedReference.setFeedType(FeedType.review.getCodeValue());
+                persistFeedReference(feedReference);
+
+                feedHistory.setSuccess(true);
+                feedHistory.setNumberOfEntries(reviews.size());
+
             }
             else if (feedType.equals(NterFeedType.NONE)) {
                 String error = "Cannot persist feed entries due to the feed " +
@@ -1043,20 +1062,20 @@ public class StaticParser {
      * @param reviews List of reviews to persist.
      * @param fc Associated feedContext object for this feed.
      */
-    private void persistReviewEntries(List<Entry> reviews, FeedContext fc) {
+    private void persistGlobalReviewEntries(List<Entry> reviews, FeedContext fc) {
         for (Entry review : reviews) {
-            if (mValidator.validateReviewEntry(review)) {
-                mLog.debug("Persisting review entry with id [" + review.getId() + "]");
+            if (mValidator.validateGlobalReviewEntry(review)) {
+                mLog.debug("Persisting global review entry with id [" + review.getId() + "]");
                 try {
-                    persistReviewEntry(review, fc);
+                    persistGlobalReviewEntry(review, fc);
                 }
                 catch (Exception e) {
-                    mLog.error("Error persisting review with id [" + review.getId() + "]", e);
-                    fc.addSyncMessage("ERR-review persist id [" + review.getId() + "]");
+                    mLog.error("Error persisting global review with id [" + review.getId() + "]", e);
+                    fc.addSyncMessage("ERROR: global review persist id [" + review.getId() + "]");
                 }
             }
             else {
-                mLog.warn("Skipping persistence of review entry with id ["
+                mLog.warn("Skipping persistence of global review entry with id ["
                         + review.getId() + "] due to validation errors");
             }
         }
@@ -1071,22 +1090,22 @@ public class StaticParser {
      *
      * @throws com.liferay.portal.kernel.exception.SystemException - Standard Liferay Exception
      */
-    private void persistReviewEntry(Entry review, FeedContext fc)
+    private void persistGlobalReviewEntry(Entry review, FeedContext fc)
             throws SystemException {
 
         AsVerb.VerbType verb = StaticNterAtomParser.getVerb(review).getVerb();
 
         if (verb.equals(AsVerb.VerbType.ADD)) {
-            addReview(review, fc);
+            addGlobalReview(review, fc);
         }
         else if (verb.equals(AsVerb.VerbType.DELETE)) {
-            removeReview(review, fc);
+            removeGlobalReview(review, fc);
         }
         else if (verb.equals(AsVerb.VerbType.REMOVE)) {
-            updateReview(review, fc);
+            updateGlobalReview(review, fc);
         }
         else if (verb.equals(AsVerb.VerbType.UPDATE)) {
-            updateReview(review, fc);
+            updateGlobalReview(review, fc);
         }
         else {
             throw new RuntimeException(
@@ -1104,23 +1123,23 @@ public class StaticParser {
      *
      * @throws com.liferay.portal.kernel.exception.SystemException Standard Liferay exception
      */
-    private void addReview(Entry review, FeedContext fc)
+    private void addGlobalReview(Entry review, FeedContext fc)
             throws SystemException {
 
-        GlobalCourseReview incomingGcr = mFeedParser.parserReviewToCatalog(review, fc);
+        GlobalCourseReview incomingGcr = mFeedParser.parserReviewToCatalogGlobal(review, fc);
 
         if (incomingGcr == null) {
             return;
         }
 
         try {
-            mLog.debug("Adding review ID [" + incomingGcr.getCourseReviewIri() + "]");
+            mLog.debug("Adding global review ID [" + incomingGcr.getCourseReviewIri() + "]");
 
             GlobalCourseReviewLocalServiceUtil.findByCourseReviewIri(
                     incomingGcr.getCourseReviewIri());
 
             // if no exception happened, that means it's persisted already
-            mLog.warn("Activity Stream review with entry ID [" + review.getId() +
+            mLog.warn("Activity Stream global review with entry ID [" + review.getId() +
                     "] with the verb '" + StaticNterAtomParser.getVerb(review).getVerb() +
                     "', cannot be added because it is already persisted.");
         }
@@ -1140,24 +1159,24 @@ public class StaticParser {
      *
      * @throws com.liferay.portal.kernel.exception.SystemException Standard Liferay exception
      */
-    private void removeReview(Entry review, FeedContext fc)
+    private void removeGlobalReview(Entry review, FeedContext fc)
             throws SystemException {
 
-        GlobalCourseReview incomingGcr = mFeedParser.parserReviewToCatalog(review, fc);
+        GlobalCourseReview incomingGcr = mFeedParser.parserReviewToCatalogGlobal(review, fc);
 
         if (incomingGcr == null) {
             return;
         }
 
         try {
-            mLog.debug("Removing review ID [" + incomingGcr.getCourseReviewIri() + "]");
+            mLog.debug("Removing global review ID [" + incomingGcr.getCourseReviewIri() + "]");
             GlobalCourseReview persistedGcr =
                     GlobalCourseReviewLocalServiceUtil.findByCourseReviewIri(
                             incomingGcr.getCourseReviewIri());
 
             // if the entry was updated before what we already have, warn that something looks fishy
             if ((review.getUpdated().compareTo(persistedGcr.getUpdatedDate()) < 1)) {
-                mLog.warn("Removal request for review entry [" + review.getId() +
+                mLog.warn("Removal request for global review entry [" + review.getId() +
                         "] is older than what's already persisted: " +
                         "the removal request date is " + review.getUpdated() +
                         ", and the persisted review " +
@@ -1168,7 +1187,7 @@ public class StaticParser {
         }
         // if it's not actually an existing review
         catch (NoSuchGlobalCourseReviewException e) {
-            mLog.warn("Activity Stream review with entry ID [" + review.getId() +
+            mLog.warn("Activity Stream global review with entry ID [" + review.getId() +
                     "] with the verb '" + StaticNterAtomParser.getVerb(review).getVerb() +
                     "', cannot be removed because it is NOT yet persisted. " +
                     "For completeness, adding the review and marking it is removed.");
@@ -1186,7 +1205,6 @@ public class StaticParser {
                 incomingGcr.getCourseReviewIri() + "] as removed.");
     }
 
-
     /**
      * Updates an existing global course review already in the system with an
      * updated one from the feed.
@@ -1196,17 +1214,17 @@ public class StaticParser {
      *
      * @throws com.liferay.portal.kernel.exception.SystemException Standard Liferay exception for dbo issues
      */
-    private void updateReview(Entry review, FeedContext fc)
+    private void updateGlobalReview(Entry review, FeedContext fc)
             throws SystemException {
 
-        GlobalCourseReview incomingGcr = mFeedParser.parserReviewToCatalog(review, fc);
+        GlobalCourseReview incomingGcr = mFeedParser.parserReviewToCatalogGlobal(review, fc);
 
         if (incomingGcr == null) {
             return;
         }
 
         try {
-            mLog.debug("Updating review ID [" + incomingGcr.getCourseReviewIri() + "]");
+            mLog.debug("Updating global review ID [" + incomingGcr.getCourseReviewIri() + "]");
             GlobalCourseReview persistedGcr =
                     GlobalCourseReviewLocalServiceUtil.findByCourseReviewIri(
                             incomingGcr.getCourseReviewIri());
@@ -1214,7 +1232,7 @@ public class StaticParser {
             // if the entry was updated before what we already have, don't
             // do anything, otherwise, update the entry
             if ((review.getUpdated().compareTo(persistedGcr.getUpdatedDate()) < 1)) {
-                mLog.debug("Update for review entry [" + review.getId() +
+                mLog.debug("Update for global review entry [" + review.getId() +
                         "] will be ignored because it is not newer than what's already persisted: " +
                         "its updated date is " + review.getUpdated() + ", and the persisted review " +
                         "was updated on " + persistedGcr.getUpdatedDate());
@@ -1225,13 +1243,211 @@ public class StaticParser {
             }
         }
         catch (NoSuchGlobalCourseReviewException e) {
-            mLog.warn("Activity Stream review with entry ID [" + review.getId() +
+            mLog.warn("Activity Stream global review with entry ID [" + review.getId() +
                     "] with the verb '" + StaticNterAtomParser.getVerb(review).getVerb() +
                     "', cannot be updated because it is NOT yet persisted. " +
                     "For completeness, adding the review.");
 
             GlobalCourseReviewLocalServiceUtil.addGlobalCourseReview(incomingGcr);
             mLog.debug("Added Global Course Review ID [" + incomingGcr.getCourseReviewIri() + "]");
+        }
+    }
+
+
+    /**
+     * Persists a list of course review entries into the database.
+     *
+     * @param reviews List of reviews to persist.
+     * @param fc Associated feedContext object for this feed.
+     */
+    private void persistLocalReviewEntries(List<Entry> reviews, FeedContext fc) {
+        for (Entry review : reviews) {
+            if (mValidator.validateLocalReviewEntry(review)) {
+                mLog.debug("Persisting local review entry with id [" + review.getId() + "]");
+                try {
+                    persistLocalReviewEntry(review, fc);
+                }
+                catch (Exception e) {
+                    mLog.error("Error persisting local review with id [" + review.getId() + "]", e);
+                    fc.addSyncMessage("ERROR: local review persist id [" + review.getId() + "]");
+                }
+            }
+            else {
+                mLog.warn("Skipping persistence of local review entry with id ["
+                        + review.getId() + "] due to validation errors");
+            }
+        }
+    }
+
+
+    /**
+     * Persists an individual course review entry into the database.
+     *
+     * @param review The course review to persist
+     * @param fc The associated feedContext object for the feed
+     *
+     * @throws SystemException - Standard Liferay Exception
+     */
+    private void persistLocalReviewEntry(Entry review, FeedContext fc)
+            throws SystemException, PortalException {
+
+        AsVerb.VerbType verb = StaticNterAtomParser.getVerb(review).getVerb();
+
+        if (verb.equals(AsVerb.VerbType.ADD)) {
+            addLocalReview(review, fc);
+        }
+        else if (verb.equals(AsVerb.VerbType.DELETE)) {
+            removeLocalReview(review, fc);
+        }
+        else if (verb.equals(AsVerb.VerbType.REMOVE)) {
+            updateLocalReview(review, fc);
+        }
+        else if (verb.equals(AsVerb.VerbType.UPDATE)) {
+            updateLocalReview(review, fc);
+        }
+        else {
+            throw new RuntimeException(
+                    "Unsupported activity stream verb in local review with id [" +
+                    review.getId() + ": " + verb);
+        }
+    }
+
+
+    /**
+     * Adds a local course review to the system.
+     *
+     * @param review Course review entry to add
+     * @param fc Associated feed context.
+     *
+     * @throws SystemException Standard Liferay exception
+     */
+    private void addLocalReview(Entry review, FeedContext fc)
+            throws SystemException, PortalException {
+
+        CourseReview incomingLcr = mFeedParser.parserReviewToCatalogLocal(review, fc);
+
+        if (incomingLcr == null) {
+            return;
+        }
+
+        try {
+            mLog.debug("Adding local review ID [" + incomingLcr.getCourseReviewId() + "]");
+
+            CourseReviewLocalServiceUtil.getCourseReview(incomingLcr.getCourseReviewId());
+
+            // if no exception happened, that means it's persisted already
+            mLog.warn("Activity Stream local review with entry ID [" + review.getId() +
+                    "] with the verb '" + StaticNterAtomParser.getVerb(review).getVerb() +
+                    "', cannot be added because it is already persisted.");
+        }
+        catch (NoSuchCourseReviewException e) {
+            // if the exception happened, we're good: add it
+            CourseReviewLocalServiceUtil.addCourseReview(incomingLcr.getUserId(),incomingLcr.getCourseId(),
+            		incomingLcr.getSummary(),incomingLcr.getContent(),incomingLcr.getWeightedScore(),
+            		ServiceContextUtil.createDefaultServiceContext());
+            mLog.debug("Added local Course Review ID [" + incomingLcr.getCourseReviewId() + "]");
+        }
+    }
+
+
+    /**
+     * Removes a local course review from the system.
+     *
+     * @param review Course review to remove
+     * @param fc Associated feedContext object
+     *
+     * @throws SystemException Standard Liferay exception
+     */
+    private void removeLocalReview(Entry review, FeedContext fc)
+            throws SystemException, PortalException {
+
+        CourseReview incomingLcr = mFeedParser.parserReviewToCatalogLocal(review, fc);
+
+        if (incomingLcr == null) {
+            return;
+        }
+
+        try {
+            mLog.debug("Removing local review ID [" + incomingLcr.getCourseReviewId() + "]");
+            CourseReview persistedLcr =
+                    CourseReviewLocalServiceUtil.getCourseReview(incomingLcr.getCourseReviewId());
+
+            // if the entry was updated before what we already have, warn that something looks fishy
+            if ((review.getUpdated().compareTo(persistedLcr.getModifiedDate()) < 1)) {
+                mLog.warn("Removal request for local review entry [" + review.getId() +
+                        "] is older than what's already persisted: " +
+                        "the removal request date is " + review.getUpdated() +
+                        ", and the persisted review " +
+                        "was updated on " + persistedLcr.getModifiedDate());
+            }
+
+            incomingLcr.setCourseReviewId(persistedLcr.getCourseReviewId());
+        }
+        // if it's not actually an existing review
+        catch (NoSuchGlobalCourseReviewException e) {
+            mLog.warn("Activity Stream local review with entry ID [" + review.getId() +
+                    "] with the verb '" + StaticNterAtomParser.getVerb(review).getVerb() +
+                    "', cannot be removed because it is NOT yet persisted. " +
+                    "For completeness, adding the review and marking it is removed.");
+
+            incomingLcr = CourseReviewLocalServiceUtil.addCourseReview(incomingLcr);
+            mLog.debug("Added local Course Review ID [" + incomingLcr.getCourseReviewId() + "]");
+        }
+
+        // regardless of if we found it in persistence, or added it,
+        // mark it as removed and update
+        incomingLcr.setRemoved(true);
+        incomingLcr.setRemovedDate(incomingLcr.getModifiedDate());
+        CourseReviewLocalServiceUtil.updateCourseReview(incomingLcr);
+        mLog.debug("Marked local Course Review ID [" +
+                incomingLcr.getCourseReviewId() + "] as removed.");
+    }
+
+
+    /**
+     * Updates an existing local course review already in the system with an
+     * updated one from the feed.
+     *
+     * @param review Updated local course review entry
+     * @param fc Associated feedContext object
+     *
+     * @throws SystemException Standard Liferay exception for dbo issues
+     */
+    private void updateLocalReview(Entry review, FeedContext fc)
+            throws SystemException, PortalException {
+
+        CourseReview incomingLcr = mFeedParser.parserReviewToCatalogLocal(review, fc);
+
+        if (incomingLcr == null) {
+            return;
+        }
+
+        try {
+            mLog.debug("Updating local review ID [" + incomingLcr.getCourseReviewId() + "]");
+            CourseReview persistedLcr =
+                    CourseReviewLocalServiceUtil.getCourseReview(incomingLcr.getCourseReviewId());
+
+            // if the entry was updated before what we already have, don't
+            // do anything, otherwise, update the entry
+            if ((review.getUpdated().compareTo(persistedLcr.getModifiedDate()) < 1)) {
+                mLog.debug("Update for local review entry [" + review.getId() +
+                        "] will be ignored because it is not newer than what's already persisted: " +
+                        "its updated date is " + review.getUpdated() + ", and the persisted review " +
+                        "was updated on " + persistedLcr.getModifiedDate());
+            }
+            else {
+                incomingLcr.setCourseReviewId(persistedLcr.getCourseReviewId());
+                CourseReviewLocalServiceUtil.updateCourseReview(incomingLcr);
+            }
+        }
+        catch (NoSuchGlobalCourseReviewException e) {
+            mLog.warn("Activity Stream local review with entry ID [" + review.getId() +
+                    "] with the verb '" + StaticNterAtomParser.getVerb(review).getVerb() +
+                    "', cannot be updated because it is NOT yet persisted. " +
+                    "For completeness, adding the review.");
+
+            CourseReviewLocalServiceUtil.addCourseReview(incomingLcr);
+            mLog.debug("Added local Course Review ID [" + incomingLcr.getCourseReviewId() + "]");
         }
     }
 

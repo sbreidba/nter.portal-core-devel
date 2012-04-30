@@ -20,16 +20,12 @@
 
 package org.nterlearning.atom.parser.validator;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import org.nterlearning.atom.extension.NterExtension;
 import org.nterlearning.atom.parser.model.AsObject;
 import org.nterlearning.atom.parser.model.NterCategory;
 
 import org.apache.abdera.model.Entry;
 import org.apache.abdera.model.Feed;
-
-import java.util.List;
 
 public interface FeedValidator {
 
@@ -49,6 +45,16 @@ public interface FeedValidator {
 
     public boolean validateCourseComponentEntry(Entry courseComponentEntry);
 
+    public boolean validateGlobalReviewEntry(Entry review);
+
+    public boolean validateLocalReviewEntry(Entry review);
+
+    /**
+     * Validates parts of entries that are common to both local and global reviews
+     *
+     * @param review
+     * @return
+     */
     public boolean validateReviewEntry(Entry review);
 
     public boolean validateObject(String errorPrefix, AsObject object);

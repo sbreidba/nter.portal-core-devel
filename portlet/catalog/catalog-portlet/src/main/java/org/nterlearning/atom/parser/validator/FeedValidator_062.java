@@ -350,6 +350,64 @@ public class FeedValidator_062 extends FeedValidator_061 implements FeedValidato
     }
 
 
+    public boolean validateGlobalReviewEntry(Entry review) {
+
+        boolean validEntry = true;
+
+        // set up the error messages
+        String entryId = review.getId().toString();
+        String errorPrefix = "Validation error in entry with id [" + entryId + "]: ";
+
+        // entry type must be correct
+        NterEntryType entryType = mStaticParser.getEntryType(review);
+        if (!entryType.equals(NterEntryType.GLOBAL_REVIEW)) {
+            mLog.info(errorPrefix + "the entry type is not GLOBAL REVIEW: " + entryType);
+            validEntry = false;
+        }
+
+        // validate the common parts
+        validEntry = validateReviewEntry(review);
+
+        // trusted reviewer is required for global reviews
+        Person actor = review.getAuthors().get(0);
+        String trustedReviewer = mStaticParser.getTrustedReviewer(actor);
+
+        if ((trustedReviewer == null) || (trustedReviewer.isEmpty())) {
+            mLog.info(errorPrefix + "trustedReviewer is missing: " + trustedReviewer);
+            validEntry = false;
+        }
+        else {
+            try {
+                Boolean.parseBoolean(trustedReviewer);
+            }
+            catch (Exception e) {
+                validEntry = false;
+            }
+        }
+
+        return validEntry;
+    }
+
+    @Override
+    public boolean validateLocalReviewEntry(Entry review) {
+
+        boolean validEntry = true;
+
+        // set up the error messages
+        String entryId = review.getId().toString();
+        String errorPrefix = "Validation error in entry with id [" + entryId + "]: ";
+
+        // entry type must be correct
+        NterEntryType entryType = mStaticParser.getEntryType(review);
+        if (!entryType.equals(NterEntryType.LOCAL_REVIEW)) {
+            mLog.info(errorPrefix + "the entry type is not LOCAL REVIEW: " + entryType);
+            validEntry = false;
+        }
+
+        return validEntry;
+    }
+
+    @Override
     public boolean validateReviewEntry(Entry review) {
 
         boolean valid = true;
@@ -358,12 +416,6 @@ public class FeedValidator_062 extends FeedValidator_061 implements FeedValidato
         String entryId = review.getId().toString();
         String errorPrefix = "Validation error in entry with id [" + entryId + "]: ";
 
-        // entry type must be correct
-        NterEntryType entryType = mStaticParser.getEntryType(review);
-        if (!entryType.equals(NterEntryType.REVIEW)) {
-            mLog.info(errorPrefix + "the entry type is not REVIEW: " + entryType);
-            valid = false;
-        }
 
         // exactly 1 actor is required
         List<Person> authors = review.getAuthors();
@@ -380,7 +432,6 @@ public class FeedValidator_062 extends FeedValidator_061 implements FeedValidato
         else {
             Person actor = authors.get(0);
             String actorId = mStaticParser.getActorId(actor);
-            String trustedReviewer = mStaticParser.getTrustedReviewer(actor);
             AsObjectType objectType = StaticNterAtomParser.getActorObjectType(actor);
 
             // object type has to be person
@@ -402,22 +453,6 @@ public class FeedValidator_062 extends FeedValidator_061 implements FeedValidato
             if ((actorId == null) || (actorId.isEmpty())) {
                 mLog.info(errorPrefix + "the author id is missing: " + actorId);
                 valid = false;
-            }
-
-            // trusted reviewer is required
-            if ((trustedReviewer == null) || (trustedReviewer.isEmpty())) {
-                mLog.info(errorPrefix + "" +
-                        "trustedReviewer is missing: " + trustedReviewer);
-                valid = false;
-            }
-            else {
-                // make sure it's a boolean
-                try {
-                    Boolean.parseBoolean(trustedReviewer);
-                }
-                catch (Exception e) {
-                    valid = false;
-                }
             }
         }
 
@@ -460,6 +495,7 @@ public class FeedValidator_062 extends FeedValidator_061 implements FeedValidato
 
         return valid;
     }
+
 
     @Override
     public boolean validateObject(String errorPrefix, AsObject obj) {

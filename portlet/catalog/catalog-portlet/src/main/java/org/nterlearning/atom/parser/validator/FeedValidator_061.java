@@ -494,10 +494,19 @@ public class FeedValidator_061 implements FeedValidator {
 
 
     @Override
-    public boolean validateReviewEntry(Entry review) {
+    public boolean validateGlobalReviewEntry(Entry review) {
         return true;
     }
 
+	@Override
+	public boolean validateLocalReviewEntry(Entry review) {
+		return true;
+	}
+
+	@Override
+    public boolean validateReviewEntry(Entry review) {
+        return true;
+    }
 
     @Override
     public boolean validateObject(String errorPrefix, AsObject object) {
