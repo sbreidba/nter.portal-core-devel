@@ -67,7 +67,16 @@ public class NterActivityStreamGenerator {
     private static String feedFileRootPath = System.getenv("CATALINA_BASE") + File.separatorChar + "webapps";
 
 
-    private static void createActivityStream(String streamUrl, long cutoffTimestamp)
+    /**
+     * Creates an activity stream of the reviews in the database, up to the cutoff point
+     *
+     * @param streamUrl
+     * @param cutoffTimestamp
+     * @param global - true if the reviews are global; false otherwise
+     * @return
+     * @throws RuntimeException
+     */
+    private static Feed createActivityStream(String streamUrl, long cutoffTimestamp, boolean global)
         throws RuntimeException {
 
         try {
@@ -80,20 +89,35 @@ public class NterActivityStreamGenerator {
                     QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
             // make a new feed
-            log.info("Creating new activity stream");
-            singletonFeed =
+            log.info("Creating activity stream at URL [" + streamUrl +
+            		"] using cutoff of " + new Date(cutoffTimestamp));
+            Feed feed =
                     NterActivityStreamUtils.createNewStream(streamUrl,
                         getFeedTitle(), getFeedId(), getPushHubUrls());
-            NterActivityStreamUtils.addReviewsToStream(dbRevs, singletonFeed,
-                                                       new Date(cutoffTimestamp));
+            NterActivityStreamUtils.addReviewsToStream(dbRevs, feed, new Date(cutoffTimestamp),global);
 
-            // since we don't know what happened since the last time we had a
-            // stream, publish it just for safety
-            publishStream(streamUrl);
+            return feed;
+
         }
         catch (Exception e) {
             throw new RuntimeException("Error creating activity stream: " + e);
         }
+    }
+
+    /**
+     *
+     * @param streamUrl
+     * @param cutoffTimestamp
+     */
+    private static void createSingletonActivityStream(String streamUrl, long cutoffTimestamp){
+
+    	// make a new feed
+        log.info("Initializing singleton activity stream");
+    	singletonFeed = createActivityStream(streamUrl, cutoffTimestamp,true);
+
+    	// since we don't know what happened since the last time we had a
+        // stream, publish it just for safety
+        publishStream(streamUrl);
     }
 
 
@@ -108,7 +132,7 @@ public class NterActivityStreamGenerator {
     public static Feed getActivityStream(String streamUrl, long cutoffTimestamp) {
 
         if (singletonFeed == null) {
-            createActivityStream(streamUrl, getDefaultExpirationTimestamp());
+            createSingletonActivityStream(streamUrl, getDefaultExpirationTimestamp());
         }
 
         // prune the feed to get rid of expired entries
@@ -130,6 +154,15 @@ public class NterActivityStreamGenerator {
      */
     public static Feed getActivityStream() {
         return getActivityStream(getStreamUrl(), getDefaultExpirationTimestamp());
+    }
+
+    /**
+     *
+     * @param localReviewsStreamUrl
+     * @return
+     */
+    public static Feed getLocalReviews(String localReviewsStreamUrl){
+    	return createActivityStream(localReviewsStreamUrl, 0,false);
     }
 
 
@@ -178,7 +211,7 @@ public class NterActivityStreamGenerator {
 
         try {
             Feed as = getActivityStream();
-            String entryId = NterActivityStreamUtils.addReviewActivity(as, courseReviewId, verb);
+            String entryId = NterActivityStreamUtils.addReviewActivity(as, courseReviewId, verb, true);
 
             // publish the feed to PuSH hubs
             log.info("Added entry with id '" + entryId + "', containing a course review " +

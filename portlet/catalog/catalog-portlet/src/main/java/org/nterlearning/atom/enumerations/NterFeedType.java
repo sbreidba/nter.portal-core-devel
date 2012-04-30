@@ -23,7 +23,8 @@ package org.nterlearning.atom.enumerations;
 public enum NterFeedType {
     COURSES,
     RECORDS,
-    REVIEW,
+    GLOBAL_REVIEW,
+    LOCAL_REVIEW,
     TOMBSTONE,
     NONE
 }
