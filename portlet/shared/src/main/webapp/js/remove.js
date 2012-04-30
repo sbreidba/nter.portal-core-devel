@@ -26,7 +26,7 @@ AUI.add("removable", function(A) {
     Removable.NS = "Removable";
 	
 	Removable.ATTRS = {
-		btns: {value:[]}
+		btns: {value:{}}
 		, msgTimeoutLength: {value:30000}
 		
 		, alertArea: {}
@@ -44,7 +44,7 @@ AUI.add("removable", function(A) {
     A.extend(Removable, A.Plugin.Base, {
 		initializer: function () {
 			var host = this.get('host');
-			if (host.get('nodeName').toLowerCase() == 'tr') var topnode = host.ancestor(function (el) { return el.get('nodeName').toLowerCase() == 'table'; });
+			if (host.get('nodeName').toLowerCase() == 'tr') var topnode = host.ancestor('table');
 			else topnode = host.get('parentNode');
 			var alertArea = topnode.get('parentNode').get('children').filter('.notification-area');
 			if (alertArea.size() == 0) {
@@ -59,13 +59,17 @@ AUI.add("removable", function(A) {
 			});
 			this.set('alertArea', alertArea);
 			
-			this.publish('remove', { defaultFn: this._removeItem, broadcast: true });
-			this.publish('unremove', { defaultFn: this._unremoveItem, broadcast: true });
+			this.publish('remove', { defaultFn: this.remove, broadcast: false });
+			this.publish('unremove', { defaultFn: this.unremove, broadcast: false });
+			this.publish('confirm', { defaultFn: this._confirm, broadcast: false });
+			this.publish('removeSuccess', { defaultFn: this._removeItem, broadcast: true });
+			this.publish('unremoveSuccess', { defaultFn: this._unremoveItem, broadcast: true });
 		}
         , destructor: function () {
         }
 		
 		, registerBtn: function (btnCfg) {
+			var context = this;
 			var defaultCfg = {
 				  btnClass: ''
 				, confirm: false
@@ -82,54 +86,84 @@ AUI.add("removable", function(A) {
 				, url: ''
 				, cancelUrl: ''
 			}
-			for (var i in btnCfg) {
-				defaultCfg[i] = btnCfg[i];
-			}
-			btnCfg = defaultCfg;
-			this.setupBtn(btnCfg);
-			this.get('btns').push(btnCfg);
-		}
-		, setupBtn: function (btnCfg) {
-			var context = this;
-			this.get('host').one(btnCfg.btnClass).on('click',function (event) {
-				event.preventDefault();
-				var target = event.currentTarget;
-				var url = target.getAttribute('data-url');
-				var idName = target.getAttribute('data-id-name');
-				var idValue = target.getAttribute('data-id');
-				var flagName = target.getAttribute('data-flag-name');
-				var data = {};
-				var cancelData = {};
-				btnCfg.button=target;
-				data[idName] = cancelData[idName] = idValue;
+			var btn = context.get('host').one(btnCfg.btnClass);
+			if (!btn) {
+				context.get('host').unplug('A.NTER.Removable');
+				return;
+			} else {
+				var id = btn.getAttribute('id');
+				if (id == '') {
+					id = A.guid();
+					btn.setAttribute('id', id);
+				}
+				btnCfg.btn = btn;
+				btnCfg.url = btn.getAttribute('data-url');
+				if (typeof btnCfg.cancelUrl == 'undefined') btnCfg.cancelUrl = btnCfg.url;
+				btnCfg.data = {};
+				btnCfg.cancelData = {};
+				var idName = btn.getAttribute('data-id-name');
+				var idValue = btn.getAttribute('data-id');
+				var flagName = btn.getAttribute('data-flag-name');
+				btnCfg.data[idName] = btnCfg.cancelData[idName] = idValue;
 				if (flagName != '') {
-					data[flagName] = true;
-					cancelData[flagName] = false;
+					btnCfg.data[flagName] = true;
+					btnCfg.cancelData[flagName] = false;
 				}
-				if (btnCfg.confirm) {
-					var dialog = new A.NTER.ConfirmDialog({
-						confirmMsg: btnCfg.text.confirmMsg,
-						confirmBtn: btnCfg.text.confirmBtn,
-						handler: function () { context.remove(btnCfg, url, data, cancelData); }
-					}).render();
-					dialog.on('destroy', function () { target.focus(); });
-				} else {
-					context.remove(btnCfg, url, data, cancelData);
+
+				for (var i in btnCfg) {
+					defaultCfg[i] = btnCfg[i];
 				}
-			});
+				btnCfg = defaultCfg;
+				context.get('btns')[id] = btnCfg;
+				
+				btn.on('click', function (e) { context._handleRemove(e); });
+			}
+		}
+
+		, _getCfg: function (event) {
+			var btn = event.target;
+			var id = btn.getAttribute('id');
+			return this.get('btns')[id];
+		}
+
+		, _handleRemove: function (event) {
+			var context = this;
+			event.preventDefault();
+			var btnCfg = context._getCfg(event);
+
+			if (btnCfg.confirm) {
+				context.fire('confirm', btnCfg);
+			} else {
+				context.fire('remove', btnCfg);
+			}
+		}
+
+		, _handleUnremove: function (event, btnCfg) {
+			var context = this;
+			event.preventDefault();
+			var alertMsg = event.target.ancestor('.portlet-msg-success');
+
+			context.fire('unremove', btnCfg, alertMsg);
+		}
+
+		, _confirm: function (btnCfg) {
+			var context = this;
+
+			var dialog = new A.NTER.ConfirmDialog({
+				confirmMsg: btnCfg.text.confirmMsg,
+				confirmBtn: btnCfg.text.confirmBtn,
+				handler: function () { context.fire('remove', btnCfg) }
+			}).render();
+			dialog.on('destroy', function () { btnCfg.btn.focus(); });
 		}
 		
-		, remove: function (btnCfg, url, data, cancelData) {
-			var text = btnCfg.text;
+		, remove: function (btnCfg) {
 			var item = this.get('host');
-			var alertArea = this.get('alertArea');
 			var context = this;
-			var cancelUrl = btnCfg.cancelUrl;
-			if (cancelUrl == "") cancelUrl = url;
 
-			A.io(url, {
+			A.io(btnCfg.url, {
 				  method: 'POST'
-				, data: data
+				, data: btnCfg.data
 				, headers: {
 					'Accept': 'application/json'
 				}
@@ -148,80 +182,81 @@ AUI.add("removable", function(A) {
 						if (data.success) {
 							context.set('returnData', data);
 							setTimeout(function () {
-								context.fire('remove', {text:text, alertArea:alertArea, item:item, cancelUrl:cancelUrl, cancelData:cancelData, showUndoButton:btnCfg.showUndoButton, button:btnCfg.button});
+								context.fire('removeSuccess', btnCfg);
 							}, 0);
 						} else {
 							// TODO: handle this when all the json responses are consistent
 						}
 					}
-					, failure: function () { context._iofail(text.errorMsg, alertArea); }
+					, failure: function () { context._iofail(btnCfg.text.errorMsg, this.get('alertArea')); }
 				}
 			});
 		}
 		
-		, _removeItem: function (cfg) {
+		, _removeItem: function (btnCfg) {
 			var context = this;
-			var text = cfg.text;
-			var alertArea = cfg.alertArea;
-			var item = cfg.item;
-			var cancelUrl = cfg.cancelUrl;
-			var cancelData = cfg.cancelData;
-			var undoButton = cfg.showUndoButton ? A.Node.create(UNDO_BUTTON_TEMPLATE) : "";
+			var alertArea = context.get('alertArea');
+			var item = context.get('host');
+
+			var undoButton = btnCfg.showUndoButton ? A.Node.create(UNDO_BUTTON_TEMPLATE) : "";
 			var actions = A.Node.create(ACTIONS_TEMPLATE).append(undoButton);
-			var content = A.Node.create(SUCCESS_MSG_TEMPLATE).append(text.successMsg).append(actions);
+			var content = A.Node.create(SUCCESS_MSG_TEMPLATE).append(btnCfg.text.successMsg).append(actions);
 			var alertMsg = content;
 			alertMsg.setStyles({'position':'relative'});
 			alertArea.append(alertMsg);
+
 			var fadeTimer = setTimeout(function () { alertMsg.remove(); item.remove(); }, context.get('msgTimeoutLength'));
 			//var focusTimer = setTimeout(function () { undoButton.focus(); }, 10);	// this makes the screen reader stop reading the message and just read the button
-			if (cfg.showUndoButton) {
-				undoButton.on('click', function (cancelEvent) {
-					cancelEvent.preventDefault();
-					clearTimeout(fadeTimer);
-					alertMsg.plug(A.NTER.ChangeSpinner);
-
-					A.io(cancelUrl, {
-						method: 'POST'
-						, data: cancelData
-						, headers: {
-							'Accept': 'application/json'
-						}
-						, on: {
-							  start: function () {}
-							, complete: function () { alertMsg.unplug(A.NTER.ChangeSpinner); alertMsg.remove(); }
-							, success: function (id, response) {
-								try {
-									var data = A.JSON.parse(response.responseText);
-								} catch (e) {
-									// TODO: we should catch json parse errors properly when all the json responses are consistent
-									//context.form.prepend(Y.Node.create('<div class="portlet-msg-error">'+Liferay.Language.get('ajax-fail')+'</div>'));
-									//return;
-									var data = {success:true};
-								}
-								if (data.success) {
-									context.set('returnData', data);
-									setTimeout(function () {
-										context.fire('unremove', {text:text, alertArea:alertArea, item:item, button:cfg.button});
-									}, 0);
-								} else {
-									// TODO: handle this when all the json responses are consistent
-								}
-							}
-							, failure: function () { context._iofail(text.cancelErrorMsg, alertArea); }
-						}
-					}, 1000);
-				});
+			if (btnCfg.showUndoButton) {
+				undoButton.on('click', function (e) { clearTimeout(fadeTimer); context._handleUnremove(e, btnCfg); });
 			}
 			item.fadeOut();
 		}
-		
-		, _unremoveItem: function (cfg) {
+
+		, unremove: function (btnCfg, alertMsg) {
 			var context = this;
-			var text = cfg.text;
-			var alertArea = cfg.alertArea;
-			var item = cfg.item;
+			var item = context.get('host');
+			
+			alertMsg.plug(A.NTER.ChangeSpinner);
+
+			A.io(btnCfg.cancelUrl, {
+				method: 'POST'
+				, data: btnCfg.cancelData
+				, headers: {
+					'Accept': 'application/json'
+				}
+				, on: {
+					  start: function () {}
+					, complete: function () { alertMsg.unplug(A.NTER.ChangeSpinner); alertMsg.remove(); }
+					, success: function (id, response) {
+						try {
+							var data = A.JSON.parse(response.responseText);
+						} catch (e) {
+							// TODO: we should catch json parse errors properly when all the json responses are consistent
+							//context.form.prepend(Y.Node.create('<div class="portlet-msg-error">'+Liferay.Language.get('ajax-fail')+'</div>'));
+							//return;
+							var data = {success:true};
+						}
+						if (data.success) {
+							context.set('returnData', data);
+							setTimeout(function () {
+								context.fire('unremoveSuccess', btnCfg);
+							}, 0);
+						} else {
+							// TODO: handle this when all the json responses are consistent
+						}
+					}
+					, failure: function () { context._iofail(btnCfg.text.cancelErrorMsg, alertArea); }
+				}
+			}, 1000);
+		}
+		
+		, _unremoveItem: function (btnCfg) {
+			var context = this;
+			var alertArea = context.get('alertArea');
+			var item = context.get('host');
 			item.fadeIn({callback:function () { item.one('a,button,input,select,textarea,[tabindex>0],iframe,object,video,audio').focus(); }});
-			alertMsg = A.Node.create('<div class="icon-accessibility-text">'+text.cancelSuccessMsg+'</div>');
+			alertMsg = A.Node.create('<div class="icon-accessibility-text">'+btnCfg.text.cancelSuccessMsg+'</div>');
 			alertArea.append(alertMsg);
 			fadeTimer = setTimeout(function () { alertMsg.remove(); }, context.get('msgTimeoutLength'));
 		}
