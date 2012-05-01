@@ -355,9 +355,6 @@ public class SetupAction extends SimpleAction {
 		Group guestGroup = GroupLocalServiceUtil.getGroup(mCompanyId, GroupConstants.GUEST);
 
 		long[] groupIds = new long[] {guestGroup.getGroupId()};
-        long[] organizationIds = new long[] {
-                OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID
-        };
 
 		User user;
 		try {
@@ -365,7 +362,7 @@ public class SetupAction extends SimpleAction {
                     password, false, screenName, emailAddress, 0,
                     StringPool.BLANK, Locale.US, firstName, StringPool.BLANK,
                     lastName, 0, 0, male, Calendar.JANUARY, 1, 1970, jobTitle,
-                    groupIds, organizationIds, roleIds, null, false,
+                    groupIds, null, roleIds, null, false,
                     mServiceContext);
             UserIdMapperLocalServiceUtil.updateUserIdMapper(user.getUserId(), "",
                                                             null, emailAddress);
