@@ -46,21 +46,18 @@ public class FeedValidator_061 implements FeedValidator {
         setExtension();
     }
 
-    @Override
     public void setExtension() {
         mNterExtension = new NterExtension(NterNameSpace.FEED_VERSION_061);
         mStaticParser = new StaticNterAtomParser(mNterExtension);
     }
 
 
-    @Override
     public void setExtension(NterExtension extension) {
         mNterExtension = extension;
         mStaticParser = new StaticNterAtomParser(mNterExtension);
     }
     
 
-    @Override
     public boolean validate(Feed feed) {
 
         boolean valid = true;
@@ -109,7 +106,6 @@ public class FeedValidator_061 implements FeedValidator {
     }
 
 
-    @Override
     public boolean validateVocabularyEntry(Entry vocabEntry) {
 
         boolean valid = true;
@@ -166,7 +162,6 @@ public class FeedValidator_061 implements FeedValidator {
     }
 
 
-    @Override
     public boolean validateCategory(NterCategory category) {
 
         boolean valid = true;
@@ -195,7 +190,6 @@ public class FeedValidator_061 implements FeedValidator {
     }
 
 
-    @Override
     public boolean validateCourseEntry(Entry courseEntry) {
 
         boolean valid = true;
@@ -212,8 +206,7 @@ public class FeedValidator_061 implements FeedValidator {
         }
 
         // get the list of courses
-        List<NterCourse> courses =
-                courseEntry.getExtensions(
+        List<NterCourse> courses = courseEntry.getExtensions(
                         mNterExtension.getQName(NterExtension.COURSE_ELEMENT_NAME));
 
         // only 1 course per entry
@@ -292,6 +285,10 @@ public class FeedValidator_061 implements FeedValidator {
                     mLog.info(errorPrefix + "relatedEntryId attribute is missing in a 'related' element");
                     valid = false;
                 }
+                else if (related.getRelatedEntryId().equals(entryId)) {
+                    mLog.info(errorPrefix + "relatedEntryId must not match courseId");
+                    valid = false;
+                }
 
                 if (related.getRelationship() == null) {
                     mLog.info(errorPrefix + "relationship attribute is missing in a 'related' element");
@@ -312,7 +309,6 @@ public class FeedValidator_061 implements FeedValidator {
     }
 
 
-    @Override
     public boolean validateCourseRecordEntry(Entry courseRecordEntry) {
 
         boolean valid = true;
@@ -396,7 +392,6 @@ public class FeedValidator_061 implements FeedValidator {
     }
 
 
-    @Override
     public boolean validateCourseComponentEntry(Entry courseComponentEntry) {
 
         boolean valid = true;
@@ -426,54 +421,54 @@ public class FeedValidator_061 implements FeedValidator {
         }
 
         // get the list of links
-        List<Link> links = courseComponentEntry.getLinks();
-
-        // only 1 link per entry
-        if (links.size() > 1) {
-            mLog.info(errorPrefix + " contains more than one link; actual number: " + links.size());
+        List<Link> links = courseComponentEntry.getLinks("self");
+        if (links.size() != 1) {
+            mLog.info(errorPrefix + "contains more than one link; actual number: " + links.size());
             valid = false;
         }
+        else {
+            Link selfLink = links.get(0);
 
-        Link link = links.get(0);
+            // link href is required
+            if (selfLink.getHref() == null) {
+                mLog.info(errorPrefix + "the link href is missing");
+                valid = false;
+            }
 
-        // link href is required
-        if (link.getHref() == null) {
-            mLog.info(errorPrefix + "the link href is missing");
-            valid = false;
-        }
-
-        // display width is optional, but if it's there, it has to be a positive integer
-        String displayWidthStr =
-                link.getAttributeValue(mNterExtension.getQName(NterExtension.DISPLAY_WIDTH_ATTRIBUTE_NAME));
-        if (displayWidthStr != null) {
-            try {
-                int displayWidth = Integer.valueOf(displayWidthStr);
-                if (displayWidth < 1) {
-                    mLog.info(errorPrefix + "the display width is not a positive integer");
+            // display width is optional, but if it's there, it has to be a positive integer
+            String displayWidthStr =
+                    selfLink.getAttributeValue(mNterExtension.getQName(NterExtension.DISPLAY_WIDTH_ATTRIBUTE_NAME));
+            if (displayWidthStr != null) {
+                try {
+                    int displayWidth = Integer.valueOf(displayWidthStr);
+                    if (displayWidth < 1) {
+                        mLog.info(errorPrefix + "the display width is not a positive integer");
+                        valid = false;
+                    }
+                }
+                catch (NumberFormatException e) {
+                    mLog.info(errorPrefix + "the display width is not a number");
                     valid = false;
                 }
             }
-            catch (NumberFormatException e) {
-                mLog.info(errorPrefix + "the display width is not a number");
-                valid = false;
-            }
-        }
 
-        // display height is optional, but if it's there, is has to be a positive integer
-        String displayHeightStr =
-                link.getAttributeValue(mNterExtension.getQName(NterExtension.DISPLAY_HEIGHT_ATTRIBUTE_NAME));
-        if (displayHeightStr != null) {
-            try {
-                int displayHeight = Integer.valueOf(displayHeightStr);
-                if (displayHeight < 1) {
-                    mLog.info(errorPrefix + "the display height is not a positive integer");
+            // display height is optional, but if it's there, is has to be a positive integer
+            String displayHeightStr =
+                    selfLink.getAttributeValue(mNterExtension.getQName(NterExtension.DISPLAY_HEIGHT_ATTRIBUTE_NAME));
+            if (displayHeightStr != null) {
+                try {
+                    int displayHeight = Integer.valueOf(displayHeightStr);
+                    if (displayHeight < 1) {
+                        mLog.info(errorPrefix + "the display height is not a positive integer");
+                        valid = false;
+                    }
+                }
+                catch (NumberFormatException e) {
+                    mLog.info(errorPrefix + "the display height is not a number");
                     valid = false;
                 }
             }
-            catch (NumberFormatException e) {
-                mLog.info(errorPrefix + "the display height is not a number");
-                valid = false;
-            }
+
         }
 
         // updated date is required
@@ -493,22 +488,18 @@ public class FeedValidator_061 implements FeedValidator {
     }
 
 
-    @Override
     public boolean validateGlobalReviewEntry(Entry review) {
         return true;
     }
 
-	@Override
 	public boolean validateLocalReviewEntry(Entry review) {
 		return true;
 	}
 
-	@Override
-    public boolean validateReviewEntry(Entry review) {
+	public boolean validateReviewEntry(Entry review) {
         return true;
     }
 
-    @Override
     public boolean validateObject(String errorPrefix, AsObject object) {
         return true;
     }
