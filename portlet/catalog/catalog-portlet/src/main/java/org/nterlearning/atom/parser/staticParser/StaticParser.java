@@ -40,6 +40,8 @@ import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
+import com.liferay.portlet.ratings.model.RatingsStats;
+import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 import org.nterlearning.atom.enumerations.NterEntryType;
 import org.nterlearning.atom.enumerations.NterFeedType;
 import org.nterlearning.atom.enumerations.NterNameSpace;
@@ -70,6 +72,7 @@ import org.apache.abdera.model.Entry;
 import org.apache.abdera.model.Feed;
 import org.apache.abdera.model.Link;
 import org.apache.abdera.model.Person;
+import org.nterlearning.utils.ReviewUtil;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -1341,11 +1344,21 @@ public class StaticParser {
                     "', cannot be added because it is already persisted.");
         }
         catch (NoSuchCourseReviewException e) {
-            // if the exception happened, we're good: add it
-            CourseReviewLocalServiceUtil.addCourseReview(incomingLcr.getUserId(),incomingLcr.getCourseId(),
+            // if the exception happened, we're good: add it.
+            //
+            // IMPORTANT NOTE: the activity stream export stores the "star" rating (RatingsEntry.score) into the weightedScore attribute.
+            // During addCourseReview, this value is used to populate the Liferay RatingsEntry entity score attribute.
+            CourseReview newReview = CourseReviewLocalServiceUtil.addCourseReview(incomingLcr.getUserId(),incomingLcr.getCourseId(),
             		incomingLcr.getSummary(),incomingLcr.getContent(),incomingLcr.getWeightedScore(),
             		ServiceContextUtil.createDefaultServiceContext());
             mLog.debug("Added local Course Review ID [" + incomingLcr.getCourseReviewId() + "]");
+
+            // Calculate and assign weighted value
+            RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(CourseReview.class.getName(), newReview.getCourseReviewId());
+            // This should equal the number of positive ratings as long as all ratings are +/-1.
+            int positive = ((int) stats.getTotalScore() + stats.getTotalEntries()) / 2;
+            double weightedScore = ReviewUtil.wilsonScore(positive, stats.getTotalEntries(), 0.05);
+            CourseReviewLocalServiceUtil.updateCourseReviewRating(newReview.getCourseReviewId(), weightedScore);
         }
     }
 
