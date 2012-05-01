@@ -93,7 +93,6 @@ public class FeedParser_061 implements FeedParser {
     }
 
 
-    @Override
     public void setExtension() {
         mNterNamespace = NterNameSpace.FEED_VERSION_061;
         mNterExtension = new NterExtension(mNterNamespace);
@@ -101,7 +100,6 @@ public class FeedParser_061 implements FeedParser {
     }
 
 
-    @Override
     public void setExtension(NterNameSpace nameSpace) {
         mNterNamespace = nameSpace;
         mNterExtension = new NterExtension(mNterNamespace);
@@ -109,7 +107,6 @@ public class FeedParser_061 implements FeedParser {
     }
     
 
-    @Override
     public FeedReference parserToCatalog(Feed feed, FeedContext fc) {
 
         FeedReference feedReference;
@@ -146,7 +143,6 @@ public class FeedParser_061 implements FeedParser {
     }
 
 
-    @Override
     public Component parserCourseComponentToCatalog(Entry componentEntry, FeedContext fc) {
 
         Component catalogComponent = new ComponentImpl();
@@ -182,7 +178,6 @@ public class FeedParser_061 implements FeedParser {
     }
 
 
-    @Override
     public Component setSearchTerms(Entry componentEntry, Component catalogComponent) {
 
         // for course components that are part of a search result
@@ -204,7 +199,6 @@ public class FeedParser_061 implements FeedParser {
     }
 
 
-    @Override
     public Course parserCourseToCatalog(Entry courseEntry, FeedContext fc) {
 
         NterCourse parserCourse = mStaticParser.getCourse(courseEntry);
@@ -300,7 +294,6 @@ public class FeedParser_061 implements FeedParser {
     }
 
 
-    @Override
     public Course setSearchTerms(Entry courseEntry, Course catalogCourse) {
 
         // for courses that are part of a search result
@@ -321,7 +314,6 @@ public class FeedParser_061 implements FeedParser {
     }
 
 
-    @Override
     public CourseRecord parserCourseRecordToCatalog(Entry courseRecordEntry,
             long feedReferenceId, long companyId, boolean dependenciesArePersisted)
             throws SystemException, PortalException, NterCatalogRecordDependencyException {
@@ -391,7 +383,6 @@ public class FeedParser_061 implements FeedParser {
     }
 
 
-    @Override
     public AssetVocabulary parserVocabularyToCatalog(Entry parserEntry, FeedContext fc) {
 
         long vocabularyId = 0;
@@ -417,19 +408,16 @@ public class FeedParser_061 implements FeedParser {
     }
 
 
-    @Override
     public GlobalCourseReview parserReviewToCatalogGlobal(Entry reviewEntry, FeedContext fc)
             throws SystemException {
         return null;
     }
 
-    @Override
     public CourseReview parserReviewToCatalogLocal(Entry reviewEntry, FeedContext fc)
             throws SystemException, PortalException {
         return null;
     }
 
-    @Override
     public Entry catalogReviewToParserLocal(CourseReview courseReview, Entry entry,
             AsVerb.VerbType verbType)
             throws SystemException, PortalException {
@@ -438,7 +426,6 @@ public class FeedParser_061 implements FeedParser {
 
     }
 
-    @Override
     public Entry catalogReviewToParserGlobal(CourseReview courseReview, Entry entry,
             AsVerb.VerbType verbType)
             throws SystemException, PortalException {
