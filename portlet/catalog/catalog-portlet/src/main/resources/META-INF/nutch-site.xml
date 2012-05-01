@@ -94,7 +94,7 @@
     <!-- plugin properties -->
     <property>
         <name>plugin.includes</name>
-        <value>index-(anchor|basic|more)|languageidentifier|microformats-reltag|nutch-extensionpoints|parse-(html|msexcel|mspowerpoint|msword|pdf|swf|text|tika)|protocol-httpclient|scoring-opic|urlfilter-regex|urlmeta|urlnormalizer-(pass|regex|basic)</value>        
+        <value>index-(anchor|basic|more)|languageidentifier|microformats-reltag|nutch-extensionpoints|parse-(html|swf|tika)|protocol-httpclient|scoring-opic|urlfilter-regex|urlmeta|urlnormalizer-(pass|regex|basic)</value>
     </property>
     <property>
         <name>urlmeta.tags</name>
