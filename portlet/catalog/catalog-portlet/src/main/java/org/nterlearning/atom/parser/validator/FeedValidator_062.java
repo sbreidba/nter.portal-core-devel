@@ -69,153 +69,50 @@ public class FeedValidator_062 extends FeedValidator_061 implements FeedValidato
     @Override
     public boolean validateCourseEntry(Entry courseEntry) {
 
-        boolean valid = true;
+        boolean valid = super.validateCourseEntry(courseEntry);
 
         // set up the error messages
         String entryId = courseEntry.getId().toString();
         String errorPrefix = "Validation error in entry with id [" + entryId + "]: ";
 
-        // entry type must be correct
-        NterEntryType entryType = mStaticParser.getEntryType(courseEntry);
-        if (!entryType.equals(NterEntryType.COURSE)) {
-            mLog.info(errorPrefix + "the entry type is not COURSE: " + entryType);
-            valid = false;
-        }
-
-        // get the list of courses
-        List<NterCourse> courses =
-                courseEntry.getExtensions(
-                        mNterExtension.getQName(NterExtension.COURSE_ELEMENT_NAME));
-
-        // only 1 course per entry
-        if (courses.size() > 1) {
-            mLog.info(errorPrefix + " contains more than one course; actual number: "
-                    + courses.size());
-            valid = false;
-        }
-
         NterCourse course = mStaticParser.getCourse(courseEntry);
 
-        if (course == null) {
-            mLog.info(errorPrefix + "the course element is missing");
+        // exactly one version per course required
+        List<NterVersion> versions = course.getVersions();
+        valid = FeedValidatorUtil.detectEmptyList(versions, errorPrefix, "version", valid, mLog);
+        if (versions.size() > 1) {
+            mLog.info(errorPrefix + "Multiple course versions exist, exactly 1 is permitted");
             valid = false;
         }
-        else {
 
-            // exactly one version per course required
-            List<NterVersion> versions = course.getVersions();
-            valid = FeedValidatorUtil.detectEmptyList(versions, errorPrefix, "version", valid, mLog);
-            if (versions.size() > 1) {
-                mLog.info(errorPrefix +
-                        "Multiple course versions exist, exactly 1 is permitted");
+        // Optional organization, 1 maximum.
+        if (course.getOrganizations().size() > 1) {
+            mLog.info(errorPrefix +
+                    "Multiple course organizations exist, maximum of 1 is permitted");
+            valid = false;
+        }
+
+        // Optional duration, 1 maximum.
+        if (course.getDurations().size() > 1) {
+            mLog.info(errorPrefix +
+                    "Multiple course durations exist, maximum of 1 is permitted");
+            valid = false;
+        }
+
+        // Optional price, 1 maximum.
+        List<NterPrice> prices = course.getPrices();
+        if (prices.size() > 1) {
+            mLog.info(errorPrefix +
+                    "Multiple course prices exist, maximum of 1 is permitted");
+            valid = false;
+        }
+        else if (prices.size() == 1) {
+            if (prices.get(0).isPriceNull()) {
+                mLog.info(errorPrefix + " A price entry exists, but a price is not set");
                 valid = false;
             }
-
-            // Optional organization, 1 maximum.
-            List<NterOrganization> organizations = course.getOrganizations();
-            if (organizations.size() > 1) {
-                mLog.info(errorPrefix +
-                        "Multiple course organizations exist, maximum of 1 is permitted");
-                valid = false;
-            }
-
-            // Optional duration, 1 maximum.
-            List<NterDuration> durations = course.getDurations();
-            if (durations.size() > 1) {
-                mLog.info(errorPrefix +
-                        "Multiple course durations exist, maximum of 1 is permitted");
-                valid = false;
-            }
-
-            // at least one title per course, exactly one per language
-            List<NterTitle> titles = course.getTitles();
-            valid = FeedValidatorUtil.detectEmptyList(titles, errorPrefix, "title", valid, mLog);
-            valid = FeedValidatorUtil.detectDuplicateLanguage(titles, errorPrefix, "title", valid, mLog);
-
-            // at most one transcript abstract per language
-            valid = FeedValidatorUtil.detectDuplicateLanguage(
-                        course.getTranscriptAbstracts(), errorPrefix,
-                        "transcriptAbstract", valid, mLog);
-
-            // at least one description per course, exactly one per language, and exactly one per title
-            List<NterCourseDescription> descriptions = course.getDescriptions();
-            valid = FeedValidatorUtil.detectEmptyList(descriptions, errorPrefix,
-                             "description", valid, mLog);
-            valid = FeedValidatorUtil.detectDuplicateLanguage(titles, errorPrefix,
-                             "description", valid, mLog);
-            if (titles.size() != descriptions.size()) {
-                mLog.info(errorPrefix + "there must be exactly one description per language per title");
-                valid = false;
-            }
-
-            // at most one copyright per language
-            valid = FeedValidatorUtil.detectDuplicateLanguage(course.getCopyrights(),
-                        errorPrefix, "copyright", valid, mLog);
-
-            // at most one rating per language
-            valid = FeedValidatorUtil.detectDuplicateLanguage(course.getRatings(),
-                        errorPrefix, "copyright", valid, mLog);
-
-            // at least one component ref per course
-            List<NterComponentRef> componentRefs = course.getComponentRefs();
-            valid = FeedValidatorUtil.detectEmptyList(componentRefs, errorPrefix,
-                        "componentRef", valid, mLog);
-
-            // component ref ID required
-            for (NterComponentRef componentRef : componentRefs) {
-                if (componentRef.getComponentId() == null) {
-                    mLog.info(errorPrefix + "componentId attribute is missing in a link");
-                    valid = false;
-                }
-            }
-
-            // at least one image translation per image, one per language
-            for (NterImage image : course.getImages()) {
-                if (image.getAlt() == null) {
-                    mLog.info(errorPrefix + "alt attribute is missing in an image");
-                    valid = false;
-                }
-
-                if (image.getHref() == null) {
-                    mLog.info(errorPrefix + "href attribute is missing in an image");
-                    valid = false;
-                }
-
-                if (image.getMimeType() == null) {
-                    mLog.info(errorPrefix + "mimeType attribute is missing in an image");
-                    valid = false;
-                }
-            }
-
-            // related entry Id required
-            for (NterRelated related : course.getRelateds()) {
-                if (related.getRelatedEntryId() == null) {
-                    mLog.info(errorPrefix +
-                            "relatedEntryId attribute is missing in a 'related' element");
-                    valid = false;
-                }
-
-                if (related.getRelationship() == null) {
-                    mLog.info(errorPrefix +
-                            "relationship attribute is missing in a 'related' element");
-                    valid = false;
-                }
-            }
-
-            // requirement type required
-            for (NterRequirement requirement : course.getRequirements()) {
-                if (requirement.getRequirementType() == null) {
-                    mLog.info(errorPrefix +
-                            "requirementType attribute is missing in a requirement");
-                    valid = false;
-                }
-            }
-
-            // Optional price, 1 maximum.
-            List<NterPrice> prices = course.getPrices();
-            if (prices.size() > 1) {
-                mLog.info(errorPrefix +
-                        "Multiple course prices exist, maximum of 1 is permitted");
+            else if (prices.get(0).getPrice() < 0f) {
+                mLog.info(errorPrefix + " A negative price has been set");
                 valid = false;
             }
         }
@@ -227,24 +124,11 @@ public class FeedValidator_062 extends FeedValidator_061 implements FeedValidato
     @Override
     public boolean validateCourseComponentEntry(Entry courseComponentEntry) {
 
-        boolean valid = true;
+        boolean valid = super.validateCourseComponentEntry(courseComponentEntry);
 
         // set up the error messages
         String entryId = courseComponentEntry.getId().toString();
         String errorPrefix = "Validation error in entry with id [" + entryId + "]: ";
-
-        // entry type must be correct
-        NterEntryType entryType = mStaticParser.getEntryType(courseComponentEntry);
-        if (!entryType.equals(NterEntryType.COURSE_COMPONENT)) {
-            mLog.info(errorPrefix + "the entry type is not COURSE_COMPONENT: " + entryType);
-            valid = false;
-        }
-
-        // course component ID is required
-        if ((entryId == null) || (entryId.isEmpty())) {
-            mLog.info(errorPrefix + "the entry ID is missing: " + entryId);
-            valid = false;
-        }
 
         NterComponent component = mStaticParser.getComponent(courseComponentEntry);
 
@@ -252,98 +136,31 @@ public class FeedValidator_062 extends FeedValidator_061 implements FeedValidato
         List<NterVersion> versions = component.getVersions();
         valid = FeedValidatorUtil.detectEmptyList(versions, errorPrefix, "version", valid, mLog);
         if (versions.size() > 1) {
-            mLog.info(errorPrefix +
-                    "Multiple component versions exist, exactly 1 is permitted");
+            mLog.info(errorPrefix + "Multiple component versions exist, exactly 1 is permitted");
             valid = false;
         }
 
         // Optional organization, 1 maximum.
-        List<NterOrganization> organizations = component.getOrganizations();
-        if (organizations.size() > 1) {
-            mLog.info(errorPrefix +
-                    "Multiple course organizations exist, maximum of 1 is permitted");
-            valid = false;
-        }
-
-        // course component title is required
-        String entryTitle = courseComponentEntry.getTitle();
-        if ((entryTitle == null) || (entryTitle.isEmpty())) {
-            mLog.info(errorPrefix + "the entry title is missing: " + entryTitle);
-            valid = false;
-        }
-
-        // get the list of links
-        List<Link> links = courseComponentEntry.getLinks();
-
-        // only 1 link per entry
-        if (links.size() != 1) {
-            mLog.info(errorPrefix +
-                    " contains more than one link; actual number: " + links.size());
-            valid = false;
-        }
-
-        Link link = links.get(0);
-
-        // link href is required
-        if (link.getHref() == null) {
-            mLog.info(errorPrefix + "the link href is missing");
-            valid = false;
-        }
-
-        // display width is optional, but if it's there, it has to be a positive integer
-        String displayWidthStr =
-                link.getAttributeValue(mNterExtension.getQName(
-                        NterExtension.DISPLAY_WIDTH_ATTRIBUTE_NAME));
-        if (displayWidthStr != null) {
-            try {
-                int displayWidth = Integer.valueOf(displayWidthStr);
-                if (displayWidth < 1) {
-                    mLog.info(errorPrefix + "the display width is not a positive integer");
-                    valid = false;
-                }
-            }
-            catch (NumberFormatException e) {
-                mLog.info(errorPrefix + "the display width is not a number");
-                valid = false;
-            }
-        }
-
-        // display height is optional, but if it's there, is has to be a positive integer
-        String displayHeightStr =
-                link.getAttributeValue(mNterExtension.getQName(
-                        NterExtension.DISPLAY_HEIGHT_ATTRIBUTE_NAME));
-        if (displayHeightStr != null) {
-            try {
-                int displayHeight = Integer.valueOf(displayHeightStr);
-                if (displayHeight < 1) {
-                    mLog.info(errorPrefix + "the display height is not a positive integer");
-                    valid = false;
-                }
-            }
-            catch (NumberFormatException e) {
-                mLog.info(errorPrefix + "the display height is not a number");
-                valid = false;
-            }
-        }
-
-        // updated date is required
-        if (courseComponentEntry.getUpdated() == null) {
-            mLog.info(errorPrefix + "the updated date is missing");
-            valid = false;
-        }
-
-        // summary is required
-        String summary = courseComponentEntry.getSummary();
-        if ((summary == null) || (summary.isEmpty())) {
-            mLog.info(errorPrefix + "the summary is missing: " + summary);
+        if (component.getOrganizations().size() > 1) {
+            mLog.info(errorPrefix + "Multiple course organizations exist, maximum of 1 is permitted");
             valid = false;
         }
 
         // Optional price, 1 maximum.
         List<NterPrice> prices = component.getPrices();
         if (prices.size() > 1) {
-            mLog.info(errorPrefix + "Multiple course prices exist, maximum of 1 is permitted");
+            mLog.info(errorPrefix + "Multiple component prices exist, maximum of 1 is permitted");
             valid = false;
+        }
+        else if (prices.size() == 1) {
+            if (prices.get(0).isPriceNull()) {
+                mLog.info(errorPrefix + " A price entry exists, but a price is not set");
+                valid = false;
+            }
+            else if (prices.get(0).getPrice() < 0f) {
+                mLog.info(errorPrefix + " A negative price has been set");
+                valid = false;
+            }
         }
 
         return valid;
