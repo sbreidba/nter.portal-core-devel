@@ -83,6 +83,10 @@
             }
 
             String resultTitle = searchResult.title;
+            if (resultTitle == null) {
+                resultTitle = course.getTitle();
+            }
+
             if (resultTitle.startsWith("[")) {
                 resultTitle = resultTitle.substring(1, resultTitle.length() - 1);
                 resultTitle = resultTitle.split(StringPool.COMMA_AND_SPACE)[0];
@@ -104,6 +108,10 @@
             }
 
             String resultTitle = searchResult.title;
+            if (resultTitle == null) {
+                resultTitle = component.getTitle();
+            }
+
             if (resultTitle.startsWith("[")) {
                 resultTitle = resultTitle.substring(1, resultTitle.length() - 1);
                 resultTitle = resultTitle.split(StringPool.COMMA_AND_SPACE)[0];
