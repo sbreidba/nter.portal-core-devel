@@ -22,7 +22,7 @@
 
 <portlet:actionURL name="updateFeedOwner" var="updateFeedOwnerUrl" />
 <portlet:actionURL name="processCourseRegistryFeeds" var="processCourseRegistryFeedsUrl" />
-
+<portlet:actionURL name="processMigrateReviewFeedImport" var="processMigrateReviewFeedImport" />
 <%
     Long themeCompanyId = themeDisplay.getCompanyId();
     Long scopeOrgId = GroupLocalServiceUtil.getGroup(themeDisplay.getScopeGroupId()).getClassPK();
@@ -209,6 +209,17 @@
 	<aui:fieldset>
 		<aui:button-row>
 			<aui:button type="submit" value="course-feed-process-registry" />
+		</aui:button-row>
+	</aui:fieldset>
+</aui:form>
+
+<div class="separator"></div>
+<h3 class="course-feed-title"><%= LanguageUtil.get(pageContext, "migrate-review-feed-import-heading") %></h3>
+<p><%= LanguageUtil.get(pageContext, "migrate-review-feed-imort-label") %></p>
+<aui:form action="<%= processMigrateReviewFeedImport.toString() %>" method="post">
+	<aui:fieldset>
+		<aui:button-row>
+			<aui:button type="submit" value="migrate-review-feed-import" />
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>

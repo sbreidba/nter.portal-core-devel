@@ -31,6 +31,7 @@ import com.liferay.portal.service.UserIdMapperLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.asset.NoSuchCategoryException;
 import com.liferay.portlet.asset.model.AssetCategory;
+import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil;
 import org.nterlearning.atom.enumerations.NterEntryType;
 import org.nterlearning.atom.enumerations.NterNameSpace;
@@ -338,7 +339,7 @@ public class FeedParser_062 extends FeedParser_061 implements FeedParser {
         cr.setCreateDate(review.getPublished());
         cr.setModifiedDate(review.getUpdated());
         cr.setSummary(review.getSummary());
-
+        cr.setWeightedScore(Double.valueOf(review.getExtension(AsExtension.RATING_ELEMENT).getText()));
         cr.setUserId(userId);
 
         return cr;
@@ -355,7 +356,7 @@ public class FeedParser_062 extends FeedParser_061 implements FeedParser {
                 mNterExtension.getQName(NterExtension.ENTRY_TYPE_ATTRIBUTE_NAME),
                 NterEntryType.LOCAL_REVIEW.value());
 
-        //replace the userId PK of the local NTER instance with the userIdMapper global unique value
+        //IMPORTANT NOTE: replace the userId PK of the local NTER instance with the userIdMapper global unique value
     	Person author = entry.getAuthor();
         UserIdMapper userMapper;
         try {
@@ -451,6 +452,9 @@ public class FeedParser_062 extends FeedParser_061 implements FeedParser {
         Date publishedDate = courseReview.getCreateDate();
         String summary = courseReview.getSummary();
         long userId = courseReview.getUserId();
+        // IMPORTANT NOTE: the activity stream export will load the "star" rating into the RATING_ELEMENT.
+        // During addCourseReview, this value is used to populate the Liferay RatingsEntry entity score attribute.
+        // The weightedScore will be calculated and set with updateCourseReview.
         double score = RatingsEntryLocalServiceUtil.getEntry(userId,
                 Course.class.getCanonicalName(), courseId).getScore();
 
