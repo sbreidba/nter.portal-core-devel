@@ -1333,24 +1333,22 @@ public class StaticParser {
             return;
         }
 
-        try {
-            mLog.debug("Adding local review ID [" + incomingLcr.getCourseReviewId() + "]");
-
-            CourseReviewLocalServiceUtil.getCourseReview(incomingLcr.getCourseReviewId());
-
-            // if no exception happened, that means it's persisted already
+        List<CourseReview> existingReviews =
+                CourseReviewLocalServiceUtil.findByCourseIdWithUserId(incomingLcr.getUserId(), incomingLcr.getCourseId());
+        if (existingReviews.size() > 0) {
+            // That means it's persisted already, do not reinsert but issue a warning.
             mLog.warn("Activity Stream local review with entry ID [" + review.getId() +
                     "] with the verb '" + StaticNterAtomParser.getVerb(review).getVerb() +
                     "', cannot be added because it is already persisted.");
-        }
-        catch (NoSuchCourseReviewException e) {
-            // if the exception happened, we're good: add it.
-            //
+        } else {
+            mLog.debug("Adding local review ID [" + incomingLcr.getCourseReviewId() + "]");
             // IMPORTANT NOTE: the activity stream export stores the "star" rating (RatingsEntry.score) into the weightedScore attribute.
             // During addCourseReview, this value is used to populate the Liferay RatingsEntry entity score attribute.
-            CourseReview newReview = CourseReviewLocalServiceUtil.addCourseReview(incomingLcr.getUserId(),incomingLcr.getCourseId(),
-            		incomingLcr.getSummary(),incomingLcr.getContent(),incomingLcr.getWeightedScore(),
-            		ServiceContextUtil.createDefaultServiceContext());
+            // IMPORTANT NOTE: the activity stream export stores the "star" rating (RatingsEntry.score) into the weightedScore attribute.
+            // During addCourseReview, this value is used to populate the Liferay RatingsEntry entity score attribute.
+            CourseReview newReview = CourseReviewLocalServiceUtil.addCourseReview(incomingLcr.getUserId(), incomingLcr.getCourseId(),
+                    incomingLcr.getSummary(), incomingLcr.getContent(), incomingLcr.getWeightedScore(),
+                    ServiceContextUtil.createDefaultServiceContext());
             mLog.debug("Added local Course Review ID [" + incomingLcr.getCourseReviewId() + "]");
 
             // Calculate and assign weighted value
