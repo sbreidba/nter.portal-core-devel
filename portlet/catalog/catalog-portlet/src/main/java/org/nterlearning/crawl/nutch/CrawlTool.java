@@ -308,30 +308,6 @@ public class CrawlTool {
             BufferedWriter urlOut = new BufferedWriter(new FileWriter(tmpUrlFile));
             String fullTextHref;
 
-            for (Course course : mCourseList) {
-                try {
-                    FeedReference feedRef =
-                            FeedReferenceLocalServiceUtil.getFeedReference(course.getFeedReferenceId());
-                    fullTextHref = URLDecoder.decode(course.getFullTextHref(), StringPool.UTF8);
-
-                    if (!(fullTextHref == null) && !(fullTextHref.equals(""))) {
-                        // Note: Each meta tag must also be added to the urlmeta
-                        // and db.parsemeta.to.crawldb properties in nutch-site.xml
-                        urlOut.write(fullTextHref
-                                     + "\t" + NutchConstants.FEED_IRI_INDEX_TAG + "=" + feedRef.getFeedIri()
-                                     + "\t" + NutchConstants.CLASS_INDEX_TAG + "=" + Course.class.getName()
-                                     + "\t" + NutchConstants.IRI_INDEX_TAG + "=" + course.getCourseIri()
-                                     + "\t" + NutchConstants.TITLE_INDEX_TAG + "=" + course.getTitle()
-                                     + "\t" + NutchConstants.COURSE_DETAILS_INDEX_TAG + "=http://" + guestUrl + "/course-details?cid=" + course.getCourseId()
-                                     + System.getProperty("line.separator"));
-                    }
-                }
-                catch (Exception e) {
-                    mLog.error("Could not find FeedReference for course IRI: "
-                            + course.getCourseIri());
-                }
-            }
-
             for (Component component : mComponentList) {
                 try {
                     FeedReference feedRef =
@@ -341,17 +317,43 @@ public class CrawlTool {
                     if (!(fullTextHref == null) && !(fullTextHref.equals(""))) {
                         // Note: Each meta tag must also be added to the urlmeta
                         // and db.parsemeta.to.crawldb properties in nutch-site.xml
-                        urlOut.write(fullTextHref
-                                     + "\t" + NutchConstants.FEED_IRI_INDEX_TAG + "=" + feedRef.getFeedIri()
-                                     + "\t" + NutchConstants.CLASS_INDEX_TAG + "=" + Component.class.getName()
-                                     + "\t" + NutchConstants.IRI_INDEX_TAG + "=" + component.getComponentIri()
-                                     + "\t" + NutchConstants.TITLE_INDEX_TAG + "=" + component.getTitle()
-                                     + System.getProperty("line.separator"));
+                        urlOut.write(
+                                fullTextHref
+                                        + "\t" + NutchConstants.FEED_IRI_INDEX_TAG + "=" + feedRef.getFeedIri()
+                                        + "\t" + NutchConstants.CLASS_INDEX_TAG + "=" + Component.class.getName()
+                                        + "\t" + NutchConstants.IRI_INDEX_TAG + "=" + component.getComponentIri()
+                                        + "\t" + NutchConstants.TITLE_INDEX_TAG + "=" + component.getTitle()
+                                        + System.getProperty("line.separator"));
                     }
                 }
                 catch (Exception e) {
                     mLog.error("Could not find FeedReference for component IRI: "
                             + component.getComponentIri());
+                }
+            }
+
+            for (Course course : mCourseList) {
+                try {
+                    FeedReference feedRef =
+                            FeedReferenceLocalServiceUtil.getFeedReference(course.getFeedReferenceId());
+                    fullTextHref = URLDecoder.decode(course.getFullTextHref(), StringPool.UTF8);
+
+                    if (!(fullTextHref == null) && !(fullTextHref.equals(""))) {
+                        // Note: Each meta tag must also be added to the urlmeta
+                        // and db.parsemeta.to.crawldb properties in nutch-site.xml
+                        urlOut.write(
+                                fullTextHref
+                                + "\t" + NutchConstants.FEED_IRI_INDEX_TAG + "=" + feedRef.getFeedIri()
+                                + "\t" + NutchConstants.CLASS_INDEX_TAG + "=" + Course.class.getName()
+                                + "\t" + NutchConstants.IRI_INDEX_TAG + "=" + course.getCourseIri()
+                                + "\t" + NutchConstants.TITLE_INDEX_TAG + "=" + course.getTitle()
+                                + "\t" + NutchConstants.COURSE_DETAILS_INDEX_TAG + "=http://" + guestUrl + "/course-details?cid=" + course.getCourseId()
+                                + System.getProperty("line.separator"));
+                    }
+                }
+                catch (Exception e) {
+                    mLog.error("Could not find FeedReference for course IRI: "
+                            + course.getCourseIri());
                 }
             }
 

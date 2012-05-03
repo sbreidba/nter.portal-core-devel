@@ -73,6 +73,7 @@ public class OpenSearchResult {
 		this.keywords = keywords;
 		this.groupId = groupId;
 		this.className = className;
+        this.classIri = null;
 	}
 
 	public void setStats(String className, long classPK, PageContext pageContext)

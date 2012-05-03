@@ -50,9 +50,11 @@ import org.nterlearning.crawl.nutch.NutchConstants;
 import org.nterlearning.datamodel.catalog.model.Component;
 import org.nterlearning.datamodel.catalog.model.Course;
 import org.nterlearning.datamodel.catalog.model.CourseImage;
+import org.nterlearning.datamodel.catalog.model.Courses_Components;
 import org.nterlearning.datamodel.catalog.service.ComponentLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.service.CourseLocalServiceUtil;
 import org.apache.commons.lang.StringUtils;
+import org.nterlearning.datamodel.catalog.service.Courses_ComponentsLocalServiceUtil;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
@@ -160,8 +162,7 @@ public class FederatedSearchManager {
 				Element root = doc.getRootElement();
 				String[] queryTerms = StringUtil.split(root.elementText("queryTerms"), StringPool.COMMA_AND_SPACE);
 				List<Element> entries = root.elements("entry");
-				int total = GetterUtil.getInteger(
-						root.elementText(OpenSearchUtil.getQName("totalResults", OpenSearchUtil.OS_NAMESPACE)));
+                int total = 0;
 
 				for (Element el : entries) {
 					try {
@@ -172,7 +173,6 @@ public class FederatedSearchManager {
                             || isEntryInvalidCourse(el, portletId, validCourses)
                             || isEntryInvalidComponent(el, portletId)) {
 							_log.debug("Result not valid");
-							total--;
 							continue;
 						}
 
@@ -182,15 +182,15 @@ public class FederatedSearchManager {
 						    searchScore = GetterUtil.getDouble((el.elementText("score")));
                         }
 
-						OpenSearchResult result = getResultFromElement(el, request, portletId, locale);
+						List<OpenSearchResult> results =
+                                getResultsFromElement(el, request, portletId, locale);
 
-						if(result == null) {
-							total--;
-						}else {
-							resultMap.add(new ResultAndScorePair(result, searchScore));
-						}
-					} catch (Exception e) {
-                        total--;
+                        total += results.size();
+                        for (OpenSearchResult result : results) {
+                            resultMap.add(new ResultAndScorePair(result, searchScore));
+                        }
+					}
+                    catch (Exception e) {
 						_log.error("Error storing entry of type: " + portlet.getOpenSearchClass(), e);
 					}
 				}
@@ -289,7 +289,7 @@ public class FederatedSearchManager {
                 return true;
             }
 
-            return !ComponentOpenSearchImpl.isSearchAuthorized();
+            return false;
         }
         else {
             return false;
@@ -304,18 +304,20 @@ public class FederatedSearchManager {
 			return false;
 		}
 
-		String articleId = el.elementText(
-				OpenSearchUtil.getQName(Field.ENTRY_CLASS_PK, OpenSearchUtil.LIFERAY_NAMESPACE));
-		long entryGroupId = GetterUtil.getLong(
-				el.elementText(OpenSearchUtil.getQName("groupId", OpenSearchUtil.LIFERAY_NAMESPACE)));
+		String articleId =
+                el.elementText(OpenSearchUtil.getQName(
+                        Field.ENTRY_CLASS_PK, OpenSearchUtil.LIFERAY_NAMESPACE));
+		long entryGroupId = GetterUtil.getLong(el.elementText(
+                OpenSearchUtil.getQName("groupId", OpenSearchUtil.LIFERAY_NAMESPACE)));
 		JournalArticle article = JournalArticleLocalServiceUtil.getArticle(entryGroupId, articleId);
 
 		return (DateUtil.compareTo(article.getDisplayDate(), new Date()) > 0);
 	}
 
+
 	private boolean isEntryInactiveGroup(Element el) {
-		long entryGroupId = GetterUtil.getLong(
-				el.elementText(OpenSearchUtil.getQName("groupId", OpenSearchUtil.LIFERAY_NAMESPACE)));
+		long entryGroupId = GetterUtil.getLong(el.elementText(
+                OpenSearchUtil.getQName("groupId", OpenSearchUtil.LIFERAY_NAMESPACE)));
 		if (Validator.isNull(entryGroupId)) {
 			return false;
 		}
@@ -330,168 +332,155 @@ public class FederatedSearchManager {
         }
 	}
 
+
 	/**
-	 * Formats a result element into an html string for display in a ResultRow.
+	 * Converts a result element into a list of OpenSearchResults that are then
+     * used to create a resultRow.  Multiple search results may be returned in
+     * the element represents a component, and both the component and parent
+     * course(s) are being displayed.
 	 *
 	 * @param el Element to format
 	 * @param request Servlet request
 	 * @param portletId Portlet Id
 	 * @param locale The current display locale
-	 * @return HTML string formatted
+     *
+	 * @return List of converted OpenSearchResult objects.
+     *
 	 * @throws javax.portlet.PortletException
 	 * @throws com.liferay.portal.kernel.exception.PortalException
 	 * @throws com.liferay.portal.kernel.exception.SystemException
 	 */
-	private OpenSearchResult getResultFromElement(Element el,
-        HttpServletRequest request, String portletId, Locale locale)
-			throws PortletException, PortalException, SystemException {
+    private List<OpenSearchResult> getResultsFromElement(Element el,
+            HttpServletRequest request, String portletId, Locale locale)
+            throws PortalException, PortletException, SystemException {
 
-        // which search request issued this query?
+        // which search request issued the query
         String primarySearch = request.getParameter("primarySearch");
 
-		// Summary
-		String entryClassName = el.elementText("entryClassName");
-		long entryClassPK = GetterUtil.getLong(el.elementText("entryClassPK"));
-        String entryClassIri = null;
-		String entryTitle = el.elementText("title");
-		String summary = el.elementText("summary");
-		String entryHref = (el.element("link") != null) ? el.element("link").attributeValue("href") : null;
+        List<OpenSearchResult> results = new ArrayList<OpenSearchResult>();
 
-		if (entryHref == null) {
-			entryHref = el.elementText("link");
-		}
+        String entryClassName = el.elementText("entryClassName");
+        long entryClassPK = GetterUtil.getLong(el.elementText("entryClassPK"));
+        String entryClassIri;
 
-		if (portletId.equals(NterKeys.EXTERNAL_SEARCH_PORTLET)) {
-			entryClassIri = el.elementText(el.getQName(NutchConstants.IRI_INDEX_TAG)).trim();
+        // common result information
+        String entryTitle = el.elementTextTrim("title");
+        String summary = el.elementTextTrim("summary");
+
+        String entryHref = (el.element("link") != null)
+                                ? el.element("link").attributeValue("href")
+                                : el.elementText("link");
+        double rating = GetterUtil.getDouble(el.elementText("ratings"));
+        long entryGroupId = GetterUtil.getLong(el.elementText(
+                OpenSearchUtil.getQName("groupId", OpenSearchUtil.LIFERAY_NAMESPACE)));
+
+        if (portletId.equals(NterKeys.EXTERNAL_SEARCH_PORTLET)) {
+
+            entryClassIri = el.elementText(el.getQName(NutchConstants.IRI_INDEX_TAG)).trim();
 
             if (processCourseResult(primarySearch, entryClassName)) {
-                try {
-                    Course course = CourseLocalServiceUtil.findByCourseIri(entryClassIri);
-                    entryClassPK = course.getPrimaryKey();
-                    summary = StringUtil.shorten(course.getDescription(locale), 200);
-                    entryHref = course.getUrl();
-
-                    // prevent duplication between external and local search
-                    if (!courseResultsSet.add(entryClassPK)) {
-                        return null;
-                    }
-                }
-                catch (Exception e) {
-                    _log.error("Could not find course with IRI: [" + entryClassIri + "]");
-                }
-            }
-            else if (processComponentResult(primarySearch, entryClassName)) {
-                try {
-                    if (!ComponentOpenSearchImpl.isSearchAuthorized()) {
-                        return null;
-                    }
-
+                // most results from solr are listed as a component, and we need to find and
+                // add their corresponding courses to the result list
+                if (entryClassName.equals(Component.class.getName())) {
                     Component component = ComponentLocalServiceUtil.fetchByComponentIri(entryClassIri);
-                    entryClassPK = component.getComponentId();
-                    summary = StringUtil.shorten(component.getDescription(), 200);
-                    entryHref = component.getUrl();
+                    List<Courses_Components> coursesComponents =
+                            Courses_ComponentsLocalServiceUtil.findByComponentId(component.getComponentId());
 
-                    // prevent duplication between external and local search
-                    if (!componentResultsSet.add(entryClassPK)) {
-                        return null;
+                    for (Courses_Components courseComponent : coursesComponents) {
+                        long courseId = courseComponent.getCourseId();
+
+                        if (courseResultsSet.add(courseId)) {
+                            Course course = CourseLocalServiceUtil.getCourse(courseId);
+                            OpenSearchResult result = convertCourseResultToSearchResult(
+                                    portletId, el, course, locale);
+                            results.add(result);
+                        }
                     }
                 }
-                catch (Exception e) {
-                    _log.error("Could not find component with IRI: [" + entryClassIri + "]");
+                else {
+                    if (courseResultsSet.add(entryClassPK)) {
+                        Course course = CourseLocalServiceUtil.findByCourseIri(entryClassIri);
+                        OpenSearchResult result = convertCourseResultToSearchResult(
+                                portletId, el, course, locale);
+                        results.add(result);
+                    }
                 }
             }
-            else {
-                // should never happen, but used to prevent future exceptions
-                return null;
+
+            if (processComponentResult(primarySearch, entryClassName)) {
+                if (ComponentOpenSearchImpl.isSearchAuthorized() &&
+                    componentResultsSet.add(entryClassPK)) {
+                        Component component =
+                                ComponentLocalServiceUtil.fetchByComponentIri(entryClassIri);
+                        results.add(convertComponentResultToSearchResult(portletId, el, component));
+                }
             }
-		}
 
-		double rating = 0.0;
-		long[] categoryIds = {};
-		long entryGroupId = GetterUtil
-				.getLong(el.elementText(OpenSearchUtil.getQName("groupId", OpenSearchUtil.LIFERAY_NAMESPACE)));
-
-		// Localize courses display
-		if (portletId.equals(NterKeys.COURSE_SEARCH_PORTLET)) {
-			// add to duplicates for filtering later
-			courseResultsSet.add(entryClassPK);
-			entryTitle = LocalizationUtil.getLocalization(entryTitle, LanguageUtil.getLanguageId(locale));
-			summary = LocalizationUtil.getLocalization(summary, LanguageUtil.getLanguageId(locale));
-		}
-
-        if (portletId.equals(NterKeys.COMPONENT_SEARCH_PORTLET)) {
-            componentResultsSet.add(entryClassPK);
-			entryTitle = LocalizationUtil.getLocalization(entryTitle, LanguageUtil.getLanguageId(locale));
-			summary = LocalizationUtil.getLocalization(summary, LanguageUtil.getLanguageId(locale));
+            return results;
         }
 
-		// Format Document Library Entries
-		if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY) ||
+        // Localize courses display
+        if (portletId.equals(NterKeys.COURSE_SEARCH_PORTLET)) {
+            courseResultsSet.add(entryClassPK);
+            entryTitle = LocalizationUtil.getLocalization(entryTitle, LanguageUtil.getLanguageId(locale));
+            summary = LocalizationUtil.getLocalization(summary, LanguageUtil.getLanguageId(locale));
+        }
+
+        // localize component details
+        if (portletId.equals(NterKeys.COMPONENT_SEARCH_PORTLET)) {
+            componentResultsSet.add(entryClassPK);
+            entryTitle = LocalizationUtil.getLocalization(entryTitle, LanguageUtil.getLanguageId(locale));
+            summary = LocalizationUtil.getLocalization(summary, LanguageUtil.getLanguageId(locale));
+        }
+
+        // Format Document Library Entries
+        if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY) ||
                 (portletId.equals(PortletKeys.SEARCH) &&
-                        entryClassName.equals(DLFileEntry.class.getName()))) {
-			long folderId = GetterUtil.getLong(HttpUtil.getParameter(entryHref, "_20_folderId", false));
-			String name = GetterUtil.getString(HttpUtil.getParameter(entryHref, "_20_name", false));
+                 entryClassName.equals(DLFileEntry.class.getName()))) {
+            long folderId = GetterUtil.getLong(HttpUtil.getParameter(entryHref, "_20_folderId", false));
+            String name = GetterUtil.getString(HttpUtil.getParameter(entryHref, "_20_name", false));
 
-			DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(entryGroupId, folderId, name);
+            DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(entryGroupId, folderId, name);
+            entryTitle = fileEntry.getTitle();
 
-			entryTitle = fileEntry.getTitle();
+            if (portletId.equals(PortletKeys.SEARCH)) {
+                entryTitle = PortalUtil.getPortletTitle(
+                        PortletKeys.DOCUMENT_LIBRARY, locale) + " " + CharPool.RAQUO + " " + entryTitle;
+            }
 
-			if (portletId.equals(PortletKeys.SEARCH)) {
-				entryTitle =
-						PortalUtil.getPortletTitle(PortletKeys.DOCUMENT_LIBRARY, locale) + " " + CharPool.RAQUO + " "
-								+ entryTitle;
-			}
+            if (dlLinkToViewURL) {
+                long dlPlid = PortalUtil.getPlidFromPortletId(fileEntry.getGroupId(),
+                        PortletKeys.DOCUMENT_LIBRARY);
 
-			if (dlLinkToViewURL) {
-				long dlPlid = PortalUtil.getPlidFromPortletId(fileEntry.getGroupId(), PortletKeys.DOCUMENT_LIBRARY);
+                PortletURL viewURL = PortletURLFactoryUtil
+                        .create(request, PortletKeys.DOCUMENT_LIBRARY, dlPlid,
+                                PortletRequest.RENDER_PHASE);
+                viewURL.setParameter("struts_action", "/document_library/view_file_entry");
+                viewURL.setParameter("redirect", portletURL.toString());
+                viewURL.setParameter("folderId", String.valueOf(fileEntry.getFolderId()));
+                viewURL.setParameter("name", HtmlUtil.unescape(name));
 
-				PortletURL viewURL = PortletURLFactoryUtil
-						.create(request, PortletKeys.DOCUMENT_LIBRARY, dlPlid, PortletRequest.RENDER_PHASE);
+                entryHref = viewURL.toString();
+            }
+        }
 
-				viewURL.setParameter("struts_action", "/document_library/view_file_entry");
-				viewURL.setParameter("redirect", portletURL.toString());
-				viewURL.setParameter("folderId", String.valueOf(fileEntry.getFolderId()));
-				viewURL.setParameter("name", HtmlUtil.unescape(name));
+        OpenSearchResult result = new OpenSearchResult(portletId, entryTitle, summary, entryHref,
+                rating, processTags(el), new long[]{}, entryGroupId, keywords, entryClassName);
 
-				entryHref = viewURL.toString();
-			}
-		}
+        if (Validator.isNotNull(entryClassName) && Validator.isNotNull(entryClassPK)) {
+            try {
+                result.setStats(entryClassName, entryClassPK, pageContext);
+            }
+            catch (Exception e) {
+                _log.error(e.getMessage());
+            }
+        }
 
-		// Format Tags
-		String tagsString = el.elementText("tags");
-		tagsString = Validator.isNotNull(tagsString) ? tagsString.replaceAll("[\\[\\]]", "") : StringPool.BLANK;
+        results.add(result);
 
-		// Ratings
-		rating = GetterUtil.getDouble(el.elementText("ratings"));
+        return results;
+    }
 
-		OpenSearchResult result = new OpenSearchResult(portletId, entryTitle, summary, entryHref, rating, tagsString,
-				categoryIds, entryGroupId, keywords, entryClassName);
-
-		if (Validator.isNotNull(entryClassName) && Validator.isNotNull(entryClassPK)) {
-			try {
-				result.setStats(entryClassName, entryClassPK, pageContext);
-                result.classIri = entryClassIri;
-
-				if (entryClassName.equals(Course.class.getName())) {
-                    ThemeDisplay themeDisplay = (ThemeDisplay) pageContext.getRequest()
-                            .getAttribute(WebKeys.THEME_DISPLAY);
-					Course course = CourseLocalServiceUtil.getCourse(entryClassPK);
-					result.setOwner(course.getOwnerName(themeDisplay.getCompanyId()),
-							course.getOwnerUrl(themeDisplay.getCompanyId()));
-
-					course.startSafeImageEnumeration(locale, locale);
-					if (course.getSafeImageCount() > 0) {
-                        CourseImage image = course.getSafeImage(0);
-                        result.setImage(image.getSmallImageUrl(themeDisplay), image.getAlternateText());
-					}
-				}
-			} catch (Exception e) {
-				_log.warn("Unable to process course.  Not displaying result.");
-			}
-		}
-
-		return result;
-	}
 
 	/**
 	 * Search all portlet sources and return a list of result lists. Returns all
@@ -548,7 +537,7 @@ public class FederatedSearchManager {
 
     /**
      * Returns true if the result is from either a global search or a course
-     * specific search and if the result represents a course object.
+     * specific search and if the result represents a course or component object.
      *
      * @param primarySearch Null if a global search, the opensearch impl otherwise
      * @param entryClass result's class
@@ -558,7 +547,8 @@ public class FederatedSearchManager {
     private boolean processCourseResult(String primarySearch, String entryClass) {
         return ((primarySearch == null) ||
                 (primarySearch.equals(CourseOpenSearchImpl.class.getName()))) &&
-                entryClass.equals(Course.class.getName());
+                (entryClass.equals(Course.class.getName()) ||
+                 entryClass.equals(Component.class.getName()));
     }
 
 
@@ -576,6 +566,91 @@ public class FederatedSearchManager {
         return ((primarySearch == null) ||
                 (primarySearch.equals(ComponentOpenSearchImpl.class.getName()))) &&
                 entryClass.equals(Component.class.getName());
+    }
+
+
+    private OpenSearchResult convertCourseResultToSearchResult(String type, Element el,
+            Course course, Locale locale) {
+
+        String summary = StringUtil.shorten(course.getDescription(locale), 200);
+
+        String url;
+        try {
+            url = course.getUrl();
+        }
+        catch (Exception e) {
+            url = "";
+        }
+
+        long entryGroupId =
+                GetterUtil.getLong(el.elementText(
+                        OpenSearchUtil.getQName("groupId", OpenSearchUtil.LIFERAY_NAMESPACE)));
+        double rating = GetterUtil.getDouble(el.elementText("ratings"));
+
+        ThemeDisplay themeDisplay = (ThemeDisplay) pageContext.getRequest()
+                                                              .getAttribute(WebKeys.THEME_DISPLAY);
+
+        OpenSearchResult result =  new OpenSearchResult(type, el.elementTextTrim("title"), summary,
+                url, rating, processTags(el), new long[]{},  entryGroupId, keywords,
+                Course.class.getName());
+        result.setOwner(course.getOwnerName(themeDisplay.getCompanyId()),
+                        course.getOwnerUrl(themeDisplay.getCompanyId()));
+        result.classIri = course.getCourseIri();
+
+        course.startSafeImageEnumeration(locale, locale);
+        if (course.getSafeImageCount() > 0) {
+            CourseImage image = course.getSafeImage(0);
+            result.setImage(image.getSmallImageUrl(themeDisplay), image.getAlternateText());
+        }
+
+        try {
+            result.setStats(Course.class.getName(), course.getCourseId(), pageContext);
+        }
+        catch (Exception e) {
+            _log.error(e.getMessage());
+        }
+
+        return result;
+    }
+
+
+    private OpenSearchResult convertComponentResultToSearchResult(String type, Element el,
+            Component component) {
+
+        String summary = StringUtil.shorten(component.getDescription(), 200);
+        String url;
+        try {
+            url = component.getUrl();
+        }
+        catch (Exception e) {
+            url = "";
+        }
+
+        long entryGroupId =
+                GetterUtil.getLong(el.elementText(
+                        OpenSearchUtil.getQName("groupId", OpenSearchUtil.LIFERAY_NAMESPACE)));
+        double rating = GetterUtil.getDouble(el.elementText("ratings"));
+
+        OpenSearchResult result = new OpenSearchResult(type, el.elementTextTrim("title"), summary,
+                url, rating, processTags(el), new long[]{}, entryGroupId, keywords,
+                Component.class.getName());
+        result.classIri = component.getComponentIri();
+
+        try {
+            result.setStats(Component.class.getName(), component.getComponentId(), pageContext);
+        }
+        catch (Exception e) {
+            _log.error(e.getMessage());
+        }
+
+        return result;
+    }
+
+
+    private String processTags(Element el) {
+        String tags = el.elementTextTrim("tags");
+        tags = Validator.isNotNull(tags) ? tags.replaceAll("[\\[\\]]", "") : StringPool.BLANK;
+        return tags;
     }
 
 	private static final Log _log = LogFactoryUtil.getLog(FederatedSearchManager.class);
