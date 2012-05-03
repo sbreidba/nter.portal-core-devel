@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  National Training and Education Resource (NTER)
+  Copyright (C) 2012 SRI International
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or (at
+  your option) any later version.
+
+  This program is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  02110-1301, USA.
+  -->
+
+<custom-sql>
+   <sql id="org.nterlearning.datamodel.catalog.service.persistence.CourseRecordFinder.findByUserIdFilterSorted">
+        <![CDATA[
+            SELECT {CATALOG_CourseRecord.*}, {CATALOG_Course.*}, RatingsEntry.score AS RATING
+            FROM CATALOG_CourseRecord
+            INNER JOIN
+                CATALOG_Course ON (CATALOG_CourseRecord.courseIri = CATALOG_Course.courseIri)
+            LEFT OUTER JOIN
+                RatingsEntry ON (RatingsEntry.classPK = CATALOG_Course.courseId AND
+                                 RatingsEntry.userId = CATALOG_CourseRecord.userId)
+            WHERE
+                ((RatingsEntry.classNameId IS NULL OR RatingsEntry.classNameId = ?))  AND
+                (CATALOG_CourseRecord.removed = 0 ) AND
+                (CATALOG_CourseRecord.userHidden = 0) AND
+                (CATALOG_CourseRecord.userId = ? ) AND
+                EXISTS (SELECT * FROM CATALOG_Courses_Components
+                        INNER JOIN
+                        CATALOG_Component ON (CATALOG_Courses_Components.componentId = CATALOG_Component.componentId)
+						WHERE CATALOG_Course.courseId = CATALOG_Courses_Components.courseId AND
+							(CATALOG_Component.removed = 0))
+        ]]>
+    </sql>
+    <sql id="org.nterlearning.datamodel.catalog.service.persistence.CourseRecordFinder.countByUserIdFilter">
+        <![CDATA[
+            SELECT COUNT(*) as COUNT_VALUE
+            FROM CATALOG_CourseRecord
+            INNER JOIN
+                CATALOG_Course ON (CATALOG_CourseRecord.courseIri = CATALOG_Course.courseIri)
+            LEFT OUTER JOIN
+                RatingsEntry ON (RatingsEntry.classPK = CATALOG_Course.courseId AND
+                                 RatingsEntry.userId = CATALOG_CourseRecord.userId)
+            WHERE
+                ((RatingsEntry.classNameId IS NULL OR RatingsEntry.classNameId = ?))  AND
+                (CATALOG_CourseRecord.removed = 0 ) AND
+                (CATALOG_CourseRecord.userHidden = 0) AND
+                (CATALOG_CourseRecord.userId = ? ) AND
+                EXISTS (SELECT * FROM CATALOG_Courses_Components
+                        INNER JOIN
+                        CATALOG_Component ON (CATALOG_Courses_Components.componentId = CATALOG_Component.componentId)
+						WHERE CATALOG_Course.courseId = CATALOG_Courses_Components.courseId AND
+							(CATALOG_Component.removed = 0))
+        ]]>
+    </sql>
+
+    <sql id="org.nterlearning.datamodel.catalog.service.persistence.CourseRecordFinder.countAccessedByCourseIri">
+        <![CDATA[
+            SELECT COUNT(*) as COUNT_VALUE
+            FROM CATALOG_CourseRecord
+            WHERE
+                (CATALOG_CourseRecord.courseIri = ? )
+        ]]>
+    </sql>
+
+    <sql id="org.nterlearning.datamodel.catalog.service.persistence.CourseRecordFinder.countCompletedByCourseIri">
+        <![CDATA[
+            SELECT COUNT(*) as COUNT_VALUE
+            FROM CATALOG_CourseRecord
+            WHERE
+                (CATALOG_CourseRecord.completionStatus in ('Completed','Failed')) AND
+                (CATALOG_CourseRecord.courseIri = ? )
+        ]]>
+    </sql>
+</custom-sql>
