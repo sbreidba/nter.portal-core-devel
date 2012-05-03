@@ -20,22 +20,12 @@
 
 package org.nterlearning.atom.parser.portlet;
 
-import com.liferay.portal.kernel.exception.PortalException;
-import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
-import org.apache.abdera.model.Document;
-import org.apache.abdera.model.Feed;
-import org.apache.abdera.parser.Parser;
-import org.nterlearning.atom.AbderaSingleton;
-import org.nterlearning.atom.generator.AbderaAtomGenerator;
-import org.nterlearning.atom.generator.NterActivityStreamGenerator;
-import org.nterlearning.atom.parser.AtomFeedProcessor;
-import org.nterlearning.atom.parser.FeedContext;
 import org.nterlearning.atom.parser.FeedParser;
 import org.nterlearning.atom.parser.push.PubSubHubbubSubscriber;
 import org.nterlearning.course.enumerations.FeedRemovalReasonType;
@@ -393,55 +383,4 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
         response.setRenderParameter("feedTabs", request.getParameter("feedTabs"));
     }
 
-    /**
-     * Exports a review feed for migration
-     *
-     * @param request HTTP Request handler
-     * @param response HTTP response handler
-     */
-    public void processMigrateReviewFeedImport(ActionRequest request, ActionResponse response)
-            throws FileNotFoundException, IOException, PortalException, SystemException {
-
-        mLog.info("Importing local course reviews");
-
-        try {
-            // get the local reviews migration feed
-            String feedString = readFileAsString(REVIEWS_MIGRATION_PATH);
-
-			// parse it into an Abdera Feed
-			Parser parser = AbderaSingleton.getInstance().getParser();
-			Document<Feed> doc = parser.parse(new StringReader(feedString));
-			Feed feed = doc.getRoot();
-
-			// create the Feed Context
-
-			FeedContext fc = new FeedContext(REVIEWS_MIGRATION_PATH);
-
-			// process it like a normal feed
-			AtomFeedProcessor.processFeed(fc, feed);
-
-        }
-        catch (FileNotFoundException e) {
-            mLog.warn("Migration Review File not found.");
-        }
-        catch (IOException e) {
-            mLog.warn("Migration Review File IO Exception");
-        } catch (SystemException e) {
-            throw new SystemException(e);
-        } catch (PortalException e) {
-            throw new PortalException(e);
-        }
-    }
-
-private static String readFileAsString(String filePath) throws java.io.IOException{
-    byte[] buffer = new byte[(int) new File(filePath).length()];
-    BufferedInputStream f = null;
-    try {
-        f = new BufferedInputStream(new FileInputStream(filePath));
-        f.read(buffer);
-    } finally {
-        if (f != null) try { f.close(); } catch (IOException ignored) { }
-    }
-    return new String(buffer);
-}
 }
