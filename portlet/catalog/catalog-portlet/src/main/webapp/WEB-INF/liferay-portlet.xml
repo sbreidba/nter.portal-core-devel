@@ -165,6 +165,15 @@
         <css-class-wrapper>reports-control-panel-portlet</css-class-wrapper>
     </portlet>
 
+    <!--migration control panel-->
+    <portlet>
+        <portlet-name>migration-control-panel</portlet-name>
+        <icon>/reports/images/icon.png</icon>
+        <control-panel-entry-category>portal</control-panel-entry-category>
+        <control-panel-entry-weight>3.1</control-panel-entry-weight>
+        <css-class-wrapper>migration-control-panel-portlet</css-class-wrapper>
+    </portlet>
+
     <!-- course testing control panel -->
     <portlet>
         <portlet-name>course-testing-control-panel</portlet-name>
