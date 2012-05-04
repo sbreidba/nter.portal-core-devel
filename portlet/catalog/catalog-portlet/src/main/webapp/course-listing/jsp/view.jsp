@@ -77,7 +77,13 @@ int end = cur * delta;
 List<Course> results = new ArrayList<Course>();
 if (total > 0) {
     if (vocabularyIdFilter > 0) {
-        results = CourseLocalServiceUtil.findAllValidCourses(vocabularyIdFilter, groupId, start, end);
+        try {
+            results = CourseLocalServiceUtil.findAllValidCourses(vocabularyIdFilter, groupId, start, end);
+        }
+        catch (Exception e) {
+            // problem searching for courses, most likely due to corrupted local index.
+            total = 0;
+        }
     } else if (categoryIdFilter > 0) {
         AssetCategory assetCategory = AssetCategoryLocalServiceUtil.getCategory(categoryIdFilter);
         results = CourseLocalServiceUtil.findAllValidCourses(assetCategory, groupId, start, end);
@@ -93,7 +99,13 @@ if (total > 0) {
 
         List<AssetEntry> assetEntries = AssetEntryLocalServiceUtil.getEntries(assetQuery);
         for (AssetEntry entry : assetEntries) {
-            results.add(CourseLocalServiceUtil.getCourse(entry.getClassPK()));
+            try {
+                results.add(CourseLocalServiceUtil.getCourse(entry.getClassPK()));
+            }
+            catch (Exception e) {
+                // problem searching for course, most likely due ot corrupted local index
+                total -= 1;
+            }
         }          
     }
     else {
