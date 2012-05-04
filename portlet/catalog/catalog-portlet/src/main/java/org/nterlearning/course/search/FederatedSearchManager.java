@@ -201,7 +201,8 @@ public class FederatedSearchManager {
             _log.error(iae.getMessage());
         }
         catch (Exception e) {
-			_log.error("Error displaying content of type " + portlet.getOpenSearchClass());
+			_log.error("Error displaying content of type " + portlet.getOpenSearchClass() +
+                       " : " + e.getMessage());
 		}
 		return resultMap;
 	}
@@ -374,6 +375,9 @@ public class FederatedSearchManager {
         long entryGroupId = GetterUtil.getLong(el.elementText(
                 OpenSearchUtil.getQName("groupId", OpenSearchUtil.LIFERAY_NAMESPACE)));
 
+        ThemeDisplay themeDisplay = (ThemeDisplay) pageContext.getRequest()
+                                                              .getAttribute(WebKeys.THEME_DISPLAY);
+
         if (portletId.equals(NterKeys.EXTERNAL_SEARCH_PORTLET)) {
 
             entryClassIri = el.elementText(el.getQName(NutchConstants.IRI_INDEX_TAG)).trim();
@@ -468,11 +472,16 @@ public class FederatedSearchManager {
                 rating, processTags(el), new long[]{}, entryGroupId, keywords, entryClassName);
 
         if (Validator.isNotNull(entryClassName) && Validator.isNotNull(entryClassPK)) {
-            try {
-                result.setStats(entryClassName, entryClassPK, pageContext);
-            }
-            catch (Exception e) {
-                _log.error(e.getMessage());
+            result.setStats(entryClassName, entryClassPK, pageContext);
+
+            if (entryClassName.equals(Course.class.getName())) {
+                Course course = CourseLocalServiceUtil.getCourse(entryClassPK);
+                course.startSafeImageEnumeration(locale, locale);
+
+                if (course.getSafeImageCount() > 0) {
+                    CourseImage image = course.getSafeImage(0);
+                    result.setImage(image.getSmallImageUrl(themeDisplay), image.getAlternateText());
+                }
             }
         }
 
