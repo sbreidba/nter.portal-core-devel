@@ -423,6 +423,10 @@ public class CourseImpl extends CourseBaseImpl {
 	public void updateIndex()
 			throws SystemException  {
 
+        if (!isIndexable()) {
+            return;
+        }
+
         try {
             Indexer indexer = IndexerRegistryUtil.getIndexer(Course.class);
             indexer.reindex(this);
