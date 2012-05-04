@@ -164,7 +164,13 @@ public class ComponentImpl extends ComponentBaseImpl implements Component {
     public void updateIndex() {
         try {
             Indexer indexer = IndexerRegistryUtil.getIndexer(Component.class);
-            indexer.reindex(this);
+
+            if (this.isRemoved()) {
+                indexer.delete(this);
+            }
+            else {
+                indexer.reindex(this);
+            }
         }
         catch (SearchException e) {
             mLog.error("Could not update index for component: " + this.getComponentId());

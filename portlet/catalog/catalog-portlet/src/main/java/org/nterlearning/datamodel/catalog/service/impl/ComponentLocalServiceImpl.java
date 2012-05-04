@@ -135,6 +135,10 @@ public class ComponentLocalServiceImpl extends ComponentLocalServiceBaseImpl {
     public void deleteComponent(Component component)
             throws PortalException, SystemException {
 
+        // we need to mark as removed so children don't reindex it
+        component.setRemoved(true);
+        componentPersistence.update(component, true);
+
         deleteAllChildren(component);
 
         // remove from index

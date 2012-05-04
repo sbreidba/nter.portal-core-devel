@@ -404,6 +404,9 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
             throws PortalException, SystemException {
 
         for (Course course : coursePersistence.findByGroupId(groupId)) {
+            // we need to mark as removed and persist so the children don't reindex the course
+            course.setRemoved(true);
+            coursePersistence.updateImpl(course, true);
             deleteCourse(course);
         }
     }
@@ -412,14 +415,11 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
     public void deleteCourse(Course course)
             throws PortalException, SystemException {
 
-        deleteAllChildren(course);
+        // we need to mark as removed and persist so the children don't reindex the course
+        course.setRemoved(true);
+        coursePersistence.update(course, true);
 
-        // TODO - once workflow is setup, the indexer delete may be moved
-        // similar to blogs
-        // Indexer - the course must be removed from indexer prior to removal
-        Indexer indexer = IndexerRegistryUtil.getIndexer(Course.class);
-        indexer.delete(course);
-        removeCourseFromIndex(course);
+        deleteAllChildren(course);
 
         // Course
         coursePersistence.remove(course);
@@ -439,6 +439,12 @@ public class CourseLocalServiceImpl extends CourseLocalServiceBaseImpl {
 
         // external links
         externalLinkPersistence.removeByCourseId(course.getCourseId());
+
+        // TODO - once workflow is setup, the indexer delete may be moved
+        // similar to blogs
+        Indexer indexer = IndexerRegistryUtil.getIndexer(Course.class);
+        indexer.delete(course);
+        removeCourseFromIndex(course);
     }
 
 
