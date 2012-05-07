@@ -21,6 +21,8 @@
 package org.nterlearning.migration.portlet;
 
 import com.liferay.portal.DuplicateUserScreenNameException;
+import com.liferay.portal.NoSuchUserIdMapperException;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -30,6 +32,10 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.*;
 import com.liferay.portal.service.*;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.ratings.model.RatingsEntry;
+import com.liferay.portlet.ratings.model.RatingsStats;
+import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil;
+import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 import com.liferay.util.PwdGenerator;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 import org.apache.abdera.model.Document;
@@ -40,19 +46,20 @@ import org.nterlearning.atom.AbderaSingleton;
 import org.nterlearning.atom.parser.AtomFeedProcessor;
 import org.nterlearning.atom.parser.FeedContext;
 import org.nterlearning.course.hook.SetupAction;
-import org.nterlearning.migration.model.UserExtract;
-import org.nterlearning.migration.model.UserGroupsExtract;
-import org.nterlearning.migration.model.UserOrgsExtract;
-import org.nterlearning.migration.model.UserRolesExtract;
+import org.nterlearning.datamodel.catalog.model.Course;
+import org.nterlearning.datamodel.catalog.model.CourseReview;
+import org.nterlearning.datamodel.catalog.service.CourseLocalServiceUtil;
+import org.nterlearning.datamodel.catalog.service.CourseReviewLocalServiceUtil;
+import org.nterlearning.migration.model.*;
 import org.nterlearning.utils.PortalProperties;
+import org.nterlearning.utils.PortalPropertiesUtil;
+import org.nterlearning.utils.ReviewUtil;
 
+import javax.management.Query;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 /**
  * Migration of information from different versions of Liferay.
@@ -254,7 +261,7 @@ public class MigrationPortlet extends MVCPortlet {
     }
 
     /**
-     * Migration process using a review feed
+     * Migration process using a local course review feed
      *
      * @param request  HTTP Request handler
      * @param response HTTP response handler
@@ -288,6 +295,98 @@ public class MigrationPortlet extends MVCPortlet {
             throw new SystemException(e);
         } catch (PortalException e) {
             throw new PortalException(e);
+        }
+    }
+
+    /**
+     * Migration process using a file for user helpful/not helpful review score
+     *
+     * @param request  HTTP Request handler
+     * @param response HTTP response handler
+     */
+    public void processMigrateReviewHelpImport(ActionRequest request, ActionResponse response)
+            throws FileNotFoundException, IOException, PortalException, SystemException {
+
+        mLog.info("Importing user helpful/not helpful scores for course reviews");
+
+        // Extract user review scores to migrate
+        String userReviewHelpFilename = MigrationConstants.USER_REVIEW_HELP_MIGRATION_PATH;
+        ArrayList<UserReviewHelpExtract> userReviewHelpList = readUserReviewHelpExtractAsArrayList(userReviewHelpFilename);
+
+        for (UserReviewHelpExtract userItem : userReviewHelpList) {
+            // extract values from list
+            String ssoValue = userItem.getSsoValue();
+            String emailAddress = userItem.getEmailAddress();
+            String courseIri = userItem.getCourseIri();
+            long score = Long.valueOf(userItem.getScore());
+
+            long courseId = 0;
+            long userId = 0;
+
+            // Find user based on the UserIdMapper assignment
+            UserIdMapper userMapper;
+            try {
+                userMapper =
+                        UserIdMapperLocalServiceUtil.getUserIdMapperByExternalUserId(PortalPropertiesUtil.getSsoImplementation(),
+                                ssoValue);
+                userId = userMapper.getUserId();
+            } catch (Exception e) {
+                mLog.warn("Could not find local user which maps to external user id " + ssoValue);
+            }
+
+            // Find course based on courseIri assignment
+            Course course;
+            try {
+                course = CourseLocalServiceUtil.fetchByCourseIri(courseIri);
+                courseId = course.getCourseId();
+            } catch (Exception e) {
+                // probably course does not exist, but log just in case
+                mLog.warn("Could not find course which maps to courseIRI: " + courseIri);
+            }
+
+            // When user, course, and review exist, migrate the extracted review helpful/not helpful
+            if (userId != 0 && courseId != 0) {
+                List<CourseReview> courseReviewList;
+                RatingsEntry ratingsEntry;
+                try {
+                    courseReviewList = CourseReviewLocalServiceUtil.findByCourseIdWithUserId(userId, courseId);
+                    for (CourseReview courseReview : courseReviewList) {
+                        ServiceContext serviceContext = ServiceContextFactory.getInstance(
+                                RatingsEntryLocalServiceUtil.class.getName(), request);
+
+                        RatingsEntryLocalServiceUtil.updateEntry(userId, CourseReview.class.getName(), courseReview.getPrimaryKey(), score, serviceContext);
+                        mLog.info("User Helpful Score added for CourseIri: " + courseIri + " UserId: " + ssoValue);
+                    }
+                } catch (Exception e) {
+                    // review does not exist
+                    mLog.warn("Could not find user " + ssoValue + " review for course " + courseIri);
+                }
+            }
+        }
+    }
+
+    /**
+     * Migration process force update of review weighted score based on  helpful/not helpful reviews in RatingsStats
+     *
+     * @param request  HTTP Request handler
+     * @param response HTTP response handler
+     */
+    public void processUpdateReviewWeightedScore(ActionRequest request, ActionResponse response)
+            throws PortalException, SystemException {
+        List<CourseReview> courseReviewList = CourseReviewLocalServiceUtil.getCourseReviews(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+        for (CourseReview courseReview : courseReviewList) {
+            try {
+                // Calculate and assign weighted value
+                RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(CourseReview.class.getName(), courseReview.getCourseReviewId());
+                // This should equal the number of positive ratings as long as all ratings are +/-1.
+                int positive = ((int) stats.getTotalScore() + stats.getTotalEntries()) / 2;
+                double weightedScore = ReviewUtil.wilsonScore(positive, stats.getTotalEntries(), 0.05);
+                CourseReviewLocalServiceUtil.updateCourseReviewRating(courseReview.getCourseReviewId(), weightedScore);
+            } catch (Exception e) {
+                mLog.warn("Problem calculating weighted score for Course Review with PK: " + courseReview.getPrimaryKey() +
+                        " based on courseId: " + courseReview.getCourseId() + " and userId " + courseReview.getUserId());
+            }
         }
     }
 
@@ -397,6 +496,31 @@ public class MigrationPortlet extends MVCPortlet {
                 userEntry.setMapperType(dataValue[1]);
                 userEntry.setEmailAddress(dataValue[2]);
                 userEntry.setRoleName(dataValue[3]);
+                storeValues.add(userEntry);
+            }
+        } catch (FileNotFoundException e) {
+            mLog.error("File not found: " + fileName);
+        } catch (IOException e) {
+            mLog.error("IO Exception processing file: " + fileName);
+        }
+        return storeValues;
+    }
+
+    private static ArrayList<UserReviewHelpExtract> readUserReviewHelpExtractAsArrayList(String fileName)
+            throws  IOException {
+        ArrayList<UserReviewHelpExtract> storeValues = new ArrayList<UserReviewHelpExtract>();
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                String dataValue[] = line.split("\t");
+                UserReviewHelpExtract userEntry = new UserReviewHelpExtract();
+                userEntry.setSsoValue(dataValue[0]);
+                userEntry.setMapperType(dataValue[1]);
+                userEntry.setEmailAddress(dataValue[2]);
+                userEntry.setCourseIri(dataValue[3]);
+                userEntry.setScore(dataValue[4]);
                 storeValues.add(userEntry);
             }
         } catch (FileNotFoundException e) {

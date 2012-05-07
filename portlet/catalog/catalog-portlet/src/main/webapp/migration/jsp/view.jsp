@@ -37,6 +37,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 
 <portlet:actionURL name="processMigrateUserImport" var="processMigrateUserImport" />
 <portlet:actionURL name="processMigrateReviewFeedImport" var="processMigrateReviewFeedImport" />
+<portlet:actionURL name="processMigrateReviewHelpImport" var="processMigrateReviewHelpImport" />
+<portlet:actionURL name="processUpdateReviewWeightedScore" var="processUpdateReviewWeightedScore" />
 <%
     PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -53,11 +55,33 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 
 <div class="separator"></div>
 <h3 class="course-feed-title"><%= LanguageUtil.get(pageContext, "migrate-review-feed-import-heading") %></h3>
-<p><%= LanguageUtil.get(pageContext, "migrate-review-feed-imort-label") %></p>
+<p><%= LanguageUtil.get(pageContext, "migrate-review-feed-import-label") %></p>
 <aui:form action="<%= processMigrateReviewFeedImport %>" method="post">
 	<aui:fieldset>
 		<aui:button-row>
 			<aui:button type="submit" value="migrate-review-feed-import" />
+		</aui:button-row>
+	</aui:fieldset>
+</aui:form>
+
+<div class="separator"></div>
+<h3 class="course-feed-title"><%= LanguageUtil.get(pageContext, "migrate-user-review-help-import-heading") %></h3>
+<p><%= LanguageUtil.get(pageContext, "migrate-user-review-help-import-label") %></p>
+<aui:form action="<%= processMigrateReviewHelpImport %>" method="post">
+	<aui:fieldset>
+		<aui:button-row>
+			<aui:button type="submit" value="migrate-user-review-help-import" />
+		</aui:button-row>
+	</aui:fieldset>
+</aui:form>
+
+<div class="separator"></div>
+<h3 class="course-feed-title"><%= LanguageUtil.get(pageContext, "migrate-review-update-weight-score-heading") %></h3>
+<p><%= LanguageUtil.get(pageContext, "migrate-review-update-weight-score-label") %></p>
+<aui:form action="<%= processUpdateReviewWeightedScore %>" method="post">
+	<aui:fieldset>
+		<aui:button-row>
+			<aui:button type="submit" value="migrate-review-update-weight-score" />
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>

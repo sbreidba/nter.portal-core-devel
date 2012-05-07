@@ -1351,13 +1351,7 @@ public class StaticParser {
                     ServiceContextUtil.createDefaultServiceContext());
             mLog.debug("Added local Course Review ID [" + incomingLcr.getCourseReviewId() + "]");
 
-            // Calculate and assign weighted value
-            RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(CourseReview.class.getName(), newReview.getCourseReviewId());
-            // This should equal the number of positive ratings as long as all ratings are +/-1.
-            int positive = ((int) stats.getTotalScore() + stats.getTotalEntries()) / 2;
-            double weightedScore = ReviewUtil.wilsonScore(positive, stats.getTotalEntries(), 0.05);
-            CourseReviewLocalServiceUtil.updateCourseReviewRating(newReview.getCourseReviewId(), weightedScore);
-        }
+         }
     }
 
 
