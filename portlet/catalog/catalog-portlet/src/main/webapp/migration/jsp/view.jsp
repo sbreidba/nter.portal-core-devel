@@ -26,11 +26,8 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 
-<%@ page import="com.liferay.portal.service.GroupLocalServiceUtil" %>
-<%@ page import="com.liferay.portal.model.GroupConstants" %>
 <%@ page import="javax.portlet.PortletURL" %>
 <%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
-<%@ taglib prefix="portlet" uri="http://liferay.com/tld/portlet" %>
 
 
 <portlet:defineObjects />
@@ -46,7 +43,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 %>
 <h3 class="course-feed-title"><%= LanguageUtil.get(pageContext, "migrate-user-import-heading") %></h3>
 <p><%= LanguageUtil.get(pageContext, "migrate-user-import-label") %></p>
-<aui:form action="<%= processMigrateUserImport.toString() %>" method="post">
+<aui:form action="<%= processMigrateUserImport%>" method="post">
 	<aui:fieldset>
 		<aui:button-row>
 			<aui:button type="submit" value="migrate-user-import" />
@@ -57,7 +54,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 <div class="separator"></div>
 <h3 class="course-feed-title"><%= LanguageUtil.get(pageContext, "migrate-review-feed-import-heading") %></h3>
 <p><%= LanguageUtil.get(pageContext, "migrate-review-feed-imort-label") %></p>
-<aui:form action="<%= processMigrateReviewFeedImport.toString() %>" method="post">
+<aui:form action="<%= processMigrateReviewFeedImport %>" method="post">
 	<aui:fieldset>
 		<aui:button-row>
 			<aui:button type="submit" value="migrate-review-feed-import" />
