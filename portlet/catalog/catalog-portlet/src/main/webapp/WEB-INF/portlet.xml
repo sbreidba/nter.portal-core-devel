@@ -489,6 +489,31 @@
         </security-role-ref>
     </portlet>
 
+    <!-- migration control panel -->
+    <portlet>
+        <portlet-name>migration-control-panel</portlet-name>
+        <display-name>Migration</display-name>
+        <portlet-class>org.nterlearning.migration.portlet.MigrationPortlet</portlet-class>
+        <init-param>
+            <name>view-jsp</name>
+            <value>/migration/jsp/view.jsp</value>
+        </init-param>
+        <expiration-cache>0</expiration-cache>
+        <supports>
+            <mime-type>text/html</mime-type>
+            <portlet-mode>view</portlet-mode>
+        </supports>
+        <resource-bundle>content.Language</resource-bundle>
+        <portlet-info>
+            <title>Migration Tasks</title>
+            <short-title>Migration Tasks</short-title>
+            <keywords>migration</keywords>
+        </portlet-info>
+        <security-role-ref>
+            <role-name>administrator</role-name>
+        </security-role-ref>
+    </portlet>
+
     <!-- course testing control panel -->
     <portlet>
         <portlet-name>course-testing-control-panel</portlet-name>
