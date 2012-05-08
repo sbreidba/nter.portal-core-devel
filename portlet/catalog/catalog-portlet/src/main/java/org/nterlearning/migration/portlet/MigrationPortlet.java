@@ -350,6 +350,9 @@ public class MigrationPortlet extends MVCPortlet {
                 RatingsEntry ratingsEntry;
                 try {
                     courseReviewList = CourseReviewLocalServiceUtil.findByCourseIdWithUserId(userId, courseId);
+                    if (courseReviewList.size() == 0) {
+                       mLog.warn("Review not found for CourseIri: " + courseIri + " UserId: " + ssoValue);
+                    }
                     for (CourseReview courseReview : courseReviewList) {
                         ServiceContext serviceContext = ServiceContextFactory.getInstance(
                                 RatingsEntryLocalServiceUtil.class.getName(), request);
