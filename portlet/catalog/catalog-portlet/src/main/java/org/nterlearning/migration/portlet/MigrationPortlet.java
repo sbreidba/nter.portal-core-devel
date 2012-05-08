@@ -21,7 +21,6 @@
 package org.nterlearning.migration.portlet;
 
 import com.liferay.portal.DuplicateUserScreenNameException;
-import com.liferay.portal.NoSuchUserIdMapperException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -38,13 +37,7 @@ import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 import com.liferay.util.PwdGenerator;
 import com.liferay.util.bridges.mvc.MVCPortlet;
-import org.apache.abdera.model.Document;
-import org.apache.abdera.model.Feed;
-import org.apache.abdera.parser.Parser;
 import org.apache.commons.lang.exception.ExceptionUtils;
-import org.nterlearning.atom.AbderaSingleton;
-import org.nterlearning.atom.parser.AtomFeedProcessor;
-import org.nterlearning.atom.parser.FeedContext;
 import org.nterlearning.course.hook.SetupAction;
 import org.nterlearning.datamodel.catalog.model.Course;
 import org.nterlearning.datamodel.catalog.model.CourseReview;
@@ -55,10 +48,11 @@ import org.nterlearning.utils.PortalProperties;
 import org.nterlearning.utils.PortalPropertiesUtil;
 import org.nterlearning.utils.ReviewUtil;
 
-import javax.management.Query;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import java.io.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -260,41 +254,117 @@ public class MigrationPortlet extends MVCPortlet {
         return roleIds;
     }
 
-    /**
-     * Migration process using a local course review feed
+//  team decided to use sql extract, delimited files for all migration including local course reviews.
+//    /**
+//     * Migration process using a local course review feed
+//     *
+//     * @param request  HTTP Request handler
+//     * @param response HTTP response handler
+//     */
+//    public void processMigrateReviewFeedImport(ActionRequest request, ActionResponse response)
+//            throws FileNotFoundException, IOException, PortalException, SystemException {
+//
+//        mLog.info("Importing local course reviews");
+//
+//        try {
+//            // get the local reviews migration feed
+//            String feedString = readFileAsString(MigrationConstants.REVIEWS_MIGRATION_PATH);
+//
+//            // parse it into an Abdera Feed
+//            Parser parser = AbderaSingleton.getInstance().getParser();
+//            Document<Feed> doc = parser.parse(new StringReader(feedString));
+//            Feed feed = doc.getRoot();
+//
+//            // create the Feed Context
+//
+//            FeedContext fc = new FeedContext(MigrationConstants.REVIEWS_MIGRATION_PATH);
+//
+//            // process it like a normal feed
+//            AtomFeedProcessor.processFeed(fc, feed);
+//
+//        } catch (FileNotFoundException e) {
+//            mLog.warn("Migration Review File not found.");
+//        } catch (IOException e) {
+//            mLog.warn("Migration Review File IO Exception");
+//        } catch (SystemException e) {
+//            throw new SystemException(e);
+//        } catch (PortalException e) {
+//            throw new PortalException(e);
+//        }
+//    }
+
+        /**
+     * Migration process using a file for user helpful/not helpful review score
      *
      * @param request  HTTP Request handler
      * @param response HTTP response handler
      */
-    public void processMigrateReviewFeedImport(ActionRequest request, ActionResponse response)
-            throws FileNotFoundException, IOException, PortalException, SystemException {
+    public void processMigrateUserReviewImport(ActionRequest request, ActionResponse response)
+            throws FileNotFoundException, IOException, ParseException, PortalException, SystemException {
 
-        mLog.info("Importing local course reviews");
+        mLog.info("Importing user local course reviews");
 
-        try {
-            // get the local reviews migration feed
-            String feedString = readFileAsString(MigrationConstants.REVIEWS_MIGRATION_PATH);
+        // Extract local course reviews  to migrate
+        String userReviewsFilename = MigrationConstants.USER_REVIEWS_MIGRATION_PATH;
+        ArrayList<UserReviewExtract> userReviewList = readUserReviewExtractAsArrayList(userReviewsFilename);
 
-            // parse it into an Abdera Feed
-            Parser parser = AbderaSingleton.getInstance().getParser();
-            Document<Feed> doc = parser.parse(new StringReader(feedString));
-            Feed feed = doc.getRoot();
+        for (UserReviewExtract userItem : userReviewList) {
+            // extract values from list
+            String ssoValue = userItem.getSsoValue();
+            String emailAddress = userItem.getEmailAddress();
+            String courseIri = userItem.getCourseIri();
+            long score = Long.valueOf(userItem.getScore());
+            String summary = userItem.getSummary();
+            String content = userItem.getContent();
+            Date createDate = userItem.getCreateDate();
+            Date modifiedDate = userItem.getModifiedDate();
+            boolean removed = userItem.getRemoved();
+            Date removedDate = userItem.getRemovedDate();
 
-            // create the Feed Context
+            long courseId = 0;
+            long userId = 0;
 
-            FeedContext fc = new FeedContext(MigrationConstants.REVIEWS_MIGRATION_PATH);
+            // Find user based on the UserIdMapper assignment
+            UserIdMapper userMapper;
+            try {
+                userMapper =
+                        UserIdMapperLocalServiceUtil.getUserIdMapperByExternalUserId(PortalPropertiesUtil.getSsoImplementation(),
+                                ssoValue);
+                userId = userMapper.getUserId();
+            } catch (Exception e) {
+                mLog.warn("Could not find local user which maps to external user id " + ssoValue);
+            }
 
-            // process it like a normal feed
-            AtomFeedProcessor.processFeed(fc, feed);
+            // Find course based on courseIri assignment
+            Course course;
+            try {
+                course = CourseLocalServiceUtil.fetchByCourseIri(courseIri);
+                courseId = course.getCourseId();
+            } catch (Exception e) {
+                // probably course does not exist, but log just in case
+                mLog.warn("Could not find course which maps to courseIRI: " + courseIri);
+            }
 
-        } catch (FileNotFoundException e) {
-            mLog.warn("Migration Review File not found.");
-        } catch (IOException e) {
-            mLog.warn("Migration Review File IO Exception");
-        } catch (SystemException e) {
-            throw new SystemException(e);
-        } catch (PortalException e) {
-            throw new PortalException(e);
+            // When user, course exist, migrate the extracted review
+            if (userId != 0 && courseId != 0) {
+                try {
+                    // Verify this review has not previously been migrated - only 1 review per user for each course.
+                    List<CourseReview> courseReviewList = CourseReviewLocalServiceUtil.findByCourseIdWithUserId(userId, courseId);
+                    if (courseReviewList.size() == 0) {
+                        ServiceContext serviceContext = ServiceContextFactory.getInstance(
+                                CourseReviewLocalServiceUtil.class.getName(), request);
+
+                        CourseReviewLocalServiceUtil.migrateCourseReview(userId, CourseReview.class.getName(), courseId,
+                                summary, content, score, createDate, modifiedDate, removed, removedDate, serviceContext);
+                        mLog.info("User Review added for CourseIri: " + courseIri + " UserId: " + ssoValue);
+                    } else {
+                        mLog.warn("Could not add review for user " + ssoValue + " review for course " + courseIri);
+                    }
+                } catch (Exception e) {
+                    mLog.error("Could not add review for user " + ssoValue + " review for course " + courseIri +
+                            " because of exception" + e);
+                }
+            }
         }
     }
 
@@ -486,7 +556,7 @@ public class MigrationPortlet extends MVCPortlet {
     }
 
     private static ArrayList<UserRolesExtract> readUserRolesExtractAsArrayList(String fileName)
-            throws  IOException {
+            throws  IOException, IllegalArgumentException {
         ArrayList<UserRolesExtract> storeValues = new ArrayList<UserRolesExtract>();
         try {
             BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
@@ -499,6 +569,41 @@ public class MigrationPortlet extends MVCPortlet {
                 userEntry.setMapperType(dataValue[1]);
                 userEntry.setEmailAddress(dataValue[2]);
                 userEntry.setRoleName(dataValue[3]);
+                storeValues.add(userEntry);
+            }
+        } catch (FileNotFoundException e) {
+            mLog.error("File not found: " + fileName);
+        } catch (IOException e) {
+            mLog.error("IO Exception processing file: " + fileName);
+        }
+        return storeValues;
+    }
+
+    private static ArrayList<UserReviewExtract> readUserReviewExtractAsArrayList(String fileName)
+            throws  IOException, ParseException {
+        ArrayList<UserReviewExtract> storeValues = new ArrayList<UserReviewExtract>();
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                String dataValue[] = line.split("\t");
+                UserReviewExtract userEntry = new UserReviewExtract();
+                userEntry.setSsoValue(dataValue[0]);
+                userEntry.setMapperType(dataValue[1]);
+                userEntry.setEmailAddress(dataValue[2]);
+                userEntry.setCourseIri(dataValue[3]);
+                userEntry.setScore(dataValue[4]);
+                userEntry.setSummary(dataValue[5]);
+                userEntry.setContent(dataValue[6]);
+                userEntry.setCreateDate(new SimpleDateFormat("YYYY-MM-DD HH:MM:ss",Locale.ENGLISH).parse(dataValue[7]));
+                userEntry.setModifiedDate(new SimpleDateFormat("YYYY-MM-DD HH:MM:ss",Locale.ENGLISH).parse(dataValue[8]));
+                if (dataValue[9].equals("1")) {
+                    userEntry.setRemoved(true);
+                } else  {
+                    userEntry.setRemoved(false);
+                }
+                userEntry.setRemovedDate(new SimpleDateFormat("YYYY-MM-DD HH:MM:ss",Locale.ENGLISH).parse(dataValue[10]));
                 storeValues.add(userEntry);
             }
         } catch (FileNotFoundException e) {
