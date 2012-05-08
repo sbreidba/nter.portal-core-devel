@@ -33,6 +33,7 @@ import org.nterlearning.datamodel.catalog.model.FeedReference;
 import org.nterlearning.datamodel.catalog.service.FeedReferenceLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.service.FeedSyncHistoryLocalServiceUtil;
 
+import java.io.*;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -58,6 +59,10 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
 
     private FeedParser mFeedParser = FeedParser.getInstance();
     private PubSubHubbubSubscriber mPushSubscriber = PubSubHubbubSubscriber.getInstance();
+
+    public static final String REVIEWS_MIGRATION_FILE_NAME = "reviews_migration.xml";
+    public static final String REVIEWS_MIGRATION_PATH = System.getenv("CATALINA_BASE") + File.separatorChar + "webapps" +
+            File.separatorChar + "nter-catalog-portlet" + File.separatorChar + "course-feeds" + File.separatorChar + REVIEWS_MIGRATION_FILE_NAME;
 
     @Override
     public void init() throws PortletException {
@@ -377,4 +382,5 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
         response.setRenderParameter("feedRefId", feedRefId.toString());
         response.setRenderParameter("feedTabs", request.getParameter("feedTabs"));
     }
+
 }

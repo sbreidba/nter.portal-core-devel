@@ -22,7 +22,7 @@
 
 <portlet:actionURL name="updateFeedOwner" var="updateFeedOwnerUrl" />
 <portlet:actionURL name="processCourseRegistryFeeds" var="processCourseRegistryFeedsUrl" />
-
+<portlet:actionURL name="processMigrateReviewFeedImport" var="processMigrateReviewFeedImport" />
 <%
     Long themeCompanyId = themeDisplay.getCompanyId();
     Long scopeOrgId = GroupLocalServiceUtil.getGroup(themeDisplay.getScopeGroupId()).getClassPK();

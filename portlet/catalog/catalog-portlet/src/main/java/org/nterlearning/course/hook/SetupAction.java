@@ -202,7 +202,7 @@ public class SetupAction extends SimpleAction {
     }
 
 
-    private void addSsoInformation(User user) {
+    public static void addSsoInformation(User user) {
         try {
             UserIdMapper userMapper;
             try {
