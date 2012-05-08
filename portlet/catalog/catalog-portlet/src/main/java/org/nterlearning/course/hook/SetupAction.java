@@ -21,7 +21,6 @@
 package org.nterlearning.course.hook;
 
 import com.liferay.portal.DuplicateUserScreenNameException;
-import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.NoSuchUserIdMapperException;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
@@ -33,7 +32,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.*;
-import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.*;
 import com.liferay.portlet.asset.model.AssetVocabulary;
 import com.liferay.portlet.expando.DuplicateColumnNameException;
@@ -42,7 +40,6 @@ import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.model.ExpandoTable;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
-import org.nterlearning.course.util.NterKeys;
 import org.nterlearning.datamodel.catalog.model.CourseRecord;
 import org.nterlearning.datamodel.catalog.service.CourseRecordLocalServiceUtil;
 import org.nterlearning.exporter.ReportReaper;
@@ -74,7 +71,6 @@ public class SetupAction extends SimpleAction {
     protected void doRun(long companyId) {
         createExpandoTables(companyId);
         createTestUsers(companyId);
-        configureSearchPermission(companyId);
         
         try {
         	ReportReaper.startReaping();
@@ -146,33 +142,6 @@ public class SetupAction extends SimpleAction {
 
         addExpandoColumn(expandoTable, ExpandoConstants.REPUTATION_SCORE,
                          ExpandoColumnConstants.DOUBLE);
-    }
-
-
-
-    protected void configureSearchPermission(long companyId) {
-        try {
-            Role authorRole = RoleLocalServiceUtil.getRole(companyId, "Author");
-            String companyIdStr = String.valueOf(companyId);
-            Boolean hasPermission =
-                    ResourcePermissionLocalServiceUtil.hasResourcePermission(
-                            companyId, NterKeys.COMPONENT_SEARCH_PORTLET,
-                            RoleConstants.TYPE_REGULAR, companyIdStr,
-                            authorRole.getRoleId(), ActionKeys.VIEW);
-            
-            if (!hasPermission) {
-                ResourcePermissionLocalServiceUtil.addResourcePermission(
-                        companyId, NterKeys.COMPONENT_SEARCH_PORTLET,
-                        RoleConstants.TYPE_REGULAR, companyIdStr,
-                        authorRole.getRoleId(), ActionKeys.VIEW);
-            }
-        }
-        catch (NoSuchRoleException e) {
-            mLog.error("Could not find Author Role.  Ensure it has been created");
-        }
-        catch (Exception e) {
-            mLog.error("Could not configure Author permissions: " + e.getMessage());
-        }
     }
 
 
