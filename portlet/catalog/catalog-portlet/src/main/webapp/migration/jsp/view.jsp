@@ -36,7 +36,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 <%-- /migration/jsp/view.jsp --%>
 
 <portlet:actionURL name="processMigrateUserImport" var="processMigrateUserImport" />
-<portlet:actionURL name="processMigrateReviewFeedImport" var="processMigrateReviewFeedImport" />
+<portlet:actionURL name="processMigrateUserReviewImport" var="processMigrateUserReviewImport" />
 <portlet:actionURL name="processMigrateReviewHelpImport" var="processMigrateReviewHelpImport" />
 <portlet:actionURL name="processUpdateReviewWeightedScore" var="processUpdateReviewWeightedScore" />
 <%
@@ -54,12 +54,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 </aui:form>
 
 <div class="separator"></div>
-<h3 class="course-feed-title"><%= LanguageUtil.get(pageContext, "migrate-review-feed-import-heading") %></h3>
-<p><%= LanguageUtil.get(pageContext, "migrate-review-feed-import-label") %></p>
-<aui:form action="<%= processMigrateReviewFeedImport %>" method="post">
+<h3 class="course-feed-title"><%= LanguageUtil.get(pageContext, "migrate-user-review-import-heading") %></h3>
+<p><%= LanguageUtil.get(pageContext, "migrate-user-review-import-label") %></p>
+<aui:form action="<%= processMigrateUserReviewImport %>" method="post">
 	<aui:fieldset>
 		<aui:button-row>
-			<aui:button type="submit" value="migrate-review-feed-import" />
+			<aui:button type="submit" value="migrate-user-review-import" />
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>
