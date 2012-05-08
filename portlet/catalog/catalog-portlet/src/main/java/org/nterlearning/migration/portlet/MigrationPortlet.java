@@ -354,15 +354,16 @@ public class MigrationPortlet extends MVCPortlet {
                         ServiceContext serviceContext = ServiceContextFactory.getInstance(
                                 CourseReviewLocalServiceUtil.class.getName(), request);
 
-                        CourseReviewLocalServiceUtil.migrateCourseReview(userId, CourseReview.class.getName(), courseId,
-                                summary, content, score, createDate, modifiedDate, removed, removedDate, serviceContext);
+                        CourseReviewLocalServiceUtil.migrateCourseReview(userId, courseId, summary, content, score,
+                                createDate, modifiedDate, removed, removedDate, serviceContext);
                         mLog.info("User Review added for CourseIri: " + courseIri + " UserId: " + ssoValue);
                     } else {
-                        mLog.warn("Could not add review for user " + ssoValue + " review for course " + courseIri);
+                        mLog.warn("Could not add review for user " + ssoValue + " review for course " + courseIri +
+                        " because review already exists.");
                     }
                 } catch (Exception e) {
                     mLog.error("Could not add review for user " + ssoValue + " review for course " + courseIri +
-                            " because of exception" + e);
+                            " because of exception: " + e);
                 }
             }
         }
