@@ -597,14 +597,16 @@ public class MigrationPortlet extends MVCPortlet {
                 userEntry.setScore(dataValue[4]);
                 userEntry.setSummary(dataValue[5]);
                 userEntry.setContent(dataValue[6]);
-                userEntry.setCreateDate(new SimpleDateFormat("YYYY-MM-DD HH:MM:ss",Locale.ENGLISH).parse(dataValue[7]));
-                userEntry.setModifiedDate(new SimpleDateFormat("YYYY-MM-DD HH:MM:ss",Locale.ENGLISH).parse(dataValue[8]));
+                userEntry.setCreateDate(new SimpleDateFormat("\"yyyy-MM-dd HH:mm:ss\"").parse(dataValue[7]));
+                userEntry.setModifiedDate(new SimpleDateFormat("\"yyyy-MM-dd HH:mm:ss\"").parse(dataValue[8]));
                 if (dataValue[9].equals("1")) {
                     userEntry.setRemoved(true);
                 } else  {
                     userEntry.setRemoved(false);
                 }
-                userEntry.setRemovedDate(new SimpleDateFormat("YYYY-MM-DD HH:MM:ss",Locale.ENGLISH).parse(dataValue[10]));
+                if (dataValue[10].length() != 0) {
+                    userEntry.setRemovedDate(new SimpleDateFormat("\"yyyy-MM-dd HH:mm:ss\"").parse(dataValue[10]));
+                }
                 storeValues.add(userEntry);
             }
         } catch (FileNotFoundException e) {
