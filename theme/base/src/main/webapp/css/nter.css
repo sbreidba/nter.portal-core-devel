@@ -76,10 +76,16 @@ body {
 }
 /* get rid of table cell layout so carousel overflow works properly */
 .portlet-layout, .portlet-column { display: block; }
-.portlet-column, .portlet-column-only { float: none; }
+.portlet-column { float: left; margin-right: 20px; }
+.portlet-column-last, .portlet-column-only { margin-right: 0; }
+.columns-1 .portlet-column, .portlet-column-only { float: none; }
 .portlet-layout:after { content: ' '; clear: both; display: block; height: 0; width: 0; visibility: hidden; }
 footer { clear: both; }
 .aui-overlaymask-content { position: fixed; left: 0; top: 0; width: 100%; }
+/* fit columns to our grid */
+.aui-w30 { width: 290px; }
+.aui-w50 { width: 445px; }
+.aui-w70 { width: 600px; }
 
 
 
