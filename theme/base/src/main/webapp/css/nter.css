@@ -294,8 +294,8 @@ img.course-image, .main-image { width: 290px; height: 217px; }
 
 .morelink { display: block; text-align: right; font-weight: bold; margin-top: 10px; }
 
-.layout-sidenav nav { float: left; width: 150px; }
-.layout-sidenav .portlet-column-content { float: right; width: 760px; }
+.layout-sidenav nav { float: left; width: 135px; margin-right: 20px; }
+.layout-sidenav .portlet-column-content { float: right; width: 755px; }
 .layout-sidenav .portlet-column:after { content: ' '; display: block; clear: both; visibility: hidden; line-height: 0; width: 0; height: 0; }
 .layout-sidenav nav h2 { margin: 0 0 .2em; }
 .layout-sidenav nav ul { margin: 0 0 0 .5em; }
