@@ -21,7 +21,7 @@
 <%@include file="../init.jsp" %>
 
 <%@ page import="org.nterlearning.service.registry.RegistryUtil" %>
-<%@ page import="org.nterlearning.xml.nter_registry.domain_objects_0_1_0.Binding" %>
+<%@ page import="org.nterlearning.registry.client.Binding" %>
 <%@ page import="org.nterlearning.registry.proxy.RegistryInstance" %>
 
 <%@ page import="java.util.List" %>
@@ -155,7 +155,7 @@ institutionsURL.setParameter(ActionRequest.ACTION_NAME, "viewInstitutions");
     </liferay-ui:search-container-results>
 
      <liferay-ui:search-container-row
-       className="org.nterlearning.xml.nter_registry.domain_objects_0_1_0.Binding"
+       className="org.nterlearning.registry.client.Binding"
        keyProperty="key"
        modelVar="binding"
     >

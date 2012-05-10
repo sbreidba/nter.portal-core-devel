@@ -73,4 +73,7 @@ public class PortalProperties {
 
     // Test configuration settings
     public static final String NTER_CREATE_TEST_USERS = "nter.test.user.create";
+
+    // Migration configuration settings
+    public static final String NTER_MIGRATE_USERS = "nter.migrate.users";
 }

@@ -26,28 +26,29 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
     private MethodKey _setBeanIdentifierMethodKey16;
     private MethodKey _appendCourseReviewMethodKey17;
     private MethodKey _addCourseReviewMethodKey18;
-    private MethodKey _addCourseReviewResourcesMethodKey19;
+    private MethodKey _migrateCourseReviewMethodKey19;
     private MethodKey _addCourseReviewResourcesMethodKey20;
-    private MethodKey _findScoreByReviewIdMethodKey21;
-    private MethodKey _findScoreByCourseIdMethodKey22;
-    private MethodKey _addCourseReviewResourcesMethodKey23;
+    private MethodKey _addCourseReviewResourcesMethodKey21;
+    private MethodKey _findScoreByReviewIdMethodKey22;
+    private MethodKey _findScoreByCourseIdMethodKey23;
     private MethodKey _addCourseReviewResourcesMethodKey24;
-    private MethodKey _deleteCourseReviewsMethodKey25;
-    private MethodKey _updateAssetMethodKey26;
-    private MethodKey _updateCourseReviewMethodKey27;
-    private MethodKey _updateCourseReviewRatingMethodKey28;
-    private MethodKey _updateCourseReviewResourcesMethodKey29;
-    private MethodKey _setRemovedMethodKey30;
-    private MethodKey _purgeAllRemovedOlderThanMethodKey31;
-    private MethodKey _findByCourseIdMethodKey32;
-    private MethodKey _countByCourseIdMethodKey33;
-    private MethodKey _findByCourseIdMethodKey34;
-    private MethodKey _findByCourseIdWithUserIdMethodKey35;
+    private MethodKey _addCourseReviewResourcesMethodKey25;
+    private MethodKey _deleteCourseReviewsMethodKey26;
+    private MethodKey _updateAssetMethodKey27;
+    private MethodKey _updateCourseReviewMethodKey28;
+    private MethodKey _updateCourseReviewRatingMethodKey29;
+    private MethodKey _updateCourseReviewResourcesMethodKey30;
+    private MethodKey _setRemovedMethodKey31;
+    private MethodKey _purgeAllRemovedOlderThanMethodKey32;
+    private MethodKey _findByCourseIdMethodKey33;
+    private MethodKey _countByCourseIdMethodKey34;
+    private MethodKey _findByCourseIdMethodKey35;
     private MethodKey _findByCourseIdWithUserIdMethodKey36;
-    private MethodKey _findByUserIdMethodKey37;
+    private MethodKey _findByCourseIdWithUserIdMethodKey37;
     private MethodKey _findByUserIdMethodKey38;
-    private MethodKey _findByCourseIdWithRemovedMethodKey39;
-    private MethodKey _countByCourseIdWithRemovedMethodKey40;
+    private MethodKey _findByUserIdMethodKey39;
+    private MethodKey _findByCourseIdWithRemovedMethodKey40;
+    private MethodKey _countByCourseIdWithRemovedMethodKey41;
 
     public CourseReviewLocalServiceClp(ClassLoaderProxy classLoaderProxy) {
         _classLoaderProxy = classLoaderProxy;
@@ -125,84 +126,91 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
                 java.lang.String.class, java.lang.String.class, double.class,
                 com.liferay.portal.service.ServiceContext.class);
 
-        _addCourseReviewResourcesMethodKey19 = new MethodKey(_classLoaderProxy.getClassName(),
-                "addCourseReviewResources",
-                org.nterlearning.datamodel.catalog.model.CourseReview.class,
-                boolean.class, boolean.class);
+        _migrateCourseReviewMethodKey19 = new MethodKey(_classLoaderProxy.getClassName(),
+                "migrateCourseReview", long.class, long.class,
+                java.lang.String.class, java.lang.String.class, double.class,
+                java.util.Date.class, java.util.Date.class, boolean.class,
+                java.util.Date.class,
+                com.liferay.portal.service.ServiceContext.class);
 
         _addCourseReviewResourcesMethodKey20 = new MethodKey(_classLoaderProxy.getClassName(),
                 "addCourseReviewResources",
                 org.nterlearning.datamodel.catalog.model.CourseReview.class,
+                boolean.class, boolean.class);
+
+        _addCourseReviewResourcesMethodKey21 = new MethodKey(_classLoaderProxy.getClassName(),
+                "addCourseReviewResources",
+                org.nterlearning.datamodel.catalog.model.CourseReview.class,
                 java.lang.String[].class, java.lang.String[].class);
 
-        _findScoreByReviewIdMethodKey21 = new MethodKey(_classLoaderProxy.getClassName(),
+        _findScoreByReviewIdMethodKey22 = new MethodKey(_classLoaderProxy.getClassName(),
                 "findScoreByReviewId", long.class);
 
-        _findScoreByCourseIdMethodKey22 = new MethodKey(_classLoaderProxy.getClassName(),
+        _findScoreByCourseIdMethodKey23 = new MethodKey(_classLoaderProxy.getClassName(),
                 "findScoreByCourseId", long.class);
 
-        _addCourseReviewResourcesMethodKey23 = new MethodKey(_classLoaderProxy.getClassName(),
+        _addCourseReviewResourcesMethodKey24 = new MethodKey(_classLoaderProxy.getClassName(),
                 "addCourseReviewResources", long.class, boolean.class,
                 boolean.class);
 
-        _addCourseReviewResourcesMethodKey24 = new MethodKey(_classLoaderProxy.getClassName(),
+        _addCourseReviewResourcesMethodKey25 = new MethodKey(_classLoaderProxy.getClassName(),
                 "addCourseReviewResources", long.class,
                 java.lang.String[].class, java.lang.String[].class);
 
-        _deleteCourseReviewsMethodKey25 = new MethodKey(_classLoaderProxy.getClassName(),
+        _deleteCourseReviewsMethodKey26 = new MethodKey(_classLoaderProxy.getClassName(),
                 "deleteCourseReviews", long.class);
 
-        _updateAssetMethodKey26 = new MethodKey(_classLoaderProxy.getClassName(),
+        _updateAssetMethodKey27 = new MethodKey(_classLoaderProxy.getClassName(),
                 "updateAsset", long.class,
                 org.nterlearning.datamodel.catalog.model.CourseReview.class,
                 long[].class, java.lang.String[].class);
 
-        _updateCourseReviewMethodKey27 = new MethodKey(_classLoaderProxy.getClassName(),
+        _updateCourseReviewMethodKey28 = new MethodKey(_classLoaderProxy.getClassName(),
                 "updateCourseReview", long.class, long.class, long.class,
                 java.lang.String.class, java.lang.String.class, double.class,
                 com.liferay.portal.service.ServiceContext.class);
 
-        _updateCourseReviewRatingMethodKey28 = new MethodKey(_classLoaderProxy.getClassName(),
+        _updateCourseReviewRatingMethodKey29 = new MethodKey(_classLoaderProxy.getClassName(),
                 "updateCourseReviewRating", long.class, double.class);
 
-        _updateCourseReviewResourcesMethodKey29 = new MethodKey(_classLoaderProxy.getClassName(),
+        _updateCourseReviewResourcesMethodKey30 = new MethodKey(_classLoaderProxy.getClassName(),
                 "updateCourseReviewResources",
                 org.nterlearning.datamodel.catalog.model.CourseReview.class,
                 java.lang.String[].class, java.lang.String[].class);
 
-        _setRemovedMethodKey30 = new MethodKey(_classLoaderProxy.getClassName(),
+        _setRemovedMethodKey31 = new MethodKey(_classLoaderProxy.getClassName(),
                 "setRemoved", long.class, boolean.class);
 
-        _purgeAllRemovedOlderThanMethodKey31 = new MethodKey(_classLoaderProxy.getClassName(),
+        _purgeAllRemovedOlderThanMethodKey32 = new MethodKey(_classLoaderProxy.getClassName(),
                 "purgeAllRemovedOlderThan", java.util.Date.class);
 
-        _findByCourseIdMethodKey32 = new MethodKey(_classLoaderProxy.getClassName(),
+        _findByCourseIdMethodKey33 = new MethodKey(_classLoaderProxy.getClassName(),
                 "findByCourseId", long.class);
 
-        _countByCourseIdMethodKey33 = new MethodKey(_classLoaderProxy.getClassName(),
+        _countByCourseIdMethodKey34 = new MethodKey(_classLoaderProxy.getClassName(),
                 "countByCourseId", long.class);
 
-        _findByCourseIdMethodKey34 = new MethodKey(_classLoaderProxy.getClassName(),
+        _findByCourseIdMethodKey35 = new MethodKey(_classLoaderProxy.getClassName(),
                 "findByCourseId", long.class, int.class, int.class);
 
-        _findByCourseIdWithUserIdMethodKey35 = new MethodKey(_classLoaderProxy.getClassName(),
+        _findByCourseIdWithUserIdMethodKey36 = new MethodKey(_classLoaderProxy.getClassName(),
                 "findByCourseIdWithUserId", long.class, long.class);
 
-        _findByCourseIdWithUserIdMethodKey36 = new MethodKey(_classLoaderProxy.getClassName(),
+        _findByCourseIdWithUserIdMethodKey37 = new MethodKey(_classLoaderProxy.getClassName(),
                 "findByCourseIdWithUserId", long.class, long.class, int.class,
                 int.class);
 
-        _findByUserIdMethodKey37 = new MethodKey(_classLoaderProxy.getClassName(),
+        _findByUserIdMethodKey38 = new MethodKey(_classLoaderProxy.getClassName(),
                 "findByUserId", long.class);
 
-        _findByUserIdMethodKey38 = new MethodKey(_classLoaderProxy.getClassName(),
+        _findByUserIdMethodKey39 = new MethodKey(_classLoaderProxy.getClassName(),
                 "findByUserId", long.class, int.class, int.class);
 
-        _findByCourseIdWithRemovedMethodKey39 = new MethodKey(_classLoaderProxy.getClassName(),
+        _findByCourseIdWithRemovedMethodKey40 = new MethodKey(_classLoaderProxy.getClassName(),
                 "findByCourseIdWithRemoved", long.class, boolean.class,
                 int.class, int.class);
 
-        _countByCourseIdWithRemovedMethodKey40 = new MethodKey(_classLoaderProxy.getClassName(),
+        _countByCourseIdWithRemovedMethodKey41 = new MethodKey(_classLoaderProxy.getClassName(),
                 "countByCourseIdWithRemoved", long.class, boolean.class);
     }
 
@@ -713,12 +721,52 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
         return (org.nterlearning.datamodel.catalog.model.CourseReview) ClpSerializer.translateOutput(returnObj);
     }
 
+    public org.nterlearning.datamodel.catalog.model.CourseReview migrateCourseReview(
+        long userId, long courseId, java.lang.String summary,
+        java.lang.String content, double rating, java.util.Date createDate,
+        java.util.Date modifiedDate, boolean removed,
+        java.util.Date removedDate,
+        com.liferay.portal.service.ServiceContext serviceContext)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_migrateCourseReviewMethodKey19,
+                userId, courseId, ClpSerializer.translateInput(summary),
+                ClpSerializer.translateInput(content), rating,
+                ClpSerializer.translateInput(createDate),
+                ClpSerializer.translateInput(modifiedDate), removed,
+                ClpSerializer.translateInput(removedDate),
+                ClpSerializer.translateInput(serviceContext));
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+                throw (com.liferay.portal.kernel.exception.PortalException) t;
+            }
+
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (org.nterlearning.datamodel.catalog.model.CourseReview) ClpSerializer.translateOutput(returnObj);
+    }
+
     public void addCourseReviewResources(
         org.nterlearning.datamodel.catalog.model.CourseReview courseReview,
         boolean addGroupPermissions, boolean addGuestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        MethodHandler methodHandler = new MethodHandler(_addCourseReviewResourcesMethodKey19,
+        MethodHandler methodHandler = new MethodHandler(_addCourseReviewResourcesMethodKey20,
                 ClpSerializer.translateInput(courseReview),
                 addGroupPermissions, addGuestPermissions);
 
@@ -747,7 +795,7 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
         java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        MethodHandler methodHandler = new MethodHandler(_addCourseReviewResourcesMethodKey20,
+        MethodHandler methodHandler = new MethodHandler(_addCourseReviewResourcesMethodKey21,
                 ClpSerializer.translateInput(courseReview),
                 ClpSerializer.translateInput(groupPermissions),
                 ClpSerializer.translateInput(guestPermissions));
@@ -776,7 +824,7 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
-        MethodHandler methodHandler = new MethodHandler(_findScoreByReviewIdMethodKey21,
+        MethodHandler methodHandler = new MethodHandler(_findScoreByReviewIdMethodKey22,
                 reviewId);
 
         try {
@@ -801,7 +849,7 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
-        MethodHandler methodHandler = new MethodHandler(_findScoreByCourseIdMethodKey22,
+        MethodHandler methodHandler = new MethodHandler(_findScoreByCourseIdMethodKey23,
                 courseId);
 
         try {
@@ -826,7 +874,7 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
         boolean addGroupPermissions, boolean addGuestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        MethodHandler methodHandler = new MethodHandler(_addCourseReviewResourcesMethodKey23,
+        MethodHandler methodHandler = new MethodHandler(_addCourseReviewResourcesMethodKey24,
                 courseReviewId, addGroupPermissions, addGuestPermissions);
 
         try {
@@ -853,7 +901,7 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
         java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        MethodHandler methodHandler = new MethodHandler(_addCourseReviewResourcesMethodKey24,
+        MethodHandler methodHandler = new MethodHandler(_addCourseReviewResourcesMethodKey25,
                 courseReviewId, ClpSerializer.translateInput(groupPermissions),
                 ClpSerializer.translateInput(guestPermissions));
 
@@ -880,7 +928,7 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
     public void deleteCourseReviews(long groupId)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        MethodHandler methodHandler = new MethodHandler(_deleteCourseReviewsMethodKey25,
+        MethodHandler methodHandler = new MethodHandler(_deleteCourseReviewsMethodKey26,
                 groupId);
 
         try {
@@ -908,7 +956,7 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
         long[] assetCategoryIds, java.lang.String[] assetTagNames)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        MethodHandler methodHandler = new MethodHandler(_updateAssetMethodKey26,
+        MethodHandler methodHandler = new MethodHandler(_updateAssetMethodKey27,
                 userId, ClpSerializer.translateInput(courseReview),
                 ClpSerializer.translateInput(assetCategoryIds),
                 ClpSerializer.translateInput(assetTagNames));
@@ -941,7 +989,7 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
             com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
-        MethodHandler methodHandler = new MethodHandler(_updateCourseReviewMethodKey27,
+        MethodHandler methodHandler = new MethodHandler(_updateCourseReviewMethodKey28,
                 userId, courseReviewId, courseId,
                 ClpSerializer.translateInput(summary),
                 ClpSerializer.translateInput(content), rating,
@@ -973,7 +1021,7 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
         double weightedScore)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        MethodHandler methodHandler = new MethodHandler(_updateCourseReviewRatingMethodKey28,
+        MethodHandler methodHandler = new MethodHandler(_updateCourseReviewRatingMethodKey29,
                 courseReviewId, weightedScore);
 
         try {
@@ -1001,7 +1049,7 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
         java.lang.String[] groupPermissions, java.lang.String[] guestPermissions)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        MethodHandler methodHandler = new MethodHandler(_updateCourseReviewResourcesMethodKey29,
+        MethodHandler methodHandler = new MethodHandler(_updateCourseReviewResourcesMethodKey30,
                 ClpSerializer.translateInput(courseReview),
                 ClpSerializer.translateInput(groupPermissions),
                 ClpSerializer.translateInput(guestPermissions));
@@ -1029,7 +1077,7 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
     public void setRemoved(long reviewId, boolean removed)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        MethodHandler methodHandler = new MethodHandler(_setRemovedMethodKey30,
+        MethodHandler methodHandler = new MethodHandler(_setRemovedMethodKey31,
                 reviewId, removed);
 
         try {
@@ -1055,7 +1103,7 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
     public void purgeAllRemovedOlderThan(java.util.Date date)
         throws com.liferay.portal.kernel.exception.PortalException,
             com.liferay.portal.kernel.exception.SystemException {
-        MethodHandler methodHandler = new MethodHandler(_purgeAllRemovedOlderThanMethodKey31,
+        MethodHandler methodHandler = new MethodHandler(_purgeAllRemovedOlderThanMethodKey32,
                 ClpSerializer.translateInput(date));
 
         try {
@@ -1083,7 +1131,7 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
-        MethodHandler methodHandler = new MethodHandler(_findByCourseIdMethodKey32,
+        MethodHandler methodHandler = new MethodHandler(_findByCourseIdMethodKey33,
                 courseId);
 
         try {
@@ -1108,7 +1156,7 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
-        MethodHandler methodHandler = new MethodHandler(_countByCourseIdMethodKey33,
+        MethodHandler methodHandler = new MethodHandler(_countByCourseIdMethodKey34,
                 courseId);
 
         try {
@@ -1134,7 +1182,7 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
-        MethodHandler methodHandler = new MethodHandler(_findByCourseIdMethodKey34,
+        MethodHandler methodHandler = new MethodHandler(_findByCourseIdMethodKey35,
                 courseId, start, end);
 
         try {
@@ -1160,7 +1208,7 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
-        MethodHandler methodHandler = new MethodHandler(_findByCourseIdWithUserIdMethodKey35,
+        MethodHandler methodHandler = new MethodHandler(_findByCourseIdWithUserIdMethodKey36,
                 userId, courseId);
 
         try {
@@ -1186,7 +1234,7 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
-        MethodHandler methodHandler = new MethodHandler(_findByCourseIdWithUserIdMethodKey36,
+        MethodHandler methodHandler = new MethodHandler(_findByCourseIdWithUserIdMethodKey37,
                 userId, courseId, start, end);
 
         try {
@@ -1211,7 +1259,7 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
         long userId) throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
-        MethodHandler methodHandler = new MethodHandler(_findByUserIdMethodKey37,
+        MethodHandler methodHandler = new MethodHandler(_findByUserIdMethodKey38,
                 userId);
 
         try {
@@ -1237,7 +1285,7 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
-        MethodHandler methodHandler = new MethodHandler(_findByUserIdMethodKey38,
+        MethodHandler methodHandler = new MethodHandler(_findByUserIdMethodKey39,
                 userId, start, end);
 
         try {
@@ -1263,7 +1311,7 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
-        MethodHandler methodHandler = new MethodHandler(_findByCourseIdWithRemovedMethodKey39,
+        MethodHandler methodHandler = new MethodHandler(_findByCourseIdWithRemovedMethodKey40,
                 courseId, removed, start, end);
 
         try {
@@ -1288,7 +1336,7 @@ public class CourseReviewLocalServiceClp implements CourseReviewLocalService {
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
-        MethodHandler methodHandler = new MethodHandler(_countByCourseIdWithRemovedMethodKey40,
+        MethodHandler methodHandler = new MethodHandler(_countByCourseIdWithRemovedMethodKey41,
                 courseId, removed);
 
         try {
