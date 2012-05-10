@@ -159,6 +159,67 @@ public class CourseReviewLocalServiceImpl
         return courseReview;
     }
 
+        public CourseReview migrateCourseReview(long userId, long courseId, String summary,
+            String content, double rating, Date createDate, Date modifiedDate,
+            boolean removed, Date removedDate, ServiceContext serviceContext)
+            throws PortalException, SystemException {
+
+        // CourseReview - these should always be an add.  if already exists, skip it.
+        // During migration, we want to keep the original creation, modification date.
+        // During migration, its possible we could extract using SQL when a review is marked for
+        //      marked for removal but hasn't yet been deleted.
+
+        User user = userPersistence.findByPrimaryKey(userId);
+        long groupId = serviceContext.getScopeGroupId();
+
+        //Star score for a course's ratings must be inserted prior to review
+        // insert so that listener onAfterUpdate of review will have value to
+        // generate global review activity stream
+        if (rating >= 1 || rating <= 5) {
+            RatingsEntryLocalServiceUtil
+                    .updateEntry(user.getUserId(), Course.class.getName(),
+                                 courseId, rating, serviceContext);
+        }
+
+        Date now = new Date();
+
+        long courseReviewId = counterLocalService.increment(CourseReview.class.getName());
+
+        CourseReview courseReview = courseReviewPersistence.create(courseReviewId);
+
+        courseReview.setGroupId(groupId);
+        courseReview.setCompanyId(user.getCompanyId());
+        courseReview.setCourseId(courseId);
+        courseReview.setUserId(user.getUserId());
+        courseReview.setSummary(summary);
+        courseReview.setContent(content);
+        courseReview.setCreateDate(createDate);
+        courseReview.setModifiedDate(modifiedDate);
+        courseReview.setRemoved(removed);
+        courseReview.setRemovedDate(removedDate);
+
+        courseReviewPersistence.update(courseReview, true);
+
+        // Resources
+        if (serviceContext.isAddGroupPermissions() ||
+                serviceContext.isAddGuestPermissions()) {
+            addCourseReviewResources(courseReview, serviceContext.isAddGroupPermissions(),
+                                     serviceContext.isAddGuestPermissions());
+        }
+        else {
+            addCourseReviewResources(courseReview, serviceContext.isAddGroupPermissions(),
+                                     serviceContext.isAddGuestPermissions());
+        }
+
+        // Asset
+        updateAsset(userId, courseReview, serviceContext.getAssetCategoryIds(),
+                    serviceContext.getAssetTagNames());
+
+        // Histogram starRateCounts in Course
+        CourseLocalServiceUtil.updateReviewHistogram(courseReview.getCourseId());
+
+        return courseReview;
+    }
 
     public void addCourseReviewResources(CourseReview courseReview,
             boolean addGroupPermissions, boolean addGuestPermissions)
