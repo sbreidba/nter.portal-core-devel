@@ -33,7 +33,8 @@ import org.nterlearning.datamodel.catalog.service.FeedReferenceLocalServiceUtil;
 import org.nterlearning.utils.ExecutorUtil;
 import org.apache.abdera.model.Feed;
 import org.joda.time.DateTime;
-import org.nterlearning.xml.nter_registry.blacklist_objects_0_1_0.ActiveStatusEnum;
+
+import org.nterlearning.registry.client.ActiveStatusEnum;
 
 import java.util.Date;
 import java.util.HashMap;
