@@ -22,16 +22,14 @@ package org.nterlearning.atom.parser.portlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import org.nterlearning.registry.proxy.InstitutionBean;
-import org.nterlearning.registry.proxy.Registry;
-import org.nterlearning.registry.proxy.RegistryImpl;
-import org.nterlearning.registry.proxy.ServiceBean;
-import org.nterlearning.utils.ExecutorUtil;
 
-import org.nterlearning.xml.nter_registry.blacklist_objects_0_1_0.ActiveStatusEnum;
-import org.nterlearning.xml.nter_registry.domain_objects_0_1_0.Binding;
-import org.nterlearning.xml.nter_registry.domain_objects_0_1_0.BindingTypeEnum;
-import org.nterlearning.xml.nter_registry.domain_objects_0_1_0.ServiceTypeEnum;
+import org.nterlearning.registry.client.*;
+import org.nterlearning.registry.proxy.InstitutionBean;
+import org.nterlearning.registry.proxy.RegistryProxy;
+import org.nterlearning.registry.proxy.RegistryProxyImpl;
+import org.nterlearning.registry.proxy.ServiceBean;
+
+import org.nterlearning.utils.ExecutorUtil;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -42,7 +40,7 @@ public class ServiceRegistryClient {
     private volatile ExecutorService mExecutor;
     private int mTimeoutSecs = 15;
 
-    private static Registry registry = null;
+    private static RegistryProxy registry = null;
 
 	private static final Log _log = LogFactoryUtil.getLog(ServiceRegistryClient.class);
 
@@ -294,10 +292,10 @@ public class ServiceRegistryClient {
     }
 
 
-    private Registry getRegistryClient() {
+    private RegistryProxy getRegistryClient() {
         if (registry == null) {
             try {
-                registry = new RegistryImpl();
+                registry = new RegistryProxyImpl();
             }
             catch (Exception e) {
                 _log.error(e.getMessage());

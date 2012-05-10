@@ -22,20 +22,21 @@ package org.nterlearning.atom.parser.portlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import org.nterlearning.datamodel.catalog.NoSuchFeedReferenceException;
 import org.nterlearning.datamodel.catalog.model.FeedReference;
 import org.nterlearning.datamodel.catalog.service.FeedReferenceLocalServiceUtil;
-import org.nterlearning.registry.proxy.ServiceBean;
 
-import org.nterlearning.xml.nter_registry.blacklist_objects_0_1_0.ActiveStatusEnum;
-import org.nterlearning.xml.nter_registry.domain_objects_0_1_0.Binding;
+import org.nterlearning.registry.proxy.ServiceBean;
+import org.nterlearning.registry.client.ActiveStatusEnum;
+import org.nterlearning.registry.client.Binding;
 
 import java.util.*;
 
 
 /**
  * This class is used to connect to the Service Registry and request current
- * list of course, student record, and activity feeds. 
+ * list of course, student record, and activity feeds.
  *
  * @author gjiva
  */
@@ -43,7 +44,7 @@ public class CourseRegistryClient {
 
 	private static Log log = LogFactoryUtil.getLog(CourseRegistryClient.class);
 
-	
+
 	/**
 	 * Connects to the Service Registries and returns a list of PubSubHubbub
      * endpoints.  Note, this list may contain duplicates if a PuSH hub is
@@ -51,7 +52,7 @@ public class CourseRegistryClient {
      *
 	 * @return List of String PuSH Hub URLs
 	 */
-	public static List<String> getPushHubUrls(){		
+	public static List<String> getPushHubUrls(){
 		try {
 			ServiceRegistryClient serviceRegistryClient = new ServiceRegistryClient();
 			return serviceRegistryClient.getPushHubEndpoints();
@@ -62,7 +63,7 @@ public class CourseRegistryClient {
 		}
 	}
 
-    
+
 	/**
 	 * Retrieves the list of Atom feed URLs form the Course Registry
 	 *
@@ -153,7 +154,7 @@ public class CourseRegistryClient {
     /**
      * Returns a HashMap containing a Hashmap of content repository endpoints
      * and their institution name.
-     * 
+     *
      * @return hashmap of all endpoints
      */
     public static HashMap<ActiveStatusEnum, HashMap<String, String>> getContentRepositories() {
@@ -237,7 +238,7 @@ public class CourseRegistryClient {
                 validFeeds.put(endpoint, feeds.get(endpoint));
             }
             catch (Exception e) {
-                log.error("Error attempting to find feed with endpoint: " + endpoint);    
+                log.error("Error attempting to find feed with endpoint: " + endpoint);
             }
         }
 

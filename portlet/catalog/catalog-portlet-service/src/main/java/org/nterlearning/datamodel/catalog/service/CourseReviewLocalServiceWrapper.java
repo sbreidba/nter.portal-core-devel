@@ -275,6 +275,19 @@ public class CourseReviewLocalServiceWrapper implements CourseReviewLocalService
             summary, content, rating, serviceContext);
     }
 
+    public org.nterlearning.datamodel.catalog.model.CourseReview migrateCourseReview(
+        long userId, long courseId, java.lang.String summary,
+        java.lang.String content, double rating, java.util.Date createDate,
+        java.util.Date modifiedDate, boolean removed,
+        java.util.Date removedDate,
+        com.liferay.portal.service.ServiceContext serviceContext)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return _courseReviewLocalService.migrateCourseReview(userId, courseId,
+            summary, content, rating, createDate, modifiedDate, removed,
+            removedDate, serviceContext);
+    }
+
     public void addCourseReviewResources(
         org.nterlearning.datamodel.catalog.model.CourseReview courseReview,
         boolean addGroupPermissions, boolean addGuestPermissions)
