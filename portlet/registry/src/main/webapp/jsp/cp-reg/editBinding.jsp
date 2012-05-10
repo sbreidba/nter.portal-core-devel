@@ -22,9 +22,9 @@
 
 <%@ page import="org.nterlearning.service.registry.RegistryUtil" %>
 
-<%@ page import="org.nterlearning.xml.nter_registry.domain_objects_0_1_0.BindingTypeEnum" %>
+<%@ page import="org.nterlearning.registry.client.BindingTypeEnum" %>
 
-<jsp:useBean id="binding" type="org.nterlearning.xml.nter_registry.domain_objects_0_1_0.Binding" scope="request" />
+<jsp:useBean id="binding" type="org.nterlearning.registry.client.Binding" scope="request" />
 <jsp:useBean id="service" type="org.nterlearning.registry.proxy.ServiceBean" scope="request" />
 
 <jsp:useBean id="actionName" type="java.lang.String" scope="request" />

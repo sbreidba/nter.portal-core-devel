@@ -23,9 +23,9 @@
 <%@ page import="org.nterlearning.service.registry.RegistryUtil" %>
 <%@ page import="org.nterlearning.registry.proxy.RegistryInstance" %>
 <%@ page import="org.nterlearning.registry.proxy.InstitutionBean" %>
-<%@ page import="org.nterlearning.xml.nter_registry.domain_objects_0_1_0.ServiceTypeEnum" %>
-<%@ page import="org.nterlearning.xml.nter_registry.domain_objects_0_1_0.Binding" %>
-<%@ page import="org.nterlearning.xml.nter_registry.blacklist_objects_0_1_0.ActiveStatusEnum" %>
+<%@ page import="org.nterlearning.registry.client.ServiceTypeEnum" %>
+<%@ page import="org.nterlearning.registry.client.Binding" %>
+<%@ page import="org.nterlearning.registry.client.ActiveStatusEnum" %>
 
 <%@ page import="java.util.List" %>
 
@@ -233,7 +233,7 @@ institutionsURL.setParameter(ActionRequest.ACTION_NAME, "viewInstitutions");
     </liferay-ui:search-container-results>
 
      <liferay-ui:search-container-row
-       className="org.nterlearning.xml.nter_registry.domain_objects_0_1_0.Binding"
+       className="org.nterlearning.registry.client.Binding"
        keyProperty="key"
        modelVar="binding"
     >

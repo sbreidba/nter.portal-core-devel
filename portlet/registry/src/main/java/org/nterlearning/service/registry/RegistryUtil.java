@@ -30,24 +30,23 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.security.auth.AuthTokenUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
 
-import org.nterlearning.xml.nter_registry.domain_objects_0_1_0.*;
+import org.nterlearning.registry.client.*;
 import org.nterlearning.registry.proxy.*;
 
-import org.nterlearning.xml.nter_registry.blacklist_objects_0_1_0.ActiveStatusEnum;
 
 public class RegistryUtil {
 
-    private static final String PORTLET_ID = "registry_WAR_registryportlet";
-    private static Registry registry;
+    private static final String PORTLET_ID = "nterregistryportlet_WAR_nterregistryportlet";
+    private static RegistryProxy registry;
     private static ActiveStatusEnum defaultActiveStatus = null;
     private static Log log = LogFactoryUtil.getLog(RegistryUtil.class);
 
     private RegistryUtil() {
     }
 
-    public static Registry getRegistryService() {
+    public static RegistryProxy getRegistryService() {
         if (registry == null) {
-            registry = new RegistryImpl();
+            registry = new RegistryProxyImpl();
         }
         return registry;
     }
