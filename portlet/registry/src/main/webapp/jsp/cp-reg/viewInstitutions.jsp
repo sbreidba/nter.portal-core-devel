@@ -36,7 +36,7 @@
 
 <%
 PortletURL iteratorURL = renderResponse.createRenderURL();
-iteratorURL.setParameter("jspPage", "viewInstitutions.jsp");
+iteratorURL.setParameter("jspPage", "/jsp/cp-reg/viewInstitutions.jsp");
 iteratorURL.setParameter(ActionRequest.ACTION_NAME, "viewInstitutions");
 
 String tabs = ParamUtil.getString(request, "tabs", "Institutions");
