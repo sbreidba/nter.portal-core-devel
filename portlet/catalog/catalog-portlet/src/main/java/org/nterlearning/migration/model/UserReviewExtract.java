@@ -31,7 +31,7 @@ public class UserReviewExtract {
     private String mapperType;
     private String emailAddress;
     private String courseIri;
-    private String score;
+    private long score;
     private String summary;
     private String content;
     private Date createDate;
@@ -67,11 +67,11 @@ public class UserReviewExtract {
         courseIri = newValue;
     }
 
-    public String getScore() {
+    public long getScore() {
         return score;
     }
 
-    public void setScore(String newValue) {
+    public void setScore(long newValue) {
         score = newValue;
     }
 
