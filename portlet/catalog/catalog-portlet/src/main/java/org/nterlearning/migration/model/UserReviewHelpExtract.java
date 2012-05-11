@@ -29,7 +29,7 @@ public class UserReviewHelpExtract {
     private String mapperType;
     private String emailAddress;
     private String courseIri;
-    private String score;
+    private long score;
 
     public String getSsoValue() {
         return ssoValue;
@@ -59,10 +59,10 @@ public class UserReviewHelpExtract {
         courseIri = newValue;
     }
 
-    public String getScore() {
+    public long getScore() {
         return score;
     }
-    public void setScore(String newValue) {
+    public void setScore(long newValue) {
         score = newValue;
     }
 
