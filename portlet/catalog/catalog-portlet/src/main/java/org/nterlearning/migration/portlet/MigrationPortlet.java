@@ -31,6 +31,9 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.*;
 import com.liferay.portal.service.*;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalService;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil;
@@ -95,6 +98,7 @@ public class MigrationPortlet extends MVCPortlet {
             for (UserExtract userItem : userList) {
                 // extract values from list
                 String ssoValue = userItem.getSsoValue();
+                String mapperType = userItem.getMapperType();
                 String screenName = userItem.getScreenName();
                 String firstName = userItem.getFirstName();
                 String middleName = userItem.getMiddleName();
@@ -293,8 +297,8 @@ public class MigrationPortlet extends MVCPortlet {
 //        }
 //    }
 
-        /**
-     * Migration process using a file for user helpful/not helpful review score
+     /**
+     * Migration process using a file for user reviews
      *
      * @param request  HTTP Request handler
      * @param response HTTP response handler
@@ -311,9 +315,10 @@ public class MigrationPortlet extends MVCPortlet {
         for (UserReviewExtract userItem : userReviewList) {
             // extract values from list
             String ssoValue = userItem.getSsoValue();
+            String mapperType = userItem.getMapperType();
             String emailAddress = userItem.getEmailAddress();
             String courseIri = userItem.getCourseIri();
-            long score = Long.valueOf(userItem.getScore());
+            long score = userItem.getScore();
             String summary = userItem.getSummary();
             String content = userItem.getContent();
             Date createDate = userItem.getCreateDate();
@@ -328,8 +333,7 @@ public class MigrationPortlet extends MVCPortlet {
             UserIdMapper userMapper;
             try {
                 userMapper =
-                        UserIdMapperLocalServiceUtil.getUserIdMapperByExternalUserId(PortalPropertiesUtil.getSsoImplementation(),
-                                ssoValue);
+                        UserIdMapperLocalServiceUtil.getUserIdMapperByExternalUserId(mapperType,ssoValue);
                 userId = userMapper.getUserId();
             } catch (Exception e) {
                 mLog.warn("Could not find local user which maps to external user id " + ssoValue);
@@ -387,9 +391,10 @@ public class MigrationPortlet extends MVCPortlet {
         for (UserReviewHelpExtract userItem : userReviewHelpList) {
             // extract values from list
             String ssoValue = userItem.getSsoValue();
+            String mapperType = userItem.getMapperType();
             String emailAddress = userItem.getEmailAddress();
             String courseIri = userItem.getCourseIri();
-            long score = Long.valueOf(userItem.getScore());
+            long score = userItem.getScore();
 
             long courseId = 0;
             long userId = 0;
@@ -398,8 +403,7 @@ public class MigrationPortlet extends MVCPortlet {
             UserIdMapper userMapper;
             try {
                 userMapper =
-                        UserIdMapperLocalServiceUtil.getUserIdMapperByExternalUserId(PortalPropertiesUtil.getSsoImplementation(),
-                                ssoValue);
+                        UserIdMapperLocalServiceUtil.getUserIdMapperByExternalUserId(mapperType, ssoValue);
                 userId = userMapper.getUserId();
             } catch (Exception e) {
                 mLog.warn("Could not find local user which maps to external user id " + ssoValue);
@@ -463,6 +467,138 @@ public class MigrationPortlet extends MVCPortlet {
             }
         }
     }
+
+      /**
+      * Migration process using a file for MB Categories
+    *
+    * @param request  HTTP Request handler
+    * @param response HTTP response handler
+    */
+   public void processMigrateMBCategoryImport(ActionRequest request, ActionResponse response)
+           throws FileNotFoundException, IOException, ParseException, PortalException, SystemException {
+
+       mLog.info("Importing user local course reviews");
+
+       // Extract local course reviews  to migrate
+       String mbCategoryFilename = MigrationConstants.MB_CATEGORY_MIGRATION_PATH;
+       ArrayList<MbCategoryExtract> categoryList = readMbCategoryExtractAsArrayList(mbCategoryFilename);
+       ServiceContext serviceContext = ServiceContextFactory.getInstance(
+                MBCategoryLocalServiceUtil.class.getName(), request);
+       boolean parentFlag = true;
+       // Load parent categories and establish a map of old/new categories to verify
+       ArrayList<MbCategoryMap> categoryMapList = new ArrayList<MbCategoryMap>();
+       categoryMapList = insertMbCategorySet(parentFlag, categoryList, categoryMapList, serviceContext);
+
+       // add subcategories, skip if all ready processed
+       // TODO this needs to be recursive in the future. Only 1 level of subcategories is currently processed.
+       parentFlag = false;
+       ArrayList<MbCategoryMap> subCategoryMapList = new ArrayList<MbCategoryMap>();
+       subCategoryMapList = insertMbCategorySet(parentFlag, categoryList, categoryMapList, serviceContext);
+
+   }
+
+    /**
+     * Insert MB Categories
+     */
+    public ArrayList<MbCategoryMap> insertMbCategorySet(boolean parentFlag, ArrayList<MbCategoryExtract> categoryList,
+                                                        ArrayList<MbCategoryMap> categoryMapList, ServiceContext serviceContext)
+            throws PortalException, SystemException {
+
+        for (MbCategoryExtract categoryItem : categoryList) {
+            // extract values from list
+            String ssoValue = categoryItem.getSsoValue();
+            String mapperType = categoryItem.getMapperType();
+            String emailAddress = categoryItem.getEmailAddress();
+            long categoryId = categoryItem.getCategoryId();
+            long parentCategoryId = categoryItem.getParentCategoryId();
+            String name = categoryItem.getName();
+            String description = categoryItem.getDescription();
+            String displayStyle = "";    //not in v6.0.6 schema
+            Date createDate = categoryItem.getCreateDate();
+            Date modifiedDate = categoryItem.getModifiedDate();
+            Date lastPostDate = categoryItem.getLastPostDate();
+            String inEmailAddress = categoryItem.getInEmailAddress();
+            String inProtocol = categoryItem.getInProtocol();
+            String inServerName = categoryItem.getInServerName();
+            int inServerPort = categoryItem.getInServerPort();
+            boolean inUseSSL = categoryItem.getInUseSSL();
+            String inUserName = categoryItem.getInUserName();
+            String inPassword = categoryItem.getInPassword();
+            int inReadInterval = categoryItem.getInReadInterval();
+            String outEmailAddress = categoryItem.getOutEmailAddress();
+            boolean outCustom = categoryItem.getOutCustom();
+            String outServerName = categoryItem.getOutServerName();
+            int outServerPort = categoryItem.getOutServerPort();
+            boolean outUseSSL = categoryItem.getOutUseSSL();
+            String outUserName = categoryItem.getOutUserName();
+            String outPassword = categoryItem.getOutPassword();
+            boolean allowAnonymous = false; // not in v6.0.6 schema
+            boolean mailingListActive = categoryItem.getMailingListActive();
+
+            long userId = 0;
+
+            // Find user based on the UserIdMapper assignment
+            UserIdMapper userMapper;
+            try {
+                userMapper =
+                        UserIdMapperLocalServiceUtil.getUserIdMapperByExternalUserId(mapperType, ssoValue);
+                userId = userMapper.getUserId();
+            } catch (Exception e) {
+                mLog.warn("Could not find local user which maps to external user id " + ssoValue);
+            }
+
+            MBCategory mbCategory;
+            try {
+                if (parentFlag && parentCategoryId == 0) {
+                    // Create MB parent (root) categories
+                    mbCategory = MBCategoryLocalServiceUtil.addCategory(userId, parentCategoryId, name,
+                            description, displayStyle,
+                            inEmailAddress, inProtocol, inServerName, inServerPort, inUseSSL, inUserName, inPassword, inReadInterval,
+                            outEmailAddress, outCustom, outServerName, outServerPort, outUseSSL, outUserName, outPassword,
+                            allowAnonymous, mailingListActive, serviceContext);
+                    mLog.info("Added Category: " + name + " UserId: " + ssoValue);
+
+                    MbCategoryMap mapItem = new MbCategoryMap();
+                    mapItem.setOldCategoryId(categoryId);
+                    mapItem.setNewCategoryId(mbCategory.getCategoryId());
+                    mapItem.setOldParentCategoryId(parentCategoryId);
+                    mapItem.setNewParentCategoryId(mbCategory.getParentCategoryId());
+                    categoryMapList.add(mapItem);
+                } else if (parentFlag) {
+                    // Save sub-categories for recursive processing
+                    MbCategoryMap mapItem = new MbCategoryMap();
+                    mapItem.setOldCategoryId(categoryId);
+                    mapItem.setNewCategoryId(-1);
+                    mapItem.setOldParentCategoryId(parentCategoryId);
+                    mapItem.setNewParentCategoryId(-1);
+                    categoryMapList.add(mapItem);
+                } else if (parentCategoryId != 0) {
+                    // insert subcategory
+                    // find new categoryId of parent
+                    for(MbCategoryMap newMapItem: categoryMapList) {
+                        if (parentCategoryId == newMapItem.getOldCategoryId()) {
+                            parentCategoryId = newMapItem.getNewCategoryId();
+                            break;
+                        }
+                    }
+                    mbCategory = MBCategoryLocalServiceUtil.addCategory(userId, parentCategoryId, name,
+                            description, displayStyle,
+                            inEmailAddress, inProtocol, inServerName, inServerPort, inUseSSL, inUserName, inPassword, inReadInterval,
+                            outEmailAddress, outCustom, outServerName, outServerPort, outUseSSL, outUserName, outPassword,
+                            allowAnonymous, mailingListActive, serviceContext);
+                    mLog.info("Added Category: " + name + " UserId: " + ssoValue);
+                }
+            } catch (Exception e) {
+                // log issue creating the MBCategory
+                mLog.warn("Could not add MBCategory: " + name);
+            }
+        }
+        return categoryMapList;
+    }
+
+    //
+    // methods to read extract files
+    //
 
     private static String readFileAsString(String filePath) throws IOException {
         byte[] buffer = new byte[(int) new File(filePath).length()];
@@ -594,12 +730,12 @@ public class MigrationPortlet extends MVCPortlet {
                 userEntry.setMapperType(dataValue[1]);
                 userEntry.setEmailAddress(dataValue[2]);
                 userEntry.setCourseIri(dataValue[3]);
-                userEntry.setScore(dataValue[4]);
+                userEntry.setScore(Long.valueOf(dataValue[4]));
                 userEntry.setSummary(dataValue[5]);
                 userEntry.setContent(dataValue[6]);
                 userEntry.setCreateDate(new SimpleDateFormat("\"yyyy-MM-dd HH:mm:ss\"").parse(dataValue[7]));
                 userEntry.setModifiedDate(new SimpleDateFormat("\"yyyy-MM-dd HH:mm:ss\"").parse(dataValue[8]));
-                if (dataValue[9].equals("1")) {
+                if ("1".equals(dataValue[9])) {
                     userEntry.setRemoved(true);
                 } else  {
                     userEntry.setRemoved(false);
@@ -631,13 +767,77 @@ public class MigrationPortlet extends MVCPortlet {
                 userEntry.setMapperType(dataValue[1]);
                 userEntry.setEmailAddress(dataValue[2]);
                 userEntry.setCourseIri(dataValue[3]);
-                userEntry.setScore(dataValue[4]);
+                userEntry.setScore(Long.valueOf(dataValue[4]));
                 storeValues.add(userEntry);
             }
         } catch (FileNotFoundException e) {
             mLog.error("File not found: " + fileName);
         } catch (IOException e) {
             mLog.error("IO Exception processing file: " + fileName);
+        }
+        return storeValues;
+    }
+
+    private static ArrayList<MbCategoryExtract> readMbCategoryExtractAsArrayList(String fileName)
+            throws  IOException, ParseException {
+        ArrayList<MbCategoryExtract> storeValues = new ArrayList<MbCategoryExtract>();
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                String dataValue[] = line.split("\t");
+                MbCategoryExtract categoryEntry = new MbCategoryExtract();
+                categoryEntry.setSsoValue(dataValue[0]);
+                categoryEntry.setMapperType(dataValue[1]);
+                categoryEntry.setEmailAddress(dataValue[2]);
+                categoryEntry.setCategoryId(Long.valueOf(dataValue[3]));
+                categoryEntry.setParentCategoryId(Long.valueOf(dataValue[4]));
+                categoryEntry.setName(dataValue[5]);
+                categoryEntry.setDescription(dataValue[6]);
+                categoryEntry.setCreateDate(new SimpleDateFormat("\"yyyy-MM-dd HH:mm:ss\"").parse(dataValue[7]));
+                categoryEntry.setModifiedDate(new SimpleDateFormat("\"yyyy-MM-dd HH:mm:ss\"").parse(dataValue[8]));
+                categoryEntry.setLastPostDate(new SimpleDateFormat("\"yyyy-MM-dd HH:mm:ss\"").parse(dataValue[9]));
+                categoryEntry.setInEmailAddress(dataValue[10]);
+                categoryEntry.setInProtocol(dataValue[11]);
+                categoryEntry.setInServerName(dataValue[12]);
+                categoryEntry.setInServerPort(Integer.valueOf(dataValue[13]));
+                if ("1".equals(dataValue[14])) {
+                    categoryEntry.setInUseSSL(true);
+                } else  {
+                    categoryEntry.setInUseSSL(false);
+                }
+                categoryEntry.setInUserName(dataValue[15]);
+                categoryEntry.setInPassword(dataValue[16]);
+                categoryEntry.setInReadInterval(Integer.valueOf(dataValue[17]));
+                categoryEntry.setOutEmailAddress(dataValue[18]);
+                if ("1".equals(dataValue[19])) {
+                    categoryEntry.setOutCustom(true);
+                } else  {
+                    categoryEntry.setOutCustom(false);
+                }
+                categoryEntry.setOutServerName(dataValue[20]);
+                categoryEntry.setOutServerPort(Integer.valueOf(dataValue[21]));
+                if ("1".equals(dataValue[22])) {
+                    categoryEntry.setOutUseSSL(true);
+                } else  {
+                    categoryEntry.setOutUseSSL(false);
+                }
+                categoryEntry.setOutUserName(dataValue[23]);
+                categoryEntry.setOutPassword(dataValue[24]);
+                if ("1".equals(dataValue[25])) {
+                    categoryEntry.setMailingListActive(true);
+                } else  {
+                    categoryEntry.setMailingListActive(false);
+                }
+                storeValues.add(categoryEntry);
+            }
+        } catch (FileNotFoundException e) {
+            mLog.error("File not found: " + fileName);
+        } catch (IOException e) {
+            mLog.error("IO Exception processing file: " + fileName);
+        } catch (ParseException e) {
+            mLog.error("Parse Exception processing file: " + fileName + e);
         }
         return storeValues;
     }
