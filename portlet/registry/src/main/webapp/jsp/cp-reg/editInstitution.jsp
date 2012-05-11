@@ -26,7 +26,7 @@
 
 <%@ page import="org.nterlearning.registry.proxy.RegistryInstance" %>
 <%@ page import="org.nterlearning.registry.proxy.ServiceBean" %>
-<%@ page import="org.nterlearning.xml.nter_registry.blacklist_objects_0_1_0.ActiveStatusEnum" %>
+<%@ page import="org.nterlearning.registry.client.ActiveStatusEnum" %>
 
 <%@ page import="javax.portlet.PortletURL" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
