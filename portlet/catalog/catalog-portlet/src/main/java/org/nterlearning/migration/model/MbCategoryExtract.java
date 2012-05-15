@@ -30,6 +30,7 @@ public class MbCategoryExtract {
     private String ssoValue;
     private String mapperType;
     private String emailAddress;
+    private String userName;
     private long categoryId;
     private long parentCategoryId;
     private String name;
@@ -75,6 +76,13 @@ public class MbCategoryExtract {
     }
     public void setEmailAddress(String newValue) {
         emailAddress = newValue;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+    public void setUserName(String newValue) {
+        userName = newValue;
     }
 
     public long getCategoryId() {
