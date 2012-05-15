@@ -21,19 +21,24 @@
 package org.nterlearning.migration.portlet;
 
 import com.liferay.portal.DuplicateUserScreenNameException;
+import com.liferay.portal.NoSuchUserIdMapperException;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.*;
 import com.liferay.portal.service.*;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
-import com.liferay.portlet.messageboards.service.MBCategoryLocalService;
+import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBMessageConstants;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil;
@@ -41,7 +46,6 @@ import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 import com.liferay.util.PwdGenerator;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 import org.apache.commons.lang.exception.ExceptionUtils;
-import org.nterlearning.course.hook.SetupAction;
 import org.nterlearning.datamodel.catalog.model.Course;
 import org.nterlearning.datamodel.catalog.model.CourseReview;
 import org.nterlearning.datamodel.catalog.service.CourseLocalServiceUtil;
@@ -54,6 +58,7 @@ import org.nterlearning.utils.ReviewUtil;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import java.io.*;
+import javax.portlet.PortletPreferences;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -124,7 +129,7 @@ public class MigrationPortlet extends MVCPortlet {
                             " org count: " + organizationIds.length +
                             " role count: " + roleIds.length);
 
-                    SetupAction.addSsoInformation(user);
+                    addSsoInformation(user, ssoValue);
                 } catch (Exception e) {
                     // probably account already exists, but log just in case
                     mLog.info(ExceptionUtils.getFullStackTrace(e));
@@ -161,6 +166,26 @@ public class MigrationPortlet extends MVCPortlet {
         }
 
         return user;
+    }
+
+    private static void addSsoInformation(User user, String ssoValue) {
+        try {
+            UserIdMapper userMapper;
+            try {
+                userMapper =
+                        UserIdMapperLocalServiceUtil.getUserIdMapper(
+                                user.getUserId(), PortalPropertiesUtil.getSsoImplementation());
+            }
+            catch (NoSuchUserIdMapperException ne) {
+                userMapper =
+                        UserIdMapperLocalServiceUtil.updateUserIdMapper(
+                                user.getUserId(), PortalPropertiesUtil.getSsoImplementation(),
+                                null, ssoValue);
+            }
+        }
+        catch (Exception e) {
+        	mLog.info(ExceptionUtils.getFullStackTrace(e));
+        }
     }
 
     /**
@@ -468,7 +493,7 @@ public class MigrationPortlet extends MVCPortlet {
         }
     }
 
-      /**
+    /**
       * Migration process using a file for MB Categories
     *
     * @param request  HTTP Request handler
@@ -477,7 +502,7 @@ public class MigrationPortlet extends MVCPortlet {
    public void processMigrateMBCategoryImport(ActionRequest request, ActionResponse response)
            throws FileNotFoundException, IOException, ParseException, PortalException, SystemException {
 
-       mLog.info("Importing user local course reviews");
+       mLog.info("Importing MB Categories");
 
        // Extract local course reviews  to migrate
        String mbCategoryFilename = MigrationConstants.MB_CATEGORY_MIGRATION_PATH;
@@ -509,6 +534,7 @@ public class MigrationPortlet extends MVCPortlet {
             String ssoValue = categoryItem.getSsoValue();
             String mapperType = categoryItem.getMapperType();
             String emailAddress = categoryItem.getEmailAddress();
+            String userName = categoryItem.getUserName();
             long categoryId = categoryItem.getCategoryId();
             long parentCategoryId = categoryItem.getParentCategoryId();
             String name = categoryItem.getName();
@@ -535,6 +561,7 @@ public class MigrationPortlet extends MVCPortlet {
             boolean allowAnonymous = false; // not in v6.0.6 schema
             boolean mailingListActive = categoryItem.getMailingListActive();
 
+            long companyId = PortalUtil.getDefaultCompanyId();
             long userId = 0;
 
             // Find user based on the UserIdMapper assignment
@@ -547,6 +574,13 @@ public class MigrationPortlet extends MVCPortlet {
                 mLog.warn("Could not find local user which maps to external user id " + ssoValue);
             }
 
+            // Use admin user if valid user not found
+            if (userId == 0) {
+                mLog.info("Inserting MBCategory: " + name + " using Admin user");
+                //userId = UserLocalServiceUtil.getUserIdByEmailAddress(companyId, "admin@nterlearning.org");
+                userId = UserLocalServiceUtil.getUserIdByScreenName(companyId, "admin");
+            }
+
             MBCategory mbCategory;
             try {
                 if (parentFlag && parentCategoryId == 0) {
@@ -556,7 +590,7 @@ public class MigrationPortlet extends MVCPortlet {
                             inEmailAddress, inProtocol, inServerName, inServerPort, inUseSSL, inUserName, inPassword, inReadInterval,
                             outEmailAddress, outCustom, outServerName, outServerPort, outUseSSL, outUserName, outPassword,
                             allowAnonymous, mailingListActive, serviceContext);
-                    mLog.info("Added Category: " + name + " UserId: " + ssoValue);
+                    mLog.info("Added Category: " + name + " Inserted by userId: " + ssoValue);
 
                     MbCategoryMap mapItem = new MbCategoryMap();
                     mapItem.setOldCategoryId(categoryId);
@@ -564,6 +598,7 @@ public class MigrationPortlet extends MVCPortlet {
                     mapItem.setOldParentCategoryId(parentCategoryId);
                     mapItem.setNewParentCategoryId(mbCategory.getParentCategoryId());
                     categoryMapList.add(mapItem);
+
                 } else if (parentFlag) {
                     // Save sub-categories for recursive processing
                     MbCategoryMap mapItem = new MbCategoryMap();
@@ -572,10 +607,11 @@ public class MigrationPortlet extends MVCPortlet {
                     mapItem.setOldParentCategoryId(parentCategoryId);
                     mapItem.setNewParentCategoryId(-1);
                     categoryMapList.add(mapItem);
+
                 } else if (parentCategoryId != 0) {
                     // insert subcategory
                     // find new categoryId of parent
-                    for(MbCategoryMap newMapItem: categoryMapList) {
+                    for (MbCategoryMap newMapItem : categoryMapList) {
                         if (parentCategoryId == newMapItem.getOldCategoryId()) {
                             parentCategoryId = newMapItem.getNewCategoryId();
                             break;
@@ -586,14 +622,204 @@ public class MigrationPortlet extends MVCPortlet {
                             inEmailAddress, inProtocol, inServerName, inServerPort, inUseSSL, inUserName, inPassword, inReadInterval,
                             outEmailAddress, outCustom, outServerName, outServerPort, outUseSSL, outUserName, outPassword,
                             allowAnonymous, mailingListActive, serviceContext);
-                    mLog.info("Added Category: " + name + " UserId: " + ssoValue);
+                    mLog.info("Added MBCategory: " + name + " Inserted by userId: " + ssoValue);
                 }
             } catch (Exception e) {
                 // log issue creating the MBCategory
-                mLog.warn("Could not add MBCategory: " + name);
+                mLog.warn("Could not add MBCategory: " + name + " Inserted by userId: " + ssoValue);
             }
         }
         return categoryMapList;
+    }
+
+    /**
+     * Migration process using a file for MB Messages
+     *
+     * @param request  HTTP Request handler
+     * @param response HTTP response handler
+     */
+    public void processMigrateMBMessageImport(ActionRequest request, ActionResponse response)
+            throws FileNotFoundException, IOException, ParseException, PortalException, SystemException {
+
+        mLog.info("Importing MB Messages");
+
+        // Extract local course reviews  to migrate
+        String mbMessageFilename = MigrationConstants.MB_MESSAGE_MIGRATION_PATH;
+        ArrayList<MbMessageExtract> messageList = readMbMessageExtractAsArrayList(mbMessageFilename);
+        ServiceContext serviceContext = ServiceContextFactory.getInstance(
+                MBMessageLocalServiceUtil.class.getName(), request);
+
+        PortletPreferences preferences = request.getPreferences();
+        String format = GetterUtil.getString(
+                preferences.getValue("messageFormat", null),
+                MBMessageConstants.DEFAULT_FORMAT);
+
+        boolean rootFlag = true;
+        // Load root messages and establish a map of old/new messages to insert entire message thread
+        ArrayList<MbMessageMap> messageMapList = new ArrayList<MbMessageMap>();
+        messageMapList = insertMbMessageSet(rootFlag, messageList, messageMapList, format, serviceContext);
+
+        // add message thread responses to root message, skip if all ready processed
+        rootFlag = false;
+        ArrayList<MbMessageMap> subMessageMapList = new ArrayList<MbMessageMap>();
+        subMessageMapList = insertMbMessageSet(rootFlag, messageList, messageMapList, format, serviceContext);
+
+    }
+
+    /**
+     * Insert MB Messages
+     */
+    public ArrayList<MbMessageMap> insertMbMessageSet(boolean rootFlag, ArrayList<MbMessageExtract> messageList,
+                                                      ArrayList<MbMessageMap> messageMapList, String format, ServiceContext serviceContext)
+            throws PortalException, SystemException {
+
+        // create new ArrayList for processing hierarchy of messages
+        ArrayList<MbMessageMap> newLevelMessageMap = new ArrayList<MbMessageMap>();
+
+        for (MbMessageExtract messageItem : messageList) {
+            // extract values from list
+            String ssoValue = messageItem.getSsoValue();
+            String mapperType = messageItem.getMapperType();
+            String emailAddress = messageItem.getEmailAddress();
+            String userName = messageItem.getUserName();
+            String name = messageItem.getName();
+            String description = messageItem.getDescription();
+            Date createDate = messageItem.getCreateDate();
+            Date modifiedDate = messageItem.getModifiedDate();
+            long messageId = messageItem.getMessageId();
+            long threadId = messageItem.getThreadId();
+            long rootMessageId = messageItem.getRootMessageId();
+            long parentMessageId = messageItem.getParentMessageId();
+            String subject = messageItem.getSubject();
+            String body = messageItem.getBody();
+            boolean attachments = messageItem.getAttachments();
+            boolean anonymous = messageItem.getAnonymous();
+            double priority = messageItem.getPriority();
+            boolean allowPingbacks = messageItem.getAllowPingbacks();
+
+            // list is used for attachments which are are not going to migrate at this time
+            List<ObjectValuePair<String, InputStream>> inputStreamOVPs =
+			new ArrayList<ObjectValuePair<String, InputStream>>(5);
+
+            long companyId = PortalUtil.getDefaultCompanyId();
+            long groupId = GroupLocalServiceUtil.getCompanyGroup(companyId).getGroupId();
+
+            long userId = 0;
+            // Find user based on the UserIdMapper assignment
+            UserIdMapper userMapper;
+            try {
+                userMapper =
+                        UserIdMapperLocalServiceUtil.getUserIdMapperByExternalUserId(mapperType, ssoValue);
+                userId = userMapper.getUserId();
+            } catch (Exception e) {
+                mLog.warn("Could not find local user which maps to external user id " + ssoValue +
+                        " inserting as guest user");
+            }
+            // Insert as guest user if user not valid in new schema
+            if (userId == 0) {
+                userId = UserLocalServiceUtil.getDefaultUser(companyId).getUserId();
+            }
+
+            // Obtain category.
+            long category = determineMBCategory(name, description);
+
+            // Messages are sorted in extract query.
+            // Root message will be first followed by message responses.
+            MBMessage mbMessage;
+            try {
+                if (rootFlag && parentMessageId == 0) {
+                    // Create MB root messages
+                    mbMessage = MBMessageLocalServiceUtil.addMessage(userId, userName, groupId,
+                            category, subject, body, format, inputStreamOVPs, anonymous,
+                            priority, allowPingbacks, serviceContext);
+                    mLog.info("Added Message: " + subject + " UserName: " + userName);
+
+                    MbMessageMap mapItem = new MbMessageMap();
+                    mapItem.setOldMessageId(messageId);
+                    mapItem.setNewMessageId(mbMessage.getMessageId());
+                    mapItem.setOldThreadId(threadId);
+                    mapItem.setNewThreadId(mbMessage.getThreadId());
+                    mapItem.setOldRootMessageId(rootMessageId);
+                    mapItem.setNewRootMessageId(mbMessage.getRootMessageId());
+                    mapItem.setOldParentMessageId(parentMessageId);
+                    mapItem.setNewParentMessageId(mbMessage.getParentMessageId());
+                    messageMapList.add(mapItem);
+
+                } else if (rootFlag) {
+                    // Save sub-messages
+                    MbMessageMap mapItem = new MbMessageMap();
+                    mapItem.setOldMessageId(messageId);
+                    mapItem.setNewMessageId(-1);
+                    mapItem.setOldThreadId(threadId);
+                    mapItem.setNewThreadId(-1);
+                    mapItem.setOldRootMessageId(rootMessageId);
+                    mapItem.setNewRootMessageId(-1);
+                    mapItem.setOldParentMessageId(parentMessageId);
+                    mapItem.setNewParentMessageId(-1);
+                    messageMapList.add(mapItem);
+
+                } else if (parentMessageId != 0 ) {
+                    // insert message in thread if not yet inserted
+                    // find new messageId, threadId of parent
+                    // extract query in order so parent message should exist to enter thread messages in proper order
+                    for (MbMessageMap newMapItem : messageMapList) {
+                        if (parentMessageId == newMapItem.getOldMessageId()) {
+                            parentMessageId = newMapItem.getNewMessageId();
+                            threadId = newMapItem.getNewThreadId();
+                            rootMessageId = newMapItem.getNewRootMessageId();
+                            break;
+                        }
+                    }
+
+                    mbMessage = MBMessageLocalServiceUtil.addMessage(userId, userName, groupId,
+                            category, threadId, parentMessageId, subject, body, format, inputStreamOVPs, anonymous,
+                            priority, allowPingbacks, serviceContext);
+                    mLog.info("Added MBMessage: " + subject + " Inserted by userName: " + userName);
+                    MbMessageMap mapItem = new MbMessageMap();
+                    mapItem.setOldMessageId(messageId);
+                    mapItem.setNewMessageId(mbMessage.getMessageId());
+                    mapItem.setOldThreadId(threadId);
+                    mapItem.setNewThreadId(mbMessage.getThreadId());
+                    mapItem.setOldRootMessageId(rootMessageId);
+                    mapItem.setNewRootMessageId(mbMessage.getRootMessageId());
+                    mapItem.setOldParentMessageId(parentMessageId);
+                    mapItem.setNewParentMessageId(mbMessage.getParentMessageId());
+                    newLevelMessageMap.add(mapItem);
+                }
+            } catch (Exception e) {
+                // log issue creating the MBMessage
+                mLog.warn("Could not add MBMessage: " + subject + " Inserted by userName: " + userName);
+            }
+        }
+
+        if (!rootFlag) {
+            // assign new ArrayList for processing hierarchy of messages
+            messageMapList = newLevelMessageMap;
+        }
+
+        return messageMapList;
+    }
+
+    /**
+     * Determine MB Messages
+     */
+    public long determineMBCategory(String name, String description)
+            throws SystemException {
+
+        long category = -1;
+        List<MBCategory> categoryList = MBCategoryLocalServiceUtil.getMBCategories(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+        for (MBCategory categoryItem : categoryList) {
+            if (categoryItem.getName().equals(name) &&
+                    categoryItem.getDescription().equals(description)) {
+                category = categoryItem.getCategoryId();
+                break;
+            }
+        }
+        if (category == -1) {
+            mLog.warn("Could not add find MBCategory: " + name + " for MB Message");
+        }
+        return category;
     }
 
     //
@@ -628,7 +854,9 @@ public class MigrationPortlet extends MVCPortlet {
                 userEntry.setSsoValue(dataValue[0]);
                 userEntry.setMapperType(dataValue[1]);
                 userEntry.setOrgName(dataValue[2]);
-                userEntry.setScreenName(dataValue[3]);
+                // remove any plus signs from screen name
+                String newScreenName = dataValue[3].replace("+", "_");
+                userEntry.setScreenName(newScreenName);
                 userEntry.setEmailAddress(dataValue[4]);
                 userEntry.setFirstName(dataValue[5]);
                 userEntry.setMiddleName(dataValue[6]);
@@ -733,15 +961,19 @@ public class MigrationPortlet extends MVCPortlet {
                 userEntry.setScore(Long.valueOf(dataValue[4]));
                 userEntry.setSummary(dataValue[5]);
                 userEntry.setContent(dataValue[6]);
-                userEntry.setCreateDate(new SimpleDateFormat("\"yyyy-MM-dd HH:mm:ss\"").parse(dataValue[7]));
-                userEntry.setModifiedDate(new SimpleDateFormat("\"yyyy-MM-dd HH:mm:ss\"").parse(dataValue[8]));
+                if (dataValue[7].length() == 19) {
+                    userEntry.setCreateDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dataValue[7]));
+                }
+                if (dataValue[8].length() == 19) {
+                    userEntry.setModifiedDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dataValue[8]));
+                }
                 if ("1".equals(dataValue[9])) {
                     userEntry.setRemoved(true);
                 } else  {
                     userEntry.setRemoved(false);
                 }
-                if (dataValue[10].length() != 0) {
-                    userEntry.setRemovedDate(new SimpleDateFormat("\"yyyy-MM-dd HH:mm:ss\"").parse(dataValue[10]));
+                if (dataValue[10].length() == 19) {
+                    userEntry.setRemovedDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dataValue[10]));
                 }
                 storeValues.add(userEntry);
             }
@@ -791,46 +1023,109 @@ public class MigrationPortlet extends MVCPortlet {
                 categoryEntry.setSsoValue(dataValue[0]);
                 categoryEntry.setMapperType(dataValue[1]);
                 categoryEntry.setEmailAddress(dataValue[2]);
-                categoryEntry.setCategoryId(Long.valueOf(dataValue[3]));
-                categoryEntry.setParentCategoryId(Long.valueOf(dataValue[4]));
-                categoryEntry.setName(dataValue[5]);
-                categoryEntry.setDescription(dataValue[6]);
-                categoryEntry.setCreateDate(new SimpleDateFormat("\"yyyy-MM-dd HH:mm:ss\"").parse(dataValue[7]));
-                categoryEntry.setModifiedDate(new SimpleDateFormat("\"yyyy-MM-dd HH:mm:ss\"").parse(dataValue[8]));
-                categoryEntry.setLastPostDate(new SimpleDateFormat("\"yyyy-MM-dd HH:mm:ss\"").parse(dataValue[9]));
-                categoryEntry.setInEmailAddress(dataValue[10]);
-                categoryEntry.setInProtocol(dataValue[11]);
-                categoryEntry.setInServerName(dataValue[12]);
-                categoryEntry.setInServerPort(Integer.valueOf(dataValue[13]));
-                if ("1".equals(dataValue[14])) {
+                categoryEntry.setUserName(dataValue[3]);
+                categoryEntry.setCategoryId(Long.valueOf(dataValue[4]));
+                categoryEntry.setParentCategoryId(Long.valueOf(dataValue[5]));
+                categoryEntry.setName(dataValue[6]);
+                categoryEntry.setDescription(dataValue[7]);
+                if (dataValue[8].length() == 19) {
+                    categoryEntry.setCreateDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dataValue[8]));
+                }
+                if (dataValue[9].length() == 19) {
+                    categoryEntry.setModifiedDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dataValue[9]));
+                }
+                if (dataValue[10].length() == 19) {
+                    categoryEntry.setLastPostDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dataValue[10]));
+                }
+                categoryEntry.setInEmailAddress(dataValue[11]);
+                categoryEntry.setInProtocol(dataValue[12]);
+                categoryEntry.setInServerName(dataValue[13]);
+                categoryEntry.setInServerPort(Integer.valueOf(dataValue[14]));
+                if ("1".equals(dataValue[15])) {
                     categoryEntry.setInUseSSL(true);
                 } else  {
                     categoryEntry.setInUseSSL(false);
                 }
-                categoryEntry.setInUserName(dataValue[15]);
-                categoryEntry.setInPassword(dataValue[16]);
-                categoryEntry.setInReadInterval(Integer.valueOf(dataValue[17]));
-                categoryEntry.setOutEmailAddress(dataValue[18]);
-                if ("1".equals(dataValue[19])) {
+                categoryEntry.setInUserName(dataValue[16]);
+                categoryEntry.setInPassword(dataValue[17]);
+                categoryEntry.setInReadInterval(Integer.valueOf(dataValue[18]));
+                categoryEntry.setOutEmailAddress(dataValue[19]);
+                if ("1".equals(dataValue[20])) {
                     categoryEntry.setOutCustom(true);
                 } else  {
                     categoryEntry.setOutCustom(false);
                 }
-                categoryEntry.setOutServerName(dataValue[20]);
-                categoryEntry.setOutServerPort(Integer.valueOf(dataValue[21]));
-                if ("1".equals(dataValue[22])) {
+                categoryEntry.setOutServerName(dataValue[21]);
+                categoryEntry.setOutServerPort(Integer.valueOf(dataValue[22]));
+                if ("1".equals(dataValue[23])) {
                     categoryEntry.setOutUseSSL(true);
                 } else  {
                     categoryEntry.setOutUseSSL(false);
                 }
-                categoryEntry.setOutUserName(dataValue[23]);
-                categoryEntry.setOutPassword(dataValue[24]);
-                if ("1".equals(dataValue[25])) {
+                categoryEntry.setOutUserName(dataValue[24]);
+                categoryEntry.setOutPassword(dataValue[25]);
+                if ("1".equals(dataValue[26])) {
                     categoryEntry.setMailingListActive(true);
                 } else  {
                     categoryEntry.setMailingListActive(false);
                 }
                 storeValues.add(categoryEntry);
+            }
+        } catch (FileNotFoundException e) {
+            mLog.error("File not found: " + fileName);
+        } catch (IOException e) {
+            mLog.error("IO Exception processing file: " + fileName);
+        } catch (ParseException e) {
+            mLog.error("Parse Exception processing file: " + fileName + e);
+        }
+        return storeValues;
+    }
+
+        private static ArrayList<MbMessageExtract> readMbMessageExtractAsArrayList(String fileName)
+            throws  IOException, ParseException {
+        ArrayList<MbMessageExtract> storeValues = new ArrayList<MbMessageExtract>();
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                String dataValue[] = line.split("\t");
+                MbMessageExtract messageEntry = new MbMessageExtract();
+                messageEntry.setSsoValue(dataValue[0]);
+                messageEntry.setMapperType(dataValue[1]);
+                messageEntry.setEmailAddress(dataValue[2]);
+                messageEntry.setUserName(dataValue[3]);
+                messageEntry.setName(dataValue[4]);
+                messageEntry.setDescription(dataValue[5]);
+                if (dataValue[6].length() == 19) {
+                    messageEntry.setCreateDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dataValue[6]));
+                }
+                if (dataValue[7].length() == 19) {
+                    messageEntry.setModifiedDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dataValue[7]));
+                }
+                messageEntry.setMessageId(Long.valueOf(dataValue[8]));
+                messageEntry.setThreadId(Long.valueOf(dataValue[9]));
+                messageEntry.setRootMessageId(Long.valueOf(dataValue[10]));
+                messageEntry.setParentMessageId(Long.valueOf(dataValue[11]));
+                messageEntry.setSubject(dataValue[12]);
+                messageEntry.setBody(dataValue[13]);
+                if ("1".equals(dataValue[14])) {
+                    messageEntry.setAttachments(true);
+                } else  {
+                    messageEntry.setAttachments(false);
+                }
+                if ("1".equals(dataValue[15])) {
+                    messageEntry.setAnonymous(true);
+                } else  {
+                    messageEntry.setAnonymous(false);
+                }
+                messageEntry.setPriority(Double.valueOf(dataValue[16]));
+                if ("1".equals(dataValue[17])) {
+                    messageEntry.setAllowPingbacks(true);
+                } else  {
+                    messageEntry.setAllowPingbacks(false);
+                }
+                storeValues.add(messageEntry);
             }
         } catch (FileNotFoundException e) {
             mLog.error("File not found: " + fileName);
