@@ -26,6 +26,67 @@ public class CourseServiceUtil {
      *
      * Never modify this class directly. Add custom service methods to {@link org.nterlearning.datamodel.catalog.service.impl.CourseServiceImpl} and rerun ServiceBuilder to regenerate this class.
      */
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.Course> findAllValidCourses()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findAllValidCourses();
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.Course> findAllValidCourses(
+        int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findAllValidCourses(start, end);
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.Course findByCourseId(
+        long courseId)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchCourseException {
+        return getService().findByCourseId(courseId);
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.Course findByCourseIri(
+        java.lang.String courseIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchCourseException {
+        return getService().findByCourseIri(courseIri);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.Course> findByGroupId(
+        long groupId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByGroupId(groupId);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.Course> findByGroupId(
+        long groupId, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByGroupId(groupId, start, end);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.Course> findByCompanyId(
+        long companyId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByCompanyId(companyId);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.Course> findByCompanyId(
+        long companyId, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByCompanyId(companyId, start, end);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.Course> findByFeedReferenceId(
+        long feedReferenceId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByFeedReferenceId(feedReferenceId);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.Course> findAllCourses(
+        int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findAllCourses(start, end);
+    }
+
     public static void clearService() {
         _service = null;
     }

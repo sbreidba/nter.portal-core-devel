@@ -29,4 +29,21 @@ public interface ComponentService {
      *
      * Never modify or reference this interface directly. Always use {@link ComponentServiceUtil} to access the component remote service. Add custom service methods to {@link org.nterlearning.datamodel.catalog.service.impl.ComponentServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
      */
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Component> findByCompanyId(
+        long companyId)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public org.nterlearning.datamodel.catalog.model.Component findByComponentId(
+        long componentId)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchComponentException;
+
+    public org.nterlearning.datamodel.catalog.model.Component findByComponentIri(
+        java.lang.String componentIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchComponentException;
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Component> findByFeedReferenceId(
+        java.lang.Long feedRefId)
+        throws com.liferay.portal.kernel.exception.SystemException;
 }

@@ -45,7 +45,7 @@
 
     <profiles>
         <profile>
-            <id>build-service</id>
+            <id>build-wsdd</id>
             <build>
                 <plugins>
                     <plugin>

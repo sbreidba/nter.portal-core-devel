@@ -1,5 +1,12 @@
 package org.nterlearning.datamodel.catalog.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import org.nterlearning.datamodel.catalog.service.CourseServiceUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * <p>
  * This class provides a SOAP utility for the
@@ -44,4 +51,143 @@ package org.nterlearning.datamodel.catalog.service.http;
  * @generated
  */
 public class CourseServiceSoap {
+    private static Log _log = LogFactoryUtil.getLog(CourseServiceSoap.class);
+
+    public static org.nterlearning.datamodel.catalog.model.Course[] findAllValidCourses()
+        throws RemoteException {
+        try {
+            java.util.List<org.nterlearning.datamodel.catalog.model.Course> returnValue =
+                CourseServiceUtil.findAllValidCourses();
+
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.Course[returnValue.size()]);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.Course[] findAllValidCourses(
+        int start, int end) throws RemoteException {
+        try {
+            java.util.List<org.nterlearning.datamodel.catalog.model.Course> returnValue =
+                CourseServiceUtil.findAllValidCourses(start, end);
+
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.Course[returnValue.size()]);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.CourseSoap findByCourseId(
+        long courseId) throws RemoteException {
+        try {
+            org.nterlearning.datamodel.catalog.model.Course returnValue = CourseServiceUtil.findByCourseId(courseId);
+
+            return org.nterlearning.datamodel.catalog.model.CourseSoap.toSoapModel(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.CourseSoap findByCourseIri(
+        java.lang.String courseIri) throws RemoteException {
+        try {
+            org.nterlearning.datamodel.catalog.model.Course returnValue = CourseServiceUtil.findByCourseIri(courseIri);
+
+            return org.nterlearning.datamodel.catalog.model.CourseSoap.toSoapModel(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.Course[] findByGroupId(
+        long groupId) throws RemoteException {
+        try {
+            java.util.List<org.nterlearning.datamodel.catalog.model.Course> returnValue =
+                CourseServiceUtil.findByGroupId(groupId);
+
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.Course[returnValue.size()]);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.Course[] findByGroupId(
+        long groupId, int start, int end) throws RemoteException {
+        try {
+            java.util.List<org.nterlearning.datamodel.catalog.model.Course> returnValue =
+                CourseServiceUtil.findByGroupId(groupId, start, end);
+
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.Course[returnValue.size()]);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.Course[] findByCompanyId(
+        long companyId) throws RemoteException {
+        try {
+            java.util.List<org.nterlearning.datamodel.catalog.model.Course> returnValue =
+                CourseServiceUtil.findByCompanyId(companyId);
+
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.Course[returnValue.size()]);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.Course[] findByCompanyId(
+        long companyId, int start, int end) throws RemoteException {
+        try {
+            java.util.List<org.nterlearning.datamodel.catalog.model.Course> returnValue =
+                CourseServiceUtil.findByCompanyId(companyId, start, end);
+
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.Course[returnValue.size()]);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.Course[] findByFeedReferenceId(
+        long feedReferenceId) throws RemoteException {
+        try {
+            java.util.List<org.nterlearning.datamodel.catalog.model.Course> returnValue =
+                CourseServiceUtil.findByFeedReferenceId(feedReferenceId);
+
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.Course[returnValue.size()]);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.Course[] findAllCourses(
+        int start, int end) throws RemoteException {
+        try {
+            java.util.List<org.nterlearning.datamodel.catalog.model.Course> returnValue =
+                CourseServiceUtil.findAllCourses(start, end);
+
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.Course[returnValue.size()]);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
 }

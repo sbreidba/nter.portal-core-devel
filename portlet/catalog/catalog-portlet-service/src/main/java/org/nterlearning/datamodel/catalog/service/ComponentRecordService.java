@@ -29,4 +29,12 @@ public interface ComponentRecordService {
      *
      * Never modify or reference this interface directly. Always use {@link ComponentRecordServiceUtil} to access the component record remote service. Add custom service methods to {@link org.nterlearning.datamodel.catalog.service.impl.ComponentRecordServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
      */
+    public java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord> findByComponentIri(
+        java.lang.String componentIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchComponentRecordException;
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord> findByCourseRecordId(
+        long courseRecordId)
+        throws com.liferay.portal.kernel.exception.SystemException;
 }

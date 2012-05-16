@@ -1,6 +1,12 @@
 package org.nterlearning.datamodel.catalog.service.impl;
 
+import com.liferay.portal.kernel.exception.SystemException;
+import org.nterlearning.datamodel.catalog.NoSuchComponentException;
+import org.nterlearning.datamodel.catalog.model.Component;
+import org.nterlearning.datamodel.catalog.service.ComponentLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.service.base.ComponentServiceBaseImpl;
+
+import java.util.List;
 
 /**
  * The implementation of the component remote service.
@@ -17,9 +23,31 @@ import org.nterlearning.datamodel.catalog.service.base.ComponentServiceBaseImpl;
  * @see org.nterlearning.datamodel.catalog.service.ComponentServiceUtil
  */
 public class ComponentServiceImpl extends ComponentServiceBaseImpl {
-    /*
-     * NOTE FOR DEVELOPERS:
-     *
-     * Never reference this interface directly. Always use {@link org.nterlearning.datamodel.catalog.service.ComponentServiceUtil} to access the component remote service.
-     */
-}
+
+    public List<Component> findByCompanyId(long companyId)
+            throws SystemException {
+        return ComponentLocalServiceUtil.findByCompanyId(companyId);
+    }
+
+
+    public Component findByComponentId(long componentId)
+            throws NoSuchComponentException, SystemException {
+        return ComponentLocalServiceUtil.findByComponentId(componentId);
+    }
+
+
+    public Component findByComponentIri(String componentIri)
+            throws NoSuchComponentException, SystemException {
+        return ComponentLocalServiceUtil.findByComponentIri(componentIri);
+    }
+
+
+    public List<Component> findByFeedReferenceId(Long feedRefId)
+            throws SystemException {
+        return ComponentLocalServiceUtil.findByFeedReferenceId(feedRefId);
+    }
+
+
+
+
+    }
