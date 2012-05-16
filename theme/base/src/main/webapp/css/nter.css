@@ -443,7 +443,7 @@ img.course-image, .main-image { width: 290px; height: 217px; }
 .uniForm button { margin-right: .4em; }
 
 .review .uniForm, #review-form { margin: 1em 0; display: block; }
-.review .uniForm .textInput, .review .uniForm textarea, .review .uniForm .aui-rating, #review-form .textInput, #review-form textarea, #review-form .aui-rating { width: 99.33333333333333%; }
+.review .uniForm .textInput, .review .uniForm textarea, .review .uniForm .aui-rating, #review-form .textInput, #review-form textarea, #review-form .aui-rating, #report-inappropriate select, #report-inappropriate textarea { width: 100%; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; -ms-box-sizing: border-box; -o-box-sizing: border-box; box-sizing: border-box; }
 
 .ratings-histogram { float: left; width: 290px; margin-right: 20px; font-size: .8em; }
 .ratings-histogram label { display: block; float: right; clear: both; }
@@ -482,8 +482,6 @@ img.course-image, .main-image { width: 290px; height: 217px; }
 .single-review { margin: 1em 0; }
 .single-review .review-title { font-weight: bold; font-size: 1.1em; margin-bottom: .3em; }
 .single-review .user-rating { margin-bottom: .3em; }
-
-#report-inappropriate select, #report-inappropriate textarea { width: 100%; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; -ms-box-sizing: border-box; -o-box-sizing: border-box; box-sizing: border-box; }
 
 /* current course */
 .current-courses { zoom: 1; }
