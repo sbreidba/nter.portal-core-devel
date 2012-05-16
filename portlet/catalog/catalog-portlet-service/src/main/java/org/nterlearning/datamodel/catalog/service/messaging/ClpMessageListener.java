@@ -7,6 +7,7 @@ import org.nterlearning.datamodel.catalog.service.ClpSerializer;
 import org.nterlearning.datamodel.catalog.service.ComponentLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.service.ComponentRecordLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.service.ComponentRecordServiceUtil;
+import org.nterlearning.datamodel.catalog.service.ComponentServiceUtil;
 import org.nterlearning.datamodel.catalog.service.ContributorLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.service.CourseImageLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.service.CourseLocalServiceUtil;
@@ -16,6 +17,7 @@ import org.nterlearning.datamodel.catalog.service.CourseRelatedLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.service.CourseRequirementLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.service.CourseReviewLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.service.CourseReviewServiceUtil;
+import org.nterlearning.datamodel.catalog.service.CourseServiceUtil;
 import org.nterlearning.datamodel.catalog.service.Courses_ComponentsLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.service.ExternalLinkLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.service.FeedReferenceLocalServiceUtil;
@@ -40,6 +42,7 @@ public class ClpMessageListener extends BaseMessageListener {
                 servletContextName.equals(getServletContextName())) {
             ComponentLocalServiceUtil.clearService();
 
+            ComponentServiceUtil.clearService();
             ComponentRecordLocalServiceUtil.clearService();
 
             ComponentRecordServiceUtil.clearService();
@@ -47,6 +50,7 @@ public class ClpMessageListener extends BaseMessageListener {
 
             CourseLocalServiceUtil.clearService();
 
+            CourseServiceUtil.clearService();
             CourseImageLocalServiceUtil.clearService();
 
             CourseRecordLocalServiceUtil.clearService();

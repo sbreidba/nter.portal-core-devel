@@ -19,7 +19,6 @@
   Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
   02110-1301, USA.
   -->
-
 <deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
 	<globalConfiguration>
 		<parameter name="adminPassword" value="admin" />
@@ -61,6 +60,15 @@
 		<parameter name="wsdlServicePort" value="Plugin_CATALOG_ComponentRecordService" />
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.catalog.datamodel.nterlearning.org" />
 	</service>
+	<service name="Plugin_CATALOG_ComponentService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="org.nterlearning.datamodel.catalog.service.http.ComponentServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="ComponentServiceSoap" />
+		<parameter name="wsdlServiceElement" value="ComponentServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_CATALOG_ComponentService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.catalog.datamodel.nterlearning.org" />
+	</service>
 	<service name="Plugin_CATALOG_CourseRecordService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="allowedMethods" value="*" />
 		<parameter name="className" value="org.nterlearning.datamodel.catalog.service.http.CourseRecordServiceSoap" />
@@ -77,6 +85,15 @@
 		<parameter name="wsdlPortType" value="CourseReviewServiceSoap" />
 		<parameter name="wsdlServiceElement" value="CourseReviewServiceSoapService" />
 		<parameter name="wsdlServicePort" value="Plugin_CATALOG_CourseReviewService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.catalog.datamodel.nterlearning.org" />
+	</service>
+	<service name="Plugin_CATALOG_CourseService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="allowedMethods" value="*" />
+		<parameter name="className" value="org.nterlearning.datamodel.catalog.service.http.CourseServiceSoap" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="CourseServiceSoap" />
+		<parameter name="wsdlServiceElement" value="CourseServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_CATALOG_CourseService" />
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.catalog.datamodel.nterlearning.org" />
 	</service>
 	<service name="Plugin_CATALOG_GlobalCourseReviewService" provider="java:RPC" style="rpc" use="encoded">

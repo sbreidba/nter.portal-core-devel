@@ -28,6 +28,7 @@ import org.nterlearning.datamodel.catalog.model.CourseReview;
 import org.nterlearning.datamodel.catalog.service.ComponentLocalService;
 import org.nterlearning.datamodel.catalog.service.ComponentRecordLocalService;
 import org.nterlearning.datamodel.catalog.service.ComponentRecordService;
+import org.nterlearning.datamodel.catalog.service.ComponentService;
 import org.nterlearning.datamodel.catalog.service.ContributorLocalService;
 import org.nterlearning.datamodel.catalog.service.CourseImageLocalService;
 import org.nterlearning.datamodel.catalog.service.CourseLocalService;
@@ -37,6 +38,7 @@ import org.nterlearning.datamodel.catalog.service.CourseRelatedLocalService;
 import org.nterlearning.datamodel.catalog.service.CourseRequirementLocalService;
 import org.nterlearning.datamodel.catalog.service.CourseReviewLocalService;
 import org.nterlearning.datamodel.catalog.service.CourseReviewService;
+import org.nterlearning.datamodel.catalog.service.CourseService;
 import org.nterlearning.datamodel.catalog.service.Courses_ComponentsLocalService;
 import org.nterlearning.datamodel.catalog.service.ExternalLinkLocalService;
 import org.nterlearning.datamodel.catalog.service.FeedReferenceLocalService;
@@ -87,6 +89,8 @@ public abstract class CourseReviewServiceBaseImpl extends PrincipalBean
     implements CourseReviewService, IdentifiableBean {
     @BeanReference(type = ComponentLocalService.class)
     protected ComponentLocalService componentLocalService;
+    @BeanReference(type = ComponentService.class)
+    protected ComponentService componentService;
     @BeanReference(type = ComponentPersistence.class)
     protected ComponentPersistence componentPersistence;
     @BeanReference(type = ComponentFinder.class)
@@ -105,6 +109,8 @@ public abstract class CourseReviewServiceBaseImpl extends PrincipalBean
     protected ContributorPersistence contributorPersistence;
     @BeanReference(type = CourseLocalService.class)
     protected CourseLocalService courseLocalService;
+    @BeanReference(type = CourseService.class)
+    protected CourseService courseService;
     @BeanReference(type = CoursePersistence.class)
     protected CoursePersistence coursePersistence;
     @BeanReference(type = CourseFinder.class)
@@ -226,6 +232,24 @@ public abstract class CourseReviewServiceBaseImpl extends PrincipalBean
     public void setComponentLocalService(
         ComponentLocalService componentLocalService) {
         this.componentLocalService = componentLocalService;
+    }
+
+    /**
+     * Returns the component remote service.
+     *
+     * @return the component remote service
+     */
+    public ComponentService getComponentService() {
+        return componentService;
+    }
+
+    /**
+     * Sets the component remote service.
+     *
+     * @param componentService the component remote service
+     */
+    public void setComponentService(ComponentService componentService) {
+        this.componentService = componentService;
     }
 
     /**
@@ -395,6 +419,24 @@ public abstract class CourseReviewServiceBaseImpl extends PrincipalBean
      */
     public void setCourseLocalService(CourseLocalService courseLocalService) {
         this.courseLocalService = courseLocalService;
+    }
+
+    /**
+     * Returns the course remote service.
+     *
+     * @return the course remote service
+     */
+    public CourseService getCourseService() {
+        return courseService;
+    }
+
+    /**
+     * Sets the course remote service.
+     *
+     * @param courseService the course remote service
+     */
+    public void setCourseService(CourseService courseService) {
+        this.courseService = courseService;
     }
 
     /**
