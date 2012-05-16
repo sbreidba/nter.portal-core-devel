@@ -20,6 +20,19 @@ public class ComponentRecordServiceWrapper implements ComponentRecordService,
         _componentRecordService = componentRecordService;
     }
 
+    public java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord> findByComponentIri(
+        java.lang.String componentIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchComponentRecordException {
+        return _componentRecordService.findByComponentIri(componentIri);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord> findByCourseRecordId(
+        long courseRecordId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _componentRecordService.findByCourseRecordId(courseRecordId);
+    }
+
     /**
      * @deprecated Renamed to {@link #getWrappedService}
      */

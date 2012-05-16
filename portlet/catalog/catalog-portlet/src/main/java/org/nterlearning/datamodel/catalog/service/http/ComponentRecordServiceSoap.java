@@ -1,5 +1,12 @@
 package org.nterlearning.datamodel.catalog.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import org.nterlearning.datamodel.catalog.service.ComponentRecordServiceUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * <p>
  * This class provides a SOAP utility for the
@@ -44,4 +51,33 @@ package org.nterlearning.datamodel.catalog.service.http;
  * @generated
  */
 public class ComponentRecordServiceSoap {
+    private static Log _log = LogFactoryUtil.getLog(ComponentRecordServiceSoap.class);
+
+    public static org.nterlearning.datamodel.catalog.model.ComponentRecord[] findByComponentIri(
+        java.lang.String componentIri) throws RemoteException {
+        try {
+            java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord> returnValue =
+                ComponentRecordServiceUtil.findByComponentIri(componentIri);
+
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.ComponentRecord[returnValue.size()]);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.ComponentRecord[] findByCourseRecordId(
+        long courseRecordId) throws RemoteException {
+        try {
+            java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord> returnValue =
+                ComponentRecordServiceUtil.findByCourseRecordId(courseRecordId);
+
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.ComponentRecord[returnValue.size()]);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
 }

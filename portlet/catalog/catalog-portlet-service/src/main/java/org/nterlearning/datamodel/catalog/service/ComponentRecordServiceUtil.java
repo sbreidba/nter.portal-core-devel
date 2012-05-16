@@ -26,6 +26,19 @@ public class ComponentRecordServiceUtil {
      *
      * Never modify this class directly. Add custom service methods to {@link org.nterlearning.datamodel.catalog.service.impl.ComponentRecordServiceImpl} and rerun ServiceBuilder to regenerate this class.
      */
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord> findByComponentIri(
+        java.lang.String componentIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchComponentRecordException {
+        return getService().findByComponentIri(componentIri);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord> findByCourseRecordId(
+        long courseRecordId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByCourseRecordId(courseRecordId);
+    }
+
     public static void clearService() {
         _service = null;
     }

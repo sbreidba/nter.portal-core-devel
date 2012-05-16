@@ -1,6 +1,13 @@
 package org.nterlearning.datamodel.catalog.service.impl;
 
+import com.liferay.portal.kernel.exception.SystemException;
+import org.nterlearning.datamodel.catalog.NoSuchComponentRecordException;
+import org.nterlearning.datamodel.catalog.model.ComponentRecord;
+import org.nterlearning.datamodel.catalog.service.ComponentRecordLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.service.base.ComponentRecordServiceBaseImpl;
+
+import java.util.List;
+import java.util.Locale;
 
 /**
  * The implementation of the component record remote service.
@@ -17,9 +24,14 @@ import org.nterlearning.datamodel.catalog.service.base.ComponentRecordServiceBas
  * @see org.nterlearning.datamodel.catalog.service.ComponentRecordServiceUtil
  */
 public class ComponentRecordServiceImpl extends ComponentRecordServiceBaseImpl {
-    /*
-     * NOTE FOR DEVELOPERS:
-     *
-     * Never reference this interface directly. Always use {@link org.nterlearning.datamodel.catalog.service.ComponentRecordServiceUtil} to access the component record remote service.
-     */
+
+    public List<ComponentRecord> findByComponentIri(String componentIri)
+            throws NoSuchComponentRecordException, SystemException {
+        return ComponentRecordLocalServiceUtil.findByComponentIri(componentIri);
+    }
+
+    public List<ComponentRecord> findByCourseRecordId(long courseRecordId)
+            throws SystemException {
+        return ComponentRecordLocalServiceUtil.findByCourseRecordId(courseRecordId);
+    }
 }

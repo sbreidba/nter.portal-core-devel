@@ -26,6 +26,32 @@ public class ComponentServiceUtil {
      *
      * Never modify this class directly. Add custom service methods to {@link org.nterlearning.datamodel.catalog.service.impl.ComponentServiceImpl} and rerun ServiceBuilder to regenerate this class.
      */
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.Component> findByCompanyId(
+        long companyId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByCompanyId(companyId);
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.Component findByComponentId(
+        long componentId)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchComponentException {
+        return getService().findByComponentId(componentId);
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.Component findByComponentIri(
+        java.lang.String componentIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchComponentException {
+        return getService().findByComponentIri(componentIri);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.Component> findByFeedReferenceId(
+        java.lang.Long feedRefId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByFeedReferenceId(feedRefId);
+    }
+
     public static void clearService() {
         _service = null;
     }

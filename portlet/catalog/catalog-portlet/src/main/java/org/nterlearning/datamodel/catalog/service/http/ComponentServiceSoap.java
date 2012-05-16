@@ -1,5 +1,12 @@
 package org.nterlearning.datamodel.catalog.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import org.nterlearning.datamodel.catalog.service.ComponentServiceUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * <p>
  * This class provides a SOAP utility for the
@@ -44,4 +51,59 @@ package org.nterlearning.datamodel.catalog.service.http;
  * @generated
  */
 public class ComponentServiceSoap {
+    private static Log _log = LogFactoryUtil.getLog(ComponentServiceSoap.class);
+
+    public static org.nterlearning.datamodel.catalog.model.Component[] findByCompanyId(
+        long companyId) throws RemoteException {
+        try {
+            java.util.List<org.nterlearning.datamodel.catalog.model.Component> returnValue =
+                ComponentServiceUtil.findByCompanyId(companyId);
+
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.Component[returnValue.size()]);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.ComponentSoap findByComponentId(
+        long componentId) throws RemoteException {
+        try {
+            org.nterlearning.datamodel.catalog.model.Component returnValue = ComponentServiceUtil.findByComponentId(componentId);
+
+            return org.nterlearning.datamodel.catalog.model.ComponentSoap.toSoapModel(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.ComponentSoap findByComponentIri(
+        java.lang.String componentIri) throws RemoteException {
+        try {
+            org.nterlearning.datamodel.catalog.model.Component returnValue = ComponentServiceUtil.findByComponentIri(componentIri);
+
+            return org.nterlearning.datamodel.catalog.model.ComponentSoap.toSoapModel(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.Component[] findByFeedReferenceId(
+        java.lang.Long feedRefId) throws RemoteException {
+        try {
+            java.util.List<org.nterlearning.datamodel.catalog.model.Component> returnValue =
+                ComponentServiceUtil.findByFeedReferenceId(feedRefId);
+
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.Component[returnValue.size()]);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
 }
