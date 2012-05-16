@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ National Training and Education Resource (NTER)
+  ~ Copyright (C) 2011  SRI International
+  ~
+  ~ This program is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or (at
+  ~ your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful, but
+  ~ WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  ~ General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  ~ 02110-1301, USA.
+  -->
+  
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:nter="http://nterlearning.org/xml/feeds/atom-extensions-schema_0.6.1.xsd">
+
+    <!-- Test series for course with components that display in TOC or Resource section -->
+
+    <title>Course Feed</title>
+    <link rel="self" href="test-0.6.1-course-atom-feed-resource.xml" type="application/atom+xml"/>
+    <updated>2011-01-13T22:52:00Z</updated>
+    <id>tag:nwtp.gov,2011-01-13:/feeds/test-component-resources-or-content</id>
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Test Component 1</title>
+        <link href="https://nwtp.gov/testComponent1.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <id>tag:nwtp.gov,2011-01-13:/link/to/test-component-1/en-US</id>
+        <updated>2011-01-13T22:52:00Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>test</summary>
+    </entry>
+
+    <entry  xml:lang="es-ES" nter:entryType="course-component">
+        <title>prueba de los componentes 1</title>
+        <link href="https://nwtp.gov/testComponent1?lang=es-ES"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <id>tag:nwtp.gov,2011-01-13:/link/to/test-component-1/es-ES</id>
+        <updated>2011-01-13T22:52:00Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>cours dix-huit</summary>
+    </entry>
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Test Component 2</title>
+        <link href="https://nwtp.gov/testComponent1.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <id>tag:nwtp.gov,2011-01-13:/link/to/test-component-2/en-US</id>
+        <updated>2011-01-13T22:52:00Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>test</summary>
+    </entry>
+
+    <entry  xml:lang="es-ES" nter:entryType="course-component">
+        <title>prueba de los componentes 2</title>
+        <link href="https://nwtp.gov/testComponent1?lang=es-ES"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <id>tag:nwtp.gov,2011-01-13:/link/to/test-component-2/es-ES</id>
+        <updated>2011-01-13T22:52:00Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>cours dix-huit</summary>
+    </entry>
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Test Component 3</title>
+        <link href="https://nwtp.gov/testComponent1.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <id>tag:nwtp.gov,2011-01-13:/link/to/test-component-3/en-US</id>
+        <updated>2011-01-13T22:52:00Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>test</summary>
+    </entry>
+
+    <entry  xml:lang="es-ES" nter:entryType="course-component">
+        <title>prueba de los componentes 3</title>
+        <link href="https://nwtp.gov/testComponent1?lang=es-ES"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <id>tag:nwtp.gov,2011-01-13:/link/to/test-component-3/es-ES</id>
+        <updated>2011-01-13T22:52:00Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>cours dix-huit</summary>
+    </entry>
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Test Resource 1</title>
+        <link href="https://nwtp.gov/testResource1.pdf"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <id>tag:nwtp.gov,2011-01-13:/link/to/test-resource-1/en-US</id>
+        <updated>2011-01-13T22:52:00Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>test</summary>
+    </entry>
+
+    <entry  xml:lang="es-ES" nter:entryType="course-component">
+        <title>prueba de recursos 1</title>
+        <link href="https://nwtp.gov/testComponent1?lang=es-ES"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <id>tag:nwtp.gov,2011-01-13:/link/to/test-resource-1/es-ES</id>
+        <updated>2011-01-13T22:52:00Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>test</summary>
+    </entry>
+   <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Test Resource 2</title>
+        <link href="https://nwtp.gov/testResource1.pdf"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <id>tag:nwtp.gov,2011-01-13:/link/to/test-resource-2/en-US</id>
+        <updated>2011-01-13T22:52:00Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>test</summary>
+    </entry>
+
+    <entry  xml:lang="es-ES" nter:entryType="course-component">
+        <title>prueba de recursos 2</title>
+        <link href="https://nwtp.gov/testComponent1?lang=es-ES"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <id>tag:nwtp.gov,2011-01-13:/link/to/test-resource-2/es-ES</id>
+        <updated>2011-01-13T22:52:00Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>test</summary>
+    </entry>
+
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link href="http://example.org/2003/12/13/atom03"/>
+        <id>tag:nwtp.gov,2011-01-13:/courses/components-as-content-or-resource-001</id>
+        <updated>2011-01-13T18:30:02Z</updated>
+        <author>
+            <name>Paula Peters</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Paula Peters&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:duration nter:durationStandard="ISO8601:2000">PT3H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">Test Component as Resource</nter:title>
+            <nter:title xml:lang="es-ES">componentes de la prueba como los recursos</nter:title>
+
+            <nter:description xml:lang="en-US">Test Component as Resource</nter:description>
+            <nter:description xml:lang="es-ES">componentes de la prueba como los recursos</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010-2011 SRI</nter:copyright>
+            <nter:copyright xml:lang="es-ES">2010-2011 SRI</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="U (Unknown)" nter:ratingReason="Not yet rated" />
+
+            <nter:componentRef 
+                nter:componentId="tag:nwtp.gov,2011-01-13:/link/to/test-component-1/en-US"
+                nter:orderWeight="1.0"
+                nter:sectionType="toc"
+            />
+            <nter:componentRef 
+                nter:componentId="tag:nwtp.gov,2011-01-13:/link/to/test-component-2/en-US"
+                nter:orderWeight="2.0"
+            />
+            <nter:componentRef
+                 nter:componentId="tag:nwtp.gov,2011-01-13:/link/to/test-component-3/en-US"
+                 nter:orderWeight="3.0"
+             />
+
+            <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2011-01-13:/link/to/test-component-1/es-ES"
+                nter:orderWeight="1.0"
+                nter:sectionType="toc"
+            />
+            <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2011-01-13:/link/to/test-component-2/es-ES"
+                nter:orderWeight="2.0"
+            />
+            <nter:componentRef
+                 nter:componentId="tag:nwtp.gov,2011-01-13:/link/to/test-component-3/es-ES"
+                 nter:orderWeight="3.0"
+             />
+
+            <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2011-01-13:/link/to/test-resource-1/en-US"
+                nter:orderWeight="2"
+                nter:sectionType="resource"
+                nter:componentType="test"
+                nter:mimeType="application/pdf"                
+            />
+            <nter:componentRef 
+                nter:componentId="tag:nwtp.gov,2011-01-13:/link/to/test-resource-1/es-ES"
+                nter:orderWeight="2"
+                nter:sectionType="resource"
+                nter:componentType="test"
+                nter:mimeType="application/pdf"
+            />
+            <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2011-01-13:/link/to/test-resource-2/en-US"
+                nter:orderWeight="1"
+                nter:sectionType="resource"
+            />
+            <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2011-01-13:/link/to/test-resource-2/es-ES"
+                nter:orderWeight="1"
+                nter:sectionType="resource"
+            />
+
+            <nter:keywords xml:lang="en-US">test</nter:keywords>
+            <nter:keywords xml:lang="fr-FR">test</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            
+        </nter:course>
+    </entry>
+
+
+</feed>
+
