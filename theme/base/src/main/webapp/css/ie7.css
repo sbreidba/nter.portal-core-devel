@@ -41,12 +41,15 @@ ul.course-listing { zoom: 1; }
 .ie6 .carousel-wrapper, .ie6 .carousel-prev, .ie6 .carousel-next { height: 105px; }
 
 /* course reviews */
-.ie6 .taglib-flags, .ie6 .aui-thumbrating, .ie6 .aui-thumbrating-content { display: inline; }
-.reviewlist .actions form, .reviewlist .actions .admin, .reviewlist .actions .metamoderation { display: inline; vertical-align: top; }
+.ie6 .aui-thumbrating, .ie6 .aui-thumbrating-content { display: inline; }
+.reviewlist .actions form, .reviewlist .actions .admin, .reviewlist .actions .metamoderation, .reviewlist .actions .flagEntry { display: inline; vertical-align: top; }
 .review header .aui-rating-content { display: inline; }
 .ratings-histogram label { white-space: nowrap; }
 .ratings-histogram .total { display: inline; }
 .ratings-stats .aui-rating { margin-left: 0; margin-bottom: .2em; }
+
+/* compensate for lack of box-sizing */
+.review .uniForm .textInput, .review .uniForm textarea, .review .uniForm .aui-rating, #review-form .textInput, #review-form textarea, #review-form .aui-rating, #report-inappropriate select, #report-inappropriate textarea { width: 99.33333333333333%; }
 
 /* course details */
 .course-details .course-image .thumbnails { zoom: 1; }
