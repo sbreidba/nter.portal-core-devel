@@ -11,6 +11,10 @@
 	<bean id="org.nterlearning.datamodel.catalog.service.ComponentRecordLocalServiceUtil" class="org.nterlearning.datamodel.catalog.service.ComponentRecordLocalServiceUtil">
 		<property name="service" ref="org.nterlearning.datamodel.catalog.service.ComponentRecordLocalService" />
 	</bean>
+	<bean id="org.nterlearning.datamodel.catalog.service.ComponentRecordService" class="org.nterlearning.datamodel.catalog.service.impl.ComponentRecordServiceImpl" />
+	<bean id="org.nterlearning.datamodel.catalog.service.ComponentRecordServiceUtil" class="org.nterlearning.datamodel.catalog.service.ComponentRecordServiceUtil">
+		<property name="service" ref="org.nterlearning.datamodel.catalog.service.ComponentRecordService" />
+	</bean>
 	<bean id="org.nterlearning.datamodel.catalog.service.persistence.ComponentRecordPersistence" class="org.nterlearning.datamodel.catalog.service.persistence.ComponentRecordPersistenceImpl" parent="basePersistence" />
 	<bean id="org.nterlearning.datamodel.catalog.service.persistence.ComponentRecordFinder" class="org.nterlearning.datamodel.catalog.service.persistence.ComponentRecordFinderImpl" parent="basePersistence" />
 	<bean id="org.nterlearning.datamodel.catalog.service.ContributorLocalService" class="org.nterlearning.datamodel.catalog.service.impl.ContributorLocalServiceImpl" />
@@ -33,6 +37,10 @@
 	<bean id="org.nterlearning.datamodel.catalog.service.CourseRecordLocalServiceUtil" class="org.nterlearning.datamodel.catalog.service.CourseRecordLocalServiceUtil">
 		<property name="service" ref="org.nterlearning.datamodel.catalog.service.CourseRecordLocalService" />
 	</bean>
+	<bean id="org.nterlearning.datamodel.catalog.service.CourseRecordService" class="org.nterlearning.datamodel.catalog.service.impl.CourseRecordServiceImpl" />
+	<bean id="org.nterlearning.datamodel.catalog.service.CourseRecordServiceUtil" class="org.nterlearning.datamodel.catalog.service.CourseRecordServiceUtil">
+		<property name="service" ref="org.nterlearning.datamodel.catalog.service.CourseRecordService" />
+	</bean>
 	<bean id="org.nterlearning.datamodel.catalog.service.persistence.CourseRecordPersistence" class="org.nterlearning.datamodel.catalog.service.persistence.CourseRecordPersistenceImpl" parent="basePersistence" />
 	<bean id="org.nterlearning.datamodel.catalog.service.persistence.CourseRecordFinder" class="org.nterlearning.datamodel.catalog.service.persistence.CourseRecordFinderImpl" parent="basePersistence" />
 	<bean id="org.nterlearning.datamodel.catalog.service.CourseRelatedLocalService" class="org.nterlearning.datamodel.catalog.service.impl.CourseRelatedLocalServiceImpl" />
@@ -48,6 +56,10 @@
 	<bean id="org.nterlearning.datamodel.catalog.service.CourseReviewLocalService" class="org.nterlearning.datamodel.catalog.service.impl.CourseReviewLocalServiceImpl" />
 	<bean id="org.nterlearning.datamodel.catalog.service.CourseReviewLocalServiceUtil" class="org.nterlearning.datamodel.catalog.service.CourseReviewLocalServiceUtil">
 		<property name="service" ref="org.nterlearning.datamodel.catalog.service.CourseReviewLocalService" />
+	</bean>
+	<bean id="org.nterlearning.datamodel.catalog.service.CourseReviewService" class="org.nterlearning.datamodel.catalog.service.impl.CourseReviewServiceImpl" />
+	<bean id="org.nterlearning.datamodel.catalog.service.CourseReviewServiceUtil" class="org.nterlearning.datamodel.catalog.service.CourseReviewServiceUtil">
+		<property name="service" ref="org.nterlearning.datamodel.catalog.service.CourseReviewService" />
 	</bean>
 	<bean id="org.nterlearning.datamodel.catalog.service.persistence.CourseReviewPersistence" class="org.nterlearning.datamodel.catalog.service.persistence.CourseReviewPersistenceImpl" parent="basePersistence" />
 	<bean id="org.nterlearning.datamodel.catalog.service.persistence.CourseReviewFinder" class="org.nterlearning.datamodel.catalog.service.persistence.CourseReviewFinderImpl" parent="basePersistence" />
@@ -85,6 +97,10 @@
 	<bean id="org.nterlearning.datamodel.catalog.service.GlobalCourseReviewLocalService" class="org.nterlearning.datamodel.catalog.service.impl.GlobalCourseReviewLocalServiceImpl" />
 	<bean id="org.nterlearning.datamodel.catalog.service.GlobalCourseReviewLocalServiceUtil" class="org.nterlearning.datamodel.catalog.service.GlobalCourseReviewLocalServiceUtil">
 		<property name="service" ref="org.nterlearning.datamodel.catalog.service.GlobalCourseReviewLocalService" />
+	</bean>
+	<bean id="org.nterlearning.datamodel.catalog.service.GlobalCourseReviewService" class="org.nterlearning.datamodel.catalog.service.impl.GlobalCourseReviewServiceImpl" />
+	<bean id="org.nterlearning.datamodel.catalog.service.GlobalCourseReviewServiceUtil" class="org.nterlearning.datamodel.catalog.service.GlobalCourseReviewServiceUtil">
+		<property name="service" ref="org.nterlearning.datamodel.catalog.service.GlobalCourseReviewService" />
 	</bean>
 	<bean id="org.nterlearning.datamodel.catalog.service.persistence.GlobalCourseReviewPersistence" class="org.nterlearning.datamodel.catalog.service.persistence.GlobalCourseReviewPersistenceImpl" parent="basePersistence" />
 	<bean id="org.nterlearning.datamodel.catalog.service.persistence.GlobalCourseReviewFinder" class="org.nterlearning.datamodel.catalog.service.persistence.GlobalCourseReviewFinderImpl" parent="basePersistence" />

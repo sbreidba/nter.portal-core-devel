@@ -1,0 +1,1 @@
+Liferay.Service.register("Liferay.Service.CATALOG", "org.nterlearning.datamodel.catalog.service", "nter-catalog-portlet");

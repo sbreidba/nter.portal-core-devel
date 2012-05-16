@@ -27,13 +27,16 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import org.nterlearning.datamodel.catalog.model.CourseRecord;
 import org.nterlearning.datamodel.catalog.service.ComponentLocalService;
 import org.nterlearning.datamodel.catalog.service.ComponentRecordLocalService;
+import org.nterlearning.datamodel.catalog.service.ComponentRecordService;
 import org.nterlearning.datamodel.catalog.service.ContributorLocalService;
 import org.nterlearning.datamodel.catalog.service.CourseImageLocalService;
 import org.nterlearning.datamodel.catalog.service.CourseLocalService;
 import org.nterlearning.datamodel.catalog.service.CourseRecordLocalService;
+import org.nterlearning.datamodel.catalog.service.CourseRecordService;
 import org.nterlearning.datamodel.catalog.service.CourseRelatedLocalService;
 import org.nterlearning.datamodel.catalog.service.CourseRequirementLocalService;
 import org.nterlearning.datamodel.catalog.service.CourseReviewLocalService;
+import org.nterlearning.datamodel.catalog.service.CourseReviewService;
 import org.nterlearning.datamodel.catalog.service.Courses_ComponentsLocalService;
 import org.nterlearning.datamodel.catalog.service.ExternalLinkLocalService;
 import org.nterlearning.datamodel.catalog.service.FeedReferenceLocalService;
@@ -41,6 +44,7 @@ import org.nterlearning.datamodel.catalog.service.FeedSyncHistoryLocalService;
 import org.nterlearning.datamodel.catalog.service.FlagReportLocalService;
 import org.nterlearning.datamodel.catalog.service.FlagReportStatsLocalService;
 import org.nterlearning.datamodel.catalog.service.GlobalCourseReviewLocalService;
+import org.nterlearning.datamodel.catalog.service.GlobalCourseReviewService;
 import org.nterlearning.datamodel.catalog.service.persistence.ComponentFinder;
 import org.nterlearning.datamodel.catalog.service.persistence.ComponentPersistence;
 import org.nterlearning.datamodel.catalog.service.persistence.ComponentRecordFinder;
@@ -94,6 +98,8 @@ public abstract class CourseRecordLocalServiceBaseImpl
     protected ComponentFinder componentFinder;
     @BeanReference(type = ComponentRecordLocalService.class)
     protected ComponentRecordLocalService componentRecordLocalService;
+    @BeanReference(type = ComponentRecordService.class)
+    protected ComponentRecordService componentRecordService;
     @BeanReference(type = ComponentRecordPersistence.class)
     protected ComponentRecordPersistence componentRecordPersistence;
     @BeanReference(type = ComponentRecordFinder.class)
@@ -114,6 +120,8 @@ public abstract class CourseRecordLocalServiceBaseImpl
     protected CourseImagePersistence courseImagePersistence;
     @BeanReference(type = CourseRecordLocalService.class)
     protected CourseRecordLocalService courseRecordLocalService;
+    @BeanReference(type = CourseRecordService.class)
+    protected CourseRecordService courseRecordService;
     @BeanReference(type = CourseRecordPersistence.class)
     protected CourseRecordPersistence courseRecordPersistence;
     @BeanReference(type = CourseRecordFinder.class)
@@ -128,6 +136,8 @@ public abstract class CourseRecordLocalServiceBaseImpl
     protected CourseRequirementPersistence courseRequirementPersistence;
     @BeanReference(type = CourseReviewLocalService.class)
     protected CourseReviewLocalService courseReviewLocalService;
+    @BeanReference(type = CourseReviewService.class)
+    protected CourseReviewService courseReviewService;
     @BeanReference(type = CourseReviewPersistence.class)
     protected CourseReviewPersistence courseReviewPersistence;
     @BeanReference(type = CourseReviewFinder.class)
@@ -160,6 +170,8 @@ public abstract class CourseRecordLocalServiceBaseImpl
     protected FlagReportStatsPersistence flagReportStatsPersistence;
     @BeanReference(type = GlobalCourseReviewLocalService.class)
     protected GlobalCourseReviewLocalService globalCourseReviewLocalService;
+    @BeanReference(type = GlobalCourseReviewService.class)
+    protected GlobalCourseReviewService globalCourseReviewService;
     @BeanReference(type = GlobalCourseReviewPersistence.class)
     protected GlobalCourseReviewPersistence globalCourseReviewPersistence;
     @BeanReference(type = GlobalCourseReviewFinder.class)
@@ -505,6 +517,25 @@ public abstract class CourseRecordLocalServiceBaseImpl
     }
 
     /**
+     * Returns the component record remote service.
+     *
+     * @return the component record remote service
+     */
+    public ComponentRecordService getComponentRecordService() {
+        return componentRecordService;
+    }
+
+    /**
+     * Sets the component record remote service.
+     *
+     * @param componentRecordService the component record remote service
+     */
+    public void setComponentRecordService(
+        ComponentRecordService componentRecordService) {
+        this.componentRecordService = componentRecordService;
+    }
+
+    /**
      * Returns the component record persistence.
      *
      * @return the component record persistence
@@ -692,6 +723,24 @@ public abstract class CourseRecordLocalServiceBaseImpl
     }
 
     /**
+     * Returns the course record remote service.
+     *
+     * @return the course record remote service
+     */
+    public CourseRecordService getCourseRecordService() {
+        return courseRecordService;
+    }
+
+    /**
+     * Sets the course record remote service.
+     *
+     * @param courseRecordService the course record remote service
+     */
+    public void setCourseRecordService(CourseRecordService courseRecordService) {
+        this.courseRecordService = courseRecordService;
+    }
+
+    /**
      * Returns the course record persistence.
      *
      * @return the course record persistence
@@ -821,6 +870,24 @@ public abstract class CourseRecordLocalServiceBaseImpl
     public void setCourseReviewLocalService(
         CourseReviewLocalService courseReviewLocalService) {
         this.courseReviewLocalService = courseReviewLocalService;
+    }
+
+    /**
+     * Returns the course review remote service.
+     *
+     * @return the course review remote service
+     */
+    public CourseReviewService getCourseReviewService() {
+        return courseReviewService;
+    }
+
+    /**
+     * Sets the course review remote service.
+     *
+     * @param courseReviewService the course review remote service
+     */
+    public void setCourseReviewService(CourseReviewService courseReviewService) {
+        this.courseReviewService = courseReviewService;
     }
 
     /**
@@ -1123,6 +1190,25 @@ public abstract class CourseRecordLocalServiceBaseImpl
     public void setGlobalCourseReviewLocalService(
         GlobalCourseReviewLocalService globalCourseReviewLocalService) {
         this.globalCourseReviewLocalService = globalCourseReviewLocalService;
+    }
+
+    /**
+     * Returns the global course review remote service.
+     *
+     * @return the global course review remote service
+     */
+    public GlobalCourseReviewService getGlobalCourseReviewService() {
+        return globalCourseReviewService;
+    }
+
+    /**
+     * Sets the global course review remote service.
+     *
+     * @param globalCourseReviewService the global course review remote service
+     */
+    public void setGlobalCourseReviewService(
+        GlobalCourseReviewService globalCourseReviewService) {
+        this.globalCourseReviewService = globalCourseReviewService;
     }
 
     /**

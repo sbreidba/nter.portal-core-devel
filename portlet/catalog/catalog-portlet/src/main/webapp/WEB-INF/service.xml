@@ -681,7 +681,7 @@
 
     <!-- *** Define local and global Course Review entities *** -->
 
-    <entity name="CourseReview" local-service="true" remote-service="false">
+    <entity name="CourseReview" local-service="true" remote-service="true">
         <!-- Data Dictionary -->
         <!-- Table: CATALOG_CourseReview contains a course review. It will be entered into the AssetEntry and the RatingsEntry. -->
         <!-- Col: courseReviewId: (mandatory) The unique identifier for a course review and supplemental ratings entry. -->
@@ -750,7 +750,7 @@
                    entity="RatingsStats"/>
     </entity>
 
-    <entity name="GlobalCourseReview" local-service="true" remote-service="false">
+    <entity name="GlobalCourseReview" local-service="true" remote-service="true">
         <!-- Data Dictionary -->
         <!-- Table: CATALOG_GlobalCourseReview contains a global course review. -->
         <!-- Col: globalCourseReviewId: (mandatory) The unique identifier for a supplemental
@@ -829,7 +829,7 @@
 
     <!-- *** Define Student Progress related entities *** -->
 
-    <entity name="CourseRecord" local-service="true" remote-service="false">
+    <entity name="CourseRecord" local-service="true" remote-service="true">
         <!-- Data Dictionary -->
         <!-- Table: CATALOG_CourseRecord contains the overall course status and assessment
             material for a person. -->
@@ -895,7 +895,7 @@
         </finder>
     </entity>
 
-    <entity name="ComponentRecord" local-service="true" remote-service="false">
+    <entity name="ComponentRecord" local-service="true" remote-service="true">
         <!-- Data Dictionary -->
         <!-- Table: CATALOG_ComponentRecord contains the course component status and assessment
             material for a person. -->
