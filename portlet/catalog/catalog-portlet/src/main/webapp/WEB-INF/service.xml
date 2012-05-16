@@ -209,7 +209,7 @@
 
     <!--  *** Define Course and Component related entities *** -->
 
-    <entity name="Course" local-service="true" remote-service="false">
+    <entity name="Course" local-service="true" remote-service="true">
         <!-- Data Dictionary -->
         <!-- Table: CATALOG_Course contains metadata about the course content. -->
         <!-- Col: courseId: (mandatory) The unique identifier for a course. -->
@@ -464,7 +464,7 @@
         </finder>
     </entity>
 
-    <entity name="Component" local-service="true" remote-service="false">
+    <entity name="Component" local-service="true" remote-service="true">
         <!-- Data Dictionary -->
         <!-- Table: CATALOG_Component contains metadata about the component content. -->
         <!-- Col: componentId: (mandatory) The unique identifier of a component entry. -->
