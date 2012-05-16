@@ -43,6 +43,73 @@
 		</plugins>
 	</build>
 
+    <profiles>
+        <profile>
+            <id>build-service</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.liferay.maven.plugins</groupId>
+                        <artifactId>liferay-maven-plugin</artifactId>
+                        <version>${liferay.version}</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.jackrabbit</groupId>
+                                <artifactId>jackrabbit-core</artifactId>
+                                <version>2.1.2</version>
+                                <exclusions>
+                                    <exclusion>
+                                        <groupId>org.slf4j</groupId>
+                                        <artifactId>jcl-over-slf4j</artifactId>
+                                    </exclusion>
+                                </exclusions>
+                            </dependency>
+                        </dependencies>
+
+                        <configuration>
+                            <webappBaseDir>${basedir}</webappBaseDir>
+                            <pluginType>portlet</pluginType>
+                            <autoDeployDir/>
+                        </configuration>
+
+                        <executions>
+                            <execution>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>build-wsdd</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    <!--
+                    <plugin>
+                        <artifactId>maven-resources-plugin</artifactId>
+                        <version>2.5</version>
+                        <executions>
+                            <execution>
+                                <id>copy-resources</id>
+                                <phase>generate-resources</phase>
+                                <goals>
+                                    <goal>copy-resources</goal>
+                                </goals>
+                                <configuration>
+                                    <outputDirectory>${basedir}/../catalog-portlet-service/target/classes</outputDirectory>
+                                    <resources>
+                                        <resource>
+                                            <directory>${basedir}/src/main/resources</directory>
+                                            <filtering>true</filtering>
+                                        </resource>
+                                    </resources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                    -->
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.nterlearning</groupId>
