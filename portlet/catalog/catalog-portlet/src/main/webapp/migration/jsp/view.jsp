@@ -101,17 +101,6 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 </aui:form>
 
 <div class="separator"></div>
-<h3 class="course-feed-title"><%= LanguageUtil.get(pageContext, "migrate-mb-thread-heading") %></h3>
-<p><%= LanguageUtil.get(pageContext, "migrate-mb-thread-label") %></p>
-<aui:form action="<%= processMigrateMBThreadImport %>" method="post">
-	<aui:fieldset>
-		<aui:button-row>
-			<aui:button type="submit" value="migrate-mb-thread" />
-		</aui:button-row>
-	</aui:fieldset>
-</aui:form>
-
-<div class="separator"></div>
 <h3 class="course-feed-title"><%= LanguageUtil.get(pageContext, "migrate-mb-message-heading") %></h3>
 <p><%= LanguageUtil.get(pageContext, "migrate-mb-message-label") %></p>
 <aui:form action="<%= processMigrateMBMessageImport %>" method="post">
