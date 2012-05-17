@@ -226,6 +226,7 @@ footer {
 	padding: 5px;
 	margin: 0 0 1.4em;
 }
+.highlightbox h4 { margin-bottom: 0; }
 .highlightbox ul { margin: 0; list-style-type: disc; }
 .highlightbox li { list-style-position: inside; padding: 3px 0 0 16px; text-indent: -12px; }
 
