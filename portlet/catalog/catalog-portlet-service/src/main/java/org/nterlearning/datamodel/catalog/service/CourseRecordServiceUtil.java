@@ -26,6 +26,57 @@ public class CourseRecordServiceUtil {
      *
      * Never modify this class directly. Add custom service methods to {@link org.nterlearning.datamodel.catalog.service.impl.CourseRecordServiceImpl} and rerun ServiceBuilder to regenerate this class.
      */
+    public static org.nterlearning.datamodel.catalog.model.CourseRecord findByPrimaryKey(
+        long courseRecordId)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchCourseRecordException {
+        return getService().findByPrimaryKey(courseRecordId);
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.CourseRecord findByCourseRecordIri(
+        java.lang.String courseRecordIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchCourseRecordException {
+        return getService().findByCourseRecordIri(courseRecordIri);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findByCourseIri(
+        java.lang.String courseIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchCourseRecordException {
+        return getService().findByCourseIri(courseIri);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findBySingleSignOnValue(
+        java.lang.String singleSignOnValue)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findBySingleSignOnValue(singleSignOnValue);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findByUserId(
+        java.lang.Long userId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByUserId(userId);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findByFeedReferenceId(
+        long feedRefId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByFeedReferenceId(feedRefId);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord> getComponentRecords(
+        org.nterlearning.datamodel.catalog.model.CourseRecord courseRecord)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().getComponentRecords(courseRecord);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord> getComponentRecords(
+        long courseRecordPrimaryKey)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().getComponentRecords(courseRecordPrimaryKey);
+    }
+
     public static void clearService() {
         _service = null;
     }

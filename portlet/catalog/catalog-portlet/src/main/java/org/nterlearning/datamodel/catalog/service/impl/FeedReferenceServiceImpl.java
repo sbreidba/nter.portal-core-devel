@@ -1,5 +1,9 @@
 package org.nterlearning.datamodel.catalog.service.impl;
 
+import com.liferay.portal.kernel.exception.SystemException;
+import org.nterlearning.datamodel.catalog.NoSuchFeedReferenceException;
+import org.nterlearning.datamodel.catalog.model.FeedReference;
+import org.nterlearning.datamodel.catalog.service.FeedReferenceLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.service.base.FeedReferenceServiceBaseImpl;
 
 /**
@@ -17,9 +21,16 @@ import org.nterlearning.datamodel.catalog.service.base.FeedReferenceServiceBaseI
  * @see org.nterlearning.datamodel.catalog.service.FeedReferenceServiceUtil
  */
 public class FeedReferenceServiceImpl extends FeedReferenceServiceBaseImpl {
-    /*
-     * NOTE FOR DEVELOPERS:
-     *
-     * Never reference this interface directly. Always use {@link org.nterlearning.datamodel.catalog.service.FeedReferenceServiceUtil} to access the feed reference remote service.
-     */
+
+
+    public FeedReference findByFeedIri(String feedIri)
+            throws NoSuchFeedReferenceException, SystemException {
+        return FeedReferenceLocalServiceUtil.findByFeedIri(feedIri);
+    }
+
+    public FeedReference findByFeedHref(String href)
+            throws NoSuchFeedReferenceException, SystemException {
+        return FeedReferenceLocalServiceUtil.findByFeedHref(href);
+    }
+
 }

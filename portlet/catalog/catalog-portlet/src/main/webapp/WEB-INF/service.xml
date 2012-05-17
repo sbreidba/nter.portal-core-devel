@@ -86,7 +86,7 @@
 
     <!-- *** Define Feed entities *** -->
     <entity name="FeedReference" local-service="true"
-            remote-service="false">
+            remote-service="true">
         <!-- Data Dictionary -->
         <!-- Table: CATALOG_FeedReference contains metadata about atom feeders. -->
         <!-- Col: feedReferenceId: (mandatory) The unique identifier of a provider. -->
@@ -545,7 +545,7 @@
         </finder>
     </entity>
 
-    <entity name="Courses_Components" local-service="true" remote-service="false">
+    <entity name="Courses_Components" local-service="true" remote-service="true">
         <!-- Data Dictionary -->
         <!-- Table: CATALOG_Courses_Components contains links between a course and its components. -->
         <!-- Col: coursesComponentsId: (mandatory) The unique identifier for a course and component mapping entry. -->

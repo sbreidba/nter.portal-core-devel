@@ -19,8 +19,10 @@ import org.nterlearning.datamodel.catalog.service.CourseReviewLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.service.CourseReviewServiceUtil;
 import org.nterlearning.datamodel.catalog.service.CourseServiceUtil;
 import org.nterlearning.datamodel.catalog.service.Courses_ComponentsLocalServiceUtil;
+import org.nterlearning.datamodel.catalog.service.Courses_ComponentsServiceUtil;
 import org.nterlearning.datamodel.catalog.service.ExternalLinkLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.service.FeedReferenceLocalServiceUtil;
+import org.nterlearning.datamodel.catalog.service.FeedReferenceServiceUtil;
 import org.nterlearning.datamodel.catalog.service.FeedSyncHistoryLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.service.FlagReportLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.service.FlagReportStatsLocalServiceUtil;
@@ -65,10 +67,12 @@ public class ClpMessageListener extends BaseMessageListener {
             CourseReviewServiceUtil.clearService();
             Courses_ComponentsLocalServiceUtil.clearService();
 
+            Courses_ComponentsServiceUtil.clearService();
             ExternalLinkLocalServiceUtil.clearService();
 
             FeedReferenceLocalServiceUtil.clearService();
 
+            FeedReferenceServiceUtil.clearService();
             FeedSyncHistoryLocalServiceUtil.clearService();
 
             FlagReportLocalServiceUtil.clearService();

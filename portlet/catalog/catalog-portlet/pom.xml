@@ -64,6 +64,12 @@
                                     </exclusion>
                                 </exclusions>
                             </dependency>
+                            <dependency>
+                                <groupId>org.nterlearning</groupId>
+                                <artifactId>nter-catalog-portlet-service</artifactId>
+                                <version>${project.version}</version>
+                                <scope>compile</scope>
+                            </dependency>
                         </dependencies>
 
                         <configuration>
@@ -81,30 +87,6 @@
                             </execution>
                         </executions>
                     </plugin>
-                    <!--
-                    <plugin>
-                        <artifactId>maven-resources-plugin</artifactId>
-                        <version>2.5</version>
-                        <executions>
-                            <execution>
-                                <id>copy-resources</id>
-                                <phase>generate-resources</phase>
-                                <goals>
-                                    <goal>copy-resources</goal>
-                                </goals>
-                                <configuration>
-                                    <outputDirectory>${basedir}/../catalog-portlet-service/target/classes</outputDirectory>
-                                    <resources>
-                                        <resource>
-                                            <directory>${basedir}/src/main/resources</directory>
-                                            <filtering>true</filtering>
-                                        </resource>
-                                    </resources>
-                                </configuration>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    -->
                 </plugins>
             </build>
         </profile>

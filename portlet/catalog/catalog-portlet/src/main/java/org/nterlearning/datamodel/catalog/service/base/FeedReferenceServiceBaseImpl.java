@@ -22,12 +22,10 @@ import org.nterlearning.datamodel.catalog.service.ComponentRecordService;
 import org.nterlearning.datamodel.catalog.service.ComponentService;
 import org.nterlearning.datamodel.catalog.service.ContributorLocalService;
 import org.nterlearning.datamodel.catalog.service.CourseImageLocalService;
-import org.nterlearning.datamodel.catalog.service.CourseImageService;
 import org.nterlearning.datamodel.catalog.service.CourseLocalService;
 import org.nterlearning.datamodel.catalog.service.CourseRecordLocalService;
 import org.nterlearning.datamodel.catalog.service.CourseRecordService;
 import org.nterlearning.datamodel.catalog.service.CourseRelatedLocalService;
-import org.nterlearning.datamodel.catalog.service.CourseRelatedService;
 import org.nterlearning.datamodel.catalog.service.CourseRequirementLocalService;
 import org.nterlearning.datamodel.catalog.service.CourseReviewLocalService;
 import org.nterlearning.datamodel.catalog.service.CourseReviewService;
@@ -112,8 +110,6 @@ public abstract class FeedReferenceServiceBaseImpl extends PrincipalBean
     protected CourseFinder courseFinder;
     @BeanReference(type = CourseImageLocalService.class)
     protected CourseImageLocalService courseImageLocalService;
-    @BeanReference(type = CourseImageService.class)
-    protected CourseImageService courseImageService;
     @BeanReference(type = CourseImagePersistence.class)
     protected CourseImagePersistence courseImagePersistence;
     @BeanReference(type = CourseRecordLocalService.class)
@@ -126,8 +122,6 @@ public abstract class FeedReferenceServiceBaseImpl extends PrincipalBean
     protected CourseRecordFinder courseRecordFinder;
     @BeanReference(type = CourseRelatedLocalService.class)
     protected CourseRelatedLocalService courseRelatedLocalService;
-    @BeanReference(type = CourseRelatedService.class)
-    protected CourseRelatedService courseRelatedService;
     @BeanReference(type = CourseRelatedPersistence.class)
     protected CourseRelatedPersistence courseRelatedPersistence;
     @BeanReference(type = CourseRequirementLocalService.class)
@@ -482,24 +476,6 @@ public abstract class FeedReferenceServiceBaseImpl extends PrincipalBean
     }
 
     /**
-     * Returns the course image remote service.
-     *
-     * @return the course image remote service
-     */
-    public CourseImageService getCourseImageService() {
-        return courseImageService;
-    }
-
-    /**
-     * Sets the course image remote service.
-     *
-     * @param courseImageService the course image remote service
-     */
-    public void setCourseImageService(CourseImageService courseImageService) {
-        this.courseImageService = courseImageService;
-    }
-
-    /**
      * Returns the course image persistence.
      *
      * @return the course image persistence
@@ -609,25 +585,6 @@ public abstract class FeedReferenceServiceBaseImpl extends PrincipalBean
     public void setCourseRelatedLocalService(
         CourseRelatedLocalService courseRelatedLocalService) {
         this.courseRelatedLocalService = courseRelatedLocalService;
-    }
-
-    /**
-     * Returns the course related remote service.
-     *
-     * @return the course related remote service
-     */
-    public CourseRelatedService getCourseRelatedService() {
-        return courseRelatedService;
-    }
-
-    /**
-     * Sets the course related remote service.
-     *
-     * @param courseRelatedService the course related remote service
-     */
-    public void setCourseRelatedService(
-        CourseRelatedService courseRelatedService) {
-        this.courseRelatedService = courseRelatedService;
     }
 
     /**

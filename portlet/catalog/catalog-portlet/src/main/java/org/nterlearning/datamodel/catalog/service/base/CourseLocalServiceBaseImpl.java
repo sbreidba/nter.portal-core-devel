@@ -58,8 +58,10 @@ import org.nterlearning.datamodel.catalog.service.CourseReviewLocalService;
 import org.nterlearning.datamodel.catalog.service.CourseReviewService;
 import org.nterlearning.datamodel.catalog.service.CourseService;
 import org.nterlearning.datamodel.catalog.service.Courses_ComponentsLocalService;
+import org.nterlearning.datamodel.catalog.service.Courses_ComponentsService;
 import org.nterlearning.datamodel.catalog.service.ExternalLinkLocalService;
 import org.nterlearning.datamodel.catalog.service.FeedReferenceLocalService;
+import org.nterlearning.datamodel.catalog.service.FeedReferenceService;
 import org.nterlearning.datamodel.catalog.service.FeedSyncHistoryLocalService;
 import org.nterlearning.datamodel.catalog.service.FlagReportLocalService;
 import org.nterlearning.datamodel.catalog.service.FlagReportStatsLocalService;
@@ -168,6 +170,8 @@ public abstract class CourseLocalServiceBaseImpl implements CourseLocalService,
     protected CourseReviewFinder courseReviewFinder;
     @BeanReference(type = Courses_ComponentsLocalService.class)
     protected Courses_ComponentsLocalService courses_ComponentsLocalService;
+    @BeanReference(type = Courses_ComponentsService.class)
+    protected Courses_ComponentsService courses_ComponentsService;
     @BeanReference(type = Courses_ComponentsPersistence.class)
     protected Courses_ComponentsPersistence courses_ComponentsPersistence;
     @BeanReference(type = ExternalLinkLocalService.class)
@@ -176,6 +180,8 @@ public abstract class CourseLocalServiceBaseImpl implements CourseLocalService,
     protected ExternalLinkPersistence externalLinkPersistence;
     @BeanReference(type = FeedReferenceLocalService.class)
     protected FeedReferenceLocalService feedReferenceLocalService;
+    @BeanReference(type = FeedReferenceService.class)
+    protected FeedReferenceService feedReferenceService;
     @BeanReference(type = FeedReferencePersistence.class)
     protected FeedReferencePersistence feedReferencePersistence;
     @BeanReference(type = FeedSyncHistoryLocalService.class)
@@ -1037,6 +1043,25 @@ public abstract class CourseLocalServiceBaseImpl implements CourseLocalService,
     }
 
     /**
+     * Returns the courses_ components remote service.
+     *
+     * @return the courses_ components remote service
+     */
+    public Courses_ComponentsService getCourses_ComponentsService() {
+        return courses_ComponentsService;
+    }
+
+    /**
+     * Sets the courses_ components remote service.
+     *
+     * @param courses_ComponentsService the courses_ components remote service
+     */
+    public void setCourses_ComponentsService(
+        Courses_ComponentsService courses_ComponentsService) {
+        this.courses_ComponentsService = courses_ComponentsService;
+    }
+
+    /**
      * Returns the courses_ components persistence.
      *
      * @return the courses_ components persistence
@@ -1110,6 +1135,25 @@ public abstract class CourseLocalServiceBaseImpl implements CourseLocalService,
     public void setFeedReferenceLocalService(
         FeedReferenceLocalService feedReferenceLocalService) {
         this.feedReferenceLocalService = feedReferenceLocalService;
+    }
+
+    /**
+     * Returns the feed reference remote service.
+     *
+     * @return the feed reference remote service
+     */
+    public FeedReferenceService getFeedReferenceService() {
+        return feedReferenceService;
+    }
+
+    /**
+     * Sets the feed reference remote service.
+     *
+     * @param feedReferenceService the feed reference remote service
+     */
+    public void setFeedReferenceService(
+        FeedReferenceService feedReferenceService) {
+        this.feedReferenceService = feedReferenceService;
     }
 
     /**

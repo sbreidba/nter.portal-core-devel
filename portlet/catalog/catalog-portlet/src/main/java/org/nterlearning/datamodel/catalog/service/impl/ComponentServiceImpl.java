@@ -46,8 +46,4 @@ public class ComponentServiceImpl extends ComponentServiceBaseImpl {
             throws SystemException {
         return ComponentLocalServiceUtil.findByFeedReferenceId(feedRefId);
     }
-
-
-
-
-    }
+}

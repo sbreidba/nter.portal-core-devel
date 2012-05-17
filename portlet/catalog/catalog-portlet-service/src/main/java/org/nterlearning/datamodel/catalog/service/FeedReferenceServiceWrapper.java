@@ -20,6 +20,20 @@ public class FeedReferenceServiceWrapper implements FeedReferenceService,
         _feedReferenceService = feedReferenceService;
     }
 
+    public org.nterlearning.datamodel.catalog.model.FeedReference findByFeedIri(
+        java.lang.String feedIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFeedReferenceException {
+        return _feedReferenceService.findByFeedIri(feedIri);
+    }
+
+    public org.nterlearning.datamodel.catalog.model.FeedReference findByFeedHref(
+        java.lang.String href)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFeedReferenceException {
+        return _feedReferenceService.findByFeedHref(href);
+    }
+
     /**
      * @deprecated Renamed to {@link #getWrappedService}
      */

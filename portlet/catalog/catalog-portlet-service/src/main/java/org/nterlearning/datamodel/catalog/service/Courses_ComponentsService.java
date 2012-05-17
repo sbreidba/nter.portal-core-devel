@@ -29,4 +29,19 @@ public interface Courses_ComponentsService {
      *
      * Never modify or reference this interface directly. Always use {@link Courses_ComponentsServiceUtil} to access the courses_ components remote service. Add custom service methods to {@link org.nterlearning.datamodel.catalog.service.impl.Courses_ComponentsServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
      */
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Courses_Components> findByCourseId(
+        java.lang.Long courseId)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Courses_Components> findByCourseIri(
+        java.lang.String courseIri)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Courses_Components> findByComponentId(
+        java.lang.Long componentId)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.Courses_Components> findByComponentIri(
+        java.lang.String componentIri)
+        throws com.liferay.portal.kernel.exception.SystemException;
 }

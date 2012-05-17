@@ -53,13 +53,13 @@ import java.rmi.RemoteException;
 public class ComponentServiceSoap {
     private static Log _log = LogFactoryUtil.getLog(ComponentServiceSoap.class);
 
-    public static org.nterlearning.datamodel.catalog.model.Component[] findByCompanyId(
+    public static org.nterlearning.datamodel.catalog.model.ComponentSoap[] findByCompanyId(
         long companyId) throws RemoteException {
         try {
             java.util.List<org.nterlearning.datamodel.catalog.model.Component> returnValue =
                 ComponentServiceUtil.findByCompanyId(companyId);
 
-            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.Component[returnValue.size()]);
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.ComponentSoap[returnValue.size()]);
         } catch (Exception e) {
             _log.error(e, e);
 
@@ -93,13 +93,13 @@ public class ComponentServiceSoap {
         }
     }
 
-    public static org.nterlearning.datamodel.catalog.model.Component[] findByFeedReferenceId(
+    public static org.nterlearning.datamodel.catalog.model.ComponentSoap[] findByFeedReferenceId(
         java.lang.Long feedRefId) throws RemoteException {
         try {
             java.util.List<org.nterlearning.datamodel.catalog.model.Component> returnValue =
                 ComponentServiceUtil.findByFeedReferenceId(feedRefId);
 
-            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.Component[returnValue.size()]);
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.ComponentSoap[returnValue.size()]);
         } catch (Exception e) {
             _log.error(e, e);
 
