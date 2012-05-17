@@ -36,13 +36,12 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
+import org.nterlearning.registry.client.*;
 import org.nterlearning.registry.proxy.*;
-import org.nterlearning.xml.nter_registry.blacklist_objects_0_1_0.ActiveStatusEnum;
-import org.nterlearning.xml.nter_registry.domain_objects_0_1_0.*;
 
 public class RegistryPortlet extends MVCPortlet {
 
-    private Registry registry = null;
+    private RegistryProxy registry = null;
 
     private final String editInstitutionJSP = "/jsp/cp-reg/editInstitution.jsp";
     private final String viewInstitutionsJSP = "/jsp/cp-reg/viewInstitutions.jsp";
@@ -59,7 +58,7 @@ public class RegistryPortlet extends MVCPortlet {
 
     private boolean debug = false;
 
-    public Registry getRegistry() {
+    public RegistryProxy getRegistry() {
         if (registry == null) {
             registry = RegistryUtil.getRegistryService();
         }
@@ -163,7 +162,6 @@ public class RegistryPortlet extends MVCPortlet {
 
         if (errors.size() == 0) {
             // Check for unique serviceName
-            // TODO: implement...
             if (!isInstitutionNameUnique(institutionName)) {
                 errors.add("error-adding-unique-inst");
             }
@@ -414,7 +412,6 @@ public class RegistryPortlet extends MVCPortlet {
 
         if (errors.size() == 0) {
             // Check for unique serviceName
-            // TODO: implement...
             if (!isServiceNameUnique(institutionName, serviceName)) {
                 errors.add("error-adding-unique-service");
             }
