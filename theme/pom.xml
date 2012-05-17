@@ -23,13 +23,12 @@
     <parent>
         <artifactId>nter-portal-core</artifactId>
         <groupId>org.nterlearning</groupId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.0</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>nter-portal-core-theme</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0-SNAPSHOT</version>
     <name>all themes</name>
 
     <build>
