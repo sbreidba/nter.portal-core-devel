@@ -293,6 +293,7 @@ img.course-image, .main-image { width: 290px; height: 217px; }
 .carousel h3, .course-listing h3, .org-listing h3 { margin: .5em 0 .1em; }
 .carousel .description, .course-listing .description, .org-listing .description { margin-top: .5em; }
 .label-heading { display: inline-block; vertical-align: middle; margin-right: .2em; }
+h4 { margin-bottom: 1.17em; }
 
 .morelink { display: block; text-align: right; font-weight: bold; margin-top: 10px; }
 
