@@ -224,7 +224,7 @@ footer {
 /* == specific content styles ==  */
 .highlightbox {
 	padding: 5px;
-	margin: 0 0 1em;
+	margin: 0 0 1.4em;
 }
 .highlightbox ul { margin: 0; list-style-type: disc; }
 .highlightbox li { list-style-position: inside; padding: 3px 0 0 16px; text-indent: -12px; }
@@ -289,7 +289,7 @@ img.course-image, .main-image { width: 290px; height: 217px; }
 .thumbnail-listing .organization { padding-top: .2em; }
 
 /* header styles */
-.course-title, .main-page-heading { margin-top: 0; margin-bottom: 0; }
+.course-title, .main-page-heading { margin-top: 0; margin-bottom: .75em; }
 .carousel h3, .course-listing h3, .org-listing h3 { margin: .5em 0 .1em; }
 .carousel .description, .course-listing .description, .org-listing .description { margin-top: .5em; }
 .label-heading { display: inline-block; vertical-align: middle; margin-right: .2em; }
@@ -372,7 +372,7 @@ img.course-image, .main-image { width: 290px; height: 217px; }
 .course-details:after { content: ' '; display: block; clear: both; visibility: hidden; line-height: 0; width: 0; height: 0; }
 .course-description .visited { margin: .2em 0 .5em; font-style: italic; }
 
-.course-description dl { margin: 0 0 1em; }
+.course-description dl { margin: 0 0 1.4em; }
 .course-description .course-attribute { padding-left: 40px; text-indent: -40px; }
 .course-description dt { display: inline; font-weight: bold; line-height: 1.8; }
 .course-description dd { display: inline; }
