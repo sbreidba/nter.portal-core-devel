@@ -74,8 +74,10 @@ if (themeDisplay.isSignedIn()) {
 	<aui:input name="<%=NterKeys.CONTENT_TITLE%>" type="hidden" value="<%= contentTitle %>"></aui:input>
 	<aui:input name="<%=NterKeys.CONTENT%>" type="hidden" value="<%= content %>"></aui:input>
 	<aui:input name="<%=NterKeys.CONTENT_URL%>" type="hidden" value="<%= contentURL %>"></aui:input>
+
 	<span class="aui-field-label"><%= LanguageUtil.get(pageContext, "flag-entry-content") %></span>
-	<div class="flagged-content"><%= content %></div>
+	<div class="flagged-content uneditable"><%= content %></div>
+
 	<aui:select name="<%=NterKeys.FLAG_REASON%>" label='<%= LanguageUtil.get(pageContext, "flag-entry-flag-reason") %>'>
 		<aui:option value="spam" selected='<%= flagReport.getFlagReason().equals("spam") %>'><liferay-ui:message key="flag-entry-reason-spam" /></aui:option>
 		<aui:option value="hatespeech" selected='<%= flagReport.getFlagReason().equals("hatespeech") %>'><liferay-ui:message key="flag-entry-reason-hatespeech" /></aui:option>
@@ -84,6 +86,7 @@ if (themeDisplay.isSignedIn()) {
 		<aui:option value="offtopic" selected='<%= flagReport.getFlagReason().equals("offtopic") %>'><liferay-ui:message key="flag-entry-reason-offtopic" /></aui:option>
 		<aui:option value="other" selected='<%= flagReport.getFlagReason().equals("other") %>'><liferay-ui:message key="flag-entry-reason-other" /></aui:option>
 	</aui:select>
+
 	<aui:input name="<%=NterKeys.FLAG_COMMENT%>" type="textarea" value="<%= flagReport.getFlagComment() %>" label='<%= LanguageUtil.get(pageContext, "flag-entry-flag-comment") %>' ></aui:input>
 
 	<aui:button-row>

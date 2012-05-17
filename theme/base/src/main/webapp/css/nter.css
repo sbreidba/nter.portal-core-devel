@@ -76,10 +76,16 @@ body {
 }
 /* get rid of table cell layout so carousel overflow works properly */
 .portlet-layout, .portlet-column { display: block; }
-.portlet-column, .portlet-column-only { float: none; }
+.portlet-column { float: left; margin-right: 20px; }
+.portlet-column-last, .portlet-column-only, .one-col-promo .portlet-column { margin-right: 0; }
+.columns-1 .portlet-column, .portlet-column-only { float: none; }
 .portlet-layout:after { content: ' '; clear: both; display: block; height: 0; width: 0; visibility: hidden; }
 footer { clear: both; }
 .aui-overlaymask-content { position: fixed; left: 0; top: 0; width: 100%; }
+/* fit columns to our grid */
+.aui-w30 { width: 290px; }
+.aui-w50 { width: 445px; }
+.aui-w70 { width: 600px; }
 
 
 
@@ -288,8 +294,8 @@ img.course-image, .main-image { width: 290px; height: 217px; }
 
 .morelink { display: block; text-align: right; font-weight: bold; margin-top: 10px; }
 
-.layout-sidenav nav { float: left; width: 150px; }
-.layout-sidenav .portlet-column-content { float: right; width: 760px; }
+.layout-sidenav nav { float: left; width: 135px; margin-right: 20px; }
+.layout-sidenav .portlet-column-content { float: right; width: 755px; }
 .layout-sidenav .portlet-column:after { content: ' '; display: block; clear: both; visibility: hidden; line-height: 0; width: 0; height: 0; }
 .layout-sidenav nav h2 { margin: 0 0 .2em; }
 .layout-sidenav nav ul { margin: 0 0 0 .5em; }
@@ -431,13 +437,13 @@ img.course-image, .main-image { width: 290px; height: 217px; }
 
 .uniForm fieldset { margin: 0; padding: 0 ; border: none; }
 .uniForm label, .uniForm p.label { display: block; font-weight: bold; margin-bottom: .2em; }
-.uniForm .textInput, .uniForm textarea, .uniForm .aui-rating { margin-bottom: .7em; }
+.uniForm .textInput, .uniForm textarea, .uniForm .aui-rating, .uniForm select, .uniForm .uneditable { margin-bottom: .7em; }
 .uniForm textarea { height: 100px; }
-.uniForm .buttonHolder { margin-top: .3em; }
+.uniForm .buttonHolder, .uniForm .aui-button-holder { margin: .3em 0 0; }
 .uniForm button { margin-right: .4em; }
 
 .review .uniForm, #review-form { margin: 1em 0; display: block; }
-.review .uniForm .textInput, .review .uniForm textarea, .review .uniForm .aui-rating, #review-form .textInput, #review-form textarea, #review-form .aui-rating { width: 99.33333333333333%; }
+.review .uniForm .textInput, .review .uniForm textarea, .review .uniForm .aui-rating, #review-form .textInput, #review-form textarea, #review-form .aui-rating, #report-inappropriate select, #report-inappropriate textarea { width: 100%; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; -ms-box-sizing: border-box; -o-box-sizing: border-box; box-sizing: border-box; }
 
 .ratings-histogram { float: left; width: 290px; margin-right: 20px; font-size: .8em; }
 .ratings-histogram label { display: block; float: right; clear: both; }
