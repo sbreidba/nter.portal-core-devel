@@ -37,8 +37,10 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageConstants;
+import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil;
@@ -55,6 +57,7 @@ import org.nterlearning.utils.PortalProperties;
 import org.nterlearning.utils.PortalPropertiesUtil;
 import org.nterlearning.utils.ReviewUtil;
 
+import javax.management.MBeanTrustPermission;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import java.io.*;
@@ -78,28 +81,29 @@ public class MigrationPortlet extends MVCPortlet {
      */
     public void processMigrateUserImport(ActionRequest request, ActionResponse response)
             throws FileNotFoundException, IOException, PortalException, SystemException {
-        String migrateUsers = PropsUtil.get(PortalProperties.NTER_MIGRATE_USERS);
+
+        String migrateUsers = PropsUtil.get(PortalProperties.NTER_MIGRATE_PERMITTED);
         Boolean createUser = ((migrateUsers != null) && migrateUsers.equals("true"));
-
-        // Extract list of users to migrate
-        String usersFilename = MigrationConstants.USERS_MIGRATION_PATH;
-        ArrayList<UserExtract> userList = readUserExtractAsArrayList(usersFilename);
-
-        // Extract list of user's groups
-        String userGroupsFilename = MigrationConstants.USER_GROUPS_MIGRATION_PATH;
-        ArrayList<UserGroupsExtract> userGroupList = readUserGroupsExtractAsArrayList(userGroupsFilename);
-
-        // Extract list of user's organizations
-        String userOrgsFilename = MigrationConstants.USER_ORGS_MIGRATION_PATH;
-        ArrayList<UserOrgsExtract> userOrgList = readUserOrgsExtractAsArrayList(userOrgsFilename);
-
-        // Extract list of user's roles
-        String userRolesFilename = MigrationConstants.USER_ROLES_MIGRATION_PATH;
-        ArrayList<UserRolesExtract> userRoleList = readUserRolesExtractAsArrayList(userRolesFilename);
-
-        long companyId = PortalUtil.getDefaultCompanyId();
-
         if (createUser) {
+
+            // Extract list of users to migrate
+            String usersFilename = MigrationConstants.USERS_MIGRATION_PATH;
+            ArrayList<UserExtract> userList = readUserExtractAsArrayList(usersFilename);
+
+            // Extract list of user's groups
+            String userGroupsFilename = MigrationConstants.USER_GROUPS_MIGRATION_PATH;
+            ArrayList<UserGroupsExtract> userGroupList = readUserGroupsExtractAsArrayList(userGroupsFilename);
+
+            // Extract list of user's organizations
+            String userOrgsFilename = MigrationConstants.USER_ORGS_MIGRATION_PATH;
+            ArrayList<UserOrgsExtract> userOrgList = readUserOrgsExtractAsArrayList(userOrgsFilename);
+
+            // Extract list of user's roles
+            String userRolesFilename = MigrationConstants.USER_ROLES_MIGRATION_PATH;
+            ArrayList<UserRolesExtract> userRoleList = readUserRolesExtractAsArrayList(userRolesFilename);
+
+            long companyId = PortalUtil.getDefaultCompanyId();
+
             for (UserExtract userItem : userList) {
                 // extract values from list
                 String ssoValue = userItem.getSsoValue();
@@ -123,15 +127,9 @@ public class MigrationPortlet extends MVCPortlet {
                             middleName, lastName, password, emailAddress,
                             male, jobTitle,
                             roleIds, groupIds, organizationIds);
-                    mLog.info("Created user: " + firstName + " " + lastName +
-                            " with email:" + emailAddress +
-                            " group count: " + groupIds.length +
-                            " org count: " + organizationIds.length +
-                            " role count: " + roleIds.length);
 
                     addSsoInformation(user, ssoValue);
                 } catch (Exception e) {
-                    // probably account already exists, but log just in case
                     mLog.info(ExceptionUtils.getFullStackTrace(e));
                 }
             }
@@ -141,9 +139,9 @@ public class MigrationPortlet extends MVCPortlet {
     }
 
     private User addUser(long companyId, String screenName, String firstName,
-            String middleName, String lastName, String password, String emailAddress,
-            boolean male, String jobTitle,
-            long[] roleIds, long[] groupIds, long[] organizationIds) throws Exception {
+                         String middleName, String lastName, String password, String emailAddress,
+                         boolean male, String jobTitle,
+                         long[] roleIds, long[] groupIds, long[] organizationIds) throws Exception {
 
         ServiceContext serviceContext = new ServiceContext();
         serviceContext.setAddGroupPermissions(true);
@@ -160,8 +158,14 @@ public class MigrationPortlet extends MVCPortlet {
                     lastName, 0, 0, male, Calendar.JANUARY, 1, 1970, jobTitle,
                     groupIds, organizationIds, roleIds, null, false,
                     serviceContext);
-        }
-        catch (DuplicateUserScreenNameException e) {
+            mLog.info("Created user: " + firstName + " " + lastName +
+                    " with email:" + emailAddress +
+                    " group count: " + groupIds.length +
+                    " org count: " + organizationIds.length +
+                    " role count: " + roleIds.length);
+
+        } catch (DuplicateUserScreenNameException e) {
+            mLog.info("User " + screenName + " already exists.");
             user = UserLocalServiceUtil.getUserByScreenName(companyId, screenName);
         }
 
@@ -175,27 +179,25 @@ public class MigrationPortlet extends MVCPortlet {
                 userMapper =
                         UserIdMapperLocalServiceUtil.getUserIdMapper(
                                 user.getUserId(), PortalPropertiesUtil.getSsoImplementation());
-            }
-            catch (NoSuchUserIdMapperException ne) {
+            } catch (NoSuchUserIdMapperException ne) {
                 userMapper =
                         UserIdMapperLocalServiceUtil.updateUserIdMapper(
                                 user.getUserId(), PortalPropertiesUtil.getSsoImplementation(),
                                 null, ssoValue);
             }
-        }
-        catch (Exception e) {
-        	mLog.info(ExceptionUtils.getFullStackTrace(e));
+        } catch (Exception e) {
+            mLog.info(ExceptionUtils.getFullStackTrace(e));
         }
     }
 
     /**
      * Find User's groups
      */
-    public long[] findUserGroups(ArrayList<UserGroupsExtract> userGroupList, String ssoValue, long companyId)
+    private long[] findUserGroups(ArrayList<UserGroupsExtract> userGroupList, String ssoValue, long companyId)
             throws PortalException, SystemException {
         Group userGroup;
         Group guestGroup = GroupLocalServiceUtil.getGroup(companyId, GroupConstants.GUEST);
-        long[] groupIds = new long[] {guestGroup.getGroupId()};
+        long[] groupIds = new long[]{guestGroup.getGroupId()};
         ArrayList<Long> matchingGroups = new ArrayList<Long>();
 
         // Loop through group list for matching user values
@@ -223,7 +225,7 @@ public class MigrationPortlet extends MVCPortlet {
     /**
      * Find User's organizations
      */
-    public long[] findUserOrganizations(ArrayList<UserOrgsExtract> userOrgList, String ssoValue, long companyId)
+    private long[] findUserOrganizations(ArrayList<UserOrgsExtract> userOrgList, String ssoValue, long companyId)
             throws PortalException, SystemException {
         Organization userOrg;
         long organizationIds[] = new long[]{OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID};
@@ -254,11 +256,11 @@ public class MigrationPortlet extends MVCPortlet {
     /**
      * Find User's Roles
      */
-    public long[] findUserRoles(ArrayList<UserRolesExtract> userRoleList, String ssoValue, long companyId)
+    private long[] findUserRoles(ArrayList<UserRolesExtract> userRoleList, String ssoValue, long companyId)
             throws PortalException, SystemException {
         Role userRole;
         Role defaultRole = RoleLocalServiceUtil.getRole(companyId, RoleConstants.USER);
-        long roleIds[] = new long[] {defaultRole.getRoleId()};
+        long roleIds[] = new long[]{defaultRole.getRoleId()};
         ArrayList<Long> matchingRoles = new ArrayList<Long>();
 
         // Loop through Role list for matching user values
@@ -322,7 +324,7 @@ public class MigrationPortlet extends MVCPortlet {
 //        }
 //    }
 
-     /**
+    /**
      * Migration process using a file for user reviews
      *
      * @param request  HTTP Request handler
@@ -331,72 +333,100 @@ public class MigrationPortlet extends MVCPortlet {
     public void processMigrateUserReviewImport(ActionRequest request, ActionResponse response)
             throws FileNotFoundException, IOException, ParseException, PortalException, SystemException {
 
-        mLog.info("Importing user local course reviews");
+        String migrateReviews = PropsUtil.get(PortalProperties.NTER_MIGRATE_PERMITTED);
+        Boolean createReviews = ((migrateReviews != null) && migrateReviews.equals("true"));
+        if (createReviews) {
 
-        // Extract local course reviews  to migrate
-        String userReviewsFilename = MigrationConstants.USER_REVIEWS_MIGRATION_PATH;
-        ArrayList<UserReviewExtract> userReviewList = readUserReviewExtractAsArrayList(userReviewsFilename);
+            mLog.info("Importing user local course reviews");
 
-        for (UserReviewExtract userItem : userReviewList) {
-            // extract values from list
-            String ssoValue = userItem.getSsoValue();
-            String mapperType = userItem.getMapperType();
-            String emailAddress = userItem.getEmailAddress();
-            String courseIri = userItem.getCourseIri();
-            long score = userItem.getScore();
-            String summary = userItem.getSummary();
-            String content = userItem.getContent();
-            Date createDate = userItem.getCreateDate();
-            Date modifiedDate = userItem.getModifiedDate();
-            boolean removed = userItem.getRemoved();
-            Date removedDate = userItem.getRemovedDate();
+            // Extract local course reviews  to migrate
+            String userReviewsFilename = MigrationConstants.USER_REVIEWS_MIGRATION_PATH;
+            ArrayList<UserReviewExtract> userReviewList = readUserReviewExtractAsArrayList(userReviewsFilename);
 
-            long courseId = 0;
-            long userId = 0;
+            for (UserReviewExtract userItem : userReviewList) {
+                // extract values from list
+                String ssoValue = userItem.getSsoValue();
+                String mapperType = userItem.getMapperType();
+                String emailAddress = userItem.getEmailAddress();
+                String courseIri = userItem.getCourseIri();
+                long score = userItem.getScore();
+                String summary = userItem.getSummary();
+                String content = userItem.getContent();
+                Date createDate = userItem.getCreateDate();
+                Date modifiedDate = userItem.getModifiedDate();
+                boolean removed = userItem.getRemoved();
+                Date removedDate = userItem.getRemovedDate();
 
-            // Find user based on the UserIdMapper assignment
-            UserIdMapper userMapper;
-            try {
-                userMapper =
-                        UserIdMapperLocalServiceUtil.getUserIdMapperByExternalUserId(mapperType,ssoValue);
-                userId = userMapper.getUserId();
-            } catch (Exception e) {
-                mLog.warn("Could not find local user which maps to external user id " + ssoValue);
-            }
+                // Find user based on the UserIdMapper assignment
+                long userId = findUserFromExternalId(mapperType, ssoValue);
 
-            // Find course based on courseIri assignment
-            Course course;
-            try {
-                course = CourseLocalServiceUtil.fetchByCourseIri(courseIri);
-                courseId = course.getCourseId();
-            } catch (Exception e) {
-                // probably course does not exist, but log just in case
-                mLog.warn("Could not find course which maps to courseIRI: " + courseIri);
-            }
+                // Find course based on courseIri assignment
+                long courseId = findCourseFromIri(courseIri);
 
-            // When user, course exist, migrate the extracted review
-            if (userId != 0 && courseId != 0) {
-                try {
-                    // Verify this review has not previously been migrated - only 1 review per user for each course.
-                    List<CourseReview> courseReviewList = CourseReviewLocalServiceUtil.findByCourseIdWithUserId(userId, courseId);
-                    if (courseReviewList.size() == 0) {
-                        ServiceContext serviceContext = ServiceContextFactory.getInstance(
-                                CourseReviewLocalServiceUtil.class.getName(), request);
+                // When user, course exist, migrate the extracted review
+                if (userId != 0 && courseId != 0) {
+                    try {
+                        // Verify this review has not previously been migrated - only 1 review per user for each course.
+                        List<CourseReview> courseReviewList = CourseReviewLocalServiceUtil.findByCourseIdWithUserId(userId, courseId);
+                        if (courseReviewList.size() == 0) {
+                            ServiceContext serviceContext = ServiceContextFactory.getInstance(
+                                    CourseReviewLocalServiceUtil.class.getName(), request);
 
-                        CourseReviewLocalServiceUtil.migrateCourseReview(userId, courseId, summary, content, score,
-                                createDate, modifiedDate, removed, removedDate, serviceContext);
-                        mLog.info("User Review added for CourseIri: " + courseIri + " UserId: " + ssoValue);
-                    } else {
-                        mLog.warn("Could not add review for user " + ssoValue + " review for course " + courseIri +
-                        " because review already exists.");
+                            CourseReviewLocalServiceUtil.migrateCourseReview(userId, courseId, summary, content, score,
+                                    createDate, modifiedDate, removed, removedDate, serviceContext);
+                            mLog.info("User Review added for CourseIri: " + courseIri + " UserId: " + ssoValue);
+                        } else {
+                            mLog.warn("Could not add review for user " + ssoValue + " review for course " + courseIri +
+                                    " because review already exists.");
+                        }
+                    } catch (Exception e) {
+                        mLog.error("Could not add review for user " + ssoValue + " review for course " + courseIri +
+                                " because of exception: " + e);
                     }
-                } catch (Exception e) {
-                    mLog.error("Could not add review for user " + ssoValue + " review for course " + courseIri +
-                            " because of exception: " + e);
                 }
             }
+        } else {
+            mLog.warn("Migration Feature not available. Portal-ext.properties migration is false.");
         }
     }
+
+    /**
+     * Find user based on the UserIdMapper assignment
+     */
+    private long findUserFromExternalId(String mapperType, String ssoValue)
+            throws SystemException {
+
+        UserIdMapper userMapper;
+        long userId = 0;
+        try {
+            userMapper =
+                    UserIdMapperLocalServiceUtil.getUserIdMapperByExternalUserId(mapperType, ssoValue);
+            userId = userMapper.getUserId();
+        } catch (Exception e) {
+            mLog.warn("Could not find local user which maps to external user id " + ssoValue);
+        }
+        return userId;
+    }
+
+    /**
+     * Find course id based on the Iri
+     */
+    private long findCourseFromIri(String courseIri)
+            throws SystemException {
+
+        long courseId = 0;
+        // Find course based on courseIri assignment
+        Course course;
+        try {
+            course = CourseLocalServiceUtil.fetchByCourseIri(courseIri);
+            courseId = course.getCourseId();
+        } catch (Exception e) {
+            // probably course does not exist, but log just in case
+            mLog.warn("Could not find course which maps to courseIRI: " + courseIri);
+        }
+        return courseId;
+    }
+
 
     /**
      * Migration process using a file for user helpful/not helpful review score
@@ -407,65 +437,56 @@ public class MigrationPortlet extends MVCPortlet {
     public void processMigrateReviewHelpImport(ActionRequest request, ActionResponse response)
             throws FileNotFoundException, IOException, PortalException, SystemException {
 
-        mLog.info("Importing user helpful/not helpful scores for course reviews");
+        String migrateReviews = PropsUtil.get(PortalProperties.NTER_MIGRATE_PERMITTED);
+        Boolean createReviews = ((migrateReviews != null) && migrateReviews.equals("true"));
+        if (createReviews) {
 
-        // Extract user review scores to migrate
-        String userReviewHelpFilename = MigrationConstants.USER_REVIEW_HELP_MIGRATION_PATH;
-        ArrayList<UserReviewHelpExtract> userReviewHelpList = readUserReviewHelpExtractAsArrayList(userReviewHelpFilename);
+            mLog.info("Importing user helpful/not helpful scores for course reviews");
 
-        for (UserReviewHelpExtract userItem : userReviewHelpList) {
-            // extract values from list
-            String ssoValue = userItem.getSsoValue();
-            String mapperType = userItem.getMapperType();
-            String emailAddress = userItem.getEmailAddress();
-            String courseIri = userItem.getCourseIri();
-            long score = userItem.getScore();
+            // Extract user review scores to migrate
+            String userReviewHelpFilename = MigrationConstants.USER_REVIEW_HELP_MIGRATION_PATH;
+            ArrayList<UserReviewHelpExtract> userReviewHelpList = readUserReviewHelpExtractAsArrayList(userReviewHelpFilename);
 
-            long courseId = 0;
-            long userId = 0;
+            for (UserReviewHelpExtract userItem : userReviewHelpList) {
+                // extract values from list
+                String ssoValue = userItem.getSsoValue();
+                String mapperType = userItem.getMapperType();
+                String emailAddress = userItem.getEmailAddress();
+                String courseIri = userItem.getCourseIri();
+                long score = userItem.getScore();
 
-            // Find user based on the UserIdMapper assignment
-            UserIdMapper userMapper;
-            try {
-                userMapper =
-                        UserIdMapperLocalServiceUtil.getUserIdMapperByExternalUserId(mapperType, ssoValue);
-                userId = userMapper.getUserId();
-            } catch (Exception e) {
-                mLog.warn("Could not find local user which maps to external user id " + ssoValue);
-            }
+                // Find user based on the UserIdMapper assignment
+                long userId = findUserFromExternalId(mapperType, ssoValue);
 
-            // Find course based on courseIri assignment
-            Course course;
-            try {
-                course = CourseLocalServiceUtil.fetchByCourseIri(courseIri);
-                courseId = course.getCourseId();
-            } catch (Exception e) {
-                // probably course does not exist, but log just in case
-                mLog.warn("Could not find course which maps to courseIRI: " + courseIri);
-            }
+                // Find course based on courseIri assignment
+                long courseId = findCourseFromIri(courseIri);
 
-            // When user, course, and review exist, migrate the extracted review helpful/not helpful
-            if (userId != 0 && courseId != 0) {
-                List<CourseReview> courseReviewList;
-                RatingsEntry ratingsEntry;
-                try {
-                    courseReviewList = CourseReviewLocalServiceUtil.findByCourseIdWithUserId(userId, courseId);
-                    if (courseReviewList.size() == 0) {
-                       mLog.warn("Review not found for CourseIri: " + courseIri + " UserId: " + ssoValue);
+                // When user, course, and review exist, migrate the extracted review helpful/not helpful
+                if (userId != 0 && courseId != 0) {
+                    List<CourseReview> courseReviewList;
+                    RatingsEntry ratingsEntry;
+                    try {
+                        courseReviewList = CourseReviewLocalServiceUtil.findByCourseIdWithUserId(userId, courseId);
+                        if (courseReviewList.size() == 0) {
+                            mLog.warn("Review not found for CourseIri: " + courseIri + " UserId: " + ssoValue);
+                        }
+                        for (CourseReview courseReview : courseReviewList) {
+                            ServiceContext serviceContext = ServiceContextFactory.getInstance(
+                                    RatingsEntryLocalServiceUtil.class.getName(), request);
+
+                            RatingsEntryLocalServiceUtil.updateEntry(userId, CourseReview.class.getName(), courseReview.getPrimaryKey(), score, serviceContext);
+                            mLog.info("User Helpful Score added for CourseIri: " + courseIri + " UserId: " + ssoValue);
+                        }
+                    } catch (Exception e) {
+                        // review does not exist
+                        mLog.warn("Could not find user " + ssoValue + " review for course " + courseIri);
                     }
-                    for (CourseReview courseReview : courseReviewList) {
-                        ServiceContext serviceContext = ServiceContextFactory.getInstance(
-                                RatingsEntryLocalServiceUtil.class.getName(), request);
-
-                        RatingsEntryLocalServiceUtil.updateEntry(userId, CourseReview.class.getName(), courseReview.getPrimaryKey(), score, serviceContext);
-                        mLog.info("User Helpful Score added for CourseIri: " + courseIri + " UserId: " + ssoValue);
-                    }
-                } catch (Exception e) {
-                    // review does not exist
-                    mLog.warn("Could not find user " + ssoValue + " review for course " + courseIri);
                 }
             }
+        } else {
+            mLog.warn("Migration Feature not available. Portal-ext.properties migration is false.");
         }
+
     }
 
     /**
@@ -494,38 +515,46 @@ public class MigrationPortlet extends MVCPortlet {
     }
 
     /**
-      * Migration process using a file for MB Categories
-    *
-    * @param request  HTTP Request handler
-    * @param response HTTP response handler
-    */
-   public void processMigrateMBCategoryImport(ActionRequest request, ActionResponse response)
-           throws FileNotFoundException, IOException, ParseException, PortalException, SystemException {
+     * Migration process using a file for MB Categories
+     *
+     * @param request  HTTP Request handler
+     * @param response HTTP response handler
+     */
+    public void processMigrateMBCategoryImport(ActionRequest request, ActionResponse response)
+            throws FileNotFoundException, IOException, ParseException, PortalException, SystemException {
 
-       mLog.info("Importing MB Categories");
+        String migrateMB = PropsUtil.get(PortalProperties.NTER_MIGRATE_PERMITTED);
+        Boolean createMB = ((migrateMB != null) && migrateMB.equals("true"));
+        if (createMB) {
+            mLog.info("Importing MB Categories");
 
-       // Extract local course reviews  to migrate
-       String mbCategoryFilename = MigrationConstants.MB_CATEGORY_MIGRATION_PATH;
-       ArrayList<MbCategoryExtract> categoryList = readMbCategoryExtractAsArrayList(mbCategoryFilename);
-       ServiceContext serviceContext = ServiceContextFactory.getInstance(
-                MBCategoryLocalServiceUtil.class.getName(), request);
-       boolean parentFlag = true;
-       // Load parent categories and establish a map of old/new categories to verify
-       ArrayList<MbCategoryMap> categoryMapList = new ArrayList<MbCategoryMap>();
-       categoryMapList = insertMbCategorySet(parentFlag, categoryList, categoryMapList, serviceContext);
+            // Extract local course reviews  to migrate
+            String mbCategoryFilename = MigrationConstants.MB_CATEGORY_MIGRATION_PATH;
+            ArrayList<MbCategoryExtract> categoryList = readMbCategoryExtractAsArrayList(mbCategoryFilename);
+            ServiceContext serviceContext = ServiceContextFactory.getInstance(
+                    MBCategoryLocalServiceUtil.class.getName(), request);
 
-       // add subcategories, skip if all ready processed
-       // TODO this needs to be recursive in the future. Only 1 level of subcategories is currently processed.
-       parentFlag = false;
-       ArrayList<MbCategoryMap> subCategoryMapList = new ArrayList<MbCategoryMap>();
-       subCategoryMapList = insertMbCategorySet(parentFlag, categoryList, categoryMapList, serviceContext);
+            mLog.info("Adding parent categories");
+            boolean parentFlag = true;
+            // Load parent categories and establish a map of old/new categories to verify
+            ArrayList<MbCategoryMap> categoryMapList = new ArrayList<MbCategoryMap>();
+            categoryMapList = insertMbCategorySet(parentFlag, categoryList, categoryMapList, serviceContext);
 
-   }
+            // add subcategories, skip if all ready processed
+            mLog.info("Adding child categories");
+            parentFlag = false;
+            ArrayList<MbCategoryMap> subCategoryMapList = new ArrayList<MbCategoryMap>();
+            subCategoryMapList = insertMbCategorySet(parentFlag, categoryList, categoryMapList, serviceContext);
+        } else {
+            mLog.warn("Migration Feature not available. Portal-ext.properties migration is false.");
+        }
+    }
+
 
     /**
      * Insert MB Categories
      */
-    public ArrayList<MbCategoryMap> insertMbCategorySet(boolean parentFlag, ArrayList<MbCategoryExtract> categoryList,
+    private ArrayList<MbCategoryMap> insertMbCategorySet(boolean parentFlag, ArrayList<MbCategoryExtract> categoryList,
                                                         ArrayList<MbCategoryMap> categoryMapList, ServiceContext serviceContext)
             throws PortalException, SystemException {
 
@@ -562,71 +591,137 @@ public class MigrationPortlet extends MVCPortlet {
             boolean mailingListActive = categoryItem.getMailingListActive();
 
             long companyId = PortalUtil.getDefaultCompanyId();
-            long userId = 0;
 
-            // Find user based on the UserIdMapper assignment
-            UserIdMapper userMapper;
-            try {
-                userMapper =
-                        UserIdMapperLocalServiceUtil.getUserIdMapperByExternalUserId(mapperType, ssoValue);
-                userId = userMapper.getUserId();
-            } catch (Exception e) {
-                mLog.warn("Could not find local user which maps to external user id " + ssoValue);
-            }
+            // Verify this category has not previously been migrated.
+            boolean categoryFound = migratedMBCategory(name, description);
 
-            // Use admin user if valid user not found
-            if (userId == 0) {
-                mLog.info("Inserting MBCategory: " + name + " using Admin user");
-                //userId = UserLocalServiceUtil.getUserIdByEmailAddress(companyId, "admin@nterlearning.org");
-                userId = UserLocalServiceUtil.getUserIdByScreenName(companyId, "admin");
-            }
+            if (!categoryFound) {
+                // Find user based on the UserIdMapper assignment
+                long userId = findUserFromExternalId(mapperType, ssoValue);
 
-            MBCategory mbCategory;
-            try {
-                if (parentFlag && parentCategoryId == 0) {
-                    // Create MB parent (root) categories
-                    mbCategory = MBCategoryLocalServiceUtil.addCategory(userId, parentCategoryId, name,
-                            description, displayStyle,
-                            inEmailAddress, inProtocol, inServerName, inServerPort, inUseSSL, inUserName, inPassword, inReadInterval,
-                            outEmailAddress, outCustom, outServerName, outServerPort, outUseSSL, outUserName, outPassword,
-                            allowAnonymous, mailingListActive, serviceContext);
-                    mLog.info("Added Category: " + name + " Inserted by userId: " + ssoValue);
-
-                    MbCategoryMap mapItem = new MbCategoryMap();
-                    mapItem.setOldCategoryId(categoryId);
-                    mapItem.setNewCategoryId(mbCategory.getCategoryId());
-                    mapItem.setOldParentCategoryId(parentCategoryId);
-                    mapItem.setNewParentCategoryId(mbCategory.getParentCategoryId());
-                    categoryMapList.add(mapItem);
-
-                } else if (parentFlag) {
-                    // Save sub-categories for recursive processing
-                    MbCategoryMap mapItem = new MbCategoryMap();
-                    mapItem.setOldCategoryId(categoryId);
-                    mapItem.setNewCategoryId(-1);
-                    mapItem.setOldParentCategoryId(parentCategoryId);
-                    mapItem.setNewParentCategoryId(-1);
-                    categoryMapList.add(mapItem);
-
-                } else if (parentCategoryId != 0) {
-                    // insert subcategory
-                    // find new categoryId of parent
-                    for (MbCategoryMap newMapItem : categoryMapList) {
-                        if (parentCategoryId == newMapItem.getOldCategoryId()) {
-                            parentCategoryId = newMapItem.getNewCategoryId();
-                            break;
-                        }
-                    }
-                    mbCategory = MBCategoryLocalServiceUtil.addCategory(userId, parentCategoryId, name,
-                            description, displayStyle,
-                            inEmailAddress, inProtocol, inServerName, inServerPort, inUseSSL, inUserName, inPassword, inReadInterval,
-                            outEmailAddress, outCustom, outServerName, outServerPort, outUseSSL, outUserName, outPassword,
-                            allowAnonymous, mailingListActive, serviceContext);
-                    mLog.info("Added MBCategory: " + name + " Inserted by userId: " + ssoValue);
+                // Use admin user if valid user not found
+                if (userId == 0) {
+                    mLog.info("Inserting MBCategory: '" + name + "' using Admin user");
+                    //userId = UserLocalServiceUtil.getUserIdByEmailAddress(companyId, "admin@nterlearning.org");
+                    userId = UserLocalServiceUtil.getUserIdByScreenName(companyId, "admin");
                 }
-            } catch (Exception e) {
-                // log issue creating the MBCategory
-                mLog.warn("Could not add MBCategory: " + name + " Inserted by userId: " + ssoValue);
+
+                MBCategory mbCategory;
+                try {
+                    if (parentFlag && parentCategoryId == 0) {
+
+                        // Create MB parent (root) categories
+                        mbCategory = MBCategoryLocalServiceUtil.addCategory(userId, parentCategoryId, name,
+                                description, displayStyle,
+                                inEmailAddress, inProtocol, inServerName, inServerPort, inUseSSL, inUserName, inPassword, inReadInterval,
+                                outEmailAddress, outCustom, outServerName, outServerPort, outUseSSL, outUserName, outPassword,
+                                allowAnonymous, mailingListActive, serviceContext);
+                        mLog.info("Added Category: '" + name + "'. Inserted by userId: " + ssoValue);
+
+                        //assign group and guest permissions  (true)
+                        ResourceLocalServiceUtil.addResources(
+                                mbCategory.getCompanyId(), mbCategory.getGroupId(), mbCategory.getUserId(),
+                                MBCategory.class.getName(), mbCategory.getCategoryId(),
+                                false, true, true);
+
+                        //create old/new map of ids
+                        boolean addFlag = true;
+                        maintainCategoryMap(addFlag, categoryMapList, categoryId, mbCategory.getCategoryId(),
+                               parentCategoryId, mbCategory.getParentCategoryId());
+
+                    } else if (parentFlag) {
+                        // Save sub-categories for recursive processing
+                        boolean addFlag = true;
+                        maintainCategoryMap(addFlag, categoryMapList, categoryId, -1,
+                               parentCategoryId, -1);
+
+                    } else {
+
+                        if (parentCategoryId != 0) {
+                            // insert subcategory
+                            // find new categoryId of parent
+                            // Categories are sorted in extract query so "parents" will always be processed first.
+                            // Maintain the map so hierarchy created properly
+                             for (MbCategoryMap newMapItem : categoryMapList) {
+                                if (parentCategoryId == newMapItem.getOldCategoryId()) {
+                                    long newParentCategoryId = newMapItem.getNewCategoryId();
+
+                                    mbCategory = MBCategoryLocalServiceUtil.addCategory(userId, newParentCategoryId, name,
+                                            description, displayStyle,
+                                            inEmailAddress, inProtocol, inServerName, inServerPort, inUseSSL, inUserName, inPassword, inReadInterval,
+                                            outEmailAddress, outCustom, outServerName, outServerPort, outUseSSL, outUserName, outPassword,
+                                            allowAnonymous, mailingListActive, serviceContext);
+                                    mLog.info("Added MBCategory: '" + name + "'. Inserted by userId: " + ssoValue);
+
+                                    //assign group and guest permissions  (true)
+                                    ResourceLocalServiceUtil.addResources(
+                                            mbCategory.getCompanyId(), mbCategory.getGroupId(), mbCategory.getUserId(),
+                                            MBCategory.class.getName(), mbCategory.getCategoryId(),
+                                            false, true, true);
+
+                                    //create old/new map of ids
+                                    boolean addFlag = false;
+                                    maintainCategoryMap(addFlag, categoryMapList, categoryId, mbCategory.getCategoryId(),
+                                            parentCategoryId, mbCategory.getParentCategoryId());
+
+                                    break;
+                                }          //matching category found
+                            }              //for loop
+                        }                 //non-parent
+                    }
+                } catch (Exception e) {
+                    // log issue creating the MBCategory
+                    mLog.warn("Could not add MBCategory: '" + name + "' Inserted by userId: " + ssoValue);
+                }
+            }
+        }
+        return categoryMapList;
+    }
+
+    /**
+     * Determine MB Category already exists
+     */
+    private boolean migratedMBCategory(String name, String description)
+            throws SystemException {
+
+        boolean categoryFound = false;
+
+        List<MBCategory> existingCategories = MBCategoryLocalServiceUtil.getMBCategories(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+        for (MBCategory existingCategory : existingCategories) {
+            if (name.equals(existingCategory.getName()) && description.equals(existingCategory.getDescription())) {
+                categoryFound = true;
+                mLog.warn("Message Board Category '" + name + "' already exists and was not re-created.");
+                break;
+            }
+        }
+        return categoryFound;
+    }
+
+    /**
+     * Maintain map of category old and new id attributes
+     */
+    private ArrayList<MbCategoryMap> maintainCategoryMap(boolean addFlag, ArrayList<MbCategoryMap> categoryMapList,
+           long oldCategoryId, long newCategoryId, long oldParentCategoryId, long newParentCategoryId)
+           throws PortalException, SystemException {
+
+        MbCategoryMap mapItem = new MbCategoryMap();
+        mapItem.setOldCategoryId(oldCategoryId);
+        mapItem.setNewCategoryId(newCategoryId);
+        mapItem.setOldParentCategoryId(oldParentCategoryId);
+        mapItem.setNewParentCategoryId(newParentCategoryId);
+
+        if (addFlag) {
+            categoryMapList.add(mapItem);
+        } else {
+            //update the map of the current record with new Id values
+            int mapIndex = 0;
+            for (MbCategoryMap fixMapItem : categoryMapList) {
+                if (mapItem.getOldCategoryId() == fixMapItem.getOldCategoryId()) {
+                    categoryMapList.set(mapIndex, mapItem);
+                    break;
+                }
+                mapIndex++;
             }
         }
         return categoryMapList;
@@ -641,40 +736,45 @@ public class MigrationPortlet extends MVCPortlet {
     public void processMigrateMBMessageImport(ActionRequest request, ActionResponse response)
             throws FileNotFoundException, IOException, ParseException, PortalException, SystemException {
 
-        mLog.info("Importing MB Messages");
+        String migrateMB = PropsUtil.get(PortalProperties.NTER_MIGRATE_PERMITTED);
+        Boolean createMB = ((migrateMB != null) && migrateMB.equals("true"));
+        if (createMB) {
+            mLog.info("Importing MB Messages");
 
-        // Extract local course reviews  to migrate
-        String mbMessageFilename = MigrationConstants.MB_MESSAGE_MIGRATION_PATH;
-        ArrayList<MbMessageExtract> messageList = readMbMessageExtractAsArrayList(mbMessageFilename);
-        ServiceContext serviceContext = ServiceContextFactory.getInstance(
-                MBMessageLocalServiceUtil.class.getName(), request);
+            // Extract local course reviews  to migrate
+            String mbMessageFilename = MigrationConstants.MB_MESSAGE_MIGRATION_PATH;
+            ArrayList<MbMessageExtract> messageList = readMbMessageExtractAsArrayList(mbMessageFilename);
+            ServiceContext serviceContext = ServiceContextFactory.getInstance(
+                    MBMessageLocalServiceUtil.class.getName(), request);
 
-        PortletPreferences preferences = request.getPreferences();
-        String format = GetterUtil.getString(
-                preferences.getValue("messageFormat", null),
-                MBMessageConstants.DEFAULT_FORMAT);
+            PortletPreferences preferences = request.getPreferences();
+            String format = GetterUtil.getString(
+                    preferences.getValue("messageFormat", null),
+                    MBMessageConstants.DEFAULT_FORMAT);
 
-        boolean rootFlag = true;
-        // Load root messages and establish a map of old/new messages to insert entire message thread
-        ArrayList<MbMessageMap> messageMapList = new ArrayList<MbMessageMap>();
-        messageMapList = insertMbMessageSet(rootFlag, messageList, messageMapList, format, serviceContext);
+            mLog.info("Adding root messages");
+            boolean rootFlag = true;
+            // Load root messages and establish a map of old/new messages to insert entire message thread
+            ArrayList<MbMessageMap> messageMapList = new ArrayList<MbMessageMap>();
+            messageMapList = insertMbMessageSet(rootFlag, messageList, messageMapList, format, serviceContext);
 
-        // add message thread responses to root message, skip if all ready processed
-        rootFlag = false;
-        ArrayList<MbMessageMap> subMessageMapList = new ArrayList<MbMessageMap>();
-        subMessageMapList = insertMbMessageSet(rootFlag, messageList, messageMapList, format, serviceContext);
+            // add message thread responses to root message, skip if all ready processed
+            mLog.info("Adding message threads");
+            rootFlag = false;
+            ArrayList<MbMessageMap> subMessageMapList = new ArrayList<MbMessageMap>();
+            subMessageMapList = insertMbMessageSet(rootFlag, messageList, messageMapList, format, serviceContext);
+        } else {
+            mLog.warn("Migration Feature not available. Portal-ext.properties migration is false.");
+        }
 
     }
 
     /**
      * Insert MB Messages
      */
-    public ArrayList<MbMessageMap> insertMbMessageSet(boolean rootFlag, ArrayList<MbMessageExtract> messageList,
+    private ArrayList<MbMessageMap> insertMbMessageSet(boolean rootFlag, ArrayList<MbMessageExtract> messageList,
                                                       ArrayList<MbMessageMap> messageMapList, String format, ServiceContext serviceContext)
             throws PortalException, SystemException {
-
-        // create new ArrayList for processing hierarchy of messages
-        ArrayList<MbMessageMap> newLevelMessageMap = new ArrayList<MbMessageMap>();
 
         for (MbMessageExtract messageItem : messageList) {
             // extract values from list
@@ -699,111 +799,130 @@ public class MigrationPortlet extends MVCPortlet {
 
             // list is used for attachments which are are not going to migrate at this time
             List<ObjectValuePair<String, InputStream>> inputStreamOVPs =
-			new ArrayList<ObjectValuePair<String, InputStream>>(5);
+                    new ArrayList<ObjectValuePair<String, InputStream>>(5);
 
             long companyId = PortalUtil.getDefaultCompanyId();
             long groupId = GroupLocalServiceUtil.getCompanyGroup(companyId).getGroupId();
 
-            long userId = 0;
-            // Find user based on the UserIdMapper assignment
-            UserIdMapper userMapper;
-            try {
-                userMapper =
-                        UserIdMapperLocalServiceUtil.getUserIdMapperByExternalUserId(mapperType, ssoValue);
-                userId = userMapper.getUserId();
-            } catch (Exception e) {
-                mLog.warn("Could not find local user which maps to external user id " + ssoValue +
-                        " inserting as guest user");
-            }
-            // Insert as guest user if user not valid in new schema
-            if (userId == 0) {
-                userId = UserLocalServiceUtil.getDefaultUser(companyId).getUserId();
-            }
+            // Verify this message has not previously been migrated.
+            boolean messageFound = migratedMBMessage(subject, body);
 
-            // Obtain category.
-            long category = determineMBCategory(name, description);
+            if (!messageFound) {
+                // Find user based on the UserIdMapper assignment
+                long userId = findUserFromExternalId(mapperType, ssoValue);
 
-            // Messages are sorted in extract query.
-            // Root message will be first followed by message responses.
-            MBMessage mbMessage;
-            try {
-                if (rootFlag && parentMessageId == 0) {
-                    // Create MB root messages
-                    mbMessage = MBMessageLocalServiceUtil.addMessage(userId, userName, groupId,
-                            category, subject, body, format, inputStreamOVPs, anonymous,
-                            priority, allowPingbacks, serviceContext);
-                    mLog.info("Added Message: " + subject + " UserName: " + userName);
-
-                    MbMessageMap mapItem = new MbMessageMap();
-                    mapItem.setOldMessageId(messageId);
-                    mapItem.setNewMessageId(mbMessage.getMessageId());
-                    mapItem.setOldThreadId(threadId);
-                    mapItem.setNewThreadId(mbMessage.getThreadId());
-                    mapItem.setOldRootMessageId(rootMessageId);
-                    mapItem.setNewRootMessageId(mbMessage.getRootMessageId());
-                    mapItem.setOldParentMessageId(parentMessageId);
-                    mapItem.setNewParentMessageId(mbMessage.getParentMessageId());
-                    messageMapList.add(mapItem);
-
-                } else if (rootFlag) {
-                    // Save sub-messages
-                    MbMessageMap mapItem = new MbMessageMap();
-                    mapItem.setOldMessageId(messageId);
-                    mapItem.setNewMessageId(-1);
-                    mapItem.setOldThreadId(threadId);
-                    mapItem.setNewThreadId(-1);
-                    mapItem.setOldRootMessageId(rootMessageId);
-                    mapItem.setNewRootMessageId(-1);
-                    mapItem.setOldParentMessageId(parentMessageId);
-                    mapItem.setNewParentMessageId(-1);
-                    messageMapList.add(mapItem);
-
-                } else if (parentMessageId != 0 ) {
-                    // insert message in thread if not yet inserted
-                    // find new messageId, threadId of parent
-                    // extract query in order so parent message should exist to enter thread messages in proper order
-                    for (MbMessageMap newMapItem : messageMapList) {
-                        if (parentMessageId == newMapItem.getOldMessageId()) {
-                            parentMessageId = newMapItem.getNewMessageId();
-                            threadId = newMapItem.getNewThreadId();
-                            rootMessageId = newMapItem.getNewRootMessageId();
-                            break;
-                        }
-                    }
-
-                    mbMessage = MBMessageLocalServiceUtil.addMessage(userId, userName, groupId,
-                            category, threadId, parentMessageId, subject, body, format, inputStreamOVPs, anonymous,
-                            priority, allowPingbacks, serviceContext);
-                    mLog.info("Added MBMessage: " + subject + " Inserted by userName: " + userName);
-                    MbMessageMap mapItem = new MbMessageMap();
-                    mapItem.setOldMessageId(messageId);
-                    mapItem.setNewMessageId(mbMessage.getMessageId());
-                    mapItem.setOldThreadId(threadId);
-                    mapItem.setNewThreadId(mbMessage.getThreadId());
-                    mapItem.setOldRootMessageId(rootMessageId);
-                    mapItem.setNewRootMessageId(mbMessage.getRootMessageId());
-                    mapItem.setOldParentMessageId(parentMessageId);
-                    mapItem.setNewParentMessageId(mbMessage.getParentMessageId());
-                    newLevelMessageMap.add(mapItem);
+                // Insert as guest user if user not valid in new schema
+                if (userId == 0) {
+                    userId = UserLocalServiceUtil.getDefaultUser(companyId).getUserId();
+                    mLog.warn("Inserting message as guest user");
                 }
-            } catch (Exception e) {
-                // log issue creating the MBMessage
-                mLog.warn("Could not add MBMessage: " + subject + " Inserted by userName: " + userName);
-            }
-        }
 
-        if (!rootFlag) {
-            // assign new ArrayList for processing hierarchy of messages
-            messageMapList = newLevelMessageMap;
+                // Obtain category.
+                long category = determineMBCategory(name, description);
+
+                // Messages are sorted in extract query.
+                // Root message will be first followed by message responses.
+                MBMessage mbMessage;
+                try {
+                    if (rootFlag && parentMessageId == 0) {
+                        // Create MB root messages
+                        mbMessage = MBMessageLocalServiceUtil.addMessage(userId, userName, groupId,
+                                category, subject, body, format, inputStreamOVPs, anonymous,
+                                priority, allowPingbacks, serviceContext);
+                        mLog.info("Added Message: " + subject + " UserName: " + userName);
+
+                        //assign group and guest permissions  (true)
+                        ResourceLocalServiceUtil.addResources(
+                                mbMessage.getCompanyId(), mbMessage.getGroupId(), mbMessage.getUserId(),
+                                MBCategory.class.getName(), mbMessage.getCategoryId(),
+                                false, true, true);
+
+                        //create old/new map of ids
+                        boolean addFlag = true;
+                        maintainMessageMap(addFlag, messageMapList,
+                                messageId, mbMessage.getMessageId(), threadId, mbMessage.getThreadId(),
+                                parentMessageId, mbMessage.getParentMessageId());
+
+
+                    } else if (rootFlag) {
+                        // Save sub-messages
+                        //create old/new map of ids
+                        boolean addFlag = true;
+                        maintainMessageMap(addFlag, messageMapList,
+                                messageId, -1, threadId, -1,
+                                parentMessageId, -1);
+
+
+                    } else {
+                        // insert thread messages
+                        // find new messageId, threadId of parent
+                        // extract query in order so parent message should exist to enter thread messages in proper order
+                        // maintain the map
+
+                        if (parentMessageId != 0) {
+
+                            // find parent message in map and create new message
+                            for (MbMessageMap newMapItem : messageMapList) {
+
+                                if (parentMessageId == newMapItem.getOldMessageId()) {
+                                    long newThreadId = newMapItem.getNewThreadId();
+                                    long newParentMessageId = newMapItem.getNewMessageId();
+
+                                    mbMessage = MBMessageLocalServiceUtil.addMessage(userId, userName, groupId,
+                                            category, newThreadId, newParentMessageId, subject, body, format, inputStreamOVPs, anonymous,
+                                            priority, allowPingbacks, serviceContext);
+                                    mLog.info("Added MBMessage: " + subject + " Inserted by userName: " + userName);
+
+                                    //assign group and guest permissions  (true)
+                                    ResourceLocalServiceUtil.addResources(
+                                            mbMessage.getCompanyId(), mbMessage.getGroupId(), mbMessage.getUserId(),
+                                            MBCategory.class.getName(), mbMessage.getCategoryId(),
+                                            false, true, true);
+
+                                    //create old/new map of ids
+                                    boolean addFlag = false;
+                                    maintainMessageMap(addFlag, messageMapList,
+                                            messageId, mbMessage.getMessageId(), threadId, mbMessage.getThreadId(),
+                                            parentMessageId, mbMessage.getParentMessageId());
+
+                                    break;
+                                }          //matching message found
+                            }              //for loop
+                        }                 //non-parent
+                    }
+                } catch (Exception e) {
+                    // log issue creating the MBMessage
+                    mLog.warn("Could not add MBMessage: " + subject + ". Inserted by userName: " + userName);
+                }
+            }
         }
 
         return messageMapList;
     }
 
     /**
-     * Determine MB Messages
+     * Determine MB Message already exists
      */
-    public long determineMBCategory(String name, String description)
+    private boolean migratedMBMessage(String subject, String body)
+            throws SystemException {
+        boolean messageFound = false;
+
+        List<MBMessage> existingMessages = MBMessageLocalServiceUtil.getMBMessages(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+        for (MBMessage existingMessage : existingMessages) {
+            if (subject.equals(existingMessage.getSubject()) && body.equals(existingMessage.getBody())) {
+                messageFound = true;
+                mLog.warn("Message Board Message: '" + subject + " 'already exists and was not re-created.");
+                break;
+            }
+        }
+        return messageFound;
+    }
+
+    /**
+     * Determine MB category id
+     */
+    private long determineMBCategory(String name, String description)
             throws SystemException {
 
         long category = -1;
@@ -817,9 +936,42 @@ public class MigrationPortlet extends MVCPortlet {
             }
         }
         if (category == -1) {
-            mLog.warn("Could not add find MBCategory: " + name + " for MB Message");
+            mLog.warn("Could not add find MBCategory: '" + name + "' for MB Message");
         }
         return category;
+    }
+
+    /**
+     * Maintain map of message old and new id attributes
+     */
+    private ArrayList<MbMessageMap> maintainMessageMap(boolean addFlag, ArrayList<MbMessageMap> messageMapList,
+                                                       long oldMessageId, long newMessageId,
+                                                       long oldThreadId, long newThreadId,
+                                                       long oldParentMessageId, long newParentMessageId)
+            throws PortalException, SystemException {
+
+        MbMessageMap mapItem = new MbMessageMap();
+        mapItem.setOldMessageId(oldMessageId);
+        mapItem.setNewMessageId(newMessageId);
+        mapItem.setOldThreadId(oldThreadId);
+        mapItem.setNewThreadId(newThreadId);
+        mapItem.setOldParentMessageId(oldParentMessageId);
+        mapItem.setNewParentMessageId(newParentMessageId);
+
+        if (addFlag) {
+            messageMapList.add(mapItem);
+        } else {
+            //update the map of the current record with new Id values
+            int mapIndex = 0;
+            for (MbMessageMap fixMapItem : messageMapList) {
+                if (mapItem.getOldMessageId() == fixMapItem.getOldMessageId()) {
+                    messageMapList.set(mapIndex, mapItem);
+                    break;
+                }
+                mapIndex++;
+            }
+        }
+        return messageMapList;
     }
 
     //
@@ -842,10 +994,11 @@ public class MigrationPortlet extends MVCPortlet {
     }
 
     private static ArrayList<UserExtract> readUserExtractAsArrayList(String fileName)
-            throws  IOException {
+            throws IOException {
         ArrayList<UserExtract> storeValues = new ArrayList<UserExtract>();
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(fileName), "UTF8"));
 
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -873,10 +1026,11 @@ public class MigrationPortlet extends MVCPortlet {
     }
 
     private static ArrayList<UserGroupsExtract> readUserGroupsExtractAsArrayList(String fileName)
-            throws  IOException {
+            throws IOException {
         ArrayList<UserGroupsExtract> storeValues = new ArrayList<UserGroupsExtract>();
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(fileName), "UTF8"));
 
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -897,10 +1051,11 @@ public class MigrationPortlet extends MVCPortlet {
     }
 
     private static ArrayList<UserOrgsExtract> readUserOrgsExtractAsArrayList(String fileName)
-            throws  IOException {
+            throws IOException {
         ArrayList<UserOrgsExtract> storeValues = new ArrayList<UserOrgsExtract>();
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(fileName), "UTF8"));
 
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -921,10 +1076,11 @@ public class MigrationPortlet extends MVCPortlet {
     }
 
     private static ArrayList<UserRolesExtract> readUserRolesExtractAsArrayList(String fileName)
-            throws  IOException, IllegalArgumentException {
+            throws IOException, IllegalArgumentException {
         ArrayList<UserRolesExtract> storeValues = new ArrayList<UserRolesExtract>();
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(fileName), "UTF8"));
 
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -945,10 +1101,11 @@ public class MigrationPortlet extends MVCPortlet {
     }
 
     private static ArrayList<UserReviewExtract> readUserReviewExtractAsArrayList(String fileName)
-            throws  IOException, ParseException {
+            throws IOException, ParseException {
         ArrayList<UserReviewExtract> storeValues = new ArrayList<UserReviewExtract>();
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(fileName), "UTF8"));
 
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -959,8 +1116,13 @@ public class MigrationPortlet extends MVCPortlet {
                 userEntry.setEmailAddress(dataValue[2]);
                 userEntry.setCourseIri(dataValue[3]);
                 userEntry.setScore(Long.valueOf(dataValue[4]));
-                userEntry.setSummary(dataValue[5]);
-                userEntry.setContent(dataValue[6]);
+                //extract query replaced all cr/lf in summary and content with <p /> so revert values here
+                String tempSummary = dataValue[5].replace("<p />", "\r\n");
+                tempSummary = tempSummary.replace("<br />", "\n");
+                String tempContent = dataValue[6].replace("<p />", "\r\n");
+                tempContent = tempContent.replace("<br />", "\n");
+                userEntry.setSummary(tempSummary);
+                userEntry.setContent(tempContent);
                 if (dataValue[7].length() == 19) {
                     userEntry.setCreateDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dataValue[7]));
                 }
@@ -969,7 +1131,7 @@ public class MigrationPortlet extends MVCPortlet {
                 }
                 if ("1".equals(dataValue[9])) {
                     userEntry.setRemoved(true);
-                } else  {
+                } else {
                     userEntry.setRemoved(false);
                 }
                 if (dataValue[10].length() == 19) {
@@ -986,10 +1148,11 @@ public class MigrationPortlet extends MVCPortlet {
     }
 
     private static ArrayList<UserReviewHelpExtract> readUserReviewHelpExtractAsArrayList(String fileName)
-            throws  IOException {
+            throws IOException {
         ArrayList<UserReviewHelpExtract> storeValues = new ArrayList<UserReviewHelpExtract>();
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(fileName), "UTF8"));
 
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -1011,10 +1174,11 @@ public class MigrationPortlet extends MVCPortlet {
     }
 
     private static ArrayList<MbCategoryExtract> readMbCategoryExtractAsArrayList(String fileName)
-            throws  IOException, ParseException {
+            throws IOException, ParseException {
         ArrayList<MbCategoryExtract> storeValues = new ArrayList<MbCategoryExtract>();
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(fileName), "UTF8"));
 
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -1026,8 +1190,13 @@ public class MigrationPortlet extends MVCPortlet {
                 categoryEntry.setUserName(dataValue[3]);
                 categoryEntry.setCategoryId(Long.valueOf(dataValue[4]));
                 categoryEntry.setParentCategoryId(Long.valueOf(dataValue[5]));
-                categoryEntry.setName(dataValue[6]);
-                categoryEntry.setDescription(dataValue[7]);
+                //extract query replaced all cr/lf in name and description with <p /> so revert values here
+                String tempName = dataValue[6].replace("<p />", "\r\n");
+                tempName = tempName.replace("<br />", "\n");
+                String tempDescription = dataValue[7].replace("<p />", "\r\n");
+                tempDescription = tempDescription.replace("<br />", "\n");
+                categoryEntry.setName(tempName);
+                categoryEntry.setDescription(tempDescription);
                 if (dataValue[8].length() == 19) {
                     categoryEntry.setCreateDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dataValue[8]));
                 }
@@ -1043,7 +1212,7 @@ public class MigrationPortlet extends MVCPortlet {
                 categoryEntry.setInServerPort(Integer.valueOf(dataValue[14]));
                 if ("1".equals(dataValue[15])) {
                     categoryEntry.setInUseSSL(true);
-                } else  {
+                } else {
                     categoryEntry.setInUseSSL(false);
                 }
                 categoryEntry.setInUserName(dataValue[16]);
@@ -1052,21 +1221,21 @@ public class MigrationPortlet extends MVCPortlet {
                 categoryEntry.setOutEmailAddress(dataValue[19]);
                 if ("1".equals(dataValue[20])) {
                     categoryEntry.setOutCustom(true);
-                } else  {
+                } else {
                     categoryEntry.setOutCustom(false);
                 }
                 categoryEntry.setOutServerName(dataValue[21]);
                 categoryEntry.setOutServerPort(Integer.valueOf(dataValue[22]));
                 if ("1".equals(dataValue[23])) {
                     categoryEntry.setOutUseSSL(true);
-                } else  {
+                } else {
                     categoryEntry.setOutUseSSL(false);
                 }
                 categoryEntry.setOutUserName(dataValue[24]);
                 categoryEntry.setOutPassword(dataValue[25]);
                 if ("1".equals(dataValue[26])) {
                     categoryEntry.setMailingListActive(true);
-                } else  {
+                } else {
                     categoryEntry.setMailingListActive(false);
                 }
                 storeValues.add(categoryEntry);
@@ -1081,11 +1250,12 @@ public class MigrationPortlet extends MVCPortlet {
         return storeValues;
     }
 
-        private static ArrayList<MbMessageExtract> readMbMessageExtractAsArrayList(String fileName)
-            throws  IOException, ParseException {
+    private static ArrayList<MbMessageExtract> readMbMessageExtractAsArrayList(String fileName)
+            throws IOException, ParseException {
         ArrayList<MbMessageExtract> storeValues = new ArrayList<MbMessageExtract>();
         try {
-            BufferedReader bufferedReader = new BufferedReader(new FileReader(fileName));
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(fileName), "UTF8"));
 
             String line;
             while ((line = bufferedReader.readLine()) != null) {
@@ -1095,8 +1265,13 @@ public class MigrationPortlet extends MVCPortlet {
                 messageEntry.setMapperType(dataValue[1]);
                 messageEntry.setEmailAddress(dataValue[2]);
                 messageEntry.setUserName(dataValue[3]);
-                messageEntry.setName(dataValue[4]);
-                messageEntry.setDescription(dataValue[5]);
+                //extract query replaced all cr/lf in name and description with <p /> so revert values here
+                String tempName = dataValue[4].replace("<p />", "\r\n");
+                tempName = tempName.replace("<br />", "\n");
+                String tempDescription = dataValue[5].replace("<p />", "\r\n");
+                tempDescription = tempDescription.replace("<br />", "\n");
+                messageEntry.setName(tempName);
+                messageEntry.setDescription(tempDescription);
                 if (dataValue[6].length() == 19) {
                     messageEntry.setCreateDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dataValue[6]));
                 }
@@ -1107,22 +1282,27 @@ public class MigrationPortlet extends MVCPortlet {
                 messageEntry.setThreadId(Long.valueOf(dataValue[9]));
                 messageEntry.setRootMessageId(Long.valueOf(dataValue[10]));
                 messageEntry.setParentMessageId(Long.valueOf(dataValue[11]));
-                messageEntry.setSubject(dataValue[12]);
-                messageEntry.setBody(dataValue[13]);
+                //extract query replaced all cr/lf in subject and body with <p /> so revert values here
+                String tempSubject = dataValue[12].replace("<p />", "\r\n");
+                tempSubject = tempSubject.replace("<br />", "\n");
+                String tempBody = dataValue[13].replace("<p />", "\r\n");
+                tempBody = tempBody.replace("<br />", "\n");
+                messageEntry.setSubject(tempSubject);
+                messageEntry.setBody(tempBody);
                 if ("1".equals(dataValue[14])) {
                     messageEntry.setAttachments(true);
-                } else  {
+                } else {
                     messageEntry.setAttachments(false);
                 }
                 if ("1".equals(dataValue[15])) {
                     messageEntry.setAnonymous(true);
-                } else  {
+                } else {
                     messageEntry.setAnonymous(false);
                 }
                 messageEntry.setPriority(Double.valueOf(dataValue[16]));
                 if ("1".equals(dataValue[17])) {
                     messageEntry.setAllowPingbacks(true);
-                } else  {
+                } else {
                     messageEntry.setAllowPingbacks(false);
                 }
                 storeValues.add(messageEntry);

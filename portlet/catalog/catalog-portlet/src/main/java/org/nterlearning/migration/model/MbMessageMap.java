@@ -30,8 +30,6 @@ public class MbMessageMap {
     private long newMessageId;
     private long oldThreadId;
     private long newThreadId;
-    private long oldRootMessageId;
-    private long newRootMessageId;
     private long oldParentMessageId;
     private long newParentMessageId;
 
@@ -65,22 +63,6 @@ public class MbMessageMap {
 
     public void setNewThreadId(long newValue) {
         newThreadId = newValue;
-    }
-
-    public long getOldRootMessageId() {
-        return oldRootMessageId;
-    }
-
-    public void setOldRootMessageId(long newValue) {
-        oldRootMessageId = newValue;
-    }
-
-    public long getNewRootMessageId() {
-        return newRootMessageId;
-    }
-
-    public void setNewRootMessageId(long newValue) {
-        newRootMessageId = newValue;
     }
 
     public long getOldParentMessageId() {
