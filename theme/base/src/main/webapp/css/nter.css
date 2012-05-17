@@ -284,7 +284,7 @@ img.course-image, .main-image { width: 290px; height: 217px; }
 .paged-thumbnail-listing li { margin-bottom: 15px; }
 .paged-thumbnail-listing li:nth-child(6n) { padding-right: 0; }
 .paged-thumbnail-listing li:nth-child(6n+1) { clear: left; padding-left: 0; }
-.thumbnail-listing h4 { padding: .2em 0; font-size: 1em; }
+.thumbnail-listing h4 { padding: .2em 0; font-size: 1em; margin-bottom: 0; }
 .thumbnail-listing .rating { padding-top: .2em; }
 .thumbnail-listing .organization { padding-top: .2em; }
 
@@ -292,7 +292,7 @@ img.course-image, .main-image { width: 290px; height: 217px; }
 .course-title, .main-page-heading { margin-top: 0; margin-bottom: .75em; }
 .carousel h3, .course-listing h3, .org-listing h3 { margin: .5em 0 .1em; }
 .carousel .description, .course-listing .description, .org-listing .description { margin-top: .5em; }
-.label-heading { display: inline-block; vertical-align: middle; margin-right: .2em; }
+.label-heading { display: inline-block; vertical-align: middle; margin-right: .2em; margin-bottom: 0; }
 h4 { margin-bottom: 1.17em; }
 
 .morelink { display: block; text-align: right; font-weight: bold; margin-top: 10px; }
