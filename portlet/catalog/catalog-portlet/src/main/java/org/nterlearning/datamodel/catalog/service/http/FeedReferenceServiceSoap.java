@@ -1,5 +1,12 @@
 package org.nterlearning.datamodel.catalog.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import org.nterlearning.datamodel.catalog.service.FeedReferenceServiceUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * <p>
  * This class provides a SOAP utility for the
@@ -44,4 +51,31 @@ package org.nterlearning.datamodel.catalog.service.http;
  * @generated
  */
 public class FeedReferenceServiceSoap {
+    private static Log _log = LogFactoryUtil.getLog(FeedReferenceServiceSoap.class);
+
+    public static org.nterlearning.datamodel.catalog.model.FeedReferenceSoap findByFeedIri(
+        java.lang.String feedIri) throws RemoteException {
+        try {
+            org.nterlearning.datamodel.catalog.model.FeedReference returnValue = FeedReferenceServiceUtil.findByFeedIri(feedIri);
+
+            return org.nterlearning.datamodel.catalog.model.FeedReferenceSoap.toSoapModel(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.FeedReferenceSoap findByFeedHref(
+        java.lang.String href) throws RemoteException {
+        try {
+            org.nterlearning.datamodel.catalog.model.FeedReference returnValue = FeedReferenceServiceUtil.findByFeedHref(href);
+
+            return org.nterlearning.datamodel.catalog.model.FeedReferenceSoap.toSoapModel(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
 }

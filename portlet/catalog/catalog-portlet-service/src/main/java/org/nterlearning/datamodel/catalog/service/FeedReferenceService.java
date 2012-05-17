@@ -29,4 +29,13 @@ public interface FeedReferenceService {
      *
      * Never modify or reference this interface directly. Always use {@link FeedReferenceServiceUtil} to access the feed reference remote service. Add custom service methods to {@link org.nterlearning.datamodel.catalog.service.impl.FeedReferenceServiceImpl} and rerun ServiceBuilder to automatically copy the method declarations to this interface.
      */
+    public org.nterlearning.datamodel.catalog.model.FeedReference findByFeedIri(
+        java.lang.String feedIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFeedReferenceException;
+
+    public org.nterlearning.datamodel.catalog.model.FeedReference findByFeedHref(
+        java.lang.String href)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFeedReferenceException;
 }

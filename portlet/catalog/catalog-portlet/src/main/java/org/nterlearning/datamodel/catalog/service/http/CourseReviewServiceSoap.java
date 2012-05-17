@@ -1,5 +1,12 @@
 package org.nterlearning.datamodel.catalog.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import org.nterlearning.datamodel.catalog.service.CourseReviewServiceUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * <p>
  * This class provides a SOAP utility for the
@@ -44,4 +51,148 @@ package org.nterlearning.datamodel.catalog.service.http;
  * @generated
  */
 public class CourseReviewServiceSoap {
+    private static Log _log = LogFactoryUtil.getLog(CourseReviewServiceSoap.class);
+
+    public static double findScoreByReviewId(long reviewId)
+        throws RemoteException {
+        try {
+            double returnValue = CourseReviewServiceUtil.findScoreByReviewId(reviewId);
+
+            return returnValue;
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static java.lang.Double[] findScoreByCourseId(long courseId)
+        throws RemoteException {
+        try {
+            java.util.List<java.lang.Double> returnValue = CourseReviewServiceUtil.findScoreByCourseId(courseId);
+
+            return returnValue.toArray(new java.lang.Double[returnValue.size()]);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.CourseReviewSoap[] findByCourseId(
+        long courseId) throws RemoteException {
+        try {
+            java.util.List<org.nterlearning.datamodel.catalog.model.CourseReview> returnValue =
+                CourseReviewServiceUtil.findByCourseId(courseId);
+
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.CourseReviewSoap[returnValue.size()]);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.CourseReviewSoap[] findByCourseId(
+        long courseId, int start, int end) throws RemoteException {
+        try {
+            java.util.List<org.nterlearning.datamodel.catalog.model.CourseReview> returnValue =
+                CourseReviewServiceUtil.findByCourseId(courseId, start, end);
+
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.CourseReviewSoap[returnValue.size()]);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.CourseReviewSoap[] findByCourseIdWithUserId(
+        long userId, long courseId) throws RemoteException {
+        try {
+            java.util.List<org.nterlearning.datamodel.catalog.model.CourseReview> returnValue =
+                CourseReviewServiceUtil.findByCourseIdWithUserId(userId,
+                    courseId);
+
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.CourseReviewSoap[returnValue.size()]);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.CourseReviewSoap[] findByCourseIdWithUserId(
+        long userId, long courseId, int start, int end)
+        throws RemoteException {
+        try {
+            java.util.List<org.nterlearning.datamodel.catalog.model.CourseReview> returnValue =
+                CourseReviewServiceUtil.findByCourseIdWithUserId(userId,
+                    courseId, start, end);
+
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.CourseReviewSoap[returnValue.size()]);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.CourseReviewSoap[] findByUserId(
+        long userId) throws RemoteException {
+        try {
+            java.util.List<org.nterlearning.datamodel.catalog.model.CourseReview> returnValue =
+                CourseReviewServiceUtil.findByUserId(userId);
+
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.CourseReviewSoap[returnValue.size()]);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.CourseReviewSoap[] findByUserId(
+        long userId, int start, int end) throws RemoteException {
+        try {
+            java.util.List<org.nterlearning.datamodel.catalog.model.CourseReview> returnValue =
+                CourseReviewServiceUtil.findByUserId(userId, start, end);
+
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.CourseReviewSoap[returnValue.size()]);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.CourseReviewSoap[] findByCourseIdWithRemoved(
+        long courseId, boolean removed, int start, int end)
+        throws RemoteException {
+        try {
+            java.util.List<org.nterlearning.datamodel.catalog.model.CourseReview> returnValue =
+                CourseReviewServiceUtil.findByCourseIdWithRemoved(courseId,
+                    removed, start, end);
+
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.CourseReviewSoap[returnValue.size()]);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static long countByCourseIdWithRemoved(long courseId, boolean removed)
+        throws RemoteException {
+        try {
+            long returnValue = CourseReviewServiceUtil.countByCourseIdWithRemoved(courseId,
+                    removed);
+
+            return returnValue;
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
 }

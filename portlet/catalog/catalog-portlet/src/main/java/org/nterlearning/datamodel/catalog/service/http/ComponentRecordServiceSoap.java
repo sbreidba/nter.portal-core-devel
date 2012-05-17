@@ -53,13 +53,13 @@ import java.rmi.RemoteException;
 public class ComponentRecordServiceSoap {
     private static Log _log = LogFactoryUtil.getLog(ComponentRecordServiceSoap.class);
 
-    public static org.nterlearning.datamodel.catalog.model.ComponentRecord[] findByComponentIri(
+    public static org.nterlearning.datamodel.catalog.model.ComponentRecordSoap[] findByComponentIri(
         java.lang.String componentIri) throws RemoteException {
         try {
             java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord> returnValue =
                 ComponentRecordServiceUtil.findByComponentIri(componentIri);
 
-            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.ComponentRecord[returnValue.size()]);
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.ComponentRecordSoap[returnValue.size()]);
         } catch (Exception e) {
             _log.error(e, e);
 
@@ -67,13 +67,13 @@ public class ComponentRecordServiceSoap {
         }
     }
 
-    public static org.nterlearning.datamodel.catalog.model.ComponentRecord[] findByCourseRecordId(
+    public static org.nterlearning.datamodel.catalog.model.ComponentRecordSoap[] findByCourseRecordId(
         long courseRecordId) throws RemoteException {
         try {
             java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord> returnValue =
                 ComponentRecordServiceUtil.findByCourseRecordId(courseRecordId);
 
-            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.ComponentRecord[returnValue.size()]);
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.ComponentRecordSoap[returnValue.size()]);
         } catch (Exception e) {
             _log.error(e, e);
 

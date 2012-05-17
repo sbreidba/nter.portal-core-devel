@@ -26,6 +26,36 @@ public class GlobalCourseReviewServiceUtil {
      *
      * Never modify this class directly. Add custom service methods to {@link org.nterlearning.datamodel.catalog.service.impl.GlobalCourseReviewServiceImpl} and rerun ServiceBuilder to regenerate this class.
      */
+    public static org.nterlearning.datamodel.catalog.model.GlobalCourseReview findByCourseReviewIri(
+        java.lang.String courseReviewIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchGlobalCourseReviewException {
+        return getService().findByCourseReviewIri(courseReviewIri);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.GlobalCourseReview> findByCourseId(
+        long courseId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByCourseId(courseId);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.GlobalCourseReview> findByCourseIri(
+        java.lang.String courseIri)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByCourseIri(courseIri);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.GlobalCourseReview> findValidByCourseId(
+        long courseId, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findValidByCourseId(courseId, start, end);
+    }
+
+    public static long countValidByCourseId(long courseId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().countValidByCourseId(courseId);
+    }
+
     public static void clearService() {
         _service = null;
     }

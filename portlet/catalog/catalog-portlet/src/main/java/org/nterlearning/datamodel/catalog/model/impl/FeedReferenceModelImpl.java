@@ -1,6 +1,7 @@
 package org.nterlearning.datamodel.catalog.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -14,12 +15,15 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import org.nterlearning.datamodel.catalog.model.FeedReference;
 import org.nterlearning.datamodel.catalog.model.FeedReferenceModel;
+import org.nterlearning.datamodel.catalog.model.FeedReferenceSoap;
 
 import java.io.Serializable;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * The base model implementation for the FeedReference service. Represents a row in the &quot;CATALOG_FeedReference&quot; database table, with each column mapped to a property of this class.
@@ -34,6 +38,7 @@ import java.util.Date;
  * @see org.nterlearning.datamodel.catalog.model.FeedReferenceModel
  * @generated
  */
+@JSON(strict = true)
 public class FeedReferenceModelImpl extends BaseModelImpl<FeedReference>
     implements FeedReferenceModel {
     /*
@@ -126,6 +131,53 @@ public class FeedReferenceModelImpl extends BaseModelImpl<FeedReference>
     public FeedReferenceModelImpl() {
     }
 
+    /**
+     * Converts the soap model instance into a normal model instance.
+     *
+     * @param soapModel the soap model instance to convert
+     * @return the normal model instance
+     */
+    public static FeedReference toModel(FeedReferenceSoap soapModel) {
+        FeedReference model = new FeedReferenceImpl();
+
+        model.setFeedReferenceId(soapModel.getFeedReferenceId());
+        model.setCompanyId(soapModel.getCompanyId());
+        model.setGroupId(soapModel.getGroupId());
+        model.setContentProviderId(soapModel.getContentProviderId());
+        model.setHref(soapModel.getHref());
+        model.setHrefHash(soapModel.getHrefHash());
+        model.setPshb(soapModel.getPshb());
+        model.setPshbSubscribed(soapModel.getPshbSubscribed());
+        model.setFeedIri(soapModel.getFeedIri());
+        model.setFeedType(soapModel.getFeedType());
+        model.setFeedVersion(soapModel.getFeedVersion());
+        model.setTrustworthyWeight(soapModel.getTrustworthyWeight());
+        model.setCreateDate(soapModel.getCreateDate());
+        model.setRemoved(soapModel.getRemoved());
+        model.setRemovedDate(soapModel.getRemovedDate());
+        model.setRemovedReason(soapModel.getRemovedReason());
+        model.setSyncDate(soapModel.getSyncDate());
+        model.setSyncSuccess(soapModel.getSyncSuccess());
+
+        return model;
+    }
+
+    /**
+     * Converts the soap model instances into normal model instances.
+     *
+     * @param soapModels the soap model instances to convert
+     * @return the normal model instances
+     */
+    public static List<FeedReference> toModels(FeedReferenceSoap[] soapModels) {
+        List<FeedReference> models = new ArrayList<FeedReference>(soapModels.length);
+
+        for (FeedReferenceSoap soapModel : soapModels) {
+            models.add(toModel(soapModel));
+        }
+
+        return models;
+    }
+
     public long getPrimaryKey() {
         return _feedReferenceId;
     }
@@ -150,6 +202,7 @@ public class FeedReferenceModelImpl extends BaseModelImpl<FeedReference>
         return FeedReference.class.getName();
     }
 
+    @JSON
     public long getFeedReferenceId() {
         return _feedReferenceId;
     }
@@ -158,6 +211,7 @@ public class FeedReferenceModelImpl extends BaseModelImpl<FeedReference>
         _feedReferenceId = feedReferenceId;
     }
 
+    @JSON
     public long getCompanyId() {
         return _companyId;
     }
@@ -178,6 +232,7 @@ public class FeedReferenceModelImpl extends BaseModelImpl<FeedReference>
         return _originalCompanyId;
     }
 
+    @JSON
     public long getGroupId() {
         return _groupId;
     }
@@ -198,6 +253,7 @@ public class FeedReferenceModelImpl extends BaseModelImpl<FeedReference>
         return _originalGroupId;
     }
 
+    @JSON
     public String getContentProviderId() {
         if (_contentProviderId == null) {
             return StringPool.BLANK;
@@ -220,6 +276,7 @@ public class FeedReferenceModelImpl extends BaseModelImpl<FeedReference>
         return GetterUtil.getString(_originalContentProviderId);
     }
 
+    @JSON
     public String getHref() {
         if (_href == null) {
             return StringPool.BLANK;
@@ -232,6 +289,7 @@ public class FeedReferenceModelImpl extends BaseModelImpl<FeedReference>
         _href = href;
     }
 
+    @JSON
     public String getHrefHash() {
         if (_hrefHash == null) {
             return StringPool.BLANK;
@@ -254,6 +312,7 @@ public class FeedReferenceModelImpl extends BaseModelImpl<FeedReference>
         return GetterUtil.getString(_originalHrefHash);
     }
 
+    @JSON
     public String getPshb() {
         if (_pshb == null) {
             return StringPool.BLANK;
@@ -266,6 +325,7 @@ public class FeedReferenceModelImpl extends BaseModelImpl<FeedReference>
         _pshb = pshb;
     }
 
+    @JSON
     public boolean getPshbSubscribed() {
         return _pshbSubscribed;
     }
@@ -278,6 +338,7 @@ public class FeedReferenceModelImpl extends BaseModelImpl<FeedReference>
         _pshbSubscribed = pshbSubscribed;
     }
 
+    @JSON
     public String getFeedIri() {
         if (_feedIri == null) {
             return StringPool.BLANK;
@@ -300,6 +361,7 @@ public class FeedReferenceModelImpl extends BaseModelImpl<FeedReference>
         return GetterUtil.getString(_originalFeedIri);
     }
 
+    @JSON
     public String getFeedType() {
         if (_feedType == null) {
             return StringPool.BLANK;
@@ -322,6 +384,7 @@ public class FeedReferenceModelImpl extends BaseModelImpl<FeedReference>
         return GetterUtil.getString(_originalFeedType);
     }
 
+    @JSON
     public String getFeedVersion() {
         if (_feedVersion == null) {
             return StringPool.BLANK;
@@ -344,6 +407,7 @@ public class FeedReferenceModelImpl extends BaseModelImpl<FeedReference>
         return GetterUtil.getString(_originalFeedVersion);
     }
 
+    @JSON
     public double getTrustworthyWeight() {
         return _trustworthyWeight;
     }
@@ -352,6 +416,7 @@ public class FeedReferenceModelImpl extends BaseModelImpl<FeedReference>
         _trustworthyWeight = trustworthyWeight;
     }
 
+    @JSON
     public Date getCreateDate() {
         return _createDate;
     }
@@ -360,6 +425,7 @@ public class FeedReferenceModelImpl extends BaseModelImpl<FeedReference>
         _createDate = createDate;
     }
 
+    @JSON
     public boolean getRemoved() {
         return _removed;
     }
@@ -384,6 +450,7 @@ public class FeedReferenceModelImpl extends BaseModelImpl<FeedReference>
         return _originalRemoved;
     }
 
+    @JSON
     public Date getRemovedDate() {
         return _removedDate;
     }
@@ -392,6 +459,7 @@ public class FeedReferenceModelImpl extends BaseModelImpl<FeedReference>
         _removedDate = removedDate;
     }
 
+    @JSON
     public String getRemovedReason() {
         if (_removedReason == null) {
             return StringPool.BLANK;
@@ -404,6 +472,7 @@ public class FeedReferenceModelImpl extends BaseModelImpl<FeedReference>
         _removedReason = removedReason;
     }
 
+    @JSON
     public Date getSyncDate() {
         return _syncDate;
     }
@@ -412,6 +481,7 @@ public class FeedReferenceModelImpl extends BaseModelImpl<FeedReference>
         _syncDate = syncDate;
     }
 
+    @JSON
     public boolean getSyncSuccess() {
         return _syncSuccess;
     }

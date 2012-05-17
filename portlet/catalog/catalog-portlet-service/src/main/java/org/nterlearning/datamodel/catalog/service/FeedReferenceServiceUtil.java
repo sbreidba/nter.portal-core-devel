@@ -26,6 +26,20 @@ public class FeedReferenceServiceUtil {
      *
      * Never modify this class directly. Add custom service methods to {@link org.nterlearning.datamodel.catalog.service.impl.FeedReferenceServiceImpl} and rerun ServiceBuilder to regenerate this class.
      */
+    public static org.nterlearning.datamodel.catalog.model.FeedReference findByFeedIri(
+        java.lang.String feedIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFeedReferenceException {
+        return getService().findByFeedIri(feedIri);
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.FeedReference findByFeedHref(
+        java.lang.String href)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFeedReferenceException {
+        return getService().findByFeedHref(href);
+    }
+
     public static void clearService() {
         _service = null;
     }

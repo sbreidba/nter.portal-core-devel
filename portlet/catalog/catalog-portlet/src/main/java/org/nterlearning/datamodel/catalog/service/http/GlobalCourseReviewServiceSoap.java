@@ -1,5 +1,12 @@
 package org.nterlearning.datamodel.catalog.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import org.nterlearning.datamodel.catalog.service.GlobalCourseReviewServiceUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * <p>
  * This class provides a SOAP utility for the
@@ -44,4 +51,75 @@ package org.nterlearning.datamodel.catalog.service.http;
  * @generated
  */
 public class GlobalCourseReviewServiceSoap {
+    private static Log _log = LogFactoryUtil.getLog(GlobalCourseReviewServiceSoap.class);
+
+    public static org.nterlearning.datamodel.catalog.model.GlobalCourseReviewSoap findByCourseReviewIri(
+        java.lang.String courseReviewIri) throws RemoteException {
+        try {
+            org.nterlearning.datamodel.catalog.model.GlobalCourseReview returnValue =
+                GlobalCourseReviewServiceUtil.findByCourseReviewIri(courseReviewIri);
+
+            return org.nterlearning.datamodel.catalog.model.GlobalCourseReviewSoap.toSoapModel(returnValue);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.GlobalCourseReviewSoap[] findByCourseId(
+        long courseId) throws RemoteException {
+        try {
+            java.util.List<org.nterlearning.datamodel.catalog.model.GlobalCourseReview> returnValue =
+                GlobalCourseReviewServiceUtil.findByCourseId(courseId);
+
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.GlobalCourseReviewSoap[returnValue.size()]);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.GlobalCourseReviewSoap[] findByCourseIri(
+        java.lang.String courseIri) throws RemoteException {
+        try {
+            java.util.List<org.nterlearning.datamodel.catalog.model.GlobalCourseReview> returnValue =
+                GlobalCourseReviewServiceUtil.findByCourseIri(courseIri);
+
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.GlobalCourseReviewSoap[returnValue.size()]);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.GlobalCourseReviewSoap[] findValidByCourseId(
+        long courseId, int start, int end) throws RemoteException {
+        try {
+            java.util.List<org.nterlearning.datamodel.catalog.model.GlobalCourseReview> returnValue =
+                GlobalCourseReviewServiceUtil.findValidByCourseId(courseId,
+                    start, end);
+
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.GlobalCourseReviewSoap[returnValue.size()]);
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
+
+    public static long countValidByCourseId(long courseId)
+        throws RemoteException {
+        try {
+            long returnValue = GlobalCourseReviewServiceUtil.countValidByCourseId(courseId);
+
+            return returnValue;
+        } catch (Exception e) {
+            _log.error(e, e);
+
+            throw new RemoteException(e.getMessage());
+        }
+    }
 }

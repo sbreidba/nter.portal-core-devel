@@ -1,6 +1,7 @@
 package org.nterlearning.datamodel.catalog.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -14,10 +15,14 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import org.nterlearning.datamodel.catalog.model.Courses_Components;
 import org.nterlearning.datamodel.catalog.model.Courses_ComponentsModel;
+import org.nterlearning.datamodel.catalog.model.Courses_ComponentsSoap;
 
 import java.io.Serializable;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The base model implementation for the Courses_Components service. Represents a row in the &quot;CATALOG_Courses_Components&quot; database table, with each column mapped to a property of this class.
@@ -32,6 +37,7 @@ import java.sql.Types;
  * @see org.nterlearning.datamodel.catalog.model.Courses_ComponentsModel
  * @generated
  */
+@JSON(strict = true)
 public class Courses_ComponentsModelImpl extends BaseModelImpl<Courses_Components>
     implements Courses_ComponentsModel {
     /*
@@ -103,6 +109,47 @@ public class Courses_ComponentsModelImpl extends BaseModelImpl<Courses_Component
     public Courses_ComponentsModelImpl() {
     }
 
+    /**
+     * Converts the soap model instance into a normal model instance.
+     *
+     * @param soapModel the soap model instance to convert
+     * @return the normal model instance
+     */
+    public static Courses_Components toModel(Courses_ComponentsSoap soapModel) {
+        Courses_Components model = new Courses_ComponentsImpl();
+
+        model.setCoursesComponentsId(soapModel.getCoursesComponentsId());
+        model.setCourseId(soapModel.getCourseId());
+        model.setCourseIri(soapModel.getCourseIri());
+        model.setComponentId(soapModel.getComponentId());
+        model.setComponentIri(soapModel.getComponentIri());
+        model.setOrderWeight(soapModel.getOrderWeight());
+        model.setSectionType(soapModel.getSectionType());
+        model.setComponentType(soapModel.getComponentType());
+        model.setMimeType(soapModel.getMimeType());
+        model.setCoursePaymentRequired(soapModel.getCoursePaymentRequired());
+        model.setComponentPaymentRequired(soapModel.getComponentPaymentRequired());
+
+        return model;
+    }
+
+    /**
+     * Converts the soap model instances into normal model instances.
+     *
+     * @param soapModels the soap model instances to convert
+     * @return the normal model instances
+     */
+    public static List<Courses_Components> toModels(
+        Courses_ComponentsSoap[] soapModels) {
+        List<Courses_Components> models = new ArrayList<Courses_Components>(soapModels.length);
+
+        for (Courses_ComponentsSoap soapModel : soapModels) {
+            models.add(toModel(soapModel));
+        }
+
+        return models;
+    }
+
     public long getPrimaryKey() {
         return _coursesComponentsId;
     }
@@ -127,6 +174,7 @@ public class Courses_ComponentsModelImpl extends BaseModelImpl<Courses_Component
         return Courses_Components.class.getName();
     }
 
+    @JSON
     public long getCoursesComponentsId() {
         return _coursesComponentsId;
     }
@@ -135,6 +183,7 @@ public class Courses_ComponentsModelImpl extends BaseModelImpl<Courses_Component
         _coursesComponentsId = coursesComponentsId;
     }
 
+    @JSON
     public long getCourseId() {
         return _courseId;
     }
@@ -155,6 +204,7 @@ public class Courses_ComponentsModelImpl extends BaseModelImpl<Courses_Component
         return _originalCourseId;
     }
 
+    @JSON
     public String getCourseIri() {
         if (_courseIri == null) {
             return StringPool.BLANK;
@@ -177,6 +227,7 @@ public class Courses_ComponentsModelImpl extends BaseModelImpl<Courses_Component
         return GetterUtil.getString(_originalCourseIri);
     }
 
+    @JSON
     public long getComponentId() {
         return _componentId;
     }
@@ -197,6 +248,7 @@ public class Courses_ComponentsModelImpl extends BaseModelImpl<Courses_Component
         return _originalComponentId;
     }
 
+    @JSON
     public String getComponentIri() {
         if (_componentIri == null) {
             return StringPool.BLANK;
@@ -219,6 +271,7 @@ public class Courses_ComponentsModelImpl extends BaseModelImpl<Courses_Component
         return GetterUtil.getString(_originalComponentIri);
     }
 
+    @JSON
     public double getOrderWeight() {
         return _orderWeight;
     }
@@ -229,6 +282,7 @@ public class Courses_ComponentsModelImpl extends BaseModelImpl<Courses_Component
         _orderWeight = orderWeight;
     }
 
+    @JSON
     public String getSectionType() {
         if (_sectionType == null) {
             return StringPool.BLANK;
@@ -241,6 +295,7 @@ public class Courses_ComponentsModelImpl extends BaseModelImpl<Courses_Component
         _sectionType = sectionType;
     }
 
+    @JSON
     public String getComponentType() {
         if (_componentType == null) {
             return StringPool.BLANK;
@@ -253,6 +308,7 @@ public class Courses_ComponentsModelImpl extends BaseModelImpl<Courses_Component
         _componentType = componentType;
     }
 
+    @JSON
     public String getMimeType() {
         if (_mimeType == null) {
             return StringPool.BLANK;
@@ -265,6 +321,7 @@ public class Courses_ComponentsModelImpl extends BaseModelImpl<Courses_Component
         _mimeType = mimeType;
     }
 
+    @JSON
     public boolean getCoursePaymentRequired() {
         return _coursePaymentRequired;
     }
@@ -277,6 +334,7 @@ public class Courses_ComponentsModelImpl extends BaseModelImpl<Courses_Component
         _coursePaymentRequired = coursePaymentRequired;
     }
 
+    @JSON
     public boolean getComponentPaymentRequired() {
         return _componentPaymentRequired;
     }

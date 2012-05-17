@@ -53,13 +53,13 @@ import java.rmi.RemoteException;
 public class CourseServiceSoap {
     private static Log _log = LogFactoryUtil.getLog(CourseServiceSoap.class);
 
-    public static org.nterlearning.datamodel.catalog.model.Course[] findAllValidCourses()
+    public static org.nterlearning.datamodel.catalog.model.CourseSoap[] findAllValidCourses()
         throws RemoteException {
         try {
             java.util.List<org.nterlearning.datamodel.catalog.model.Course> returnValue =
                 CourseServiceUtil.findAllValidCourses();
 
-            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.Course[returnValue.size()]);
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.CourseSoap[returnValue.size()]);
         } catch (Exception e) {
             _log.error(e, e);
 
@@ -67,13 +67,13 @@ public class CourseServiceSoap {
         }
     }
 
-    public static org.nterlearning.datamodel.catalog.model.Course[] findAllValidCourses(
+    public static org.nterlearning.datamodel.catalog.model.CourseSoap[] findAllValidCourses(
         int start, int end) throws RemoteException {
         try {
             java.util.List<org.nterlearning.datamodel.catalog.model.Course> returnValue =
                 CourseServiceUtil.findAllValidCourses(start, end);
 
-            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.Course[returnValue.size()]);
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.CourseSoap[returnValue.size()]);
         } catch (Exception e) {
             _log.error(e, e);
 
@@ -107,13 +107,13 @@ public class CourseServiceSoap {
         }
     }
 
-    public static org.nterlearning.datamodel.catalog.model.Course[] findByGroupId(
+    public static org.nterlearning.datamodel.catalog.model.CourseSoap[] findByGroupId(
         long groupId) throws RemoteException {
         try {
             java.util.List<org.nterlearning.datamodel.catalog.model.Course> returnValue =
                 CourseServiceUtil.findByGroupId(groupId);
 
-            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.Course[returnValue.size()]);
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.CourseSoap[returnValue.size()]);
         } catch (Exception e) {
             _log.error(e, e);
 
@@ -121,13 +121,13 @@ public class CourseServiceSoap {
         }
     }
 
-    public static org.nterlearning.datamodel.catalog.model.Course[] findByGroupId(
+    public static org.nterlearning.datamodel.catalog.model.CourseSoap[] findByGroupId(
         long groupId, int start, int end) throws RemoteException {
         try {
             java.util.List<org.nterlearning.datamodel.catalog.model.Course> returnValue =
                 CourseServiceUtil.findByGroupId(groupId, start, end);
 
-            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.Course[returnValue.size()]);
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.CourseSoap[returnValue.size()]);
         } catch (Exception e) {
             _log.error(e, e);
 
@@ -135,13 +135,13 @@ public class CourseServiceSoap {
         }
     }
 
-    public static org.nterlearning.datamodel.catalog.model.Course[] findByCompanyId(
+    public static org.nterlearning.datamodel.catalog.model.CourseSoap[] findByCompanyId(
         long companyId) throws RemoteException {
         try {
             java.util.List<org.nterlearning.datamodel.catalog.model.Course> returnValue =
                 CourseServiceUtil.findByCompanyId(companyId);
 
-            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.Course[returnValue.size()]);
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.CourseSoap[returnValue.size()]);
         } catch (Exception e) {
             _log.error(e, e);
 
@@ -149,13 +149,13 @@ public class CourseServiceSoap {
         }
     }
 
-    public static org.nterlearning.datamodel.catalog.model.Course[] findByCompanyId(
+    public static org.nterlearning.datamodel.catalog.model.CourseSoap[] findByCompanyId(
         long companyId, int start, int end) throws RemoteException {
         try {
             java.util.List<org.nterlearning.datamodel.catalog.model.Course> returnValue =
                 CourseServiceUtil.findByCompanyId(companyId, start, end);
 
-            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.Course[returnValue.size()]);
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.CourseSoap[returnValue.size()]);
         } catch (Exception e) {
             _log.error(e, e);
 
@@ -163,13 +163,13 @@ public class CourseServiceSoap {
         }
     }
 
-    public static org.nterlearning.datamodel.catalog.model.Course[] findByFeedReferenceId(
+    public static org.nterlearning.datamodel.catalog.model.CourseSoap[] findByFeedReferenceId(
         long feedReferenceId) throws RemoteException {
         try {
             java.util.List<org.nterlearning.datamodel.catalog.model.Course> returnValue =
                 CourseServiceUtil.findByFeedReferenceId(feedReferenceId);
 
-            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.Course[returnValue.size()]);
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.CourseSoap[returnValue.size()]);
         } catch (Exception e) {
             _log.error(e, e);
 
@@ -177,13 +177,13 @@ public class CourseServiceSoap {
         }
     }
 
-    public static org.nterlearning.datamodel.catalog.model.Course[] findAllCourses(
+    public static org.nterlearning.datamodel.catalog.model.CourseSoap[] findAllCourses(
         int start, int end) throws RemoteException {
         try {
             java.util.List<org.nterlearning.datamodel.catalog.model.Course> returnValue =
                 CourseServiceUtil.findAllCourses(start, end);
 
-            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.Course[returnValue.size()]);
+            return returnValue.toArray(new org.nterlearning.datamodel.catalog.model.CourseSoap[returnValue.size()]);
         } catch (Exception e) {
             _log.error(e, e);
 

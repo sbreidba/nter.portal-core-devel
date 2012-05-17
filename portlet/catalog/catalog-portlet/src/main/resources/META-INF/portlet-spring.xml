@@ -75,6 +75,10 @@
 	<bean id="org.nterlearning.datamodel.catalog.service.Courses_ComponentsLocalServiceUtil" class="org.nterlearning.datamodel.catalog.service.Courses_ComponentsLocalServiceUtil">
 		<property name="service" ref="org.nterlearning.datamodel.catalog.service.Courses_ComponentsLocalService" />
 	</bean>
+	<bean id="org.nterlearning.datamodel.catalog.service.Courses_ComponentsService" class="org.nterlearning.datamodel.catalog.service.impl.Courses_ComponentsServiceImpl" />
+	<bean id="org.nterlearning.datamodel.catalog.service.Courses_ComponentsServiceUtil" class="org.nterlearning.datamodel.catalog.service.Courses_ComponentsServiceUtil">
+		<property name="service" ref="org.nterlearning.datamodel.catalog.service.Courses_ComponentsService" />
+	</bean>
 	<bean id="org.nterlearning.datamodel.catalog.service.persistence.Courses_ComponentsPersistence" class="org.nterlearning.datamodel.catalog.service.persistence.Courses_ComponentsPersistenceImpl" parent="basePersistence" />
 	<bean id="org.nterlearning.datamodel.catalog.service.ExternalLinkLocalService" class="org.nterlearning.datamodel.catalog.service.impl.ExternalLinkLocalServiceImpl" />
 	<bean id="org.nterlearning.datamodel.catalog.service.ExternalLinkLocalServiceUtil" class="org.nterlearning.datamodel.catalog.service.ExternalLinkLocalServiceUtil">
@@ -84,6 +88,10 @@
 	<bean id="org.nterlearning.datamodel.catalog.service.FeedReferenceLocalService" class="org.nterlearning.datamodel.catalog.service.impl.FeedReferenceLocalServiceImpl" />
 	<bean id="org.nterlearning.datamodel.catalog.service.FeedReferenceLocalServiceUtil" class="org.nterlearning.datamodel.catalog.service.FeedReferenceLocalServiceUtil">
 		<property name="service" ref="org.nterlearning.datamodel.catalog.service.FeedReferenceLocalService" />
+	</bean>
+	<bean id="org.nterlearning.datamodel.catalog.service.FeedReferenceService" class="org.nterlearning.datamodel.catalog.service.impl.FeedReferenceServiceImpl" />
+	<bean id="org.nterlearning.datamodel.catalog.service.FeedReferenceServiceUtil" class="org.nterlearning.datamodel.catalog.service.FeedReferenceServiceUtil">
+		<property name="service" ref="org.nterlearning.datamodel.catalog.service.FeedReferenceService" />
 	</bean>
 	<bean id="org.nterlearning.datamodel.catalog.service.persistence.FeedReferencePersistence" class="org.nterlearning.datamodel.catalog.service.persistence.FeedReferencePersistenceImpl" parent="basePersistence" />
 	<bean id="org.nterlearning.datamodel.catalog.service.FeedSyncHistoryLocalService" class="org.nterlearning.datamodel.catalog.service.impl.FeedSyncHistoryLocalServiceImpl" />

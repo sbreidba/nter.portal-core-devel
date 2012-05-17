@@ -2,8 +2,23 @@
 
 <deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
 	<service name="Plugin_CATALOG_ComponentService" provider="java:RPC" style="rpc" use="encoded">
-		<parameter name="allowedMethods" value="*" />
+		<arrayMapping xmlns:ns="urn:http.service.catalog.datamodel.nterlearning.org" xmlns:cmp-ns="http://model.catalog.datamodel.nterlearning.org" qname="ns:ArrayOf_tns2_ComponentSoap" type="java:org.nterlearning.datamodel.catalog.model.ComponentSoap[]" innerType="cmp-ns:ComponentSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<typeMapping xmlns:ns="http://model.catalog.datamodel.nterlearning.org" qname="ns:ComponentSoap" type="java:org.nterlearning.datamodel.catalog.model.ComponentSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<operation xmlns:operNS="urn:http.service.catalog.datamodel.nterlearning.org" xmlns:rtns="urn:http.service.catalog.datamodel.nterlearning.org" xmlns:tns2="http://model.catalog.datamodel.nterlearning.org" name="findByCompanyId" qname="operNS:findByCompanyId" returnQName="findByCompanyIdReturn" returnType="rtns:ArrayOf_tns2_ComponentSoap" returnItemType="tns2:ComponentSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.catalog.datamodel.nterlearning.org" xmlns:rtns="http://model.catalog.datamodel.nterlearning.org" name="findByComponentId" qname="operNS:findByComponentId" returnQName="findByComponentIdReturn" returnType="rtns:ComponentSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="componentId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.catalog.datamodel.nterlearning.org" xmlns:rtns="http://model.catalog.datamodel.nterlearning.org" name="findByComponentIri" qname="operNS:findByComponentIri" returnQName="findByComponentIriReturn" returnType="rtns:ComponentSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="componentIri" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.catalog.datamodel.nterlearning.org" xmlns:rtns="urn:http.service.catalog.datamodel.nterlearning.org" xmlns:tns2="http://model.catalog.datamodel.nterlearning.org" name="findByFeedReferenceId" qname="operNS:findByFeedReferenceId" returnQName="findByFeedReferenceIdReturn" returnType="rtns:ArrayOf_tns2_ComponentSoap" returnItemType="tns2:ComponentSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="feedRefId" type="tns:long"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="findByCompanyId findByComponentId findByComponentIri findByFeedReferenceId" />
 		<parameter name="className" value="org.nterlearning.datamodel.catalog.service.http.ComponentServiceSoap" />
+		<parameter name="schemaUnqualified" value="http://model.catalog.datamodel.nterlearning.org,urn:http.service.catalog.datamodel.nterlearning.org" />
 		<parameter name="typeMappingVersion" value="1.2" />
 		<parameter name="wsdlPortType" value="ComponentServiceSoap" />
 		<parameter name="wsdlServiceElement" value="ComponentServiceSoapService" />

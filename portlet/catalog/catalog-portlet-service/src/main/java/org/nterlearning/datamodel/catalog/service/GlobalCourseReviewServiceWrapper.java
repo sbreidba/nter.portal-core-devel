@@ -21,6 +21,37 @@ public class GlobalCourseReviewServiceWrapper
         _globalCourseReviewService = globalCourseReviewService;
     }
 
+    public org.nterlearning.datamodel.catalog.model.GlobalCourseReview findByCourseReviewIri(
+        java.lang.String courseReviewIri)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchGlobalCourseReviewException {
+        return _globalCourseReviewService.findByCourseReviewIri(courseReviewIri);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.GlobalCourseReview> findByCourseId(
+        long courseId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _globalCourseReviewService.findByCourseId(courseId);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.GlobalCourseReview> findByCourseIri(
+        java.lang.String courseIri)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _globalCourseReviewService.findByCourseIri(courseIri);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.GlobalCourseReview> findValidByCourseId(
+        long courseId, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _globalCourseReviewService.findValidByCourseId(courseId, start,
+            end);
+    }
+
+    public long countValidByCourseId(long courseId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _globalCourseReviewService.countValidByCourseId(courseId);
+    }
+
     /**
      * @deprecated Renamed to {@link #getWrappedService}
      */

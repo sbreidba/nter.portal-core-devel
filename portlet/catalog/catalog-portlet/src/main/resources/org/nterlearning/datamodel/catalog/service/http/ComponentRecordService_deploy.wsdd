@@ -2,8 +2,17 @@
 
 <deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
 	<service name="Plugin_CATALOG_ComponentRecordService" provider="java:RPC" style="rpc" use="encoded">
-		<parameter name="allowedMethods" value="*" />
+		<arrayMapping xmlns:ns="urn:http.service.catalog.datamodel.nterlearning.org" xmlns:cmp-ns="http://model.catalog.datamodel.nterlearning.org" qname="ns:ArrayOf_tns2_ComponentRecordSoap" type="java:org.nterlearning.datamodel.catalog.model.ComponentRecordSoap[]" innerType="cmp-ns:ComponentRecordSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<typeMapping xmlns:ns="http://model.catalog.datamodel.nterlearning.org" qname="ns:ComponentRecordSoap" type="java:org.nterlearning.datamodel.catalog.model.ComponentRecordSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<operation xmlns:operNS="urn:http.service.catalog.datamodel.nterlearning.org" xmlns:rtns="urn:http.service.catalog.datamodel.nterlearning.org" xmlns:tns2="http://model.catalog.datamodel.nterlearning.org" name="findByComponentIri" qname="operNS:findByComponentIri" returnQName="findByComponentIriReturn" returnType="rtns:ArrayOf_tns2_ComponentRecordSoap" returnItemType="tns2:ComponentRecordSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="componentIri" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.catalog.datamodel.nterlearning.org" xmlns:rtns="urn:http.service.catalog.datamodel.nterlearning.org" xmlns:tns2="http://model.catalog.datamodel.nterlearning.org" name="findByCourseRecordId" qname="operNS:findByCourseRecordId" returnQName="findByCourseRecordIdReturn" returnType="rtns:ArrayOf_tns2_ComponentRecordSoap" returnItemType="tns2:ComponentRecordSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="courseRecordId" type="tns:long"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="findByComponentIri findByCourseRecordId" />
 		<parameter name="className" value="org.nterlearning.datamodel.catalog.service.http.ComponentRecordServiceSoap" />
+		<parameter name="schemaUnqualified" value="http://model.catalog.datamodel.nterlearning.org,urn:http.service.catalog.datamodel.nterlearning.org" />
 		<parameter name="typeMappingVersion" value="1.2" />
 		<parameter name="wsdlPortType" value="ComponentRecordServiceSoap" />
 		<parameter name="wsdlServiceElement" value="ComponentRecordServiceSoapService" />
