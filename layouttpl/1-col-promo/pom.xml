@@ -30,7 +30,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>nter-1-col-promo-layouttpl</artifactId>
-    <version>1.0.0</version>
+    <version>6.1.0</version>
     <packaging>war</packaging>
     <name>1-col-promo Layout Template</name>
 
