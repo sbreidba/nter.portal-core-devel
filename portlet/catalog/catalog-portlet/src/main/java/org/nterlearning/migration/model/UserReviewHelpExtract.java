@@ -38,7 +38,7 @@ public class UserReviewHelpExtract {
         return voteSsoValue;
     }
     public void setVoteSsoValue(String newValue) {
-        voteEmailAddress = newValue;
+        voteSsoValue = newValue;
     }
 
     public String getVoteMapperType() {
