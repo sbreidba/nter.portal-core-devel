@@ -31,3 +31,6 @@ This file allows you to override and define new Velocity variables.
 #* configure services *#
 #set ($groupService = $serviceLocator.findService("com.liferay.portal.service.GroupService"))
 #set ($guestGroup = $groupService.getGroup($company_id, "Guest"))
+
+#* override yui theme in init.vm *#
+#set ($css_class = $css_class.replaceAll("yui3-skin-sam", ""))
