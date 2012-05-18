@@ -28,16 +28,8 @@
     </parent>
 
 	<artifactId>nter-nter-theme</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
 	<packaging>war</packaging>
 	<name>NTER Theme</name>
-
-    <scm>
-        <connection>scm:hg:http://code.google.com/p/nter.portal-core-devel/</connection>
-        <developerConnection>scm:hg:https://code.google.com/p/nter.portal-core-devel/</developerConnection>
-        <tag>tip</tag>
-        <url>http://code.google.com/p/nter/source/checkout?repo=portal-core-devel</url>
-    </scm>
 
 	<dependencies>
         <dependency>
