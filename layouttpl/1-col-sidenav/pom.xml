@@ -30,6 +30,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.nterlearning</groupId>
     <artifactId>nter-1-col-sidenav-layouttpl</artifactId>
+    <version>1.0.0</version>
     <packaging>war</packaging>
     <name>1-col-sidenav Layout Template</name>
 
