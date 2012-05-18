@@ -32,6 +32,13 @@
     <packaging>war</packaging>
     <name>Shibboleth SSO Portlet</name>
 
+    <scm>
+        <connection>scm:hg:http://code.google.com/p/nter.portal-core-devel/</connection>
+        <developerConnection>scm:hg:https://code.google.com/p/nter.portal-core-devel/</developerConnection>
+        <tag>tip</tag>
+        <url>http://code.google.com/p/nter/source/checkout?repo=portal-core-devel</url>
+    </scm>
+
     <dependencies>
         <dependency>
             <groupId>com.liferay.portal</groupId>
