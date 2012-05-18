@@ -449,37 +449,41 @@ public class MigrationPortlet extends MVCPortlet {
 
             for (UserReviewHelpExtract userItem : userReviewHelpList) {
                 // extract values from list
-                String ssoValue = userItem.getSsoValue();
-                String mapperType = userItem.getMapperType();
-                String emailAddress = userItem.getEmailAddress();
+                String voteSsoValue = userItem.getVoteSsoValue();
+                String voteMapperType = userItem.getVoteMapperType();
+                String reviewSsoValue = userItem.getReviewSsoValue();
+                String reviewMapperType = userItem.getReviewMapperType();
                 String courseIri = userItem.getCourseIri();
                 long score = userItem.getScore();
 
-                // Find user based on the UserIdMapper assignment
-                long userId = findUserFromExternalId(mapperType, ssoValue);
+                // Find vote user based on the UserIdMapper assignment
+                long voteUserId = findUserFromExternalId(voteMapperType, voteSsoValue);
+                // Find review user based on the UserIdMapper assignment
+                long reviewUserId = findUserFromExternalId(reviewMapperType, reviewSsoValue);
 
                 // Find course based on courseIri assignment
                 long courseId = findCourseFromIri(courseIri);
 
-                // When user, course, and review exist, migrate the extracted review helpful/not helpful
-                if (userId != 0 && courseId != 0) {
+                // When all users, course, and review exist, migrate the extracted review helpful/not helpful
+                if (voteUserId != 0 && reviewUserId != 0 && courseId != 0) {
                     List<CourseReview> courseReviewList;
                     RatingsEntry ratingsEntry;
                     try {
-                        courseReviewList = CourseReviewLocalServiceUtil.findByCourseIdWithUserId(userId, courseId);
+                        courseReviewList = CourseReviewLocalServiceUtil.findByCourseIdWithUserId(reviewUserId, courseId);
                         if (courseReviewList.size() == 0) {
-                            mLog.warn("Review not found for CourseIri: " + courseIri + " UserId: " + ssoValue);
+                            mLog.warn("Review not found for CourseIri: " + courseIri + " UserId: " + reviewSsoValue);
                         }
                         for (CourseReview courseReview : courseReviewList) {
                             ServiceContext serviceContext = ServiceContextFactory.getInstance(
                                     RatingsEntryLocalServiceUtil.class.getName(), request);
 
-                            RatingsEntryLocalServiceUtil.updateEntry(userId, CourseReview.class.getName(), courseReview.getPrimaryKey(), score, serviceContext);
-                            mLog.info("User Helpful Score added for CourseIri: " + courseIri + " UserId: " + ssoValue);
+                            RatingsEntryLocalServiceUtil.updateEntry(voteUserId, CourseReview.class.getName(), courseReview.getPrimaryKey(), score, serviceContext);
+                            mLog.info("User Helpful Score added for CourseIri: " + courseIri + " Vote UserId: " + voteSsoValue);
                         }
                     } catch (Exception e) {
-                        // review does not exist
-                        mLog.warn("Could not find user " + ssoValue + " review for course " + courseIri);
+
+                        mLog.warn("Could not find load vote for user " + voteSsoValue +
+                                " review for course " + courseIri + " reviewed by " + reviewSsoValue);
                     }
                 }
             }
@@ -568,7 +572,7 @@ public class MigrationPortlet extends MVCPortlet {
             long parentCategoryId = categoryItem.getParentCategoryId();
             String name = categoryItem.getName();
             String description = categoryItem.getDescription();
-            String displayStyle = "";    //not in v6.0.6 schema
+            String displayStyle = categoryItem.getDisplayStyle();
             Date createDate = categoryItem.getCreateDate();
             Date modifiedDate = categoryItem.getModifiedDate();
             Date lastPostDate = categoryItem.getLastPostDate();
@@ -595,7 +599,14 @@ public class MigrationPortlet extends MVCPortlet {
             // Verify this category has not previously been migrated.
             boolean categoryFound = migratedMBCategory(name, description);
 
-            if (!categoryFound) {
+            if (categoryFound) {
+                if (parentFlag && parentCategoryId == 0) {
+                    mLog.warn("Message Board Category '" + name + "' already exists and was not re-created.");
+                } else if (!parentFlag && parentCategoryId !=0) {
+                    mLog.warn("Message Board Category '" + name + "' already exists and was not re-created.");
+                }
+
+            } else {
                 // Find user based on the UserIdMapper assignment
                 long userId = findUserFromExternalId(mapperType, ssoValue);
 
@@ -691,7 +702,6 @@ public class MigrationPortlet extends MVCPortlet {
         for (MBCategory existingCategory : existingCategories) {
             if (name.equals(existingCategory.getName()) && description.equals(existingCategory.getDescription())) {
                 categoryFound = true;
-                mLog.warn("Message Board Category '" + name + "' already exists and was not re-created.");
                 break;
             }
         }
@@ -802,20 +812,19 @@ public class MigrationPortlet extends MVCPortlet {
                     new ArrayList<ObjectValuePair<String, InputStream>>(5);
 
             long companyId = PortalUtil.getDefaultCompanyId();
-            long groupId = GroupLocalServiceUtil.getCompanyGroup(companyId).getGroupId();
+            long groupId = GroupLocalServiceUtil.getGroup(companyId,GroupConstants.GUEST).getGroupId();
 
             // Verify this message has not previously been migrated.
             boolean messageFound = migratedMBMessage(subject, body);
 
-            if (!messageFound) {
-                // Find user based on the UserIdMapper assignment
-                long userId = findUserFromExternalId(mapperType, ssoValue);
-
-                // Insert as guest user if user not valid in new schema
-                if (userId == 0) {
-                    userId = UserLocalServiceUtil.getDefaultUser(companyId).getUserId();
-                    mLog.warn("Inserting message as guest user");
+            if (messageFound) {
+                if (rootFlag && parentMessageId == 0) {
+                    mLog.warn("Message Board message '" + subject + "' already exists and was not re-created.");
+                } else if (!rootFlag && parentMessageId !=0) {
+                    mLog.warn("Message Board message '" + subject + "' already exists and was not re-created.");
                 }
+
+            } else {
 
                 // Obtain category.
                 long category = determineMBCategory(name, description);
@@ -825,6 +834,15 @@ public class MigrationPortlet extends MVCPortlet {
                 MBMessage mbMessage;
                 try {
                     if (rootFlag && parentMessageId == 0) {
+                        // Find user based on the UserIdMapper assignment
+                        long userId = findUserFromExternalId(mapperType, ssoValue);
+
+                        // Insert as guest user if user not valid in new schema
+                        if (userId == 0) {
+                            userId = UserLocalServiceUtil.getDefaultUser(companyId).getUserId();
+                            mLog.warn("Inserting message as guest user");
+                        }
+
                         // Create MB root messages
                         mbMessage = MBMessageLocalServiceUtil.addMessage(userId, userName, groupId,
                                 category, subject, body, format, inputStreamOVPs, anonymous,
@@ -860,6 +878,15 @@ public class MigrationPortlet extends MVCPortlet {
                         // maintain the map
 
                         if (parentMessageId != 0) {
+
+                            // Find user based on the UserIdMapper assignment
+                            long userId = findUserFromExternalId(mapperType, ssoValue);
+
+                            // Insert as guest user if user not valid in new schema
+                            if (userId == 0) {
+                                userId = UserLocalServiceUtil.getDefaultUser(companyId).getUserId();
+                                mLog.warn("Inserting message as guest user");
+                            }
 
                             // find parent message in map and create new message
                             for (MbMessageMap newMapItem : messageMapList) {
@@ -912,7 +939,6 @@ public class MigrationPortlet extends MVCPortlet {
         for (MBMessage existingMessage : existingMessages) {
             if (subject.equals(existingMessage.getSubject()) && body.equals(existingMessage.getBody())) {
                 messageFound = true;
-                mLog.warn("Message Board Message: '" + subject + " 'already exists and was not re-created.");
                 break;
             }
         }
@@ -1014,7 +1040,13 @@ public class MigrationPortlet extends MVCPortlet {
                 userEntry.setFirstName(dataValue[5]);
                 userEntry.setMiddleName(dataValue[6]);
                 userEntry.setLastName(dataValue[7]);
+                // hardwire fix for user Rune with incorrect UTF-8 last name
+                if (userEntry.getFirstName() .equals("Rune") &&
+                        userEntry.getEmailAddress() .equals("rune.sortun@kaefer.no")) {
+                    userEntry.setLastName("S" + "\u00F8" + "rtun");
+                }
                 userEntry.setJobTitle(dataValue[8]);
+
                 storeValues.add(userEntry);
             }
         } catch (FileNotFoundException e) {
@@ -1040,6 +1072,7 @@ public class MigrationPortlet extends MVCPortlet {
                 userEntry.setMapperType(dataValue[1]);
                 userEntry.setEmailAddress(dataValue[2]);
                 userEntry.setFriendlyUrl(dataValue[3]);
+
                 storeValues.add(userEntry);
             }
         } catch (FileNotFoundException e) {
@@ -1065,6 +1098,7 @@ public class MigrationPortlet extends MVCPortlet {
                 userEntry.setMapperType(dataValue[1]);
                 userEntry.setEmailAddress(dataValue[2]);
                 userEntry.setOrgName(dataValue[3]);
+
                 storeValues.add(userEntry);
             }
         } catch (FileNotFoundException e) {
@@ -1090,6 +1124,7 @@ public class MigrationPortlet extends MVCPortlet {
                 userEntry.setMapperType(dataValue[1]);
                 userEntry.setEmailAddress(dataValue[2]);
                 userEntry.setRoleName(dataValue[3]);
+
                 storeValues.add(userEntry);
             }
         } catch (FileNotFoundException e) {
@@ -1137,6 +1172,7 @@ public class MigrationPortlet extends MVCPortlet {
                 if (dataValue[10].length() == 19) {
                     userEntry.setRemovedDate(new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dataValue[10]));
                 }
+
                 storeValues.add(userEntry);
             }
         } catch (FileNotFoundException e) {
@@ -1158,11 +1194,15 @@ public class MigrationPortlet extends MVCPortlet {
             while ((line = bufferedReader.readLine()) != null) {
                 String dataValue[] = line.split("\t");
                 UserReviewHelpExtract userEntry = new UserReviewHelpExtract();
-                userEntry.setSsoValue(dataValue[0]);
-                userEntry.setMapperType(dataValue[1]);
-                userEntry.setEmailAddress(dataValue[2]);
-                userEntry.setCourseIri(dataValue[3]);
-                userEntry.setScore(Long.valueOf(dataValue[4]));
+                userEntry.setVoteSsoValue(dataValue[0]);
+                userEntry.setVoteMapperType(dataValue[1]);
+                userEntry.setVoteEmailAddress(dataValue[2]);
+                userEntry.setReviewSsoValue(dataValue[3]);
+                userEntry.setReviewMapperType(dataValue[4]);
+                userEntry.setReviewEmailAddress(dataValue[5]);
+                userEntry.setCourseIri(dataValue[6]);
+                userEntry.setScore(Long.valueOf(dataValue[7]));
+
                 storeValues.add(userEntry);
             }
         } catch (FileNotFoundException e) {
@@ -1238,6 +1278,9 @@ public class MigrationPortlet extends MVCPortlet {
                 } else {
                     categoryEntry.setMailingListActive(false);
                 }
+                //new attribute in lrv61
+                categoryEntry.setDisplayStyle("default");
+
                 storeValues.add(categoryEntry);
             }
         } catch (FileNotFoundException e) {
@@ -1305,6 +1348,7 @@ public class MigrationPortlet extends MVCPortlet {
                 } else {
                     messageEntry.setAllowPingbacks(false);
                 }
+
                 storeValues.add(messageEntry);
             }
         } catch (FileNotFoundException e) {
