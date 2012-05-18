@@ -25,31 +25,55 @@ package org.nterlearning.migration.model;
  */
 public class UserReviewHelpExtract {
 
-    private String ssoValue;
-    private String mapperType;
-    private String emailAddress;
+    private String voteSsoValue;
+    private String voteMapperType;
+    private String voteEmailAddress;
+    private String reviewSsoValue;
+    private String reviewMapperType;
+    private String reviewEmailAddress;
     private String courseIri;
     private long score;
 
-    public String getSsoValue() {
-        return ssoValue;
+    public String getVoteSsoValue() {
+        return voteSsoValue;
     }
-    public void setSsoValue(String newValue) {
-        ssoValue = newValue;
-    }
-
-    public String getMapperType() {
-        return mapperType;
-    }
-    public void setMapperType(String newValue) {
-        mapperType = newValue;
+    public void setVoteSsoValue(String newValue) {
+        voteEmailAddress = newValue;
     }
 
-    public String getEmailAddress() {
-        return emailAddress;
+    public String getVoteMapperType() {
+        return voteMapperType;
     }
-    public void setEmailAddress(String newValue) {
-        emailAddress = newValue;
+    public void setVoteMapperType(String newValue) {
+        voteMapperType = newValue;
+    }
+
+    public String getVoteEmailAddress() {
+        return voteEmailAddress;
+    }
+    public void setVoteEmailAddress(String newValue) {
+        voteEmailAddress = newValue;
+    }
+
+    public String getReviewSsoValue() {
+        return reviewSsoValue;
+    }
+    public void setReviewSsoValue(String newValue) {
+        reviewSsoValue = newValue;
+    }
+
+    public String getReviewMapperType() {
+        return reviewMapperType;
+    }
+    public void setReviewMapperType(String newValue) {
+        reviewMapperType = newValue;
+    }
+
+    public String getReviewEmailAddress() {
+        return reviewEmailAddress;
+    }
+    public void setReviewEmailAddress(String newValue) {
+        reviewEmailAddress = newValue;
     }
 
     public String getCourseIri() {
