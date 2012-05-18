@@ -1,6 +1,7 @@
 package org.nterlearning.datamodel.catalog.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
@@ -15,12 +16,15 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import org.nterlearning.datamodel.catalog.model.ComponentRecord;
 import org.nterlearning.datamodel.catalog.model.ComponentRecordModel;
+import org.nterlearning.datamodel.catalog.model.ComponentRecordSoap;
 
 import java.io.Serializable;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * The base model implementation for the ComponentRecord service. Represents a row in the &quot;CATALOG_ComponentRecord&quot; database table, with each column mapped to a property of this class.
@@ -35,6 +39,7 @@ import java.util.Date;
  * @see org.nterlearning.datamodel.catalog.model.ComponentRecordModel
  * @generated
  */
+@JSON(strict = true)
 public class ComponentRecordModelImpl extends BaseModelImpl<ComponentRecord>
     implements ComponentRecordModel {
     /*
@@ -91,6 +96,42 @@ public class ComponentRecordModelImpl extends BaseModelImpl<ComponentRecord>
     public ComponentRecordModelImpl() {
     }
 
+    /**
+     * Converts the soap model instance into a normal model instance.
+     *
+     * @param soapModel the soap model instance to convert
+     * @return the normal model instance
+     */
+    public static ComponentRecord toModel(ComponentRecordSoap soapModel) {
+        ComponentRecord model = new ComponentRecordImpl();
+
+        model.setComponentRecordId(soapModel.getComponentRecordId());
+        model.setCourseRecordId(soapModel.getCourseRecordId());
+        model.setComponentIri(soapModel.getComponentIri());
+        model.setUpdatedDate(soapModel.getUpdatedDate());
+        model.setCompletionStatus(soapModel.getCompletionStatus());
+        model.setCompletionPercent(soapModel.getCompletionPercent());
+
+        return model;
+    }
+
+    /**
+     * Converts the soap model instances into normal model instances.
+     *
+     * @param soapModels the soap model instances to convert
+     * @return the normal model instances
+     */
+    public static List<ComponentRecord> toModels(
+        ComponentRecordSoap[] soapModels) {
+        List<ComponentRecord> models = new ArrayList<ComponentRecord>(soapModels.length);
+
+        for (ComponentRecordSoap soapModel : soapModels) {
+            models.add(toModel(soapModel));
+        }
+
+        return models;
+    }
+
     public long getPrimaryKey() {
         return _componentRecordId;
     }
@@ -115,6 +156,7 @@ public class ComponentRecordModelImpl extends BaseModelImpl<ComponentRecord>
         return ComponentRecord.class.getName();
     }
 
+    @JSON
     public long getComponentRecordId() {
         return _componentRecordId;
     }
@@ -123,6 +165,7 @@ public class ComponentRecordModelImpl extends BaseModelImpl<ComponentRecord>
         _componentRecordId = componentRecordId;
     }
 
+    @JSON
     public long getCourseRecordId() {
         return _courseRecordId;
     }
@@ -143,6 +186,7 @@ public class ComponentRecordModelImpl extends BaseModelImpl<ComponentRecord>
         return _originalCourseRecordId;
     }
 
+    @JSON
     public String getComponentIri() {
         if (_componentIri == null) {
             return StringPool.BLANK;
@@ -165,6 +209,7 @@ public class ComponentRecordModelImpl extends BaseModelImpl<ComponentRecord>
         return GetterUtil.getString(_originalComponentIri);
     }
 
+    @JSON
     public Date getUpdatedDate() {
         return _updatedDate;
     }
@@ -175,6 +220,7 @@ public class ComponentRecordModelImpl extends BaseModelImpl<ComponentRecord>
         _updatedDate = updatedDate;
     }
 
+    @JSON
     public String getCompletionStatus() {
         if (_completionStatus == null) {
             return StringPool.BLANK;
@@ -187,6 +233,7 @@ public class ComponentRecordModelImpl extends BaseModelImpl<ComponentRecord>
         _completionStatus = completionStatus;
     }
 
+    @JSON
     public Integer getCompletionPercent() {
         return _completionPercent;
     }

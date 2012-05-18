@@ -42,20 +42,28 @@ import com.liferay.portlet.asset.service.persistence.AssetEntryPersistence;
 import org.nterlearning.datamodel.catalog.model.FlagReport;
 import org.nterlearning.datamodel.catalog.service.ComponentLocalService;
 import org.nterlearning.datamodel.catalog.service.ComponentRecordLocalService;
+import org.nterlearning.datamodel.catalog.service.ComponentRecordService;
+import org.nterlearning.datamodel.catalog.service.ComponentService;
 import org.nterlearning.datamodel.catalog.service.ContributorLocalService;
 import org.nterlearning.datamodel.catalog.service.CourseImageLocalService;
 import org.nterlearning.datamodel.catalog.service.CourseLocalService;
 import org.nterlearning.datamodel.catalog.service.CourseRecordLocalService;
+import org.nterlearning.datamodel.catalog.service.CourseRecordService;
 import org.nterlearning.datamodel.catalog.service.CourseRelatedLocalService;
 import org.nterlearning.datamodel.catalog.service.CourseRequirementLocalService;
 import org.nterlearning.datamodel.catalog.service.CourseReviewLocalService;
+import org.nterlearning.datamodel.catalog.service.CourseReviewService;
+import org.nterlearning.datamodel.catalog.service.CourseService;
 import org.nterlearning.datamodel.catalog.service.Courses_ComponentsLocalService;
+import org.nterlearning.datamodel.catalog.service.Courses_ComponentsService;
 import org.nterlearning.datamodel.catalog.service.ExternalLinkLocalService;
 import org.nterlearning.datamodel.catalog.service.FeedReferenceLocalService;
+import org.nterlearning.datamodel.catalog.service.FeedReferenceService;
 import org.nterlearning.datamodel.catalog.service.FeedSyncHistoryLocalService;
 import org.nterlearning.datamodel.catalog.service.FlagReportLocalService;
 import org.nterlearning.datamodel.catalog.service.FlagReportStatsLocalService;
 import org.nterlearning.datamodel.catalog.service.GlobalCourseReviewLocalService;
+import org.nterlearning.datamodel.catalog.service.GlobalCourseReviewService;
 import org.nterlearning.datamodel.catalog.service.persistence.ComponentFinder;
 import org.nterlearning.datamodel.catalog.service.persistence.ComponentPersistence;
 import org.nterlearning.datamodel.catalog.service.persistence.ComponentRecordFinder;
@@ -103,12 +111,16 @@ public abstract class FlagReportLocalServiceBaseImpl
     private static Log _log = LogFactoryUtil.getLog(FlagReportLocalServiceBaseImpl.class);
     @BeanReference(type = ComponentLocalService.class)
     protected ComponentLocalService componentLocalService;
+    @BeanReference(type = ComponentService.class)
+    protected ComponentService componentService;
     @BeanReference(type = ComponentPersistence.class)
     protected ComponentPersistence componentPersistence;
     @BeanReference(type = ComponentFinder.class)
     protected ComponentFinder componentFinder;
     @BeanReference(type = ComponentRecordLocalService.class)
     protected ComponentRecordLocalService componentRecordLocalService;
+    @BeanReference(type = ComponentRecordService.class)
+    protected ComponentRecordService componentRecordService;
     @BeanReference(type = ComponentRecordPersistence.class)
     protected ComponentRecordPersistence componentRecordPersistence;
     @BeanReference(type = ComponentRecordFinder.class)
@@ -119,6 +131,8 @@ public abstract class FlagReportLocalServiceBaseImpl
     protected ContributorPersistence contributorPersistence;
     @BeanReference(type = CourseLocalService.class)
     protected CourseLocalService courseLocalService;
+    @BeanReference(type = CourseService.class)
+    protected CourseService courseService;
     @BeanReference(type = CoursePersistence.class)
     protected CoursePersistence coursePersistence;
     @BeanReference(type = CourseFinder.class)
@@ -129,6 +143,8 @@ public abstract class FlagReportLocalServiceBaseImpl
     protected CourseImagePersistence courseImagePersistence;
     @BeanReference(type = CourseRecordLocalService.class)
     protected CourseRecordLocalService courseRecordLocalService;
+    @BeanReference(type = CourseRecordService.class)
+    protected CourseRecordService courseRecordService;
     @BeanReference(type = CourseRecordPersistence.class)
     protected CourseRecordPersistence courseRecordPersistence;
     @BeanReference(type = CourseRecordFinder.class)
@@ -143,12 +159,16 @@ public abstract class FlagReportLocalServiceBaseImpl
     protected CourseRequirementPersistence courseRequirementPersistence;
     @BeanReference(type = CourseReviewLocalService.class)
     protected CourseReviewLocalService courseReviewLocalService;
+    @BeanReference(type = CourseReviewService.class)
+    protected CourseReviewService courseReviewService;
     @BeanReference(type = CourseReviewPersistence.class)
     protected CourseReviewPersistence courseReviewPersistence;
     @BeanReference(type = CourseReviewFinder.class)
     protected CourseReviewFinder courseReviewFinder;
     @BeanReference(type = Courses_ComponentsLocalService.class)
     protected Courses_ComponentsLocalService courses_ComponentsLocalService;
+    @BeanReference(type = Courses_ComponentsService.class)
+    protected Courses_ComponentsService courses_ComponentsService;
     @BeanReference(type = Courses_ComponentsPersistence.class)
     protected Courses_ComponentsPersistence courses_ComponentsPersistence;
     @BeanReference(type = ExternalLinkLocalService.class)
@@ -157,6 +177,8 @@ public abstract class FlagReportLocalServiceBaseImpl
     protected ExternalLinkPersistence externalLinkPersistence;
     @BeanReference(type = FeedReferenceLocalService.class)
     protected FeedReferenceLocalService feedReferenceLocalService;
+    @BeanReference(type = FeedReferenceService.class)
+    protected FeedReferenceService feedReferenceService;
     @BeanReference(type = FeedReferencePersistence.class)
     protected FeedReferencePersistence feedReferencePersistence;
     @BeanReference(type = FeedSyncHistoryLocalService.class)
@@ -175,6 +197,8 @@ public abstract class FlagReportLocalServiceBaseImpl
     protected FlagReportStatsPersistence flagReportStatsPersistence;
     @BeanReference(type = GlobalCourseReviewLocalService.class)
     protected GlobalCourseReviewLocalService globalCourseReviewLocalService;
+    @BeanReference(type = GlobalCourseReviewService.class)
+    protected GlobalCourseReviewService globalCourseReviewService;
     @BeanReference(type = GlobalCourseReviewPersistence.class)
     protected GlobalCourseReviewPersistence globalCourseReviewPersistence;
     @BeanReference(type = GlobalCourseReviewFinder.class)
@@ -505,6 +529,24 @@ public abstract class FlagReportLocalServiceBaseImpl
     }
 
     /**
+     * Returns the component remote service.
+     *
+     * @return the component remote service
+     */
+    public ComponentService getComponentService() {
+        return componentService;
+    }
+
+    /**
+     * Sets the component remote service.
+     *
+     * @param componentService the component remote service
+     */
+    public void setComponentService(ComponentService componentService) {
+        this.componentService = componentService;
+    }
+
+    /**
      * Returns the component persistence.
      *
      * @return the component persistence
@@ -558,6 +600,25 @@ public abstract class FlagReportLocalServiceBaseImpl
     public void setComponentRecordLocalService(
         ComponentRecordLocalService componentRecordLocalService) {
         this.componentRecordLocalService = componentRecordLocalService;
+    }
+
+    /**
+     * Returns the component record remote service.
+     *
+     * @return the component record remote service
+     */
+    public ComponentRecordService getComponentRecordService() {
+        return componentRecordService;
+    }
+
+    /**
+     * Sets the component record remote service.
+     *
+     * @param componentRecordService the component record remote service
+     */
+    public void setComponentRecordService(
+        ComponentRecordService componentRecordService) {
+        this.componentRecordService = componentRecordService;
     }
 
     /**
@@ -655,6 +716,24 @@ public abstract class FlagReportLocalServiceBaseImpl
     }
 
     /**
+     * Returns the course remote service.
+     *
+     * @return the course remote service
+     */
+    public CourseService getCourseService() {
+        return courseService;
+    }
+
+    /**
+     * Sets the course remote service.
+     *
+     * @param courseService the course remote service
+     */
+    public void setCourseService(CourseService courseService) {
+        this.courseService = courseService;
+    }
+
+    /**
      * Returns the course persistence.
      *
      * @return the course persistence
@@ -745,6 +824,24 @@ public abstract class FlagReportLocalServiceBaseImpl
     public void setCourseRecordLocalService(
         CourseRecordLocalService courseRecordLocalService) {
         this.courseRecordLocalService = courseRecordLocalService;
+    }
+
+    /**
+     * Returns the course record remote service.
+     *
+     * @return the course record remote service
+     */
+    public CourseRecordService getCourseRecordService() {
+        return courseRecordService;
+    }
+
+    /**
+     * Sets the course record remote service.
+     *
+     * @param courseRecordService the course record remote service
+     */
+    public void setCourseRecordService(CourseRecordService courseRecordService) {
+        this.courseRecordService = courseRecordService;
     }
 
     /**
@@ -880,6 +977,24 @@ public abstract class FlagReportLocalServiceBaseImpl
     }
 
     /**
+     * Returns the course review remote service.
+     *
+     * @return the course review remote service
+     */
+    public CourseReviewService getCourseReviewService() {
+        return courseReviewService;
+    }
+
+    /**
+     * Sets the course review remote service.
+     *
+     * @param courseReviewService the course review remote service
+     */
+    public void setCourseReviewService(CourseReviewService courseReviewService) {
+        this.courseReviewService = courseReviewService;
+    }
+
+    /**
      * Returns the course review persistence.
      *
      * @return the course review persistence
@@ -933,6 +1048,25 @@ public abstract class FlagReportLocalServiceBaseImpl
     public void setCourses_ComponentsLocalService(
         Courses_ComponentsLocalService courses_ComponentsLocalService) {
         this.courses_ComponentsLocalService = courses_ComponentsLocalService;
+    }
+
+    /**
+     * Returns the courses_ components remote service.
+     *
+     * @return the courses_ components remote service
+     */
+    public Courses_ComponentsService getCourses_ComponentsService() {
+        return courses_ComponentsService;
+    }
+
+    /**
+     * Sets the courses_ components remote service.
+     *
+     * @param courses_ComponentsService the courses_ components remote service
+     */
+    public void setCourses_ComponentsService(
+        Courses_ComponentsService courses_ComponentsService) {
+        this.courses_ComponentsService = courses_ComponentsService;
     }
 
     /**
@@ -1009,6 +1143,25 @@ public abstract class FlagReportLocalServiceBaseImpl
     public void setFeedReferenceLocalService(
         FeedReferenceLocalService feedReferenceLocalService) {
         this.feedReferenceLocalService = feedReferenceLocalService;
+    }
+
+    /**
+     * Returns the feed reference remote service.
+     *
+     * @return the feed reference remote service
+     */
+    public FeedReferenceService getFeedReferenceService() {
+        return feedReferenceService;
+    }
+
+    /**
+     * Sets the feed reference remote service.
+     *
+     * @param feedReferenceService the feed reference remote service
+     */
+    public void setFeedReferenceService(
+        FeedReferenceService feedReferenceService) {
+        this.feedReferenceService = feedReferenceService;
     }
 
     /**
@@ -1179,6 +1332,25 @@ public abstract class FlagReportLocalServiceBaseImpl
     public void setGlobalCourseReviewLocalService(
         GlobalCourseReviewLocalService globalCourseReviewLocalService) {
         this.globalCourseReviewLocalService = globalCourseReviewLocalService;
+    }
+
+    /**
+     * Returns the global course review remote service.
+     *
+     * @return the global course review remote service
+     */
+    public GlobalCourseReviewService getGlobalCourseReviewService() {
+        return globalCourseReviewService;
+    }
+
+    /**
+     * Sets the global course review remote service.
+     *
+     * @param globalCourseReviewService the global course review remote service
+     */
+    public void setGlobalCourseReviewService(
+        GlobalCourseReviewService globalCourseReviewService) {
+        this.globalCourseReviewService = globalCourseReviewService;
     }
 
     /**

@@ -225,10 +225,6 @@
 
                 <aui:button-row>
                     <aui:button type="submit" class="submit primaryAction" value="submit"/>
-                    <%
-                    String backURL = ParamUtil.getString(request, "redirect", "location.href='';");
-                    %>
-                    <aui:button type="cancel" class="button secondaryAction cancel" onClick="<%=backURL %>" />
                 </aui:button-row>
             </aui:fieldset>
     </aui:form>
@@ -237,9 +233,5 @@
     <%
     } // if statement moderate action only if new flag reports
     %>
-<aui:button-row>
-    <%
-        String backURL = ParamUtil.getString(request, "redirect", "location.href='';");
-    %>
-    <aui:button name="returnButton" type="button" value="flag-return-to-report-view" last="true" onClick="<%=backURL %>"/>
-</aui:button-row>
+
+<a class="back-link" href="<%= ParamUtil.getString(request, "redirect") %>"><%= LanguageUtil.get(pageContext, "flag-return-to-report-view") %></a>

@@ -21,12 +21,15 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import org.nterlearning.datamodel.catalog.model.Course;
 import org.nterlearning.datamodel.catalog.model.CourseModel;
+import org.nterlearning.datamodel.catalog.model.CourseSoap;
 
 import java.io.Serializable;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -43,6 +46,7 @@ import java.util.Map;
  * @see org.nterlearning.datamodel.catalog.model.CourseModel
  * @generated
  */
+@JSON(strict = true)
 public class CourseModelImpl extends BaseModelImpl<Course>
     implements CourseModel {
     /*
@@ -186,6 +190,75 @@ public class CourseModelImpl extends BaseModelImpl<Course>
     public CourseModelImpl() {
     }
 
+    /**
+     * Converts the soap model instance into a normal model instance.
+     *
+     * @param soapModel the soap model instance to convert
+     * @return the normal model instance
+     */
+    public static Course toModel(CourseSoap soapModel) {
+        Course model = new CourseImpl();
+
+        model.setCourseId(soapModel.getCourseId());
+        model.setCompanyId(soapModel.getCompanyId());
+        model.setGroupId(soapModel.getGroupId());
+        model.setUserId(soapModel.getUserId());
+        model.setFeedReferenceId(soapModel.getFeedReferenceId());
+        model.setHref(soapModel.getHref());
+        model.setFullTextHref(soapModel.getFullTextHref());
+        model.setCourseIri(soapModel.getCourseIri());
+        model.setUpdatedDate(soapModel.getUpdatedDate());
+        model.setTitle(soapModel.getTitle());
+        model.setTranscriptAbstract(soapModel.getTranscriptAbstract());
+        model.setDescription(soapModel.getDescription());
+        model.setKeywords(soapModel.getKeywords());
+        model.setCopyright(soapModel.getCopyright());
+        model.setRatingLevel(soapModel.getRatingLevel());
+        model.setRatingReason(soapModel.getRatingReason());
+        model.setDuration(soapModel.getDuration());
+        model.setDurationStandard(soapModel.getDurationStandard());
+        model.setFeaturedStatus(soapModel.getFeaturedStatus());
+        model.setPopularWeight(soapModel.getPopularWeight());
+        model.setAccessCount(soapModel.getAccessCount());
+        model.setCompletedCount(soapModel.getCompletedCount());
+        model.setCreateDate(soapModel.getCreateDate());
+        model.setRemoved(soapModel.getRemoved());
+        model.setRemovedDate(soapModel.getRemovedDate());
+        model.setSupersedesCourseIri(soapModel.getSupersedesCourseIri());
+        model.setSupersededByCourseIri(soapModel.getSupersededByCourseIri());
+        model.setReleaseOnDate(soapModel.getReleaseOnDate());
+        model.setAcceptUntilDate(soapModel.getAcceptUntilDate());
+        model.setVersion(soapModel.getVersion());
+        model.setVersionDate(soapModel.getVersionDate());
+        model.setPrice(soapModel.getPrice());
+        model.setPriceUnit(soapModel.getPriceUnit());
+        model.setPriceTerms(soapModel.getPriceTerms());
+        model.setPriceExpiration(soapModel.getPriceExpiration());
+        model.setOneStarRateCount(soapModel.getOneStarRateCount());
+        model.setTwoStarRateCount(soapModel.getTwoStarRateCount());
+        model.setThreeStarRateCount(soapModel.getThreeStarRateCount());
+        model.setFourStarRateCount(soapModel.getFourStarRateCount());
+        model.setFiveStarRateCount(soapModel.getFiveStarRateCount());
+
+        return model;
+    }
+
+    /**
+     * Converts the soap model instances into normal model instances.
+     *
+     * @param soapModels the soap model instances to convert
+     * @return the normal model instances
+     */
+    public static List<Course> toModels(CourseSoap[] soapModels) {
+        List<Course> models = new ArrayList<Course>(soapModels.length);
+
+        for (CourseSoap soapModel : soapModels) {
+            models.add(toModel(soapModel));
+        }
+
+        return models;
+    }
+
     public long getPrimaryKey() {
         return _courseId;
     }
@@ -210,6 +283,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         return Course.class.getName();
     }
 
+    @JSON
     public long getCourseId() {
         return _courseId;
     }
@@ -230,6 +304,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         return _originalCourseId;
     }
 
+    @JSON
     public long getCompanyId() {
         return _companyId;
     }
@@ -250,6 +325,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         return _originalCompanyId;
     }
 
+    @JSON
     public long getGroupId() {
         return _groupId;
     }
@@ -270,6 +346,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         return _originalGroupId;
     }
 
+    @JSON
     public long getUserId() {
         return _userId;
     }
@@ -286,6 +363,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _userUuid = userUuid;
     }
 
+    @JSON
     public long getFeedReferenceId() {
         return _feedReferenceId;
     }
@@ -306,6 +384,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         return _originalFeedReferenceId;
     }
 
+    @JSON
     public String getHref() {
         if (_href == null) {
             return StringPool.BLANK;
@@ -318,6 +397,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _href = href;
     }
 
+    @JSON
     public String getFullTextHref() {
         if (_fullTextHref == null) {
             return StringPool.BLANK;
@@ -330,6 +410,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _fullTextHref = fullTextHref;
     }
 
+    @JSON
     public String getCourseIri() {
         if (_courseIri == null) {
             return StringPool.BLANK;
@@ -352,6 +433,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         return GetterUtil.getString(_originalCourseIri);
     }
 
+    @JSON
     public Date getUpdatedDate() {
         return _updatedDate;
     }
@@ -360,6 +442,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _updatedDate = updatedDate;
     }
 
+    @JSON
     public String getTitle() {
         if (_title == null) {
             return StringPool.BLANK;
@@ -447,6 +530,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         }
     }
 
+    @JSON
     public String getTranscriptAbstract() {
         if (_transcriptAbstract == null) {
             return StringPool.BLANK;
@@ -540,6 +624,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         }
     }
 
+    @JSON
     public String getDescription() {
         if (_description == null) {
             return StringPool.BLANK;
@@ -630,6 +715,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         }
     }
 
+    @JSON
     public String getKeywords() {
         if (_keywords == null) {
             return StringPool.BLANK;
@@ -718,6 +804,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         }
     }
 
+    @JSON
     public String getCopyright() {
         if (_copyright == null) {
             return StringPool.BLANK;
@@ -807,6 +894,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         }
     }
 
+    @JSON
     public String getRatingLevel() {
         if (_ratingLevel == null) {
             return StringPool.BLANK;
@@ -897,6 +985,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         }
     }
 
+    @JSON
     public String getRatingReason() {
         if (_ratingReason == null) {
             return StringPool.BLANK;
@@ -987,6 +1076,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         }
     }
 
+    @JSON
     public String getDuration() {
         if (_duration == null) {
             return StringPool.BLANK;
@@ -999,6 +1089,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _duration = duration;
     }
 
+    @JSON
     public String getDurationStandard() {
         if (_durationStandard == null) {
             return StringPool.BLANK;
@@ -1011,6 +1102,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _durationStandard = durationStandard;
     }
 
+    @JSON
     public double getFeaturedStatus() {
         return _featuredStatus;
     }
@@ -1021,6 +1113,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _featuredStatus = featuredStatus;
     }
 
+    @JSON
     public double getPopularWeight() {
         return _popularWeight;
     }
@@ -1029,6 +1122,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _popularWeight = popularWeight;
     }
 
+    @JSON
     public long getAccessCount() {
         return _accessCount;
     }
@@ -1037,6 +1131,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _accessCount = accessCount;
     }
 
+    @JSON
     public long getCompletedCount() {
         return _completedCount;
     }
@@ -1045,6 +1140,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _completedCount = completedCount;
     }
 
+    @JSON
     public Date getCreateDate() {
         return _createDate;
     }
@@ -1053,6 +1149,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _createDate = createDate;
     }
 
+    @JSON
     public boolean getRemoved() {
         return _removed;
     }
@@ -1065,6 +1162,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _removed = removed;
     }
 
+    @JSON
     public Date getRemovedDate() {
         return _removedDate;
     }
@@ -1073,6 +1171,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _removedDate = removedDate;
     }
 
+    @JSON
     public String getSupersedesCourseIri() {
         if (_supersedesCourseIri == null) {
             return StringPool.BLANK;
@@ -1085,6 +1184,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _supersedesCourseIri = supersedesCourseIri;
     }
 
+    @JSON
     public String getSupersededByCourseIri() {
         if (_supersededByCourseIri == null) {
             return StringPool.BLANK;
@@ -1107,6 +1207,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         return GetterUtil.getString(_originalSupersededByCourseIri);
     }
 
+    @JSON
     public Date getReleaseOnDate() {
         return _releaseOnDate;
     }
@@ -1115,6 +1216,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _releaseOnDate = releaseOnDate;
     }
 
+    @JSON
     public Date getAcceptUntilDate() {
         return _acceptUntilDate;
     }
@@ -1123,6 +1225,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _acceptUntilDate = acceptUntilDate;
     }
 
+    @JSON
     public String getVersion() {
         if (_version == null) {
             return StringPool.BLANK;
@@ -1135,6 +1238,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _version = version;
     }
 
+    @JSON
     public Date getVersionDate() {
         return _versionDate;
     }
@@ -1143,6 +1247,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _versionDate = versionDate;
     }
 
+    @JSON
     public double getPrice() {
         return _price;
     }
@@ -1151,6 +1256,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _price = price;
     }
 
+    @JSON
     public String getPriceUnit() {
         if (_priceUnit == null) {
             return StringPool.BLANK;
@@ -1163,6 +1269,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _priceUnit = priceUnit;
     }
 
+    @JSON
     public String getPriceTerms() {
         if (_priceTerms == null) {
             return StringPool.BLANK;
@@ -1175,6 +1282,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _priceTerms = priceTerms;
     }
 
+    @JSON
     public String getPriceExpiration() {
         if (_priceExpiration == null) {
             return StringPool.BLANK;
@@ -1187,6 +1295,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _priceExpiration = priceExpiration;
     }
 
+    @JSON
     public long getOneStarRateCount() {
         return _oneStarRateCount;
     }
@@ -1195,6 +1304,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _oneStarRateCount = oneStarRateCount;
     }
 
+    @JSON
     public long getTwoStarRateCount() {
         return _twoStarRateCount;
     }
@@ -1203,6 +1313,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _twoStarRateCount = twoStarRateCount;
     }
 
+    @JSON
     public long getThreeStarRateCount() {
         return _threeStarRateCount;
     }
@@ -1211,6 +1322,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _threeStarRateCount = threeStarRateCount;
     }
 
+    @JSON
     public long getFourStarRateCount() {
         return _fourStarRateCount;
     }
@@ -1219,6 +1331,7 @@ public class CourseModelImpl extends BaseModelImpl<Course>
         _fourStarRateCount = fourStarRateCount;
     }
 
+    @JSON
     public long getFiveStarRateCount() {
         return _fiveStarRateCount;
     }

@@ -56,7 +56,7 @@
                         <configuration>
                             <webappBaseDir>${basedir}/../catalog-portlet</webappBaseDir>
                             <pluginType>portlet</pluginType>
-                            <autoDeployDir/> <!-- not used for deploy -->
+                            <autoDeployDir/>
                         </configuration>
 
                         <executions>

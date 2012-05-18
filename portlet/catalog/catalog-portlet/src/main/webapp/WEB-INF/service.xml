@@ -86,7 +86,7 @@
 
     <!-- *** Define Feed entities *** -->
     <entity name="FeedReference" local-service="true"
-            remote-service="false">
+            remote-service="true">
         <!-- Data Dictionary -->
         <!-- Table: CATALOG_FeedReference contains metadata about atom feeders. -->
         <!-- Col: feedReferenceId: (mandatory) The unique identifier of a provider. -->
@@ -209,7 +209,7 @@
 
     <!--  *** Define Course and Component related entities *** -->
 
-    <entity name="Course" local-service="true" remote-service="false">
+    <entity name="Course" local-service="true" remote-service="true">
         <!-- Data Dictionary -->
         <!-- Table: CATALOG_Course contains metadata about the course content. -->
         <!-- Col: courseId: (mandatory) The unique identifier for a course. -->
@@ -464,7 +464,7 @@
         </finder>
     </entity>
 
-    <entity name="Component" local-service="true" remote-service="false">
+    <entity name="Component" local-service="true" remote-service="true">
         <!-- Data Dictionary -->
         <!-- Table: CATALOG_Component contains metadata about the component content. -->
         <!-- Col: componentId: (mandatory) The unique identifier of a component entry. -->
@@ -545,7 +545,7 @@
         </finder>
     </entity>
 
-    <entity name="Courses_Components" local-service="true" remote-service="false">
+    <entity name="Courses_Components" local-service="true" remote-service="true">
         <!-- Data Dictionary -->
         <!-- Table: CATALOG_Courses_Components contains links between a course and its components. -->
         <!-- Col: coursesComponentsId: (mandatory) The unique identifier for a course and component mapping entry. -->
@@ -681,7 +681,7 @@
 
     <!-- *** Define local and global Course Review entities *** -->
 
-    <entity name="CourseReview" local-service="true" remote-service="false">
+    <entity name="CourseReview" local-service="true" remote-service="true">
         <!-- Data Dictionary -->
         <!-- Table: CATALOG_CourseReview contains a course review. It will be entered into the AssetEntry and the RatingsEntry. -->
         <!-- Col: courseReviewId: (mandatory) The unique identifier for a course review and supplemental ratings entry. -->
@@ -750,7 +750,7 @@
                    entity="RatingsStats"/>
     </entity>
 
-    <entity name="GlobalCourseReview" local-service="true" remote-service="false">
+    <entity name="GlobalCourseReview" local-service="true" remote-service="true">
         <!-- Data Dictionary -->
         <!-- Table: CATALOG_GlobalCourseReview contains a global course review. -->
         <!-- Col: globalCourseReviewId: (mandatory) The unique identifier for a supplemental
@@ -829,7 +829,7 @@
 
     <!-- *** Define Student Progress related entities *** -->
 
-    <entity name="CourseRecord" local-service="true" remote-service="false">
+    <entity name="CourseRecord" local-service="true" remote-service="true">
         <!-- Data Dictionary -->
         <!-- Table: CATALOG_CourseRecord contains the overall course status and assessment
             material for a person. -->
@@ -895,7 +895,7 @@
         </finder>
     </entity>
 
-    <entity name="ComponentRecord" local-service="true" remote-service="false">
+    <entity name="ComponentRecord" local-service="true" remote-service="true">
         <!-- Data Dictionary -->
         <!-- Table: CATALOG_ComponentRecord contains the course component status and assessment
             material for a person. -->
