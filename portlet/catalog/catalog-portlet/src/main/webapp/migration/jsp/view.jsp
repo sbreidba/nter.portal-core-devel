@@ -39,6 +39,9 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 <portlet:actionURL name="processMigrateUserReviewImport" var="processMigrateUserReviewImport" />
 <portlet:actionURL name="processMigrateReviewHelpImport" var="processMigrateReviewHelpImport" />
 <portlet:actionURL name="processUpdateReviewWeightedScore" var="processUpdateReviewWeightedScore" />
+<portlet:actionURL name="processMigrateMBCategoryImport" var="processMigrateMBCategoryImport" />
+<portlet:actionURL name="processMigrateMBThreadImport" var="processMigrateMBThreadImport" />
+<portlet:actionURL name="processMigrateMBMessageImport" var="processMigrateMBMessageImport" />
 <%
     PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -82,6 +85,28 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 	<aui:fieldset>
 		<aui:button-row>
 			<aui:button type="submit" value="migrate-review-update-weight-score" />
+		</aui:button-row>
+	</aui:fieldset>
+</aui:form>
+
+<div class="separator"></div>
+<h3 class="course-feed-title"><%= LanguageUtil.get(pageContext, "migrate-mb-category-heading") %></h3>
+<p><%= LanguageUtil.get(pageContext, "migrate-mb-category-label") %></p>
+<aui:form action="<%= processMigrateMBCategoryImport %>" method="post">
+	<aui:fieldset>
+		<aui:button-row>
+			<aui:button type="submit" value="migrate-mb-category" />
+		</aui:button-row>
+	</aui:fieldset>
+</aui:form>
+
+<div class="separator"></div>
+<h3 class="course-feed-title"><%= LanguageUtil.get(pageContext, "migrate-mb-message-heading") %></h3>
+<p><%= LanguageUtil.get(pageContext, "migrate-mb-message-label") %></p>
+<aui:form action="<%= processMigrateMBMessageImport %>" method="post">
+	<aui:fieldset>
+		<aui:button-row>
+			<aui:button type="submit" value="migrate-mb-message" />
 		</aui:button-row>
 	</aui:fieldset>
 </aui:form>
