@@ -257,6 +257,12 @@ public class ComponentRecordLocalServiceUtil {
         return getService().findByComponentIri(componentIri);
     }
 
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord> findByCourseRecordId(
+        long courseRecordId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByCourseRecordId(courseRecordId);
+    }
+
     public static java.util.List<java.lang.Object[]> findByCourseRecordIdUserIdLanguageFilterSorted(
         long courseRecordId, long userId, java.util.Locale locale,
         java.lang.String filterType, java.lang.String sortType, boolean asc,

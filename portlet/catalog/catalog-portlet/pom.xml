@@ -43,6 +43,55 @@
 		</plugins>
 	</build>
 
+    <profiles>
+        <profile>
+            <id>build-wsdd</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>com.liferay.maven.plugins</groupId>
+                        <artifactId>liferay-maven-plugin</artifactId>
+                        <version>${liferay.version}</version>
+                        <dependencies>
+                            <dependency>
+                                <groupId>org.apache.jackrabbit</groupId>
+                                <artifactId>jackrabbit-core</artifactId>
+                                <version>2.1.2</version>
+                                <exclusions>
+                                    <exclusion>
+                                        <groupId>org.slf4j</groupId>
+                                        <artifactId>jcl-over-slf4j</artifactId>
+                                    </exclusion>
+                                </exclusions>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.nterlearning</groupId>
+                                <artifactId>nter-catalog-portlet-service</artifactId>
+                                <version>${project.version}</version>
+                                <scope>compile</scope>
+                            </dependency>
+                        </dependencies>
+
+                        <configuration>
+                            <webappBaseDir>${basedir}</webappBaseDir>
+                            <pluginType>portlet</pluginType>
+                            <autoDeployDir/>
+                        </configuration>
+
+                        <executions>
+                            <execution>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>build-wsdd</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.nterlearning</groupId>
@@ -330,7 +379,7 @@
         <dependency>
             <groupId>org.nterlearning</groupId>
             <artifactId>registry-proxy</artifactId>
-            <version>1.1.0-SNAPSHOT</version>
+            <version>1.1.1</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

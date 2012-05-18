@@ -1,6 +1,7 @@
 package org.nterlearning.datamodel.catalog.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
@@ -15,12 +16,15 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import org.nterlearning.datamodel.catalog.model.GlobalCourseReview;
 import org.nterlearning.datamodel.catalog.model.GlobalCourseReviewModel;
+import org.nterlearning.datamodel.catalog.model.GlobalCourseReviewSoap;
 
 import java.io.Serializable;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * The base model implementation for the GlobalCourseReview service. Represents a row in the &quot;CATALOG_GlobalCourseReview&quot; database table, with each column mapped to a property of this class.
@@ -35,6 +39,7 @@ import java.util.Date;
  * @see org.nterlearning.datamodel.catalog.model.GlobalCourseReviewModel
  * @generated
  */
+@JSON(strict = true)
 public class GlobalCourseReviewModelImpl extends BaseModelImpl<GlobalCourseReview>
     implements GlobalCourseReviewModel {
     /*
@@ -127,6 +132,56 @@ public class GlobalCourseReviewModelImpl extends BaseModelImpl<GlobalCourseRevie
     public GlobalCourseReviewModelImpl() {
     }
 
+    /**
+     * Converts the soap model instance into a normal model instance.
+     *
+     * @param soapModel the soap model instance to convert
+     * @return the normal model instance
+     */
+    public static GlobalCourseReview toModel(GlobalCourseReviewSoap soapModel) {
+        GlobalCourseReview model = new GlobalCourseReviewImpl();
+
+        model.setGlobalCourseReviewId(soapModel.getGlobalCourseReviewId());
+        model.setCompanyId(soapModel.getCompanyId());
+        model.setGroupId(soapModel.getGroupId());
+        model.setCourseReviewIri(soapModel.getCourseReviewIri());
+        model.setUpdatedDate(soapModel.getUpdatedDate());
+        model.setCourseIri(soapModel.getCourseIri());
+        model.setHref(soapModel.getHref());
+        model.setNterInstance(soapModel.getNterInstance());
+        model.setCourseId(soapModel.getCourseId());
+        model.setUserDisplayName(soapModel.getUserDisplayName());
+        model.setSingleSignOnValue(soapModel.getSingleSignOnValue());
+        model.setSummary(soapModel.getSummary());
+        model.setContent(soapModel.getContent());
+        model.setCreateDate(soapModel.getCreateDate());
+        model.setModifiedDate(soapModel.getModifiedDate());
+        model.setStarScore(soapModel.getStarScore());
+        model.setFromTrustedReviewer(soapModel.getFromTrustedReviewer());
+        model.setRemoved(soapModel.getRemoved());
+        model.setRemovedDate(soapModel.getRemovedDate());
+        model.setIsHidden(soapModel.getIsHidden());
+
+        return model;
+    }
+
+    /**
+     * Converts the soap model instances into normal model instances.
+     *
+     * @param soapModels the soap model instances to convert
+     * @return the normal model instances
+     */
+    public static List<GlobalCourseReview> toModels(
+        GlobalCourseReviewSoap[] soapModels) {
+        List<GlobalCourseReview> models = new ArrayList<GlobalCourseReview>(soapModels.length);
+
+        for (GlobalCourseReviewSoap soapModel : soapModels) {
+            models.add(toModel(soapModel));
+        }
+
+        return models;
+    }
+
     public long getPrimaryKey() {
         return _globalCourseReviewId;
     }
@@ -151,6 +206,7 @@ public class GlobalCourseReviewModelImpl extends BaseModelImpl<GlobalCourseRevie
         return GlobalCourseReview.class.getName();
     }
 
+    @JSON
     public long getGlobalCourseReviewId() {
         return _globalCourseReviewId;
     }
@@ -159,6 +215,7 @@ public class GlobalCourseReviewModelImpl extends BaseModelImpl<GlobalCourseRevie
         _globalCourseReviewId = globalCourseReviewId;
     }
 
+    @JSON
     public long getCompanyId() {
         return _companyId;
     }
@@ -179,6 +236,7 @@ public class GlobalCourseReviewModelImpl extends BaseModelImpl<GlobalCourseRevie
         return _originalCompanyId;
     }
 
+    @JSON
     public long getGroupId() {
         return _groupId;
     }
@@ -199,6 +257,7 @@ public class GlobalCourseReviewModelImpl extends BaseModelImpl<GlobalCourseRevie
         return _originalGroupId;
     }
 
+    @JSON
     public String getCourseReviewIri() {
         if (_courseReviewIri == null) {
             return StringPool.BLANK;
@@ -221,6 +280,7 @@ public class GlobalCourseReviewModelImpl extends BaseModelImpl<GlobalCourseRevie
         return GetterUtil.getString(_originalCourseReviewIri);
     }
 
+    @JSON
     public Date getUpdatedDate() {
         return _updatedDate;
     }
@@ -229,6 +289,7 @@ public class GlobalCourseReviewModelImpl extends BaseModelImpl<GlobalCourseRevie
         _updatedDate = updatedDate;
     }
 
+    @JSON
     public String getCourseIri() {
         if (_courseIri == null) {
             return StringPool.BLANK;
@@ -251,6 +312,7 @@ public class GlobalCourseReviewModelImpl extends BaseModelImpl<GlobalCourseRevie
         return GetterUtil.getString(_originalCourseIri);
     }
 
+    @JSON
     public String getHref() {
         if (_href == null) {
             return StringPool.BLANK;
@@ -263,6 +325,7 @@ public class GlobalCourseReviewModelImpl extends BaseModelImpl<GlobalCourseRevie
         _href = href;
     }
 
+    @JSON
     public String getNterInstance() {
         if (_nterInstance == null) {
             return StringPool.BLANK;
@@ -275,6 +338,7 @@ public class GlobalCourseReviewModelImpl extends BaseModelImpl<GlobalCourseRevie
         _nterInstance = nterInstance;
     }
 
+    @JSON
     public long getCourseId() {
         return _courseId;
     }
@@ -295,6 +359,7 @@ public class GlobalCourseReviewModelImpl extends BaseModelImpl<GlobalCourseRevie
         return _originalCourseId;
     }
 
+    @JSON
     public String getUserDisplayName() {
         if (_userDisplayName == null) {
             return StringPool.BLANK;
@@ -307,6 +372,7 @@ public class GlobalCourseReviewModelImpl extends BaseModelImpl<GlobalCourseRevie
         _userDisplayName = userDisplayName;
     }
 
+    @JSON
     public String getSingleSignOnValue() {
         if (_singleSignOnValue == null) {
             return StringPool.BLANK;
@@ -319,6 +385,7 @@ public class GlobalCourseReviewModelImpl extends BaseModelImpl<GlobalCourseRevie
         _singleSignOnValue = singleSignOnValue;
     }
 
+    @JSON
     public String getSummary() {
         if (_summary == null) {
             return StringPool.BLANK;
@@ -331,6 +398,7 @@ public class GlobalCourseReviewModelImpl extends BaseModelImpl<GlobalCourseRevie
         _summary = summary;
     }
 
+    @JSON
     public String getContent() {
         if (_content == null) {
             return StringPool.BLANK;
@@ -343,6 +411,7 @@ public class GlobalCourseReviewModelImpl extends BaseModelImpl<GlobalCourseRevie
         _content = content;
     }
 
+    @JSON
     public Date getCreateDate() {
         return _createDate;
     }
@@ -351,6 +420,7 @@ public class GlobalCourseReviewModelImpl extends BaseModelImpl<GlobalCourseRevie
         _createDate = createDate;
     }
 
+    @JSON
     public Date getModifiedDate() {
         return _modifiedDate;
     }
@@ -361,6 +431,7 @@ public class GlobalCourseReviewModelImpl extends BaseModelImpl<GlobalCourseRevie
         _modifiedDate = modifiedDate;
     }
 
+    @JSON
     public double getStarScore() {
         return _starScore;
     }
@@ -371,6 +442,7 @@ public class GlobalCourseReviewModelImpl extends BaseModelImpl<GlobalCourseRevie
         _starScore = starScore;
     }
 
+    @JSON
     public boolean getFromTrustedReviewer() {
         return _fromTrustedReviewer;
     }
@@ -385,6 +457,7 @@ public class GlobalCourseReviewModelImpl extends BaseModelImpl<GlobalCourseRevie
         _fromTrustedReviewer = fromTrustedReviewer;
     }
 
+    @JSON
     public boolean getRemoved() {
         return _removed;
     }
@@ -397,6 +470,7 @@ public class GlobalCourseReviewModelImpl extends BaseModelImpl<GlobalCourseRevie
         _removed = removed;
     }
 
+    @JSON
     public Date getRemovedDate() {
         return _removedDate;
     }
@@ -405,6 +479,7 @@ public class GlobalCourseReviewModelImpl extends BaseModelImpl<GlobalCourseRevie
         _removedDate = removedDate;
     }
 
+    @JSON
     public boolean getIsHidden() {
         return _isHidden;
     }

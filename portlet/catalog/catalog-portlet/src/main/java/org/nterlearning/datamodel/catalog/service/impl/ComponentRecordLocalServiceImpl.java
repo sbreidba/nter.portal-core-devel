@@ -62,6 +62,12 @@ public class ComponentRecordLocalServiceImpl
     }
 
 
+    public List<ComponentRecord> findByCourseRecordId(long courseRecordId)
+            throws SystemException {
+        return componentRecordPersistence.findByCourseRecordId(courseRecordId);
+    }
+
+
     public List<Object[]> findByCourseRecordIdUserIdLanguageFilterSorted(
             long courseRecordId, long userId, Locale locale, String filterType,
             String sortType, boolean asc, int start, int end)

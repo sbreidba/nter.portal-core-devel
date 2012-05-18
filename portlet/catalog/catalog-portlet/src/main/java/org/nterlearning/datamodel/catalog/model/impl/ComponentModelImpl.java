@@ -19,12 +19,15 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import org.nterlearning.datamodel.catalog.model.Component;
 import org.nterlearning.datamodel.catalog.model.ComponentModel;
+import org.nterlearning.datamodel.catalog.model.ComponentSoap;
 
 import java.io.Serializable;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
@@ -41,6 +44,7 @@ import java.util.Map;
  * @see org.nterlearning.datamodel.catalog.model.ComponentModel
  * @generated
  */
+@JSON(strict = true)
 public class ComponentModelImpl extends BaseModelImpl<Component>
     implements ComponentModel {
     /*
@@ -136,6 +140,58 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
     public ComponentModelImpl() {
     }
 
+    /**
+     * Converts the soap model instance into a normal model instance.
+     *
+     * @param soapModel the soap model instance to convert
+     * @return the normal model instance
+     */
+    public static Component toModel(ComponentSoap soapModel) {
+        Component model = new ComponentImpl();
+
+        model.setComponentId(soapModel.getComponentId());
+        model.setCompanyId(soapModel.getCompanyId());
+        model.setGroupId(soapModel.getGroupId());
+        model.setFeedReferenceId(soapModel.getFeedReferenceId());
+        model.setComponentIri(soapModel.getComponentIri());
+        model.setUpdatedDate(soapModel.getUpdatedDate());
+        model.setLanguage(soapModel.getLanguage());
+        model.setHref(soapModel.getHref());
+        model.setFullTextHref(soapModel.getFullTextHref());
+        model.setTitle(soapModel.getTitle());
+        model.setDescription(soapModel.getDescription());
+        model.setCopyright(soapModel.getCopyright());
+        model.setDisplayWidth(soapModel.getDisplayWidth());
+        model.setDisplayHeight(soapModel.getDisplayHeight());
+        model.setCreateDate(soapModel.getCreateDate());
+        model.setRemoved(soapModel.getRemoved());
+        model.setRemovedDate(soapModel.getRemovedDate());
+        model.setVersion(soapModel.getVersion());
+        model.setVersionDate(soapModel.getVersionDate());
+        model.setPrice(soapModel.getPrice());
+        model.setPriceUnit(soapModel.getPriceUnit());
+        model.setPriceTerms(soapModel.getPriceTerms());
+        model.setPriceExpiration(soapModel.getPriceExpiration());
+
+        return model;
+    }
+
+    /**
+     * Converts the soap model instances into normal model instances.
+     *
+     * @param soapModels the soap model instances to convert
+     * @return the normal model instances
+     */
+    public static List<Component> toModels(ComponentSoap[] soapModels) {
+        List<Component> models = new ArrayList<Component>(soapModels.length);
+
+        for (ComponentSoap soapModel : soapModels) {
+            models.add(toModel(soapModel));
+        }
+
+        return models;
+    }
+
     public long getPrimaryKey() {
         return _componentId;
     }
@@ -160,6 +216,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
         return Component.class.getName();
     }
 
+    @JSON
     public long getComponentId() {
         return _componentId;
     }
@@ -180,6 +237,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
         return _originalComponentId;
     }
 
+    @JSON
     public long getCompanyId() {
         return _companyId;
     }
@@ -200,6 +258,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
         return _originalCompanyId;
     }
 
+    @JSON
     public long getGroupId() {
         return _groupId;
     }
@@ -208,6 +267,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
         _groupId = groupId;
     }
 
+    @JSON
     public long getFeedReferenceId() {
         return _feedReferenceId;
     }
@@ -228,6 +288,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
         return _originalFeedReferenceId;
     }
 
+    @JSON
     public String getComponentIri() {
         if (_componentIri == null) {
             return StringPool.BLANK;
@@ -250,6 +311,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
         return GetterUtil.getString(_originalComponentIri);
     }
 
+    @JSON
     public Date getUpdatedDate() {
         return _updatedDate;
     }
@@ -258,6 +320,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
         _updatedDate = updatedDate;
     }
 
+    @JSON
     public String getLanguage() {
         if (_language == null) {
             return StringPool.BLANK;
@@ -270,6 +333,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
         _language = language;
     }
 
+    @JSON
     public String getHref() {
         if (_href == null) {
             return StringPool.BLANK;
@@ -282,6 +346,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
         _href = href;
     }
 
+    @JSON
     public String getFullTextHref() {
         if (_fullTextHref == null) {
             return StringPool.BLANK;
@@ -294,6 +359,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
         _fullTextHref = fullTextHref;
     }
 
+    @JSON
     public String getTitle() {
         if (_title == null) {
             return StringPool.BLANK;
@@ -306,6 +372,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
         _title = title;
     }
 
+    @JSON
     public String getDescription() {
         if (_description == null) {
             return StringPool.BLANK;
@@ -318,6 +385,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
         _description = description;
     }
 
+    @JSON
     public String getCopyright() {
         if (_copyright == null) {
             return StringPool.BLANK;
@@ -407,6 +475,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
         }
     }
 
+    @JSON
     public int getDisplayWidth() {
         return _displayWidth;
     }
@@ -415,6 +484,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
         _displayWidth = displayWidth;
     }
 
+    @JSON
     public int getDisplayHeight() {
         return _displayHeight;
     }
@@ -423,6 +493,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
         _displayHeight = displayHeight;
     }
 
+    @JSON
     public Date getCreateDate() {
         return _createDate;
     }
@@ -431,6 +502,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
         _createDate = createDate;
     }
 
+    @JSON
     public boolean getRemoved() {
         return _removed;
     }
@@ -443,6 +515,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
         _removed = removed;
     }
 
+    @JSON
     public Date getRemovedDate() {
         return _removedDate;
     }
@@ -451,6 +524,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
         _removedDate = removedDate;
     }
 
+    @JSON
     public String getVersion() {
         if (_version == null) {
             return StringPool.BLANK;
@@ -463,6 +537,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
         _version = version;
     }
 
+    @JSON
     public Date getVersionDate() {
         return _versionDate;
     }
@@ -471,6 +546,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
         _versionDate = versionDate;
     }
 
+    @JSON
     public double getPrice() {
         return _price;
     }
@@ -479,6 +555,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
         _price = price;
     }
 
+    @JSON
     public String getPriceUnit() {
         if (_priceUnit == null) {
             return StringPool.BLANK;
@@ -491,6 +568,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
         _priceUnit = priceUnit;
     }
 
+    @JSON
     public String getPriceTerms() {
         if (_priceTerms == null) {
             return StringPool.BLANK;
@@ -503,6 +581,7 @@ public class ComponentModelImpl extends BaseModelImpl<Component>
         _priceTerms = priceTerms;
     }
 
+    @JSON
     public String getPriceExpiration() {
         if (_priceExpiration == null) {
             return StringPool.BLANK;

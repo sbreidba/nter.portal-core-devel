@@ -2,6 +2,7 @@ package org.nterlearning.datamodel.catalog.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
@@ -17,12 +18,15 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import org.nterlearning.datamodel.catalog.model.CourseReview;
 import org.nterlearning.datamodel.catalog.model.CourseReviewModel;
+import org.nterlearning.datamodel.catalog.model.CourseReviewSoap;
 
 import java.io.Serializable;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * The base model implementation for the CourseReview service. Represents a row in the &quot;CATALOG_CourseReview&quot; database table, with each column mapped to a property of this class.
@@ -37,6 +41,7 @@ import java.util.Date;
  * @see org.nterlearning.datamodel.catalog.model.CourseReviewModel
  * @generated
  */
+@JSON(strict = true)
 public class CourseReviewModelImpl extends BaseModelImpl<CourseReview>
     implements CourseReviewModel {
     /*
@@ -116,6 +121,47 @@ public class CourseReviewModelImpl extends BaseModelImpl<CourseReview>
     public CourseReviewModelImpl() {
     }
 
+    /**
+     * Converts the soap model instance into a normal model instance.
+     *
+     * @param soapModel the soap model instance to convert
+     * @return the normal model instance
+     */
+    public static CourseReview toModel(CourseReviewSoap soapModel) {
+        CourseReview model = new CourseReviewImpl();
+
+        model.setCourseReviewId(soapModel.getCourseReviewId());
+        model.setCompanyId(soapModel.getCompanyId());
+        model.setGroupId(soapModel.getGroupId());
+        model.setCourseId(soapModel.getCourseId());
+        model.setUserId(soapModel.getUserId());
+        model.setSummary(soapModel.getSummary());
+        model.setContent(soapModel.getContent());
+        model.setCreateDate(soapModel.getCreateDate());
+        model.setModifiedDate(soapModel.getModifiedDate());
+        model.setWeightedScore(soapModel.getWeightedScore());
+        model.setRemoved(soapModel.getRemoved());
+        model.setRemovedDate(soapModel.getRemovedDate());
+
+        return model;
+    }
+
+    /**
+     * Converts the soap model instances into normal model instances.
+     *
+     * @param soapModels the soap model instances to convert
+     * @return the normal model instances
+     */
+    public static List<CourseReview> toModels(CourseReviewSoap[] soapModels) {
+        List<CourseReview> models = new ArrayList<CourseReview>(soapModels.length);
+
+        for (CourseReviewSoap soapModel : soapModels) {
+            models.add(toModel(soapModel));
+        }
+
+        return models;
+    }
+
     public long getPrimaryKey() {
         return _courseReviewId;
     }
@@ -140,6 +186,7 @@ public class CourseReviewModelImpl extends BaseModelImpl<CourseReview>
         return CourseReview.class.getName();
     }
 
+    @JSON
     public long getCourseReviewId() {
         return _courseReviewId;
     }
@@ -148,6 +195,7 @@ public class CourseReviewModelImpl extends BaseModelImpl<CourseReview>
         _courseReviewId = courseReviewId;
     }
 
+    @JSON
     public long getCompanyId() {
         return _companyId;
     }
@@ -168,6 +216,7 @@ public class CourseReviewModelImpl extends BaseModelImpl<CourseReview>
         return _originalCompanyId;
     }
 
+    @JSON
     public long getGroupId() {
         return _groupId;
     }
@@ -188,6 +237,7 @@ public class CourseReviewModelImpl extends BaseModelImpl<CourseReview>
         return _originalGroupId;
     }
 
+    @JSON
     public long getCourseId() {
         return _courseId;
     }
@@ -208,6 +258,7 @@ public class CourseReviewModelImpl extends BaseModelImpl<CourseReview>
         return _originalCourseId;
     }
 
+    @JSON
     public long getUserId() {
         return _userId;
     }
@@ -236,6 +287,7 @@ public class CourseReviewModelImpl extends BaseModelImpl<CourseReview>
         return _originalUserId;
     }
 
+    @JSON
     public String getSummary() {
         if (_summary == null) {
             return StringPool.BLANK;
@@ -248,6 +300,7 @@ public class CourseReviewModelImpl extends BaseModelImpl<CourseReview>
         _summary = summary;
     }
 
+    @JSON
     public String getContent() {
         if (_content == null) {
             return StringPool.BLANK;
@@ -260,6 +313,7 @@ public class CourseReviewModelImpl extends BaseModelImpl<CourseReview>
         _content = content;
     }
 
+    @JSON
     public Date getCreateDate() {
         return _createDate;
     }
@@ -268,6 +322,7 @@ public class CourseReviewModelImpl extends BaseModelImpl<CourseReview>
         _createDate = createDate;
     }
 
+    @JSON
     public Date getModifiedDate() {
         return _modifiedDate;
     }
@@ -278,6 +333,7 @@ public class CourseReviewModelImpl extends BaseModelImpl<CourseReview>
         _modifiedDate = modifiedDate;
     }
 
+    @JSON
     public double getWeightedScore() {
         return _weightedScore;
     }
@@ -288,6 +344,7 @@ public class CourseReviewModelImpl extends BaseModelImpl<CourseReview>
         _weightedScore = weightedScore;
     }
 
+    @JSON
     public boolean getRemoved() {
         return _removed;
     }
@@ -312,6 +369,7 @@ public class CourseReviewModelImpl extends BaseModelImpl<CourseReview>
         return _originalRemoved;
     }
 
+    @JSON
     public Date getRemovedDate() {
         return _removedDate;
     }

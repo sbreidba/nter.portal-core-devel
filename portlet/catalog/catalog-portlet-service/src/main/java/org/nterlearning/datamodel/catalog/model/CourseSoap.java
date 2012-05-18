@@ -7,9 +7,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * This class is used by SOAP remote services.
+ * This class is used by SOAP remote services, specifically {@link org.nterlearning.datamodel.catalog.service.http.CourseServiceSoap}.
  *
  * @author    Brian Wing Shun Chan
+ * @see       org.nterlearning.datamodel.catalog.service.http.CourseServiceSoap
  * @generated
  */
 public class CourseSoap implements Serializable {

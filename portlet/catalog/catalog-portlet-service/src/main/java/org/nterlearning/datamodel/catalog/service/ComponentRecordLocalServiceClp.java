@@ -26,8 +26,9 @@ public class ComponentRecordLocalServiceClp
     private MethodKey _getBeanIdentifierMethodKey15;
     private MethodKey _setBeanIdentifierMethodKey16;
     private MethodKey _findByComponentIriMethodKey17;
-    private MethodKey _findByCourseRecordIdUserIdLanguageFilterSortedMethodKey18;
-    private MethodKey _countByCourseRecordIdUserIdLanguageFilterMethodKey19;
+    private MethodKey _findByCourseRecordIdMethodKey18;
+    private MethodKey _findByCourseRecordIdUserIdLanguageFilterSortedMethodKey19;
+    private MethodKey _countByCourseRecordIdUserIdLanguageFilterMethodKey20;
 
     public ComponentRecordLocalServiceClp(ClassLoaderProxy classLoaderProxy) {
         _classLoaderProxy = classLoaderProxy;
@@ -98,12 +99,15 @@ public class ComponentRecordLocalServiceClp
         _findByComponentIriMethodKey17 = new MethodKey(_classLoaderProxy.getClassName(),
                 "findByComponentIri", java.lang.String.class);
 
-        _findByCourseRecordIdUserIdLanguageFilterSortedMethodKey18 = new MethodKey(_classLoaderProxy.getClassName(),
+        _findByCourseRecordIdMethodKey18 = new MethodKey(_classLoaderProxy.getClassName(),
+                "findByCourseRecordId", long.class);
+
+        _findByCourseRecordIdUserIdLanguageFilterSortedMethodKey19 = new MethodKey(_classLoaderProxy.getClassName(),
                 "findByCourseRecordIdUserIdLanguageFilterSorted", long.class,
                 long.class, java.util.Locale.class, java.lang.String.class,
                 java.lang.String.class, boolean.class, int.class, int.class);
 
-        _countByCourseRecordIdUserIdLanguageFilterMethodKey19 = new MethodKey(_classLoaderProxy.getClassName(),
+        _countByCourseRecordIdUserIdLanguageFilterMethodKey20 = new MethodKey(_classLoaderProxy.getClassName(),
                 "countByCourseRecordIdUserIdLanguageFilter", long.class,
                 long.class, java.util.Locale.class, java.lang.String.class);
     }
@@ -570,6 +574,32 @@ public class ComponentRecordLocalServiceClp
         return (java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord>) ClpSerializer.translateOutput(returnObj);
     }
 
+    public java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord> findByCourseRecordId(
+        long courseRecordId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_findByCourseRecordIdMethodKey18,
+                courseRecordId);
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<org.nterlearning.datamodel.catalog.model.ComponentRecord>) ClpSerializer.translateOutput(returnObj);
+    }
+
     public java.util.List<java.lang.Object[]> findByCourseRecordIdUserIdLanguageFilterSorted(
         long courseRecordId, long userId, java.util.Locale locale,
         java.lang.String filterType, java.lang.String sortType, boolean asc,
@@ -577,7 +607,7 @@ public class ComponentRecordLocalServiceClp
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
-        MethodHandler methodHandler = new MethodHandler(_findByCourseRecordIdUserIdLanguageFilterSortedMethodKey18,
+        MethodHandler methodHandler = new MethodHandler(_findByCourseRecordIdUserIdLanguageFilterSortedMethodKey19,
                 courseRecordId, userId, ClpSerializer.translateInput(locale),
                 ClpSerializer.translateInput(filterType),
                 ClpSerializer.translateInput(sortType), asc, start, end);
@@ -605,7 +635,7 @@ public class ComponentRecordLocalServiceClp
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
-        MethodHandler methodHandler = new MethodHandler(_countByCourseRecordIdUserIdLanguageFilterMethodKey19,
+        MethodHandler methodHandler = new MethodHandler(_countByCourseRecordIdUserIdLanguageFilterMethodKey20,
                 courseRecordId, userId, ClpSerializer.translateInput(locale),
                 ClpSerializer.translateInput(filterType));
 

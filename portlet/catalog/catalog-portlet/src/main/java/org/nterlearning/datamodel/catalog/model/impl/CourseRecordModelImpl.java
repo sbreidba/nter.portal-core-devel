@@ -2,6 +2,7 @@ package org.nterlearning.datamodel.catalog.model.impl;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSON;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
@@ -17,12 +18,15 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import org.nterlearning.datamodel.catalog.model.CourseRecord;
 import org.nterlearning.datamodel.catalog.model.CourseRecordModel;
+import org.nterlearning.datamodel.catalog.model.CourseRecordSoap;
 
 import java.io.Serializable;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * The base model implementation for the CourseRecord service. Represents a row in the &quot;CATALOG_CourseRecord&quot; database table, with each column mapped to a property of this class.
@@ -37,6 +41,7 @@ import java.util.Date;
  * @see org.nterlearning.datamodel.catalog.model.CourseRecordModel
  * @generated
  */
+@JSON(strict = true)
 public class CourseRecordModelImpl extends BaseModelImpl<CourseRecord>
     implements CourseRecordModel {
     /*
@@ -113,6 +118,47 @@ public class CourseRecordModelImpl extends BaseModelImpl<CourseRecord>
     public CourseRecordModelImpl() {
     }
 
+    /**
+     * Converts the soap model instance into a normal model instance.
+     *
+     * @param soapModel the soap model instance to convert
+     * @return the normal model instance
+     */
+    public static CourseRecord toModel(CourseRecordSoap soapModel) {
+        CourseRecord model = new CourseRecordImpl();
+
+        model.setCourseRecordId(soapModel.getCourseRecordId());
+        model.setFeedReferenceId(soapModel.getFeedReferenceId());
+        model.setCourseRecordIri(soapModel.getCourseRecordIri());
+        model.setUserId(soapModel.getUserId());
+        model.setSingleSignOnValue(soapModel.getSingleSignOnValue());
+        model.setCourseIri(soapModel.getCourseIri());
+        model.setUpdatedDate(soapModel.getUpdatedDate());
+        model.setCompletionStatus(soapModel.getCompletionStatus());
+        model.setRemoved(soapModel.getRemoved());
+        model.setRemovedDate(soapModel.getRemovedDate());
+        model.setUserHidden(soapModel.getUserHidden());
+        model.setAssigned(soapModel.getAssigned());
+
+        return model;
+    }
+
+    /**
+     * Converts the soap model instances into normal model instances.
+     *
+     * @param soapModels the soap model instances to convert
+     * @return the normal model instances
+     */
+    public static List<CourseRecord> toModels(CourseRecordSoap[] soapModels) {
+        List<CourseRecord> models = new ArrayList<CourseRecord>(soapModels.length);
+
+        for (CourseRecordSoap soapModel : soapModels) {
+            models.add(toModel(soapModel));
+        }
+
+        return models;
+    }
+
     public long getPrimaryKey() {
         return _courseRecordId;
     }
@@ -137,6 +183,7 @@ public class CourseRecordModelImpl extends BaseModelImpl<CourseRecord>
         return CourseRecord.class.getName();
     }
 
+    @JSON
     public long getCourseRecordId() {
         return _courseRecordId;
     }
@@ -145,6 +192,7 @@ public class CourseRecordModelImpl extends BaseModelImpl<CourseRecord>
         _courseRecordId = courseRecordId;
     }
 
+    @JSON
     public long getFeedReferenceId() {
         return _feedReferenceId;
     }
@@ -165,6 +213,7 @@ public class CourseRecordModelImpl extends BaseModelImpl<CourseRecord>
         return _originalFeedReferenceId;
     }
 
+    @JSON
     public String getCourseRecordIri() {
         if (_courseRecordIri == null) {
             return StringPool.BLANK;
@@ -187,6 +236,7 @@ public class CourseRecordModelImpl extends BaseModelImpl<CourseRecord>
         return GetterUtil.getString(_originalCourseRecordIri);
     }
 
+    @JSON
     public long getUserId() {
         return _userId;
     }
@@ -215,6 +265,7 @@ public class CourseRecordModelImpl extends BaseModelImpl<CourseRecord>
         return _originalUserId;
     }
 
+    @JSON
     public String getSingleSignOnValue() {
         if (_singleSignOnValue == null) {
             return StringPool.BLANK;
@@ -237,6 +288,7 @@ public class CourseRecordModelImpl extends BaseModelImpl<CourseRecord>
         return GetterUtil.getString(_originalSingleSignOnValue);
     }
 
+    @JSON
     public String getCourseIri() {
         if (_courseIri == null) {
             return StringPool.BLANK;
@@ -259,6 +311,7 @@ public class CourseRecordModelImpl extends BaseModelImpl<CourseRecord>
         return GetterUtil.getString(_originalCourseIri);
     }
 
+    @JSON
     public Date getUpdatedDate() {
         return _updatedDate;
     }
@@ -269,6 +322,7 @@ public class CourseRecordModelImpl extends BaseModelImpl<CourseRecord>
         _updatedDate = updatedDate;
     }
 
+    @JSON
     public String getCompletionStatus() {
         if (_completionStatus == null) {
             return StringPool.BLANK;
@@ -281,6 +335,7 @@ public class CourseRecordModelImpl extends BaseModelImpl<CourseRecord>
         _completionStatus = completionStatus;
     }
 
+    @JSON
     public boolean getRemoved() {
         return _removed;
     }
@@ -293,6 +348,7 @@ public class CourseRecordModelImpl extends BaseModelImpl<CourseRecord>
         _removed = removed;
     }
 
+    @JSON
     public Date getRemovedDate() {
         return _removedDate;
     }
@@ -301,6 +357,7 @@ public class CourseRecordModelImpl extends BaseModelImpl<CourseRecord>
         _removedDate = removedDate;
     }
 
+    @JSON
     public boolean getUserHidden() {
         return _userHidden;
     }
@@ -313,6 +370,7 @@ public class CourseRecordModelImpl extends BaseModelImpl<CourseRecord>
         _userHidden = userHidden;
     }
 
+    @JSON
     public boolean getAssigned() {
         return _assigned;
     }
