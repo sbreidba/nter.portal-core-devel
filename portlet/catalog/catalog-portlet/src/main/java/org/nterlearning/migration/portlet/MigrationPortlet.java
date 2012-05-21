@@ -852,7 +852,7 @@ public class MigrationPortlet extends MVCPortlet {
                         //assign group and guest permissions  (true)
                         ResourceLocalServiceUtil.addResources(
                                 mbMessage.getCompanyId(), mbMessage.getGroupId(), mbMessage.getUserId(),
-                                MBCategory.class.getName(), mbMessage.getCategoryId(),
+                                MBMessage.class.getName(), mbMessage.getMessageId(),
                                 false, true, true);
 
                         //create old/new map of ids
@@ -903,7 +903,7 @@ public class MigrationPortlet extends MVCPortlet {
                                     //assign group and guest permissions  (true)
                                     ResourceLocalServiceUtil.addResources(
                                             mbMessage.getCompanyId(), mbMessage.getGroupId(), mbMessage.getUserId(),
-                                            MBCategory.class.getName(), mbMessage.getCategoryId(),
+                                            MBMessage.class.getName(), mbMessage.getMessageId(),
                                             false, true, true);
 
                                     //create old/new map of ids
