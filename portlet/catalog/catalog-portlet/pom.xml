@@ -65,7 +65,7 @@
                                 </exclusions>
                             </dependency>
                             <dependency>
-                                <groupId>org.nterlearning</groupId>
+                                <groupId>org.nterlearning.portal</groupId>
                                 <artifactId>nter-catalog-portlet-service</artifactId>
                                 <version>${project.version}</version>
                                 <scope>compile</scope>
@@ -94,7 +94,7 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.nterlearning</groupId>
+			<groupId>org.nterlearning.portal</groupId>
 			<artifactId>nter-catalog-portlet-service</artifactId>
 			<version>${project.version}</version>
             <scope>compile</scope>
