@@ -28,7 +28,6 @@
         <version>1.0.1</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.nterlearning</groupId>
     <artifactId>nter-1-col-sidenav-layouttpl</artifactId>
     <version>6.1.1-SNAPSHOT</version>
     <packaging>war</packaging>
