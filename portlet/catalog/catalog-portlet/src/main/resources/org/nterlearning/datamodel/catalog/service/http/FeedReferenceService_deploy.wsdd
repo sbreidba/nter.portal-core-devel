@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<!--
+  National Training and Education Resource (NTER)
+  Copyright (C) 2012  SRI International
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or (at
+  your option) any later version.
+
+  This program is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  02110-1301, USA.
+  -->
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<service name="Plugin_CATALOG_FeedReferenceService" provider="java:RPC" style="rpc" use="encoded">
+		<typeMapping xmlns:ns="http://model.catalog.datamodel.nterlearning.org" qname="ns:FeedReferenceSoap" type="java:org.nterlearning.datamodel.catalog.model.FeedReferenceSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<operation xmlns:operNS="urn:http.service.catalog.datamodel.nterlearning.org" xmlns:rtns="http://model.catalog.datamodel.nterlearning.org" name="findByFeedHref" qname="operNS:findByFeedHref" returnQName="findByFeedHrefReturn" returnType="rtns:FeedReferenceSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="href" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.catalog.datamodel.nterlearning.org" xmlns:rtns="http://model.catalog.datamodel.nterlearning.org" name="findByFeedIri" qname="operNS:findByFeedIri" returnQName="findByFeedIriReturn" returnType="rtns:FeedReferenceSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="feedIri" type="tns:string"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="findByFeedHref findByFeedIri" />
+		<parameter name="className" value="org.nterlearning.datamodel.catalog.service.http.FeedReferenceServiceSoap" />
+		<parameter name="schemaUnqualified" value="http://model.catalog.datamodel.nterlearning.org" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="FeedReferenceServiceSoap" />
+		<parameter name="wsdlServiceElement" value="FeedReferenceServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_CATALOG_FeedReferenceService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.catalog.datamodel.nterlearning.org" />
+	</service>
+</deployment>
