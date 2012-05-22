@@ -285,24 +285,24 @@
                     <artifactId>jsp-api-2.1</artifactId>
                 </exclusion>
                 <exclusion>
+                    <groupId>tomcat</groupId>
                     <artifactId>jasper-runtime</artifactId>
-                    <groupId>tomcat</groupId>
                 </exclusion>
                 <exclusion>
+                    <groupId>tomcat</groupId>
                     <artifactId>jasper-compiler</artifactId>
-                    <groupId>tomcat</groupId>
                 </exclusion>
                 <exclusion>
-                    <artifactId>kfs</artifactId>
                     <groupId>net.sf.kosmosfs</groupId>
+                    <artifactId>kfs</artifactId>
                 </exclusion>
                 <exclusion>
-                    <artifactId>hsqldb</artifactId>
                     <groupId>hsqldb</groupId>
+                    <artifactId>hsqldb</artifactId>
                 </exclusion>
                 <exclusion>
-                    <artifactId>jets3t</artifactId>
                     <groupId>net.java.dev.jets3t</groupId>
+                    <artifactId>jets3t</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
@@ -351,8 +351,8 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.apache.tika</groupId>
             <artifactId>tika-core</artifactId>
+            <groupId>org.apache.tika</groupId>
             <version>0.10</version>
         </dependency>
         <dependency>
@@ -416,6 +416,20 @@
             <groupId>org.apache.httpcomponents</groupId>
             <artifactId>httpcore</artifactId>
             <version>4.1</version>
+        </dependency>
+
+        <!-- custom jsp pages (included with core Liferay) -->
+        <dependency>
+            <groupId>org.apache.axis</groupId>
+            <artifactId>axis</artifactId>
+            <version>1.4</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>javax.xml</groupId>
+            <artifactId>jaxrpc</artifactId>
+            <version>1.1</version>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>
