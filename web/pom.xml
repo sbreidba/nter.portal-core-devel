@@ -22,15 +22,15 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <parent>
+        <groupId>org.nterlearning.portal</groupId>
         <artifactId>nter-portal-core</artifactId>
-        <groupId>org.nterlearning</groupId>
-        <version>1.0.0</version>
+        <version>1.0.1</version>
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>nter-portal-core-web</artifactId>
     <packaging>pom</packaging>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <name>all web applications</name>
 
     <build>
