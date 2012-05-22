@@ -22,10 +22,10 @@
 <%@ page import="java.util.Set" %>
 <%@ page import="java.util.List" %>
 
-<%@ page import="com.sri.nter.registry.proxy.ServiceBean" %>
+<%@ page import="org.nterlearning.registry.proxy.ServiceBean" %>
 <%@ page import="org.nterlearning.utils.ServiceRegistryClient" %>
 
-<%@ page import="org.nterlearning.xml.nter_registry.domain_objects_0_1_0.Binding" %>
-<%@ page import="org.nterlearning.xml.nter_registry.domain_objects_0_1_0.BindingTypeEnum" %>
+<%@ page import="org.nterlearning.registry.client.Binding" %>
+<%@ page import="org.nterlearning.registry.client.BindingTypeEnum" %>
 
 <%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
