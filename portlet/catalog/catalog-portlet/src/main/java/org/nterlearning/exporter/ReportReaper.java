@@ -19,7 +19,7 @@
  */
 
 /**
- * 
+ *
  */
 package org.nterlearning.exporter;
 
@@ -35,7 +35,7 @@ import org.nterlearning.utils.ExecutorUtil;
 
 public class ReportReaper {
 
-	private static Log log = LogFactoryUtil.getLog(ReportReaper.class);
+    private static Log log = LogFactoryUtil.getLog(ReportReaper.class);
 
     // executor and timer for thread pooling
     private static ScheduledExecutorService exec;
@@ -45,16 +45,17 @@ public class ReportReaper {
     private static ReportReaper mReaper = new ReportReaper();
 
 
-	private ReportReaper() {
+    private ReportReaper() {
         exec = Executors.newSingleThreadScheduledExecutor();
-	}
+    }
 
 
     public static ReportReaper getInstance() {
         return mReaper;
     }
 
-    public void startReaping(){
+
+    public void startReaping() {
         log.info("Starting the Report Reaper and setting it to run every " +
                 REAPER_INTERVAL_MIN + " minutes.");
 
@@ -63,7 +64,7 @@ public class ReportReaper {
     }
 
 
-    public void stopReaping(){
+    public void stopReaping() {
         log.info("Shutting down ReportReaper service.");
         exec.shutdown();
         exec.shutdownNow();
@@ -77,42 +78,45 @@ public class ReportReaper {
 
         File pdfDir;
 
+
         public ReaperProcess() {
             pdfDir = new File(ReportExporter.getPdfReportDirPath());
         }
+
 
         public void run() {
 
             log.debug("Running report reaper");
 
-            if (pdfDir.isDirectory()){
+            if (pdfDir.isDirectory()) {
 
                 Date timeOfLastReaping =
-                        new Date(System.currentTimeMillis() - REAPER_INTERVAL_MIN*60*1000);
+                        new Date(System.currentTimeMillis() - REAPER_INTERVAL_MIN * 60 * 1000);
                 Date dirLastModified;
                 File[] tempDirs = pdfDir.listFiles();
 
-                for (File tempDir:tempDirs){
+                for (File tempDir : tempDirs) {
                     dirLastModified = new Date(tempDir.lastModified());
-                    if (dirLastModified.before(timeOfLastReaping)){
+                    if (dirLastModified.before(timeOfLastReaping)) {
 
-                        // empty out the directory, then delete it
                         File[] reports = tempDir.listFiles();
-                        for (File report:reports){
+                        for (File report : reports) {
                             if (!report.delete()) {
-                                log.error("Could not delete PDF report file at " + report.getAbsolutePath());
+                                log.error("Could not delete PDF report file at " + report
+                                        .getAbsolutePath());
                             }
                         }
                         if (!tempDir.delete()) {
-                            log.error("Could not delete PDF report directory at " + tempDir.getAbsolutePath());
+                            log.error("Could not delete PDF report directory at " + tempDir
+                                    .getAbsolutePath());
                         }
                     }
                 }
             }
             else {
-                log.error("The PDF report directory path is not a valid directory: [" + pdfDir.getAbsolutePath() +
-                        "]. Make sure the directory is either set in the portal-ext.properties file or that " +
-                        "the CATALINA_BASE environment variable is set.");
+                log.error("The PDF report directory path is not a valid directory: [" +
+                        pdfDir.getAbsolutePath() +"]. Make sure the directory is either set in the" +
+                        " portal-ext.properties file or that the CATALINA_BASE environment variable is set.");
             }
 
             log.debug("Report reaping complete.");
