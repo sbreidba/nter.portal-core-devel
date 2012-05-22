@@ -44,4 +44,45 @@ AUI().ready('liferay-portlet-url', function(A) {
 		row.push(item);
 	});
 	processRow(row);
+
+
+	function trackCourseEvent(action, event) {
+		var course = event.currentTarget.ancestor('.course');
+		var course_id = course.getAttribute('data-course-id');
+		var completion_status = course.getAttribute('data-completion-status');
+		var status_map = {
+			"Not Started" : 1,
+			"In Progress" : 2,
+			"Failed Retry" : 3,
+			"Failed" : 4,
+			"Completed" : 5
+		};
+		completion_status = status_map[completion_status];
+		if (typeof _trackEvent == 'undefined') return false;
+		_trackEvent('recent courses', action, course_id, completion_status);
+	}
+	var section = A.one('.course-status-section');
+	// course image and title
+	section.all('.course-title a, .thumbnail-link').on('click', function (event) {
+		trackCourseEvent('go to course details', event);
+	});
+	// next/failed/updated component
+	section.all('.course-attribute a, .update a').on('click', function (event) {
+		trackCourseEvent('go to specific course component', event);
+	});
+	// link to new version course page
+	section.all('.new-version a').on('click', function (event) {
+		trackCourseEvent('go to new course version', event);
+	});
+	// start/continue/retry buttons, write course review button
+	section.all('.actions .button').on('click', function (event) {
+		var course = event.currentTarget.ancestor('.course');
+		var completion_status = course.getAttribute('data-completion-status');
+		if (completion_status == 'Not Started') trackCourseEvent('start course', event);
+		else if (completion_status == 'In Progress') trackCourseEvent('continue course', event);
+		else if (completion_status == 'Failed Retry') trackCourseEvent('retry course', event);
+		else if ((completion_status == 'Completed' || completion_status == 'Failed')
+			&& course.getAttribute('href').indexOf('course-details' > -1))
+				trackCourseEvent('go review course', event);
+	});
 });
