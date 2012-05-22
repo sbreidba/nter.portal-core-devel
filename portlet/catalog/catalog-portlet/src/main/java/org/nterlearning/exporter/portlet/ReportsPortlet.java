@@ -22,6 +22,7 @@ package org.nterlearning.exporter.portlet;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletException;
 
 import org.apache.commons.lang.Validate;
 
@@ -34,6 +35,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+import org.nterlearning.exporter.ReportReaper;
 import org.nterlearning.exporter.reports.Last500UsersLoggedIn;
 import org.nterlearning.exporter.reports.StudentTranscript;
 
@@ -43,8 +45,23 @@ public class ReportsPortlet extends MVCPortlet{
 	private static Log log = LogFactoryUtil.getLog(ReportsPortlet.class);
 	
 	public static final String PARAM_USER_EMAIL = "reports-user-email";
-	
-	/**
+
+
+    @Override
+    public void init() throws PortletException {
+        ReportReaper.getInstance().startReaping();
+        super.init();
+    }
+
+
+    @Override
+    public void destroy() {
+        ReportReaper.getInstance().stopReaping();
+        super.destroy();
+    }
+
+
+    /**
 	 * 
 	 * @param request
 	 * @param response
@@ -74,6 +91,7 @@ public class ReportsPortlet extends MVCPortlet{
 			e.printStackTrace();
 		}
 	}
+
 	
 	/**
 	 * 
@@ -91,5 +109,4 @@ public class ReportsPortlet extends MVCPortlet{
 			e.printStackTrace();
 		}
 	}
-
 }
