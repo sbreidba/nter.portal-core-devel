@@ -450,8 +450,9 @@ public class CourseImpl extends CourseBaseImpl {
         }
 	}
 
+    // TODO temporary method while waiting for e-commerce service to be completed
     public boolean isPurchased(long userId) 	throws SystemException, PortalException {
-        return (true);
+        return (false);
     }
 //	public boolean isPurchased(long userId)
 //			throws SystemException, PortalException {

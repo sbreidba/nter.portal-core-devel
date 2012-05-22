@@ -63,7 +63,7 @@ AUI().add(
 						var ratingScoreLabel = '';
 
 						if (ratingScore || ratingScore == 0) {
-							ratingScoreLabelMessage = A.substitute(
+							ratingScoreLabelMessage = A.Lang.sub(
 								Liferay.Language.get('the-average-rating-is-x-stars-out-of-x'),
 								[ratingScore, instance.get('size')]
 							);
@@ -80,7 +80,7 @@ AUI().add(
 							voteLabel = Liferay.Language.get('votes');
 						}
 
-						return A.substitute(
+						return A.Lang.sub(
 							labelScoreTpl,
 							{
 								desc: desc,
@@ -276,18 +276,18 @@ AUI().add(
 						var labelNode = instance.ratings.get('labelNode');
 						var inputs = instance.ratings.get('inputs');
 
-						labelNode.one('.aui-helper-hidden-accessible').set('text', A.substitute(Liferay.Language.get('you-have-rated-this-x-stars-out-of-x'), [score, size]));
+						labelNode.one('.aui-helper-hidden-accessible').set('text', A.Lang.sub(Liferay.Language.get('you-have-rated-this-x-stars-out-of-x'), [score, size]));
 						instance.ratings.set('label', labelNode.html());
 
 						for (var i = 0; i < size; i++) {
 							var input = inputs.item(i);
 							var label = input.get('parentNode');
 							if (i == index) {
-								if (score == 1) label.html(A.substitute(Liferay.Language.get('you-have-rated-this-x-stars-out-of-x-singular'), [score, size])).append(input);
-								else label.html(A.substitute(Liferay.Language.get('you-have-rated-this-x-stars-out-of-x'), [score, size])).append(input);
+								if (score == 1) label.html(A.Lang.sub(Liferay.Language.get('you-have-rated-this-x-stars-out-of-x-singular'), [score, size])).append(input);
+								else label.html(A.Lang.sub(Liferay.Language.get('you-have-rated-this-x-stars-out-of-x'), [score, size])).append(input);
 							} else {
-								if (score == 1) label.html(A.substitute(Liferay.Language.get('rate-this-x-stars-out-of-x-singular'), [score, size])).append(input);
-								else label.html(A.substitute(Liferay.Language.get('rate-this-x-stars-out-of-x'), [score, size])).append(input);
+								if (score == 1) label.html(A.Lang.sub(Liferay.Language.get('rate-this-x-stars-out-of-x-singular'), [score, size])).append(input);
+								else label.html(A.Lang.sub(Liferay.Language.get('rate-this-x-stars-out-of-x'), [score, size])).append(input);
 							}
 						}
 					}
@@ -363,10 +363,10 @@ AUI().add(
 						inputs.each(function (input, index) {
 							var label = input.get('parentNode');
 							if (score == Liferay.Ratings._thumbScoreMap[input.getAttribute('value')]) {
-								var str = 'you-have-rated-this-as-'+Liferay.Ratings._labelMap[input.getAttribute('value')];console.log(str);
+								var str = 'you-have-rated-this-as-'+Liferay.Ratings._labelMap[input.getAttribute('value')];
 								label.html(Liferay.Language.get(str)).append(input);
 							} else {
-								var str = 'rate-this-as-'+Liferay.Ratings._labelMap[input.getAttribute('value')];console.log(str);
+								var str = 'rate-this-as-'+Liferay.Ratings._labelMap[input.getAttribute('value')];
 								label.html(Liferay.Language.get(str)).append(input);
 							}
 						});
@@ -382,6 +382,6 @@ AUI().add(
 	},
 	'',
 	{
-		requires: ['aui-io-request', 'aui-rating', 'substitute']
+		requires: ['aui-io-request', 'aui-rating']
 	}
 );
