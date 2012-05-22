@@ -1327,6 +1327,7 @@ public class MigrationPortlet extends MVCPortlet {
                 tempSubject = tempSubject.replace("<br />", "\n");
                 String tempBody = dataValue[13].replace("<p />", "\r\n");
                 tempBody = tempBody.replace("<br />", "\n");
+                tempBody = tempBody.replace("<tab/>", "\t");
                 messageEntry.setSubject(tempSubject);
                 messageEntry.setBody(tempBody);
                 if ("1".equals(dataValue[14])) {
