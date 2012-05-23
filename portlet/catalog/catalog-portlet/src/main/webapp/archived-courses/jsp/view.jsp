@@ -214,9 +214,9 @@
             <% if (course.hasNewerVersion()) {
               Course newestVersion = course.getMostRecentVersion();
               if (course.isRemoved()) { %>
-              <div class="portlet-msg-error"><%= LanguageUtil.format(pageContext, "course-superseded-removed", newestVersion.getUrl()) %></div>
+              <div class="portlet-msg-error new-version"><%= LanguageUtil.format(pageContext, "course-superseded-removed", newestVersion.getUrl()) %></div>
               <% } else { %>
-              <div class="portlet-msg-error"><%= LanguageUtil.format(pageContext, "course-superseded", newestVersion.getUrl()) %></div>
+              <div class="portlet-msg-error new-version"><%= LanguageUtil.format(pageContext, "course-superseded", newestVersion.getUrl()) %></div>
               <% }
             } else if (course.isRemoved()) { %>
               <div class="portlet-msg-error"><%= LanguageUtil.get(pageContext, "course-removed") %></div>
@@ -242,11 +242,11 @@
                            }
                                 if (alertChangedComponentCount == 0) {
                             %>
-                                    <div class="portlet-msg-alert"><%= LanguageUtil.get(pageContext, "course-updated") %> </div>
+                                    <div class="portlet-msg-alert update"><%= LanguageUtil.get(pageContext, "course-updated") %> </div>
                             <%  } else if (alertChangedComponentCount == 1) { %>
-                                    <div class="portlet-msg-alert"><%= LanguageUtil.format(pageContext, "course-updated-with-one-component",alertChangedComponent) %> </div>
+                                    <div class="portlet-msg-alert update"><%= LanguageUtil.format(pageContext, "course-updated-with-one-component",alertChangedComponent) %> </div>
                             <%  } else { %>
-                                    <div class="portlet-msg-alert"><%= LanguageUtil.format(pageContext, "course-updated-with-many-component",alertChangedComponent) %> </div>
+                                    <div class="portlet-msg-alert update"><%= LanguageUtil.format(pageContext, "course-updated-with-many-component",alertChangedComponent) %> </div>
                             <%
                                 }
                         } %>
@@ -257,7 +257,7 @@
             </dl>
 
 
-            <ul class="toc" role="tree" aria-labelledby="contents-label-1">
+            <ul class="toc components" role="tree" aria-labelledby="contents-label-1">
               <li role="treeitem"><span class="tree-description"><span class="state-collapsed"><liferay-ui:message key="show" /></span><span class="state-expanded"><liferay-ui:message key="hide" /></span> <span id="contents-label-1"><liferay-ui:message key="course-contents" /></span></span>
                 <ul role="group">
                   <%
@@ -282,7 +282,7 @@
             </ul>
                         <%
                         if (resourceResults.size()> 0) { %>
-            <ul class="toc" role="tree" aria-labelledby="contents-label-1">
+            <ul class="toc resources" role="tree" aria-labelledby="contents-label-1">
               <li role="treeitem"><span class="tree-description"><span class="state-collapsed"><liferay-ui:message key="show" /></span><span class="state-expanded"><liferay-ui:message key="hide" /></span> <span id="contents-label-1"><liferay-ui:message key="course-resources" /></span></span>
                 <ul role="group">
                   <%
@@ -374,7 +374,7 @@
                     } else {
                 %>
                         <div><liferay-ui:message key="no-course-review-for-user" /></div>
-            <a href="<%= course.getUrl() %>#review"><liferay-ui:message key="course-actions-review" /></a>
+            <a class="review-link" href="<%= course.getUrl() %>#review"><liferay-ui:message key="course-actions-review" /></a>
                 <%
                     }
                 %>
