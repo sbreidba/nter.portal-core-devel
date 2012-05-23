@@ -199,7 +199,7 @@
             %>
 
       <liferay-ui:search-container-column-text name='<%= LanguageUtil.get(pageContext, "course-title-heading") %>' orderable="true" orderableProperty='<%= CourseRecordSortType.COURSE_TITLE.toString() %>'>
-        <div class="details">
+        <div class="details" data-course-id="<%= course.getCourseId() %>">
           <%
           course.startSafeImageEnumeration(locale, LocaleUtil.getDefault());
           Group group = GroupLocalServiceUtil.getGroup(course.getGroupId());
@@ -366,18 +366,12 @@
       </liferay-ui:search-container-column-text>
 
       <liferay-ui:search-container-column-text name='<%= LanguageUtil.get(pageContext, "course-rating-heading") %>' orderable="true" orderableProperty="<%= CourseRecordSortType.USER_RATING.toString() %>">
-                <%
-                    if (userRating > 0.0) {
-            %>
-                        <liferay-ui:ratings-score score="<%= userRating %>" />
-                <%
-                    } else {
-                %>
-                        <div><liferay-ui:message key="no-course-review-for-user" /></div>
+          <% if (userRating > 0.0) { %>
+            <liferay-ui:ratings-score score="<%= userRating %>" />
+          <% } else { %>
+            <div><liferay-ui:message key="no-course-review-for-user" /></div>
             <a class="review-link" href="<%= course.getUrl() %>#review"><liferay-ui:message key="course-actions-review" /></a>
-                <%
-                    }
-                %>
+          <% } %>
       </liferay-ui:search-container-column-text>
 
     </liferay-ui:search-container-row>
