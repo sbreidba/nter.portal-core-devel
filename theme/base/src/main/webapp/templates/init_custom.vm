@@ -21,16 +21,15 @@ This file allows you to override and define new Velocity variables.
 			#set($user_role = 'admin')
 		#end
 	#end
+
+	#set ($guestId = $serviceLocator.findService("com.liferay.portal.service.GroupService").getGroup($companyId, "Guest").getGroupId())
 #else
 	#set ($user_role = 'guest')
+	#set ($guestId = $group_id)
 #end
 
 #* overrides user greeting set in profile *#
 #set ($user_greeting = $languageUtil.format($companyId, $locale, "banner-welcome-text", $user_first_name, $user_last_name))
-
-#* configure services *#
-#set ($groupService = $serviceLocator.findService("com.liferay.portal.service.GroupService"))
-#set ($guestGroup = $groupService.getGroup($company_id, "Guest"))
 
 #* override yui theme in init.vm *#
 #set ($css_class = $css_class.replaceAll("yui3-skin-sam", ""))
