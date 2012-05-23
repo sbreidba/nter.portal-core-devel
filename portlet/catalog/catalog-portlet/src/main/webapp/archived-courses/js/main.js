@@ -89,4 +89,43 @@ AUI().ready('tree-view-html', 'removable', function(A) {
 	});
 	
 	Liferay.on('portletReady', function (cfg) { if (cfg.portlet.hasClass(portletClass)) { buttonSetup(); treeSetup(); tableSetup(); } });	// fires when portlet loads via ajax
+
+
+	function trackCourseEvent(action, event) {//console.log(action);event.preventDefault();
+		var course = event.currentTarget.ancestor('.results-row');
+		var course_id = course.getAttribute('data-course-id');
+		//var completion_status = 0;
+		if (course.hasClass('notstarted')) completion_status = 1;
+		else if (course.hasClass('progress')) completion_status = 2;
+		else if (course.hasClass('failed-retry')) completion_status = 3;
+		else if (course.hasClass('failed')) completion_status = 4;
+		else if (course.hasClass('complete')) completion_status = 5;
+		console.log(completion_status);
+		if (typeof _trackEvent == 'undefined') return false;
+		_trackEvent('recent courses', action, course_id, completion_status);
+	}
+	var section = A.one('.my-courses');
+	// course image and title
+	section.all('.course-title a, .thumbnail-link').on('click', function (event) {
+		trackCourseEvent('go to course details', event);
+	});
+	// next/failed/updated component
+	/*section.all('.course-attribute a, .update a').on('click', function (event) {
+		trackCourseEvent('go to specific course component', event);
+	});
+	// link to new version course page
+	section.all('.new-version a').on('click', function (event) {
+		trackCourseEvent('go to new course version', event);
+	});
+	// start/continue/retry buttons, write course review button
+	section.all('.actions .button').on('click', function (event) {
+		var course = event.currentTarget.ancestor('.course');
+		var completion_status = course.getAttribute('data-completion-status');
+		if (completion_status == 'Not Started') trackCourseEvent('start course', event);
+		else if (completion_status == 'In Progress') trackCourseEvent('continue course', event);
+		else if (completion_status == 'Failed Retry') trackCourseEvent('retry course', event);
+		else if ((completion_status == 'Completed' || completion_status == 'Failed')
+			&& course.getAttribute('href').indexOf('course-details' > -1))
+				trackCourseEvent('go review course', event);
+	});*/
 });

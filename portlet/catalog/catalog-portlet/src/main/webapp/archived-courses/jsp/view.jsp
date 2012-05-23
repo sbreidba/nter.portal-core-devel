@@ -324,7 +324,7 @@
 					String courseStatus;
 					String statusClass = "";
 					String completionStatus = courseRecord.getCompletionStatus();
-					if (completionStatus.equals(CompletionStatusType.IN_PROGRESS.getDbValue())) {
+					if (completionStatus.equals(CompletionStatusType.IN_PROGRESS.getDbValue()) && (activeComponentCount > 0 || finishedComponentCount > 0)) {
 						courseStatus = LanguageUtil.get(pageContext, "course-status-started");
 						statusClass = "progress";
 					} else if (completionStatus.equals(CompletionStatusType.COMPLETED.getDbValue())) {
@@ -335,7 +335,7 @@
 						statusClass = "failed";
                     } else if (completionStatus.equals(CompletionStatusType.FAILED_RETRY.getDbValue())) {
                         courseStatus = LanguageUtil.get(pageContext, "course-status-failed");
-						statusClass = "failed";
+						statusClass = "failed failed-retry";
                     } else {
 						courseStatus = LanguageUtil.get(pageContext, "course-status-not-started");
 						statusClass = "notstarted";
@@ -343,7 +343,7 @@
 
 					thisrow.setClassName(statusClass);
 
-                    if (completionStatus.equals(CompletionStatusType.IN_PROGRESS.getDbValue()) ) {
+                    if (completionStatus.equals(CompletionStatusType.IN_PROGRESS.getDbValue()) && (activeComponentCount > 0 || finishedComponentCount > 0)) {
                         String[] callout_args = {Integer.toString(finishedComponentCount), Integer.toString(totalComponentCount)};
                         String calloutText = LanguageUtil.format(pageContext, "course-status-component-completion", callout_args);
                 %>
