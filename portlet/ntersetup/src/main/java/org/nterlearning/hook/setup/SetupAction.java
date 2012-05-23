@@ -207,8 +207,10 @@ public class SetupAction extends SimpleAction {
         Calendar now = Calendar.getInstance();
 
         String title;
-        String content = "<?xml version='1.0' encoding='UTF-8'?>" +
-                "<root><static-content><![CDATA[<p></p>]]></static-content></root>";
+        String content = "<?xml version=\"1.0\"?>" +
+                         "<root available-locales=\"en_US\" default-locale=\"en_US\">" +
+                         "<static-content language-id=\"en_US\"></static-content>" +
+                         "</root>";
 
         title = "VERSION";
         Locale defaultLocale = LocaleUtil.getDefault();
