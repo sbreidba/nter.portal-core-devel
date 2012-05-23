@@ -93,7 +93,7 @@ AUI().ready('tree-view-html', 'removable', function(A) {
 
 	function trackCourseEvent(action, event) {
 		var course = event.currentTarget.ancestor('.results-row');
-		var course_id = course.getAttribute('data-course-id');
+		var course_id = course.one('.details').getAttribute('data-course-id');
 		var completion_status = 0;
 		if (course.hasClass('notstarted')) completion_status = 1;
 		else if (course.hasClass('progress')) completion_status = 2;
