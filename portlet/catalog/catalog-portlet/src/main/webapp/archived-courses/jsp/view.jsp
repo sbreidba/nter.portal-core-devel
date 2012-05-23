@@ -57,27 +57,27 @@
         String[] msg_callout_args = {user.getFirstName(), user.getLastName()};
         String msg_calloutText = LanguageUtil.format(pageContext, "current-course-callout-new-student", msg_callout_args);
 
-		long userId = themeDisplay.getUserId();
-		long courseId = 0; //retrieve all courses not a specific;
+    long userId = themeDisplay.getUserId();
+    long courseId = 0; //retrieve all courses not a specific;
 %>
 
 
 <div class="my-courses">
-	<div class="notification-area" aria-live="polite" aria-atomic="false"></div>
-	<liferay-ui:search-container emptyResultsMessage="<%= msg_calloutText %>" orderByCol="updateDate" orderByType="desc" delta="5">
-		<liferay-ui:search-container-results>
+  <div class="notification-area" aria-live="polite" aria-atomic="false"></div>
+  <liferay-ui:search-container emptyResultsMessage="<%= msg_calloutText %>" orderByCol="updateDate" orderByType="desc" delta="5">
+    <liferay-ui:search-container-results>
 
-		<%
-		// These parameters are set by the search container when you click on a sortable
-		// header.  The orderByCol element is set to the value of the
-		// orderableProperty element of the column clicked.  orderByType toggles
-		// between asc and desc.  It's null at the beginning.
+    <%
+    // These parameters are set by the search container when you click on a sortable
+    // header.  The orderByCol element is set to the value of the
+    // orderableProperty element of the column clicked.  orderByType toggles
+    // between asc and desc.  It's null at the beginning.
 
         String orderByCol = ParamUtil.getString(renderRequest, "orderByCol");
-		String orderByType = ParamUtil.getString(request, "orderByType");
+    String orderByType = ParamUtil.getString(request, "orderByType");
         String sortType = "";
-		// and pagination.  Get values from preferences if parameters are not set.
-		PortalPreferences prefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
+    // and pagination.  Get values from preferences if parameters are not set.
+    PortalPreferences prefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
         if (orderByCol != null && !orderByCol.equals("")) {
             prefs.setValue(portletName, "archived-courses-order-by-col", orderByCol);
@@ -91,17 +91,17 @@
             }
         }
 
-		if(orderByType != null && !orderByType.equals("")){
-			prefs.setValue(portletName, "archived-courses-order-by-type", orderByType);
-		}else{
-			orderByType = prefs.getValue(portletName, "archived-courses-order-by-type");
-			if (orderByType == null) orderByType = "desc";
-		}
+    if(orderByType != null && !orderByType.equals("")){
+      prefs.setValue(portletName, "archived-courses-order-by-type", orderByType);
+    }else{
+      orderByType = prefs.getValue(portletName, "archived-courses-order-by-type");
+      if (orderByType == null) orderByType = "desc";
+    }
 
- 	searchContainer.setOrderByCol(sortType);
-	searchContainer.setOrderByType(orderByType);
+  searchContainer.setOrderByCol(sortType);
+  searchContainer.setOrderByType(orderByType);
 
-	// Get the results.  "results" is a variable defined within the search-container-results tag.
+  // Get the results.  "results" is a variable defined within the search-container-results tag.
     // Dynamic sort enabled - allowing post-query sort by title, updatedDate, CompletionStatus, UserRating
     // Dynamic sort will return a maximum of 500 courseRecords.
     Boolean dynamicSortEnabled = true;
@@ -129,26 +129,26 @@
 
 //System.out.print("\n filterType =" + filterType + "\n sortType = " + sortType + " asc/desc order type = " + orderByType + "\n total returned by count query = " + total + " size of result list = " + courseRecordQueryResults.size());
 
-	searchContainer.setResults(courseRecordQueryResults);
-	searchContainer.setTotal(total);
+  searchContainer.setResults(courseRecordQueryResults);
+  searchContainer.setTotal(total);
 
-	// Set the pagination sublist of results on the page.
-	pageContext.setAttribute("results", courseRecordQueryResults);
-	pageContext.setAttribute("total", total);
+  // Set the pagination sublist of results on the page.
+  pageContext.setAttribute("results", courseRecordQueryResults);
+  pageContext.setAttribute("total", total);
 %>
 
-		</liferay-ui:search-container-results>
+    </liferay-ui:search-container-results>
 
-		<liferay-ui:search-container-row className="CourseRecordQueryResult" modelVar="courseRecordQueryResult" rowVar="thisrow">
-			<%
+    <liferay-ui:search-container-row className="CourseRecordQueryResult" modelVar="courseRecordQueryResult" rowVar="thisrow">
+      <%
             // hard-coded:
             boolean isPurchased = false;
             String buttonCssClass = "button";
 
             CourseRecord courseRecord = courseRecordQueryResult.getCourseRecord();
-			Course course = courseRecordQueryResult.getCourse();
-			Double userRating = 0.0;
-			if (courseRecordQueryResult.getUserRating() != null) userRating = courseRecordQueryResult.getUserRating();
+      Course course = courseRecordQueryResult.getCourse();
+      Double userRating = 0.0;
+      if (courseRecordQueryResult.getUserRating() != null) userRating = courseRecordQueryResult.getUserRating();
 
             String courseCompletionStatus = courseRecord.getCompletionStatus();
 
@@ -174,18 +174,18 @@
             ComponentRecordQueryResult resumeComponentRecord = ComponentRecordQueryUtils.getFirstUncompletedComponent(componentResults);
             if (resumeComponentRecord != null) resumeComponent = resumeComponentRecord.getComponent();
 
-            //Determine failedComponent for button failed retry of a course		
+            //Determine failedComponent for button failed retry of a course   
             Component failedComponent = null;
             if (courseCompletionStatus.equals(CompletionStatusType.FAILED_RETRY.getDbValue())) {
-				ComponentRecordQueryResult failedComponentRecord = ComponentRecordQueryUtils.getFirstFailedComponent(componentResults);
+        ComponentRecordQueryResult failedComponentRecord = ComponentRecordQueryUtils.getFirstFailedComponent(componentResults);
                 failedComponent = failedComponentRecord.getComponent();
             }
-			
-			try{
-				isPurchased = course.isPurchased(user.getUserId());
-			}catch(IndexOutOfBoundsException e) {
-				out.print("This user is for testing purposes only.  Commerce will not work as expected.");
-			}
+      
+      try{
+        isPurchased = course.isPurchased(user.getUserId());
+      }catch(IndexOutOfBoundsException e) {
+        out.print("This user is for testing purposes only.  Commerce will not work as expected.");
+      }
 
             request.setAttribute("buttonCssClass",buttonCssClass);
             request.setAttribute("isPurchased",isPurchased);
@@ -198,29 +198,29 @@
 
             %>
 
-			<liferay-ui:search-container-column-text name='<%= LanguageUtil.get(pageContext, "course-title-heading") %>' orderable="true" orderableProperty='<%= CourseRecordSortType.COURSE_TITLE.toString() %>'>
-				<div class="details">
-					<%
-					course.startSafeImageEnumeration(locale, LocaleUtil.getDefault());
-					Group group = GroupLocalServiceUtil.getGroup(course.getGroupId());
-					%>
-					<a href="<%= course.getUrl() %>" class="thumbnail-link"><img src="<%= course.getSafeImage(0)
-						.getSmallImageUrl(themeDisplay) %>" class="course-mini-thumbnail" title="<%= course.getTitle(locale) %>"
-						alt="<%= course.getTitle(locale) %>" /></a>
-					<div class="course-description">
-						<h4 class="course-title" data-record-id="<%= courseRecord.getCourseRecordId() %>"><a href="<%= course.getUrl() %>"><%= course.getTitle(locale) %></a></h4>
-						<div class="organization"><a href="<%= course.getOwnerUrl(themeDisplay.getCompanyId()) %>"><%= course.getOwnerName(themeDisplay.getCompanyId()) %></a></div>
+      <liferay-ui:search-container-column-text name='<%= LanguageUtil.get(pageContext, "course-title-heading") %>' orderable="true" orderableProperty='<%= CourseRecordSortType.COURSE_TITLE.toString() %>'>
+        <div class="details">
+          <%
+          course.startSafeImageEnumeration(locale, LocaleUtil.getDefault());
+          Group group = GroupLocalServiceUtil.getGroup(course.getGroupId());
+          %>
+          <a href="<%= course.getUrl() %>" class="thumbnail-link"><img src="<%= course.getSafeImage(0)
+            .getSmallImageUrl(themeDisplay) %>" class="course-mini-thumbnail" title="<%= course.getTitle(locale) %>"
+            alt="<%= course.getTitle(locale) %>" /></a>
+          <div class="course-description">
+            <h4 class="course-title" data-record-id="<%= courseRecord.getCourseRecordId() %>"><a href="<%= course.getUrl() %>"><%= course.getTitle(locale) %></a></h4>
+            <div class="organization"><a href="<%= course.getOwnerUrl(themeDisplay.getCompanyId()) %>"><%= course.getOwnerName(themeDisplay.getCompanyId()) %></a></div>
 
-						<% if (course.hasNewerVersion()) {
-							Course newestVersion = course.getMostRecentVersion();
-							if (course.isRemoved()) { %>
-							<div class="portlet-msg-error"><%= LanguageUtil.format(pageContext, "course-superseded-removed", newestVersion.getUrl()) %></div>
-							<% } else { %>
-							<div class="portlet-msg-error"><%= LanguageUtil.format(pageContext, "course-superseded", newestVersion.getUrl()) %></div>
-							<% }
-						} else if (course.isRemoved()) { %>
-							<div class="portlet-msg-error"><%= LanguageUtil.get(pageContext, "course-removed") %></div>
-					 <% } else if (course.getVersionDate().compareTo(courseRecord.getUpdatedDate()) > 0) {
+            <% if (course.hasNewerVersion()) {
+              Course newestVersion = course.getMostRecentVersion();
+              if (course.isRemoved()) { %>
+              <div class="portlet-msg-error"><%= LanguageUtil.format(pageContext, "course-superseded-removed", newestVersion.getUrl()) %></div>
+              <% } else { %>
+              <div class="portlet-msg-error"><%= LanguageUtil.format(pageContext, "course-superseded", newestVersion.getUrl()) %></div>
+              <% }
+            } else if (course.isRemoved()) { %>
+              <div class="portlet-msg-error"><%= LanguageUtil.get(pageContext, "course-removed") %></div>
+           <% } else if (course.getVersionDate().compareTo(courseRecord.getUpdatedDate()) > 0) {
                            //loop to retrieve all components which were updated to display in alert
                            StringBuffer alertChangedComponent = new StringBuffer();
                            int alertChangedComponentCount = 0;
@@ -250,18 +250,18 @@
                             <%
                                 }
                         } %>
-						<dl>
-							<div class="course-attribute">
-								<dt><liferay-ui:message key="course-description-duration" />:</dt><dd><%= course.getFriendlyDuration(pageContext) %></dd>
-							</div>
-						</dl>
+            <dl>
+              <div class="course-attribute">
+                <dt><liferay-ui:message key="course-description-duration" />:</dt><dd><%= course.getFriendlyDuration(pageContext) %></dd>
+              </div>
+            </dl>
 
 
-						<ul class="toc" role="tree" aria-labelledby="contents-label-1">
-							<li role="treeitem"><span class="tree-description"><span class="state-collapsed"><liferay-ui:message key="show" /></span><span class="state-expanded"><liferay-ui:message key="hide" /></span> <span id="contents-label-1"><liferay-ui:message key="course-contents" /></span></span>
-								<ul role="group">
-									<%
-										int linkId = 1;
+            <ul class="toc" role="tree" aria-labelledby="contents-label-1">
+              <li role="treeitem"><span class="tree-description"><span class="state-collapsed"><liferay-ui:message key="show" /></span><span class="state-expanded"><liferay-ui:message key="hide" /></span> <span id="contents-label-1"><liferay-ui:message key="course-contents" /></span></span>
+                <ul role="group">
+                  <%
+                    int linkId = 1;
 
                                         for (ComponentRecordQueryResult componentResult : componentResults) {
 
@@ -274,18 +274,18 @@
                                                 componentRecord="<%=componentRecord%>" linkId="<%=linkId%>"
                                                 pageContext="<%=pageContext%>" componentIsResource="<%=false%>"></nter:component-list>
                                     <%
-											linkId++;
-										}
-									%>
-								</ul>
-							</li>
-						</ul>
+                      linkId++;
+                    }
+                  %>
+                </ul>
+              </li>
+            </ul>
                         <%
                         if (resourceResults.size()> 0) { %>
- 						<ul class="toc" role="tree" aria-labelledby="contents-label-1">
-							<li role="treeitem"><span class="tree-description"><span class="state-collapsed"><liferay-ui:message key="show" /></span><span class="state-expanded"><liferay-ui:message key="hide" /></span> <span id="contents-label-1"><liferay-ui:message key="course-resources" /></span></span>
-								<ul role="group">
-									<%
+            <ul class="toc" role="tree" aria-labelledby="contents-label-1">
+              <li role="treeitem"><span class="tree-description"><span class="state-collapsed"><liferay-ui:message key="show" /></span><span class="state-expanded"><liferay-ui:message key="hide" /></span> <span id="contents-label-1"><liferay-ui:message key="course-resources" /></span></span>
+                <ul role="group">
+                  <%
                                         int linkId2 = 1;
                                         for (ComponentRecordQueryResult resourceResult : resourceResults) {
                                             Component resource = resourceResult.getComponent();
@@ -297,16 +297,16 @@
                                                 componentRecord="<%=componentRecord%>" linkId="<%=linkId2%>"
                                                 pageContext="<%=pageContext%>" componentIsResource="<%=true%>"></nter:component-list>
                                     <%
-											linkId2++;
-										}
-									%>
-								</ul>
-							</li>
-						</ul>
+                      linkId2++;
+                    }
+                  %>
+                </ul>
+              </li>
+            </ul>
                      <% } %>
-					</div>
+          </div>
 
-					<ul class="actions">
+          <ul class="actions">
                          <li>
                              <nter:course-button buttonCssClass="<%=buttonCssClass%>" isPurchased="<%=isPurchased%>"
                                                     course="<%=course%>" courseRecord="<%=courseRecord%>" finishedComponentCount="<%=finishedComponentCount%>"
@@ -315,77 +315,76 @@
                          </li>
 
                         <li><button class="remove-course" data-url="<portlet:actionURL name='updateRemoved' windowState='<%= LiferayWindowState.EXCLUSIVE.toString() %>'/>" data-id-name="courseRecordId" data-id="<%= courseRecord.getCourseRecordId() %>" data-flag-name="removed"><liferay-ui:message key="course-actions-remove" /></button></li>
-					</ul>
-				</div>
-			</liferay-ui:search-container-column-text>
+          </ul>
+        </div>
+      </liferay-ui:search-container-column-text>
 
-			<liferay-ui:search-container-column-text name='<%= LanguageUtil.get(pageContext, "course-status-heading") %>' orderable="true"  orderableProperty="<%= CourseRecordSortType.COMPLETION_STATUS.toString() %>">
-				<%
-					String courseStatus;
-					String statusClass = "";
-					String completionStatus = courseRecord.getCompletionStatus();
-					if (completionStatus.equals(CompletionStatusType.IN_PROGRESS.getDbValue()) && (activeComponentCount > 0 || finishedComponentCount > 0)) {
-						courseStatus = LanguageUtil.get(pageContext, "course-status-started");
-						statusClass = "progress";
-					} else if (completionStatus.equals(CompletionStatusType.COMPLETED.getDbValue())) {
-						courseStatus = LanguageUtil.get(pageContext, "course-status-complete");
-						statusClass = "complete";
-					} else if (completionStatus.equals(CompletionStatusType.FAILED.getDbValue())) {
-                        courseStatus = LanguageUtil.get(pageContext, "course-status-failed");
-						statusClass = "failed";
-                    } else if (completionStatus.equals(CompletionStatusType.FAILED_RETRY.getDbValue())) {
-                        courseStatus = LanguageUtil.get(pageContext, "course-status-failed");
-						statusClass = "failed failed-retry";
-                    } else {
-						courseStatus = LanguageUtil.get(pageContext, "course-status-not-started");
-						statusClass = "notstarted";
-					}
+      <liferay-ui:search-container-column-text name='<%= LanguageUtil.get(pageContext, "course-status-heading") %>' orderable="true"  orderableProperty="<%= CourseRecordSortType.COMPLETION_STATUS.toString() %>">
+        <%
+          String courseStatus;
+          String statusClass = "";
+          String completionStatus = courseRecord.getCompletionStatus();
+          if (completionStatus.equals(CompletionStatusType.IN_PROGRESS.getDbValue()) && (activeComponentCount > 0 || finishedComponentCount > 0)) {
+            courseStatus = LanguageUtil.get(pageContext, "course-status-started");
+            statusClass = "progress";
+          } else if (completionStatus.equals(CompletionStatusType.COMPLETED.getDbValue())) {
+            courseStatus = LanguageUtil.get(pageContext, "course-status-complete");
+            statusClass = "complete";
+          } else if (completionStatus.equals(CompletionStatusType.FAILED.getDbValue())) {
+            courseStatus = LanguageUtil.get(pageContext, "course-status-failed");
+            statusClass = "failed";
+          } else if (completionStatus.equals(CompletionStatusType.FAILED_RETRY.getDbValue())) {
+            courseStatus = LanguageUtil.get(pageContext, "course-status-failed");
+            statusClass = "failed failed-retry";
+          } else {
+            courseStatus = LanguageUtil.get(pageContext, "course-status-not-started");
+            statusClass = "notstarted";
+          }
 
-					thisrow.setClassName(statusClass);
+          thisrow.setClassName(statusClass);
 
-                    if (completionStatus.equals(CompletionStatusType.IN_PROGRESS.getDbValue()) && (activeComponentCount > 0 || finishedComponentCount > 0)) {
-                        String[] callout_args = {Integer.toString(finishedComponentCount), Integer.toString(totalComponentCount)};
-                        String calloutText = LanguageUtil.format(pageContext, "course-status-component-completion", callout_args);
-                %>
-                        <strong class="course-status-message"><%= courseStatus %></strong>
-						<p><%= calloutText %></p>
-                <%
-                    } else {
-				%>
-                        <strong class="course-status-message"><%= courseStatus %></strong>
-						<% if (completionStatus.equals(CompletionStatusType.FAILED_RETRY.getDbValue())) { %>
-							<p><%= LanguageUtil.get(pageContext, "course-status-retry") %></p>
-						<% } %>
-                <%
-                   }
-				%>
+          if (completionStatus.equals(CompletionStatusType.IN_PROGRESS.getDbValue()) && (activeComponentCount > 0 || finishedComponentCount > 0)) {
+            String[] callout_args = {Integer.toString(finishedComponentCount), Integer.toString(totalComponentCount)};
+            String calloutText = LanguageUtil.format(pageContext, "course-status-component-completion", callout_args);
+            %>
+            <strong class="course-status-message"><%= courseStatus %></strong>
+            <p><%= calloutText %></p>
+            <%
+          } else {
+            %>
+            <strong class="course-status-message"><%= courseStatus %></strong>
+            <% if (completionStatus.equals(CompletionStatusType.FAILED_RETRY.getDbValue())) { %>
+              <p><%= LanguageUtil.get(pageContext, "course-status-retry") %></p>
+            <% }
+          }
+        %>
 
-			</liferay-ui:search-container-column-text>
+      </liferay-ui:search-container-column-text>
 
-			<liferay-ui:search-container-column-text name='<%= LanguageUtil.get(pageContext, "course-visited-heading") %>' orderable="true"  orderableProperty="<%= CourseRecordSortType.UPDATED_DATE.toString() %>">
-				<%= courseRecord.getFriendlyUpdatedDate(pageContext) %>
-			</liferay-ui:search-container-column-text>
+      <liferay-ui:search-container-column-text name='<%= LanguageUtil.get(pageContext, "course-visited-heading") %>' orderable="true"  orderableProperty="<%= CourseRecordSortType.UPDATED_DATE.toString() %>">
+        <%= courseRecord.getFriendlyUpdatedDate(pageContext) %>
+      </liferay-ui:search-container-column-text>
 
-			<liferay-ui:search-container-column-text name='<%= LanguageUtil.get(pageContext, "course-rating-heading") %>' orderable="true" orderableProperty="<%= CourseRecordSortType.USER_RATING.toString() %>">
+      <liferay-ui:search-container-column-text name='<%= LanguageUtil.get(pageContext, "course-rating-heading") %>' orderable="true" orderableProperty="<%= CourseRecordSortType.USER_RATING.toString() %>">
                 <%
                     if (userRating > 0.0) {
-         		%>
+            %>
                         <liferay-ui:ratings-score score="<%= userRating %>" />
                 <%
                     } else {
                 %>
                         <div><liferay-ui:message key="no-course-review-for-user" /></div>
-						<a href="<%= course.getUrl() %>#review"><liferay-ui:message key="course-actions-review" /></a>
+            <a href="<%= course.getUrl() %>#review"><liferay-ui:message key="course-actions-review" /></a>
                 <%
                     }
                 %>
-			</liferay-ui:search-container-column-text>
+      </liferay-ui:search-container-column-text>
 
-		</liferay-ui:search-container-row>
-		<liferay-ui:search-iterator paginate="<%= false %>" />
+    </liferay-ui:search-container-row>
+    <liferay-ui:search-iterator paginate="<%= false %>" />
 
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="article" />
-	</liferay-ui:search-container>
+    <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="article" />
+  </liferay-ui:search-container>
 </div>
 
 
