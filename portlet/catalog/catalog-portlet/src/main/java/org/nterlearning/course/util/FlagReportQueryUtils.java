@@ -171,12 +171,13 @@ public final class FlagReportQueryUtils {
     public static List<FlagReportMasterSetResult> getMasterSet(List<FlagReportQueryResult> resultList) {
         List<FlagReportMasterSetResult> mostRecentFlagReportSet = new ArrayList<FlagReportMasterSetResult>();  //rollup of flagReportResult
 
+        ArrayList<String> reasonList = new ArrayList<String>();
+
         if (resultList.size() >= 1) {
             Collections.sort(resultList, new FlagRptClassNameIdAndPkDateComparator());
 
             FlagReportQueryResult flagReportSetMaster = resultList.get(0);
-            String flagReasonMaster = "~" + flagReportSetMaster.getFlagReport().getFlagReason();
-            String flagReasonSave = flagReportSetMaster.getFlagReport().getFlagReason();
+            reasonList.add(flagReportSetMaster.getFlagReport().getFlagReason());
             String statusMaster = "Processed";
             boolean statusHandler = false;
 
@@ -187,13 +188,13 @@ public final class FlagReportQueryUtils {
                     mostRecentFlagReportSet.add(new FlagReportMasterSetResult(flagReportSetMaster.getFlagReportStats(),
                             flagReportSetMaster.getFlagReport(), flagReportSetMaster.getModifiedDate(),
                             flagReportSetMaster.getUserDisplay(), flagReportSetMaster.getContentType(),
-                            flagReportSetMaster.getFlagReport().getContent(), flagReasonMaster, statusMaster,
+                            flagReportSetMaster.getFlagReport().getContent(), reasonList, statusMaster,
                             getReportStatsSummary(flagReportSetMaster),
                             getUnmoderatedReportCnt(flagReportSetMaster)));
 
                     flagReportSetMaster = result;
-                    flagReasonMaster = "~" + result.getFlagReport().getFlagReason();
-                    flagReasonSave = result.getFlagReport().getFlagReason();
+                    reasonList = new ArrayList<String>();
+                    reasonList.add(result.getFlagReport().getFlagReason());
 
                     if (result.getFlagReport().getStatus() == WorkflowConstants.STATUS_PENDING) {
                         //check to see if assigned to an admin yet
@@ -212,9 +213,9 @@ public final class FlagReportQueryUtils {
 
                 } else {
 
-                    if (!result.getFlagReport().getFlagReason().equalsIgnoreCase(flagReasonSave)) {
-                        flagReasonMaster = (flagReasonMaster + "<br/>~" + result.getFlagReport().getFlagReason());
-                        flagReasonSave = result.getFlagReport().getFlagReason();
+                    boolean newReason = determineNewReason(result.getFlagReport().getFlagReason(),reasonList);
+                    if (newReason) {
+                        reasonList.add(result.getFlagReport().getFlagReason());
                     }
 
                     if (result.getFlagReport().getStatus() == WorkflowConstants.STATUS_PENDING) {
@@ -233,11 +234,22 @@ public final class FlagReportQueryUtils {
             mostRecentFlagReportSet.add(new FlagReportMasterSetResult(flagReportSetMaster.getFlagReportStats(),
                     flagReportSetMaster.getFlagReport(), flagReportSetMaster.getModifiedDate(),
                     flagReportSetMaster.getUserDisplay(), flagReportSetMaster.getContentType(),
-                    flagReportSetMaster.getFlagReport().getContent(), flagReasonMaster, statusMaster,
+                    flagReportSetMaster.getFlagReport().getContent(), reasonList, statusMaster,
                     getReportStatsSummary(flagReportSetMaster),
                     getUnmoderatedReportCnt(flagReportSetMaster)));
         }
         return mostRecentFlagReportSet;
+    }
+
+    private static boolean determineNewReason(String flagReason, ArrayList<String> reasonList) {
+        boolean newValue = true;
+        for (String reason : reasonList) {
+            if (flagReason .equalsIgnoreCase(reason)) {
+                newValue = false;
+                break;
+            }
+        }
+        return newValue;
     }
 
 	private static Log _log = LogFactoryUtil.getLog(FlagReportQueryUtils.class);
