@@ -133,15 +133,6 @@ public class RegistryUtil {
     }
 
     public static InstitutionBean getInstitutionByName(String name) {
-
-        InstitutionBean inst = getRegistryService().getInstitutionByName(name);
-        for (ServiceBean service : inst.getServiceBeans()) {
-          System.out.println(
-           "RegistryUtil.getInstitutionByName.service [" +
-           service.getName() + "] status [" + service.getActiveStatus() + "]");
-        }
-
-
         return getRegistryService().getInstitutionByName(name);
     }
 
