@@ -185,14 +185,14 @@
                             }
 
 							String statusClass = "";
-							if (completionStatus.equals(CompletionStatusType.IN_PROGRESS.getDbValue())) {
+							if (completionStatus.equals(CompletionStatusType.IN_PROGRESS.getDbValue()) && (activeComponentCount > 0 || finishedComponentCount > 0)) {
 								statusClass = "progress";
 							} else if (completionStatus.equals(CompletionStatusType.COMPLETED.getDbValue())) {
 								statusClass = "complete";
 							} else if (completionStatus.equals(CompletionStatusType.FAILED.getDbValue())) {
 								statusClass = "failed";
 							} else if (completionStatus.equals(CompletionStatusType.FAILED_RETRY.getDbValue())) {
-								statusClass = "failed";
+								statusClass = "failed failed-retry";
 							} else {
 								statusClass = "notstarted";
 							}
@@ -212,7 +212,7 @@
                             request.setAttribute("resumeComponent", resumeComponent);
                             request.setAttribute("failedComponent", failedComponent);
                     %>
-                    <li class='course <%= statusClass %>'><article>
+                    <li class='course <%= statusClass %>' data-course-id='<%= course.getCourseId() %>'><article>
                         <a href="<%= course.getUrl() %>" class="thumbnail-link"><img src='<%= course.getSafeImage(0)
                         .getSmallImageUrl(themeDisplay) %>' class="course-thumbnail" title="<%= course.getTitle(locale) %>"
 						alt="<%= course.getTitle(locale) %>" /></a>
@@ -226,9 +226,9 @@
 							if (course.hasNewerVersion()) {
 								Course newestVersion = course.getMostRecentVersion();
 								if (course.isRemoved()) { %>
-									<div class="portlet-msg-error"><%= LanguageUtil.format(pageContext, "course-superseded-removed", newestVersion.getUrl()) %></div>
+									<div class="portlet-msg-error new-version"><%= LanguageUtil.format(pageContext, "course-superseded-removed", newestVersion.getUrl()) %></div>
 								<% } else { %>
-									<div class="portlet-msg-error"><%= LanguageUtil.format(pageContext, "course-superseded", newestVersion.getUrl()) %></div>
+									<div class="portlet-msg-error new-version"><%= LanguageUtil.format(pageContext, "course-superseded", newestVersion.getUrl()) %></div>
 								<%  }
 
 							} else if (course.isRemoved()) { %>
@@ -256,11 +256,11 @@
                                 }
                                 if (alertChangedComponentCount == 0) {
 								%>
-                                    <div class="portlet-msg-alert"><%= LanguageUtil.get(pageContext, "course-updated") %> </div>
+                                    <div class="portlet-msg-alert update"><%= LanguageUtil.get(pageContext, "course-updated") %> </div>
 								<% } else if (alertChangedComponentCount == 1) { %>
-                                    <div class="portlet-msg-alert"><%= LanguageUtil.format(pageContext, "course-updated-with-one-component",alertChangedComponent) %> </div>
+                                    <div class="portlet-msg-alert update"><%= LanguageUtil.format(pageContext, "course-updated-with-one-component",alertChangedComponent) %> </div>
 								<% } else { %>
-                                    <div class="portlet-msg-alert"><%= LanguageUtil.format(pageContext, "course-updated-with-many-component",alertChangedComponent) %> </div>
+                                    <div class="portlet-msg-alert update"><%= LanguageUtil.format(pageContext, "course-updated-with-many-component",alertChangedComponent) %> </div>
 								<%
                                 }
 							}
