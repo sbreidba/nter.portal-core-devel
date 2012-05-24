@@ -77,7 +77,7 @@
             String contentType = flagReportMasterSetResult.getContentType();
             String userDisplay = flagReportMasterSetResult.getUserDisplay();
             String mostRecentContent = flagReportMasterSetResult.getMostRecentContent();
-            String allFlagReasons = flagReportMasterSetResult.getAllFlagReasons();
+            ArrayList<String> allFlagReasons = flagReportMasterSetResult.getAllFlagReasons();
             String rollupStatus = flagReportMasterSetResult.getRollupStatus();
         %>
         <liferay-ui:search-container-column-text
@@ -98,7 +98,16 @@
 		</liferay-ui:search-container-column-text>
         <liferay-ui:search-container-column-text
             name="Reason">
-            <%= allFlagReasons %>
+        <% if (allFlagReasons.size() > 0) {  %>
+            <ul>
+            <% for (String reason:allFlagReasons) {  %>
+                <li><%= reason %></li>
+            <% } %>
+            </ul>
+        <% } else { %>
+                <%= "unknown" %>
+        <% }%>
+
         </liferay-ui:search-container-column-text>
         <liferay-ui:search-container-column-text
             name="Status">

@@ -24,6 +24,7 @@ package org.nterlearning.course.util;
 import org.nterlearning.datamodel.catalog.model.FlagReport;
 import org.nterlearning.datamodel.catalog.model.FlagReportStats;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public final class FlagReportMasterSetResult {
@@ -34,13 +35,13 @@ public final class FlagReportMasterSetResult {
     private final String userDisplay;
     private final String contentType;
     private final String mostRecentContent;
-    private final String allFlagReasons;
+    private final ArrayList<String> allFlagReasons;
     private final String rollupStatus;
     private final String statsSummary;
     private final long unmoderatedReportCnt;
 
     FlagReportMasterSetResult(FlagReportStats flagReportStats, FlagReport flagReport, Date modifiedDate, String userDisplay,
-                              String contentType, String mostRecentContent, String allFlagReasons, String rollupStatus,
+                              String contentType, String mostRecentContent, ArrayList<String> allFlagReasons, String rollupStatus,
                               String statsSummary, long unmoderatedReportCnt) {
         if (flagReport == null) {
             throw new IllegalArgumentException("flagReport cannot be null");
@@ -82,7 +83,7 @@ public final class FlagReportMasterSetResult {
         return mostRecentContent;
     }
 
-    public String getAllFlagReasons() {
+    public ArrayList<String> getAllFlagReasons() {
         return allFlagReasons;
     }
 

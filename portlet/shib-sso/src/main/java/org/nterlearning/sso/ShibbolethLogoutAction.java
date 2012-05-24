@@ -53,7 +53,7 @@ public class ShibbolethLogoutAction extends Action {
             response.sendRedirect(logoutRedirectUrl);
         }
         catch (Exception e) {
-            _log.error(e, e);
+            _log.error(e);
         }
     }
 

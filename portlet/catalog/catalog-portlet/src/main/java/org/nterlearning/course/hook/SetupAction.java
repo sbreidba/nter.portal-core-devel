@@ -71,13 +71,6 @@ public class SetupAction extends SimpleAction {
     protected void doRun(long companyId) {
         createExpandoTables(companyId);
         createTestUsers(companyId);
-        
-        try {
-        	ReportReaper.startReaping();
-        }
-        catch(Exception e) {
-        	mLog.error(ExceptionUtils.getFullStackTrace(e));
-        }
     }
 
 
