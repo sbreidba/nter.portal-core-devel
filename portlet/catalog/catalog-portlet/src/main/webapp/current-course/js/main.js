@@ -49,15 +49,12 @@ AUI().ready('liferay-portlet-url', function(A) {
 	function trackCourseEvent(action, event) {
 		var course = event.currentTarget.ancestor('.course');
 		var course_id = course.getAttribute('data-course-id');
-		var completion_status = course.getAttribute('data-completion-status');
-		var status_map = {
-			"Not Started" : 1,
-			"In Progress" : 2,
-			"Failed Retry" : 3,
-			"Failed" : 4,
-			"Completed" : 5
-		};
-		completion_status = status_map[completion_status];
+		var completion_status = 0;
+		if (course.hasClass('notstarted')) completion_status = 1;
+		else if (course.hasClass('progress')) completion_status = 2;
+		else if (course.hasClass('failed-retry')) completion_status = 3;
+		else if (course.hasClass('failed')) completion_status = 4;
+		else if (course.hasClass('complete')) completion_status = 5;
 		if (typeof _trackEvent == 'undefined') return false;
 		_trackEvent('recent courses', action, course_id, completion_status);
 	}
@@ -77,12 +74,11 @@ AUI().ready('liferay-portlet-url', function(A) {
 	// start/continue/retry buttons, write course review button
 	section.all('.actions .button').on('click', function (event) {
 		var course = event.currentTarget.ancestor('.course');
-		var completion_status = course.getAttribute('data-completion-status');
-		if (completion_status == 'Not Started') trackCourseEvent('start course', event);
-		else if (completion_status == 'In Progress') trackCourseEvent('continue course', event);
-		else if (completion_status == 'Failed Retry') trackCourseEvent('retry course', event);
-		else if ((completion_status == 'Completed' || completion_status == 'Failed')
-			&& course.getAttribute('href').indexOf('course-details' > -1))
+		if (course.hasClass('notstarted')) trackCourseEvent('start course', event);
+		else if (course.hasClass('progress')) trackCourseEvent('continue course', event);
+		else if (course.hasClass('failed-retry')) trackCourseEvent('retry course', event);
+		else if ((course.hasClass('complete') || course.hasClass('failed'))
+			&& event.currentTarget.getAttribute('href').indexOf('course-details' > -1))
 				trackCourseEvent('go review course', event);
 	});
 });
