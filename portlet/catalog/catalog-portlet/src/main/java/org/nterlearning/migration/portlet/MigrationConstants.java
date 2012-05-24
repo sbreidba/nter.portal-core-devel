@@ -58,10 +58,6 @@ public class MigrationConstants {
     public static final String MB_CATEGORY_MIGRATION_PATH = System.getenv("CATALINA_BASE") + File.separatorChar + "webapps" +
             File.separatorChar + "nter-catalog-portlet" + File.separatorChar + "course-feeds" + File.separatorChar + MB_CATEGORY_MIGRATION_FILE_NAME;
 
-    public static final String MB_THREAD_MIGRATION_FILE_NAME = "mb_thread_migration_extract.txt";
-    public static final String MB_THREAD_MIGRATION_PATH = System.getenv("CATALINA_BASE") + File.separatorChar + "webapps" +
-            File.separatorChar + "nter-catalog-portlet" + File.separatorChar + "course-feeds" + File.separatorChar + MB_THREAD_MIGRATION_FILE_NAME;
-
     public static final String MB_MESSAGE_MIGRATION_FILE_NAME = "mb_message_migration_extract.txt";
     public static final String MB_MESSAGE_MIGRATION_PATH = System.getenv("CATALINA_BASE") + File.separatorChar + "webapps" +
             File.separatorChar + "nter-catalog-portlet" + File.separatorChar + "course-feeds" + File.separatorChar + MB_MESSAGE_MIGRATION_FILE_NAME;

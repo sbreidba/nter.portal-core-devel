@@ -37,10 +37,8 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageConstants;
-import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil;
@@ -57,7 +55,6 @@ import org.nterlearning.utils.PortalProperties;
 import org.nterlearning.utils.PortalPropertiesUtil;
 import org.nterlearning.utils.ReviewUtil;
 
-import javax.management.MBeanTrustPermission;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import java.io.*;
@@ -1330,6 +1327,7 @@ public class MigrationPortlet extends MVCPortlet {
                 tempSubject = tempSubject.replace("<br />", "\n");
                 String tempBody = dataValue[13].replace("<p />", "\r\n");
                 tempBody = tempBody.replace("<br />", "\n");
+                tempBody = tempBody.replace("<tab/>", "\t");
                 messageEntry.setSubject(tempSubject);
                 messageEntry.setBody(tempBody);
                 if ("1".equals(dataValue[14])) {
