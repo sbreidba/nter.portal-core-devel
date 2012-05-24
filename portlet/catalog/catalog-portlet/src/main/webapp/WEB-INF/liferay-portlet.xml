@@ -1,0 +1,250 @@
+<?xml version="1.0"?>
+<!--
+  National Training and Education Resource (NTER)
+  Copyright (C) 2012 SRI International
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation; either version 2 of the License, or (at
+  your option) any later version.
+
+  This program is distributed in the hope that it will be useful, but
+  WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program; if not, write to the Free Software
+  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  02110-1301, USA.
+  -->
+
+<!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.1.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_1_0.dtd">
+
+<liferay-portlet-app>
+
+    <!-- course carousel -->
+    <portlet>
+        <portlet-name>course-carousel</portlet-name>
+        <icon>/course-carousel/images/icon.png</icon>
+        <instanceable>true</instanceable>
+        <header-portlet-javascript>/course-carousel/js/carousel.js</header-portlet-javascript>
+        <footer-portlet-javascript>/course-carousel/js/main.js</footer-portlet-javascript>
+        <css-class-wrapper>course-carousel-portlet</css-class-wrapper>
+    </portlet>
+
+    <!-- course listing -->
+    <portlet>
+        <portlet-name>course-listing</portlet-name>
+        <icon>/course-listing/images/icon.png</icon>
+        <instanceable>true</instanceable>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/anim-custom.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/tree-view-html.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/course-listing/js/main.js</footer-portlet-javascript>
+        <css-class-wrapper>course-listing-portlet</css-class-wrapper>
+    </portlet>
+
+    <!-- course details -->
+    <portlet>
+        <portlet-name>course-details</portlet-name>
+        <icon>/course-details/icon.png</icon>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/anim-custom.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/tree-view-html.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/course-details/js/course-thumbnails.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/course-details/js/course-popup.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/course-details/js/main.js</footer-portlet-javascript>
+        <css-class-wrapper>course-details-portlet</css-class-wrapper>
+    </portlet>
+
+    <!-- component details -->
+    <portlet>
+        <portlet-name>component-details</portlet-name>
+        <icon>/component-details/images/icon.png</icon>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/anim-custom.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/tree-view-html.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/component-details/js/main.js</footer-portlet-javascript>
+        <css-class-wrapper>component-details-portlet</css-class-wrapper>
+    </portlet>
+
+    <!-- course history - current course -->
+    <portlet>
+        <portlet-name>current-course</portlet-name>
+        <icon>/current-course/images/icon.png</icon>
+        <instanceable>true</instanceable>
+        <footer-portlet-javascript>/current-course/js/main.js</footer-portlet-javascript>
+        <css-class-wrapper>current-course-portlet</css-class-wrapper>
+    </portlet>
+
+    <!--course history - archived courses -->
+    <portlet>
+        <portlet-name>archived-courses</portlet-name>
+        <icon>/archived-courses/images/icon.png</icon>
+        <instanceable>false</instanceable>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/anim-custom.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/tree-view-html.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/accessible-dialog.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/remove.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/archived-courses/js/main.js</footer-portlet-javascript>
+        <css-class-wrapper>archived-courses-portlet</css-class-wrapper>
+    </portlet>
+
+    <!-- course reviews -->
+    <portlet>
+        <portlet-name>course-reviews</portlet-name>
+        <icon>/course-reviews/images/icon.png</icon>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/anim-custom.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/remove.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/accessible-dialog.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/course-reviews/js/review-form.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/course-reviews/js/load-more.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/course-reviews/js/main.js</footer-portlet-javascript>
+        <css-class-wrapper>course-reviews-portlet</css-class-wrapper>
+    </portlet>
+
+    <!-- partner top courses -->
+    <portlet>
+        <portlet-name>partner-top-courses</portlet-name>
+        <icon>/partner-top-courses/images/icon.png</icon>
+        <instanceable>true</instanceable>
+        <footer-portlet-javascript>/partner-top-courses/js/main.js</footer-portlet-javascript>
+        <css-class-wrapper>partner-top-courses-portlet</css-class-wrapper>
+    </portlet>
+
+    <!-- course management control panel -->
+    <portlet>
+        <portlet-name>course-management-control-panel</portlet-name>
+        <icon>/course-management/images/icon.png</icon>
+        <control-panel-entry-category>content</control-panel-entry-category>
+        <control-panel-entry-weight>1.5</control-panel-entry-weight>
+        <header-portlet-css>/course-management/css/main.css</header-portlet-css>
+        <css-class-wrapper>course-management-control-panel-portlet</css-class-wrapper>
+    </portlet>
+
+    <!-- course records control panel -->
+    <portlet>
+        <portlet-name>course-records-control-panel</portlet-name>
+        <icon>/course-records/images/icon.png</icon>
+        <control-panel-entry-category>portal</control-panel-entry-category>
+        <control-panel-entry-weight>1.7</control-panel-entry-weight>
+        <header-portlet-css>/course-records/css/main.css</header-portlet-css>
+        <css-class-wrapper>course-records-control-panel-portlet</css-class-wrapper>
+    </portlet>
+
+    <!-- Feeds, control panel -->
+    <portlet>
+        <portlet-name>feeds</portlet-name>
+        <icon>/course-feeds/images/icon.png</icon>
+        <portlet-data-handler-class>org.nterlearning.atom.parser.portlet.AtomParserPortletDataHandler</portlet-data-handler-class>
+        <control-panel-entry-category>content</control-panel-entry-category>
+        <control-panel-entry-weight>1.6</control-panel-entry-weight>
+        <header-portlet-css>/course-feeds/css/main.css</header-portlet-css>
+        <css-class-wrapper>course-feeds-portlet</css-class-wrapper>
+    </portlet>
+
+    <!--flag report control panel -->
+    <portlet>
+        <portlet-name>flag-report-control-panel</portlet-name>
+        <icon>/flag-report/images/icon.png</icon>
+        <control-panel-entry-category>portal</control-panel-entry-category>
+        <control-panel-entry-weight>2.4</control-panel-entry-weight>
+        <asset-renderer-factory>
+              org.nterlearning.course.asset.AssetRendererFactory
+        </asset-renderer-factory>
+        <workflow-handler>
+             org.nterlearning.course.workflow.FlagReportWorkflowHandler
+        </workflow-handler>
+        <css-class-wrapper>flag-report-control-panel-portlet</css-class-wrapper>
+    </portlet>
+
+    <!--reports control panel-->
+    <portlet>
+        <portlet-name>reports-control-panel</portlet-name>
+        <icon>/reports/images/icon.png</icon>
+        <control-panel-entry-category>portal</control-panel-entry-category>
+        <control-panel-entry-weight>2.5</control-panel-entry-weight>
+        <css-class-wrapper>reports-control-panel-portlet</css-class-wrapper>
+    </portlet>
+
+    <!--migration control panel-->
+    <portlet>
+        <portlet-name>migration-control-panel</portlet-name>
+        <icon>/migration/images/icon.png</icon>
+        <control-panel-entry-category>portal</control-panel-entry-category>
+        <control-panel-entry-weight>3.1</control-panel-entry-weight>
+        <css-class-wrapper>migration-control-panel-portlet</css-class-wrapper>
+    </portlet>
+
+    <!-- course testing control panel -->
+    <portlet>
+        <portlet-name>course-testing-control-panel</portlet-name>
+        <icon>/course-testing/images/icon.png</icon>
+        <control-panel-entry-category>portal</control-panel-entry-category>
+        <control-panel-entry-weight>2.1</control-panel-entry-weight>
+        <css-class-wrapper>course-testing-control-panel-portlet</css-class-wrapper>
+    </portlet>
+   
+    <!-- crawl portlet -->
+    <portlet>
+        <portlet-name>crawl</portlet-name>
+        <icon>/nutch-crawler/images/icon.png</icon>
+        <control-panel-entry-category>portal</control-panel-entry-category>
+        <control-panel-entry-weight>2.2</control-panel-entry-weight>
+        <header-portlet-css>/nutch-crawler/css/main.css</header-portlet-css>
+        <footer-portlet-javascript>/nutch-crawler/js/main.js</footer-portlet-javascript>
+        <css-class-wrapper>crawl-portlet</css-class-wrapper>
+    </portlet>
+
+    <!-- course searches -->
+    <portlet>
+        <portlet-name>course-search</portlet-name>
+        <indexer-class>org.nterlearning.course.search.CourseIndexer</indexer-class>
+        <open-search-class>org.nterlearning.course.search.CourseOpenSearchImpl</open-search-class>
+        <instanceable>false</instanceable>
+        <add-default-resource>true</add-default-resource>
+    </portlet>
+
+    <!-- course-component searches -->
+    <portlet>
+        <portlet-name>component-search</portlet-name>
+        <indexer-class>org.nterlearning.course.search.ComponentIndexer</indexer-class>
+        <open-search-class>org.nterlearning.course.search.ComponentOpenSearchImpl</open-search-class>
+        <instanceable>false</instanceable>
+        <add-default-resource>true</add-default-resource>
+    </portlet>
+
+    <!-- external-search portlet -->
+    <portlet>
+        <portlet-name>external-search</portlet-name>
+        <open-search-class>org.nterlearning.course.search.ExternalOpenSearchImpl</open-search-class>
+        <instanceable>false</instanceable>
+    </portlet>
+
+    <!-- Unified Search -->
+    <portlet>
+        <portlet-name>unified-search</portlet-name>
+        <icon>/unified-search/images/icon.png</icon>
+        <instanceable>false</instanceable>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/anim-custom.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/tree-view-html.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/accessible-dialog.js</footer-portlet-javascript>
+        <footer-portlet-javascript>/../nter-shared-portlet/js/remove.js</footer-portlet-javascript>
+        <css-class-wrapper>search-portlet</css-class-wrapper>
+    </portlet>
+
+	<role-mapper>
+		<role-name>administrator</role-name>
+		<role-link>Administrator</role-link>
+	</role-mapper>
+	<role-mapper>
+		<role-name>guest</role-name>
+		<role-link>Guest</role-link>
+	</role-mapper>
+	<role-mapper>
+		<role-name>power-user</role-name>
+		<role-link>Power User</role-link>
+	</role-mapper>
+	<role-mapper>
+		<role-name>user</role-name>
+		<role-link>User</role-link>
+	</role-mapper>
+</liferay-portlet-app>
