@@ -72,7 +72,7 @@ AUI().ready('liferay-portlet-url', function(A) {
 	});
 	// link to new version course page
 	section.all('.new-version a').on('click', function (event) {
-		trackCourseEvent('go to new course version', event);
+		trackCourseEvent('go to other course version', event);
 	});
 	// start/continue/retry buttons, write course review button
 	section.all('.actions .button').on('click', function (event) {

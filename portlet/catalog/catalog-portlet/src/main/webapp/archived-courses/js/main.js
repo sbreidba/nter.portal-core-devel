@@ -118,7 +118,7 @@ AUI().ready('tree-view-html', 'removable', function(A) {
 	}, '.my-courses .resources a');
 	// link to new version course page
 	section.delegate('click', function (event) {
-		trackCourseEvent('go to new course version', event);
+		trackCourseEvent('go to other course version', event);
 	}, '.my-courses .new-version a');
 	// start/continue/retry buttons
 	section.delegate('click', function (event) {
