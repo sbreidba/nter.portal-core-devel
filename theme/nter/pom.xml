@@ -32,11 +32,17 @@
 	<version>6.1.2-SNAPSHOT</version>
 	<name>NTER Theme</name>
 
+    <properties>
+        <nter.base.theme.version>6.1.2-SNAPSHOT</nter.base.theme.version>
+        <liferay.theme.parent>org.nterlearning.portal:nter-base-theme:${nter.base.theme.version}</liferay.theme.parent>
+        <liferay.theme.type>vm</liferay.theme.type>
+    </properties>
+
 	<dependencies>
         <dependency>
             <groupId>org.nterlearning.portal</groupId>
             <artifactId>nter-base-theme</artifactId>
-            <version>6.1.2-SNAPSHOT</version>
+            <version>${nter.base.theme.version}</version>
             <type>war</type>
             <scope>provided</scope>
         </dependency>
@@ -84,8 +90,4 @@
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-	<properties>
-		<liferay.theme.parent>org.nterlearning:nter-base-theme:1.0.0-SNAPSHOT</liferay.theme.parent>
-		<liferay.theme.type>vm</liferay.theme.type>
-	</properties>
 </project>
