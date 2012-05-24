@@ -840,6 +840,10 @@ public class MigrationPortlet extends MVCPortlet {
                             mLog.warn("Inserting message as guest user");
                         }
 
+                        // Add tags using 'old' messageId
+                        String tagNames[] = addMessageTagInformation(messageId);
+                        serviceContext.setAssetTagNames(tagNames);
+
                         // Create MB root messages
                         mbMessage = MBMessageLocalServiceUtil.addMessage(userId, userName, groupId,
                                 category, subject, body, format, inputStreamOVPs, anonymous,
@@ -891,6 +895,10 @@ public class MigrationPortlet extends MVCPortlet {
                                 if (parentMessageId == newMapItem.getOldMessageId()) {
                                     long newThreadId = newMapItem.getNewThreadId();
                                     long newParentMessageId = newMapItem.getNewMessageId();
+
+                                    // Add tags using 'old' messageId
+                                    String tagNames[] = addMessageTagInformation(messageId);
+                                    serviceContext.setAssetTagNames(tagNames);
 
                                     mbMessage = MBMessageLocalServiceUtil.addMessage(userId, userName, groupId,
                                             category, newThreadId, newParentMessageId, subject, body, format, inputStreamOVPs, anonymous,
@@ -962,6 +970,31 @@ public class MigrationPortlet extends MVCPortlet {
             mLog.warn("Could not add find MBCategory: '" + name + "' for MB Message");
         }
         return category;
+    }
+
+    private static String[] addMessageTagInformation(long messageId)
+            throws IOException, SystemException {
+
+        String[] tagIds = new String[]{};
+        ArrayList<String> matchingTags = new ArrayList<String>();
+
+        // Extract list of tags
+        String tagFilename = MigrationConstants.MB_MESSAGE_TAGS_MIGRATION_PATH;
+        ArrayList<MbMessageTagExtract> tagList = readMbMessageTagsExtractAsArrayList(tagFilename);
+
+        for (MbMessageTagExtract tag:tagList) {
+            if (messageId == tag.getMessageId()) {
+                matchingTags.add(tag.getName());
+            }
+        }
+
+        if (!matchingTags.isEmpty()) {
+            tagIds = new String[matchingTags.size()];
+            for (int i = 0; i < matchingTags.size(); i++) {
+                tagIds[i] = matchingTags.get(i);
+            }
+        }
+        return tagIds;
     }
 
     /**
@@ -1355,6 +1388,31 @@ public class MigrationPortlet extends MVCPortlet {
             mLog.error("IO Exception processing file: " + fileName);
         } catch (ParseException e) {
             mLog.error("Parse Exception processing file: " + fileName + e);
+        }
+        return storeValues;
+    }
+
+    private static ArrayList<MbMessageTagExtract> readMbMessageTagsExtractAsArrayList(String fileName)
+            throws IOException {
+        ArrayList<MbMessageTagExtract> storeValues = new ArrayList<MbMessageTagExtract>();
+        try {
+            BufferedReader bufferedReader = new BufferedReader(
+                    new InputStreamReader(new FileInputStream(fileName), "UTF8"));
+
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                String dataValue[] = line.split("\t");
+                MbMessageTagExtract messageTagEntry = new MbMessageTagExtract();
+
+                messageTagEntry.setMessageId(Long.valueOf(dataValue[0]));
+                messageTagEntry.setName(dataValue[1]);
+
+                storeValues.add(messageTagEntry);
+            }
+        } catch (FileNotFoundException e) {
+            mLog.error("File not found: " + fileName);
+        } catch (IOException e) {
+            mLog.error("IO Exception processing file: " + fileName);
         }
         return storeValues;
     }
