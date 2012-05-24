@@ -27,7 +27,6 @@ public class UserExtract {
 
     private String ssoValue;
     private String mapperType;
-    private String orgName;
     private String screenName;
     private String emailAddress;
     private String firstName;
@@ -47,13 +46,6 @@ public class UserExtract {
     }
     public void setMapperType(String newValue) {
         mapperType = newValue;
-    }
-
-    public String getOrgName() {
-        return orgName;
-    }
-    public void setOrgName(String newValue) {
-        orgName = newValue;
     }
 
     public String getScreenName() {
