@@ -87,7 +87,7 @@
 
                          <div class="course-attribute">
 						    <dt><%= sectionDescription %>:</dt>
-								   <dd><a href="<%= resumeComponentHref %>" <% if (popup) { %>target="_blank"<% } %>><%= resumeComponentTitle %></a></dd>
+								   <dd><a class="next-section" href="<%= resumeComponentHref %>" <% if (popup) { %>target="_blank"<% } %>><%= resumeComponentTitle %></a></dd>
 				         </div>
 
     <%               }
@@ -96,7 +96,7 @@
     %>
                          <div class="course-attribute">
 						    <dt><%= sectionDescription %>:</dt>
-								   <dd><a href="<%= resumeComponentHref %>" <% if (popup) { %>target="_blank"<% } %>><%= resumeComponentTitle %></a></dd>
+								   <dd><a class="next-section" href="<%= resumeComponentHref %>" <% if (popup) { %>target="_blank"<% } %>><%= resumeComponentTitle %></a></dd>
 				         </div>
     <%          } // courseRecordCheck
 

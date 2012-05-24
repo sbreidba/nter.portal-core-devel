@@ -141,9 +141,27 @@ if (Validator.isNull(courseParam)) {
     PortalUtil.addPageSubtitle(course.getTitle(locale), PortalUtil.getHttpServletRequest(renderRequest));
     PortalUtil.addPageKeywords(course.getKeywords(locale), PortalUtil.getHttpServletRequest(renderRequest));	// add categories too?
     PortalUtil.addPageDescription(course.getDescription(locale), PortalUtil.getHttpServletRequest(renderRequest));
+
+    String statusClass = "";
+    if (courseRecord == null) {
+        statusClass = "noprogress";
+    } else {
+        String completionStatus = courseRecord.getCompletionStatus();
+        if (completionStatus.equals(CompletionStatusType.IN_PROGRESS.getDbValue()) && (activeComponentCount > 0 || finishedComponentCount > 0)) {
+            statusClass = "progress";
+        } else if (completionStatus.equals(CompletionStatusType.COMPLETED.getDbValue())) {
+            statusClass = "complete";
+        } else if (completionStatus.equals(CompletionStatusType.FAILED.getDbValue())) {
+            statusClass = "failed";
+        } else if (completionStatus.equals(CompletionStatusType.FAILED_RETRY.getDbValue())) {
+            statusClass = "failed failed-retry";
+        } else {
+            statusClass = "notstarted";
+        }
+    }
 %>
 
-<article class="course-details" itemscope itemtype="http://schema.org/CreativeWork">
+<article class="course-details <%= statusClass %>" itemscope itemtype="http://schema.org/CreativeWork" data-course-id="<%= course.getCourseId() %>">
 	<div class="course-image">
 	<%
 		course.startSafeImageEnumeration(locale, LocaleUtil.getDefault());
@@ -195,10 +213,10 @@ if (Validator.isNull(courseParam)) {
 		<% if (course.hasNewerVersion()) {
 			Course newestVersion = course.getMostRecentVersion();
 			if (course.isRemoved()) { %>
-			<div class="portlet-msg-error"><%= LanguageUtil.format(pageContext, "course-superseded-removed",
+			<div class="portlet-msg-error new-version"><%= LanguageUtil.format(pageContext, "course-superseded-removed",
 					newestVersion.getUrl()) %></div>
 			<% } else { %>
-			<div class="portlet-msg-error"><%= LanguageUtil.format(pageContext, "course-superseded",
+			<div class="portlet-msg-error new-version"><%= LanguageUtil.format(pageContext, "course-superseded",
 					newestVersion.getUrl()) %></div>
 			<% }
 		} else if (course.isRemoved()) { %>
@@ -219,7 +237,7 @@ if (Validator.isNull(courseParam)) {
 %>
         <div class="highlightbox">
             <h4 id="contents-label"><%= LanguageUtil.get(pageContext, "course-contents") %></h4>
-            <ul class="toc" role="tree" aria-labelledby="contents-label">
+            <ul class="toc components" role="tree" aria-labelledby="contents-label">
                 <%
                 int linkId=0;
                 for (ComponentQueryResult componentResult : componentResults) {
@@ -241,7 +259,7 @@ if (Validator.isNull(courseParam)) {
         if (resourceResults.size() > 0) { %>
         <div class="highlightbox">
             <h4 id="contents-label"><%= LanguageUtil.get(pageContext, "course-resources") %></h4>
-            <ul class="toc" role="tree" aria-labelledby="contents-label">
+            <ul class="toc resources" role="tree" aria-labelledby="contents-label">
                 <%
                 int linkId=0;
                 for (ComponentQueryResult resourceResult : resourceResults) {
@@ -268,7 +286,7 @@ if (Validator.isNull(courseParam)) {
 
         <div class="highlightbox">
             <h4 id="contents-label"><%= LanguageUtil.get(pageContext, "course-contents") %></h4>
-            <ul class="toc" role="tree" aria-labelledby="contents-label">
+            <ul class="toc components" role="tree" aria-labelledby="contents-label">
 <%
                 int linkId = 1;
                 for (ComponentRecordQueryResult componentResult : componentRecordResults) {
@@ -293,7 +311,7 @@ if (Validator.isNull(courseParam)) {
 
         <div class="highlightbox">
             <h4 id="contents-label"><%= LanguageUtil.get(pageContext, "course-resources") %></h4>
-            <ul class="toc" role="tree" aria-labelledby="contents-label">
+            <ul class="toc resources" role="tree" aria-labelledby="contents-label">
 <%
                 int linkId = 1;
                 for (ComponentRecordQueryResult resourceResult : resourceRecordResults) {

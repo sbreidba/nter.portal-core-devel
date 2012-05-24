@@ -89,4 +89,50 @@ AUI().ready('tree-view-html', 'removable', function(A) {
 	});
 	
 	Liferay.on('portletReady', function (cfg) { if (cfg.portlet.hasClass(portletClass)) { buttonSetup(); treeSetup(); tableSetup(); } });	// fires when portlet loads via ajax
+
+
+	function trackCourseEvent(action, event) {
+		var course = event.currentTarget.ancestor('.results-row');
+		var course_id = course.one('.details').getAttribute('data-course-id');
+		var completion_status = 0;
+		if (course.hasClass('notstarted')) completion_status = 1;
+		else if (course.hasClass('progress')) completion_status = 2;
+		else if (course.hasClass('failed-retry')) completion_status = 3;
+		else if (course.hasClass('failed')) completion_status = 4;
+		else if (course.hasClass('complete')) completion_status = 5;
+		if (typeof _trackEvent == 'undefined') return false;
+		_trackEvent('recent courses', action, course_id, completion_status);
+	}
+	var section = A.one('#main-content');
+	// course image and title
+	section.delegate('click', function (event) {
+		trackCourseEvent('go to course details', event);
+	}, '.my-courses .course-title a, .my-courses .thumbnail-link');
+	// next/failed/updated component
+	section.delegate('click', function (event) {
+		trackCourseEvent('go to specific course component', event);
+	}, '.my-courses .components a, .my-courses .update a');
+	// resources
+	section.delegate('click', function (event) {
+		trackCourseEvent('download course resource', event);
+	}, '.my-courses .resources a');
+	// link to new version course page
+	section.delegate('click', function (event) {
+		trackCourseEvent('go to other course version', event);
+	}, '.my-courses .new-version a');
+	// start/continue/retry buttons
+	section.delegate('click', function (event) {
+		var course = event.currentTarget.ancestor('.results-row');
+		if (course.hasClass('notstarted')) trackCourseEvent('start course', event);
+		else if (course.hasClass('progress')) trackCourseEvent('continue course', event);
+		else if (course.hasClass('failed-retry')) trackCourseEvent('retry course', event);
+	}, '.my-courses .actions .button:not(".review-course")');
+	// write review link
+	section.delegate('click', function (event) {
+		trackCourseEvent('go review course', event);
+	}, '.my-courses .review-link');
+	// remove course history
+	section.delegate('click', function (event) {
+		trackCourseEvent('remove course history', event);
+	}, '.my-courses .actions .remove-course');
 });
