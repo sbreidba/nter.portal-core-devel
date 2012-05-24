@@ -1062,20 +1062,19 @@ public class MigrationPortlet extends MVCPortlet {
                 UserExtract userEntry = new UserExtract();
                 userEntry.setSsoValue(dataValue[0]);
                 userEntry.setMapperType(dataValue[1]);
-                userEntry.setOrgName(dataValue[2]);
                 // remove any plus signs from screen name
-                String newScreenName = dataValue[3].replace("+", "_");
+                String newScreenName = dataValue[2].replace("+", "_");
                 userEntry.setScreenName(newScreenName);
-                userEntry.setEmailAddress(dataValue[4]);
-                userEntry.setFirstName(dataValue[5]);
-                userEntry.setMiddleName(dataValue[6]);
-                userEntry.setLastName(dataValue[7]);
+                userEntry.setEmailAddress(dataValue[3]);
+                userEntry.setFirstName(dataValue[4]);
+                userEntry.setMiddleName(dataValue[5]);
+                userEntry.setLastName(dataValue[6]);
                 // hardwire fix for user Rune with incorrect UTF-8 last name
                 if (userEntry.getFirstName() .equals("Rune") &&
                         userEntry.getEmailAddress() .equals("rune.sortun@kaefer.no")) {
                     userEntry.setLastName("S" + "\u00F8" + "rtun");
                 }
-                userEntry.setJobTitle(dataValue[8]);
+                userEntry.setJobTitle(dataValue[7]);
 
                 storeValues.add(userEntry);
             }
