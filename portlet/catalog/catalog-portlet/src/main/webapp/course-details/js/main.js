@@ -53,4 +53,45 @@ AUI().ready('tree-view-html', 'course-thumbnails', 'course-popup', function(A) {
 		});
 	}
 
+
+	var course = A.one('.course-details');
+	var course_id = course.getAttribute('data-course-id');
+	var completion_status = 0;	// stays 0 if there is no progress
+	if (course.hasClass('notstarted')) completion_status = 1;
+	else if (course.hasClass('progress')) completion_status = 2;
+	else if (course.hasClass('failed-retry')) completion_status = 3;
+	else if (course.hasClass('failed')) completion_status = 4;
+	else if (course.hasClass('complete')) completion_status = 5;
+	function trackCourseEvent(action, event) {
+		if (typeof _trackEvent == 'undefined') return false;
+		_trackEvent('recent courses', action, course_id, completion_status);
+	}
+	// next/failed/updated component
+	course.all('.components a').on('click', function (event) {
+		trackCourseEvent('go to specific course component', event);
+	});
+	// resources
+	course.all('.resources a').on('click', function (event) {
+		trackCourseEvent('download course resource', event);
+	});
+	// link to new version course page
+	course.all('.new-version a, .versions a').on('click', function (event) {
+		trackCourseEvent('go to other course version', event);
+	});
+	// start/continue/retry buttons, sign in button
+	course.all('.actions .join-course').on('click', function (event) {
+		var course = event.currentTarget.ancestor('.results-row');
+		if (course.ancestor('.signed-out').size == 0) {
+			if (completion_status == 0 || completion_status == 1) trackCourseEvent('start course', event);
+			else if (completion_status == 2) trackCourseEvent('continue course', event);
+			else if (completion_status == 3) trackCourseEvent('retry course', event);
+		} else {
+			trackCourseEvent('sign in for course', event);
+		}
+	});
+	// write review link
+	course.all('.actions .review-course').on('click', function (event) {
+		trackCourseEvent('go review course', event);
+	});
+
 });
