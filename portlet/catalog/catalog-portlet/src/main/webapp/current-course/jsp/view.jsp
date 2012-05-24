@@ -185,14 +185,14 @@
                             }
 
 							String statusClass = "";
-							if (completionStatus.equals(CompletionStatusType.IN_PROGRESS.getDbValue())) {
+							if (completionStatus.equals(CompletionStatusType.IN_PROGRESS.getDbValue()) && (activeComponentCount > 0 || finishedComponentCount > 0)) {
 								statusClass = "progress";
 							} else if (completionStatus.equals(CompletionStatusType.COMPLETED.getDbValue())) {
 								statusClass = "complete";
 							} else if (completionStatus.equals(CompletionStatusType.FAILED.getDbValue())) {
 								statusClass = "failed";
 							} else if (completionStatus.equals(CompletionStatusType.FAILED_RETRY.getDbValue())) {
-								statusClass = "failed";
+								statusClass = "failed failed-retry";
 							} else {
 								statusClass = "notstarted";
 							}
@@ -212,7 +212,7 @@
                             request.setAttribute("resumeComponent", resumeComponent);
                             request.setAttribute("failedComponent", failedComponent);
                     %>
-                    <li class='course <%= statusClass %>' data-completion-status='<%= (completionStatus.equals(CompletionStatusType.IN_PROGRESS.getDbValue()) && activeComponentCount == 0 && finishedComponentCount == 0) ? "Not Started" : completionStatus %>' data-course-id='<%= course.getCourseId() %>'><article>
+                    <li class='course <%= statusClass %>' data-course-id='<%= course.getCourseId() %>'><article>
                         <a href="<%= course.getUrl() %>" class="thumbnail-link"><img src='<%= course.getSafeImage(0)
                         .getSmallImageUrl(themeDisplay) %>' class="course-thumbnail" title="<%= course.getTitle(locale) %>"
 						alt="<%= course.getTitle(locale) %>" /></a>
