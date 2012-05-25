@@ -110,7 +110,7 @@
 						</c:when>
 						<c:otherwise> <!-- everyone may review -->
 							<c:choose>
-								<c:when test="<%= !themeDisplay.isSignedIn() %>">
+								<c:when test="<%= !themeDisplay.isSignedIn() || course.isRemoved() %>">
 									<liferay-ui:message key="no-course-reviews" /> <!-- tell them to sign in -->
 								</c:when>
 								<c:when test="<%= userHasTakenCourse %>">
