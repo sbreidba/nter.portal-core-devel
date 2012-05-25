@@ -29,7 +29,7 @@
 
 	<artifactId>nter-base-theme</artifactId>
 	<packaging>war</packaging>
-    <version>6.1.2-SNAPSHOT</version>
+    <version>6.1.2</version>
 	<name>base theme</name>
 
 	<dependencies>
