@@ -56,8 +56,14 @@
 		<div id="header-actions">
 			<div id="login-actions">
 			#if(!$is_signed_in)
+			    #set ($create_account_url = $portletURLFactory.create($request, "58", $page.getPlid(), "ACTION_PHASE"))
+                $create_account_url.setWindowState("maximized")
+                $create_account_url.setPortletMode("view")
+                $create_account_url.setParameter("saveLastPath", "0")
+                $create_account_url.setParameter("struts_action", "/login/create_account")
+
 				<a href="$sign_in_url" id="sign-in" rel="nofollow">$sign_in_text</a>
-				<a href="$themeDisplay.getURLCreateAccount().toString()" id="create-account">#language ("create-account")</a>
+				<a href="$create_account_url" id="create-account">#language ("create-account")</a>
 			#else
 				<span class="welcome-message">$user_greeting</span>
 				<a href="$company_url/account" id="account" rel="nofollow">#language("account")</a>
