@@ -259,10 +259,12 @@
 				<% } %>
 			<% } %>
 		<% } else { /* logged out */ %>
-			<% if (!expertReviews) { /* anyone can write full review */ %>
-				<a href="<%= themeDisplay.getURLSignIn() %>" class="button"><%= LanguageUtil.get(pageContext,"login-review-course") %></a>
-			<% } else { /* most users can only rate */ %>
-				<a href="<%= themeDisplay.getURLSignIn() %>" class="button"><%= LanguageUtil.get(pageContext,"login-rate-course") %></a>
+			<% if (!course.isRemoved()) { %>
+				<% if (!expertReviews) { /* anyone can write full review */ %>
+					<a href="<%= themeDisplay.getURLSignIn() %>" class="button"><%= LanguageUtil.get(pageContext,"login-review-course") %></a>
+				<% } else { /* most users can only rate */ %>
+					<a href="<%= themeDisplay.getURLSignIn() %>" class="button"><%= LanguageUtil.get(pageContext,"login-rate-course") %></a>
+				<% } %>
 			<% } %>
 		<% } %>
 	</div>
