@@ -110,7 +110,7 @@
 						</c:when>
 						<c:otherwise> <!-- everyone may review -->
 							<c:choose>
-								<c:when test="<%= !themeDisplay.isSignedIn() %>">
+								<c:when test="<%= !themeDisplay.isSignedIn() || course.isRemoved() %>">
 									<liferay-ui:message key="no-course-reviews" /> <!-- tell them to sign in -->
 								</c:when>
 								<c:when test="<%= userHasTakenCourse %>">
@@ -259,10 +259,12 @@
 				<% } %>
 			<% } %>
 		<% } else { /* logged out */ %>
-			<% if (!expertReviews) { /* anyone can write full review */ %>
-				<a href="<%= themeDisplay.getURLSignIn() %>" class="button"><%= LanguageUtil.get(pageContext,"login-review-course") %></a>
-			<% } else { /* most users can only rate */ %>
-				<a href="<%= themeDisplay.getURLSignIn() %>" class="button"><%= LanguageUtil.get(pageContext,"login-rate-course") %></a>
+			<% if (!course.isRemoved()) { %>
+				<% if (!expertReviews) { /* anyone can write full review */ %>
+					<a href="<%= themeDisplay.getURLSignIn() %>" class="button"><%= LanguageUtil.get(pageContext,"login-review-course") %></a>
+				<% } else { /* most users can only rate */ %>
+					<a href="<%= themeDisplay.getURLSignIn() %>" class="button"><%= LanguageUtil.get(pageContext,"login-rate-course") %></a>
+				<% } %>
 			<% } %>
 		<% } %>
 	</div>

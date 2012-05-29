@@ -64,9 +64,9 @@
     String priceUnit = course.getPriceUnit().isEmpty() ? "USD" : course.getPriceUnit();
 %>
 
-<a href='<%= returnUrl %>' cssClass="moreLink">
-    <%= LanguageUtil.get(pageContext, "course-management-details-return") %>    
-</a>
+<span class="header-back-to">
+    <a href='<%= returnUrl %>'>&laquo;<%= LanguageUtil.get(pageContext, "course-management-details-return") %></a>
+</span>
 
 <div class="course-detail">
     <h3 class="course-title"><a href='<%= course.getUrl() %>'><%= course.getTitle(locale) %></a></h3>
