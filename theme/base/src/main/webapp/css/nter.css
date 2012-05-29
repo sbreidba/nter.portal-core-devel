@@ -248,7 +248,7 @@ footer {
 	background-position: center;
 }
 
-.portlet-msg-alert, .portlet-msg-error { margin: .5em 0 .3em; background-position: 6px 6px; }
+.portlet-msg-alert, .portlet-msg-error { margin: .5em 0 1.4em; background-position: 6px 6px; }
 
 /* treeview */
 .toc, .toc ul { margin: 0; list-style-type: disc; }
@@ -521,6 +521,7 @@ h4 { margin-bottom: 1.17em; }
 , .course-status-section .courses:after
 , .current-courses:after
 { content: ' '; display: block; width: 0; height: 0; clear: both; }
+.current-courses h4, .current-courses .portlet-msg-alert, .current-courses .portlet-msg-error { margin-bottom: .3em; }
 
 /* archived courses */
 .my-courses { width: 100%; zoom: 1; }
@@ -541,6 +542,7 @@ h4 { margin-bottom: 1.17em; }
 .my-courses .archived-course .archive-course { display: none; }
 .my-courses .archived-course .activate-course { display: inline-block; }
 .course-status-message { font-weight: bold; font-size: 1.1em; }
+.my-courses h4, .my-courses .portlet-msg-alert, .my-courses .portlet-msg-error { margin-bottom: .3em; }
 
 /* tabs */
 .yui3-tabview-list { padding: 0; margin: 0; }
