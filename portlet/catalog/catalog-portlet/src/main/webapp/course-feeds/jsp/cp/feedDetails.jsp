@@ -65,7 +65,9 @@
     }
 %>
 
-<a href='<%=returnURL%>' cssClass="moreLink"><%= LanguageUtil.get(pageContext, "course-feed-details-return") %></a>
+<span class="header-back-to">
+    <a href='<%=returnURL%>'>&laquo;<%= LanguageUtil.get(pageContext, "course-feed-details-return") %></a>
+</span>
 
 <article class="course-feed">
 <div class="course-feed-detail">
