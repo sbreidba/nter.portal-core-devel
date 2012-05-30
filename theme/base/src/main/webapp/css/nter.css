@@ -525,6 +525,7 @@ h4 { margin-bottom: 1.17em; }
 
 /* archived courses */
 .my-courses { width: 100%; zoom: 1; }
+.my-courses .results-grid { border: none; }
 .my-courses .results-row td { padding: 5px; vertical-align: top; text-align: left; }
 .my-courses .results-header th { padding: 5px; vertical-align: bottom; text-align: left; }
 .my-courses .course-mini-thumbnail { float: left; }

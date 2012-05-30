@@ -418,16 +418,23 @@ footer {
 /* archived courses */
 .my-courses .results-header { background: none; }
 .my-courses tr { border-bottom: 1px solid #ccc; }
+.my-courses .results-row td { border: none; }
 .my-courses .results-row.hover td, .my-courses .results-row.alt td { background: none; }
 .my-courses th { color: #333; }
 .my-courses .actions { background-color: #fafafa; }
+.my-courses .actions { background-color: rgba(245, 245, 245, .5); }
 .my-courses th a:visited, .my-courses .taglib-page-iterator a:visited { color: #32358F; }
 .failed .course-status-message { color: #800000; }
 .complete .course-status-message { color: #006000; }
 .my-courses tr.failed { background-color: #fff7f7; }
 .my-courses tr.failed .actions { background-color: #fcf0f0; }
+.my-courses tr.failed .actions { background-color: rgba(249, 234, 234, 0.5); }
 .my-courses tr.complete { background-color: #f5fcf5; }
 .my-courses tr.complete .actions { background-color: #edf9ed; }
+.my-courses tr.complete .actions { background-color: rgba(230, 246, 230, 0.5); }
+.my-courses td.sort-column, .my-courses .alt td.sort-column { background-color: #f5f5f5; }
+.my-courses .complete td.sort-column { background-color: #e6f7e6; }
+.my-courses .failed td.sort-column { background-color: #fae8e8; }
 .ie7 .my-courses td { border-top: 1px solid #ccc; }
 /* fix for problem with default table hover styles (which we don't want) and IE7 */
 .ie7 .my-courses tr.failed td { background-color: #fff7f7 !important; }
