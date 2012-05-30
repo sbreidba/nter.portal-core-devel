@@ -51,6 +51,15 @@ public class CourseImageImpl extends CourseImageBaseImpl {
 		return themeDisplay.getPathThemeImages() + "/default_images/course_default_large.jpg";
 	}
 
+    public String getMediumImageUrl(ThemeDisplay themeDisplay) {
+		String url = getSourceImageUrl();
+		if (!url.isEmpty()) {
+			return url;
+		}
+
+		return themeDisplay.getPathThemeImages() + "/default_images/course_default_medium.jpg";
+	}
+
 	public String getSmallImageUrl(ThemeDisplay themeDisplay) {
 		String url = getSourceImageUrl();
 		if (!url.isEmpty()) {

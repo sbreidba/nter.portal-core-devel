@@ -212,13 +212,6 @@
                     nter:orderWeight="1.0"
                     />
 
-            <nter:image
-                    xml:lang="en-US"
-                    nter:href="http://nwtp.gov/course15-1.png"
-                    nter:alternateText="page one"
-                    nter:mimeType="image/png"
-                    nter:orderWeight="1.0"
-                    />
             <nter:keywords xml:lang="en-US">test course 15 fifteen</nter:keywords>
 
             <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
@@ -271,13 +264,6 @@
                     nter:orderWeight="1.0"
                     />
 
-            <nter:image
-                    xml:lang="en-US"
-                    nter:href="http://nwtp.gov/course16-1.png"
-                    nter:alternateText="page one"
-                    nter:mimeType="image/png"
-                    nter:orderWeight="1.0"
-                    />
             <nter:keywords xml:lang="en-US">test course 16 sixteen</nter:keywords>
 
             <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
@@ -328,13 +314,6 @@
                     nter:orderWeight="1.0"
                     />
 
-            <nter:image
-                    xml:lang="en-US"
-                    nter:href="http://nwtp.gov/course17-1.png"
-                    nter:alternateText="page one"
-                    nter:mimeType="image/png"
-                    nter:orderWeight="1.0"
-                    />
             <nter:keywords xml:lang="en-US">test course 17 seventeen</nter:keywords>
 
             <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
@@ -390,13 +369,7 @@
                     nter:componentId="tag:nwtp.gov,2010-02-01:/link/to/test-component19/en-US"
                     nter:orderWeight="2.0"
                     />
-            <nter:image
-                    xml:lang="en-US"
-                    nter:href="http://nwtp.gov/course18-1.png"
-                    nter:alternateText="page one"
-                    nter:mimeType="image/png"
-                    nter:orderWeight="1.0"
-                    />
+
             <nter:keywords xml:lang="en-US">test course 18 eighteen</nter:keywords>
 
             <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
@@ -449,13 +422,6 @@
                     nter:orderWeight="1.0"
                     />
 
-            <nter:image
-                    xml:lang="en-US"
-                    nter:href="http://nwtp.gov/course19-1.png"
-                    nter:alternateText="page one"
-                    nter:mimeType="image/png"
-                    nter:orderWeight="1.0"
-                    />
             <nter:keywords xml:lang="en-US">test course 19 nineteen</nter:keywords>
 
             <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
@@ -508,13 +474,6 @@
                     nter:orderWeight="1.0"
                     />
 
-            <nter:image
-                    xml:lang="en-US"
-                    nter:href="http://nwtp.gov/course20-1.png"
-                    nter:alternateText="page one"
-                    nter:mimeType="image/png"
-                    nter:orderWeight="1.0"
-                    />
             <nter:keywords xml:lang="en-US">test course 20 twenty</nter:keywords>
 
             <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
@@ -567,13 +526,6 @@
                     nter:orderWeight="1.0"
                     />
 
-            <nter:image
-                    xml:lang="en-US"
-                    nter:href="http://nwtp.gov/course21-1.png"
-                    nter:alternateText="page one"
-                    nter:mimeType="image/png"
-                    nter:orderWeight="1.0"
-                    />
             <nter:keywords xml:lang="en-US">test course 21 twenty-one twentyone</nter:keywords>
 
             <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
@@ -626,13 +578,6 @@
                     nter:orderWeight="1.0"
                     />
 
-            <nter:image
-                    xml:lang="en-US"
-                    nter:href="http://nwtp.gov/course22-1.png"
-                    nter:alternateText="page one"
-                    nter:mimeType="image/png"
-                    nter:orderWeight="1.0"
-                    />
             <nter:keywords xml:lang="en-US">test course 22 twenty-two twentytwo</nter:keywords>
 
             <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
@@ -682,13 +627,6 @@
 
             <!-- intentionally have no component assignment for test purposes -->
 
-            <nter:image
-                    xml:lang="en-US"
-                    nter:href="http://nwtp.gov/course23-1.png"
-                    nter:alternateText="page one"
-                    nter:mimeType="image/png"
-                    nter:orderWeight="1.0"
-                    />
             <nter:keywords xml:lang="en-US">test course 23 twenty-three twentythree</nter:keywords>
 
             <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
@@ -742,13 +680,6 @@
                     nter:orderWeight="1.0"
                     />
 
-            <nter:image
-                    xml:lang="en-US"
-                    nter:href="http://nwtp.gov/course24-1.png"
-                    nter:alternateText="page one"
-                    nter:mimeType="image/png"
-                    nter:orderWeight="1.0"
-                    />
             <nter:keywords xml:lang="en-US">test course 24 twenty-four twentyfour</nter:keywords>
 
             <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>

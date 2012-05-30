@@ -78,7 +78,7 @@ else {
 			%>
 				<li role="listitem" class="course">
 					<a href="<%= course.getUrl() %>" class="thumbnail-link"><img src='<%= course.getSafeImage(0)
-					.getLargeImageUrl(themeDisplay) %>' class="course-thumbnail no-png-fix" title="<%= course.getTitle(locale)
+					.getMediumImageUrl(themeDisplay) %>' class="course-thumbnail no-png-fix" title="<%= course.getTitle(locale)
 					%>" alt="<%= course.getTitle(locale) %>" /></a>
 					<h4><a href="<%= course.getUrl() %>"><%= course.getTitle(locale) %></a></h4>
 					<div class="rating"><liferay-ui:ratings-score score="<%= ReviewUtil.getCourseAverageRating(course) %>" /></div>

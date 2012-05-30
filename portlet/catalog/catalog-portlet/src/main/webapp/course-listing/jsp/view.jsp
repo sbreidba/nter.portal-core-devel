@@ -207,8 +207,10 @@ httpRequest.setAttribute(MimeResponse.MARKUP_HEAD_ELEMENT, meta);
     %>
 <li>
 <article class="course">
-<a class="thumbnail-link" href="<%= course.getUrl() %>"><img class="course-thumbnail no-png-fix" src="<%= image0
-.getSmallImageUrl(themeDisplay) %>" title="<%= image0.getAlternateText() %>" alt="<%= image0.getAlternateText() %>" /></a>
+<a class="thumbnail-link" href="<%= course.getUrl() %>"><img class="course-thumbnail no-png-fix"
+     src="<%= image0.getMediumImageUrl(themeDisplay) %>"
+     title="<%= image0.getAlternateText() %>"
+     alt="<%= image0.getAlternateText() %>" /></a>
 <h4><a href="<%= course.getUrl() %>"><%= course.getTitle(locale) %></a></h4>
 <% RatingsStats ratingsStats = RatingsStatsLocalServiceUtil.getStats(Course.class.getName(), course.getPrimaryKey()); %>
 <div class="rating"><liferay-ui:ratings-score score="<%= ReviewUtil.getCourseAverageRating(course) %>" /></div>
