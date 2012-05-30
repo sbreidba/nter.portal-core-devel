@@ -439,6 +439,8 @@ footer {
 /* fix for problem with default table hover styles (which we don't want) and IE7 */
 .ie7 .my-courses tr.failed td { background-color: #fff7f7 !important; }
 .ie7 .my-courses tr.complete td { background-color: #f5fcf5 !important; }
+.ie7 .my-courses tr.complete td.sort-column { background-color: #e6f7e6 !important; }
+.ie7 .my-courses tr.failed td.sort-column { background-color: #fae8e8 !important; }
 
 /* tabs */
 .yui3-tab a { color: #3A3C6F; font-weight: bold; text-decoration: none; background-color: #ffeebb; background-image: -moz-linear-gradient(top, #fffefd, #ffeebb); background-image: linear-gradient(to bottom, #fffefd, #ffeebb); border-color: #FFCC66; border-radius: 6px 6px 0 0; }
