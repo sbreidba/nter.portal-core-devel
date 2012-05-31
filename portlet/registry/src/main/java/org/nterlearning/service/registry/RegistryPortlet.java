@@ -100,9 +100,9 @@ public class RegistryPortlet extends MVCPortlet {
         String institutionName = ParamUtil.getString(request, "institutionName");
         log.debug("institutionName [" + institutionName + "]");
 
-        InstitutionBean institution = null;
         if (Validator.isNotNull(institutionName)) {
-            institution = RegistryUtil.getInstitutionByName(institutionName);
+            InstitutionBean institution =
+                    RegistryUtil.getInstitutionByName(institutionName);
 
             // Set the tab
             request.setAttribute("tabs", tabInstitutions);

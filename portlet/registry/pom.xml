@@ -34,7 +34,7 @@
 
     <properties>
         <basedir>.</basedir>
-        <registry-proxy.version>1.1.1</registry-proxy.version>
+        <registry-proxy.version>1.1.2</registry-proxy.version>
         <cxf.version>2.5.2</cxf.version>
         <servlet.version>2.3</servlet.version>
         <portlet-api.version>2.0</portlet-api.version>
