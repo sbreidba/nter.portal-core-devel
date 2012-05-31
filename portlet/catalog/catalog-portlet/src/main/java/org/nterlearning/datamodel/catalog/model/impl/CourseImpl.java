@@ -46,6 +46,7 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.*;
 import com.liferay.portal.util.PortalUtil;
 //import org.nterlearning.commerce.client.CommerceServiceStub;
+import org.nterlearning.course.enumerations.ContributorRoleType;
 import org.nterlearning.datamodel.catalog.model.*;
 import org.nterlearning.datamodel.catalog.service.*;
 import org.nterlearning.utils.DateUtil;
@@ -167,7 +168,9 @@ public class CourseImpl extends CourseBaseImpl {
 	public Contributor getCourseAuthor()
 			throws SystemException {
 
-		List<Contributor> authors = ContributorLocalServiceUtil.findByCourseIdWithRole(this.getCourseId(), "author");
+		List<Contributor> authors =
+                ContributorLocalServiceUtil.findByCourseIdWithRole(this.getCourseId(),
+                                                                   ContributorRoleType.AUTHOR.value());
 		return (authors.size() > 0) ? authors.get(0) : null;
 	}
 
@@ -175,7 +178,7 @@ public class CourseImpl extends CourseBaseImpl {
 			throws SystemException {
 
 		List<Contributor> organizations = ContributorLocalServiceUtil
-				.findByCourseIdWithRole(this.getCourseId(), "organization");
+				.findByCourseIdWithRole(this.getCourseId(), ContributorRoleType.ORGANIZATION.value());
 		return (organizations.size() > 0) ? organizations.get(0) : null;
 	}
 
