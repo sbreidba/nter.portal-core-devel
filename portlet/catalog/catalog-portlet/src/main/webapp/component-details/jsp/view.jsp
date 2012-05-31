@@ -94,12 +94,34 @@ else {
                             author = author + ", " + authors.get(i).getContributorName();
                         }
                         else {
-                            author = author + "and " + authors.get(i).getContributorName();
+                            author = author + " and " + authors.get(i).getContributorName();
                         }
                     }
                 %>
                 <dt><%= LanguageUtil.get(pageContext,"component-details-authors") %>:</dt>
                 <dd><%= author %> </dd>
+            </div>
+
+            <div class="course-attribute">
+                <%
+                    String contributorList = "";
+                    List<Contributor> contributors =
+                            ComponentLocalServiceUtil.getContributors(component);
+
+                    for (int i = 0; i < contributors.size(); i++) {
+                        if (i == 0) {
+                            contributorList = contributors.get(i).getContributorName();
+                        }
+                        else if (i < contributors.size() - 1) {
+                            contributorList += ", " + contributors.get(i).getContributorName();
+                        }
+                        else {
+                            contributorList += " and " + contributors.get(i).getContributorName();
+                        }
+                    }
+                %>
+                <dt><%= LanguageUtil.get(pageContext, "component-details-contributors")%>:</dt>
+                <dd><%= contributorList %></dd>
             </div>
 
             <div class="course-attribute">
