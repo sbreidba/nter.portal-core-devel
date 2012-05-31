@@ -40,7 +40,7 @@
 
 <portlet:defineObjects />
 
-<liferay-ui:error key="error-adding-unique" message="error-adding-unique" />
+<liferay-ui:error key="error-adding-unique-service" message="error-adding-unique-service" />
 <liferay-ui:error key="error-updating" message="error-updating" />
 <liferay-ui:error key="error-required-name" message="error-required-name" />
 <liferay-ui:error key="error-required-institution" message="error-required-institution" />
