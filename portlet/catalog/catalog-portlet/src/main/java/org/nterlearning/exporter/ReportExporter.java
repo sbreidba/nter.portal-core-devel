@@ -21,13 +21,19 @@
 package org.nterlearning.exporter;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Collection;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
+import com.liferay.portal.kernel.servlet.ServletResponseUtil;
+import com.liferay.portal.util.PortalUtil;
 import org.apache.commons.lang.RandomStringUtils;
 
 import com.liferay.portal.kernel.exception.PortalException;
@@ -44,7 +50,7 @@ public class ReportExporter {
 	
 	// TODO: if needed, make these configurable
 	private static final String WEB_DIR_NAME = "webapps";
-	private static String WEB_DIR_PATH = System.getenv("CATALINA_BASE") + File.separatorChar + WEB_DIR_NAME + "/";
+	private static String WEB_DIR_PATH = PropsUtil.get("catalina.base") + File.separatorChar + WEB_DIR_NAME + "/";
 	private static final String DEFAULT_PDF_REPORT_DIR_PATH = WEB_DIR_PATH + "nter-catalog-portlet/reports/pdf/";
 	private static final String DEFAULT_JRXML_REPORT_DIR_PATH = WEB_DIR_PATH + "nter-catalog-portlet/reports/jrxml/";
 
@@ -66,7 +72,8 @@ public class ReportExporter {
 		String randomDirName = RandomStringUtils.randomAlphanumeric(10);
 		File randomDir = new File(pdfReportDirPath + File.separator + randomDirName);// for security
 		if (randomDir.mkdir()) {
-			String pdfPath = randomDir.getAbsolutePath() + File.separator +	pdfReportFileName + ".pdf";
+//			String pdfPath = randomDir.getAbsolutePath() + File.separator +	pdfReportFileName + ".pdf";
+			String pdfPath = randomDir + File.separator +	pdfReportFileName + ".pdf";
 			//TODO: make sure a cron job somewhere periodically purges the transcript dir
 
 			// create the report
@@ -75,7 +82,7 @@ public class ReportExporter {
 			return pdfPath;
 		}
 		else {
-			throw new RuntimeException("Could not create random report directory: " + randomDir.getAbsolutePath());
+			throw new RuntimeException("Could not create random report directory: " + randomDir);
 		}
 	}
 	
@@ -116,31 +123,51 @@ public class ReportExporter {
 	 * @throws com.liferay.portal.kernel.exception.PortalException
 	 * @throws com.liferay.portal.kernel.exception.SystemException
 	 */
-	public static void redirectToReportUrl(String reportPath, ActionRequest request, ActionResponse response)
-		throws PortalException, SystemException{
-		
-		// extract the transcript path inside the web directory
-		int webDirIndex = reportPath.indexOf(WEB_DIR_NAME);
-		if (webDirIndex > 0) {
-			String reportWebDirPath = reportPath.substring(webDirIndex + WEB_DIR_NAME.length()+1);
-			String transcriptUrl = getServerUrl(request) + reportWebDirPath;
-			transcriptUrl = transcriptUrl.replace("\\", "/"); // replace any Windows backslashes
-			log.info("Redirecting user to report at URL [" + transcriptUrl + "]");
-			try {
-				response.sendRedirect(transcriptUrl);
-			}
-			catch (IOException e) {
-				throw new PortalException(
-						"Error redirecting to report: " + e, e);
-			}
-		}
-		else {
-			throw new SystemException("Error parsing the report path: it does not contain the web directory, " +
-					WEB_DIR_NAME + ". Report path: " + reportPath);
-		}
-	}
-	
-	/**
+    public static void redirectToReportUrl(String reportPath, ActionRequest request, ActionResponse response)
+            throws PortalException, SystemException {
+
+        String configuredReportPath = PropsUtil.get(PortalProperties.PDF_REPORT_DIR);
+        if ((configuredReportPath == null) || configuredReportPath.length() == 0) {
+
+            // extract the transcript path inside the web directory
+            int webDirIndex = reportPath.indexOf(WEB_DIR_NAME);
+            if (webDirIndex > 0) {
+                String reportWebDirPath = reportPath.substring(webDirIndex + WEB_DIR_NAME.length() + 1);
+                String transcriptUrl = getServerUrl(request) + reportWebDirPath;
+                transcriptUrl = transcriptUrl.replace("\\", "/"); // replace any Windows backslashes
+                log.info("Redirecting user to report at URL [" + transcriptUrl + "]");
+                try {
+                    response.sendRedirect(transcriptUrl);
+                } catch (IOException e) {
+                    throw new PortalException(
+                            "Error redirecting to report: " + e, e);
+                }
+            } else {
+                throw new SystemException("Error parsing the report path: it does not contain the web directory, " +
+                        WEB_DIR_NAME + ". Report path: " + reportPath);
+            }
+
+        } else {
+           // extract the transcript path within the directory supplied in portal-ext.properties
+            log.info("Redirecting user to report at [" + configuredReportPath + "]");
+            try {
+                HttpServletRequest httpRequest = PortalUtil.getHttpServletRequest(request);
+                HttpServletResponse httpResponse = PortalUtil.getHttpServletResponse(response);
+
+                reportPath = reportPath.replace("\\", "/"); // replace any Windows backslashes
+
+                InputStream inputStream = new FileInputStream(reportPath);
+
+                ServletResponseUtil.sendFile(httpRequest, httpResponse, reportPath, inputStream, "application/pdf");
+
+            } catch (IOException e) {
+                throw new PortalException(
+                        "Error redirecting to report: " + e, e);
+            }
+        }
+    }
+
+    /**
 	 * 
 	 * @param reportDirPath
 	 * @param reportFileName
