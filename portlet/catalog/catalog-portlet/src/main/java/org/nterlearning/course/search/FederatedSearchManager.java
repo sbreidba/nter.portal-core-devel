@@ -35,7 +35,7 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.service.GroupServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -100,7 +100,7 @@ public class FederatedSearchManager {
 
 		this.portlets = portlets;
 		this.keywords = StringPool.BLANK;
-		this.searchDelta = 25;
+		this.searchDelta = 20;
 		this.format = null;
 		this.groupId = groupId;
 		this.portletURL = portletURL;
@@ -185,7 +185,6 @@ public class FederatedSearchManager {
 						List<OpenSearchResult> results =
                                 getResultsFromElement(el, request, portletId, locale);
 
-                        total += results.size();
                         for (OpenSearchResult result : results) {
                             resultMap.add(new ResultAndScorePair(result, searchScore));
                         }
@@ -194,7 +193,6 @@ public class FederatedSearchManager {
 						_log.error("Error storing entry of type: " + portlet.getOpenSearchClass(), e);
 					}
 				}
-				totalResultsCount += total;
 			}
 		}
         catch (IllegalArgumentException iae) {
@@ -204,6 +202,8 @@ public class FederatedSearchManager {
 			_log.error("Error displaying content of type " + portlet.getOpenSearchClass() +
                        " : " + e.getMessage());
 		}
+
+        totalResultsCount += resultMap.size();
 		return resultMap;
 	}
 
@@ -324,7 +324,7 @@ public class FederatedSearchManager {
 		}
 
         try {
-		    Group entryGroup = GroupServiceUtil.getGroup(entryGroupId);
+		    Group entryGroup = GroupLocalServiceUtil.getGroup(entryGroupId);
 		    return !entryGroup.isActive();
         }
         catch (Exception e) {

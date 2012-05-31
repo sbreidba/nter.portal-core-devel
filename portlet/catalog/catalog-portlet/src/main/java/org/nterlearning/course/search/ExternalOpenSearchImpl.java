@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.search.BaseOpenSearchImpl;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import org.apache.lucene.queryParser.QueryParser;
 import org.nterlearning.atom.parser.portlet.ServiceRegistryClient;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
@@ -96,7 +97,7 @@ public class ExternalOpenSearchImpl extends BaseOpenSearchImpl {
 		if (Validator.isNull(searchAddress))
 			setSearchAddressFromRegistry();
 
-        String queryTerms = URLEncoder.encode(keywords, "UTF-8");
+        String queryTerms = QueryParser.escape(URLEncoder.encode(keywords, StringPool.UTF8));
 
 		String query =
 			String.format(

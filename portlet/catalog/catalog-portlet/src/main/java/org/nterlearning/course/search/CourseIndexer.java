@@ -197,10 +197,13 @@ public class CourseIndexer extends BaseIndexer {
 		doc.addText(Field.DESCRIPTION, localeDescription);
 		doc.addText(NterKeys.OWNER_NAME, course.getOwnerName(companyId));
 
-        Contributor author = course.getCourseAuthor();
-        if (author != null) {
-            doc.addText(NterKeys.CONTRIBUTOR_NAME, author.getContributorName());
+        List<Contributor> contributors = course.getContributors();
+        String contributorNames[] = new String[contributors.size()];
+        for (int i = 0; i < contributors.size(); i++) {
+            contributorNames[i] = contributors.get(i).getContributorName();
         }
+
+        doc.addText(NterKeys.CONTRIBUTOR_NAME, contributorNames);
 
 		ExpandoBridge expandoBridge = course.getExpandoBridge();
 		ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);
