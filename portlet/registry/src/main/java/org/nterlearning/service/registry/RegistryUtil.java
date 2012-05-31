@@ -79,23 +79,44 @@ public class RegistryUtil {
 
     public static List<InstitutionBean> getLocalInstitutions() {
         List<InstitutionBean> institutions = new ArrayList<InstitutionBean>();
-
+        // Retrieve "all" local institutions
+        // parameters:
+        //   localBlacklistStatus {ACTIVE, INACTIVE, BLACKLIST, UNSPECIFIED},
+        //   globalActiveStatus(ignored when RegistryInstance.LOCAL),
+        //   registryInstance {LOCAL, GLOBAL}
         institutions.addAll(getRegistryService().getInstitutions(
-                ActiveStatusEnum.UNSPECIFIED, ActiveStatusEnum.UNSPECIFIED, RegistryInstance.LOCAL));
+                ActiveStatusEnum.UNSPECIFIED,
+                ActiveStatusEnum.UNSPECIFIED,
+                RegistryInstance.LOCAL)
+        );
 
         return institutions;
     }
 
     private static List<InstitutionBean> getGlobalInstitutions() {
         List<InstitutionBean> institutions = new ArrayList<InstitutionBean>();
-        // Retrieve 'Active' global institutions
+        // Retrieve 'ACTIVE' global institutions
+        // parameters:
+        //   localBlacklistStatus {ACTIVE, INACTIVE, BLACKLIST, UNSPECIFIED},
+        //   globalActiveStatus {ACTIVE, INACTIVE, BLACKLIST, UNSPECIFIED},
+        //   registryInstance {LOCAL, GLOBAL}
         institutions.addAll(getRegistryService().getInstitutions(
-                ActiveStatusEnum.UNSPECIFIED, ActiveStatusEnum.ACTIVE, RegistryInstance.GLOBAL));
+                ActiveStatusEnum.UNSPECIFIED,
+                ActiveStatusEnum.ACTIVE,
+                RegistryInstance.GLOBAL)
+        );
 
-        // If default status is 'unspecified' retrieve global "Inactive" institutions
+        // If default status is 'UNSPECIFIED' retrieve global 'INACTIVE' institutions
         if (getDefaultBlacklistStatus() == ActiveStatusEnum.UNSPECIFIED) {
+            // parameters:
+            //   localBlacklistStatus {ACTIVE, INACTIVE, BLACKLIST, UNSPECIFIED},
+            //   globalActiveStatus {ACTIVE, INACTIVE, BLACKLIST, UNSPECIFIED},
+            //   registryInstance {LOCAL, GLOBAL}
             institutions.addAll(getRegistryService().getInstitutions(
-                ActiveStatusEnum.UNSPECIFIED, ActiveStatusEnum.INACTIVE, RegistryInstance.GLOBAL));
+                ActiveStatusEnum.UNSPECIFIED,
+                    ActiveStatusEnum.INACTIVE,
+                    RegistryInstance.GLOBAL)
+            );
         }
 
         return institutions;
@@ -146,22 +167,44 @@ public class RegistryUtil {
 
     private static List<ServiceBean> getLocalServices() {
         List<ServiceBean> services = new ArrayList<ServiceBean>();
-
+        // Retrieve "all" local services
+        // parameters:
+        //   localBlacklistStatus {ACTIVE, INACTIVE, BLACKLIST, UNSPECIFIED},
+        //   globalActiveStatus(ignored when RegistryInstance.LOCAL),
+        //   registryInstance {LOCAL, GLOBAL}
         services.addAll(getRegistryService().getServices(
-                ActiveStatusEnum.UNSPECIFIED, ActiveStatusEnum.UNSPECIFIED, RegistryInstance.LOCAL));
+                ActiveStatusEnum.UNSPECIFIED,
+                ActiveStatusEnum.UNSPECIFIED,
+                RegistryInstance.LOCAL)
+        );
 
         return services;
     }
 
     private static List<ServiceBean> getGlobalServices() {
         List<ServiceBean> services = new ArrayList<ServiceBean>();
-        // Retrieve 'Active' global institutions
+        // Retrieve 'ACTIVE' global services
+        // parameters:
+        //   localBlacklistStatus {ACTIVE, INACTIVE, BLACKLIST, UNSPECIFIED},
+        //   globalActiveStatus {ACTIVE, INACTIVE, BLACKLIST, UNSPECIFIED},
+        //   registryInstance {LOCAL, GLOBAL}
         services.addAll(getRegistryService().getServices(
-                ActiveStatusEnum.UNSPECIFIED, ActiveStatusEnum.ACTIVE, RegistryInstance.GLOBAL));
-        // If default status is 'unspecified' retrieve global "Inactive" services
+                ActiveStatusEnum.UNSPECIFIED,
+                ActiveStatusEnum.ACTIVE,
+                RegistryInstance.GLOBAL)
+        );
+
+        // If default status is 'UNSPECIFIED' retrieve global "INACTIVE" services
         if (getDefaultBlacklistStatus() == ActiveStatusEnum.UNSPECIFIED) {
+            // parameters:
+            //   localBlacklistStatus {ACTIVE, INACTIVE, BLACKLIST, UNSPECIFIED},
+            //   globalActiveStatus {ACTIVE, INACTIVE, BLACKLIST, UNSPECIFIED},
+            //   registryInstance {LOCAL, GLOBAL}
             services.addAll(getRegistryService().getServices(
-                ActiveStatusEnum.UNSPECIFIED, ActiveStatusEnum.INACTIVE, RegistryInstance.GLOBAL));
+                ActiveStatusEnum.UNSPECIFIED,
+                    ActiveStatusEnum.INACTIVE,
+                    RegistryInstance.GLOBAL)
+            );
         }
 
         return services;
@@ -208,7 +251,7 @@ public class RegistryUtil {
     private static List<Binding> getBindings(
             int start, int end, List<Binding> bindingList) {
 
-        // Sort the collection - by service name
+        // Sort the collection - by binding description
         java.util.Collections.sort(
                 bindingList, new BindingNameComparator());
 
