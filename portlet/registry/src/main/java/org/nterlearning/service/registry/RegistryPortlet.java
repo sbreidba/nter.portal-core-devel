@@ -100,9 +100,9 @@ public class RegistryPortlet extends MVCPortlet {
         String institutionName = ParamUtil.getString(request, "institutionName");
         log.debug("institutionName [" + institutionName + "]");
 
-        InstitutionBean institution = null;
         if (Validator.isNotNull(institutionName)) {
-            institution = RegistryUtil.getInstitutionByName(institutionName);
+            InstitutionBean institution =
+                    RegistryUtil.getInstitutionByName(institutionName);
 
             // Set the tab
             request.setAttribute("tabs", tabInstitutions);
@@ -413,6 +413,8 @@ public class RegistryPortlet extends MVCPortlet {
         if (errors.size() == 0) {
             // Check for unique serviceName
             if (!isServiceNameUnique(institutionName, serviceName)) {
+                log.info("Service name [" + serviceName +
+                    "] is not unique for institution [" + institutionName + "]");
                 errors.add("error-adding-unique-service");
             }
         }
@@ -455,6 +457,7 @@ public class RegistryPortlet extends MVCPortlet {
             for (String error : errors) {
                 SessionErrors.add(request, error);
             }
+            request.setAttribute("institutionName", institutionName);
             response.setRenderParameter("jspPage", editServiceJSP);
         }
     }
@@ -480,7 +483,7 @@ public class RegistryPortlet extends MVCPortlet {
             request.setAttribute("tabs", tabs);
         }
 
-        ServiceBean service = null;
+        ServiceBean service;
         if (Validator.isNotNull(serviceName)) {
             service = RegistryUtil.getServiceByName(institutionName, serviceName);
 
