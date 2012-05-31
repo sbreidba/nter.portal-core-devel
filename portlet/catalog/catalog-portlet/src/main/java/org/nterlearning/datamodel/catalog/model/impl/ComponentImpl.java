@@ -41,6 +41,7 @@ import com.liferay.portal.service.UserIdMapperLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 
 //import org.nterlearning.commerce.client.CommerceServiceStub;
+import org.nterlearning.course.enumerations.ContributorRoleType;
 import org.nterlearning.datamodel.catalog.model.Component;
 import org.nterlearning.datamodel.catalog.model.Contributor;
 import org.nterlearning.datamodel.catalog.service.ComponentLocalServiceUtil;
@@ -79,7 +80,9 @@ public class ComponentImpl extends ComponentBaseImpl implements Component {
 
     public Contributor getComponentAuthor()
             throws SystemException {
-        List<Contributor> authors = ContributorLocalServiceUtil.findByComponentIdWithRole(this.getComponentId(), "author");
+        List<Contributor> authors =
+                ContributorLocalServiceUtil.findByComponentIdWithRole(this.getComponentId(),
+                                                                      ContributorRoleType.AUTHOR.value());
         return (authors.size() > 0) ? authors.get(0) : null;
     }
 
