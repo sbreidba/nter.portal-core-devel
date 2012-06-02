@@ -395,7 +395,7 @@ input.homepage-search-button:hover, input.homepage-search-button:focus { backgro
 .ie7 .homepage-tabs .yui3-tab-selected a { border-color: #7E93B4; background: #DEEBFF none !important; margin-top: -1px; }
 .ie7 .homepage-tabs .yui3-tabview-list a:hover { background: #ffb922 none; }
 .ie7 .homepage-tabs .first a { border-left: 0; }
-.homepage-tabs .tab-body { border-bottom: 1px solid #7e93b4; }
+.ie7 .homepage-tabs .tab-body { border-bottom: 1px solid #7e93b4; }
 
 
 .call-to-action {
