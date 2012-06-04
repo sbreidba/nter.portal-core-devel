@@ -305,7 +305,7 @@ footer {
 	background-image: linear-gradient(to bottom, #fffcef 0%, #fff7d8 17%, #f7d979 50%, #ffd987 52%, #ffe4b2 88%);
 	text-shadow: 1px 1px 1px rgba(255,255,255,.7), -1px -1px 1px rgba(91,51,0,.2);
 }
-.one-col-promo .portlet-column:first-child .button.secondary, .one-col-promo .portlet-column:first-child button.secondary {
+.one-col-promo .portlet-column:first-child .button.secondary, .one-col-promo .portlet-column:first-child button.secondary, .one-col-promo .portlet-column:first-child .homepage-tabs .button, .one-col-promo .portlet-column:first-child .homepage-tabs button {
 	color: #001c45;
 	border-color: #4982d8;
 	background-color: #94cfff;
@@ -349,7 +349,7 @@ footer {
 	background-image: linear-gradient(to bottom , #F4F8FF, #DEEBFF);
 	padding: 5px 10px;
 }
-.homepage-tabs .yui3-tab-panel { border: none; border-radius: 0; }
+.homepage-tabs .yui3-tab-panel { border: none; border-radius: 0; padding: 0; }
 .homepage-tabs .actions { margin-bottom: .5em; }
 
 .homepage-tabs ul { width: 100%; }
@@ -386,6 +386,8 @@ input.homepage-search-button { width: 19px; height: 20px; margin: 0 0 0 -30px; p
 input.homepage-search-button:hover, input.homepage-search-button:focus { background: url('../images/custom/magnifying-glass.png') no-repeat left -20px; border: none; }
 .placeholder-hidden { text-indent: -9999px; position: absolute; }
 .yui3-placeholder-text { color: #737373; }
+
+.news-portlet { width: 290px; float: right; }
 
 /* put in IE stylesheet */
 .ie8 .homepage-tabs .yui3-tabview-list .last a:after { right: -12px; }

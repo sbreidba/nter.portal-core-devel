@@ -367,6 +367,7 @@ h4 { margin-bottom: 1.17em; }
 	width: 290px;
 	height: 217px;
 }
+.signed-out .promo-boxes .empty, .controls-hidden .promo-boxes .empty { padding: 0; } /* don't leave a gap if the site chooses not to use promos */
 
 
 .course-image, .reviewlist header { width: 290px; display: block; float: left; }
