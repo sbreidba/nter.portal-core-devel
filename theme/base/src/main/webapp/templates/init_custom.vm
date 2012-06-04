@@ -10,6 +10,9 @@ This file allows you to override and define new Velocity variables.
 		#break
 	#end
 #end
+#if ($show_doc == false)
+	#set ($css_class = $css_class.replaceAll("controls-visible", "controls-hidden"))
+#end
 
 #* get user role *#
 #if ($is_signed_in)
