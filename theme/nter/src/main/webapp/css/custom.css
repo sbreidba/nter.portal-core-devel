@@ -290,7 +290,7 @@ footer {
 	background-image: -o-linear-gradient(top, rgba(236,236,236,0) 0%, #ececec 90%, rgba(236,236,236,0) 100%);
 	background-image: -ms-linear-gradient(top, rgba(236,236,236,0) 0%, #ececec 90%, rgba(236,236,236,0) 100%);
 	background-image: linear-gradient(to bottom, rgba(236,236,236,0) 0%, #ececec 90%, rgba(236,236,236,0) 100%);
-	padding: 10px;
+	padding: 10px 10px 0;
 }
 /* signed in welcome message has a blue background and divider image */
 .signed-in .one-col-promo .portlet-column:first-child {
