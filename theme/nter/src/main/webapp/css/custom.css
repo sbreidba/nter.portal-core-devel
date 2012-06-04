@@ -283,6 +283,7 @@ footer {
 	color: #505050;
 }
 
+/* signed out welcome message has a gray background with blue tab box */
 .one-col-promo .portlet-column:first-child {
 	background-image: -moz-linear-gradient(top, rgba(236,236,236,0) 0%, #ececec 90%, rgba(236,236,236,0) 100%);
 	background-image: -webkit-linear-gradient(top, rgba(236,236,236,0) 0%, #ececec 90%, rgba(236,236,236,0) 100%);
@@ -291,6 +292,33 @@ footer {
 	background-image: linear-gradient(to bottom, rgba(236,236,236,0) 0%, #ececec 90%, rgba(236,236,236,0) 100%);
 	padding: 10px;
 }
+/* signed in welcome message has a blue background and divider image */
+.signed-in .one-col-promo .portlet-column:first-child {
+	background-color: #deebff;
+	background-image: -moz-linear-gradient(top, #f4f8ff, #deebff);
+	background-image: -webkit-linear-gradient(top, #f4f8ff, #deebff);
+	background-image: -o-linear-gradient(top, #f4f8ff, #deebff);
+	background-image: -ms-linear-gradient(top, #f4f8ff, #deebff);
+	background-image: linear-gradient(to bottom, #f4f8ff, #deebff);
+}
+.boxshadow .signed-in .one-col-promo .portlet-column:first-child {
+	border-color: rgba(59,60,112,.4);
+	border-width: 0 1px;
+	border-style: solid;
+	padding: 10px 9px;
+}
+.signed-in .one-col-promo .portlet-column:first-child:after {
+	content: url('../images/nter/cta-divider.png');
+	display: block;
+	clear: both;
+	margin: 0 -10px;
+	width: 930px;
+	height: 0;
+	position: absolute;
+	bottom: 2px;
+	line-height: 0;
+}
+
 .one-col-promo .portlet-column:first-child h2 {
 	color: #002e73;
 }
