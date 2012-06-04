@@ -283,7 +283,17 @@ footer {
 	color: #505050;
 }
 
+/* signed out welcome message has a gray background with blue tab box */
 .one-col-promo .portlet-column:first-child {
+	background-image: -moz-linear-gradient(top, rgba(236,236,236,0) 0%, #ececec 90%, rgba(236,236,236,0) 100%);
+	background-image: -webkit-linear-gradient(top, rgba(236,236,236,0) 0%, #ececec 90%, rgba(236,236,236,0) 100%);
+	background-image: -o-linear-gradient(top, rgba(236,236,236,0) 0%, #ececec 90%, rgba(236,236,236,0) 100%);
+	background-image: -ms-linear-gradient(top, rgba(236,236,236,0) 0%, #ececec 90%, rgba(236,236,236,0) 100%);
+	background-image: linear-gradient(to bottom, rgba(236,236,236,0) 0%, #ececec 90%, rgba(236,236,236,0) 100%);
+	padding: 10px;
+}
+/* signed in welcome message has a blue background and divider image */
+.signed-in .one-col-promo .portlet-column:first-child {
 	background-color: #deebff;
 	background-image: -moz-linear-gradient(top, #f4f8ff, #deebff);
 	background-image: -webkit-linear-gradient(top, #f4f8ff, #deebff);
@@ -291,15 +301,13 @@ footer {
 	background-image: -ms-linear-gradient(top, #f4f8ff, #deebff);
 	background-image: linear-gradient(to bottom, #f4f8ff, #deebff);
 }
-.boxshadow .one-col-promo .portlet-column:first-child {
+.boxshadow .signed-in .one-col-promo .portlet-column:first-child {
 	border-color: rgba(59,60,112,.4);
 	border-width: 0 1px;
 	border-style: solid;
+	padding: 10px 9px;
 }
-.one-col-promo .portlet-column:first-child h2 {
-	color: #002e73;
-}
-.one-col-promo .portlet-column:first-child:after {
+.signed-in .one-col-promo .portlet-column:first-child:after {
 	content: url('../images/nter/cta-divider.png');
 	display: block;
 	clear: both;
@@ -309,6 +317,10 @@ footer {
 	position: absolute;
 	bottom: 2px;
 	line-height: 0;
+}
+
+.one-col-promo .portlet-column:first-child h2 {
+	color: #002e73;
 }
 .one-col-promo .portlet-column:first-child .button, .one-col-promo .portlet-column:first-child button {
 	color:#5b3300;
@@ -321,7 +333,7 @@ footer {
 	background-image: linear-gradient(to bottom, #fffcef 0%, #fff7d8 17%, #f7d979 50%, #ffd987 52%, #ffe4b2 88%);
 	text-shadow: 1px 1px 1px rgba(255,255,255,.7), -1px -1px 1px rgba(91,51,0,.2);
 }
-.one-col-promo .portlet-column:first-child .button.secondary, .one-col-promo .portlet-column:first-child button.secondary {
+.one-col-promo .portlet-column:first-child .button.secondary, .one-col-promo .portlet-column:first-child button.secondary, .one-col-promo .portlet-column:first-child .homepage-tabs .button, .one-col-promo .portlet-column:first-child .homepage-tabs button {
 	color: #001c45;
 	border-color: #4982d8;
 	background-color: #94cfff;
@@ -351,6 +363,69 @@ footer {
 	background-image: linear-gradient(to bottom, #63afff 0%, #7abfff 40%, #47acff 48%, #3c87f0 93%, #5498ff 100%);
 	text-shadow: 0px 0px 1px rgba(0,46,115,1);
 }
+.one-col-promo .portlet-column:first-child:after { content: ' '; display: block; clear: both; line-height: 0; }
+
+.tab-portlet { width: 600px; float: left; }
+.homepage-tabs { position: relative; margin: -10px 0 0 -10px; font-size: 1.2em;  }
+.homepage-tabs .tab-body {
+	border-right: 1px solid #7e93b4;
+	background-color: #deebff;
+	background-image: -moz-linear-gradient(top , #F4F8FF, #DEEBFF);
+	background-image: -webkit-linear-gradient(top , #F4F8FF, #DEEBFF);
+	background-image: -o-linear-gradient(top , #F4F8FF, #DEEBFF);
+	background-image: -ms-linear-gradient(top , #F4F8FF, #DEEBFF);
+	background-image: linear-gradient(to bottom , #F4F8FF, #DEEBFF);
+	padding: 5px 10px;
+}
+.homepage-tabs .yui3-tab-panel { border: none; border-radius: 0; padding: 0; }
+.homepage-tabs .actions { margin-bottom: .5em; }
+
+.homepage-tabs ul { width: 100%; }
+.homepage-tabs li { width: 33.33333%; -moz-box-sizing: border-box; -webkit-box-sizing: border-box; -o-box-sizing: border-box; -ms-box-sizing: border-box; box-sizing: border-box; border-style: solid; border-color: transparent; border-width: 0 13px; }
+.homepage-tabs .yui3-tabview-list a {
+	border: none;
+	border-radius: 0;
+	padding: 0;
+	text-align: center;
+	text-shadow: 1px 1px 1px rgba(255, 255, 255, .7),-1px -1px 1px rgba(91, 51, 0, .1);
+	color: #5b3300;
+	background: url('../images/custom/inactive-tab-bg.png') repeat-x;
+	line-height: 2em;
+	white-space: nowrap;
+	font-size: 1em;
+	position: relative;
+	z-index: 1;
+}
+.homepage-tabs .yui3-tabview-list a:before { content: ' '; width: 26px; height: 34px; background-image: url('../images/custom/tab-end-caps.png'); background-position: left -34px; display: block; position: absolute; top: 0; left: -26px; }
+.homepage-tabs .yui3-tabview-list a:after { content: ' '; width: 26px; height: 34px; background-image: url('../images/custom/tab-end-caps.png'); background-position: right -34px; display: block; position: absolute; top: 0; right: -26px; }
+.homepage-tabs .yui3-tabview-list .last a { z-index: 0; }
+.homepage-tabs .yui3-tab-selected a { background: url('../images/custom/active-tab-bg.png') !important; z-index: 5 !important; color: #6f767f; top: 0; font-weight: normal; }
+.homepage-tabs .yui3-tab-selected a:before { content: '  ' /* 2 spaces so IE8 re-renders the image */; background-position: top left !important; }
+.homepage-tabs .yui3-tab-selected a:after { content: '  ' /* 2 spaces so IE8 re-renders the image */; background-position: top right !important; }
+.homepage-tabs .yui3-tabview-list a:hover { background-image: url('../images/custom/hover-tab-bg.png'); background-color: transparent; }
+.homepage-tabs .yui3-tabview-list a:hover:before { content: '   ' /* 3 spaces so IE8 re-renders the image */; background-position: left bottom; }
+.homepage-tabs .yui3-tabview-list a:hover:after { content: '   ' /* 3 spaces so IE8 re-renders the image */; background-position: right bottom; }
+.homepage-tabs .yui3-tabview-list .first { border-left: 0; }
+.homepage-tabs .yui3-tabview-list .first a:before { content: ''; background: none; display: none; }
+.homepage-tabs .yui3-tabview-list .last a:after { background-image: url('../images/custom/tab-right-cap.png'); width: 13px; right: -13px; }
+
+input.homepage-search { border: 1px solid #002e73; border-radius: 1em; padding: .2em 1.5em .2em .5em; box-shadow: 2px 2px 2px rgba(0,0,0,.2) inset; font-size: 1.2em; width: 13em; vertical-align: middle; }
+input.homepage-search-button { width: 19px; height: 20px; margin: 0 0 0 -30px; padding: 0; text-indent: -9999px; background: url('../images/custom/magnifying-glass.png') no-repeat left top; border: none; cursor: pointer; box-shadow: none; margin-right: .5em; vertical-align: middle; }
+input.homepage-search-button:hover, input.homepage-search-button:focus { background: url('../images/custom/magnifying-glass.png') no-repeat left -20px; border: none; }
+.placeholder-hidden { text-indent: -9999px; position: absolute; }
+.yui3-placeholder-text { color: #737373; }
+
+.news-portlet { width: 290px; float: right; }
+
+/* put in IE stylesheet */
+.ie8 .homepage-tabs .yui3-tabview-list .last a:after { right: -12px; }
+
+.ie7 .homepage-tabs li { width: auto; margin-right: 13px; border: none; }
+.ie7 .homepage-tabs .yui3-tabview-list a { border-width: 0 1px 1px; border-color: #E8BA5D; border-style: solid; background: #FFD987 none; padding: 0 2em; }
+.ie7 .homepage-tabs .yui3-tab-selected a { border-color: #7E93B4; background: #DEEBFF none !important; margin-top: -1px; }
+.ie7 .homepage-tabs .yui3-tabview-list a:hover { background: #ffb922 none; }
+.ie7 .homepage-tabs .first a { border-left: 0; }
+.ie7 .homepage-tabs .tab-body { border-bottom: 1px solid #7e93b4; }
 
 
 .call-to-action {
