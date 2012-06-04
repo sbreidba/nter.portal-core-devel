@@ -119,6 +119,11 @@ public class CourseImageClp extends BaseModelImpl<CourseImage>
         throw new UnsupportedOperationException();
     }
 
+    public java.lang.String getMediumImageUrl(
+        com.liferay.portal.theme.ThemeDisplay themeDisplay) {
+        throw new UnsupportedOperationException();
+    }
+
     public java.lang.String getSmallImageUrl(
         com.liferay.portal.theme.ThemeDisplay themeDisplay) {
         throw new UnsupportedOperationException();

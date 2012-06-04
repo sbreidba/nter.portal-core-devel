@@ -268,6 +268,11 @@ public class CourseImageWrapper implements CourseImage,
         return _courseImage.getLargeImageUrl(themeDisplay);
     }
 
+    public java.lang.String getMediumImageUrl(
+        com.liferay.portal.theme.ThemeDisplay themeDisplay) {
+        return _courseImage.getMediumImageUrl(themeDisplay);
+    }
+
     public java.lang.String getSmallImageUrl(
         com.liferay.portal.theme.ThemeDisplay themeDisplay) {
         return _courseImage.getSmallImageUrl(themeDisplay);

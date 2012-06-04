@@ -164,10 +164,13 @@ public class ComponentIndexer extends BaseIndexer {
         doc.addText(Field.DESCRIPTION, component.getDescription());
         doc.addText(Field.TITLE, component.getTitle());
 
-        Contributor author = component.getComponentAuthor();
-        if (author != null) {
-            doc.addText(NterKeys.CONTRIBUTOR_NAME, author.getContributorName());
+        List<Contributor> contributors = component.getContributors();
+        String contributorNames[] = new String[contributors.size()];
+        for (int i = 0; i < contributors.size(); i++) {
+            contributorNames[i] = contributors.get(i).getContributorName();
         }
+
+        doc.addText(NterKeys.CONTRIBUTOR_NAME, contributorNames);
 
         ExpandoBridge expandoBridge = component.getExpandoBridge();
         ExpandoBridgeIndexerUtil.addAttributes(doc, expandoBridge);

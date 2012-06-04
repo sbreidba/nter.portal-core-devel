@@ -81,10 +81,10 @@ public class ShibbolethAutoLogin implements AutoLogin {
             if (Validator.isNull(emailAddress)) {
                 throw new AutoLoginException("Email address is null");
             }
-            if (Validator.isNull(firstName)) {
+            if (Validator.isNull(firstName) || firstName.equals("")) {
                 firstName = "-";
             }
-            if (Validator.isNull(lastName)) {
+            if (Validator.isNull(lastName) || lastName.equals("")) {
                 lastName = "-";
             }
 

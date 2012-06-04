@@ -20,6 +20,9 @@ public interface CourseImage extends CourseImageModel, PersistedModel {
     public java.lang.String getLargeImageUrl(
         com.liferay.portal.theme.ThemeDisplay themeDisplay);
 
+    public java.lang.String getMediumImageUrl(
+        com.liferay.portal.theme.ThemeDisplay themeDisplay);
+
     public java.lang.String getSmallImageUrl(
         com.liferay.portal.theme.ThemeDisplay themeDisplay);
 }

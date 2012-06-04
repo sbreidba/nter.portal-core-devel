@@ -63,6 +63,11 @@
 		<!-- merged field for faster searching -->
 		<field name="text" type="text" indexed="true" stored="false" multiValued="true"/>
 
+        <!-- NTER fields -->
+        <field name="contributor" type="text" indexed="true" stored="true" multiValued="true"/>
+        <field name="componentIri" type="string" indexed="true" stored="false" multiValued="false"/>
+        <field name="courseIri" type="string" indexed="true" stored="false" multiValued="false"/>
+
 		<!-- dynamic fields -->
 		<dynamicField name="*" type="string" indexed="true" stored="true" multiValued="true" />
 		<dynamicField name="*TagNames" type="text" indexed="true" stored="true" multiValued="true" />

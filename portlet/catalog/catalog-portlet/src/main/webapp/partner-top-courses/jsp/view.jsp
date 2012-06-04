@@ -79,7 +79,7 @@
                         <article class="course">
                             <a href='<%= course.getUrl() %>' class="thumbnail-link">
                                 <img class="course-thumbnail no-png-fix" src='<%= course.getSafeImage(0)
-                                .getSmallImageUrl(themeDisplay) %>' alt='<%= course.getTitle(locale) %>' title='<%= course
+                                .getMediumImageUrl(themeDisplay) %>' alt='<%= course.getTitle(locale) %>' title='<%= course
                                 .getTitle(locale) %>'/>
                             </a>
                             <h4><a href='<%= course.getUrl() %>'><%=course.getTitle(locale) %></a></h4>
@@ -140,7 +140,7 @@
                             <article class="course">
                                 <a href='<%= course.getUrl() %>' class="thumbnail-link">
                                     <img class="course-thumbnail no-png-fix" src='<%= course.getSafeImage(0)
-                                    .getSmallImageUrl(themeDisplay) %>' alt='<%= course.getTitle(locale) %>' title='<%= course
+                                    .getMediumImageUrl(themeDisplay) %>' alt='<%= course.getTitle(locale) %>' title='<%= course
                                     .getTitle(locale) %>'/>
                                 </a>
                                 <h4><a href='<%= course.getUrl() %>'><%=course.getTitle(locale) %></a></h4>

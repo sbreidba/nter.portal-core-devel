@@ -214,7 +214,7 @@
                     %>
                     <li class='course <%= statusClass %>' data-course-id='<%= course.getCourseId() %>'><article>
                         <a href="<%= course.getUrl() %>" class="thumbnail-link"><img src='<%= course.getSafeImage(0)
-                        .getSmallImageUrl(themeDisplay) %>' class="course-thumbnail" title="<%= course.getTitle(locale) %>"
+                        .getMediumImageUrl(themeDisplay) %>' class="course-thumbnail" title="<%= course.getTitle(locale) %>"
 						alt="<%= course.getTitle(locale) %>" /></a>
                         <div class="course-description">
                             <h4 class="course-title"><a href="<%= course.getUrl() %>"><%= course.getTitle(locale) %></a></h4>

@@ -128,7 +128,7 @@ public class SearchUtil {
 
         SearchContainer globalSearchContainer = new SearchContainer(
                 renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM,
-                25, portletURL, null, LanguageUtil.format(pageContext,
+                20, portletURL, null, LanguageUtil.format(pageContext,
                         "no-results-were-found-that-matched-the-keywords-x",
                         "<strong>" + HtmlUtil.escape(keywords) + "</strong>"));
         globalSearchContainer.setIteratorURL(portletURL);
