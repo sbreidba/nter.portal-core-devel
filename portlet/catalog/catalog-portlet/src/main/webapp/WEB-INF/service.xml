@@ -418,7 +418,7 @@
         <!-- Col: relatedCourseIri: (mandatory) The Internationalized Resource Identifier
              for a course. -->
         <!-- Col: relationshipType: (mandatory) A description how the courses are
-             related. (token: PREREQUISTE, SUPERSEDES) -->
+             related. (token: PREREQUISITE, SUPERSEDES) -->
         <!-- End Data Dictionary -->
         <!-- Primary key columns -->
         <column name="courseRelatedId" type="long" primary="true"/>
@@ -693,7 +693,7 @@
         <!-- Col: summary: A summary statement of the user review. -->
         <!-- Col: content: A detailed statement containing the user review. -->
         <!-- Col: createDate: The date the course review was created. -->
-        <!-- Col: modifiedDate: The date of the user review was updated. -->
+        <!-- Col: modifiedDate: The date the user review was updated. -->
         <!-- Col: weightedScore: The weighted score of the user review. -->
         <!-- Col: removed: Flag that the administrator wants to remove the local CourseReview (tombstone entry). -->
         <!-- Col: removedDate: The date the local CourseReview information was marked for delete. -->
@@ -772,7 +772,7 @@
         <!-- Col: summary: A summary statement of the user review. -->
         <!-- Col: content: A detailed statement containing the user review. -->
         <!-- Col: createDate: The date the course review was created. -->
-        <!-- Col: modifiedDate: The date of the user review was updated. -->
+        <!-- Col: modifiedDate: The date the user review was updated. -->
         <!-- Col: starScore: The star score of the user review. -->
         <!-- Col: fromTrustedReviewer: True if review created by a Trusted Reviewer. -->
         <!-- Col: removed: Flag that the provider wants to remove the globalCourseReview (tombstone entry). -->
@@ -939,7 +939,8 @@
     <entity name="FlagReport" uuid="true" local-service="true" remote-service="false">
         <!-- Data Dictionary -->
         <!-- Table: CATALOG_FlagReport contains a user inappropriate flag report to be processed with Liferay workflow. -->
-        <!-- Col: flagReportId: (mandatory) The unique identifier for a flagReport ratings entry. -->
+        <!-- Col: uuid_: (mandatory) Liferay generated identifier for a flagReport user entry. -->
+        <!-- Col: flagReportId: (mandatory) The unique identifier for a flagReport entry. -->
         <!-- Col: groupId: Liferay element for community / organization. -->
         <!-- Col: companyId: Liferay element for portal instance. -->
         <!-- Col: userId: Liferay element for user, used in auditing. -->
@@ -950,7 +951,7 @@
         <!-- Col: content: The content which was flagged. -->
         <!-- Col: flagReason: The reason report was flagged. -->
         <!-- Col: flagComment: Reporter comment about reason report was flagged. -->
-        <!-- Col: moderateAction: The moderator action plan regarding inappropriate content.  (token: REMOVE, IGNORE)  -->
+        <!-- Col: moderateAction: The moderator action plan regarding inappropriate content. (token REMOVE, IGNORE)  -->
         <!-- Col: moderatorComment: Informative comments the moderator wishes to convey about the action plan. -->
         <!-- Col: status: Workflow status. -->
         <!-- Col: statusByUserId: Workflow moderator userId. -->
