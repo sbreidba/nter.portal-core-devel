@@ -402,9 +402,9 @@ footer {
 .homepage-tabs .yui3-tab-selected a { background: url('../images/custom/active-tab-bg.png') !important; z-index: 5 !important; color: #6f767f; top: 0; font-weight: normal; }
 .homepage-tabs .yui3-tab-selected a:before { content: '  ' /* 2 spaces so IE8 re-renders the image */; background-position: top left !important; }
 .homepage-tabs .yui3-tab-selected a:after { content: '  ' /* 2 spaces so IE8 re-renders the image */; background-position: top right !important; }
-.homepage-tabs .yui3-tabview-list a:hover { background-image: url('../images/custom/hover-tab-bg.png'); background-color: transparent; }
-.homepage-tabs .yui3-tabview-list a:hover:before { content: '   ' /* 3 spaces so IE8 re-renders the image */; background-position: left bottom; }
-.homepage-tabs .yui3-tabview-list a:hover:after { content: '   ' /* 3 spaces so IE8 re-renders the image */; background-position: right bottom; }
+.homepage-tabs .yui3-tabview-list a:hover, .homepage-tabs .yui3-tabview-list a:focus { background-image: url('../images/custom/hover-tab-bg.png'); background-color: transparent; }
+.homepage-tabs .yui3-tabview-list a:hover:before, .homepage-tabs .yui3-tabview-list a:focus:before { content: '   ' /* 3 spaces so IE8 re-renders the image */; background-position: left bottom; }
+.homepage-tabs .yui3-tabview-list a:hover:after, .homepage-tabs .yui3-tabview-list a:focus:after { content: '   ' /* 3 spaces so IE8 re-renders the image */; background-position: right bottom; }
 .homepage-tabs .yui3-tabview-list .first { border-left: 0; }
 .homepage-tabs .yui3-tabview-list .first a:before { content: ''; background: none; display: none; }
 .homepage-tabs .yui3-tabview-list .last a:after { background-image: url('../images/custom/tab-right-cap.png'); width: 13px; right: -13px; }
