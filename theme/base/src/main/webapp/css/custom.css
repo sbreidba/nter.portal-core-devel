@@ -103,7 +103,6 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 	font-size: 1.5em;
 	font-weight: normal;
 }
-.company-subtitle small { font-size: 0.7692307692307692em; /* capital B in Beta will be x-height of Arial text */ }
 
 #header-actions a {
 	color: #FFBACB;
@@ -352,9 +351,6 @@ footer {
 
 .call-to-action {
 	color: #001c45;
-}
-.beta-disclaimer {
-	color: #4b4b4b;
 }
 
 .category-filter { border-color: #999; }

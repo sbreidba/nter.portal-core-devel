@@ -41,7 +41,7 @@
 					<img alt="$logo_description" src="$site_logo" />
 				</a>
 			</h1>
-			<h2 class="company-subtitle">#language("nter-name") <small>#language("beta-note")</small></h2>
+			<h2 class="company-subtitle">#language("nter-name")</h2>
 		</hgroup>
 		
 		<div id="header-actions">
