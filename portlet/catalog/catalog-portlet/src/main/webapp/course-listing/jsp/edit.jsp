@@ -25,6 +25,28 @@
 	<aui:fieldset>
 		<aui:input type="text" name="<%= ListingConstants.PREF_NUM_DISPLAYED %>"
 				   value='<%= prefs.getValue(ListingConstants.PREF_NUM_DISPLAYED, defaultDisplayCount) %>' size="45" />
+
+    <aui:select name="<%= ListingConstants.PREF_TYPE %>">
+      <% ListingType listingType = ListingType.valueOf(prefs.getValue(
+          ListingConstants.PREF_TYPE, ListingType.UNDEFINED.toString())); %>
+      <aui:option value='<%= ListingType.UNDEFINED.toString() %>'
+            selected='<%= listingType == ListingType.UNDEFINED %>'>
+        <liferay-ui:message key="all-course-listing" />
+      </aui:option>
+      <aui:option value='<%= ListingType.NEW.toString() %>'
+            selected='<%= listingType == ListingType.NEW %>'>
+        <liferay-ui:message key="new-course-listing" />
+      </aui:option>
+      <aui:option value='<%= ListingType.POPULAR.toString() %>'
+            selected='<%= listingType == ListingType.POPULAR %>'>
+        <liferay-ui:message key="popular-course-listing" />
+      </aui:option>
+      <aui:option value='<%= ListingType.FEATURED.toString() %>'
+            selected='<%= listingType == ListingType.FEATURED %>'>
+        <liferay-ui:message key="featured-course-listing" />
+      </aui:option>
+    </aui:select>
+
 		<aui:button-row>
 			<aui:button type="submit" />
 		</aui:button-row>
