@@ -28,7 +28,7 @@ import java.util.List;
 
 public class CourseListingValidator {
 
-	public static boolean validateCourseListingPreferences(String coursesDisplayed, List<String> errors) {
+	public static boolean validateCourseListingPreferences(String coursesDisplayed, String listingType, List<String> errors) {
 		boolean valid = true;
 
 		if (com.liferay.portal.kernel.util.Validator.isNull(coursesDisplayed)) {
@@ -39,6 +39,20 @@ public class CourseListingValidator {
             _log.debug("Number of courses is not a number: " + coursesDisplayed);
 			errors.add("courses-displayed-invalid");
 			valid = false;
+		} else {
+            try {
+                ListingConstants.ListingType type = ListingConstants.ListingType.valueOf(listingType);
+                if (type == ListingConstants.ListingType.UNDEFINED) {
+                    _log.debug("Listing Type is undefined");
+                    errors.add("listing-type-required");
+                    valid = false;
+                }
+            }
+            catch (IllegalArgumentException e) {
+                _log.error("Listing Type " + listingType + " is invalid");
+                errors.add("listing-type-invalid");
+                valid = false;
+            }
 		}
 
 		return valid;

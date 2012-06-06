@@ -51,6 +51,7 @@
 <%@ page import="com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil" %>
 
 <%@ page import="org.nterlearning.course.listing.portlet.ListingConstants" %>
+<%@ page import="org.nterlearning.course.listing.portlet.ListingConstants.ListingType" %>
 <%@ page import="org.nterlearning.course.enumerations.CourseFilterType" %>
 <%@ page import="org.nterlearning.course.enumerations.CourseSortType" %>
 
