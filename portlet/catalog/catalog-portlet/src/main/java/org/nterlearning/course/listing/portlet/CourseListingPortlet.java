@@ -48,13 +48,17 @@ public class CourseListingPortlet extends MVCPortlet {
 	 * @throws Exception
 	 */
 	public void setPrefs(ActionRequest request, ActionResponse response) throws Exception {
+		String listingType = ParamUtil.getString(request, ListingConstants.PREF_TYPE);
 		String coursesDisplayed = ParamUtil.getString(request, ListingConstants.PREF_NUM_DISPLAYED);
 
 		ArrayList<String> errors = new ArrayList<String>();
-		if (CourseListingValidator.validateCourseListingPreferences(coursesDisplayed, errors)) {
+		if (CourseListingValidator.validateCourseListingPreferences(coursesDisplayed, listingType, errors)) {
 			PortletPreferences prefs = request.getPreferences();
 			prefs.setValue(ListingConstants.PREF_NUM_DISPLAYED, coursesDisplayed);
-            _log.debug("Setting preferences to: " + ListingConstants.PREF_NUM_DISPLAYED + "=" + coursesDisplayed);
+			prefs.setValue(ListingConstants.PREF_TYPE, listingType);
+            _log.debug("Setting preferences to: " + ListingConstants.PREF_NUM_DISPLAYED + 
+            		"=" + coursesDisplayed + ", " + ListingConstants.PREF_TYPE +
+                    "=" + listingType);
 			prefs.store();
 
 			response.setPortletMode(PortletMode.VIEW);

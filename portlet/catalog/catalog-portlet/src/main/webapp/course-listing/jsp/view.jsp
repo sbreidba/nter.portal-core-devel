@@ -33,18 +33,23 @@ if (group.isOrganization()) {
     groupId = group.getGroupId();
 }
 
+ListingType listingType = ListingType.valueOf(
+    prefs.getValue(ListingConstants.PREF_TYPE, ListingType.UNDEFINED.toString()));
+
 //set course filter type (where clause) and course sort type (order by clause)
-String urlFilter = httpRequest.getParameter("filter");
-if (urlFilter == null) urlFilter = "";
 CourseFilterType courseFilterType = CourseFilterType.ALL;
 CourseSortType courseSortType = CourseSortType.NEW_POPULAR;
-if (urlFilter.equals("new")) {
+switch (listingType) {
+  case NEW:
     courseSortType = CourseSortType.NEW_POPULAR;
-} else if (urlFilter.equals("popular")) {
+    break;
+  case POPULAR:
     courseSortType = CourseSortType.POPULAR_NEW;
-} else if (urlFilter.equals("featured")) {
+    break;
+  case FEATURED:
     courseFilterType = CourseFilterType.FEATURED;
     courseSortType = CourseSortType.NEW_POPULAR;
+    break;
 }
 
 long categoryIdFilter = ParamUtil.getLong(httpRequest, "category");
@@ -119,10 +124,7 @@ if (total > 0) {
 pageContext.setAttribute("results", results);
 pageContext.setAttribute("total", total);
 
-StringBuffer subpage = new StringBuffer("");
-if (urlFilter.equals("featured") || urlFilter.equals("new") || urlFilter.equals("popular")) {
-	subpage.append("?filter=" + urlFilter);
-}
+StringBuffer subpage = new StringBuffer("?");
 if (vocabularyIdFilter > 0) {
 	if (subpage.length() > 0) subpage.append("&");
 	else subpage.append("?");
@@ -143,45 +145,6 @@ ArrayList meta = new ArrayList();
 meta.add("<link rel=\"canonical\" href=\"" + PortalUtil.getPathFriendlyURLPublic() + GroupLocalServiceUtil.getGroup(themeDisplay.getScopeGroupId()).getFriendlyURL() + layout.getFriendlyURL() + subpage.toString() + "\" />");
 httpRequest.setAttribute(MimeResponse.MARKUP_HEAD_ELEMENT, meta);
 %>
-
-<!-- heading -->
-<h3 class="main-page-heading">
-	<%
-	String pageTitle;
-	boolean changeWindowTitle = true;
-	if (urlFilter.equals("") && keywordFilter.equals("") && vocabularyIdFilter == 0 && categoryIdFilter == 0) {
-		pageTitle = LanguageUtil.get(pageContext, "all-courses");
-		changeWindowTitle = false;
-	} else if (urlFilter.equals("featured")) {
-		pageTitle = LanguageUtil.get(pageContext, "featured-courses");
-	} else if (urlFilter.equals("new")) {
-		pageTitle = LanguageUtil.get(pageContext, "new-courses");
-	} else if (urlFilter.equals("popular")) {
-		pageTitle = LanguageUtil.get(pageContext, "popular-courses");
-	} else if (vocabularyIdFilter > 0) {
-		pageTitle = LanguageUtil.format(pageContext, "vocabulary-courses", AssetVocabularyLocalServiceUtil.getAssetVocabulary(vocabularyIdFilter).getTitle(locale,true));
-    } else if (categoryIdFilter > 0) {
-		pageTitle = LanguageUtil.format(pageContext, "category-courses", AssetCategoryLocalServiceUtil.getAssetCategory(categoryIdFilter).getTitle(locale,true));
-		changeWindowTitle = false;
-    } else if (!keywordFilter.equals("")) {
-        pageTitle = LanguageUtil.format(pageContext, "keyword-courses", LanguageUtil.get(pageContext, "keyword-label") + ": " + keywordFilter);
-        changeWindowTitle = false;
-    } else {
-		pageTitle = LanguageUtil.get(pageContext, "courses");
-		changeWindowTitle = false;
-	}
-	%>
-	<%= pageTitle %>
-	<% if (changeWindowTitle) PortalUtil.addPageTitle(pageTitle, PortalUtil.getHttpServletRequest(renderRequest)); %>
-</h3>
-
-<!-- type filter -->
-<ul class="course-filter">
-	<% if (urlFilter.equals("") && keywordFilter.equals("") && vocabularyIdFilter == 0 && categoryIdFilter == 0) {%><li class="current"><%= LanguageUtil.get(pageContext, "all-course-carousel") %></li><% } else { %><li><a href="?"><%= LanguageUtil.get(pageContext, "all-course-carousel") %></a></li><% } %>
-	<% if (urlFilter.equals("featured")) { %><li class="current"><%= LanguageUtil.get(pageContext, "featured-course-carousel") %></li><% } else { %><li><a href="?filter=featured"><%= LanguageUtil.get(pageContext, "featured-course-carousel") %></a></li><% } %>
-	<% if (urlFilter.equals("new")) { %><li class="current"><%= LanguageUtil.get(pageContext, "new-course-carousel") %></li><% } else { %><li><a href="?filter=new"><%= LanguageUtil.get(pageContext, "new-course-carousel") %></a></li><% } %>
-	<% if (urlFilter.equals("popular")) { %><li class="current"><%= LanguageUtil.get(pageContext, "popular-course-carousel") %></li><% } else { %><li><a href="?filter=popular"><%= LanguageUtil.get(pageContext, "popular-course-carousel") %></a></li><% } %>
-</ul>
 
 <!-- category filter -->
 <!-- only include category tree if it is partner page and a vocabulary is defined-->
@@ -222,7 +185,6 @@ httpRequest.setAttribute(MimeResponse.MARKUP_HEAD_ELEMENT, meta);
 
 <%
 String paginationUrl = renderResponse.createRenderURL().toString();
-if (!urlFilter.equals("")) paginationUrl += "&filter=" + urlFilter.toLowerCase();
 %>
 
 <liferay-ui:page-iterator
