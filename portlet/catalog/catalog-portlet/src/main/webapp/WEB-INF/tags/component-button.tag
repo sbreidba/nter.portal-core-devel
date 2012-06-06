@@ -70,12 +70,13 @@ if (!component.isRemoved()) {
                 return;
             }
 
-            String configWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_CONFIGURATION_URL);
-            String configEmail= PropsUtil.get(PortalProperties.ECOMMERCE_EMAIL);
-            String configPassword = PropsUtil.get(PortalProperties.ECOMMERCE_PASSWORD);
-            ConfigurationClient client = new ConfigurationClientImpl(configEmail, configPassword, configWsdlURL);
+            try {
+                String configWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_CONFIGURATION_URL);
+                String configEmail= PropsUtil.get(PortalProperties.ECOMMERCE_EMAIL);
+                String configPassword = PropsUtil.get(PortalProperties.ECOMMERCE_PASSWORD);
+                ConfigurationClient client = new ConfigurationClientImpl(configEmail, configPassword, configWsdlURL);
 
-            PaymentConfig paymentConfig =
+                PaymentConfig paymentConfig =
                     client.getPaymentConfig(PaymentProcessor.PAY_PAL);
             %>
 
@@ -102,9 +103,10 @@ if (!component.isRemoved()) {
                     <%= LanguageUtil.get(pageContext, "component-details-purchase") %>
                 </button>
             </form>
-<%
-        }
-        else {
+<%          } catch (Exception e) {
+               // commerce service not available
+            }
+        }else {
             // else course is free or has been purchased.
 
             List<ExternalLink> dlLinks = ComponentLocalServiceUtil.getExternalLinks(component);

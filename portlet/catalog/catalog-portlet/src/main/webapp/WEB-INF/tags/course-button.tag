@@ -74,14 +74,15 @@ if (!course.isRemoved()) {
 					return;
 				}
 
-                String configWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_CONFIGURATION_URL);
-                String configEmail= PropsUtil.get(PortalProperties.ECOMMERCE_EMAIL);
-                String configPassword = PropsUtil.get(PortalProperties.ECOMMERCE_PASSWORD);
-                ConfigurationClient client = new ConfigurationClientImpl(configEmail, configPassword, configWsdlURL);
+                try {
+                    String configWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_CONFIGURATION_URL);
+                    String configEmail = PropsUtil.get(PortalProperties.ECOMMERCE_EMAIL);
+                    String configPassword = PropsUtil.get(PortalProperties.ECOMMERCE_PASSWORD);
+                    ConfigurationClient client = new ConfigurationClientImpl(configEmail, configPassword, configWsdlURL);
 
-                PaymentConfig paymentConfig =
-                        client.getPaymentConfig(PaymentProcessor.PAY_PAL);
- 				%>
+                    PaymentConfig paymentConfig =
+                            client.getPaymentConfig(PaymentProcessor.PAY_PAL);
+                %>
                 <form action="<%=paymentConfig.getActionURL()%>" method="post">
                     <input type="hidden" name="cmd" value="_xclick">
                     <input type="hidden" name="business" value="<%=paymentConfig.getSellerId()%>">
@@ -108,7 +109,9 @@ if (!course.isRemoved()) {
                     <%--<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">--%>
                 </form>
 
-    <%
+    <%          } catch (Exception e) {
+                   // commerce service not available
+                }
             } else {
                 // else course is free or has been purchased.
 

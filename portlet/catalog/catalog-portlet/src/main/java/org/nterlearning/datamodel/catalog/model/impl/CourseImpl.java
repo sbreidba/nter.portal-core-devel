@@ -29,6 +29,7 @@ package org.nterlearning.datamodel.catalog.model.impl;
  *
  */
 
+import com.liferay.portal.NoSuchUserIdMapperException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
@@ -469,21 +470,26 @@ public class CourseImpl extends CourseBaseImpl {
             BigDecimal price = new BigDecimal(getPrice());
 			price = (price.setScale(2, RoundingMode.UP));
             String courseIri = getCourseIri();
-            String studentId =
-                    UserIdMapperLocalServiceUtil.getUserIdMapper(
-                            userId, PortalPropertiesUtil.getSsoImplementation()).getExternalUserId();
-			try {
-				PaymentStatus paymentStatus = client.getPaymentStatus(institution, studentId, courseIri, price);
-				return paymentStatus.equals(PaymentStatus.COMPLETED);
-			} catch (Exception e)  {
-				_log.error("Could not determine payment status for studentId:" + studentId +
-                        ", courseIri:" + courseIri + ". Check commerce service availability.");
-			}   return false;
-		} else {
-			return true;
-		}
+            try {
+                String studentId =
+                        UserIdMapperLocalServiceUtil.getUserIdMapper(
+                                userId, PortalPropertiesUtil.getSsoImplementation()).getExternalUserId();
 
-	}
+                PaymentStatus paymentStatus = client.getPaymentStatus(institution, studentId, courseIri, price);
+                return paymentStatus.equals(PaymentStatus.COMPLETED);
+            } catch (NoSuchUserIdMapperException nsu) {
+                _log.error("Could not find externalUserId (SSO) for:" + userId + ".");
+                return false;
+            } catch (Exception e) {
+                _log.error("Could not determine payment status for userId:" + userId +
+                        ", courseIri:" + courseIri + ". Check commerce service availability.");
+                return false;
+            }
+        } else {
+            return true;
+        }
+
+    }
 
 	private static Log _log = LogFactoryUtil.getLog(CourseImpl.class);
 }
