@@ -46,11 +46,10 @@
 <%@ tag import="org.nterlearning.datamodel.catalog.service.FeedReferenceLocalServiceUtil" %>
 <%@ tag import="org.nterlearning.utils.PortalProperties" %>
 
-<%--<%@ tag import="org.nterlearning.commerce.client.CommerceServiceStub" %>--%>
-<%--<%@ tag import="org.nterlearning.xml.commerce.configuration_interface_0_1_0.GetPaymentConfig" %>--%>
-<%--<%@ tag import="org.nterlearning.xml.commerce.configuration_interface_0_1_0.GetPaymentConfigResponse" %>--%>
-<%--<%@ tag import="org.nterlearning.xml.commerce.configuration_interface_0_1_0_wsdl.ConfigurationInterface" %>--%>
-<%--<%@ tag import="org.nterlearning.xml.commerce.domain_objects_0_1_0.PaymentProcessor" %>--%>
+<%@ tag import="org.nterlearning.commerce.client.ConfigurationClient" %>
+<%@ tag import="org.nterlearning.commerce.client.ConfigurationClientImpl" %>
+<%@ tag import="org.nterlearning.commerce.configuration.client.PaymentConfig" %>
+<%@ tag import="org.nterlearning.commerce.configuration.client.PaymentProcessor" %>
 
 
 <liferay-theme:defineObjects/>
@@ -75,42 +74,39 @@ if (!course.isRemoved()) {
 					return;
 				}
 
-                String transactionWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_TRANSACTION_URL);
-			    String configurationWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_CONFIGURATION_URL);
-			    String entitlementWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_ENTITLEMENT_URL);
-                
-//				CommerceServiceStub commerceService = new CommerceServiceStub(transactionWsdlURL, configurationWsdlURL,
-//						entitlementWsdlURL);
-//				ConfigurationInterface configurationInterface = commerceService.getConfigurationInterface();
-//				GetPaymentConfig getPaymentConfig = new GetPaymentConfig();
-//				getPaymentConfig.setConfigId(PaymentProcessor.PAY_PAL);
-//				GetPaymentConfigResponse paymentResponse = configurationInterface.getPaymentConfig(getPaymentConfig);
-				%>
-                <%--<form action="<%=paymentResponse.getConfigurationEntry().getActionURL()%>" method="post">--%>
-                    <%--<input type="hidden" name="cmd" value="_xclick">--%>
-                    <%--<input type="hidden" name="business" value="<%=paymentResponse.getConfigurationEntry().getSellerId()%>">--%>
-                    <%--<input type="hidden" name="lc" value="US">--%>
-                    <%--<input type="hidden" name="item_name" value="<%= course.getTitle(locale) %>">--%>
-                    <%--<input type="hidden" name="item_number" value="<%= course.getCourseIri() %>">--%>
-                    <%--<input type="hidden" name="amount" value="<%= course.getPrice() %>">--%>
-                    <%--<input type="hidden" name="currency_code" value="<%= course.getPriceUnit() %>">--%>
-                    <%--<input type="hidden" name="button_subtype" value="services">--%>
-                    <%--<input type="hidden" name="no_note" value="1">--%>
-                    <%--<input type="hidden" name="no_shipping" value="1">--%>
-                    <%--<input type="hidden" name="rm" value="1">--%>
-                    <%--<input type="hidden" name="return" value="<%= PortalUtil.getPortalURL(request) %><%= course.getUrl() %>">--%>
-                    <%--<input type="hidden" name="cancel_return" value="<%= PortalUtil.getPortalURL(request) %><%= course.getUrl() %>">--%>
-                    <%--<input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">--%>
-                    <%--<input type="hidden" name="address_override" value="1">--%>
-                    <%--<input type="hidden" name="notify_url" value="<%=paymentResponse.getConfigurationEntry().getNotifyURL()%>">--%>
-                    <%--<input type="hidden" name="email" value="<%= user.getEmailAddress() %>">--%>
-                    <%--<input type="hidden" name="custom" value="studentId=<%= studentId %>|nterId=NTER|cpId=<%= cpId %>">--%>
-                    <%--<button type="submit" class="purchase"><%= LanguageUtil.get(pageContext,--%>
-							<%--"course-actions-purchase") %></button>--%>
-					<%--&lt;%&ndash;<input type="image" src="<%=paymentResponse.getConfigurationEntry().getButtonURL()%>" border="0" name="submit"&ndash;%&gt;--%>
-						   <%--&lt;%&ndash;alt="PayPal - The safer, easier way to pay online!">&ndash;%&gt;--%>
-                    <%--&lt;%&ndash;<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">&ndash;%&gt;--%>
-                <%--</form>--%>
+                String configWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_CONFIGURATION_URL);
+                String configEmail= PropsUtil.get(PortalProperties.ECOMMERCE_EMAIL);
+                String configPassword = PropsUtil.get(PortalProperties.ECOMMERCE_PASSWORD);
+                ConfigurationClient client = new ConfigurationClientImpl(configEmail, configPassword, configWsdlURL);
+
+                PaymentConfig paymentConfig =
+                        client.getPaymentConfig(PaymentProcessor.PAY_PAL);
+ 				%>
+                <form action="<%=paymentConfig.getActionURL()%>" method="post">
+                    <input type="hidden" name="cmd" value="_xclick">
+                    <input type="hidden" name="business" value="<%=paymentConfig.getSellerId()%>">
+                    <input type="hidden" name="lc" value="US">
+                    <input type="hidden" name="item_name" value="<%= course.getTitle(locale) %>">
+                    <input type="hidden" name="item_number" value="<%= course.getCourseIri() %>">
+                    <input type="hidden" name="amount" value="<%= course.getPrice() %>">
+                    <input type="hidden" name="currency_code" value="<%= course.getPriceUnit() %>">
+                    <input type="hidden" name="button_subtype" value="services">
+                    <input type="hidden" name="no_note" value="1">
+                    <input type="hidden" name="no_shipping" value="1">
+                    <input type="hidden" name="rm" value="1">
+                    <input type="hidden" name="return" value="<%= PortalUtil.getPortalURL(request) %><%= course.getUrl() %>">
+                    <input type="hidden" name="cancel_return" value="<%= PortalUtil.getPortalURL(request) %><%= course.getUrl() %>">
+                    <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+                    <input type="hidden" name="address_override" value="1">
+                    <input type="hidden" name="notify_url" value="<%=paymentConfig.getNotifyURL()%>">
+                    <input type="hidden" name="email" value="<%= user.getEmailAddress() %>">
+                    <input type="hidden" name="custom" value="studentId=<%= studentId %>|nterId=NTER|cpId=<%= cpId %>">
+                    <button type="submit" class="purchase"><%= LanguageUtil.get(pageContext,
+							"course-actions-purchase") %></button>
+					<%--<input type="image" src="<%=paymentResponse.getConfigurationEntry().getButtonURL()%>" border="0" name="submit"--%>
+						   <%--alt="PayPal - The safer, easier way to pay online!">--%>
+                    <%--<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">--%>
+                </form>
 
     <%
             } else {
