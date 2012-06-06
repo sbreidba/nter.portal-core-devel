@@ -22,6 +22,7 @@
 <%@ taglib uri="http://java.sun.com/portlet" prefix="portlet" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://liferay.com/tld/security" prefix="liferay-security" %>
+<%@ taglib uri="http://liferay.com/tld/portlet" prefix="liferay-portlet" %>
 <%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
@@ -383,18 +384,21 @@
 
 
 <div>
-    <portlet:actionURL name="exportStudentTranscriptToPdf"
-                   var="exportStudentTranscriptToPdf" />
+
+    <liferay-portlet:resourceURL
+            portletName="transcriptreports_WAR_ntercatalogportlet"
+            var="printTranscriptURL"
+            anchor="false">
+        <liferay-portlet:param name="userId" value="<%= String.valueOf(userId) %>"/>
+    </liferay-portlet:resourceURL>
 
     <%
         int totalRecords = (int) CourseRecordLocalServiceUtil.countByUserIdFilter(userId, courseId, CourseRecordFilterType.ALL.toString());
         if (totalRecords > 0) { %>
-            <aui:form action="<%= exportStudentTranscriptToPdf %>" method="post">
-                <aui:fieldset>
-                    <aui:button-row>
-                        <aui:button type="submit" value="archived-courses-export-pdf" />
-                    </aui:button-row>
-                </aui:fieldset>
-            </aui:form>
+            <input type="button"
+                   value="<%=LanguageUtil.get(pageContext, "nter-student-records-export-transcript") %>"
+                   onclick="window.open('<%= printTranscriptURL.toString() %>',
+                           '<%=LanguageUtil.get(pageContext, "nter-student-records") %>',
+                           'toolbar=no,location=no,menubar=no,scrollbar=yes')"/>
     <%  } %>
 </div>

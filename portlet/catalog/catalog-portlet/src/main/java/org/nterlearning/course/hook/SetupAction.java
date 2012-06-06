@@ -42,7 +42,6 @@ import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.model.CourseRecord;
 import org.nterlearning.datamodel.catalog.service.CourseRecordLocalServiceUtil;
-import org.nterlearning.exporter.ReportReaper;
 import org.nterlearning.utils.ExpandoConstants;
 import org.nterlearning.utils.PortalProperties;
 import org.nterlearning.utils.PortalPropertiesUtil;

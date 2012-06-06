@@ -23,14 +23,14 @@
 
 <display>
 	<category name="NTER">
+        <portlet id="archived-courses" />
+        <portlet id="course-carousel" />
         <portlet id="component-details"/>
-		<portlet id="course-carousel" />
 		<portlet id="course-details" />
 		<portlet id="course-listing" />
+        <portlet id="course-reviews" />
+        <portlet id="current-course" />
 		<portlet id="partner-top-courses" />
-		<portlet id="course-reviews" />
-		<portlet id="current-course" />
-		<portlet id="archived-courses" />
 		<portlet id="unified-search"/>
 	</category>
     <category name="NTER Search Tools">
@@ -38,14 +38,14 @@
     </category>
 	<category name="category.hidden">
 		<portlet id="course-management-control-panel" />
-		<portlet id="feeds" />
-		<portlet id="course-search" />
-		<portlet id="course-records-control-panel" />
-		<portlet id="course-testing-control-panel" />
-        <portlet id="flag-report-control-panel" />
-		<portlet id="crawl" />
+        <portlet id="course-records-control-panel" />
+        <portlet id="course-search" />
+        <portlet id="course-testing-control-panel" />
+        <portlet id="crawl" />
         <portlet id="external-search"/>
-        <portlet id="reports-control-panel"/>
+		<portlet id="feeds" />
+        <portlet id="flag-report-control-panel" />
         <portlet id="migration-control-panel"/>
+        <portlet id="transcript-reports"/>
     </category>
 </display>

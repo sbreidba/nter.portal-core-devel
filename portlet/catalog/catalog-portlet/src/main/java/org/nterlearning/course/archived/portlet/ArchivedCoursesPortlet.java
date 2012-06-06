@@ -25,11 +25,9 @@ import javax.portlet.ActionResponse;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.util.WebKeys;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+
 import org.nterlearning.course.CourseUtil;
-import org.nterlearning.exporter.reports.StudentTranscript;
 
 public class ArchivedCoursesPortlet extends MVCPortlet {
 	
@@ -38,22 +36,4 @@ public class ArchivedCoursesPortlet extends MVCPortlet {
 
 		CourseUtil.updateRemoved(request, response);
 	}
-	
-	/**
-	 * Exports the logged in student's course records to a PDF file, then redirects the portal to it
-	 * 
-	 * @param request
-	 * @param response
-	 * @throws com.liferay.portal.kernel.exception.PortalException
-	 * @throws com.liferay.portal.kernel.exception.SystemException
-	 */
-	public void exportStudentTranscriptToPdf(ActionRequest request, ActionResponse response)
-		throws PortalException, SystemException{
-		
-		ThemeDisplay themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
-		long userId = themeDisplay.getUserId(); // get the current user's ID
-		
-		StudentTranscript.exportToPdfAndRedirect(userId, request.getLocale(),request, response);
-	}
-
 }

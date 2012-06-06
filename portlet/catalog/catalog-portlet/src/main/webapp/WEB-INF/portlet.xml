@@ -362,7 +362,7 @@
     <portlet>
         <portlet-name>course-records-control-panel</portlet-name>
         <display-name>Course Records</display-name>
-        <portlet-class>org.nterlearning.course.record.portlet.CourseRecordsPortlet</portlet-class>
+        <portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
         <init-param>
             <name>view-jsp</name>
             <value>/course-records/jsp/view.jsp</value>
@@ -460,32 +460,25 @@
         </security-role-ref>
     </portlet>
 
-    <!-- reports control panel -->
+    <!-- Transcript Report -->
     <portlet>
-        <portlet-name>reports-control-panel</portlet-name>
-        <display-name>Reports</display-name>
-        <portlet-class>org.nterlearning.exporter.portlet.ReportsPortlet</portlet-class>
-        <init-param>
-            <name>view-jsp</name>
-            <value>/reports/jsp/view.jsp</value>
-        </init-param>
-        <init-param>
-            <name>add-process-action-success-action</name>
-            <value>false</value>
-        </init-param>
-        <expiration-cache>0</expiration-cache>
+        <portlet-name>transcript-reports</portlet-name>
+        <display-name>Transcript Reports</display-name>
+        <portlet-class>org.nterlearning.exporter.portlet.TranscriptReportPortlet</portlet-class>
         <supports>
             <mime-type>text/html</mime-type>
-            <portlet-mode>view</portlet-mode>
         </supports>
         <resource-bundle>content.Language</resource-bundle>
         <portlet-info>
-            <title>Reports</title>
-            <short-title>Reports</short-title>
-            <keywords>Reports</keywords>
+            <title>Transcript Reports</title>
+            <short-title>Transcript Reports</short-title>
+            <keywords>transcript report</keywords>
         </portlet-info>
         <security-role-ref>
             <role-name>administrator</role-name>
+        </security-role-ref>
+        <security-role-ref>
+            <role-name>user</role-name>
         </security-role-ref>
     </portlet>
 
