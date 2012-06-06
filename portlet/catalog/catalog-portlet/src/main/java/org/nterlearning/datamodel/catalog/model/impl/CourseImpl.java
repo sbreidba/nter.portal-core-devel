@@ -46,6 +46,8 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.*;
 import com.liferay.portal.util.PortalUtil;
 //import org.nterlearning.commerce.client.CommerceServiceStub;
+import org.nterlearning.commerce.client.TransactionClient;
+import org.nterlearning.commerce.client.TransactionClientImpl;
 import org.nterlearning.course.enumerations.ContributorRoleType;
 import org.nterlearning.datamodel.catalog.model.*;
 import org.nterlearning.datamodel.catalog.service.*;
@@ -57,6 +59,7 @@ import org.nterlearning.utils.PortalPropertiesUtil;
 //import org.nterlearning.xml.commerce.transaction_interface_0_1_0.GetPaymentStatusResponse;
 //import org.nterlearning.xml.commerce.transaction_interface_0_1_0_wsdl.TransactionInterface;
 //import org.nterlearning.xml.commerce.transaction_interface_0_1_0_wsdl.ValidationError;
+import org.nterlearning.commerce.transaction.client.*;
 
 import javax.servlet.jsp.PageContext;
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -453,42 +456,34 @@ public class CourseImpl extends CourseBaseImpl {
         }
 	}
 
-    // TODO temporary method while waiting for e-commerce service to be completed
-    public boolean isPurchased(long userId) 	throws SystemException, PortalException {
-        return (false);
-    }
-//	public boolean isPurchased(long userId)
-//			throws SystemException, PortalException {
-//		if (getPrice() > 0.0) {
-//			TransactionInterface transactionInterface;
-//			String transactionWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_TRANSACTION_URL);
-//			String configurationWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_CONFIGURATION_URL);
-//			String entitlementWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_ENTITLEMENT_URL);
-//
-//			CommerceServiceStub commerceService = new CommerceServiceStub(transactionWsdlURL, configurationWsdlURL,
-//					entitlementWsdlURL);
-//			transactionInterface = commerceService.getTransactionInterface();
-//
-//			GetPaymentStatus paymentStatus = new GetPaymentStatus();
-//            String studentId =
-//                    UserIdMapperLocalServiceUtil.getUserIdMapper(
-//                            userId, PortalPropertiesUtil.getSsoImplementation()).getExternalUserId();
-//			paymentStatus.setStudentId(studentId);
-//			paymentStatus.setCourseId(getCourseIri());
-//			paymentStatus.setResourceId("NTER");
-//			BigDecimal price = new BigDecimal(getPrice());
-//			paymentStatus.setPrice(price.setScale(2, RoundingMode.UP));
-//			try {
-//				GetPaymentStatusResponse paymentResponse = transactionInterface.getPaymentStatus(paymentStatus);
-//				return paymentResponse.getStatus() == PaymentStatus.COMPLETED;
-//			} catch (ValidationError e) {
-//				throw new SystemException(e);
-//			}
-//		} else {
-//			return true;
-//		}
-//
-//	}
+    public boolean isPurchased(long userId)
+			throws SystemException, PortalException {
+		if (getPrice() > 0.0) {
+
+			String transactionWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_TRANSACTION_URL);
+			String transactionEmail= PropsUtil.get(PortalProperties.ECOMMERCE_EMAIL);
+			String transactionPassword = PropsUtil.get(PortalProperties.ECOMMERCE_PASSWORD);
+			TransactionClient client = new TransactionClientImpl(transactionEmail, transactionPassword, transactionWsdlURL);
+
+            String institution = "NTER";
+            BigDecimal price = new BigDecimal(getPrice());
+			price = (price.setScale(2, RoundingMode.UP));
+            String courseIri = getCourseIri();
+            String studentId =
+                    UserIdMapperLocalServiceUtil.getUserIdMapper(
+                            userId, PortalPropertiesUtil.getSsoImplementation()).getExternalUserId();
+			try {
+				PaymentStatus paymentStatus = client.getPaymentStatus(institution, studentId, courseIri, price);
+				return paymentStatus.equals(PaymentStatus.COMPLETED);
+			} catch (Exception e)  {
+				_log.error("Could not determine payment status for studentId:" + studentId +
+                        ", courseIri:" + courseIri + ". Check commerce service availability.");
+			}   return false;
+		} else {
+			return true;
+		}
+
+	}
 
 	private static Log _log = LogFactoryUtil.getLog(CourseImpl.class);
 }
