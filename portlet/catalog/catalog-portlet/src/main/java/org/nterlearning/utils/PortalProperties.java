@@ -32,7 +32,8 @@ public class PortalProperties {
     // E-Commerce properties
     public static final String ECOMMERCE_TRANSACTION_URL = "org.nterlearning.ecommerce.transaction.url";
     public static final String ECOMMERCE_CONFIGURATION_URL = "org.nterlearning.ecommerce.configuration.url";
-    public static final String ECOMMERCE_ENTITLEMENT_URL = "org.nterlearning.ecommerce.entitlement.url";
+    public static final String ECOMMERCE_EMAIL = "org.nterlearning.ecommerce.email";
+    public static final String ECOMMERCE_PASSWORD = "org.nterlearning.ecommerce.password";
 
     // Service Registry properties
     public static final String SERVICE_REGISTRY_GLOBAL_URL = "org.nterlearning.registry.global.url";
