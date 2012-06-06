@@ -37,13 +37,12 @@
 <%@ tag import="org.nterlearning.datamodel.catalog.service.FeedReferenceLocalServiceUtil" %>
 <%@ tag import="org.nterlearning.utils.PortalProperties" %>
 
-<%--<%@ tag import="org.nterlearning.commerce.client.CommerceServiceStub" %>--%>
-<%--<%@ tag import="org.nterlearning.xml.commerce.configuration_interface_0_1_0_wsdl.ConfigurationInterface" %>--%>
-<%--<%@ tag import="org.nterlearning.xml.commerce.configuration_interface_0_1_0.GetPaymentConfig" %>--%>
-<%--<%@ tag import="org.nterlearning.xml.commerce.configuration_interface_0_1_0.GetPaymentConfigResponse" %>--%>
-<%--<%@ tag import="org.nterlearning.xml.commerce.domain_objects_0_1_0.PaymentProcessor" %>--%>
-
 <%@ tag import="java.util.List" %>
+<%@ tag import="org.nterlearning.commerce.client.ConfigurationClient" %>
+<%@ tag import="org.nterlearning.commerce.client.ConfigurationClientImpl" %>
+<%@ tag import="org.nterlearning.commerce.configuration.client.*" %>
+<%@ tag import="org.nterlearning.commerce.configuration.client.PaymentProcessor" %>
+<%@ tag import="org.nterlearning.commerce.configuration.client.PaymentConfig" %>
 
 <liferay-theme:defineObjects/>
 <portlet:defineObjects/>
@@ -71,45 +70,43 @@ if (!component.isRemoved()) {
                 return;
             }
 
-            String transactionWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_TRANSACTION_URL);
-			String configurationWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_CONFIGURATION_URL);
-			String entitlementWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_ENTITLEMENT_URL);
+            try {
+                String configWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_CONFIGURATION_URL);
+                String configEmail= PropsUtil.get(PortalProperties.ECOMMERCE_EMAIL);
+                String configPassword = PropsUtil.get(PortalProperties.ECOMMERCE_PASSWORD);
+                ConfigurationClient client = new ConfigurationClientImpl(configEmail, configPassword, configWsdlURL);
 
-//            CommerceServiceStub commerceService =
-//                    new CommerceServiceStub(transactionWsdlURL, configurationWsdlURL,
-//                                            entitlementWsdlURL);
-//            ConfigurationInterface configurationInterface = commerceService.getConfigurationInterface();
-//            GetPaymentConfig getPaymentConfig = new GetPaymentConfig();
-//            getPaymentConfig.setConfigId(PaymentProcessor.PAY_PAL);
-//            GetPaymentConfigResponse paymentResponse = configurationInterface.getPaymentConfig(getPaymentConfig);
+                PaymentConfig paymentConfig =
+                    client.getPaymentConfig(PaymentProcessor.PAY_PAL);
             %>
 
-            <%--<form action="<%=paymentResponse.getConfigurationEntry().getActionURL()%>" method="post">--%>
-                <%--<input type="hidden" name="cmd" value="_xclick">--%>
-                <%--<input type="hidden" name="business" value="<%=paymentResponse.getConfigurationEntry().getSellerId()%>">--%>
-                <%--<input type="hidden" name="lc" value="US">--%>
-                <%--<input type="hidden" name="item_name" value="<%= component.getTitle() %>">--%>
-                <%--<input type="hidden" name="item_number" value="<%= component.getComponentIri() %>">--%>
-                <%--<input type="hidden" name="amount" value="<%= component.getPrice() %>">--%>
-                <%--<input type="hidden" name="currency_code" value="<%= component.getPriceUnit() %>">--%>
-                <%--<input type="hidden" name="button_subtype" value="services">--%>
-                <%--<input type="hidden" name="no_note" value="1">--%>
-                <%--<input type="hidden" name="no_shipping" value="1">--%>
-                <%--<input type="hidden" name="rm" value="1">--%>
-                <%--<input type="hidden" name="return" value="<%= PortalUtil.getPortalURL(request) %><%= request.getRequestURL() %>">--%>
-                <%--<input type="hidden" name="cancel_return" value="<%= PortalUtil.getPortalURL(request) %><%= request.getRequestURL() %>">--%>
-                <%--<input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">--%>
-                <%--<input type="hidden" name="address_override" value="1">--%>
-                <%--<input type="hidden" name="notify_url" value="<%=paymentResponse.getConfigurationEntry().getNotifyURL()%>">--%>
-                <%--<input type="hidden" name="email" value="<%= user.getEmailAddress() %>">--%>
-                <%--<input type="hidden" name="custom" value="studentId=<%= studentId %>|nterId=NTER|cpId=<%= cpId %>">--%>
-                <%--<button type="submit" class="purchase">--%>
-                    <%--<%= LanguageUtil.get(pageContext, "component-details-purchase") %>--%>
-                <%--</button>--%>
-            <%--</form> --%>
-<%
-        }
-        else {
+            <form action="<%=paymentConfig.getActionURL()%>" method="post">
+                <input type="hidden" name="cmd" value="_xclick">
+                <input type="hidden" name="business" value="<%=paymentConfig.getSellerId()%>">
+                <input type="hidden" name="lc" value="US">
+                <input type="hidden" name="item_name" value="<%= component.getTitle() %>">
+                <input type="hidden" name="item_number" value="<%= component.getComponentIri() %>">
+                <input type="hidden" name="amount" value="<%= component.getPrice() %>">
+                <input type="hidden" name="currency_code" value="<%= component.getPriceUnit() %>">
+                <input type="hidden" name="button_subtype" value="services">
+                <input type="hidden" name="no_note" value="1">
+                <input type="hidden" name="no_shipping" value="1">
+                <input type="hidden" name="rm" value="1">
+                <input type="hidden" name="return" value="<%= PortalUtil.getPortalURL(request) %><%= request.getRequestURL() %>">
+                <input type="hidden" name="cancel_return" value="<%= PortalUtil.getPortalURL(request) %><%= request.getRequestURL() %>">
+                <input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+                <input type="hidden" name="address_override" value="1">
+                <input type="hidden" name="notify_url" value="<%=paymentConfig.getNotifyURL()%>">
+                <input type="hidden" name="email" value="<%= user.getEmailAddress() %>">
+                <input type="hidden" name="custom" value="studentId=<%= studentId %>|nterId=NTER|cpId=<%= cpId %>">
+                <button type="submit" class="purchase">
+                    <%= LanguageUtil.get(pageContext, "component-details-purchase") %>
+                </button>
+            </form>
+<%          } catch (Exception e) {
+               // commerce service not available
+            }
+        }else {
             // else course is free or has been purchased.
 
             List<ExternalLink> dlLinks = ComponentLocalServiceUtil.getExternalLinks(component);
