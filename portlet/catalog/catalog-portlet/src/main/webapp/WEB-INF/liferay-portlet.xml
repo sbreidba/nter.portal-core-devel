@@ -44,6 +44,14 @@
         <css-class-wrapper>course-listing-portlet</css-class-wrapper>
     </portlet>
 
+    <!-- course navigation -->
+    <portlet>
+        <portlet-name>course-navigation</portlet-name>
+        <icon>/course-navigation/images/icon.png</icon>
+        <instanceable>true</instanceable>
+        <css-class-wrapper>course-navigation-portlet</css-class-wrapper>
+    </portlet>
+
     <!-- course details -->
     <portlet>
         <portlet-name>course-details</portlet-name>

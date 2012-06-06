@@ -22,5 +22,20 @@
 package org.nterlearning.course.listing.portlet;
 
 public final class ListingConstants {
+	
+	public enum ListingType {
+        UNDEFINED,
+        NEW,
+        POPULAR,
+        FEATURED;
+
+        public String toNormalizedString() {
+            // Only capitalize the first letter
+            String s = super.toString();
+            return s.substring(0, 1) + s.substring(1).toLowerCase();
+        }
+    }
+
+    public static final String PREF_TYPE = "listingType";
     public static final String PREF_NUM_DISPLAYED = "coursesDisplayed";
 }
