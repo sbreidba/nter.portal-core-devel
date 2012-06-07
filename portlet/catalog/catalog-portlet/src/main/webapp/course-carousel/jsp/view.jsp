@@ -32,19 +32,23 @@ int coursesDisplayed = Integer.parseInt(prefs.getValue(CarouselConstants.PREF_NU
 CourseFilterType courseFilterType = CourseFilterType.ALL;
 CourseSortType courseSortType = CourseSortType.NEW_POPULAR;
 String morestring = LanguageUtil.get(pageContext, "view-more");
+String morelink = PortalUtil.getPathFriendlyURLPublic() + GroupLocalServiceUtil.getGroup(themeDisplay.getScopeGroupId()).getFriendlyURL() + "/courses";
 switch (carouselType) {
    case NEW:
 	courseSortType = CourseSortType.NEW_POPULAR;
 	morestring = LanguageUtil.get(pageContext, "view-more-new");
+	morelink = PortalUtil.getPathFriendlyURLPublic() + GroupLocalServiceUtil.getGroup(themeDisplay.getScopeGroupId()).getFriendlyURL() + "/new-courses";
 	break;
    case POPULAR:
 	courseSortType = CourseSortType.POPULAR_NEW;
 	morestring = LanguageUtil.get(pageContext, "view-more-popular");
+	morelink = PortalUtil.getPathFriendlyURLPublic() + GroupLocalServiceUtil.getGroup(themeDisplay.getScopeGroupId()).getFriendlyURL() + "/popular-courses";
 	break;
    case FEATURED:
 	courseFilterType = CourseFilterType.FEATURED;
 	courseSortType = CourseSortType.NEW_POPULAR;
 	morestring = LanguageUtil.get(pageContext, "view-more-featured");
+	morelink = PortalUtil.getPathFriendlyURLPublic() + GroupLocalServiceUtil.getGroup(themeDisplay.getScopeGroupId()).getFriendlyURL() + "/featured-courses";
 	break;
 }
 
@@ -90,7 +94,7 @@ else {
 			<% } %>
 			</ul>
 		</div>
-		<a href="<%= PortalUtil.getPathFriendlyURLPublic() + GroupLocalServiceUtil.getGroup(themeDisplay.getScopeGroupId()).getFriendlyURL() %>/courses?filter=<%= carouselType.toString().toLowerCase() %>" class="morelink"><%= morestring %></a>
+		<a href="<%= morelink %>" class="morelink"><%= morestring %></a>
 	</c:when>
 	<c:otherwise>
 		<liferay-ui:message key="portlet-needs-to-be-configured" />
