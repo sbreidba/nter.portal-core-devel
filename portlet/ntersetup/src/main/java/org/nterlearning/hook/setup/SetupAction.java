@@ -81,6 +81,8 @@ public class SetupAction extends SimpleAction {
 
             createDefaultWebContent();
             synchronizeTaxonomy();
+
+            setDefaultPasswordPolicy(companyId);
         }
         catch (Exception e) {
             mLog.error(e.getMessage());
@@ -91,7 +93,6 @@ public class SetupAction extends SimpleAction {
 
         disableUnusedLiferayPortlets(companyId);
 	}
-
 
     /**
      * Initializes the hook by setting some common properties needed by all
@@ -425,5 +426,12 @@ public class SetupAction extends SimpleAction {
         catch (Exception e) {
             mLog.error("Could not update Password Policy portlet");
         }
+    }
+
+
+    private void setDefaultPasswordPolicy(long companyId) throws SystemException, PortalException {
+        PasswordPolicy policy = PasswordPolicyLocalServiceUtil.getDefaultPasswordPolicy(companyId);
+        policy.setChangeRequired(false);
+        policy.persist();
     }
 }
