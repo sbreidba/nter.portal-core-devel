@@ -27,7 +27,8 @@
         <portlet id="course-carousel" />
         <portlet id="component-details"/>
 		<portlet id="course-details" />
-		<portlet id="course-listing" />
+    <portlet id="course-listing" />
+		<portlet id="course-navigation" />
         <portlet id="course-reviews" />
         <portlet id="current-course" />
 		<portlet id="partner-top-courses" />
