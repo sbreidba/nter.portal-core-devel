@@ -82,6 +82,7 @@ if (!course.isRemoved()) {
 
                     PaymentConfig paymentConfig =
                             client.getPaymentConfig(PaymentProcessor.PAY_PAL);
+                    if (paymentConfig != null) {
                 %>
                 <form action="<%=paymentConfig.getActionURL()%>" method="post">
                     <input type="hidden" name="cmd" value="_xclick">
@@ -109,7 +110,8 @@ if (!course.isRemoved()) {
                     <%--<img alt="" border="0" src="https://www.sandbox.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">--%>
                 </form>
 
-    <%          } catch (Exception e) {
+    <%              }
+                } catch (Exception e) {
                    // commerce service not available
                 }
             } else {
