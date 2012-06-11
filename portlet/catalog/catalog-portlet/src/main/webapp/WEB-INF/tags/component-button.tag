@@ -78,6 +78,7 @@ if (!component.isRemoved()) {
 
                 PaymentConfig paymentConfig =
                     client.getPaymentConfig(PaymentProcessor.PAY_PAL);
+                if (paymentConfig != null) {
             %>
 
             <form action="<%=paymentConfig.getActionURL()%>" method="post">
@@ -103,7 +104,9 @@ if (!component.isRemoved()) {
                     <%= LanguageUtil.get(pageContext, "component-details-purchase") %>
                 </button>
             </form>
-<%          } catch (Exception e) {
+
+<%              }
+            } catch (Exception e) {
                // commerce service not available
             }
         }else {
