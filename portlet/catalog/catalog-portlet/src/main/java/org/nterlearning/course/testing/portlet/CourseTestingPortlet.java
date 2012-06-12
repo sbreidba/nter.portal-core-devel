@@ -59,10 +59,7 @@ import org.apache.commons.lang.Validate;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 public class CourseTestingPortlet extends MVCPortlet {
 
@@ -104,11 +101,21 @@ public class CourseTestingPortlet extends MVCPortlet {
 	public void purgeFeeds(ActionRequest request, ActionResponse response)
 		throws Exception {
 
-		List<FeedReference> feedRefs =
-			FeedReferenceLocalServiceUtil.getFeedReferences(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		List<FeedReference> feedRefs = new ArrayList<FeedReference>();
+        try {
+            feedRefs = FeedReferenceLocalServiceUtil.getFeedReferences(QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+        }
+        catch (Exception e) {
+            _log.error("Could not generate list of FeedReference objects: " + e.getMessage());
+        }
 
 		for (FeedReference feedRef : feedRefs) {
-			FeedReferenceLocalServiceUtil.deleteFeedReference(feedRef.getFeedReferenceId());
+            try {
+			    FeedReferenceLocalServiceUtil.deleteFeedReference(feedRef.getFeedReferenceId());
+            }
+            catch (Exception e) {
+                _log.error("Could not purge FeedRef [" + feedRef.getFeedIri() + "] : " + e.getMessage());
+            }
 		}
 	}
 
