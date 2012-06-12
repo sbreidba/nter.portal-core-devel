@@ -32,7 +32,7 @@ This file allows you to override and define new Velocity variables.
 #end
 
 #* overrides user greeting set in profile *#
-#set ($user_greeting = $languageUtil.format(themeDisplay.getCompanyId(), $locale, "banner-welcome-text", $user_first_name, $user_last_name))
+#set ($user_greeting = $languageUtil.format($themeDisplay.getCompanyId(), $locale, "banner-welcome-text", $user_first_name, $user_last_name))
 
 #* override yui theme in init.vm *#
 #set ($css_class = $css_class.replaceAll("yui3-skin-sam", ""))
