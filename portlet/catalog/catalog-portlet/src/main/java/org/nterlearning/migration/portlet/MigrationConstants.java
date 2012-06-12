@@ -20,6 +20,8 @@
 
 package org.nterlearning.migration.portlet;
 
+import com.liferay.portal.kernel.util.PropsUtil;
+
 import java.io.File;
 
 /**
@@ -27,42 +29,42 @@ import java.io.File;
  */
 public class MigrationConstants {
     public static final String USERS_MIGRATION_FILE_NAME = "users_migration_extract.txt";
-    public static final String USERS_MIGRATION_PATH = System.getenv("CATALINA_BASE") + File.separatorChar + "webapps" +
+    public static final String USERS_MIGRATION_PATH = PropsUtil.get("catalina.base") + File.separatorChar + "webapps" +
             File.separatorChar + "nter-catalog-portlet" + File.separatorChar + "course-feeds" + File.separatorChar + USERS_MIGRATION_FILE_NAME;
 
     public static final String USER_GROUPS_MIGRATION_FILE_NAME = "user_groups_migration_extract.txt";
-    public static final String USER_GROUPS_MIGRATION_PATH = System.getenv("CATALINA_BASE") + File.separatorChar + "webapps" +
+    public static final String USER_GROUPS_MIGRATION_PATH = PropsUtil.get("catalina.base") + File.separatorChar + "webapps" +
             File.separatorChar + "nter-catalog-portlet" + File.separatorChar + "course-feeds" + File.separatorChar + USER_GROUPS_MIGRATION_FILE_NAME;
 
     public static final String USER_ORGS_MIGRATION_FILE_NAME = "user_orgs_migration_extract.txt";
-    public static final String USER_ORGS_MIGRATION_PATH = System.getenv("CATALINA_BASE") + File.separatorChar + "webapps" +
+    public static final String USER_ORGS_MIGRATION_PATH = PropsUtil.get("catalina.base") + File.separatorChar + "webapps" +
             File.separatorChar + "nter-catalog-portlet" + File.separatorChar + "course-feeds" + File.separatorChar + USER_ORGS_MIGRATION_FILE_NAME;
 
     public static final String USER_ROLES_MIGRATION_FILE_NAME = "user_roles_migration_extract.txt";
-    public static final String USER_ROLES_MIGRATION_PATH = System.getenv("CATALINA_BASE") + File.separatorChar + "webapps" +
+    public static final String USER_ROLES_MIGRATION_PATH = PropsUtil.get("catalina.base") + File.separatorChar + "webapps" +
             File.separatorChar + "nter-catalog-portlet" + File.separatorChar + "course-feeds" + File.separatorChar + USER_ROLES_MIGRATION_FILE_NAME;
 
     public static final String REVIEWS_MIGRATION_FILE_NAME = "reviews_migration.xml";
-    public static final String REVIEWS_MIGRATION_PATH = System.getenv("CATALINA_BASE") + File.separatorChar + "webapps" +
+    public static final String REVIEWS_MIGRATION_PATH = PropsUtil.get("catalina.base") + File.separatorChar + "webapps" +
             File.separatorChar + "nter-catalog-portlet" + File.separatorChar + "course-feeds" + File.separatorChar + REVIEWS_MIGRATION_FILE_NAME;
 
     public static final String USER_REVIEWS_MIGRATION_FILE_NAME = "user_reviews_migration_extract.txt";
-    public static final String USER_REVIEWS_MIGRATION_PATH = System.getenv("CATALINA_BASE") + File.separatorChar + "webapps" +
+    public static final String USER_REVIEWS_MIGRATION_PATH = PropsUtil.get("catalina.base") + File.separatorChar + "webapps" +
             File.separatorChar + "nter-catalog-portlet" + File.separatorChar + "course-feeds" + File.separatorChar + USER_REVIEWS_MIGRATION_FILE_NAME;
 
     public static final String USER_REVIEW_HELP_MIGRATION_FILE_NAME = "review_help_migration_extract.txt";
-    public static final String USER_REVIEW_HELP_MIGRATION_PATH = System.getenv("CATALINA_BASE") + File.separatorChar + "webapps" +
+    public static final String USER_REVIEW_HELP_MIGRATION_PATH = PropsUtil.get("catalina.base") + File.separatorChar + "webapps" +
             File.separatorChar + "nter-catalog-portlet" + File.separatorChar + "course-feeds" + File.separatorChar + USER_REVIEW_HELP_MIGRATION_FILE_NAME;
 
     public static final String MB_CATEGORY_MIGRATION_FILE_NAME = "mb_category_migration_extract.txt";
-    public static final String MB_CATEGORY_MIGRATION_PATH = System.getenv("CATALINA_BASE") + File.separatorChar + "webapps" +
+    public static final String MB_CATEGORY_MIGRATION_PATH = PropsUtil.get("catalina.base") + File.separatorChar + "webapps" +
             File.separatorChar + "nter-catalog-portlet" + File.separatorChar + "course-feeds" + File.separatorChar + MB_CATEGORY_MIGRATION_FILE_NAME;
 
     public static final String MB_MESSAGE_MIGRATION_FILE_NAME = "mb_message_migration_extract.txt";
-    public static final String MB_MESSAGE_MIGRATION_PATH = System.getenv("CATALINA_BASE") + File.separatorChar + "webapps" +
+    public static final String MB_MESSAGE_MIGRATION_PATH = PropsUtil.get("catalina.base") + File.separatorChar + "webapps" +
             File.separatorChar + "nter-catalog-portlet" + File.separatorChar + "course-feeds" + File.separatorChar + MB_MESSAGE_MIGRATION_FILE_NAME;
 
     public static final String MB_MESSAGE_TAGS_MIGRATION_FILE_NAME = "mb_message_tags_migration_extract.txt";
-    public static final String MB_MESSAGE_TAGS_MIGRATION_PATH = System.getenv("CATALINA_BASE") + File.separatorChar + "webapps" +
+    public static final String MB_MESSAGE_TAGS_MIGRATION_PATH = PropsUtil.get("catalina.base") + File.separatorChar + "webapps" +
             File.separatorChar + "nter-catalog-portlet" + File.separatorChar + "course-feeds" + File.separatorChar + MB_MESSAGE_TAGS_MIGRATION_FILE_NAME;
 }
