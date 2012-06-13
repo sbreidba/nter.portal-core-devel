@@ -60,6 +60,7 @@
     </build>
 
     <modules>
+        <module>weatherization</module>
         <module>nter</module>
         <module>base</module>
     </modules>
