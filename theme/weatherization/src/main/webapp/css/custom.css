@@ -354,7 +354,6 @@ footer {
 	background-image: linear-gradient(to bottom, #63afff 0%, #7abfff 40%, #47acff 48%, #3c87f0 93%, #5498ff 100%);
 	text-shadow: 0px 0px 1px rgba(0,46,115,1);
 }
-.one-col-promo .portlet-column:first-child:after { content: ' '; display: block; clear: both; line-height: 0; }
 
 .call-to-action {
 	color: #001c45;
