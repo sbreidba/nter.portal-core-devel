@@ -59,5 +59,5 @@ public class PushKeys {
     public static final String SYNC_VERIFY = "sync";
 
     public static final String DEFAULT_HOST = "localhost";
-    public static final String RELATIVE_CALLBACK_URL = "/course-portlet/push";
+    public static final String RELATIVE_CALLBACK_URL = "/nter-catalog-portlet/push";
 }
