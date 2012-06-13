@@ -210,7 +210,7 @@
             alt="<%= course.getTitle(locale) %>" /></a>
           <div class="course-description">
             <h4 class="course-title" data-record-id="<%= courseRecord.getCourseRecordId() %>"><a href="<%= course.getUrl() %>"><%= course.getTitle(locale) %></a></h4>
-            <div class="organization"><a href="<%= course.getOwnerUrl(themeDisplay.getCompanyId()) %>"><%= course.getOwnerName(themeDisplay.getCompanyId()) %></a></div>
+            <div class="organization"><%= course.getCourseDomain() %></div>
 
             <% if (course.hasNewerVersion()) {
               Course newestVersion = course.getMostRecentVersion();
@@ -382,9 +382,7 @@
   </liferay-ui:search-container>
 </div>
 
-
 <div>
-
     <liferay-portlet:resourceURL
             portletName="transcriptreports_WAR_ntercatalogportlet"
             var="printTranscriptURL"
