@@ -1,0 +1,344 @@
+package org.nterlearning.datamodel.catalog.service;
+
+import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ClassLoaderProxy;
+import com.liferay.portal.kernel.util.MethodCache;
+import com.liferay.portal.kernel.util.ReferenceRegistry;
+
+/**
+ * The utility for the flag report stats local service. This utility wraps {@link org.nterlearning.datamodel.catalog.service.impl.FlagReportStatsLocalServiceImpl} and is the primary access point for service operations in application layer code running on the local server.
+ *
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ * @see FlagReportStatsLocalService
+ * @see org.nterlearning.datamodel.catalog.service.base.FlagReportStatsLocalServiceBaseImpl
+ * @see org.nterlearning.datamodel.catalog.service.impl.FlagReportStatsLocalServiceImpl
+ * @generated
+ */
+public class FlagReportStatsLocalServiceUtil {
+    private static FlagReportStatsLocalService _service;
+
+    /*
+     * NOTE FOR DEVELOPERS:
+     *
+     * Never modify this class directly. Add custom service methods to {@link org.nterlearning.datamodel.catalog.service.impl.FlagReportStatsLocalServiceImpl} and rerun ServiceBuilder to regenerate this class.
+     */
+
+    /**
+    * Adds the flag report stats to the database. Also notifies the appropriate model listeners.
+    *
+    * @param flagReportStats the flag report stats
+    * @return the flag report stats that was added
+    * @throws SystemException if a system exception occurred
+    */
+    public static org.nterlearning.datamodel.catalog.model.FlagReportStats addFlagReportStats(
+        org.nterlearning.datamodel.catalog.model.FlagReportStats flagReportStats)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().addFlagReportStats(flagReportStats);
+    }
+
+    /**
+    * Creates a new flag report stats with the primary key. Does not add the flag report stats to the database.
+    *
+    * @param flagReportStatsId the primary key for the new flag report stats
+    * @return the new flag report stats
+    */
+    public static org.nterlearning.datamodel.catalog.model.FlagReportStats createFlagReportStats(
+        long flagReportStatsId) {
+        return getService().createFlagReportStats(flagReportStatsId);
+    }
+
+    /**
+    * Deletes the flag report stats with the primary key from the database. Also notifies the appropriate model listeners.
+    *
+    * @param flagReportStatsId the primary key of the flag report stats
+    * @throws PortalException if a flag report stats with the primary key could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static void deleteFlagReportStats(long flagReportStatsId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        getService().deleteFlagReportStats(flagReportStatsId);
+    }
+
+    /**
+    * Deletes the flag report stats from the database. Also notifies the appropriate model listeners.
+    *
+    * @param flagReportStats the flag report stats
+    * @throws SystemException if a system exception occurred
+    */
+    public static void deleteFlagReportStats(
+        org.nterlearning.datamodel.catalog.model.FlagReportStats flagReportStats)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        getService().deleteFlagReportStats(flagReportStats);
+    }
+
+    /**
+    * Performs a dynamic query on the database and returns the matching rows.
+    *
+    * @param dynamicQuery the dynamic query
+    * @return the matching rows
+    * @throws SystemException if a system exception occurred
+    */
+    @SuppressWarnings("rawtypes")
+    public static java.util.List dynamicQuery(
+        com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().dynamicQuery(dynamicQuery);
+    }
+
+    /**
+    * Performs a dynamic query on the database and returns a range of the matching rows.
+    *
+    * <p>
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+    * </p>
+    *
+    * @param dynamicQuery the dynamic query
+    * @param start the lower bound of the range of model instances
+    * @param end the upper bound of the range of model instances (not inclusive)
+    * @return the range of matching rows
+    * @throws SystemException if a system exception occurred
+    */
+    @SuppressWarnings("rawtypes")
+    public static java.util.List dynamicQuery(
+        com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+        int end) throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().dynamicQuery(dynamicQuery, start, end);
+    }
+
+    /**
+    * Performs a dynamic query on the database and returns an ordered range of the matching rows.
+    *
+    * <p>
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+    * </p>
+    *
+    * @param dynamicQuery the dynamic query
+    * @param start the lower bound of the range of model instances
+    * @param end the upper bound of the range of model instances (not inclusive)
+    * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+    * @return the ordered range of matching rows
+    * @throws SystemException if a system exception occurred
+    */
+    @SuppressWarnings("rawtypes")
+    public static java.util.List dynamicQuery(
+        com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+        int end,
+        com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService()
+                   .dynamicQuery(dynamicQuery, start, end, orderByComparator);
+    }
+
+    /**
+    * Returns the number of rows that match the dynamic query.
+    *
+    * @param dynamicQuery the dynamic query
+    * @return the number of rows that match the dynamic query
+    * @throws SystemException if a system exception occurred
+    */
+    public static long dynamicQueryCount(
+        com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().dynamicQueryCount(dynamicQuery);
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.FlagReportStats fetchFlagReportStats(
+        long flagReportStatsId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().fetchFlagReportStats(flagReportStatsId);
+    }
+
+    /**
+    * Returns the flag report stats with the primary key.
+    *
+    * @param flagReportStatsId the primary key of the flag report stats
+    * @return the flag report stats
+    * @throws PortalException if a flag report stats with the primary key could not be found
+    * @throws SystemException if a system exception occurred
+    */
+    public static org.nterlearning.datamodel.catalog.model.FlagReportStats getFlagReportStats(
+        long flagReportStatsId)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getService().getFlagReportStats(flagReportStatsId);
+    }
+
+    public static com.liferay.portal.model.PersistedModel getPersistedModel(
+        java.io.Serializable primaryKeyObj)
+        throws com.liferay.portal.kernel.exception.PortalException,
+            com.liferay.portal.kernel.exception.SystemException {
+        return getService().getPersistedModel(primaryKeyObj);
+    }
+
+    /**
+    * Returns a range of all the flag report statses.
+    *
+    * <p>
+    * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set.
+    * </p>
+    *
+    * @param start the lower bound of the range of flag report statses
+    * @param end the upper bound of the range of flag report statses (not inclusive)
+    * @return the range of flag report statses
+    * @throws SystemException if a system exception occurred
+    */
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.FlagReportStats> getFlagReportStatses(
+        int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().getFlagReportStatses(start, end);
+    }
+
+    /**
+    * Returns the number of flag report statses.
+    *
+    * @return the number of flag report statses
+    * @throws SystemException if a system exception occurred
+    */
+    public static int getFlagReportStatsesCount()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().getFlagReportStatsesCount();
+    }
+
+    /**
+    * Updates the flag report stats in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+    *
+    * @param flagReportStats the flag report stats
+    * @return the flag report stats that was updated
+    * @throws SystemException if a system exception occurred
+    */
+    public static org.nterlearning.datamodel.catalog.model.FlagReportStats updateFlagReportStats(
+        org.nterlearning.datamodel.catalog.model.FlagReportStats flagReportStats)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().updateFlagReportStats(flagReportStats);
+    }
+
+    /**
+    * Updates the flag report stats in the database or adds it if it does not yet exist. Also notifies the appropriate model listeners.
+    *
+    * @param flagReportStats the flag report stats
+    * @param merge whether to merge the flag report stats with the current session. See {@link com.liferay.portal.service.persistence.BatchSession#update(com.liferay.portal.kernel.dao.orm.Session, com.liferay.portal.model.BaseModel, boolean)} for an explanation.
+    * @return the flag report stats that was updated
+    * @throws SystemException if a system exception occurred
+    */
+    public static org.nterlearning.datamodel.catalog.model.FlagReportStats updateFlagReportStats(
+        org.nterlearning.datamodel.catalog.model.FlagReportStats flagReportStats,
+        boolean merge)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().updateFlagReportStats(flagReportStats, merge);
+    }
+
+    /**
+    * Returns the Spring bean ID for this bean.
+    *
+    * @return the Spring bean ID for this bean
+    */
+    public static java.lang.String getBeanIdentifier() {
+        return getService().getBeanIdentifier();
+    }
+
+    /**
+    * Sets the Spring bean ID for this bean.
+    *
+    * @param beanIdentifier the Spring bean ID for this bean
+    */
+    public static void setBeanIdentifier(java.lang.String beanIdentifier) {
+        getService().setBeanIdentifier(beanIdentifier);
+    }
+
+    public static void incrementTotalEntries(long classNameId, long classPK)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFlagReportStatsException {
+        getService().incrementTotalEntries(classNameId, classPK);
+    }
+
+    public static void incrementTotalModerated(long classNameId, long classPK)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFlagReportStatsException {
+        getService().incrementTotalModerated(classNameId, classPK);
+    }
+
+    public static void incrementTotalApproved(long classNameId, long classPK)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFlagReportStatsException {
+        getService().incrementTotalApproved(classNameId, classPK);
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.FlagReportStats findByFlagReportStatsId(
+        long flagReportStatsId)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFlagReportStatsException {
+        return getService().findByFlagReportStatsId(flagReportStatsId);
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.FlagReportStats fetchByFlagReportStatsId(
+        long flagReportStatsId)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().fetchByFlagReportStatsId(flagReportStatsId);
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.FlagReportStats findByClassNameIdWithClassPK(
+        long classNameId, long classPK)
+        throws com.liferay.portal.kernel.exception.SystemException,
+            org.nterlearning.datamodel.catalog.NoSuchFlagReportStatsException {
+        return getService().findByClassNameIdWithClassPK(classNameId, classPK);
+    }
+
+    public static org.nterlearning.datamodel.catalog.model.FlagReportStats fetchByClassNameIdWithClassPK(
+        long classNameId, long classPK)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().fetchByClassNameIdWithClassPK(classNameId, classPK);
+    }
+
+    public static java.lang.Integer countAll()
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().countAll();
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.FlagReportStats> findAll(
+        int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findAll(start, end);
+    }
+
+    public static void clearService() {
+        _service = null;
+    }
+
+    public static FlagReportStatsLocalService getService() {
+        if (_service == null) {
+            Object object = PortletBeanLocatorUtil.locate(ClpSerializer.getServletContextName(),
+                    FlagReportStatsLocalService.class.getName());
+            ClassLoader portletClassLoader = (ClassLoader) PortletBeanLocatorUtil.locate(ClpSerializer.getServletContextName(),
+                    "portletClassLoader");
+
+            ClassLoaderProxy classLoaderProxy = new ClassLoaderProxy(object,
+                    FlagReportStatsLocalService.class.getName(),
+                    portletClassLoader);
+
+            _service = new FlagReportStatsLocalServiceClp(classLoaderProxy);
+
+            ClpSerializer.setClassLoader(portletClassLoader);
+
+            ReferenceRegistry.registerReference(FlagReportStatsLocalServiceUtil.class,
+                "_service");
+            MethodCache.remove(FlagReportStatsLocalService.class);
+        }
+
+        return _service;
+    }
+
+    public void setService(FlagReportStatsLocalService service) {
+        MethodCache.remove(FlagReportStatsLocalService.class);
+
+        _service = service;
+
+        ReferenceRegistry.registerReference(FlagReportStatsLocalServiceUtil.class,
+            "_service");
+        MethodCache.remove(FlagReportStatsLocalService.class);
+    }
+}
