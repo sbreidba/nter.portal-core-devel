@@ -1,0 +1,710 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ National Training and Education Resource (NTER)
+  ~ Copyright (C) 2011  SRI International
+  ~
+  ~ This program is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or (at
+  ~ your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful, but
+  ~ WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  ~ General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  ~ 02110-1301, USA.
+  -->
+  
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:nter="http://nterlearning.org/xml/feeds/atom-extensions-schema_0.6.1.xsd">
+
+    <!-- Test series for initial, minor, major update of a course -->
+    <!-- Major update: a new course IRI is used. Components have old IRI and new IRI. -->
+    <!-- Pocket Frogs course. -->
+    <!-- Added a 2nd course 3/29/11 to test student enrollment progression with multiple courses -->
+    <!-- Added 5 courses 5/9/11 to test student desktop -->
+
+    <title>Course Feed</title>
+    <link rel="self" href="test-0.6.1-course-atom-feed-4.xml" type="application/atom+xml"/>
+    <updated>2011-03-13T22:52:00Z</updated>
+    <id>tag:nwtp.gov,2010-10-04:/feeds/testIMM0-d399-11d9-b93C-0003939e0af6</id>
+
+    <!-- components with old IRI -->
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Course 18</title>
+        <link href="https://nwtp.gov/course18-en.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <id>tag:nwtp.gov,2010-11-05:/link/to/course18-IMMO/en-US</id>
+        <updated>2010-11-13T18:30:02Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+        </author>
+        <summary>course eighteen</summary>
+    </entry>
+
+   <entry  xml:lang="fr-FR" nter:entryType="course-component">
+        <title>Cours 18</title>
+        <link href="https://nwtp.gov/course18.php?lang=fr-FR"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <id>tag:nwtp.gov,2010-11-05:/link/to/cours18-IMMO/fr-FR</id>
+        <updated>2010-11-14T12:12:42Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>cours dix-huit</summary>
+    </entry>
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Course 19</title>
+        <link href="https://nwtp.gov/course19.php"
+              nter:displayWidth="444" nter:displayHeight="204"/>
+        <id>tag:nwtp.gov,2010-11-08:/link/to/course19-IMMO/en-US</id>
+        <updated>2010-11-13T08:30:59Z</updated>
+        <author>
+            <name>Pam Griffith</name>
+        </author>
+        <summary>course nineteen</summary>
+    </entry>
+
+    <entry xml:lang="fr-FR" nter:entryType="course-component">
+        <title>Cours 19</title>
+        <link href="https://nwtp.gov/course19.php?lang=fr-FR"
+              nter:displayWidth="444" nter:displayHeight="204"/>
+        <id>tag:nwtp.gov,2010-11-08:/link/to/cours19-IMMO/fr-FR</id>
+        <updated>2010-11-12T10:33:00Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>cours dix-neuf</summary>
+    </entry>
+
+    <!-- components with new IRI -->
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Course 20 NEW</title>
+        <link href="https://nwtp.gov/course20.php"
+              nter:displayWidth="433" nter:displayHeight="197"/>
+        <id>tag:nwtp.gov,2010-12-14:/link/to/course20new-IMMO/en-US</id>
+        <updated>2010-11-03T01:03:02Z</updated>
+        <author>
+            <name>Gabriel Jiva</name>
+        </author>
+        <summary>course twenty</summary>
+    </entry>
+
+    <entry xml:lang="fr-FR" nter:entryType="course-component">
+        <title>Cours 20 NEW</title>
+        <link href="https://nwtp.gov/course20.php"
+              nter:displayWidth="443" nter:displayHeight="197"/>
+        <id>tag:nwtp.gov,2010-12-14:/link/to/cours20new-IMMO/fr-FR</id>
+        <updated>2010-11-29T07:19:34Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>cours vingt</summary>
+    </entry>
+
+        <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Course 21 NEW</title>
+        <link href="https://nwtp.gov/course21-en.php"
+              nter:displayWidth="1080" nter:displayHeight="750"/>
+        <id>tag:nwtp.gov,2010-12-14:/link/to/course21new-IMMO/en-US</id>
+        <updated>2010-12-13T19:57:02Z</updated>
+        <author>
+            <name>Skip Breidbach</name>
+        </author>
+        <summary>course twenty one</summary>
+    </entry>
+
+    <entry xml:lang="fr-FR" nter:entryType="course-component">
+        <title>Cours 21 NEW</title>
+        <link href="https://nwtp.gov/course21.php?lang=fr_FR"
+              nter:displayWidth="1080" nter:displayHeight="750"/>
+        <id>tag:nwtp.gov,2010-12-14:/link/to/cours21new-IMMO/fr-FR</id>
+        <updated>2010-12-13T19:59:47Z</updated>
+        <author>
+            <name>Paula Peters</name>
+        </author>
+        <summary>cours vingt un</summary>
+    </entry>
+
+    <!-- Major update: a new IRI is used. -->
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link href="http://example.org/2003/12/13/atom03"/>
+        <id>tag:nwtp.gov,2010-10-04:/courses/frog0003-cfb8-4ebb-aaaa-80da344efa6a</id>
+        <updated>2011-01-14T20:09:23Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Robby Bailey&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <contributor>
+            <name>Paula Peters</name>
+        </contributor>
+        <contributor>
+            <name>Gabriel Jiva</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Gabriel Jiva&#13;&#10;n:Jiva;Gabriel&#13;&#10;org:SRI;SWEP&#13;&#10;adr:;;450 8th Ave SE;St Petersburg;FL;33701;USA&#13;&#10;email;internet:gabriel.jiva@sri.com&#13;&#10;title:Software Engineer&#13;&#10;tel;work:727-553-3539&#13;&#10;url:http://www.sri.com&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </contributor>
+        <contributor>
+            <name>Skip Breidbach</name>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:duration nter:durationStandard="ISO8601:2000">P2DT5H15M4S</nter:duration>
+
+            <nter:title xml:lang="en-US">Pocket Frogs Version 3!</nter:title>
+            <nter:title xml:lang="fr-FR">Grenouilles de poche!</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Learn how to jump between lily pads</nter:transcriptAbstract>
+            <nter:transcriptAbstract xml:lang="fr-FR">Apprenez comment sauter entre les garnitures de lis</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Learn how to jump between lily pads</nter:description>
+            <nter:description xml:lang="fr-FR">Apprenez comment sauter entre les garnitures de lis</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+            <nter:copyright xml:lang="fr-FR">International de 2010 SRI</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+" nter:ratingReason="visible potbellies" />
+            <nter:rating xml:lang="fr-FR" nter:ratingLevel="Adulte, 45+" nter:ratingReason="ventres ballonés évidents" />
+
+             <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2010-11-05:/link/to/course18-IMMO/en-US"
+                nter:orderWeight="1.0"
+            />
+            <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2010-11-05:/link/to/cours18-IMMO/fr-FR"
+                nter:orderWeight="1.0"
+            />
+            <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2010-11-08:/link/to/course19-IMMO/en-US"
+                nter:orderWeight="1.5"
+            />
+            <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2010-11-08:/link/to/cours19-IMMO/fr-FR"
+                nter:orderWeight="1.5"
+            />
+            <nter:componentRef 
+                nter:componentId="tag:nwtp.gov,2010-12-14:/link/to/course20new-IMMO/en-US"
+                nter:orderWeight="2.5" 
+            />
+           <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2010-12-14:/link/to/cours20new-IMMO/fr-FR"
+                nter:orderWeight="2.5"
+            />
+            <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2010-12-14:/link/to/course21new-IMMO/en-US"
+                nter:orderWeight="3.5" 
+            />
+            <nter:componentRef 
+                nter:componentId="tag:nwtp.gov,2010-12-14:/link/to/cours21new-IMMO/fr-FR"
+                nter:orderWeight="3.5" 
+            />
+
+            <nter:image
+                xml:lang="en-US"
+                nter:href="http://nwtp.gov/course18-1.png"
+                nter:alternateText="page one"
+                nter:mimeType="image/png"
+                nter:orderWeight="1.0"
+            />
+            <nter:image
+                xml:lang="fr-FR"
+                nter:href="http://nwtp.gov/course18-1.png"
+                nter:alternateText="page une"
+                nter:mimeType="image/png"
+                nter:orderWeight="1.0"
+            />
+            <nter:image
+                xml:lang="en-US"
+                nter:href="http://nwtp.gov/course18-2.png"
+                nter:alternateText="page two"
+                nter:mimeType="image/png"
+                nter:orderWeight="2.0"
+            />
+            <nter:image
+                xml:lang="fr-FR"
+                nter:href="http://nwtp.gov/course18-2.png"
+                nter:alternateText="page deux"
+                nter:mimeType="image/png"
+                nter:orderWeight="2.0"
+            />
+            <nter:image
+                xml:lang="en-US"
+                nter:href="http://nwtp.gov/course18-3.png"
+                nter:alternateText="page three"
+                nter:mimeType="image/png"
+                nter:orderWeight="3.0"
+            />
+            <nter:image
+                xml:lang="fr-FR"
+                nter:href="http://nwtp.gov/course18-3-fr.png"
+                nter:alternateText="page trois"
+                nter:mimeType="image/png"
+                nter:orderWeight="3.0"
+            />
+
+            <nter:keywords xml:lang="en-US">pocket frogs lily pads</nter:keywords>
+            <nter:keywords xml:lang="fr-FR">poche grenouilles</nter:keywords>
+
+            <nter:related
+                  nter:relationship="supersedes"
+                  nter:relatedEntryId="tag:nwtp.gov,2010-10-04:/courses/frog0002-cfb8-4ebb-aaaa-80da344efa6a"
+              />
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+
+    <!-- 2nd course for student progression testing -->
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Component Pond Animals</title>
+        <link href="https://nwtp.gov/course20-en.php"
+              nter:displayWidth="1080" nter:displayHeight="750"/>
+        <id>tag:nwtp.gov,2010-12-14:/link/to/component-pond-animals-IMMO/en-US</id>
+        <updated>2010-12-13T19:57:02Z</updated>
+        <author>
+            <name>Skip Breidbach</name>
+        </author>
+        <summary>pond</summary>
+    </entry>
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Component Marsh Animals</title>
+        <link href="https://nwtp.gov/course21-en.php"
+              nter:displayWidth="1080" nter:displayHeight="750"/>
+        <id>tag:nwtp.gov,2010-12-14:/link/to/component-marsh-animals-IMMO/en-US</id>
+        <updated>2010-12-13T19:57:02Z</updated>
+        <author>
+            <name>Skip Breidbach</name>
+        </author>
+        <summary>marsh</summary>
+    </entry>
+
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link href="http://example.org/2003/12/13/atom03"/>
+        <id>tag:nwtp.gov,2010-10-04:/courses/ANIMAL1-cfb8-4ebb-aaaa-80da344efa6a</id>
+        <updated>2010-12-13T20:09:23Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Robby Bailey&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+         <contributor>
+            <name>Skip Breidbach</name>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:duration nter:durationStandard="ISO8601:2000">PT3H20M</nter:duration>
+
+            <nter:title xml:lang="en-US">Frog Habitat</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Learn how to jump between lily pads</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Learn how to jump between lily pads</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+" nter:ratingReason="visible potbellies" />
+
+             <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2010-12-14:/link/to/component-pond-animals-IMMO/en-US"
+                nter:orderWeight="1.0"
+            />
+            <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2010-12-14:/link/to/component-marsh-animals-IMMO/en-US"
+                nter:orderWeight="2.0"
+            />
+
+
+            <nter:image
+                xml:lang="en-US"
+                nter:href="http://nwtp.gov/course18-1.png"
+                nter:alternateText="page one"
+                nter:mimeType="image/png"
+                nter:orderWeight="1.0"
+            />
+
+            <nter:keywords xml:lang="en-US">pond marsh frog habitat</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+
+    <!-- 3rd course for student progression testing -->
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Green Animals</title>
+        <link href="https://nwtp.gov/course18-en.php"
+              nter:displayWidth="1080" nter:displayHeight="750"/>
+        <id>tag:nwtp.gov,2010-12-14:/link/to/component-green-animals-IMMO/en-US</id>
+        <updated>2011-02-13T19:57:02Z</updated>
+        <author>
+            <name>Skip Breidbach</name>
+        </author>
+        <summary>green</summary>
+    </entry>
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Brown Animals</title>
+        <link href="https://nwtp.gov/course19-en.php"
+              nter:displayWidth="1080" nter:displayHeight="750"/>
+        <id>tag:nwtp.gov,2010-12-14:/link/to/component-brown-animals-IMMO/en-US</id>
+        <updated>2011-02-13T19:57:02Z</updated>
+        <author>
+            <name>Skip Breidbach</name>
+        </author>
+        <summary>brown</summary>
+    </entry>
+
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link href="http://example.org/2003/12/13/atom03"/>
+        <id>tag:nwtp.gov,2010-10-04:/courses/Animal-Colors-4ebb-aaaa-80da344efa6a</id>
+        <updated>2011-02-13T20:09:23Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Robby Bailey&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:duration nter:durationStandard="ISO8601:2000">P2M13D</nter:duration>
+
+            <nter:title xml:lang="en-US">Animal Colors</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Learn which animal is brown or green.</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Learn which animal is brown or green.</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+             <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2010-12-14:/link/to/component-brown-animals-IMMO/en-US"
+                nter:orderWeight="1.0"
+            />
+            <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2010-12-14:/link/to/component-green-animals-IMMO/en-US"
+                nter:orderWeight="2.0"
+            />
+
+
+            <nter:image
+                xml:lang="en-US"
+                nter:href="http://nwtp.gov/course18-1.png"
+                nter:alternateText="page one"
+                nter:mimeType="image/png"
+                nter:orderWeight="1.0"
+            />
+
+            <nter:keywords xml:lang="en-US">color brown green</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+
+    <!-- 4th course for student progression testing -->
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>House Fly</title>
+        <link href="https://nwtp.gov/course18-en.php"
+              nter:displayWidth="1080" nter:displayHeight="750"/>
+        <id>tag:nwtp.gov,2010-12-14:/link/to/component-house-fly-IMMO/en-US</id>
+        <updated>2011-03-13T19:57:02Z</updated>
+        <author>
+            <name>Skip Breidbach</name>
+        </author>
+        <summary>house</summary>
+    </entry>
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Horse Fly</title>
+        <link href="https://nwtp.gov/course19-en.php"
+              nter:displayWidth="1080" nter:displayHeight="750"/>
+        <id>tag:nwtp.gov,2010-12-14:/link/to/component-horse-fly-IMMO/en-US</id>
+        <updated>2011-03-13T19:57:02Z</updated>
+        <author>
+            <name>Skip Breidbach</name>
+        </author>
+        <summary>horse</summary>
+    </entry>
+
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link href="http://example.org/2003/12/13/atom03"/>
+        <id>tag:nwtp.gov,2010-10-04:/courses/Flies-4ebb-aaaa-80da344efa6a</id>
+        <updated>2011-03-13T20:09:23Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Robby Bailey&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:duration nter:durationStandard="ISO8601:2000">P4Y2M3DT4H5M</nter:duration>
+
+            <nter:title xml:lang="en-US">Flies</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Learn difference between house fly and horse fly.</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Learn difference between house fly and horse fly.</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+             <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2010-12-14:/link/to/component-house-fly-IMMO/en-US"
+                nter:orderWeight="1.0"
+            />
+            <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2010-12-14:/link/to/component-horse-fly-IMMO/en-US"
+                nter:orderWeight="2.0"
+            />
+
+
+            <nter:image
+                xml:lang="en-US"
+                nter:href="http://nwtp.gov/course18-1.png"
+                nter:alternateText="page one"
+                nter:mimeType="image/png"
+                nter:orderWeight="1.0"
+            />
+
+            <nter:keywords xml:lang="en-US">fly horse house</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+
+    <!-- 5th course for student progression testing -->
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Beach</title>
+        <link href="https://nwtp.gov/course18-en.php"
+              nter:displayWidth="1080" nter:displayHeight="750"/>
+        <id>tag:nwtp.gov,2010-12-14:/link/to/component-beach-IMMO/en-US</id>
+        <updated>2011-01-13T19:57:02Z</updated>
+        <author>
+            <name>Skip Breidbach</name>
+        </author>
+        <summary>beach</summary>
+    </entry>
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Mountain</title>
+        <link href="https://nwtp.gov/course19-en.php"
+              nter:displayWidth="1080" nter:displayHeight="750"/>
+        <id>tag:nwtp.gov,2010-12-14:/link/to/component-mountain-IMMO/en-US</id>
+        <updated>2011-01-13T19:57:02Z</updated>
+        <author>
+            <name>Skip Breidbach</name>
+        </author>
+        <summary>mountain</summary>
+    </entry>
+
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link href="http://example.org/2003/12/13/atom03"/>
+        <id>tag:nwtp.gov,2010-10-04:/courses/vacation-4ebb-aaaa-80da344efa6a</id>
+        <updated>2011-01-13T20:09:23Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Robby Bailey&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:duration nter:durationStandard="ISO8601:2000">P3Y4DT2H</nter:duration>
+
+            <nter:title xml:lang="en-US">Vacation Spots</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Learn favored Vacation Spots</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Learn favored Vacation Spots</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+             <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2010-12-14:/link/to/component-beach-IMMO/en-US"
+                nter:orderWeight="1.0"
+            />
+            <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2010-12-14:/link/to/component-mountain-IMMO/en-US"
+                nter:orderWeight="2.0"
+            />
+
+
+            <nter:image
+                xml:lang="en-US"
+                nter:href="http://nwtp.gov/course18-1.png"
+                nter:alternateText="page one"
+                nter:mimeType="image/png"
+                nter:orderWeight="1.0"
+            />
+
+            <nter:keywords xml:lang="en-US">vacation beach mountain</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+
+    <!-- 6th course for student progression testing -->
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Ford</title>
+        <link href="https://nwtp.gov/course18-en.php"
+              nter:displayWidth="1080" nter:displayHeight="750"/>
+        <id>tag:nwtp.gov,2010-12-14:/link/to/component-ford-IMMO/en-US</id>
+        <updated>2009-09-09T19:57:02Z</updated>
+        <author>
+            <name>Skip Breidbach</name>
+        </author>
+        <summary>ford</summary>
+    </entry>
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Jeep</title>
+        <link href="https://nwtp.gov/course20-en.php"
+              nter:displayWidth="1080" nter:displayHeight="750"/>
+        <id>tag:nwtp.gov,2010-12-14:/link/to/component-jeep-IMMO/en-US</id>
+        <updated>2009-09-09T19:57:02Z</updated>
+        <author>
+            <name>Skip Breidbach</name>
+        </author>
+        <summary>jeep</summary>
+    </entry>
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Crysler</title>
+        <link href="https://nwtp.gov/course19-en.php"
+              nter:displayWidth="1080" nter:displayHeight="750"/>
+        <id>tag:nwtp.gov,2010-12-14:/link/to/component-crysler-IMMO/en-US</id>
+        <updated>2009-09-09T19:57:02Z</updated>
+        <author>
+            <name>Skip Breidbach</name>
+        </author>
+        <summary>crysler</summary>
+    </entry>
+
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link href="http://example.org/2003/12/13/atom03"/>
+        <id>tag:nwtp.gov,2010-10-04:/courses/cars-4ebb-aaaa-80da344efa6a</id>
+        <updated>2009-09-09T20:09:23Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Robby Bailey&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course >
+            <nter:duration nter:durationStandard="ISO8601:2000">PT45M</nter:duration>
+
+            <nter:title xml:lang="en-US">Cars</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Learn about cars</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Learn about cars</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+             <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2010-12-14:/link/to/component-jeep-IMMO/en-US"
+                nter:orderWeight="1.0"
+            />
+            <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2010-12-14:/link/to/component-crysler-IMMO/en-US"
+                nter:orderWeight="2.0"
+            />
+            <nter:componentRef
+                nter:componentId="tag:nwtp.gov,2010-12-14:/link/to/component-ford-IMMO/en-US"
+                nter:orderWeight="2.0"
+            />
+
+            <nter:image
+                xml:lang="en-US"
+                nter:href="http://nwtp.gov/course18-1.png"
+                nter:alternateText="page one"
+                nter:mimeType="image/png"
+                nter:orderWeight="1.0"
+            />
+
+            <nter:keywords xml:lang="en-US">car</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+
+     <!-- 7th course does not have components but will have student progression testing -->
+     <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link href="http://example.org/2003/12/13/atom03"/>
+        <id>tag:nwtp.gov,2010-10-04:/courses/no-component-but-progress-80da344efa6a</id>
+        <updated>2011-03-13T20:09:23Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Robby Bailey&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+            <nter:duration nter:durationStandard="ISO8601:2000">P1DT3H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">No Components but Student Progress</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Learn about nothing</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Learn about nothing</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+            <nter:image
+                xml:lang="en-US"
+                nter:href="http://nwtp.gov/course18-1.png"
+                nter:alternateText="page one"
+                nter:mimeType="image/png"
+                nter:orderWeight="1.0"
+            />
+
+            <nter:keywords xml:lang="en-US">car</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+</feed>
+
