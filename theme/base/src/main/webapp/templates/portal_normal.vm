@@ -107,7 +107,7 @@
 		</ul>
 		<div class="footer-version">
             #set ($versionContent = $journalContentUtil.getContent(
-                        $guestId, "VERSION", null, "$locale", $theme_display))
+                        $themeDisplay.getScopeGroupId(), "VERSION", null, "$locale", $theme_display))
             $versionContent
         </div>
 	</footer>
