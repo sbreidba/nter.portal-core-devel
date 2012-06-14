@@ -265,7 +265,7 @@ public class NterActivityStreamGenerator {
         String port = PortalPropertiesUtil.getWebServerPort();
         String virtualHost = ServiceContextUtil.getDefaultVirtualHost();
 
-        if (!port.equals("80") && !port.equals("443")) {
+        if (!port.equals("80") && !port.equals("443") && !port.equals("-1")) {
             virtualHost += ":" + port;
         }
         
