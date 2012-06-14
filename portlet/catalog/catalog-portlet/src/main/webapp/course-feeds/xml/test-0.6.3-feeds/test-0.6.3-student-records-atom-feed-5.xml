@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ National Training and Education Resource (NTER)
+  ~ Copyright (C) 2011  SRI International
+  ~
+  ~ This program is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or (at
+  ~ your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful, but
+  ~ WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  ~ General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  ~ 02110-1301, USA.
+  -->
+  
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:nter="http://nterlearning.org/xml/feeds/atom-extensions-schema_0.6.3.xsd">
+
+    <!-- NOTE: this feed depends on the target courses and links mentioned in it 
+               being available in the database.  To enter these in the database,
+               parse the sample-course-atom-feed available in the same directory as this file. -->
+    <!-- Added progress for 5 courses 5/9/11 to test student desktop -->
+
+    <title>Student Records Feed</title>
+    <link rel="self" href="test-0.6.3-student-records-atom-feed-5.xml" type="application/atom+xml"/>
+    <author>
+        <uri>nwtp.gov</uri>
+    </author>
+    <updated>2010-01-14T18:52:00Z</updated>
+    <id>tag:nwtp.gov,2010-08-24:/feeds/TESTsru1-ab89-11d9-b93C-0003939e0af6</id>
+
+    <!-- Record for a course -->
+    <entry nter:entryType="course-record">
+        <title/>
+        <id>tag:nwtp.gov,2010-10-04:/records/Atest211-C34C-4A99-C38A-C97D87AF8AA2</id>
+        <updated>2011-01-14T13:30:02Z</updated>
+        <content/>
+        <nter:courseRecord
+                nter:studentUserId="test@nter.com"
+                nter:courseId="tag:nwtp.gov,2010-10-04:/courses/frog0003-cfb8-4ebb-aaaa-80da344efa6a"
+                nter:progress="Completed"
+                nter:assigned="false"
+                >
+            <nter:componentRecord
+                    nter:componentId="tag:nwtp.gov,2010-11-05:/link/to/course18-IMMO/en-US"
+                    nter:completionPercent="100"
+                    nter:progress="Completed"
+                    nter:progressDate="2010-12-07T13:30:02Z"
+                    />
+            <nter:componentRecord
+                    nter:componentId="tag:nwtp.gov,2010-11-08:/link/to/course19-IMMO/en-US"
+                    nter:completionPercent="100"
+                    nter:progress="Completed"
+                    nter:progressDate="2011-01-14T13:30:02Z"
+                    />
+            <nter:componentRecord
+                    nter:componentId="tag:nwtp.gov,2010-12-14:/link/to/course20new-IMMO/en-US"
+                    nter:completionPercent="100"
+                    nter:progress="Completed"
+                    nter:progressDate="2010-12-06T13:30:02Z"
+                    />
+            <nter:componentRecord
+                    nter:componentId="tag:nwtp.gov,2010-12-14:/link/to/course21new-IMMO/en-US"
+                    nter:completionPercent="100"
+                    nter:progress="Completed"
+                    nter:progressDate="2011-01-14T13:30:02Z"
+                    />
+        </nter:courseRecord>
+    </entry>
+
+    <!-- Record for a course -->
+    <entry nter:entryType="course-record">
+        <title/>
+        <id>tag:nwtp.gov,2011-03-04:/records/FAILED-COURSE-TEST-4A99-C38A-C97D87AF8AA2</id>
+        <updated>2011-02-24T13:30:02Z</updated>
+        <content/>
+        <nter:courseRecord
+                nter:studentUserId="test@nter.com"
+                nter:courseId="tag:nwtp.gov,2010-10-04:/courses/Animal-Colors-4ebb-aaaa-80da344efa6a"
+                nter:progress="Failed"
+                nter:assigned="false"
+                >
+            <nter:componentRecord
+                    nter:componentId="tag:nwtp.gov,2010-12-14:/link/to/component-brown-animals-IMMO/en-US"
+                    nter:completionPercent="100"
+                    nter:progress="Failed"
+                    nter:progressDate="2011-02-24T13:30:02Z"
+                    />
+            <nter:componentRecord
+                    nter:componentId="tag:nwtp.gov,2010-12-14:/link/to/component-green-animals-IMMO/en-US"
+                    nter:completionPercent="100"
+                    nter:progress="Failed"
+                    nter:progressDate="2011-02-24T13:30:02Z"
+                    />
+        </nter:courseRecord>
+    </entry>
+
+    <!-- Record for a course -->
+    <entry nter:entryType="course-record">
+        <title/>
+        <id>tag:nwtp.gov,2011-02-04:/records/ASSIGNED-TEST-C34C-4A99-C38A-C97D87AF8AA2</id>
+        <updated>2011-05-10T13:30:02Z</updated>
+        <content/>
+        <nter:courseRecord
+            nter:studentUserId="test@nter.com"
+            nter:courseId="tag:nwtp.gov,2010-10-04:/courses/Flies-4ebb-aaaa-80da344efa6a"
+            nter:progress="Completed"
+            nter:assigned="true"
+        />
+    </entry>
+
+    <!-- Record for a course -->
+    <entry nter:entryType="course-record">
+        <title/>
+        <id>tag:nwtp.gov,2011-02-04:/records/COURSERECORDS-NOCOMPONENTRECORDS-C97D87AF8AA2</id>
+        <updated>2011-03-04T13:30:02Z</updated>
+        <content/>
+        <nter:courseRecord
+            nter:studentUserId="test@nter.com"
+            nter:courseId="tag:nwtp.gov,2010-10-04:/courses/vacation-4ebb-aaaa-80da344efa6a"
+            nter:progress="Completed"
+            nter:assigned="true"
+        />
+    </entry>
+
+    <!-- Record for a course -->
+    <entry nter:entryType="course-record">
+        <title/>
+        <id>tag:nwtp.gov,2011-02-04:/records/COMPLETE-TEST-ONE-4A99-C38A-C97D87AF8AA2</id>
+        <updated>2010-01-14T13:30:02Z</updated>
+        <content/>
+        <nter:courseRecord
+                nter:studentUserId="test@nter.com"
+                nter:courseId="tag:nwtp.gov,2010-10-04:/courses/cars-4ebb-aaaa-80da344efa6a"
+                nter:progress="In Progress"
+                nter:assigned="true"
+                >
+            <nter:componentRecord
+                    nter:componentId="tag:nwtp.gov,2010-12-14:/link/to/component-ford-IMMO/en-US"
+                    nter:completionPercent="60"
+                    nter:progress="In Progress"
+                    nter:progressDate="2010-01-14T13:30:02Z"
+                    />
+        </nter:courseRecord>
+    </entry>
+    
+</feed>
