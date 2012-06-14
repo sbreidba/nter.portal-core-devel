@@ -24,11 +24,8 @@ This file allows you to override and define new Velocity variables.
 			#set($user_role = 'admin')
 		#end
 	#end
-
-	#set ($guestId = $serviceLocator.findService("com.liferay.portal.service.GroupService").getGroup($themeDisplay.getCompanyId(), "Guest").getGroupId())
 #else
 	#set ($user_role = 'guest')
-	#set ($guestId = $group_id)
 #end
 
 #* overrides user greeting set in profile *#
