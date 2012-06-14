@@ -131,6 +131,12 @@ public class FeedParser_061 implements FeedParser {
                 // there's a chance that a few fields have updated
                 feedReference.setFeedVersion(mNterNamespace.getVersion());
                 feedReference.setContentProviderId(fc.getContentProviderId());
+
+                feedReference.setHref(feed.getSelfLinkResolvedHref().toString());
+                feedReference.setHrefHash(
+                        FeedReferenceUtil.generateHash(feed.getSelfLinkResolvedHref().toString()));
+                feedReference.setGroupId(fc.getScopeGroupId());
+                feedReference.setCompanyId(fc.getCompanyId());
             }
         }
         catch (SystemException se) {
