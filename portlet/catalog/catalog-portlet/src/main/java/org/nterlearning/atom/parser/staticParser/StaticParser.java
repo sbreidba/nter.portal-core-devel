@@ -60,6 +60,7 @@ import org.nterlearning.atom.parser.validator.FeedValidator;
 import org.nterlearning.atom.parser.validator.FeedValidatorFactory;
 import org.nterlearning.course.enumerations.FeedType;
 import org.nterlearning.course.enumerations.RelationshipType;
+import org.nterlearning.course.util.FeedReferenceUtil;
 import org.nterlearning.crawl.nutch.CrawlTool;
 import org.nterlearning.datamodel.catalog.NoSuchCourseReviewException;
 import org.nterlearning.datamodel.catalog.NoSuchGlobalCourseReviewException;
@@ -473,6 +474,9 @@ public class StaticParser {
         }
         else {
             mLog.debug("Updating feed reference with IRI [" + iri + "]");
+
+            fetchedFr.setHref(feedReference.getHref());
+            fetchedFr.setHrefHash(FeedReferenceUtil.generateHash(feedReference.getHref()));
 
             fetchedFr.setSyncDate(feedReference.getSyncDate());
             fetchedFr.setSyncSuccess(feedReference.getSyncSuccess());
