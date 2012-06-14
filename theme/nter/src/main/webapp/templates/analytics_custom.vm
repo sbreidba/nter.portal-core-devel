@@ -5,7 +5,7 @@
 		_gaq.push(['_addIgnoredRef', 'nterlearning.org']);
 
 		// prepare logged in state and role for google analytics (included in bottom)
-		_gaq.push(['_setCustomVar', 1, 'Logged in', $is_signed_in, 2]);	// logged in for this session
+		_gaq.push(['_setCustomVar', 1, 'Logged in', '$is_signed_in', 2]);	// logged in for this session
 
 		#if($is_signed_in)
 		// only use these if logged in so we don't reset them when they're logged out
