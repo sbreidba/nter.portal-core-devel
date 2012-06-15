@@ -26,10 +26,10 @@ body {
 	/* transparent stripes over bg color for everyone, stripes over gradient over bg color for browsers with multiple backgrounds and gradients modules */
 	background: #95acc3;
 	background-image: url('../images/custom/bg_stripes_transparent.png'); /* fallback */
-	background-image: url('../images/custom/bg_stripes_transparent.png'), -moz-linear-gradient(top, #434777, rgba(0,0,0,0) 900px); /* FF3.6 */
-	background-image: url('../images/custom/bg_stripes_transparent.png'), -webkit-gradient(linear, left top, left bottom, color-stop(0, #434777), color-stop(1, rgba(0,0,0,0))); /* Saf4+, Chrome */
-	background-image: url('../images/custom/bg_stripes_transparent.png'), -o-linear-gradient(top, #434777, rgba(0,0,0,0) 900px); /* Opera (soon?) */
-	background-image: url('../images/custom/bg_stripes_transparent.png'), linear-gradient(to bottom, #434777, rgba(0,0,0,0) 900px); /* Standard */
+	background-image: url('../images/custom/bg_stripes_transparent.png'), -moz-linear-gradient(top, #434777, rgba(69, 71, 119, 0) 900px); /* FF3.6 */
+	background-image: url('../images/custom/bg_stripes_transparent.png'), -webkit-gradient(linear, left top, left bottom, color-stop(0, #434777), color-stop(1, rgba(69, 71, 119, 0))); /* Saf4+, Chrome */
+	background-image: url('../images/custom/bg_stripes_transparent.png'), -o-linear-gradient(top, #434777, rgba(69, 71, 119, 0) 900px); /* Opera */
+	background-image: url('../images/custom/bg_stripes_transparent.png'), linear-gradient(to bottom, #434777, rgba(69, 71, 119, 0) 900px); /* Standard */
 }
 
 h4 { color: #002e73; }
