@@ -221,7 +221,8 @@
                 </c:if>
 				<c:if test="<%= Validator.isNotNull(searchResult.summary) %>">
 					<div class="description">
-                        <%=StringUtil.highlight(HtmlUtil.escape(searchResult.summary), queryTerms)%>
+                        <%=StringUtil.shorten(StringUtil.highlight(
+                                HtmlUtil.escape(searchResult.summary), queryTerms), 150)%>
                     </div>
 				</c:if>
 				<c:if test="<%= Validator.isNotNull(searchResult.rating) &&

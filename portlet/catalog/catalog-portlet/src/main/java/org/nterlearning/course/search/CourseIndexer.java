@@ -89,7 +89,7 @@ public class CourseIndexer extends BaseIndexer {
 			String title = course.getTitle();
 			String content = snippet;
 			if (Validator.isNull(content)) {
-				content = StringUtil.shorten(course.getDescription(), 200);
+				content = course.getDescription();
 			}
 			return new Summary(title, content, url);
 		}
