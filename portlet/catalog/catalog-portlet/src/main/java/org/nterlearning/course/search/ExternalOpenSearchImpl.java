@@ -97,7 +97,7 @@ public class ExternalOpenSearchImpl extends BaseOpenSearchImpl {
 		if (Validator.isNull(searchAddress))
 			setSearchAddressFromRegistry();
 
-        String queryTerms = QueryParser.escape(URLEncoder.encode(keywords, StringPool.UTF8));
+        String queryTerms = URLEncoder.encode(QueryParser.escape(keywords), StringPool.UTF8);
 
 		String query =
 			String.format(
