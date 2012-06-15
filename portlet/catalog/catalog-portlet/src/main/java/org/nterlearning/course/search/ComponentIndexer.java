@@ -85,7 +85,7 @@ public class ComponentIndexer extends BaseIndexer {
             String content = snippet;
 
             if (Validator.isNull(content)) {
-                content = StringUtil.shorten(component.getDescription(), 200);
+                content = component.getDescription();
             }
 
             return new Summary(title, content, portletURL);
