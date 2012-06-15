@@ -40,6 +40,16 @@
 	else {
 		keywords = StringPool.BLANK;
 	}
+
+    // ensure that if a starting quote is present, that a closing quote is found too
+    // if not, remove the quote
+    if (keywords.contains("\"")) {
+        int quoteIndex = keywords.indexOf("\"");
+        if (keywords.indexOf("\"", quoteIndex + 1) == -1) {
+            keywords = keywords.substring(0, quoteIndex) + keywords.substring(quoteIndex +1);
+        }
+    }
+
 	String format = ParamUtil.getString(request, "format");
 
 	// Get list of searchable portlets
