@@ -98,7 +98,7 @@ AUI.add("removable", function(A) {
 				}
 				btnCfg.btn = btn;
 				btnCfg.url = btn.getAttribute('data-url');
-				if (typeof btnCfg.cancelUrl == 'undefined') btnCfg.cancelUrl = btnCfg.url;
+				if (typeof btnCfg.cancelUrl == 'undefined' || btnCfg.cancelUrl == '') btnCfg.cancelUrl = btnCfg.url;
 				btnCfg.data = {};
 				btnCfg.cancelData = {};
 				var idName = btn.getAttribute('data-id-name');
