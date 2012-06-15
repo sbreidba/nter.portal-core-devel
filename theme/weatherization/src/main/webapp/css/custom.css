@@ -84,7 +84,7 @@ a:focus { outline: 1px dotted; }
 /* == page regions == */
 /* header */
 #banner {
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.45);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.45);
 }
 #heading {
 	background: #3a3c6f url('../images/custom/NTER-MastBG.png') top right no-repeat;
