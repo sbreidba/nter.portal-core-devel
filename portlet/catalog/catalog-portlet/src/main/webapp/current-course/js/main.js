@@ -55,8 +55,8 @@ AUI().ready('liferay-portlet-url', function(A) {
 		else if (course.hasClass('failed-retry')) completion_status = 3;
 		else if (course.hasClass('failed')) completion_status = 4;
 		else if (course.hasClass('complete')) completion_status = 5;
-		if (typeof _trackEvent == 'undefined') return false;
-		_trackEvent('recent courses', action, course_id, completion_status);
+		if (typeof _gaq == 'undefined') return false;
+		_gaq.push(['_trackEvent', 'recent courses', action, course_id, completion_status]);
 	}
 	var section = A.one('.course-status-section');
 	// course image and title

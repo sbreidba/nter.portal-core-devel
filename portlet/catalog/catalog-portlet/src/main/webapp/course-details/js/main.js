@@ -63,8 +63,8 @@ AUI().ready('tree-view-html', 'course-thumbnails', 'course-popup', function(A) {
 	else if (course.hasClass('failed')) completion_status = 4;
 	else if (course.hasClass('complete')) completion_status = 5;
 	function trackCourseEvent(action, event) {
-		if (typeof _trackEvent == 'undefined') return false;
-		_trackEvent('recent courses', action, course_id, completion_status);
+		if (typeof _gaq == 'undefined') return false;
+		_gaq.push(['_trackEvent', 'course details', action, course_id, completion_status]);
 	}
 	// next/failed/updated component
 	course.all('.components a').on('click', function (event) {
