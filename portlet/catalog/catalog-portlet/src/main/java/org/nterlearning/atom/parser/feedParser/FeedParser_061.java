@@ -25,6 +25,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import org.apache.abdera.model.Entry;
 import org.apache.abdera.model.ExtensibleElement;
 import org.apache.abdera.model.Feed;
@@ -47,6 +49,7 @@ import com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil;
 import org.nterlearning.atom.enumerations.NterNameSpace;
 import org.nterlearning.atom.extension.NterExtension;
 import org.nterlearning.atom.parser.FeedContext;
+import org.nterlearning.atom.parser.ServiceContextUtil;
 import org.nterlearning.atom.parser.dao.CatalogDataModelUtils;
 import org.nterlearning.atom.parser.dao.NterCatalogRecordDependencyException;
 import org.nterlearning.atom.parser.model.AsVerb;
@@ -109,34 +112,39 @@ public class FeedParser_061 implements FeedParser {
 
     public FeedReference parserToCatalog(Feed feed, FeedContext fc) {
 
-        FeedReference feedReference;
+        FeedReference feedReference = null;
         try {
             feedReference =
                     FeedReferenceLocalServiceUtil.fetchByFeedIri(feed.getId().toString());
-
-            if (feedReference == null) {
-                feedReference = new FeedReferenceImpl();
-                feedReference.setFeedType(FeedType.unknown.getCodeValue());
-                feedReference.setHref(feed.getSelfLinkResolvedHref().toString());
-                feedReference.setHrefHash(
-                        FeedReferenceUtil.generateHash(feed.getSelfLinkResolvedHref().toString()));
-                feedReference.setContentProviderId(fc.getContentProviderId());
-                feedReference.setFeedIri(feed.getId().toString());
-                feedReference.setFeedVersion(mNterNamespace.getVersion());
-                feedReference.setGroupId(fc.getScopeGroupId());
-                feedReference.setCompanyId(fc.getCompanyId());
-                feedReference.setPshbSubscribed(false);
-            }
-            else {
-                // there's a chance that a few fields have updated
-                feedReference.setFeedVersion(mNterNamespace.getVersion());
-                feedReference.setContentProviderId(fc.getContentProviderId());
-            }
         }
         catch (SystemException se) {
+            mLog.error("Error locating feedReference object for " +
+                    feed.getId().toString() + ": " + se.getMessage());
+        }
+
+        if (feedReference == null) {
             feedReference = new FeedReferenceImpl();
-            mLog.error("Error creating feedReference object for " +
-                    feed.getId().toString());
+            feedReference.setFeedType(FeedType.unknown.getCodeValue());
+            feedReference.setHref(feed.getSelfLinkResolvedHref().toString());
+            feedReference.setHrefHash(
+                    FeedReferenceUtil.generateHash(feed.getSelfLinkResolvedHref().toString()));
+            feedReference.setContentProviderId(fc.getContentProviderId());
+            feedReference.setFeedIri(feed.getId().toString());
+            feedReference.setFeedVersion(mNterNamespace.getVersion());
+            feedReference.setGroupId(fc.getScopeGroupId());
+            feedReference.setCompanyId(fc.getCompanyId());
+            feedReference.setPshbSubscribed(false);
+        }
+        else {
+            // there's a chance that a few fields have updated
+            feedReference.setFeedVersion(mNterNamespace.getVersion());
+            feedReference.setContentProviderId(fc.getContentProviderId());
+
+            feedReference.setHref(feed.getSelfLinkResolvedHref().toString());
+            feedReference.setHrefHash(
+                    FeedReferenceUtil.generateHash(feed.getSelfLinkResolvedHref().toString()));
+            feedReference.setGroupId(fc.getScopeGroupId());
+            feedReference.setCompanyId(fc.getCompanyId());
         }
 
         return feedReference;
