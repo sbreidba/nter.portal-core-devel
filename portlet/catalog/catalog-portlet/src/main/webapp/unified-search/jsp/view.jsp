@@ -148,7 +148,7 @@
 <%
 	PortletURL portletURL = renderResponse.createRenderURL();
 	SearchContainer globalSearchContainer = SearchUtil.getGlobalSearchContainer(renderRequest, portletURL,
-			pageContext, keywords);
+			pageContext, SearchUtil.escapeKeywords(keywords));
 	portletURL = globalSearchContainer.getIteratorURL();
 	portletURL.setParameter("keywords", keywords);
 	portletURL.setParameter("primarySearch", primarySearch);
@@ -156,7 +156,7 @@
 	globalSearchContainer.setDeltaConfigurable(true);
 	FederatedSearchManager searchManager = new FederatedSearchManager(portlets, groupId, portletURL, format,
 			pageContext);
-	searchManager.setKeywords(keywords);
+	searchManager.setKeywords(SearchUtil.escapeKeywords(keywords));
 	searchManager.setSearchDelta(globalSearchContainer.getDelta());
 	List<OpenSearchResult> displayResults = searchManager.getPageResults(request, globalSearchContainer.getCur());
 	globalSearchContainer.setTotal(searchManager.getTotalResultsCount());
