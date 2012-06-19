@@ -328,10 +328,23 @@ public class CourseRecordLocalServiceWrapper implements CourseRecordLocalService
         return _courseRecordLocalService.findBySingleSignOnValue(singleSignOnValue);
     }
 
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findBySingleSignOnValue(
+        java.lang.String singleSignOnValue, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _courseRecordLocalService.findBySingleSignOnValue(singleSignOnValue,
+            start, end);
+    }
+
     public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findByUserId(
         java.lang.Long userId)
         throws com.liferay.portal.kernel.exception.SystemException {
         return _courseRecordLocalService.findByUserId(userId);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findByUserId(
+        java.lang.Long userId, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return _courseRecordLocalService.findByUserId(userId, start, end);
     }
 
     public long countAccessedByCourseIri(java.lang.String courseIri)

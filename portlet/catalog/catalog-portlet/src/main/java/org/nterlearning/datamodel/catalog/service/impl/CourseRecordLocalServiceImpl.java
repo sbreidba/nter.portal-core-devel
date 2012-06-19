@@ -185,8 +185,16 @@ public class CourseRecordLocalServiceImpl
         return courseRecordPersistence.findBySingleSignOnValue(singleSignOnValue);
     }
 
+    public List<CourseRecord> findBySingleSignOnValue(String singleSignOnValue, int start, int end) throws SystemException {
+        return courseRecordPersistence.findBySingleSignOnValue(singleSignOnValue, start, end);
+    }
+
     public List<CourseRecord> findByUserId(Long userId) throws SystemException {
         return courseRecordPersistence.findByUserId(userId);
+    }
+
+    public List<CourseRecord> findByUserId(Long userId, int start, int end) throws SystemException {
+        return courseRecordPersistence.findByUserId(userId, start, end);
     }
 
     public long countAccessedByCourseIri(String courseIri) throws SystemException {

@@ -20,11 +20,20 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
 
 <%@ page import="com.liferay.portal.model.User" %>
 <%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
+<%@ page import="com.liferay.portlet.PortletURLFactoryUtil" %>
+
+<%@ page import="javax.portlet.PortletURL" %>
+<%@ page import="javax.portlet.PortletRequest" %>
 
 <%@ include file="/html/portlet/users_admin/init.jsp" %>
 
 <%
     User selUser = (User)request.getAttribute("user.selUser");
+
+    PortletURL viewUrl = PortletURLFactoryUtil.create(request,
+                            "transcriptreports_WAR_ntercatalogportlet",
+                            themeDisplay.getLayout().getPlid(), PortletRequest.RENDER_PHASE);
+    viewUrl.setParameter("userId", String.valueOf(selUser.getUserId()));
 %>
 
 <div>
@@ -34,6 +43,18 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
             anchor="false">
         <liferay-portlet:param name="userId" value="<%= String.valueOf(selUser.getUserId()) %>"/>
     </liferay-portlet:resourceURL>
+
+    <div class="">
+        <a href="<%= viewUrl.toString() %>">
+            <%= LanguageUtil.get(pageContext, "nter-student-records-view-transcript")%>
+        </a>
+    </div>
+
+<%--
+   <input type="button"
+           value="<%= LanguageUtil.get(pageContext, "nter-student-records-view-transcript") %>"
+           onclick='<%= viewUrl.toString() %>'/>
+--%>
 
     <input type="button"
            value="<%=LanguageUtil.get(pageContext, "nter-student-records-export-transcript") %>"

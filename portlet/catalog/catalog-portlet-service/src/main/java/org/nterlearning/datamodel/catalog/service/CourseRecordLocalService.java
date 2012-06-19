@@ -282,8 +282,16 @@ public interface CourseRecordLocalService extends PersistedModelLocalService {
         java.lang.String singleSignOnValue)
         throws com.liferay.portal.kernel.exception.SystemException;
 
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findBySingleSignOnValue(
+        java.lang.String singleSignOnValue, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
     public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findByUserId(
         java.lang.Long userId)
+        throws com.liferay.portal.kernel.exception.SystemException;
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findByUserId(
+        java.lang.Long userId, int start, int end)
         throws com.liferay.portal.kernel.exception.SystemException;
 
     public long countAccessedByCourseIri(java.lang.String courseIri)
