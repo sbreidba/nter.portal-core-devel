@@ -336,10 +336,23 @@ public class CourseRecordLocalServiceUtil {
         return getService().findBySingleSignOnValue(singleSignOnValue);
     }
 
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findBySingleSignOnValue(
+        java.lang.String singleSignOnValue, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService()
+                   .findBySingleSignOnValue(singleSignOnValue, start, end);
+    }
+
     public static java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findByUserId(
         java.lang.Long userId)
         throws com.liferay.portal.kernel.exception.SystemException {
         return getService().findByUserId(userId);
+    }
+
+    public static java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findByUserId(
+        java.lang.Long userId, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        return getService().findByUserId(userId, start, end);
     }
 
     public static long countAccessedByCourseIri(java.lang.String courseIri)

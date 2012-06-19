@@ -167,7 +167,10 @@
     <!-- Transcript Report -->
     <portlet>
         <portlet-name>transcript-reports</portlet-name>
+        <icon>/course-transcripts/images/icon.png</icon>
         <remoteable>true</remoteable>
+        <header-portlet-css>/course-transcripts/css/main.css</header-portlet-css>
+        <css-class-wrapper>course-transcript-portlet</css-class-wrapper>
         <add-default-resource>true</add-default-resource>
         <system>true</system>
     </portlet>

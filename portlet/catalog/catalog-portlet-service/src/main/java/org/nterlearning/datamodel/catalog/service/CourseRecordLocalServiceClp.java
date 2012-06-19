@@ -36,12 +36,14 @@ public class CourseRecordLocalServiceClp implements CourseRecordLocalService {
     private MethodKey _findByUserIdFilterSortedMethodKey26;
     private MethodKey _countByUserIdFilterMethodKey27;
     private MethodKey _findBySingleSignOnValueMethodKey28;
-    private MethodKey _findByUserIdMethodKey29;
-    private MethodKey _countAccessedByCourseIriMethodKey30;
-    private MethodKey _countCompletedByCourseIriMethodKey31;
-    private MethodKey _findByFeedReferenceIdMethodKey32;
-    private MethodKey _getComponentRecordsMethodKey33;
-    private MethodKey _getComponentRecordsMethodKey34;
+    private MethodKey _findBySingleSignOnValueMethodKey29;
+    private MethodKey _findByUserIdMethodKey30;
+    private MethodKey _findByUserIdMethodKey31;
+    private MethodKey _countAccessedByCourseIriMethodKey32;
+    private MethodKey _countCompletedByCourseIriMethodKey33;
+    private MethodKey _findByFeedReferenceIdMethodKey34;
+    private MethodKey _getComponentRecordsMethodKey35;
+    private MethodKey _getComponentRecordsMethodKey36;
 
     public CourseRecordLocalServiceClp(ClassLoaderProxy classLoaderProxy) {
         _classLoaderProxy = classLoaderProxy;
@@ -154,23 +156,30 @@ public class CourseRecordLocalServiceClp implements CourseRecordLocalService {
         _findBySingleSignOnValueMethodKey28 = new MethodKey(_classLoaderProxy.getClassName(),
                 "findBySingleSignOnValue", java.lang.String.class);
 
-        _findByUserIdMethodKey29 = new MethodKey(_classLoaderProxy.getClassName(),
+        _findBySingleSignOnValueMethodKey29 = new MethodKey(_classLoaderProxy.getClassName(),
+                "findBySingleSignOnValue", java.lang.String.class, int.class,
+                int.class);
+
+        _findByUserIdMethodKey30 = new MethodKey(_classLoaderProxy.getClassName(),
                 "findByUserId", java.lang.Long.class);
 
-        _countAccessedByCourseIriMethodKey30 = new MethodKey(_classLoaderProxy.getClassName(),
+        _findByUserIdMethodKey31 = new MethodKey(_classLoaderProxy.getClassName(),
+                "findByUserId", java.lang.Long.class, int.class, int.class);
+
+        _countAccessedByCourseIriMethodKey32 = new MethodKey(_classLoaderProxy.getClassName(),
                 "countAccessedByCourseIri", java.lang.String.class);
 
-        _countCompletedByCourseIriMethodKey31 = new MethodKey(_classLoaderProxy.getClassName(),
+        _countCompletedByCourseIriMethodKey33 = new MethodKey(_classLoaderProxy.getClassName(),
                 "countCompletedByCourseIri", java.lang.String.class);
 
-        _findByFeedReferenceIdMethodKey32 = new MethodKey(_classLoaderProxy.getClassName(),
+        _findByFeedReferenceIdMethodKey34 = new MethodKey(_classLoaderProxy.getClassName(),
                 "findByFeedReferenceId", long.class);
 
-        _getComponentRecordsMethodKey33 = new MethodKey(_classLoaderProxy.getClassName(),
+        _getComponentRecordsMethodKey35 = new MethodKey(_classLoaderProxy.getClassName(),
                 "getComponentRecords",
                 org.nterlearning.datamodel.catalog.model.CourseRecord.class);
 
-        _getComponentRecordsMethodKey34 = new MethodKey(_classLoaderProxy.getClassName(),
+        _getComponentRecordsMethodKey36 = new MethodKey(_classLoaderProxy.getClassName(),
                 "getComponentRecords", long.class);
     }
 
@@ -936,13 +945,65 @@ public class CourseRecordLocalServiceClp implements CourseRecordLocalService {
         return (java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord>) ClpSerializer.translateOutput(returnObj);
     }
 
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findBySingleSignOnValue(
+        java.lang.String singleSignOnValue, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_findBySingleSignOnValueMethodKey29,
+                ClpSerializer.translateInput(singleSignOnValue), start, end);
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord>) ClpSerializer.translateOutput(returnObj);
+    }
+
     public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findByUserId(
         java.lang.Long userId)
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
-        MethodHandler methodHandler = new MethodHandler(_findByUserIdMethodKey29,
+        MethodHandler methodHandler = new MethodHandler(_findByUserIdMethodKey30,
                 ClpSerializer.translateInput(userId));
+
+        try {
+            returnObj = _classLoaderProxy.invoke(methodHandler);
+        } catch (Throwable t) {
+            if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+                throw (com.liferay.portal.kernel.exception.SystemException) t;
+            }
+
+            if (t instanceof RuntimeException) {
+                throw (RuntimeException) t;
+            } else {
+                throw new RuntimeException(t.getClass().getName() +
+                    " is not a valid exception");
+            }
+        }
+
+        return (java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord>) ClpSerializer.translateOutput(returnObj);
+    }
+
+    public java.util.List<org.nterlearning.datamodel.catalog.model.CourseRecord> findByUserId(
+        java.lang.Long userId, int start, int end)
+        throws com.liferay.portal.kernel.exception.SystemException {
+        Object returnObj = null;
+
+        MethodHandler methodHandler = new MethodHandler(_findByUserIdMethodKey31,
+                ClpSerializer.translateInput(userId), start, end);
 
         try {
             returnObj = _classLoaderProxy.invoke(methodHandler);
@@ -966,7 +1027,7 @@ public class CourseRecordLocalServiceClp implements CourseRecordLocalService {
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
-        MethodHandler methodHandler = new MethodHandler(_countAccessedByCourseIriMethodKey30,
+        MethodHandler methodHandler = new MethodHandler(_countAccessedByCourseIriMethodKey32,
                 ClpSerializer.translateInput(courseIri));
 
         try {
@@ -991,7 +1052,7 @@ public class CourseRecordLocalServiceClp implements CourseRecordLocalService {
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
-        MethodHandler methodHandler = new MethodHandler(_countCompletedByCourseIriMethodKey31,
+        MethodHandler methodHandler = new MethodHandler(_countCompletedByCourseIriMethodKey33,
                 ClpSerializer.translateInput(courseIri));
 
         try {
@@ -1017,7 +1078,7 @@ public class CourseRecordLocalServiceClp implements CourseRecordLocalService {
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
-        MethodHandler methodHandler = new MethodHandler(_findByFeedReferenceIdMethodKey32,
+        MethodHandler methodHandler = new MethodHandler(_findByFeedReferenceIdMethodKey34,
                 feedRefId);
 
         try {
@@ -1043,7 +1104,7 @@ public class CourseRecordLocalServiceClp implements CourseRecordLocalService {
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
-        MethodHandler methodHandler = new MethodHandler(_getComponentRecordsMethodKey33,
+        MethodHandler methodHandler = new MethodHandler(_getComponentRecordsMethodKey35,
                 ClpSerializer.translateInput(courseRecord));
 
         try {
@@ -1069,7 +1130,7 @@ public class CourseRecordLocalServiceClp implements CourseRecordLocalService {
         throws com.liferay.portal.kernel.exception.SystemException {
         Object returnObj = null;
 
-        MethodHandler methodHandler = new MethodHandler(_getComponentRecordsMethodKey34,
+        MethodHandler methodHandler = new MethodHandler(_getComponentRecordsMethodKey36,
                 courseRecordPrimaryKey);
 
         try {

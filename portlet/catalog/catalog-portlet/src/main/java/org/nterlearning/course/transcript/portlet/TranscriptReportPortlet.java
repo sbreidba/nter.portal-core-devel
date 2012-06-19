@@ -18,7 +18,7 @@
  02110-1301, USA.
  */
 
-package org.nterlearning.exporter.portlet;
+package org.nterlearning.course.transcript.portlet;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -31,6 +31,13 @@ import javax.portlet.*;
 import java.io.IOException;
 
 public class TranscriptReportPortlet extends MVCPortlet {
+
+
+    @Override
+    public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws
+            IOException, PortletException {
+        super.doView(renderRequest, renderResponse);
+    }
 
 
     @Override

@@ -498,9 +498,14 @@
     <portlet>
         <portlet-name>transcript-reports</portlet-name>
         <display-name>Transcript Reports</display-name>
-        <portlet-class>org.nterlearning.exporter.portlet.TranscriptReportPortlet</portlet-class>
+        <portlet-class>org.nterlearning.course.transcript.portlet.TranscriptReportPortlet</portlet-class>
+        <init-param>
+            <name>view-jsp</name>
+            <value>/course-transcripts/jsp/view.jsp</value>
+        </init-param>
         <supports>
             <mime-type>text/html</mime-type>
+            <portlet-mode>view</portlet-mode>
         </supports>
         <resource-bundle>content.Language</resource-bundle>
         <portlet-info>
