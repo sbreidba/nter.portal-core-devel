@@ -136,6 +136,7 @@
         <control-panel-entry-weight>1.7</control-panel-entry-weight>
         <header-portlet-css>/course-records/css/main.css</header-portlet-css>
         <css-class-wrapper>course-records-control-panel-portlet</css-class-wrapper>
+        <active>false</active>
     </portlet>
 
     <!-- Feeds, control panel -->
