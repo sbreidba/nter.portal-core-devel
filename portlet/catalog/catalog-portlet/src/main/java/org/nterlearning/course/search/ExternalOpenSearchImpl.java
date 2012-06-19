@@ -94,10 +94,12 @@ public class ExternalOpenSearchImpl extends BaseOpenSearchImpl {
 	private String qetQuery(String keywords, int startPage, int itemsPerPage)
 		throws Exception {
 
-		if (Validator.isNull(searchAddress))
-			setSearchAddressFromRegistry();
+		if (Validator.isNull(searchAddress)) {
+            setSearchAddressFromRegistry();
+        }
 
-        String queryTerms = URLEncoder.encode(QueryParser.escape(keywords), StringPool.UTF8);
+        // the keywords have already been escaped via queryparser
+        String queryTerms = URLEncoder.encode(keywords, StringPool.UTF8);
 
 		String query =
 			String.format(
