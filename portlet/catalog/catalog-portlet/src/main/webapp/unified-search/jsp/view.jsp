@@ -25,11 +25,11 @@
 
 	// GET PARAMETERS
 	String primarySearch = GetterUtil.getString(request.getParameter("primarySearch"));
-	HttpServletRequest httpRequest =
-		PortalUtil.getOriginalServletRequest(request);
+	HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 	if(Validator.isNull(primarySearch)) {
 		primarySearch = GetterUtil.getString(httpRequest.getParameter("primarySearch"));
 	}
+
 	String keywords;
 	if (Validator.isNotNull(httpRequest.getParameter("keywords"))) {
 		keywords = HtmlUtil.unescape(httpRequest.getParameter("keywords"));
@@ -69,17 +69,10 @@
 				portlets.add(portlet);
 			}
 		}
-	}else {
+	}
+    else {
 		portlets = new ArrayList<Portlet>(filtercats);
 	}
-
-	LinkedHashMap groupParams = new LinkedHashMap();
-
-	groupParams.put("active", Boolean.FALSE);
-
-	int inactiveGroupsCount =
-		GroupLocalServiceUtil.searchCount(
-			themeDisplay.getCompanyId(), null, null, groupParams);
 
 	// we should be using renderResponse.createElement (http://blogs.oracle.com/deepakg/entry/setting_markup_head_elements_in)
 	// but it doesn't seem to work in all circumstances, e.g. maximized portlets
@@ -93,8 +86,7 @@
 <portlet:renderURL var="searchURL">
 </portlet:renderURL>
 
-<form action="<%=searchURL%>" method="get" name="fm" role="search"
-	class="main-search-form">
+<form action="<%= searchURL %>" method="get" name="fm" role="search" class="main-search-form">
 	<h3 class="main-page-heading label-heading">
 		<label for="<portlet:namespace />search">
             <liferay-ui:message key="search" />
@@ -102,7 +94,7 @@
 	</h3>
 
 	<input id="<portlet:namespace />search" name="keywords" type="text"
-	       value="<%=HtmlUtil.escapeAttribute(keywords) %>" />
+	       value="<%= HtmlUtil.escapeAttribute(keywords) %>" />
 	<input name="primarySearch" type="hidden" value="<%=primarySearch%>" />
 	<input value="<liferay-ui:message key="search" />" class="submit" type="submit" />
 </form>
@@ -115,8 +107,8 @@
 			<portlet:param name="format" value="<%= format %>" />
 		</portlet:renderURL>
 
-		<li <%if (Validator.isNull(primarySearch)) {%>
-			class="current" <%}%>><a href="<%=everythingUrl%>">Everything</a>
+		<li <% if (Validator.isNull(primarySearch)) {%>class="current" <%}%>>
+            <a href="<%= everythingUrl %>">Everything</a>
 		</li>
 
 		<%
@@ -124,7 +116,7 @@
 				Boolean current = false;
 				Portlet portlet = filtercats.get(i);
 
-				if(portlet.getPortletId().equals(NterKeys.EXTERNAL_SEARCH_PORTLET))
+				if (portlet.getPortletId().equals(NterKeys.EXTERNAL_SEARCH_PORTLET))
 					continue;
 
 				if (StringUtils.equals(primarySearch, portlet.getOpenSearchClass()))
@@ -179,7 +171,7 @@
 <c:choose>
 	<c:when test="<%= globalSearchContainer.getTotal() > 0 %>">
 		<div class="search-paginator-container">
-			<liferay-ui:search-paginator searchContainer="<%=globalSearchContainer%>" />
+			<liferay-ui:search-paginator searchContainer="<%=globalSearchContainer%>" type="more" />
 		</div>
 	</c:when>
 	<c:otherwise>
@@ -187,8 +179,7 @@
 			<%=LanguageUtil.format(
 							pageContext,
 							"no-results-were-found-that-matched-the-keywords-x",
-							"<strong>" + keywords +
-								"</strong>") %>
+							"<strong>" + keywords + "</strong>") %>
 		</div>
 	</c:otherwise>
 </c:choose>
