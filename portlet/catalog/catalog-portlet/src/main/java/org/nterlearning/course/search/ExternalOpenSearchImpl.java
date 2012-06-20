@@ -98,8 +98,9 @@ public class ExternalOpenSearchImpl extends BaseOpenSearchImpl {
             setSearchAddressFromRegistry();
         }
 
-        // the keywords have already been escaped via queryparser
-        String queryTerms = URLEncoder.encode(keywords, StringPool.UTF8);
+        // the keywords have already been escaped to support Liferay, now prep them for Solr
+        String queryTerms = SearchUtil.unEscapeKeywords(keywords);
+        queryTerms = URLEncoder.encode(QueryParser.escape(keywords), StringPool.UTF8);
 
 		String query =
 			String.format(
