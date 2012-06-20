@@ -32,33 +32,87 @@
 <%@ page import="com.liferay.portal.model.Layout" %>
 <%@ page import="com.liferay.portal.service.permission.LayoutPermissionUtil" %>
 <%@ page import="com.liferay.portal.security.permission.ActionKeys" %>
+<%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
+<%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.service.AssetVocabularyLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.asset.NoSuchCategoryException" %>
+<%@ page import="com.liferay.portlet.asset.NoSuchVocabularyException" %>
 
 <liferay-theme:defineObjects/>
 <portlet:defineObjects/>
 
 <%
+
+HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
+String keywords = ParamUtil.getString(httpRequest, "keyword");
+long categoryFilter = ParamUtil.getLong(httpRequest, "category");
+long vocabularyFilter = ParamUtil.getLong(httpRequest, "vocabulary");
+
 List ancestors = new ArrayList();
 ancestors.add(layout);
 ancestors.addAll(layout.getAncestors());
 
 Layout rootLayout = (Layout) ancestors.get(ancestors.size() - 1);
 List <Layout> siblings = rootLayout.getChildren();
+
+String pageTitle;
+Boolean showSubPages = true;
+if (!keywords.equals("")) {
+    pageTitle = LanguageUtil.format(pageContext, "keyword-courses",
+            LanguageUtil.get(pageContext, "keyword-label") + ": " + keywords);
+    showSubPages = false;
+}
+else if (categoryFilter > 0) {
+    try {
+        pageTitle = LanguageUtil.format(pageContext, "category-courses",
+                AssetCategoryLocalServiceUtil.getAssetCategory(categoryFilter).getTitle(locale,true));
+        showSubPages = false;
+    }
+    catch (NoSuchCategoryException e) {
+        pageTitle = layout.getHTMLTitle(themeDisplay.getLocale());
+    }
+}
+else if (vocabularyFilter > 0) {
+    try {
+        pageTitle = LanguageUtil.format(pageContext, "vocabulary-courses",
+                AssetVocabularyLocalServiceUtil.getAssetVocabulary(vocabularyFilter).getTitle(locale,true));
+        showSubPages = false;
+    }
+    catch (NoSuchVocabularyException e) {
+        pageTitle = layout.getHTMLTitle(themeDisplay.getLocale());
+    }
+}
+else {
+    pageTitle = layout.getHTMLTitle(themeDisplay.getLocale());
+}
+
 %>
 
-<h3 class="main-page-heading"><%= layout.getHTMLTitle(themeDisplay.getLocale()) %></h3>
-<ul class="course-filter">
-  <% if (layout.getLayoutId() == rootLayout.getLayoutId()) { %>
-    <li class="current"><%= rootLayout.getHTMLTitle(themeDisplay.getLocale()) %></li>
-  <% } else { %>
-    <li><a href="<%= PortalUtil.getLayoutURL(rootLayout, themeDisplay) %>"><%= rootLayout.getHTMLTitle(themeDisplay.getLocale()) %></a></li>
-  <% } %>
-  <% for (Layout sibling : siblings) { 
-    if (!sibling.isHidden() && LayoutPermissionUtil.contains(themeDisplay.getPermissionChecker(), sibling, ActionKeys.VIEW)) {
-      if (layout.getLayoutId() == sibling.getLayoutId()) { %>
-        <li class="current"><%= sibling.getName(themeDisplay.getLocale()) %></li>
-      <% } else { %>
-        <li><a href="<%= PortalUtil.getLayoutURL(sibling, themeDisplay) %>"><%= sibling.getName(themeDisplay.getLocale()) %></a></li>
-      <% }
+<h3 class="main-page-heading"><%= pageTitle %></h3>
+<%
+    if (showSubPages) {
+        %>
+
+        <ul class="course-filter">
+          <% if (layout.getLayoutId() == rootLayout.getLayoutId()) { %>
+            <li class="current"><%= rootLayout.getHTMLTitle(themeDisplay.getLocale()) %></li>
+          <% } else { %>
+            <li><a href="<%= PortalUtil.getLayoutURL(rootLayout, themeDisplay) %>"><%= rootLayout.getHTMLTitle(
+                    themeDisplay.getLocale()) %></a></li>
+          <% } %>
+          <% for (Layout sibling : siblings) {
+            if (!sibling.isHidden() && LayoutPermissionUtil.contains(
+                    themeDisplay.getPermissionChecker(), sibling, ActionKeys.VIEW)) {
+              if (layout.getLayoutId() == sibling.getLayoutId()) { %>
+                <li class="current"><%= sibling.getName(themeDisplay.getLocale()) %></li>
+              <% } else { %>
+                <li><a href="<%= PortalUtil.getLayoutURL(sibling, themeDisplay) %>"><%= sibling.getName(
+                        themeDisplay.getLocale()) %></a></li>
+              <% }
+            }
+          } %>
+        </ul>
+        <%
     }
-  } %>
-</ul>
+%>
