@@ -22,6 +22,9 @@
 /* header */
 .ie6 #site-search .submit { background-position: left center; padding-left: 16px; }
 
+/* IE7 gives native Tag Compiler portlet of one line of text even though it's always empty */
+#p_p_id_103_ { display: none; }
+
 
 /* == portlet content styles == */
 .course-description .taglib-ratings { display: inline; top: 0; }
