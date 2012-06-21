@@ -252,7 +252,6 @@ footer {
 
 /* treeview */
 .toc, .toc ul { margin: 0; list-style-type: disc; }
-.treeview ul { display: none; }
 .toc .expanded>ul { display: block; }
 .toc li { padding: 3px 0 0 16px; list-style-position: inside; text-indent: -12px; }
 .toc li li { list-style-position: outside; margin-left: 20px; padding-left: 0; text-indent: 0; }
@@ -263,6 +262,7 @@ footer {
 .toc li .status, .toc li .visited { margin-left: 1em; }
 .toc li .updated { font-weight: bold; color: #660000; display: block; text-indent: 0; }
 .toc li .status { font-style: italic; }
+.treeview ul { display: none; }
 .treeview, .treeview ul { margin: 0; list-style: none; }
 .treeview li { padding-left: 20px; text-indent: 0; }
 .treeview .collapsible .toggle, .treeview .expanded .toggle { background: no-repeat center url('../images/nter/minus.gif'); cursor: pointer; width: 16px; height: 16px; display: inline-block; vertical-align: middle; margin: -2px 0 0 -20px; }
