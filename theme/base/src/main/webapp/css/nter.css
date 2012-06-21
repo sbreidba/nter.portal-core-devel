@@ -252,15 +252,16 @@ footer {
 
 /* treeview */
 .toc, .toc ul { margin: 0; list-style-type: disc; }
-.toc ul { display: none; }
+.treeview ul { display: none; }
 .toc .expanded>ul { display: block; }
 .toc li { padding: 3px 0 0 16px; list-style-position: inside; text-indent: -12px; }
 .toc li li { list-style-position: outside; margin-left: 20px; padding-left: 0; text-indent: 0; }
 .toc .tree-description { font-weight: bold; }
-.toc .expanded .state-collapsed, .toc .collapsed .state-expanded { display: none; }
+.toc .state-collapsed, .toc .state-expanded { display: none; }
+.toc .collapsed .state-collapsed, .toc .expanded .state-expanded { display: inline; }
 .toc .current-course-section { background-color: #F2F2F2; }
 .toc li .status, .toc li .visited { margin-left: 1em; }
-.toc li .updated { font-weight: bold; color: #660000; display: block; text-indent: 0; margin-left: -5px; }
+.toc li .updated { font-weight: bold; color: #660000; display: block; text-indent: 0; }
 .toc li .status { font-style: italic; }
 .treeview, .treeview ul { margin: 0; list-style: none; }
 .treeview li { padding-left: 20px; text-indent: 0; }
