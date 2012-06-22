@@ -25,11 +25,11 @@
 
 	// GET PARAMETERS
 	String primarySearch = GetterUtil.getString(request.getParameter("primarySearch"));
-	HttpServletRequest httpRequest =
-		PortalUtil.getOriginalServletRequest(request);
+	HttpServletRequest httpRequest = PortalUtil.getOriginalServletRequest(request);
 	if(Validator.isNull(primarySearch)) {
 		primarySearch = GetterUtil.getString(httpRequest.getParameter("primarySearch"));
 	}
+
 	String keywords;
 	if (Validator.isNotNull(httpRequest.getParameter("keywords"))) {
 		keywords = HtmlUtil.unescape(httpRequest.getParameter("keywords"));
@@ -69,17 +69,10 @@
 				portlets.add(portlet);
 			}
 		}
-	}else {
+	}
+    else {
 		portlets = new ArrayList<Portlet>(filtercats);
 	}
-
-	LinkedHashMap groupParams = new LinkedHashMap();
-
-	groupParams.put("active", Boolean.FALSE);
-
-	int inactiveGroupsCount =
-		GroupLocalServiceUtil.searchCount(
-			themeDisplay.getCompanyId(), null, null, groupParams);
 
 	// we should be using renderResponse.createElement (http://blogs.oracle.com/deepakg/entry/setting_markup_head_elements_in)
 	// but it doesn't seem to work in all circumstances, e.g. maximized portlets
@@ -93,8 +86,7 @@
 <portlet:renderURL var="searchURL">
 </portlet:renderURL>
 
-<form action="<%=searchURL%>" method="get" name="fm" role="search"
-	class="main-search-form">
+<form action="<%= searchURL %>" method="get" name="fm" role="search" class="main-search-form">
 	<h3 class="main-page-heading label-heading">
 		<label for="<portlet:namespace />search">
             <liferay-ui:message key="search" />
@@ -102,7 +94,7 @@
 	</h3>
 
 	<input id="<portlet:namespace />search" name="keywords" type="text"
-	       value="<%=HtmlUtil.escapeAttribute(keywords) %>" />
+	       value="<%= HtmlUtil.escapeAttribute(keywords) %>" />
 	<input name="primarySearch" type="hidden" value="<%=primarySearch%>" />
 	<input value="<liferay-ui:message key="search" />" class="submit" type="submit" />
 </form>
@@ -115,8 +107,8 @@
 			<portlet:param name="format" value="<%= format %>" />
 		</portlet:renderURL>
 
-		<li <%if (Validator.isNull(primarySearch)) {%>
-			class="current" <%}%>><a href="<%=everythingUrl%>">Everything</a>
+		<li <% if (Validator.isNull(primarySearch)) {%>class="current" <%}%>>
+            <a href="<%= everythingUrl %>">Everything</a>
 		</li>
 
 		<%
@@ -124,7 +116,7 @@
 				Boolean current = false;
 				Portlet portlet = filtercats.get(i);
 
-				if(portlet.getPortletId().equals(NterKeys.EXTERNAL_SEARCH_PORTLET))
+				if (portlet.getPortletId().equals(NterKeys.EXTERNAL_SEARCH_PORTLET))
 					continue;
 
 				if (StringUtils.equals(primarySearch, portlet.getOpenSearchClass()))
@@ -146,52 +138,71 @@
 </div>
 
 <%
+
+    int currentPage = GetterUtil.getInteger(request.getParameter("cur"), 1);
+    int displayDelta = 10;
+    // query the indexes in batches of 100 results
+    int searchDelta = 100 * ((int)(currentPage / displayDelta) + 1);
+
 	PortletURL portletURL = renderResponse.createRenderURL();
-	SearchContainer globalSearchContainer = SearchUtil.getGlobalSearchContainer(renderRequest, portletURL,
-			pageContext, SearchUtil.escapeKeywords(keywords));
-	portletURL = globalSearchContainer.getIteratorURL();
+
+	SearchContainer globalSearchContainer =
+            SearchUtil.getGlobalSearchContainer(renderRequest, portletURL, pageContext,
+                    SearchUtil.escapeKeywords(keywords));
+    globalSearchContainer.setDeltaConfigurable(true);
+    globalSearchContainer.setDelta(displayDelta);
+
+    portletURL = globalSearchContainer.getIteratorURL();
 	portletURL.setParameter("keywords", keywords);
 	portletURL.setParameter("primarySearch", primarySearch);
 	portletURL.setParameter("format", format);
-	globalSearchContainer.setDeltaConfigurable(true);
-	FederatedSearchManager searchManager = new FederatedSearchManager(portlets, groupId, portletURL, format,
-			pageContext);
+
+	FederatedSearchManager searchManager = new FederatedSearchManager(portlets, groupId,
+            portletURL, format, pageContext);
+    searchManager.setSearchDelta(searchDelta);
 	searchManager.setKeywords(SearchUtil.escapeKeywords(keywords));
-	searchManager.setSearchDelta(globalSearchContainer.getDelta());
-	List<OpenSearchResult> displayResults = searchManager.getPageResults(request, globalSearchContainer.getCur());
-	globalSearchContainer.setTotal(searchManager.getTotalResultsCount());
+
+    List<OpenSearchResult> displayResults = searchManager.getPageResults(request, 1);
+
+    globalSearchContainer.setTotal(searchManager.getTotalResultsCount());
 	globalSearchContainer.getResultRows().addAll(displayResults);
+    globalSearchContainer.setEmptyResultsMessage(LanguageUtil.format(pageContext,
+            "no-results-were-found-that-matched-the-keywords-x",
+            "<strong>" + keywords + "</strong>"));
 
 	if (Validator.isNotNull(keywords)) {
 %>
 
 <section class="search-listing">
 <ul>
-	<%
-		for (OpenSearchResult result : displayResults) {
-            %>
-            <nter:search_result searchResult="<%= result%>" />
-            <%
-		}
-	%>
-</ul>
+<liferay-ui:search-container
+        searchContainer="<%= globalSearchContainer %>">
 
-<c:choose>
-	<c:when test="<%= globalSearchContainer.getTotal() > 0 %>">
-		<div class="search-paginator-container">
-			<liferay-ui:search-paginator searchContainer="<%=globalSearchContainer%>" />
-		</div>
-	</c:when>
-	<c:otherwise>
-		<div class="no-results">
-			<%=LanguageUtil.format(
-							pageContext,
-							"no-results-were-found-that-matched-the-keywords-x",
-							"<strong>" + keywords +
-								"</strong>") %>
-		</div>
-	</c:otherwise>
-</c:choose>
+    <liferay-ui:search-container-results>
+        <%
+            results = displayResults;
+            total = displayResults.size();
+
+            int displayEnd = Math.min(displayResults.size(), globalSearchContainer.getEnd());
+            int displayStart = Math.min(displayEnd, globalSearchContainer.getStart());
+
+            pageContext.setAttribute("results", results.subList(displayStart, displayEnd));
+            pageContext.setAttribute("total", total);
+
+            request.setAttribute("cur", globalSearchContainer.getCur());
+        %>
+    </liferay-ui:search-container-results>
+
+    <liferay-ui:search-container-row
+            className="org.nterlearning.course.search.OpenSearchResult"
+            modelVar="result">
+
+        <nter:search_result searchResult="<%= result %>"/>
+    </liferay-ui:search-container-row>
+
+    <liferay-ui:search-iterator searchContainer="<%= globalSearchContainer %>" type="more"/>
+</liferay-ui:search-container>
+</ul>
 </section>
 <%
 	}
