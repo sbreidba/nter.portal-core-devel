@@ -87,9 +87,10 @@ public class FederatedSearchManager {
 	private PortletURL portletURL;
 	// Page context
 	private PageContext pageContext;
+
 	// duplicate table for removing dups between local and remote searches
-	private Set<Long> courseResultsSet;
-    private Set<Long> componentResultsSet;
+	private Set<String> courseResultsSet;
+    private Set<String> componentResultsSet;
 
 	// Open search return format
 	private String format;
@@ -109,8 +110,8 @@ public class FederatedSearchManager {
 		this.portletURL = portletURL;
 		this.format = format;
 		this.pageContext = pageContext;
-		this.courseResultsSet = new HashSet<Long>();
-        this.componentResultsSet = new HashSet<Long>();
+		this.courseResultsSet = new HashSet<String>();
+        this.componentResultsSet = new HashSet<String>();
 	}
 
 	public int getTotalResultsCount() {
@@ -396,7 +397,7 @@ public class FederatedSearchManager {
                     for (Courses_Components courseComponent : coursesComponents) {
                         long courseId = courseComponent.getCourseId();
 
-                        if (courseResultsSet.add(courseId)) {
+                        if (courseResultsSet.add(courseComponent.getCourseIri())) {
                             Course course = CourseLocalServiceUtil.getCourse(courseId);
                             OpenSearchResult result = convertCourseResultToSearchResult(
                                     portletId, el, course, locale);
@@ -405,7 +406,7 @@ public class FederatedSearchManager {
                     }
                 }
                 else {
-                    if (courseResultsSet.add(entryClassPK)) {
+                    if (courseResultsSet.add(entryClassIri)) {
                         Course course = CourseLocalServiceUtil.findByCourseIri(entryClassIri);
                         OpenSearchResult result = convertCourseResultToSearchResult(
                                 portletId, el, course, locale);
@@ -416,7 +417,7 @@ public class FederatedSearchManager {
 
             if (processComponentResult(primarySearch, entryClassName)) {
                 if (ComponentOpenSearchImpl.isSearchAuthorized() &&
-                    componentResultsSet.add(entryClassPK)) {
+                    componentResultsSet.add(entryClassIri)) {
                         Component component =
                                 ComponentLocalServiceUtil.fetchByComponentIri(entryClassIri);
                         results.add(convertComponentResultToSearchResult(portletId, el, component));
@@ -428,14 +429,22 @@ public class FederatedSearchManager {
 
         // Localize courses display
         if (portletId.equals(NterKeys.COURSE_SEARCH_PORTLET)) {
-            courseResultsSet.add(entryClassPK);
+            Course course = CourseLocalServiceUtil.getCourse(entryClassPK);
+            if (!courseResultsSet.add(course.getCourseIri())) {
+                return results;
+            }
+
             entryTitle = LocalizationUtil.getLocalization(entryTitle, LanguageUtil.getLanguageId(locale));
             summary = LocalizationUtil.getLocalization(summary, LanguageUtil.getLanguageId(locale));
         }
 
         // localize component details
         if (portletId.equals(NterKeys.COMPONENT_SEARCH_PORTLET)) {
-            componentResultsSet.add(entryClassPK);
+            Component component = ComponentLocalServiceUtil.getComponent(entryClassPK);
+            if (!componentResultsSet.add(component.getComponentIri())) {
+                return results;
+            }
+
             entryTitle = LocalizationUtil.getLocalization(entryTitle, LanguageUtil.getLanguageId(locale));
             summary = LocalizationUtil.getLocalization(summary, LanguageUtil.getLanguageId(locale));
         }
