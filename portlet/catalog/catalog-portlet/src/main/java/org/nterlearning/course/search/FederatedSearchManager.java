@@ -95,6 +95,9 @@ public class FederatedSearchManager {
 	private String format;
 	private long groupId;
 
+    // minimum search delta
+    private final static int MINIMUM_SEARCH_DELTA = 5;
+
 	public FederatedSearchManager(List<Portlet> portlets, long groupId,
         PortletURL portletURL, String format, PageContext pageContext) {
 
@@ -122,7 +125,7 @@ public class FederatedSearchManager {
 
 	public void setSearchDelta(int searchDelta) {
 		if (this.searchDelta != searchDelta) {
-			this.searchDelta = searchDelta;
+			this.searchDelta = Math.max(MINIMUM_SEARCH_DELTA, searchDelta);
 		}
 	}
 
