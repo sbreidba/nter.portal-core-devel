@@ -29,7 +29,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>nter-1-col-sidenav-layouttpl</artifactId>
-    <version>6.1.2-SNAPSHOT</version>
+    <version>6.1.2</version>
     <packaging>war</packaging>
     <name>1-col-sidenav Layout Template</name>
 
