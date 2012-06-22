@@ -29,11 +29,11 @@
 
 	<artifactId>nter-nter-theme</artifactId>
 	<packaging>war</packaging>
-	<version>6.1.10-SNAPSHOT</version>
+	<version>6.1.10</version>
 	<name>NTER Theme</name>
 
     <properties>
-        <nter.base.theme.version>6.1.8-SNAPSHOT</nter.base.theme.version>
+        <nter.base.theme.version>6.1.8</nter.base.theme.version>
         <liferay.theme.parent>org.nterlearning.portal:nter-base-theme:${nter.base.theme.version}</liferay.theme.parent>
         <liferay.theme.type>vm</liferay.theme.type>
     </properties>
