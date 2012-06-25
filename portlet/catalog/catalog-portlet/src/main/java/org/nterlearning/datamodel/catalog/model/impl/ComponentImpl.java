@@ -28,6 +28,7 @@ package org.nterlearning.datamodel.catalog.model.impl;
  * </p>
  *
  */
+import com.liferay.portal.NoSuchUserIdMapperException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -40,7 +41,9 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserIdMapperLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 
-//import org.nterlearning.commerce.client.CommerceServiceStub;
+import org.nterlearning.commerce.client.TransactionClient;
+import org.nterlearning.commerce.client.TransactionClientImpl;
+import org.nterlearning.commerce.transaction.client.*;
 import org.nterlearning.course.enumerations.ContributorRoleType;
 import org.nterlearning.datamodel.catalog.model.Component;
 import org.nterlearning.datamodel.catalog.model.Contributor;
@@ -48,13 +51,7 @@ import org.nterlearning.datamodel.catalog.service.ComponentLocalServiceUtil;
 import org.nterlearning.datamodel.catalog.service.ContributorLocalServiceUtil;
 import org.nterlearning.utils.DateUtil;
 import org.nterlearning.utils.PortalProperties;
-
 import org.nterlearning.utils.PortalPropertiesUtil;
-//import org.nterlearning.xml.commerce.domain_objects_0_1_0.PaymentStatus;
-//import org.nterlearning.xml.commerce.transaction_interface_0_1_0.GetPaymentStatus;
-//import org.nterlearning.xml.commerce.transaction_interface_0_1_0.GetPaymentStatusResponse;
-//import org.nterlearning.xml.commerce.transaction_interface_0_1_0_wsdl.TransactionInterface;
-//import org.nterlearning.xml.commerce.transaction_interface_0_1_0_wsdl.ValidationError;
 
 import javax.servlet.jsp.PageContext;
 import java.math.BigDecimal;
@@ -123,45 +120,41 @@ public class ComponentImpl extends ComponentBaseImpl implements Component {
         return getUrl() + "&lang=" + lang;
     }
 
-    public boolean isPurchased(long userId) 	throws SystemException, PortalException {
-        return (true);
+    public boolean isPurchased(long userId)
+            throws SystemException, PortalException {
+
+        if (getPrice() > 0) {
+            String transactionWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_TRANSACTION_URL);
+            String transactionEmail= PropsUtil.get(PortalProperties.ECOMMERCE_EMAIL);
+            String transactionPassword = PropsUtil.get(PortalProperties.ECOMMERCE_PASSWORD);
+            TransactionClient client = new TransactionClientImpl(transactionEmail, transactionPassword, transactionWsdlURL);
+
+            String institution = "NTER";
+            BigDecimal price = new BigDecimal(getPrice());
+            price = (price.setScale(2, RoundingMode.UP));
+            String iri = getComponentIri();
+
+            try {
+                String studentId =
+                        UserIdMapperLocalServiceUtil.getUserIdMapper(userId,
+                        PortalPropertiesUtil.getSsoImplementation()).getExternalUserId();
+                PaymentStatus paymentStatus = client.getPaymentStatus(institution, studentId, iri, price);
+                return  paymentStatus.equals(PaymentStatus.COMPLETED);
+            }
+            catch (NoSuchUserIdMapperException nsu) {
+                mLog.error("Could not find externalUserId (SSO) for: " + userId);
+                return false;
+            }
+            catch (Exception e) {
+                mLog.error("Could not determine payment status for userId: " + userId +
+                        " for component: " + iri);
+                return false;
+            }
+        }
+        else {
+            return true;
+        }
     }
-//    public boolean isPurchased(long userId)
-//            throws SystemException, PortalException {
-//
-//        if (getPrice() > 0) {
-//			TransactionInterface transactionInterface;
-//			String transactionWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_TRANSACTION_URL);
-//			String configurationWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_CONFIGURATION_URL);
-//			String entitlementWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_ENTITLEMENT_URL);
-//
-//			CommerceServiceStub commerceService = new CommerceServiceStub(transactionWsdlURL, configurationWsdlURL,
-//					entitlementWsdlURL);
-//			transactionInterface = commerceService.getTransactionInterface();
-//
-//			GetPaymentStatus paymentStatus = new GetPaymentStatus();
-//            String studentId =
-//                    UserIdMapperLocalServiceUtil.getUserIdMapper(
-//                            userId, PortalPropertiesUtil.getSsoImplementation()).getExternalUserId();
-//			paymentStatus.setStudentId(studentId);
-//			paymentStatus.setCourseId(getComponentIri());
-//			paymentStatus.setResourceId("NTER");
-//			BigDecimal price = new BigDecimal(getPrice());
-//			paymentStatus.setPrice(price.setScale(2, RoundingMode.UP));
-//
-//            try {
-//				GetPaymentStatusResponse paymentResponse =
-//                        transactionInterface.getPaymentStatus(paymentStatus);
-//				return paymentResponse.getStatus() == PaymentStatus.COMPLETED;
-//			}
-//            catch (ValidationError e) {
-//				throw new com.liferay.portal.kernel.exception.SystemException(e);
-//			}
-//        }
-//        else {
-//            return true;
-//        }
-//    }
 
 
     public void updateIndex() {
