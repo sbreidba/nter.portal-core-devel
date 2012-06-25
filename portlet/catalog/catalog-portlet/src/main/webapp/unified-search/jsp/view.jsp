@@ -200,7 +200,7 @@
         <nter:search_result searchResult="<%= result %>"/>
     </liferay-ui:search-container-row>
 
-    <liferay-ui:search-iterator searchContainer="<%= globalSearchContainer %>" type="more"/>
+    <liferay-ui:search-paginator searchContainer="<%= globalSearchContainer %>" type="more"/>
 </liferay-ui:search-container>
 </ul>
 </section>
