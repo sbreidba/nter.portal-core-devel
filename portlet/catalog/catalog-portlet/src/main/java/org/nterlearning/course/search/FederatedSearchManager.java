@@ -397,8 +397,9 @@ public class FederatedSearchManager {
                     for (Courses_Components courseComponent : coursesComponents) {
                         long courseId = courseComponent.getCourseId();
 
-                        if (courseResultsSet.add(courseComponent.getCourseIri())) {
-                            Course course = CourseLocalServiceUtil.getCourse(courseId);
+                        Course course = CourseLocalServiceUtil.getCourse(courseId);
+
+                        if (!course.isRemoved() && courseResultsSet.add(courseComponent.getCourseIri())) {
                             OpenSearchResult result = convertCourseResultToSearchResult(
                                     portletId, el, course, locale);
                             results.add(result);
@@ -406,8 +407,9 @@ public class FederatedSearchManager {
                     }
                 }
                 else {
-                    if (courseResultsSet.add(entryClassIri)) {
-                        Course course = CourseLocalServiceUtil.findByCourseIri(entryClassIri);
+                    Course course = CourseLocalServiceUtil.findByCourseIri(entryClassIri);
+
+                    if (!course.isRemoved() && courseResultsSet.add(entryClassIri)) {
                         OpenSearchResult result = convertCourseResultToSearchResult(
                                 portletId, el, course, locale);
                         results.add(result);
@@ -416,10 +418,12 @@ public class FederatedSearchManager {
             }
 
             if (processComponentResult(primarySearch, entryClassName)) {
+                Component component =
+                        ComponentLocalServiceUtil.fetchByComponentIri(entryClassIri);
+
                 if (ComponentOpenSearchImpl.isSearchAuthorized() &&
+                    !component.isRemoved() &&
                     componentResultsSet.add(entryClassIri)) {
-                        Component component =
-                                ComponentLocalServiceUtil.fetchByComponentIri(entryClassIri);
                         results.add(convertComponentResultToSearchResult(portletId, el, component));
                 }
             }
@@ -430,7 +434,7 @@ public class FederatedSearchManager {
         // Localize courses display
         if (portletId.equals(NterKeys.COURSE_SEARCH_PORTLET)) {
             Course course = CourseLocalServiceUtil.getCourse(entryClassPK);
-            if (!courseResultsSet.add(course.getCourseIri())) {
+            if (course.isRemoved() || !courseResultsSet.add(course.getCourseIri())) {
                 return results;
             }
 
@@ -441,7 +445,7 @@ public class FederatedSearchManager {
         // localize component details
         if (portletId.equals(NterKeys.COMPONENT_SEARCH_PORTLET)) {
             Component component = ComponentLocalServiceUtil.getComponent(entryClassPK);
-            if (!componentResultsSet.add(component.getComponentIri())) {
+            if (component.isRemoved() || !componentResultsSet.add(component.getComponentIri())) {
                 return results;
             }
 
