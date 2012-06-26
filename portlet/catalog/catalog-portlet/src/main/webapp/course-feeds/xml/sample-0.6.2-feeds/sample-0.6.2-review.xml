@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ National Training and Education Resource (NTER)
+  ~ Copyright (C) 2011  SRI International
+  ~
+  ~ This program is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or (at
+  ~ your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful, but
+  ~ WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  ~ General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  ~ 02110-1301, USA.
+  -->
+  
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:activity="http://activitystrea.ms/spec/1.0/"
+      xmlns:atom="http://www.w3.org/2005/Atom"
+      xmlns:nter="http://nterlearning.org/xml/feeds/atom-extensions-schema_0.6.2.xsd">
+
+    <title>Review Feed</title>
+    <link rel="self" href="sample-0.0.0-review-activity.xml" type="application/atom+xml"/>
+    <updated>2010-12-13T22:52:00Z</updated>
+    <id>tag:nwtp.gov,2010-10-04:/feeds/sample01-crs9-11d9-b93C-0003939e0af6</id>
+    
+    <entry xml:lang="en-US" nter:entryType="review">
+        <id>tag:nterlearning.com,2011-08-03:/link/to/activity/1234</id>
+        <title>Roger Ebert added a review of Captain America</title>
+        <published>2011-08-01T08:22:45Z</published>
+        <updated>2011-08-03T08:22:45Z</updated>
+        <link rel="alternate" type="text/html" href="http://nterlearning.com/link/to/activity/1234" />
+        <author nter:studentUserId="RogerEbert" nter:trustedReviewer="true">
+            <activity:object-type>person</activity:object-type>
+            <name>Roger Ebert</name>
+            <uri>http://nterlearning.com/roger-ebert</uri>
+        </author>
+        <activity:verb>add</activity:verb>
+        <activity:object>
+            <activity:object-type>review</activity:object-type>
+            <activity:id>tag:nterlearning.com,2011-08-03:/link/to/review/5678</activity:id>
+            <activity:name>Review of Captain America: The First Avenger</activity:name>
+            <activity:updated>2011-08-03T08:22:45Z</activity:updated>
+            <activity:published>2011-08-01T08:22:45Z</activity:published>
+            <activity:rating>3</activity:rating>
+            <activity:permalinkUrl atom:rel="alternate" atom:type="text/html" atom:href="http://nterlearning.com/link/to/review/5678" />
+            <activity:summary>I enjoyed the movie</activity:summary>
+            <activity:content type="text">...</activity:content>
+        </activity:object>
+        <activity:target>
+            <activity:object-type>course</activity:object-type>
+            <activity:id>tag:nwtp.gov,2010-12-13:/courses/1245ca95-c3b8-4e6b-cb43-834a3487ab6a</activity:id>
+            <activity:name>Captain America: The First Avenger</activity:name>
+            <activity:permalinkUrl rel="alternate" type="text/html" href="https://nwtp.gov/course18-en.php" />
+        </activity:target>
+    </entry>
+    
+    <entry xml:lang="en-US" nter:entryType="review">
+        <id>tag:nterlearning.com,2011-08-03:/link/to/activity/1239</id>
+        <title>Roger Ebert removed a review of Captain America</title>
+        <published>2011-09-03T12:45:13Z</published>
+        <updated>2011-09-05T12:45:13Z</updated>
+        <link rel="alternate" type="text/html" href="http://nterlearning.com/link/to/activity/1239" />
+        <author nter:studentUserId="RogerEbert" nter:trustedReviewer="true">
+            <activity:object-type>person</activity:object-type>
+            <name>Roger Ebert</name>
+            <uri>http://nterlearning.com/roger-ebert</uri>
+        </author>
+        <activity:verb>delete</activity:verb>
+        <activity:object>
+            <activity:object-type>review</activity:object-type>
+            <activity:id>tag:nterlearning.com,2011-08-03:/link/to/review/5678</activity:id>
+            <activity:name>Review of Captain America: The First Avenger</activity:name>
+            <activity:updated>2011-08-05T08:22:45Z</activity:updated>
+            <activity:published>2011-08-03T08:22:45Z</activity:published>
+            <activity:rating>3</activity:rating>
+            <activity:permalinkUrl atom:rel="alternate" atom:type="text/html" atom:href="http://nterlearning.com/link/to/review/5678" />
+            <activity:summary>I enjoyed the movie</activity:summary>
+            <activity:content type="text">...</activity:content>
+        </activity:object>
+        <activity:target>
+            <activity:object-type>course</activity:object-type>
+            <activity:id>tag:nwtp.gov,2010-12-13:/courses/1245ca95-c3b8-4e6b-cb43-834a3487ab6a</activity:id>
+            <activity:name>Captain America: The First Avenger</activity:name>
+            <activity:permalinkUrl rel="alternate" type="text/html" href="https://nwtp.gov/course18-en.php" />
+        </activity:target>
+    </entry>
+</feed>
