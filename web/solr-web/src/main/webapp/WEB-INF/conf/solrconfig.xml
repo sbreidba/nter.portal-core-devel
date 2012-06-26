@@ -45,13 +45,13 @@
     -->
 	<abortOnConfigurationError>${solr.abortOnConfigurationError:false}</abortOnConfigurationError>
 
-	<lib dir="../../../contrib/analysis-extras/lib" />
-	<lib dir="../../../contrib/clustering/lib" />
-	<lib dir="../../../contrib/dataimporthandler/lib" />
-	<lib dir="../../../contrib/extraction/lib" />
-	<lib dir="../../../contrib/langid/lib" />
-	<lib dir="../../../contrib/uima/lib" />
-	<lib dir="../../../contrib/velocity/lib" />
+	<lib dir="${solr.contrib.dir}/analysis-extras/lib" />
+	<lib dir="${solr.contrib.dir}/clustering/lib" />
+	<lib dir="${solr.contrib.dir}/dataimporthandler/lib" />
+	<lib dir="${solr.contrib.dir}/extraction/lib" />
+	<lib dir="${solr.contrib.dir}/langid/lib" />
+	<lib dir="${solr.contrib.dir}/uima/lib" />
+	<lib dir="${solr.contrib.dir}/velocity/lib" />
 
 	<!-- Data Directory
        Used to specify an alternate directory to hold all index data
