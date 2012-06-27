@@ -224,6 +224,8 @@ public class ShibbolethAutoLogin implements AutoLogin {
             fieldChanged = true;
         }
 
+        user.setPasswordReset(false);
+
         if (fieldChanged) {
             try {
                 UserLocalServiceUtil.updateUser(user);
