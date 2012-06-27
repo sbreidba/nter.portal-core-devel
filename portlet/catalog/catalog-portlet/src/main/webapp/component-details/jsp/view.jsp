@@ -49,24 +49,26 @@ else if (Validator.isNull(componentParam)) {
 else {
     long componentId = Long.parseLong(componentParam);
     try {
-    component = ComponentLocalServiceUtil.findByComponentId(componentId);
+        component = ComponentLocalServiceUtil.findByComponentId(componentId);
 
-    // determine language
-    String languageId = httpRequest.getParameter("lang");
-    if (languageId != null) {
-        locale = LocaleUtil.fromLanguageId(languageId);
-    }
+        // determine language
+        String languageId = httpRequest.getParameter("lang");
+        if (languageId != null) {
+            locale = LocaleUtil.fromLanguageId(languageId);
+        }
 
-    if (themeDisplay.isSignedIn()) {
+        if (themeDisplay.isSignedIn()) {
             isPurchased = component.isPurchased(themeDisplay.getUserId());
         }
     }
-        catch (Exception e) {
+    catch (Exception e) {
         %>
-        <div class="portlet-msg-alert"><%= LanguageUtil.get(pageContext, "component-details-not-found") %></div>
+        <div class="portlet-msg-alert">
+            <%= LanguageUtil.get(pageContext, "component-details-not-found") %>
+        </div>
         <%
         return;
-        }
+    }
 %>
 
 <article class="course-details" itemscope itemtype="http://schema.org/CreativeWork">

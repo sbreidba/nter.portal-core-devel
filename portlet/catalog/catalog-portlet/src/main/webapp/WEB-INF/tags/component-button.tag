@@ -40,7 +40,6 @@
 <%@ tag import="java.util.List" %>
 <%@ tag import="org.nterlearning.commerce.client.ConfigurationClient" %>
 <%@ tag import="org.nterlearning.commerce.client.ConfigurationClientImpl" %>
-<%@ tag import="org.nterlearning.commerce.configuration.client.*" %>
 <%@ tag import="org.nterlearning.commerce.configuration.client.PaymentProcessor" %>
 <%@ tag import="org.nterlearning.commerce.configuration.client.PaymentConfig" %>
 
@@ -109,7 +108,8 @@ if (!component.isRemoved()) {
             } catch (Exception e) {
                // commerce service not available
             }
-        }else {
+        }
+        else {
             // else course is free or has been purchased.
 
             List<ExternalLink> dlLinks = ComponentLocalServiceUtil.getExternalLinks(component);

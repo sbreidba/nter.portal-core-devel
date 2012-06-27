@@ -37,8 +37,6 @@ import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.comparator.PortletTitleComparator;
-import groovy.json.StringEscapeUtils;
-import org.apache.lucene.queryParser.QueryParser;
 import org.nterlearning.course.util.NterKeys;
 
 import javax.portlet.PortletURL;
@@ -137,15 +135,5 @@ public class SearchUtil {
         globalSearchContainer.setDeltaConfigurable(true);
 
         return globalSearchContainer;
-    }
-
-
-    public static String escapeKeywords(String keywords) {
-        // the double escape is deal with http://issues.liferay.com/browse/LPS-24609
-        return QueryParser.escape(QueryParser.escape(keywords));
-    }
-
-    public static String unEscapeKeywords(String keywords) {
-        return StringEscapeUtils.unescapeJava(StringEscapeUtils.unescapeJava(keywords));
     }
 }
