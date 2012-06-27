@@ -32,6 +32,7 @@ public class PortalProperties {
     // E-Commerce properties
     public static final String ECOMMERCE_TRANSACTION_URL = "org.nterlearning.ecommerce.transaction.url";
     public static final String ECOMMERCE_CONFIGURATION_URL = "org.nterlearning.ecommerce.configuration.url";
+    public static final String ECOMMERCE_ENTITLEMENT_URL = "org.nterlearning.ecommerce.entitlement.url";
     public static final String ECOMMERCE_EMAIL = "org.nterlearning.ecommerce.email";
     public static final String ECOMMERCE_PASSWORD = "org.nterlearning.ecommerce.password";
 
@@ -53,10 +54,6 @@ public class PortalProperties {
     public static final String SOLR_URL_PROPERTY = "nter.nutch.solr.url";
     public static final String SOLR_USER_PROPERTY = "nter.nutch.solr.user";
     public static final String SOLR_PASSWORD_PROPERTY = "nter.nutch.solr.password";
-    
-    // Reporting properties
-    public static final String PDF_REPORT_DIR = "org.nterlearning.exporter.reports.dir.pdf";
-    public static final String JRXML_REPORT_DIR = "org.nterlearning.exporter.reports.dir.jrxml";
 
     // SSO properties
     public static final String SSO_PROPERTY = "nter.sso.type";

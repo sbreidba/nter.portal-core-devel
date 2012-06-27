@@ -46,21 +46,15 @@ import com.liferay.portal.model.GroupConstants;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.service.*;
 import com.liferay.portal.util.PortalUtil;
-//import org.nterlearning.commerce.client.CommerceServiceStub;
 import org.nterlearning.commerce.client.TransactionClient;
 import org.nterlearning.commerce.client.TransactionClientImpl;
+import org.nterlearning.commerce.transaction.client.PaymentStatus;
 import org.nterlearning.course.enumerations.ContributorRoleType;
 import org.nterlearning.datamodel.catalog.model.*;
 import org.nterlearning.datamodel.catalog.service.*;
 import org.nterlearning.utils.DateUtil;
 import org.nterlearning.utils.PortalProperties;
 import org.nterlearning.utils.PortalPropertiesUtil;
-//import org.nterlearning.xml.commerce.domain_objects_0_1_0.PaymentStatus;
-//import org.nterlearning.xml.commerce.transaction_interface_0_1_0.GetPaymentStatus;
-//import org.nterlearning.xml.commerce.transaction_interface_0_1_0.GetPaymentStatusResponse;
-//import org.nterlearning.xml.commerce.transaction_interface_0_1_0_wsdl.TransactionInterface;
-//import org.nterlearning.xml.commerce.transaction_interface_0_1_0_wsdl.ValidationError;
-import org.nterlearning.commerce.transaction.client.*;
 
 import javax.servlet.jsp.PageContext;
 import javax.xml.datatype.DatatypeConfigurationException;
@@ -459,8 +453,8 @@ public class CourseImpl extends CourseBaseImpl {
 
     public boolean isPurchased(long userId)
 			throws SystemException, PortalException {
-		if (getPrice() > 0.0) {
 
+		if (getPrice() > 0.0) {
 			String transactionWsdlURL = PropsUtil.get(PortalProperties.ECOMMERCE_TRANSACTION_URL);
 			String transactionEmail= PropsUtil.get(PortalProperties.ECOMMERCE_EMAIL);
 			String transactionPassword = PropsUtil.get(PortalProperties.ECOMMERCE_PASSWORD);
@@ -477,15 +471,18 @@ public class CourseImpl extends CourseBaseImpl {
 
                 PaymentStatus paymentStatus = client.getPaymentStatus(institution, studentId, courseIri, price);
                 return paymentStatus.equals(PaymentStatus.COMPLETED);
-            } catch (NoSuchUserIdMapperException nsu) {
+            }
+            catch (NoSuchUserIdMapperException nsu) {
                 _log.error("Could not find externalUserId (SSO) for:" + userId + ".");
                 return false;
-            } catch (Exception e) {
+            }
+            catch (Exception e) {
                 _log.error("Could not determine payment status for userId:" + userId +
                         ", courseIri:" + courseIri + ". Check commerce service availability.");
                 return false;
             }
-        } else {
+        }
+        else {
             return true;
         }
 
