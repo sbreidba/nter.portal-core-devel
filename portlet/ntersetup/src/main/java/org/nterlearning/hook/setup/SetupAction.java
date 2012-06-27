@@ -429,9 +429,17 @@ public class SetupAction extends SimpleAction {
     }
 
 
-    private void setDefaultPasswordPolicy(long companyId) throws SystemException, PortalException {
-        PasswordPolicy policy = PasswordPolicyLocalServiceUtil.getDefaultPasswordPolicy(companyId);
-        policy.setChangeRequired(false);
-        policy.persist();
+    private void setDefaultPasswordPolicy(long companyId) {
+        try {
+            PasswordPolicy policy = PasswordPolicyLocalServiceUtil.getDefaultPasswordPolicy(companyId);
+            policy.setChangeRequired(false);
+
+            PasswordPolicyLocalServiceUtil.updatePasswordPolicy(policy);
+        }
+        catch (Exception e)
+        {
+            mLog.error("Failed updating password policy in ntersetup", e);
+        }
+
     }
 }
