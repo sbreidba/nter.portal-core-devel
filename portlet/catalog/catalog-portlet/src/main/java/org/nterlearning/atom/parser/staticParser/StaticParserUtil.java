@@ -62,42 +62,29 @@ public class StaticParserUtil {
             FeedReference feedReference) {
 
         List<Link> hubLinks = feed.getLinks(PushKeys.PUSH_HUB_LINK_REL_ATTR_VAL);
-        List<Link> subscribeLinks = new ArrayList<Link>();
-        List<String> feedRefLinks = Arrays.asList(feedReference.getPshb().split(","));
         String feedHubLinks = "";
         Boolean subscribeSuccess = false;
 
+        // if there are any push hubs, attempt to subscribe to them.
         if (hubLinks.size() > 0) {
-
-            // compare the hub list from the feed to the one already associated
-            // with the feedReference object and generate a list of different
-            // hubs to subscribe to.
             for (Link hubLink : hubLinks) {
-                if (!feedRefLinks.contains(hubLink.getHref().toString())) {
-                    subscribeLinks.add(hubLink);
+                try {
+                    int statusCode =
+                            PubSubHubbubSubscriber.getInstance().subscribe(
+                                    hubLink.getHref().toString(), fc.getFeedUrl());
+                    subscribeSuccess = (statusCode == HttpServletResponse.SC_NO_CONTENT) ||
+                            (statusCode == HttpServletResponse.SC_ACCEPTED) ||
+                            subscribeSuccess;
                 }
+                catch (Exception e) {
+                    mLog.error("Unable to subscribe to hub: " +
+                            hubLink.getHref().toString() + ".  " + e.getMessage());
+                }
+
                 feedHubLinks += hubLink.getHref().toString() + ",";
             }
 
-            // remove the trailing comma
             feedHubLinks = feedHubLinks.substring(0, feedHubLinks.length() - 1);
-
-            if (subscribeLinks.size() > 0) {
-                for (Link subscribeLink : subscribeLinks) {
-                    try {
-                        int statusCode =
-                                PubSubHubbubSubscriber.getInstance().subscribe(
-                                        subscribeLink.getHref().toString(), fc.getFeedUrl());
-                        subscribeSuccess = (statusCode == HttpServletResponse.SC_NO_CONTENT) ||
-                                (statusCode == HttpServletResponse.SC_ACCEPTED) ||
-                                subscribeSuccess;
-                    }
-                    catch (Exception e) {
-                        mLog.error("Unable to subscribe to hub: " +
-                                subscribeLink.getHref().toString() + ".  " + e.getMessage());
-                    }
-                }
-            }
         }
 
         feedReference.setPshbSubscribed(subscribeSuccess);
