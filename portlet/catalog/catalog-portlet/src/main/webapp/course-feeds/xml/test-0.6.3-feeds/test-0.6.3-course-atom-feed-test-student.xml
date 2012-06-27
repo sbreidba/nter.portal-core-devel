@@ -1,0 +1,691 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+  ~ National Training and Education Resource (NTER)
+  ~ Copyright (C) 2011  SRI International
+  ~
+  ~ This program is free software; you can redistribute it and/or modify
+  ~ it under the terms of the GNU General Public License as published by
+  ~ the Free Software Foundation; either version 2 of the License, or (at
+  ~ your option) any later version.
+  ~
+  ~ This program is distributed in the hope that it will be useful, but
+  ~ WITHOUT ANY WARRANTY; without even the implied warranty of
+  ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  ~ General Public License for more details.
+  ~
+  ~ You should have received a copy of the GNU General Public License
+  ~ along with this program; if not, write to the Free Software
+  ~ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+  ~ 02110-1301, USA.
+  -->
+
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:nter="http://nterlearning.org/xml/feeds/atom-extensions-schema_0.6.3.xsd">
+
+    <!-- Sample feed to create 10 test courses for student record testing -->
+    <!-- 6/9/2011 added different duration values to test out getFriendly Duration -->
+
+    <title>Course Feed</title>
+    <link rel="self" href="test-0.6.3-course-atom-feed-test-student.xml" type="application/atom+xml"/>
+    <updated>2010-07-01T22:52:00Z</updated>
+    <id>tag:nwtp.gov,2010-07-01:/feeds/TESTs01a-d399-11d9-b93C-0003939e0af6</id>
+
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Test component 15</title>
+        <link rel="self" href="https://nwtp.gov/course15-en.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <link rel="search" href="https://nwtp.gov/course15-en.php?q=search"/>
+        <id>tag:nwtp.gov,2010-01-01:/link/to/test-component15/en-US</id>
+        <updated>2010-01-01T18:30:02Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+        </author>
+        <summary>test component fifteen</summary>
+		<nter:courseComponent>
+			<nter:version>1.0</nter:version>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+		</nter:courseComponent>	
+    </entry>
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Test component 16</title>
+        <link rel="self" href="https://nwtp.gov/course16-en.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <link rel="search" href="https://nwtp.gov/course16-en.php?q=search"/>
+        <id>tag:nwtp.gov,2010-01-01:/link/to/test-component16/en-US</id>
+        <updated>2010-01-01T18:30:02Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+        </author>
+        <summary>test component sixteen</summary>
+		<nter:courseComponent>
+			<nter:version>1.0</nter:version>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+		</nter:courseComponent>	
+    </entry>
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Test component 17</title>
+        <link rel="self" href="https://nwtp.gov/course17-en.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <link rel="search" href="https://nwtp.gov/course17-en.php?q=search"/>
+        <id>tag:nwtp.gov,2010-01-01:/link/to/test-component17/en-US</id>
+        <updated>2010-01-01T18:30:02Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+        </author>
+        <summary>test component seventeen</summary>
+		<nter:courseComponent>
+			<nter:version>1.0</nter:version>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+		</nter:courseComponent>	
+    </entry>
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Test component 18</title>
+        <link rel="self" href="https://nwtp.gov/course18-en.php"
+              nter:displayWidth="334" nter:displayHeight="189"/>
+        <link rel="search" href="https://nwtp.gov/course18-en.php?q=search"/>
+        <id>tag:nwtp.gov,2010-01-01:/link/to/test-component18/en-US</id>
+        <updated>2010-01-01T18:30:02Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+        </author>
+        <summary>test component eighteen</summary>
+		<nter:courseComponent>
+			<nter:version>1.0</nter:version>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+		</nter:courseComponent>	
+    </entry>
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Test component 19</title>
+        <link rel="self" href="https://nwtp.gov/course19.php"
+              nter:displayWidth="444" nter:displayHeight="204"/>
+        <link rel="search" href="https://nwtp.gov/course19.php?q=search"/>
+        <id>tag:nwtp.gov,2010-02-01:/link/to/test-component19/en-US</id>
+        <updated>2010-02-01T08:30:59Z</updated>
+        <author>
+            <name>Pam Griffith</name>
+        </author>
+        <summary>test component nineteen</summary>
+		<nter:courseComponent>
+			<nter:version>1.0</nter:version>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+		</nter:courseComponent>	
+    </entry>
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Test component 20</title>
+        <link rel="self" href="https://nwtp.gov/course20.php"
+              nter:displayWidth="433" nter:displayHeight="197"/>
+        <link rel="search" href="https://nwtp.gov/course20.php?q=search"/>
+        <id>tag:nwtp.gov,2010-03-01:/link/to/test-component20/en-US</id>
+        <updated>2010-03-01T01:03:02Z</updated>
+        <author>
+            <name>Gabriel Jiva</name>
+        </author>
+        <summary>test course twenty</summary>
+		<nter:courseComponent>
+			<nter:version>1.0</nter:version>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+		</nter:courseComponent>	
+    </entry>
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Test component 21</title>
+        <link rel="self" href="https://nwtp.gov/course21.php"
+              nter:displayWidth="433" nter:displayHeight="197"/>
+        <link rel="search" href="https://nwtp.gov/course21.php?q=search"/>
+        <id>tag:nwtp.gov,2010-04-01:/link/to/test-component21/en-US</id>
+        <updated>2010-04-01T01:03:02Z</updated>
+        <author>
+            <name>Gabriel Jiva</name>
+        </author>
+        <summary>test component twenty-one</summary>
+		<nter:courseComponent>
+			<nter:version>1.0</nter:version>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+		</nter:courseComponent>	
+    </entry>
+
+    <entry xml:lang="en-US" nter:entryType="course-component">
+        <title>Test component 22</title>
+        <link rel="self" href="https://nwtp.gov/course22.php"
+              nter:displayWidth="433" nter:displayHeight="197"/>
+        <link rel="search" href="https://nwtp.gov/course22.php?q=search"/>
+        <id>tag:nwtp.gov,2010-05-01:/link/to/test-component22/en-US</id>
+        <updated>2010-05-01T01:03:02Z</updated>
+        <author>
+            <name>Gabriel Jiva</name>
+        </author>
+        <summary>test component twenty-two</summary>
+		<nter:courseComponent>
+			<nter:version>1.0</nter:version>
+            <nter:copyright lang="en-US">2010-2011 SRI International</nter:copyright>
+		</nter:courseComponent>	
+    </entry>
+
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self" href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search" href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2010-01-01:/courses/TEST0015-cfb8-4ebb-aaaa-80da344efa6a</id>
+        <updated>2010-01-02T18:30:02Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Robby Bailey&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <contributor>
+            <name>Paula Peters</name>
+        </contributor>
+        <contributor>
+            <name>Gabriel Jiva</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Gabriel Jiva&#13;&#10;n:Jiva;Gabriel&#13;&#10;org:SRI;SWEP&#13;&#10;adr:;;450
+                8th Ave SE;St Petersburg;FL;33701;USA&#13;&#10;email;internet:gabriel.jiva@sri.com&#13;&#10;title:Software
+                Engineer&#13;&#10;tel;work:727-553-3539&#13;&#10;url:http://www.sri.com&#13;&#10;version:2.1&#13;&#10;end:vcard
+            </nter:vcard>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+			<nter:version>1</nter:version>
+            <nter:duration nter:durationStandard="ISO8601:2000">P1Y2MT15M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST Course 15</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Course 15 abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Course 15 description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2010-01-01:/link/to/test-component15/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:keywords xml:lang="en-US">test course 15 fifteen</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self" href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search" href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2010-01-02:/courses/TEST0016-cfb8-4ebb-aaaa-80da344efa6a</id>
+        <updated>2010-02-02T18:30:02Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Robby Bailey&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <contributor>
+            <name>Paula Peters</name>
+        </contributor>
+        <contributor>
+            <name>Gabriel Jiva</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Gabriel Jiva&#13;&#10;n:Jiva;Gabriel&#13;&#10;org:SRI;SWEP&#13;&#10;adr:;;450
+                8th Ave SE;St Petersburg;FL;33701;USA&#13;&#10;email;internet:gabriel.jiva@sri.com&#13;&#10;title:Software
+                Engineer&#13;&#10;tel;work:727-553-3539&#13;&#10;url:http://www.sri.com&#13;&#10;version:2.1&#13;&#10;end:vcard
+            </nter:vcard>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+			<nter:version>1</nter:version>
+            <nter:duration nter:durationStandard="ISO8601:2000">P1M3D</nter:duration>
+
+            <nter:title xml:lang="en-US">Test COURSE 16</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Course 16 abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Course 16 description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2010-01-01:/link/to/test-component16/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:keywords xml:lang="en-US">test course 16 sixteen</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self" href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search" href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2010-01-03:/courses/TEST0017-cfb8-4ebb-aaaa-80da344efa6a</id>
+        <updated>2010-01-03T18:30:02Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Robby Bailey&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <contributor>
+            <name>Paula Peters</name>
+        </contributor>
+        <contributor>
+            <name>Gabriel Jiva</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Gabriel Jiva&#13;&#10;n:Jiva;Gabriel&#13;&#10;org:SRI;SWEP&#13;&#10;adr:;;450
+                8th Ave SE;St Petersburg;FL;33701;USA&#13;&#10;email;internet:gabriel.jiva@sri.com&#13;&#10;title:Software
+                Engineer&#13;&#10;tel;work:727-553-3539&#13;&#10;url:http://www.sri.com&#13;&#10;version:2.1&#13;&#10;end:vcard
+            </nter:vcard>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+			<nter:version>1</nter:version>
+            <nter:title xml:lang="en-US">TeSt CoUrSe 17</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Course 17 abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Course 17 description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2010-01-01:/link/to/test-component17/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:keywords xml:lang="en-US">test course 17 seventeen</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self" href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search" href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2010-01-04:/courses/TEST0018-cfb8-4ebb-aaaa-80da344efa6a</id>
+        <updated>2010-01-04T18:30:02Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Robby Bailey&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <contributor>
+            <name>Paula Peters</name>
+        </contributor>
+        <contributor>
+            <name>Gabriel Jiva</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Gabriel Jiva&#13;&#10;n:Jiva;Gabriel&#13;&#10;org:SRI;SWEP&#13;&#10;adr:;;450
+                8th Ave SE;St Petersburg;FL;33701;USA&#13;&#10;email;internet:gabriel.jiva@sri.com&#13;&#10;title:Software
+                Engineer&#13;&#10;tel;work:727-553-3539&#13;&#10;url:http://www.sri.com&#13;&#10;version:2.1&#13;&#10;end:vcard
+            </nter:vcard>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+			<nter:version>1</nter:version>
+            <nter:duration nter:durationStandard="ISO8601:2000">P4DT1H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">test Course 18</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Course 18 abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Course 18 description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2010-01-01:/link/to/test-component18/en-US"
+                    nter:orderWeight="1.0"
+                    />
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2010-02-01:/link/to/test-component19/en-US"
+                    nter:orderWeight="2.0"
+                    />
+
+            <nter:keywords xml:lang="en-US">test course 18 eighteen</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self" href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search" href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2010-02-01:/courses/TEST0019-cfb8-4ebb-aaaa-80da344efa6a</id>
+        <updated>2010-02-01T18:30:02Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Robby Bailey&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <contributor>
+            <name>Paula Peters</name>
+        </contributor>
+        <contributor>
+            <name>Gabriel Jiva</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Gabriel Jiva&#13;&#10;n:Jiva;Gabriel&#13;&#10;org:SRI;SWEP&#13;&#10;adr:;;450
+                8th Ave SE;St Petersburg;FL;33701;USA&#13;&#10;email;internet:gabriel.jiva@sri.com&#13;&#10;title:Software
+                Engineer&#13;&#10;tel;work:727-553-3539&#13;&#10;url:http://www.sri.com&#13;&#10;version:2.1&#13;&#10;end:vcard
+            </nter:vcard>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+			<nter:version>1</nter:version>
+            <nter:duration nter:durationStandard="ISO8601:2000">PT3H1M</nter:duration>
+
+            <nter:title xml:lang="en-US">TEST course 19</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Course 19 abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Course 19 description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2010-02-01:/link/to/test-component19/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:keywords xml:lang="en-US">test course 19 nineteen</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self" href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search" href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2010-03-01:/courses/TEST0020-cfb8-4ebb-aaaa-80da344efa6a</id>
+        <updated>2010-03-01T18:30:02Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Robby Bailey&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <contributor>
+            <name>Paula Peters</name>
+        </contributor>
+        <contributor>
+            <name>Gabriel Jiva</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Gabriel Jiva&#13;&#10;n:Jiva;Gabriel&#13;&#10;org:SRI;SWEP&#13;&#10;adr:;;450
+                8th Ave SE;St Petersburg;FL;33701;USA&#13;&#10;email;internet:gabriel.jiva@sri.com&#13;&#10;title:Software
+                Engineer&#13;&#10;tel;work:727-553-3539&#13;&#10;url:http://www.sri.com&#13;&#10;version:2.1&#13;&#10;end:vcard
+            </nter:vcard>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+			<nter:version>1</nter:version>
+            <nter:duration nter:durationStandard="ISO8601:2000">PT20M</nter:duration>
+
+            <nter:title xml:lang="en-US">Test Course 20</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Course 20 abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Course 20 description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2010-03-01:/link/to/test-component20/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:keywords xml:lang="en-US">test course 20 twenty</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self" href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search" href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2010-04-01:/courses/TEST0021-cfb8-4ebb-aaaa-80da344efa6a</id>
+        <updated>2010-04-01T18:30:02Z</updated>
+        <author>
+            <name>Robby Bailey</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Robby Bailey&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <contributor>
+            <name>Pam Griffith</name>
+        </contributor>
+        <contributor>
+            <name>Paula Peters</name>
+        </contributor>
+        <contributor>
+            <name>Gabriel Jiva</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Gabriel Jiva&#13;&#10;n:Jiva;Gabriel&#13;&#10;org:SRI;SWEP&#13;&#10;adr:;;450
+                8th Ave SE;St Petersburg;FL;33701;USA&#13;&#10;email;internet:gabriel.jiva@sri.com&#13;&#10;title:Software
+                Engineer&#13;&#10;tel;work:727-553-3539&#13;&#10;url:http://www.sri.com&#13;&#10;version:2.1&#13;&#10;end:vcard
+            </nter:vcard>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+			<nter:version>1</nter:version>
+            <nter:duration nter:durationStandard="ISO8601:2000">PT48S</nter:duration>
+
+            <nter:title xml:lang="en-US">Test Course 21</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Course 21 abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Course 21 description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2010-04-01:/link/to/test-component21/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:keywords xml:lang="en-US">test course 21 twenty-one twentyone</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self" href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search" href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2010-05-01:/courses/TEST0022-cfb8-4ebb-aaaa-80da344efa6a</id>
+        <updated>2010-05-01T18:30:02Z</updated>
+        <author>
+            <name>Pam Griffth</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Pam Griffith&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <contributor>
+            <name>Robby Bailey</name>
+        </contributor>
+        <contributor>
+            <name>Paula Peters</name>
+        </contributor>
+        <contributor>
+            <name>Gabriel Jiva</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Gabriel Jiva&#13;&#10;n:Jiva;Gabriel&#13;&#10;org:SRI;SWEP&#13;&#10;adr:;;450
+                8th Ave SE;St Petersburg;FL;33701;USA&#13;&#10;email;internet:gabriel.jiva@sri.com&#13;&#10;title:Software
+                Engineer&#13;&#10;tel;work:727-553-3539&#13;&#10;url:http://www.sri.com&#13;&#10;version:2.1&#13;&#10;end:vcard
+            </nter:vcard>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+			<nter:version>1</nter:version>
+            <nter:duration nter:durationStandard="ISO8601:2000">P4DT15M</nter:duration>
+
+            <nter:title xml:lang="en-US">Test Course 22</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Course 22 abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Course 22 description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2010-05-01:/link/to/test-component22/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:keywords xml:lang="en-US">test course 22 twenty-two twentytwo</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self" href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search" href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2010-06-01:/courses/TEST0023-cfb8-4ebb-aaaa-80da344efa6a</id>
+        <updated>2010-06-01T18:30:02Z</updated>
+        <author>
+            <name>Pam Griffth</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Pam Griffith&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <contributor>
+            <name>Robby Bailey</name>
+        </contributor>
+        <contributor>
+            <name>Paula Peters</name>
+        </contributor>
+        <contributor>
+            <name>Gabriel Jiva</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Gabriel Jiva&#13;&#10;n:Jiva;Gabriel&#13;&#10;org:SRI;SWEP&#13;&#10;adr:;;450
+                8th Ave SE;St Petersburg;FL;33701;USA&#13;&#10;email;internet:gabriel.jiva@sri.com&#13;&#10;title:Software
+                Engineer&#13;&#10;tel;work:727-553-3539&#13;&#10;url:http://www.sri.com&#13;&#10;version:2.1&#13;&#10;end:vcard
+            </nter:vcard>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+			<nter:version>1</nter:version>
+            <nter:duration nter:durationStandard="ISO8601:2000">P2DT3H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">Test Course 23</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Course 23 abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Course 23 description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <!-- intentionally have no component assignment for test purposes -->
+
+            <nter:keywords xml:lang="en-US">test course 23 twenty-three twentythree</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+
+    <entry nter:entryType="course">
+        <title>This title will be ignored by NTER in favor of the language specific course titles</title>
+        <link rel="self" href="http://example.org/2003/12/13/atom03"/>
+        <link rel="search" href="http://example.org/2003/12/13/atom03?q=search"/>
+        <id>tag:nwtp.gov,2010-06-01:/courses/TEST0024-cfb8-4ebb-aaaa-80da344efa6a</id>
+        <updated>2010-06-01T18:30:02Z</updated>
+        <author>
+            <name>Pam Griffth</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Pam Griffith&#13;&#10;version:2.1&#13;&#10;end:vcard</nter:vcard>
+        </author>
+        <contributor>
+            <name>Robby Bailey</name>
+        </contributor>
+        <contributor>
+            <name>Paula Peters</name>
+        </contributor>
+        <contributor>
+            <name>Gabriel Jiva</name>
+            <nter:vcard>begin:vcard&#13;&#10;fn:Gabriel Jiva&#13;&#10;n:Jiva;Gabriel&#13;&#10;org:SRI;SWEP&#13;&#10;adr:;;450
+                8th Ave SE;St Petersburg;FL;33701;USA&#13;&#10;email;internet:gabriel.jiva@sri.com&#13;&#10;title:Software
+                Engineer&#13;&#10;tel;work:727-553-3539&#13;&#10;url:http://www.sri.com&#13;&#10;version:2.1&#13;&#10;end:vcard
+            </nter:vcard>
+        </contributor>
+        <summary>Some text that is currently not used by NTER.</summary>
+        <nter:course>
+			<nter:version>1</nter:version>
+            <nter:duration nter:durationStandard="ISO8601:2000">P2DT3H15M</nter:duration>
+
+            <nter:title xml:lang="en-US">Test Course 24</nter:title>
+
+            <nter:transcriptAbstract xml:lang="en-US">Test Course 24 abstract</nter:transcriptAbstract>
+
+            <nter:description xml:lang="en-US">Test Course 24 description</nter:description>
+
+            <nter:copyright xml:lang="en-US">2010 SRI International</nter:copyright>
+
+            <nter:rating xml:lang="en-US" nter:ratingLevel="Adult, 45+"
+                         nter:ratingReason="inappropriate test language"/>
+
+            <!-- intentionally have component assignment even though component does not exist for test purposes -->
+            <nter:componentRef
+                    nter:componentId="tag:nwtp.gov,2010-05-01:/link/to/test-component24/en-US"
+                    nter:orderWeight="1.0"
+                    />
+
+            <nter:keywords xml:lang="en-US">test course 24 twenty-four twentyfour</nter:keywords>
+
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">IE 6+</nter:requirement>
+            <nter:requirement nter:requirementType="browser" xml:lang="en-US">Firefox 4.0 beta</nter:requirement>
+
+        </nter:course>
+    </entry>
+</feed>
+
