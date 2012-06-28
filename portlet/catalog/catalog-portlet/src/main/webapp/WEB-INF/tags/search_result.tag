@@ -120,7 +120,7 @@
             resultTitle = LocalizationUtil.
                     getLocalization(resultTitle, LanguageUtil.getLanguageId(locale));
 
-            searchResult.title = component.getTitle() + " : " +
+            searchResult.title =
                     LocalizationUtil.getLocalization(resultTitle, LanguageUtil.getLanguageId(locale));
         }
         
@@ -144,10 +144,8 @@
 
 		if (PortletKeys.SEARCH.equals(searchResult.type)) {
 			searchResult.title =
-				PortalUtil.getPortletTitle(
-					PortletKeys.DOCUMENT_LIBRARY, locale) +
-					" " +
-					CharPool.RAQUO + " " + searchResult.title;
+				PortalUtil.getPortletTitle(PortletKeys.DOCUMENT_LIBRARY, locale) +
+					" " + CharPool.RAQUO + " " + searchResult.title;
 		}
 
 		if (dlLinkToViewURL) {
