@@ -80,8 +80,7 @@ AUI().ready('tree-view-html', 'course-thumbnails', 'course-popup', function(A) {
 	});
 	// start/continue/retry buttons, sign in button
 	course.all('.actions .join-course').on('click', function (event) {
-		var course = event.currentTarget.ancestor('.results-row');
-		if (course.ancestor('.signed-out').size == 0) {
+		if (course.ancestor('.signed-out') == null) {
 			if (completion_status == 0 || completion_status == 1) trackCourseEvent('start course', event);
 			else if (completion_status == 2) trackCourseEvent('continue course', event);
 			else if (completion_status == 3) trackCourseEvent('retry course', event);
@@ -93,5 +92,4 @@ AUI().ready('tree-view-html', 'course-thumbnails', 'course-popup', function(A) {
 	course.all('.actions .review-course').on('click', function (event) {
 		trackCourseEvent('go review course', event);
 	});
-
 });
