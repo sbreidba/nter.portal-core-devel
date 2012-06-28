@@ -393,10 +393,9 @@
     <%
         int totalRecords = (int) CourseRecordLocalServiceUtil.countByUserIdFilter(userId, courseId, CourseRecordFilterType.ALL.toString());
         if (totalRecords > 0) { %>
+
             <input type="button"
                    value="<%=LanguageUtil.get(pageContext, "nter-student-records-export-transcript") %>"
-                   onclick="window.open('<%= printTranscriptURL.toString() %>',
-                           '<%=LanguageUtil.get(pageContext, "nter-student-records") %>',
-                           'toolbar=no,location=no,menubar=no,scrollbar=yes')"/>
+                   onclick="window.open('<%= printTranscriptURL.toString() %>')"/>
     <%  } %>
 </div>

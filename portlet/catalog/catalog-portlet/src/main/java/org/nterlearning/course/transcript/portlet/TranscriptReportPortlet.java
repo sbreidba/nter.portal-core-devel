@@ -20,14 +20,17 @@
 
 package org.nterlearning.course.transcript.portlet;
 
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import org.nterlearning.exporter.reports.LastUsersLoggedIn;
 import org.nterlearning.exporter.reports.StudentTranscript;
 
 import javax.portlet.*;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class TranscriptReportPortlet extends MVCPortlet {
@@ -61,6 +64,7 @@ public class TranscriptReportPortlet extends MVCPortlet {
         response.reset();
         response.setContentType("application/pdf");
         response.setContentLength(pdfData.length);
+        response.addProperty(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=transcript.pdf");
         response.getPortletOutputStream().write(pdfData);
         response.getPortletOutputStream().flush();
         response.getPortletOutputStream().close();
