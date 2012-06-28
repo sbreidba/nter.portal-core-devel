@@ -50,15 +50,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
         </a>
     </div>
 
-<%--
-   <input type="button"
-           value="<%= LanguageUtil.get(pageContext, "nter-student-records-view-transcript") %>"
-           onclick='<%= viewUrl.toString() %>'/>
---%>
-
     <input type="button"
            value="<%=LanguageUtil.get(pageContext, "nter-student-records-export-transcript") %>"
-           onclick="window.open('<%= printTranscriptURL.toString() %>',
-                                '<%=LanguageUtil.get(pageContext, "nter-student-records") %>',
-                                'toolbar=no,location=no,menubar=no,scrollbar=yes')"/>
+           onclick="window.open('<%= printTranscriptURL.toString() %>')"/>
 </div>
