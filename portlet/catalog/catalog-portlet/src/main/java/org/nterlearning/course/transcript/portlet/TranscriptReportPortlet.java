@@ -23,24 +23,15 @@ package org.nterlearning.course.transcript.portlet;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import org.nterlearning.exporter.reports.LastUsersLoggedIn;
 import org.nterlearning.exporter.reports.StudentTranscript;
 
 import javax.portlet.*;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class TranscriptReportPortlet extends MVCPortlet {
-
-
-    @Override
-    public void doView(RenderRequest renderRequest, RenderResponse renderResponse) throws
-            IOException, PortletException {
-        super.doView(renderRequest, renderResponse);
-    }
 
 
     @Override
