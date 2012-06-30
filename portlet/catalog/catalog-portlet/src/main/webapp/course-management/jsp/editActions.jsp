@@ -56,10 +56,10 @@
 
 
 	<c:if test='<%= PortletPermissionUtil.contains(permissionChecker, plid, themeDisplay.getPortletDisplay().getId(), ActionKeys.UPDATE) %>'>
-		<c:if test='<%= !course.isFeatured() %>'>
+		<c:if test='<%= !course.isRemoved() && !course.isFeatured() %>'>
 			<liferay-ui:icon image="edit" message="mark-featured" url="<%= markCourseAsFeaturedUrl %>" />
 		</c:if>
-		<c:if test='<%= course.isFeatured() %>'>
+		<c:if test='<%= !course.isRemoved() && course.isFeatured() %>'>
 			<liferay-ui:icon image="edit" message="mark-not-featured" url="<%= markCourseAsNotFeaturedUrl %>" />
 		</c:if>
 
