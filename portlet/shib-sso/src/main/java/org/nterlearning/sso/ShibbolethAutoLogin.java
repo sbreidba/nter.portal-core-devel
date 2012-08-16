@@ -223,8 +223,11 @@ public class ShibbolethAutoLogin implements AutoLogin {
             user.setEmailAddress(emailAddress);
             fieldChanged = true;
         }
-
-        user.setPasswordReset(false);
+        if (user.getPasswordReset()) {
+            _log.debug("updating user's password reset requirement to false");
+            user.setPasswordReset(false);
+            fieldChanged = true;
+        }
 
         if (fieldChanged) {
             try {
