@@ -103,6 +103,7 @@ public class ShibbolethAutoLogin implements AutoLogin {
                             companyId, emailAddress.toString());
                 }
                 catch (NoSuchUserException nsue) {
+                    _log.debug("User does not yet exist.  Creating user account");
 
                     ThemeDisplay themeDisplay =
                             (ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
@@ -111,11 +112,14 @@ public class ShibbolethAutoLogin implements AutoLogin {
                     if (themeDisplay != null) {
                         // ThemeDisplay should never be null, but some users
                         // complain of this error. Cause is unknown.
+                        _log.error("ThemeDisplay is null");
                         locale = themeDisplay.getLocale();
                     }
 
                     user = addUser(companyId, firstName.toString(), lastName.toString(),
                                    emailAddress.toString(), locale);
+                    _log.debug("User account created: " + user.getUserId() +
+                               "for " + user.getScreenName());
                 }
 
                 userMapper =
@@ -149,7 +153,7 @@ public class ShibbolethAutoLogin implements AutoLogin {
             return new String[] {username, password, isPasswordEncrypted};
         }
         catch (Exception e) {
-            _log.error(e.getMessage());
+            _log.error(e.getMessage(), e);
         }
 
         return null;
