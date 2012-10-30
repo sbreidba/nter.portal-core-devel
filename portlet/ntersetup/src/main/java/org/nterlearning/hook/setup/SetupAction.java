@@ -432,7 +432,16 @@ public class SetupAction extends SimpleAction {
     private void setDefaultPasswordPolicy(long companyId) {
         try {
             PasswordPolicy policy = PasswordPolicyLocalServiceUtil.getDefaultPasswordPolicy(companyId);
+            policy.setChangeable(true);
             policy.setChangeRequired(false);
+            policy.setExpireable(false);
+
+            policy.setMinLength(0);
+            policy.setMinAlphanumeric(0);
+            policy.setMinNumbers(0);
+            policy.setMinLowerCase(0);
+            policy.setMinUpperCase(0);
+            policy.setMinSymbols(0);
 
             PasswordPolicyLocalServiceUtil.updatePasswordPolicy(policy);
         }
