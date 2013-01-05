@@ -463,6 +463,19 @@
 </aui:form>
 
 <div class="separator"></div>
+<h3><%= LanguageUtil.get(pageContext, "course-testing-local-course-reviews") %></h3>
+<portlet:actionURL name="populateTestCourses" var="populateTestCourses"/>
+<portlet:actionURL name="purgeTestCourses" var="purgeTestCourses"/>
+<aui:form method="post">
+    <aui:fieldset>
+        <aui:button value="course-testing-populate-test-courses"
+                    onClick="<%= populateTestCourses %>"/>
+        <aui:button value="course-testing-purge-test-courses"
+                    onClick="<%= purgeTestCourses %>"/>
+    </aui:fieldset>
+</aui:form>
+
+<div class="separator"></div>
 <h3><%= LanguageUtil.get(pageContext, "course-testing-global-course-reviews") %></h3>
 <% // Test Feature: remove GlobalCourseReview entries %>
 <portlet:actionURL name="purgeAllGlobalCourseReviews"
@@ -474,6 +487,7 @@
         </aui:button-row>
     </aui:fieldset>
 </aui:form>
+
 <% // Test Feature: insert a canned local course review into the DB %>
 <portlet:actionURL name="insertCannedLocalCourseReview"
                    var="insertCannedLocalCourseReview" />
@@ -484,3 +498,4 @@
         </aui:button-row>
     </aui:fieldset>
 </aui:form>
+

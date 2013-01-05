@@ -26,15 +26,13 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PrettyDateFormat;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.util.WebKeys;
+import com.liferay.portal.kernel.util.*;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserIdMapper;
-import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.ServiceContextFactory;
-import com.liferay.portal.service.UserIdMapperLocalServiceUtil;
+import com.liferay.portal.service.*;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.model.AssetEntry;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
@@ -47,6 +45,7 @@ import com.liferay.util.bridges.mvc.MVCPortlet;
 
 import org.nterlearning.atom.parser.FeedParser;
 import org.nterlearning.atom.parser.ServiceContextUtil;
+import org.nterlearning.course.enumerations.FeedType;
 import org.nterlearning.course.management.portlet.CourseManagementPortlet;
 import org.nterlearning.course.search.ExternalOpenSearchImpl;
 import org.nterlearning.crawl.nutch.CrawlTool;
@@ -537,6 +536,96 @@ public class CourseTestingPortlet extends MVCPortlet {
 	public void reloadTopReviewerThreshold(ActionRequest request, ActionResponse response) {
 		ReviewUtil.reloadTopReviewerThreshold();
 	}
+
+
+    /**
+     * Adds a collection of test courses to the system, and then adds 20 reviews for
+     * each course.
+     *
+     * @param request
+     * @param response
+     */
+    public void populateTestCourses(ActionRequest request, ActionResponse response)
+            throws Exception{
+
+        try {
+            long companyId = PortalUtil.getCompanyId(request);
+            User user = UserLocalServiceUtil.getDefaultUser(companyId);
+            long userId = user.getUserId();
+            Group guestGroup = GroupLocalServiceUtil.getGroup(companyId, "Guest");
+
+            ServiceContext serviceContext = ServiceContextFactory.getInstance(request);
+
+            String courseName = "****SAMPLE_TEST_COURSE****";
+            String il8nCourseName = LocalizationUtil.updateLocalization(StringPool.BLANK, "Title",
+                    courseName, "en_US", "en_US");
+            String il8nCourseDesc = LocalizationUtil.updateLocalization(StringPool.BLANK,
+                    "Description", courseName, "en_US", "en_US");
+
+            String href = "http://my_test_course.com";
+            String iri = "TEST_COURSE_";
+
+            Date now = new Date();
+            Calendar nextYear = Calendar.getInstance();
+            nextYear.add(Calendar.YEAR, 1);
+
+            String reviewSummary = "THIS IS A COURSE REVIEW";
+            String review;
+
+            // create a feedReference to store the courses
+            // this is needed by courselocalserviceimpl to get the feedref groupId
+            // and for easier deletion
+            FeedReference feedRef = FeedReferenceLocalServiceUtil.createFeedReference(0);
+            feedRef.setGroupId(guestGroup.getGroupId());
+            feedRef.setCompanyId(companyId);
+            feedRef.setFeedIri("****TEST_FEED****");
+            feedRef.setHref("http://my_test_feed.com/test_feed");
+            feedRef.setFeedType(FeedType.course.getCodeValue());
+            feedRef.setFeedVersion("0.6.3");
+            feedRef.setCreateDate(now);
+            feedRef.setSyncDate(now);
+            feedRef.setSyncSuccess(true);
+            FeedReferenceLocalServiceUtil.addFeedReference(feedRef);
+
+            // create 5 test courses and their reviews
+            Course course;
+            for (int i = 0; i < 5; i++) {
+                course = CourseLocalServiceUtil.addCourse(userId, feedRef.getFeedReferenceId(),
+                        href, iri + i, now, il8nCourseName, null, il8nCourseDesc, null,
+                        null, null, null, null, null, 0, null, null, now, nextYear.getTime(),
+                        "1.0", now, 0, "USD", null, null, serviceContext);
+
+                // create 20 reviews for this course
+                for (int j = 0; j < 20; j++) {
+                    review = reviewSummary + " FOR COURSE " + i + " REVIEW " + j;
+                    CourseReviewLocalServiceUtil.addCourseReview(userId, course.getCourseId(),
+                            review, review, 1, serviceContext);
+                }
+            }
+        }
+        catch (Exception e) {
+            _log.warn(e.getMessage());
+        }
+    }
+
+
+    /**
+     * Removes the test courses and reviews from the system.
+     *
+     * @param request
+     * @param response
+     */
+    public void purgeTestCourses(ActionRequest request, ActionResponse response)
+            throws Exception {
+
+        try {
+            FeedReference feedRef = FeedReferenceLocalServiceUtil.fetchByFeedIri("****TEST_FEED****");
+            FeedReferenceLocalServiceUtil.deleteFeedReference(feedRef);
+        }
+        catch (Exception e) {
+            _log.warn("Error finding courses: " + e.getMessage());
+        }
+    }
 
 	private static Log _log = LogFactoryUtil.getLog(CourseTestingPortlet.class);
 }
