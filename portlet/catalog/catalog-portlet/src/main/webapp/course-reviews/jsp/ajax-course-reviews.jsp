@@ -26,11 +26,11 @@
 	if(end < start) {
 		end = (int) CourseReviewLocalServiceUtil.countByCourseId(courseId);
 	}
-	List<CourseReview> reviews = CourseReviewLocalServiceUtil.getCourseReviews(start, end);
+	List<CourseReview> reviews = CourseReviewLocalServiceUtil.findByCourseIdWithRemoved(courseId, false, start, end);
 	if (!reviews.isEmpty()) {
 %>
 	<% for (CourseReview review : reviews) { %>
-	<% request.setAttribute("review", review); %>
-	<nter:review review="<%=review%>" pageContext="<%=pageContext%>" />
+        <% request.setAttribute("review", review); %>
+        <nter:review review="<%=review%>" pageContext="<%=pageContext%>" />
 	<% } %>
 <% } %>

@@ -70,18 +70,28 @@ double yourScore = 0.0;
 try {
 	RatingsEntry ratingsEntry = RatingsEntryLocalServiceUtil.getEntry(themeDisplay.getUserId(), className, classPK);
 	yourScore = ratingsEntry.getScore();
-} catch (NoSuchEntryException nsee) {
-	_log.debug("no existing review", nsee);
+} catch (Exception e) {
+    // nested methods throw either a systemException or NoSuchRatingException when a rating can't be found
+	_log.info("Ratings Entry does not exist for review: " + classPK);
 }
 
 Course course = CourseLocalServiceUtil.getCourse(review.getCourseId());
 
 // figure out how many upvotes and downvotes, only works if all votes are +1 and -1
-RatingsStats ratingsStats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
-double totalScore = ratingsStats.getTotalScore();
-double totalEntries = ratingsStats.getTotalEntries();
-int downVotes = (int) (totalEntries - totalScore) / 2;
-int upVotes = (int) totalEntries - downVotes;
+double totalEntries = 0;
+int downVotes = 0;
+int upVotes = 0;
+
+try {
+    RatingsStats ratingsStats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
+    double totalScore = ratingsStats.getTotalScore();
+    totalEntries = ratingsStats.getTotalEntries();
+    downVotes = (int) (totalEntries - totalScore) / 2;
+    upVotes = (int) totalEntries - downVotes;
+} catch (Exception e) {
+    // nested methods throw either a systemException or NoSuchRatingException when a rating can't be found
+    _log.info("RatingsStats entry does not exist for review: " +classPK);
+}
 %>
 
 <li class="review" data-review-id="<%= review.getPrimaryKey() %>" data-review-id-param="<%=NterKeys.REVIEW_ID%>" data-user-id="<%= review.getUserId() %>"
