@@ -28,7 +28,7 @@
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>nter-setup-portlet</artifactId>
-    <version>6.1.7</version>
+    <version>6.1.8-SNAPSHOT</version>
     <packaging>war</packaging>
     <name>NTER Setup Portlet</name>
 
