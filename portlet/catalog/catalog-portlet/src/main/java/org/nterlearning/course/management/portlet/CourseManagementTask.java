@@ -31,6 +31,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * This class is designed to manage the CourseManagement Tasks which update the
@@ -85,7 +86,23 @@ public class CourseManagementTask {
     public void shutdownTask() {
         log.info("Stopping Course Management Task.");
         mExecutor.shutdown();
-        mExecutor.shutdownNow();
+
+
+        try {
+            // Wait for existing tasks to terminate before attempting
+            // to forcefully shut them down
+            if (!mExecutor.awaitTermination(60, TimeUnit.SECONDS))  {
+                mExecutor.shutdownNow();
+                if (!mExecutor.awaitTermination(60, TimeUnit.SECONDS)) {
+                    log.error("Error stopping the CourseManagement execution pool");
+                    Thread.currentThread().interrupt();
+                }
+            }
+        }
+        catch (InterruptedException e) {
+            mExecutor.shutdownNow();
+            Thread.currentThread().interrupt();
+        }
     }
 
     /**
@@ -118,6 +135,9 @@ public class CourseManagementTask {
      */
     private class CourseManagementProcess implements Runnable {
         public void run() {
+
+            Thread.currentThread().setName("CourseManagementProcess");
+
             log.info("Assigning course accessCount, completedCount, and popularWeight");
             try {
 
@@ -135,6 +155,7 @@ public class CourseManagementTask {
             catch (Exception e) {
                 log.error("Problem assigning course accessCount, completedCount, and popularWeight");
                 log.error(e.getMessage());
+                Thread.currentThread().interrupt();
             }
         }
     }
