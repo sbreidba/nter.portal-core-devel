@@ -340,6 +340,9 @@ public class ServiceRegistryClient {
 
 
         public void run() {
+
+            Thread.currentThread().setName("ServiceRegistryClient");
+
             try {
                 if (mBindingTypeEnum != null) {
                     mServices = getRegistryClient().getServicesByServiceAndBindingType(
@@ -358,6 +361,7 @@ public class ServiceRegistryClient {
             }
             catch (Exception e) {
                 _log.error(e.getMessage());
+                Thread.currentThread().interrupt();
             }
         }
     }

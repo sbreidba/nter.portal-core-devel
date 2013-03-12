@@ -96,7 +96,22 @@ public class FeedParser {
         mLog.info("Stopping Feed Parser task");
 
         mExecutor.shutdown();
-        mExecutor.shutdownNow();
+
+        try {
+            // Wait for existing tasks to terminate before attempting
+            // to forcefully shut them down
+            if (!mExecutor.awaitTermination(60, TimeUnit.SECONDS))  {
+                mExecutor.shutdownNow();
+                if (!mExecutor.awaitTermination(60, TimeUnit.SECONDS)) {
+                    mLog.error("Error stopping the FeedParser execution pool");
+                    Thread.currentThread().interrupt();
+                }
+            }
+        }
+        catch (InterruptedException e) {
+            mExecutor.shutdownNow();
+            Thread.currentThread().interrupt();
+        }
     }
 
 
@@ -195,6 +210,9 @@ public class FeedParser {
     private class FeedProcess implements Runnable {
 
         public void run() {
+
+            Thread.currentThread().setName("AtomFeedProcessor");
+
             try {
                 mLog.info("Fetching feeds from service registry");
 
@@ -225,6 +243,7 @@ public class FeedParser {
             }
             catch (Throwable e) {
                 mLog.error("FeedProcess threw exception: " + e,e);
+                Thread.currentThread().interrupt();
             }
 
 			try {
@@ -311,6 +330,9 @@ public class FeedParser {
         }
 
         public void run() {
+
+            Thread.currentThread().setName("PubSubHubbubFeedProcessor");
+
             try {
                 String feedUrl = mFeed.getSelfLinkResolvedHref().toString();
                 String contentProviderId = mServiceRegistryClient.getContentProviderId(feedUrl);
@@ -321,6 +343,7 @@ public class FeedParser {
             }
             catch (Throwable e) {
                 mLog.error(e.getMessage());
+                Thread.currentThread().interrupt();
             }
         }
     }
@@ -339,12 +362,16 @@ public class FeedParser {
         }
 
         public void run() {
+
+            Thread.currentThread().setName("ManualFeedProcessor");
+
             try {
                 mLog.info("Starting a manual Feed Processing Task for Feed: " + mFeedRef);
                 AtomFeedProcessor.processFeed(mFeedRef);
             }
             catch (Throwable e) {
                 mLog.error(e);
+                Thread.currentThread().interrupt();
             }
         }
     }

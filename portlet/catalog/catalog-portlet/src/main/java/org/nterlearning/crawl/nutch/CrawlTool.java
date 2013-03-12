@@ -190,7 +190,22 @@ public class CrawlTool {
      */
     public void shutdownTasks() {
         mExecutor.shutdown();
-        mExecutor.shutdownNow();
+
+        try {
+            // Wait for existing tasks to terminate before attempting
+            // to forcefully shut them down
+            if (!mExecutor.awaitTermination(60, TimeUnit.SECONDS))  {
+                mExecutor.shutdownNow();
+                if (!mExecutor.awaitTermination(60, TimeUnit.SECONDS)) {
+                    mLog.error("Error stopping the CrawlTool execution pool");
+                    Thread.currentThread().interrupt();
+                }
+            }
+        }
+        catch (InterruptedException e) {
+            mExecutor.shutdownNow();
+            Thread.currentThread().interrupt();
+        }
     }
 
 
@@ -583,11 +598,19 @@ public class CrawlTool {
      */
     private class CrawlProcess implements Runnable {
         public void run() {
+
+            Thread.currentThread().setName("NutchCrawlProcess");
+
             try {
                 crawl();
             }
             catch (RuntimeException e) {
-                mLog.fatal(e.getMessage());
+                mLog.fatal(e.getMessage(), e);
+                Thread.currentThread().interrupt();
+            }
+            catch (Exception e) {
+                mLog.fatal(e.getMessage(), e);
+                Thread.currentThread().interrupt();
             }
         }
     }
@@ -598,11 +621,15 @@ public class CrawlTool {
      */
     private class PurgeIndexProcess implements Runnable {
         public void run() {
+
+            Thread.currentThread().setName("NutchPurgeIndexProcess");
+
             try {
                 IndexTool.getInstance().purgeIndex();
             }
             catch (RuntimeException e) {
                 mLog.fatal(e.getMessage());
+                Thread.currentThread().interrupt();
             }
         }
     }
@@ -620,6 +647,9 @@ public class CrawlTool {
         }
 
         public void run() {
+
+            Thread.currentThread().setName("NutchRemoveFromIndexProcess");
+
             try {
                 if (removedObject instanceof Course) {
                     mStatus = "Removing course " +
@@ -644,9 +674,11 @@ public class CrawlTool {
             }
             catch (RuntimeException e) {
                 mLog.fatal(e.getMessage());
+                Thread.currentThread().interrupt();
             }
             catch (Exception e) {
                 mLog.warn(e.getMessage());
+                Thread.currentThread().interrupt();
             }
             finally {
                 mStatus = "Waiting for next crawl";
