@@ -132,20 +132,25 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
      *
      * @throws Exception Standard Liferay Exception
      */
-    public void processCourseFeed(ActionRequest request, ActionResponse response)
+    public void processFeed(ActionRequest request, ActionResponse response)
             throws Exception {
 
-        // TODO : This currently doesn't work, but we may not need/want to
-        // handle individual feeds.
+        Long feedId = ParamUtil.getLong(request, "feedRefId");
+        String feedUrl = FeedReferenceLocalServiceUtil.getFeedReference(feedId).getHref();
+
         try {
-            Long feedId = ParamUtil.getLong(request, "feedRefId");
-            String feedIri = FeedReferenceLocalServiceUtil.getFeedReference(feedId).getFeedIri();
-            mFeedParser.runFeedParser(feedIri);
+            mFeedParser.runFeedParser(feedUrl);
         }
         catch (Exception e) {
             SessionErrors.add(request, e.getMessage());
             mLog.error(e.getMessage());
         }
+
+        response.setRenderParameter("feedCur", request.getParameter("feedCur"));
+        response.setRenderParameter("feedDelta", request.getParameter("feedDelta"));
+        response.setRenderParameter("feedRedirect", request.getParameter("feedRedirect"));
+        response.setRenderParameter("feedRefId", feedId.toString());
+        response.setRenderParameter("feedTabs", request.getParameter("feedTabs"));
     }
 
     /**
@@ -320,7 +325,7 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
         }
 
         if (request.getParameter("jspPage") != null) {
-        response.setRenderParameter("jspPage", request.getParameter("jspPage"));
+            response.setRenderParameter("jspPage", request.getParameter("jspPage"));
         }
         
         response.setRenderParameter("feedCur", request.getParameter("feedCur"));
@@ -373,7 +378,7 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
         }
 
         if (request.getParameter("jspPage") != null) {
-        response.setRenderParameter("jspPage", request.getParameter("jspPage"));
+            response.setRenderParameter("jspPage", request.getParameter("jspPage"));
         }
         
         response.setRenderParameter("feedCur", request.getParameter("feedCur"));

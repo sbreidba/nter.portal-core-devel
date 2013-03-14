@@ -148,6 +148,16 @@ public class FeedParser {
 
 
     /**
+     * Adds an immediate feed processing task to the task queue.
+     *
+     * @param includeSubscribedFeeds set to True to include any previously subscribed to feeds.
+     */
+    public void runFeedParser(boolean includeSubscribedFeeds) {
+        ExecutorUtil.safeSubmit(mExecutor, new FeedProcess(includeSubscribedFeeds));
+    }
+
+
+    /**
      * Adds an immediate feed processing task to the task queue.  This task is
      * used to process a particular Feed Reference object based on the feed
      * reference id.  This is used from the course-feeds portlet to initiate
@@ -209,6 +219,16 @@ public class FeedParser {
      */
     private class FeedProcess implements Runnable {
 
+        private boolean mIncludeSubscribedFeeds;
+
+        public FeedProcess() {
+            mIncludeSubscribedFeeds = false;
+        }
+
+        public FeedProcess(boolean includeSubscribedFeeds) {
+            mIncludeSubscribedFeeds = includeSubscribedFeeds;
+        }
+
         public void run() {
 
             Thread.currentThread().setName("AtomFeedProcessor");
@@ -217,7 +237,7 @@ public class FeedParser {
                 mLog.info("Fetching feeds from service registry");
 
                 HashMap<ActiveStatusEnum, HashMap<String, String>> repos =
-                        CourseRegistryClient.getContentRepositories();
+                        CourseRegistryClient.getContentRepositories(mIncludeSubscribedFeeds);
 
                 if (repos.containsKey(ActiveStatusEnum.ACTIVE)) {
                     List<FeedContext> fcs = FeedContext.createList(repos.get(ActiveStatusEnum.ACTIVE));

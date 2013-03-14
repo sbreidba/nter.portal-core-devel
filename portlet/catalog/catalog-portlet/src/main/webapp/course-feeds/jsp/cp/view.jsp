@@ -86,7 +86,7 @@
                     name="course-feed-feed">
                 <portlet:renderURL var="displayDetailsUrl">
                     <portlet:param name="jspPage" value="/course-feeds/jsp/cp/feedDetails.jsp" />
-                    <portlet:param name="feedRedirect" value='<%=renderResponse.createRenderURL().toString() %>' />
+                    <portlet:param name="feedRedirect" value='<%= renderResponse.createRenderURL().toString() %>' />
                     <portlet:param name="feedRefId" value='<%= String.valueOf(feedReference.getFeedReferenceId()) %>'/>
                     <portlet:param name="feedTabs" value='<%= tabs %>'/>
                     <portlet:param name="feedCur" value='<%= String.valueOf(searchContainer.getCur()) %>'/>

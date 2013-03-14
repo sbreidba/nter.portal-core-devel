@@ -158,6 +158,20 @@ public class CourseRegistryClient {
      * @return hashmap of all endpoints
      */
     public static HashMap<ActiveStatusEnum, HashMap<String, String>> getContentRepositories() {
+        return getContentRepositories(false);
+    }
+
+
+    /**
+     * Returns a HashMap containing a Hashmap of content repository endpoints
+     * and their institution name.
+     *
+     * @param includeSubscribed set to True to include currently subscribed to feeds.
+     *
+     * @return hashmap of all endpoints
+     */
+    public static HashMap<ActiveStatusEnum, HashMap<String, String>> getContentRepositories(
+            boolean includeSubscribed) {
         ServiceRegistryClient srClient = new ServiceRegistryClient();
 
         HashMap<String, String> activeFeeds = new HashMap<String, String>();
@@ -181,7 +195,10 @@ public class CourseRegistryClient {
             }
         }
 
-        activeFeeds = removeSubscribedFeeds(activeFeeds);
+        if (!includeSubscribed) {
+            activeFeeds = removeSubscribedFeeds(activeFeeds);
+        }
+
         contentRepos.put(ActiveStatusEnum.ACTIVE, activeFeeds);
         contentRepos.put(ActiveStatusEnum.BLACKLIST, blacklistedFeeds);
         contentRepos.put(ActiveStatusEnum.INACTIVE, inactiveFeeds);
