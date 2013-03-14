@@ -38,34 +38,23 @@
         <portlet:param name="feedRefId" value="<%= feedRefId %>" />
         <portlet:param name="feedTabs" value='<%= tabs %>'/>
         <portlet:param name="feedCur" value='<%= current %>'/>
+        <portlet:param name="feedDelta" value='<%= ParamUtil.getString(request, "feedDelta", "5") %>'/>
     </portlet:renderURL>
 
-    <%-- will be superseded by a blacklist option
-    <portlet:actionURL name="disableCourseFeed" var="disableCourseFeedUrl">
-        <portlet:param name="feedRefId" value="<%= feedRefId %>" />
+    <portlet:actionURL name="processFeed" var="processFeedURL">
         <portlet:param name="feedCur" value='<%= ParamUtil.getString(request, "feedCur", "1") %>'/>
         <portlet:param name="feedDelta" value='<%= ParamUtil.getString(request, "feedDelta", "5") %>'/>
         <portlet:param name="feedRedirect" value='<%= ParamUtil.getString(request, "feedRedirect") %>'/>
-        <portlet:param name="feedTabs" value='<%= ParamUtil.getString(request, "feedTabs", "Active") %>'/>
+        <portlet:param name="feedRefId" value='<%= feedRefId %>'/>
+        <portlet:param name="feedTabs" value='<%= tabs %>'/>
     </portlet:actionURL>
-    --%>
-
-    <%-- will be superseded by a blacklist option
-    <portlet:actionURL name="enableCourseFeed" var="enableCourseFeedUrl">
-        <portlet:param name="feedRefId" value="<%= feedRefId %>" />
-        <portlet:param name="feedCur" value='<%= ParamUtil.getString(request, "feedCur", "1") %>'/>
-        <portlet:param name="feedDelta" value='<%= ParamUtil.getString(request, "feedDelta", "5") %>'/>
-        <portlet:param name="feedRedirect" value='<%= ParamUtil.getString(request, "feedRedirect") %>'/>
-        <portlet:param name="feedTabs" value='<%= ParamUtil.getString(request, "feedTabs", "Active") %>'/>
-    </portlet:actionURL>
-    --%>
 
     <portlet:actionURL name="pushUnsubscribe" var="pushUnsubscribeURL">
         <portlet:param name="feedCur" value='<%= ParamUtil.getString(request, "feedCur", "1") %>'/>
         <portlet:param name="feedDelta" value='<%= ParamUtil.getString(request, "feedDelta", "5") %>'/>
         <portlet:param name="feedRedirect" value='<%= ParamUtil.getString(request, "feedRedirect") %>'/>
         <portlet:param name="feedRefId" value='<%= feedRefId %>'/>
-        <portlet:param name="feedTabs" value='<%= ParamUtil.getString(request, "feedTabs", "Active") %>'/>
+        <portlet:param name="feedTabs" value='<%= tabs %>'/>
     </portlet:actionURL>
 
     <portlet:actionURL name="pushResubscribe" var="pushResubscribeURL">
@@ -73,39 +62,24 @@
         <portlet:param name="feedDelta" value='<%= ParamUtil.getString(request, "feedDelta", "5") %>'/>
         <portlet:param name="feedRedirect" value='<%= ParamUtil.getString(request, "feedRedirect") %>'/>
         <portlet:param name="feedRefId" value='<%= feedRefId %>'/>
-        <portlet:param name="feedTabs" value='<%= ParamUtil.getString(request, "feedTabs", "Active") %>'/>
+        <portlet:param name="feedTabs" value='<%= tabs %>'/>
     </portlet:actionURL>
 
 
     <liferay-ui:icon image="attributes" message="course-feed-details" url='<%= displayDetailsUrl %>' />
 
-    <%-- TODO : get this working again
-    <c:if test='<%= PortletPermissionUtil.contains(permissionChecker, plid, themeDisplay.getPortletDisplay().getId(), ActionKeys.UPDATE) %>'>
-        <portlet:actionURL name="processCourseFeed" var="processCourseFeedUrl">
-            <portlet:param name="feedRefId" value="<%= feedRefId %>" />
-        </portlet:actionURL>
-        <liferay-ui:icon image="edit" message="course-feed-process" url='<%= processCourseFeedUrl %>'/>
-    </c:if>
-    --%>
-
 	<c:if test='<%= PortletPermissionUtil.contains(permissionChecker, plid, themeDisplay.getPortletDisplay().getId(), ActionKeys.DELETE) %>'>
 
-        <%--
         <c:if test='<%= !feedRef.getRemoved() %>'>
-		    <liferay-ui:icon image="delete" message="course-feed-remove" url='<%= disableCourseFeedUrl %>' />
+            <liferay-ui:icon image="download" message="course-feed-process" url="<%= processFeedURL %>"/>
         </c:if>
-
-        <c:if test='<%= feedRef.getRemoved() %>'>
-		    <liferay-ui:icon image="delete" message="course-feed-enable" url='<%= enableCourseFeedUrl %>' />
-        </c:if>
-        --%>
 
         <c:if test='<%= feedRef.getPshbSubscribed() %>'>
-            <liferay-ui:icon image="edit" message="course-feed-details-push-unsubscribe" url="<%= pushUnsubscribeURL %>"/>
+            <liferay-ui:icon image="rss" message="course-feed-details-push-unsubscribe" url="<%= pushUnsubscribeURL %>"/>
         </c:if>
 
         <c:if test='<%= feedRef.getPshbSubscribed() || !feedRef.getPshb().equals("") %>'>
-            <liferay-ui:icon image="edit" message="course-feed-details-push-resubscribe" url="<%= pushResubscribeURL %>"/>            
+            <liferay-ui:icon image="rss" message="course-feed-details-push-resubscribe" url="<%= pushResubscribeURL %>"/>
         </c:if>
 	</c:if>
 </liferay-ui:icon-menu>
