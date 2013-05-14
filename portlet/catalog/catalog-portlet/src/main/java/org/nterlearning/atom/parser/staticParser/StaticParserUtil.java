@@ -62,7 +62,7 @@ public class StaticParserUtil {
             FeedReference feedReference) {
 
         List<Link> hubLinks = feed.getLinks(PushKeys.PUSH_HUB_LINK_REL_ATTR_VAL);
-        String feedHubLinks = "";
+        StringBuffer feedHubLinks = new StringBuffer("");
         Boolean subscribeSuccess = false;
 
         // if there are any push hubs, attempt to subscribe to them.
@@ -81,14 +81,15 @@ public class StaticParserUtil {
                             hubLink.getHref().toString() + ".  " + e.getMessage());
                 }
 
-                feedHubLinks += hubLink.getHref().toString() + ",";
+                feedHubLinks.append(hubLink.getHref().toString());
+                if (hubLinks.size() > 1) {
+                    feedHubLinks.append(",");
+                }
             }
-
-            feedHubLinks = feedHubLinks.substring(0, feedHubLinks.length() - 1);
         }
 
         feedReference.setPshbSubscribed(subscribeSuccess);
-        feedReference.setPshb(feedHubLinks);
+        feedReference.setPshb(feedHubLinks.toString());
 
         return feedReference;
     }

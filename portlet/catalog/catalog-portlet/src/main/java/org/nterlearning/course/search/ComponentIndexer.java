@@ -140,9 +140,9 @@ public class ComponentIndexer extends BaseIndexer {
         List<AssetCategory> assetCategories = AssetCategoryLocalServiceUtil.getCategories(
                                     Component.class.getName(), componentId);
 
-        String localeCategoryTitles = StringPool.BLANK;
+        StringBuffer localeCategoryTitles = new StringBuffer(StringPool.BLANK);
         for (AssetCategory assetCategory : assetCategories) {
-            localeCategoryTitles += assetCategory.getTitle();
+            localeCategoryTitles.append(assetCategory.getTitle());
         }
 
         Document doc = new DocumentImpl();
@@ -160,7 +160,7 @@ public class ComponentIndexer extends BaseIndexer {
         doc.addKeyword(Field.USER_ID, company.getDefaultUser().getUserId());
         doc.addKeyword(Field.URL, component.getUrl());
 
-        doc.addText(Field.COMMENTS, localeCategoryTitles);
+        doc.addText(Field.COMMENTS, localeCategoryTitles.toString());
         doc.addText(Field.DESCRIPTION, component.getDescription());
         doc.addText(Field.TITLE, component.getTitle());
 
