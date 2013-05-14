@@ -133,7 +133,7 @@ public class CourseManagementTask {
      * This class runs the actual course management task and updates the
      * various course popularity weights.
      */
-    private class CourseManagementProcess implements Runnable {
+    private static class CourseManagementProcess implements Runnable {
         public void run() {
 
             Thread.currentThread().setName("CourseManagementProcess");

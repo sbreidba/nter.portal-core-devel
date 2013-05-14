@@ -108,7 +108,7 @@ public class LastUsersLoggedIn {
     /**
      * @author gjiva
      */
-    public class UserLastLoginComparator implements Comparator<User> {
+    public static class UserLastLoginComparator implements Comparator<User> {
 
         public int compare(User u1, User u2) {
 

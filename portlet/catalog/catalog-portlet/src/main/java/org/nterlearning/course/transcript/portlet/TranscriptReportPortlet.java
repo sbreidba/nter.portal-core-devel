@@ -54,7 +54,7 @@ public class TranscriptReportPortlet extends MVCPortlet {
 
         response.reset();
         response.setContentType("application/pdf");
-        response.setContentLength(pdfData.length);
+        response.setContentLength((pdfData != null) ? pdfData.length : 0);
         response.addProperty(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=transcript.pdf");
         response.getPortletOutputStream().write(pdfData);
         response.getPortletOutputStream().flush();

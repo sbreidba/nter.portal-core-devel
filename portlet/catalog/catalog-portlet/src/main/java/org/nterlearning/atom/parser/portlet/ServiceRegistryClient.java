@@ -40,7 +40,7 @@ public class ServiceRegistryClient {
     private volatile ExecutorService mExecutor;
     private int mTimeoutSecs = 15;
 
-    private static RegistryProxy registry = null;
+    private static volatile RegistryProxy registry = null;
 
 	private static final Log _log = LogFactoryUtil.getLog(ServiceRegistryClient.class);
 
@@ -285,7 +285,7 @@ public class ServiceRegistryClient {
             }
         }
         else {
-            _log.error("Unable to find institution by endpoint [" + endpoint + "]");
+            _log.error("Unable to find institution by endpoint because endpoint value was null.");
         }
 
         return institutionName;

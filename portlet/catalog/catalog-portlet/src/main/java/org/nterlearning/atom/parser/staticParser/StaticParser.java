@@ -40,8 +40,6 @@ import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
-import com.liferay.portlet.ratings.model.RatingsStats;
-import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 import org.nterlearning.atom.enumerations.NterEntryType;
 import org.nterlearning.atom.enumerations.NterFeedType;
 import org.nterlearning.atom.enumerations.NterNameSpace;
@@ -62,7 +60,6 @@ import org.nterlearning.course.enumerations.FeedType;
 import org.nterlearning.course.enumerations.RelationshipType;
 import org.nterlearning.course.util.FeedReferenceUtil;
 import org.nterlearning.crawl.nutch.CrawlTool;
-import org.nterlearning.datamodel.catalog.NoSuchCourseReviewException;
 import org.nterlearning.datamodel.catalog.NoSuchGlobalCourseReviewException;
 import org.nterlearning.datamodel.catalog.model.*;
 import org.nterlearning.datamodel.catalog.model.impl.FeedSyncHistoryImpl;
@@ -73,7 +70,6 @@ import org.apache.abdera.model.Entry;
 import org.apache.abdera.model.Feed;
 import org.apache.abdera.model.Link;
 import org.apache.abdera.model.Person;
-import org.nterlearning.utils.ReviewUtil;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -1350,7 +1346,7 @@ public class StaticParser {
             // During addCourseReview, this value is used to populate the Liferay RatingsEntry entity score attribute.
             // IMPORTANT NOTE: the activity stream export stores the "star" rating (RatingsEntry.score) into the weightedScore attribute.
             // During addCourseReview, this value is used to populate the Liferay RatingsEntry entity score attribute.
-            CourseReview newReview = CourseReviewLocalServiceUtil.addCourseReview(incomingLcr.getUserId(), incomingLcr.getCourseId(),
+            CourseReviewLocalServiceUtil.addCourseReview(incomingLcr.getUserId(), incomingLcr.getCourseId(),
                     incomingLcr.getSummary(), incomingLcr.getContent(), incomingLcr.getWeightedScore(),
                     ServiceContextUtil.createDefaultServiceContext());
             mLog.debug("Added local Course Review ID [" + incomingLcr.getCourseReviewId() + "]");

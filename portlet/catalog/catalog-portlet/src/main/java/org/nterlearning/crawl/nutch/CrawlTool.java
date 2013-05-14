@@ -619,7 +619,7 @@ public class CrawlTool {
     /**
      * This class is used to purge all index data on the server.
      */
-    private class PurgeIndexProcess implements Runnable {
+    private static class PurgeIndexProcess implements Runnable {
         public void run() {
 
             Thread.currentThread().setName("NutchPurgeIndexProcess");

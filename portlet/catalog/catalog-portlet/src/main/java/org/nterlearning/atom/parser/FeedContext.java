@@ -109,7 +109,7 @@ public class FeedContext {
         }
 
         this.userId = sc.getUserId();
-        this.syncMessage = new String();
+        this.syncMessage = "";
     }
 
 
