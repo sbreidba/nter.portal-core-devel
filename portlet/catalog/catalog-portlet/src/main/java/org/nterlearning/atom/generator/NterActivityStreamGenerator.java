@@ -378,7 +378,7 @@ public class NterActivityStreamGenerator {
     public static String getFeedFileRelativeUrl() {
         String feedRelativeUrl = "";
         for (String pathElement : feedFilePathElements) {
-            feedRelativeUrl += "/" + pathElement;
+            feedRelativeUrl.concat("/").concat(pathElement);
         }
         return feedRelativeUrl;
     }

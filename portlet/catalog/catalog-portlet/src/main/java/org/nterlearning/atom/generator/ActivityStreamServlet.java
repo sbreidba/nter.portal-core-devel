@@ -113,7 +113,6 @@ public class ActivityStreamServlet extends HttpServlet{
 				status = HttpServletResponse.SC_OK;
 				content = sw.toString();
 				contentType = "application/atom+xml";
-				
 			}
 			
 			resp.setStatus(status);
