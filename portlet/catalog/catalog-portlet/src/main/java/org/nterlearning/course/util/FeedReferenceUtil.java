@@ -22,6 +22,7 @@ package org.nterlearning.course.util;
 
 import org.apache.commons.codec.binary.Hex;
 
+import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
@@ -38,12 +39,15 @@ public class FeedReferenceUtil {
     public static String generateHash(String href) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-1");
-            md.update(href.getBytes());
+            md.update(href.getBytes("UTF-8"));
             byte output[] = md.digest();
 
             return Hex.encodeHexString(output);
         }
         catch (NoSuchAlgorithmException nsae) {
+            return null;
+        }
+        catch (UnsupportedEncodingException e) {
             return null;
         }
     }
