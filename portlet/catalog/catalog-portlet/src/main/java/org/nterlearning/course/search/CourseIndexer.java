@@ -180,19 +180,19 @@ public class CourseIndexer extends BaseIndexer {
 					description, localeId) + StringPool.SPACE);
 		}
 
-		String localeCategoryTitles = StringPool.BLANK;
+        StringBuffer localeCategoryTitles = new StringBuffer();
 		for (AssetCategory assetCategory : assetCategories) {
 			String categoryTitle = assetCategory.getTitle();
-			String localeCategoryTitle = StringPool.BLANK;
+            StringBuffer localeCategoryTitle = new StringBuffer(StringPool.BLANK);
 			for (String localeId : LocalizationUtil.getAvailableLocales(
 				categoryTitle)) {
-				localeCategoryTitle += LocalizationUtil.getLocalization(
-					categoryTitle, localeId) + StringPool.SPACE;
+                localeCategoryTitle.append(LocalizationUtil.getLocalization(categoryTitle, localeId));
+                localeCategoryTitle.append(StringPool.SPACE);
 			}
-			localeCategoryTitles += localeCategoryTitle;
+			localeCategoryTitles.append(localeCategoryTitle);
 		}
 
-		doc.addText(Field.COMMENTS, localeCategoryTitles);
+		doc.addText(Field.COMMENTS, localeCategoryTitles.toString());
 		doc.addText(Field.TITLE, localeTitle);
 		doc.addText(Field.DESCRIPTION, localeDescription);
 		doc.addText(NterKeys.OWNER_NAME, course.getOwnerName(companyId));
