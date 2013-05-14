@@ -57,8 +57,10 @@ public class CrawlUtil {
         File segmentDir = new File(parentDir.toString());
         File segmentSubDirs[] = segmentDir.listFiles();
 
-        for (File subDir : segmentSubDirs) {
-            subDirs.add(new Path(subDir.toString()));
+        if (segmentSubDirs != null) {
+            for (File subDir : segmentSubDirs) {
+                subDirs.add(new Path(subDir.toString()));
+            }
         }
 
         Path subDirArray[] = new Path[subDirs.size()];

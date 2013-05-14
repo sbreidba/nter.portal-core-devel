@@ -22,6 +22,8 @@ package org.nterlearning.atom.parser;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import org.apache.abdera.i18n.iri.IRI;
+import org.apache.abdera.parser.ParseException;
 import org.nterlearning.atom.parser.portlet.CourseRegistryClient;
 import org.nterlearning.atom.parser.portlet.ServiceRegistryClient;
 import org.nterlearning.course.enumerations.FeedRemovalReasonType;
@@ -217,7 +219,7 @@ public class FeedParser {
      * This class is used by the automatic feed processing timer task.  It
      * collects a list of feeds to process from the Service Registry.
      */
-    private class FeedProcess implements Runnable {
+    private static class FeedProcess implements Runnable {
 
         private boolean mIncludeSubscribedFeeds;
 
@@ -354,15 +356,23 @@ public class FeedParser {
             Thread.currentThread().setName("PubSubHubbubFeedProcessor");
 
             try {
-                String feedUrl = mFeed.getSelfLinkResolvedHref().toString();
-                String contentProviderId = mServiceRegistryClient.getContentProviderId(feedUrl);
+                IRI selflink = mFeed.getSelfLinkResolvedHref();
 
-                FeedContext fc = new FeedContext(feedUrl, contentProviderId);
+                if (selflink != null) {
+                    String feedUrl = selflink.toString();
+                    String contentProviderId = mServiceRegistryClient.getContentProviderId(feedUrl);
 
-                AtomFeedProcessor.processFeed(fc, mFeed);
+                    FeedContext fc = new FeedContext(feedUrl, contentProviderId);
+
+                    AtomFeedProcessor.processFeed(fc, mFeed);
+                }
+            }
+            catch (ParseException pe) {
+                mLog.error("Could not parse feed [" + mFeed.toString() + "]");
             }
             catch (Throwable e) {
-                mLog.error(e.getMessage());
+                mLog.error("Could not parse feed [" + mFeed.toString() + "]");
+                mLog.error(e.getMessage(), e);
                 Thread.currentThread().interrupt();
             }
         }
@@ -373,7 +383,7 @@ public class FeedParser {
      * This class is used to manually process a particular feed, based on the
      * either the feed IRI or feed URL information.
      */
-    private class FeedRequestProcess implements Runnable {
+    private static class FeedRequestProcess implements Runnable {
 
         private String mFeedRef;
 

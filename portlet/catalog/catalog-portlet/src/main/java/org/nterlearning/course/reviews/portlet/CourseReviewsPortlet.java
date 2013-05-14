@@ -324,7 +324,7 @@ public class CourseReviewsPortlet extends MVCPortlet {
 		}
 	}
 
-	private final class CourseReviewUpdateParameters {
+	private static final class CourseReviewUpdateParameters {
 
 		private ThemeDisplay themeDisplay;
 		private long userId;
@@ -332,7 +332,6 @@ public class CourseReviewsPortlet extends MVCPortlet {
 		private long classPK;
 		private long reviewId;
 		private String content;
-		private String summary = "";
 
 		CourseReviewUpdateParameters(ActionRequest request) throws SystemException, PortalException {
 			themeDisplay = (ThemeDisplay) request.getAttribute(WebKeys.THEME_DISPLAY);
@@ -347,10 +346,8 @@ public class CourseReviewsPortlet extends MVCPortlet {
 				classPK = review.getCourseId();
 			}
 			content = ParamUtil.getString(request, NterKeys.REVIEW_CONTENT);
-			//summary = ParamUtil.getString(request, NterKeys.REVIEW_SUMMARY);
 			// Sanitize html input
 			content = HtmlUtil.escape(content);
-			//summary = HtmlUtil.escape(summary);
 		}
 	}
 

@@ -20,6 +20,7 @@
 
 package org.nterlearning.atom.parser.portlet;
 
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
@@ -80,6 +81,9 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
         			mFeedParser.getFeedTimerInterval() + "] will be used.");
         }
 
+        // re-subscribe to all previously subscribed to feeds
+        reSubscribeFeeds();
+
         // initialize the feed parser timer task
         mFeedParser.initiateFeedParserSchedule();
 
@@ -92,6 +96,25 @@ public class AtomParserControlPanelPortlet extends MVCPortlet {
         mFeedParser.shutdownTask();
         super.destroy();
     }
+
+
+    /**
+     * Takes any previously subscribed to feeds, and resubscribes to them.
+     */
+    private void reSubscribeFeeds() {
+        try {
+            List<FeedReference> feedReferences = FeedReferenceLocalServiceUtil.getFeedReferences(
+                    QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+            for (FeedReference feedReference : feedReferences) {
+                mPushSubscriber.subscribe(feedReference, true);
+            }
+        }
+        catch (Exception e) {
+            mLog.error("Could not process Feeds for PuSH resubscription: " + e.getMessage());
+        }
+    }
+
 
 
 	/**

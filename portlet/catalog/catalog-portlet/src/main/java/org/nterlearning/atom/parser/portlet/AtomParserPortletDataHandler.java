@@ -61,7 +61,6 @@ public class AtomParserPortletDataHandler implements PortletDataHandler {
 	/* (non-Javadoc)
 	 * @see com.liferay.portal.kernel.lar.PortletDataHandler#deleteData(com.liferay.portal.kernel.lar.PortletDataContext, java.lang.String, javax.portlet.PortletPreferences)
 	 */
-	@Override
 	public PortletPreferences deleteData(PortletDataContext context, String portletId,
 			PortletPreferences prefs) throws PortletDataException {
 		return null;
@@ -70,7 +69,6 @@ public class AtomParserPortletDataHandler implements PortletDataHandler {
 	/* (non-Javadoc)
 	 * @see com.liferay.portal.kernel.lar.PortletDataHandler#exportData(com.liferay.portal.kernel.lar.PortletDataContext, java.lang.String, javax.portlet.PortletPreferences)
 	 */
-	@Override
 	public String exportData(PortletDataContext context, String portletId,
 			PortletPreferences prefs) throws PortletDataException {
 		
@@ -99,7 +97,6 @@ public class AtomParserPortletDataHandler implements PortletDataHandler {
 	/* (non-Javadoc)
 	 * @see com.liferay.portal.kernel.lar.PortletDataHandler#getExportControls()
 	 */
-	@Override
 	public PortletDataHandlerControl[] getExportControls()
 			throws PortletDataException {
 		return null;
@@ -108,7 +105,6 @@ public class AtomParserPortletDataHandler implements PortletDataHandler {
 	/* (non-Javadoc)
 	 * @see com.liferay.portal.kernel.lar.PortletDataHandler#getImportControls()
 	 */
-	@Override
 	public PortletDataHandlerControl[] getImportControls()
 			throws PortletDataException {
 		return null;
@@ -117,7 +113,6 @@ public class AtomParserPortletDataHandler implements PortletDataHandler {
 	/* (non-Javadoc)
 	 * @see com.liferay.portal.kernel.lar.PortletDataHandler#importData(com.liferay.portal.kernel.lar.PortletDataContext, java.lang.String, javax.portlet.PortletPreferences, java.lang.String)
 	 */
-	@Override
 	public PortletPreferences importData(PortletDataContext context, String portletId,
 			PortletPreferences prefs, String data) throws PortletDataException {
 		
@@ -150,12 +145,15 @@ public class AtomParserPortletDataHandler implements PortletDataHandler {
 		catch (PortalException e) {
 			throw new PortletDataException(e);
 		}
+        catch (Exception e) {
+            log.error("Could not import reviews: " + e.getMessage());
+            throw new PortletDataException(e);
+        }
 	}
 
 	/* non-Javadoc)
 	 * @see com.liferay.portal.kernel.lar.PortletDataHandler#isAlwaysStaged()
 	 */
-	@Override
 	public boolean isAlwaysStaged() {
 		return true;
 	}
@@ -163,7 +161,6 @@ public class AtomParserPortletDataHandler implements PortletDataHandler {
 	/* non-Javadoc)
 	 * @see com.liferay.portal.kernel.lar.PortletDataHandler#isAlwaysExportable()
 	 */
-	@Override
 	public boolean isAlwaysExportable() {
 		return true;
 	}
@@ -171,7 +168,6 @@ public class AtomParserPortletDataHandler implements PortletDataHandler {
 	/* (non-Javadoc)
 	 * @see com.liferay.portal.kernel.lar.PortletDataHandler#isPublishToLiveByDefault()
 	 */
-	@Override
 	public boolean isPublishToLiveByDefault() {
 		return true;
 	}

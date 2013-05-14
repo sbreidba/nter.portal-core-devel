@@ -24,7 +24,7 @@ package org.nterlearning.atom.parser.push;
 public class PushKeys {
 
     // Atom feed keys
-	public static String PUSH_HUB_LINK_REL_ATTR_VAL = "hub";
+	public static final String PUSH_HUB_LINK_REL_ATTR_VAL = "hub";
 
     // HTTP methods
     public static final String HTTP_SCHEME = "http";
@@ -38,7 +38,6 @@ public class PushKeys {
     public static final String ATOM_CONTENT_TYPE = "application/atom+xml";
 
     // pshb payload properties
-//    public static final String USER_AGENT_STRING = "NTER Atom Parser";
     public static final String USER_AGENT_STRING = "RSS pubsubhubbub 0.3";
     public static final String PARAM_CALLBACK = "hub.callback";
     public static final String PARAM_MODE = "hub.mode";

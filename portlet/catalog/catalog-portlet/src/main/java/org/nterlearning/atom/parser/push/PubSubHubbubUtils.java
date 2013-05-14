@@ -20,6 +20,8 @@
 
 package org.nterlearning.atom.parser.push;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import org.apache.http.HeaderElement;
 import org.apache.http.HeaderElementIterator;
 import org.apache.http.HttpResponse;
@@ -34,14 +36,21 @@ import org.apache.http.params.HttpParams;
 import org.apache.http.protocol.HTTP;
 import org.apache.http.protocol.HttpContext;
 
+import javax.servlet.http.HttpServletRequest;
+import java.net.MalformedURLException;
+import java.net.URL;
+
 /**
  * 
  * @author gjiva
  *
  */
 public class PubSubHubbubUtils {
-	
-	/**
+
+    private static Log mLog = LogFactoryUtil.getLog(PubSubHubbubUtils.class);
+
+
+    /**
 	 * 
 	 * @return
 	 */
@@ -77,5 +86,32 @@ public class PubSubHubbubUtils {
         });
 
         return httpClient;
+    }
+
+
+    /**
+     * Generates a fully qualified URL for a server based on a ServletRequest.
+     *
+     * @param request ServletRequest to glean server URL from.
+     *
+     * @return Fully qualified URL, or null if an error occurred.
+     */
+    public static String getServerUrlFromRequest(HttpServletRequest request) {
+        int port = request.getServerPort();
+        if (request.getScheme().equals("http") && (port == 80)) {
+            port = -1;
+        }
+        else if (request.getScheme().equals("https") && (port == 443)) {
+            port = -1;
+        }
+
+        try {
+            URL serverURL = new URL(request.getScheme(), request.getServerName(), port, "");
+            return serverURL.toString();
+        }
+        catch (MalformedURLException e) {
+            mLog.warn("Unable to create URL for PuSH server at: " + request.getServerName());
+            return null;
+        }
     }
 }

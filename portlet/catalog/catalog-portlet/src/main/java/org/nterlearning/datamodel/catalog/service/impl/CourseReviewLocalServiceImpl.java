@@ -181,8 +181,6 @@ public class CourseReviewLocalServiceImpl
                                  courseId, rating, serviceContext);
         }
 
-        Date now = new Date();
-
         long courseReviewId = counterLocalService.increment(CourseReview.class.getName());
 
         CourseReview courseReview = courseReviewPersistence.create(courseReviewId);

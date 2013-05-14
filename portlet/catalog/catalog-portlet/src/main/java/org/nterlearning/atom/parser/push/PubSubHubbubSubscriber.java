@@ -22,9 +22,7 @@ package org.nterlearning.atom.parser.push;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -41,6 +39,7 @@ import org.apache.http.protocol.BasicHttpContext;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import org.apache.tika.io.IOUtils;
 import org.nterlearning.atom.parser.AbderaAtomParser;
 import org.nterlearning.atom.parser.FeedParser;
 import org.nterlearning.datamodel.catalog.model.FeedReference;
@@ -56,18 +55,16 @@ import org.nterlearning.datamodel.catalog.service.FeedReferenceLocalServiceUtil;
  */
 public class PubSubHubbubSubscriber {
 
+    private static Log log = LogFactoryUtil.getLog(PubSubHubbubSubscriber.class);
+
     // singleton to prevent multiple subscribers from being created
     private static PubSubHubbubSubscriber mSubscriber = new PubSubHubbubSubscriber();
 
-	private static Log log = LogFactoryUtil.getLog(PubSubHubbubSubscriber.class);
-
-	private String absoluteCallbackUrl;
 	private static volatile HashSet<String> subscribedTopics = new HashSet<String>();
+    private static volatile HashMap<String, String> mVerificationTokens = new HashMap<String, String>();
 
 
     private PubSubHubbubSubscriber() {
-        absoluteCallbackUrl = PubSubHubbubProperties.getCallbackUrl();
-
         // repopulate the list of subscribed feeds so that we know what we've
         // already subscribed to.  This is important for when the hub attempts
         // to verify subscriptions due to expired lease times.
@@ -93,7 +90,7 @@ public class PubSubHubbubSubscriber {
 
 
 	/**
-	 * Handles new content distribution from a PuSH hub
+	 * Handles new content distribution from a PuSH hub.
 	 *
 	 * @param request incoming HTTP request
 	 * @param response outbound HTTP response
@@ -111,9 +108,12 @@ public class PubSubHubbubSubscriber {
 
                 FeedParser.getInstance().runFeedParser(atomParser.getFeed());                
 				response.setStatus(HttpServletResponse.SC_OK);
+
+                IOUtils.closeQuietly(requestInputStream);
 			}
 			else {
-				log.error("Unsupported HTTP Content-Type in content distribution: " + request.getContentType());
+				log.error("Unsupported HTTP Content-Type in content distribution: " +
+                        request.getContentType());
 				response.setStatus(HttpServletResponse.SC_BAD_REQUEST);
 			}
 		}
@@ -137,37 +137,91 @@ public class PubSubHubbubSubscriber {
 		String mode = request.getParameter(PushKeys.PARAM_MODE);
 		String topic = request.getParameter(PushKeys.PARAM_TOPIC);
 		String challenge = request.getParameter(PushKeys.PARAM_CHALLENGE);
-		String leaseSeconds = request.getParameter(PushKeys.PARAM_LEASE_SECONDS);
 		String verifyToken = request.getParameter(PushKeys.PARAM_VERIFY_TOKEN);
 
-		log.info("Verify request.  Mode: " + mode + " | topic: " + topic +
-				" | challenge: " + challenge + " | leaseSeconds: " + leaseSeconds +
-				" | verifyToken: " + verifyToken);
+		log.info("Verification request:  mode [" + mode + "] for [" + topic + "]");
 
 		Validate.notNull(mode, "hub.mode is null");
 		Validate.notNull(topic, "hub.topic is null");
 		Validate.notNull(challenge, "hub.challenge is null");
 
-		if (subscribedTopics.contains(topic)) {
-			log.info("Verification successful");
+        if (mode.equals(PushKeys.SUBSCRIBE_MODE)) {
+            if (subscribedTopics.contains(topic)) {
+                if (verifyToken != null) {
+                    // ensure that the verification tokens match what was sent
+                    if (mVerificationTokens.containsKey(topic) &&
+                            mVerificationTokens.get(topic).equals(verifyToken)) {
+                        log.info("Verification token accepted for [" + topic + "]");
+                        response.setStatus(HttpServletResponse.SC_OK);
+                    }
+                    else {
+                        log.info("Verification token does not match for [" + topic + "]");
+                        response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+                    }
+                }
+                else {
+                    log.info("Verification successful for [" + topic + "]");
+                    response.setStatus(HttpServletResponse.SC_OK);
+                }
 
-            updateFeedRefSubscriptionStatus(topic, mode.equals(PushKeys.SUBSCRIBE_MODE));
-			response.setStatus(HttpServletResponse.SC_OK);
+                try {
+                    response.getWriter().print(challenge);
+                }
+                catch (IOException e) {
+                    log.error("Error writing HTTP GET response: " + e);
+                }
 
-			try {
-				response.getWriter().print(challenge);
-			}
-            catch (IOException e) {
-				log.error("Error writing HTTP GET response: " + e);
-			}
-		}
-		else {
-			log.info("Verification failed");
+                updateFeedRefSubscriptionStatus(topic, mode.equals(PushKeys.SUBSCRIBE_MODE));
+            }
+            else {
+                log.info("Verification failed for [" + topic + "]");
 
-            updateFeedRefSubscriptionStatus(topic, false);
-			response.setStatus(HttpServletResponse.SC_NOT_FOUND);
-		}
+                updateFeedRefSubscriptionStatus(topic, false);
+                response.setStatus(HttpServletResponse.SC_NOT_FOUND);
+            }
+        }
+        else {
+            // unsubscribe from the feed
+            String pushServer = PubSubHubbubUtils.getServerUrlFromRequest(request);
+            unsubscribe(pushServer, topic);
+            response.setStatus(HttpServletResponse.SC_OK);
+        }
 	}
+
+
+    /**
+     * Subscribes or unsubscribes a given feedReference object from its hub(s).
+     *
+     * @param feedReference the FeedReference object to process
+     * @param subscribe True to subscribe to the hub(s), false to unsubscribe
+     *
+     * @return True if subscribing and processing was successful, false if unsubscribing or if
+     * subscribing and processing failed.
+     */
+    public boolean subscribe(FeedReference feedReference, Boolean subscribe) {
+        Boolean subscribeSuccess = false;
+
+        String hubs[] = feedReference.getPshb().split(",");
+        if (subscribe) {
+            for (String hub : hubs) {
+                if (!hub.equals("")) {
+                    int statusCode = subscribe(hub, feedReference.getHref());
+                    subscribeSuccess = (statusCode == HttpServletResponse.SC_NO_CONTENT) ||
+                            (statusCode == HttpServletResponse.SC_ACCEPTED) ||
+                            subscribeSuccess;
+                }
+            }
+        }
+        else {
+            for (String hub : hubs) {
+                if (!hub.equals("")) {
+                    unsubscribe(hub, feedReference.getHref());
+                }
+            }
+        }
+
+        return subscribeSuccess;
+    }
 
 
 	/**
@@ -180,7 +234,8 @@ public class PubSubHubbubSubscriber {
      * @return HTTP Response code, a 200 represents success, 400 represents failure
 	 */
 	public int subscribe(String hubUrl, String topicUrl) {
-		return subscribe(hubUrl, absoluteCallbackUrl, topicUrl , 0, null);
+        String absoluteCallbackUrl = PubSubHubbubProperties.getCallbackUrl();
+		return subscribe(hubUrl, absoluteCallbackUrl, topicUrl, 0, null);
 	}
 
 
@@ -195,6 +250,7 @@ public class PubSubHubbubSubscriber {
      * @return HTTP Response code 200 represents success, 400 represents failure
 	 */
 	public int subscribe(String hubUrl, String topicUrl, long leaseSeconds) {
+        String absoluteCallbackUrl = PubSubHubbubProperties.getCallbackUrl();
 		return subscribe(hubUrl, absoluteCallbackUrl, topicUrl, leaseSeconds, null);
 	}
 
@@ -204,14 +260,14 @@ public class PubSubHubbubSubscriber {
 	 *
 	 * @param hubUrl - the hub's URL
      * @param callbackUrl - NTER's callback URL to receive hub connections
-	 * @param topicUrl - the URL of the topic
+	 * @param topicUrl - the URL of the topic (the feed's href)
 	 * @param leaseSeconds - the number of seconds to subscribe for, or 0 for a
      * permanent lease
 	 * @param verifyToken - opaque token that will be echoed back in the
      * verification request to assist in identifying which subscription request
      * is being verified, or null if no such assistance is required.
      *
-     * @return HTTP Response code 200 represents success, 400 represents failure
+     * @return HTTP Response code 2xx represents success, 4xx or 5xx represents failure
 	 */
 	public int subscribe(String hubUrl, String callbackUrl, String topicUrl,
                          long leaseSeconds, String verifyToken)  {
@@ -219,9 +275,8 @@ public class PubSubHubbubSubscriber {
 		Validate.notNull(hubUrl, "hubUrl is null");
 		Validate.notNull(topicUrl, "topicUrl is null");
 
-		log.info("Subscribing to feed at " + topicUrl + " from PuSH hub at [" + 
-                hubUrl + "] to send subscriptions to the callback URL at [" +
-                callbackUrl + "]");
+		log.info("Subscribing to [" + topicUrl + "] on PuSH hub [" + hubUrl +
+                "] to send subscriptions to [" + callbackUrl + "]");
 
 		subscribedTopics.add(topicUrl);
 
@@ -236,9 +291,12 @@ public class PubSubHubbubSubscriber {
                 pushParams.add(new BasicNameValuePair(PushKeys.PARAM_LEASE_SECONDS, String.valueOf(leaseSeconds)));
             }
 
-            if (verifyToken != null){
-                pushParams.add(new BasicNameValuePair(PushKeys.PARAM_VERIFY_TOKEN, verifyToken));
+            // force a verification token and add it to the parameter set
+            if (verifyToken == null) {
+                verifyToken =  UUID.randomUUID().toString();
             }
+            pushParams.add(new BasicNameValuePair(PushKeys.PARAM_VERIFY_TOKEN, verifyToken));
+            mVerificationTokens.put(topicUrl, verifyToken);
 
             HttpPost post = new HttpPost(hubUrl);
             post.setEntity(new UrlEncodedFormEntity(pushParams));
@@ -248,12 +306,10 @@ public class PubSubHubbubSubscriber {
             HttpClient httpClient = PubSubHubbubUtils.createHttpClient();
             HttpResponse response = httpClient.execute(post, new BasicHttpContext());
 
-            log.info("HTTP code from PuSH hub at [" + hubUrl +
-                    "] in response to subscription request for feed at ["
-                    + topicUrl + "]: " +
-                    response.getStatusLine().getStatusCode()
-                    + ". Accompanying reason for the code: [" +
-                    response.getStatusLine().getReasonPhrase() + "]");
+            log.info("HTTP response from PuSH hub [" + hubUrl +
+                    "] for subscription request for feed [" + topicUrl + "] " +
+                    response.getStatusLine().getStatusCode() + " - " +
+                    response.getStatusLine().getReasonPhrase());
 
             return response.getStatusLine().getStatusCode();
         }
@@ -261,6 +317,11 @@ public class PubSubHubbubSubscriber {
             log.error("Could not subscribe to hub [" + hubUrl + "] for feed [" + topicUrl + "]");
 
             subscribedTopics.remove(topicUrl);
+
+            if (verifyToken != null) {
+                mVerificationTokens.remove(topicUrl);
+            }
+
             return HttpServletResponse.SC_BAD_REQUEST;
         }
 	}
@@ -275,6 +336,7 @@ public class PubSubHubbubSubscriber {
      * @return HTTP Response code. A 200 represents success, 400 failure
      */
     public int unsubscribe(String hub, String topicUrl)  {
+        String absoluteCallbackUrl = PubSubHubbubProperties.getCallbackUrl();
         return unsubscribe(hub, topicUrl, absoluteCallbackUrl, null);
     }
 
@@ -315,12 +377,12 @@ public class PubSubHubbubSubscriber {
 
                 if (response.getStatusLine().getStatusCode() == HttpServletResponse.SC_NO_CONTENT) {
                     try {
+                        log.info("Unsubscribing from[ " + hub + "] for feed [" + topicUrl + "]");
                         FeedReference feedRef = FeedReferenceLocalServiceUtil.findByFeedHref(topicUrl);
                         feedRef.setPshbSubscribed(false);
                         FeedReferenceLocalServiceUtil.updateFeedReference(feedRef);
 
                         subscribedTopics.remove(topicUrl);
-
                     }
                     catch (Exception e) {
                         log.error("Could not update Push subscription for FeedReference with Href: " + topicUrl);
@@ -341,11 +403,6 @@ public class PubSubHubbubSubscriber {
             return HttpServletResponse.SC_BAD_REQUEST;
         }
     }
-
-
-    public String getCallbackUrl() {
-		return absoluteCallbackUrl;
-	}
     
 
     private void updateFeedRefSubscriptionStatus(String feedHref, Boolean subscribed) {
@@ -356,7 +413,20 @@ public class PubSubHubbubSubscriber {
             FeedReferenceLocalServiceUtil.updateFeedReference(feedRef);
         }
         catch (Exception e) {
-            log.error("Error updating the feedReference: " + feedHref);
+            log.error("Error updating subscription status of feedReference: " +
+                    feedHref + " : " + e.getMessage());
+        }
+    }
+
+
+    private void updateFeedRefSubscriptionStatus(FeedReference feedRef, Boolean subscribed) {
+        try {
+            feedRef.setPshbSubscribed(subscribed);
+            FeedReferenceLocalServiceUtil.updateFeedReference(feedRef);
+        }
+        catch (Exception e) {
+            log.error("Error updating subscription status of feedReference: " +
+                    feedRef.getFeedReferenceId() + " : " + e.getMessage());
         }
     }
 }

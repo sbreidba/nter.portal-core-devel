@@ -36,6 +36,7 @@ import net.sf.jasperreports.engine.data.JRMapCollectionDataSource;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import org.apache.commons.io.IOUtils;
 
 public class JasperExporter {
 
@@ -94,6 +95,9 @@ public class JasperExporter {
         }
         catch (IOException ioe) {
             log.error("Error closing export stream: " + ioe.getMessage());
+        }
+        finally {
+            IOUtils.closeQuietly(reportTemplateStream);
         }
 
         return  reportOutput.toByteArray();

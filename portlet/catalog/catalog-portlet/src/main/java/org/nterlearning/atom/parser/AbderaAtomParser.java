@@ -22,6 +22,7 @@ package org.nterlearning.atom.parser;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import org.apache.tika.io.IOUtils;
 import org.nterlearning.atom.AbderaSingleton;
 import org.nterlearning.atom.extension.NterExtension;
 import org.nterlearning.atom.parser.staticParser.StaticParser;
@@ -51,6 +52,7 @@ public class AbderaAtomParser {
      *
      * @param file File containing the Atom Feed
      */
+    @Deprecated
     public AbderaAtomParser(File file) {
         setFeedFile(file);
     }
@@ -93,13 +95,14 @@ public class AbderaAtomParser {
      *
      * @param file New file to process as an Atom Feed
      */
+    @Deprecated
     public void setFeedFile(File file) {
         try {
             mFeedFile = file;
             setFeed(new FileInputStream(file));
         }
         catch (Exception e) {
-            resetParser();            
+            resetParser();
             mLog.error("Error setting the feed file at [" + file.getName() + "]: " + e,e);
         }
     }
@@ -115,13 +118,21 @@ public class AbderaAtomParser {
      * @param url New URL to point to for an Atom Feed.
      */
     public void setFeedUrl(URL url) {
+        InputStream urlInput = null;
         try {
             mFeedUrl = url;
-            setFeed(url.openStream());
+            urlInput = url.openStream();
+            setFeed(urlInput);
         }
         catch (IOException e) {
             resetParser();
-            mLog.error("Could not open the Feed URL at [" + url.toString() + "]: " + e);
+            IOUtils.closeQuietly(urlInput);
+            mLog.error("Could not open the Feed URL at [" + url.toString() + "]: " + e.getMessage());
+        }
+        catch (Exception e) {
+            resetParser();
+            IOUtils.closeQuietly(urlInput);
+            mLog.error("Could not process the Feed at [" + url.toString() + "]: " + e.getMessage());
         }
     }
 
@@ -142,7 +153,7 @@ public class AbderaAtomParser {
         BufferedInputStream feed = new BufferedInputStream(feedInputStream);
         try {
         	
-        	// make sure the stream isn't empty, to avoid an AraryIndexOutOfBounds
+        	// make sure the stream isn't empty, to avoid an ArrayIndexOutOfBounds
         	feed.mark(4); // arbitrary, low number. As long as we read more than zero, it's fine
         	int readBytes = feed.read();
         	if (readBytes > 0){
