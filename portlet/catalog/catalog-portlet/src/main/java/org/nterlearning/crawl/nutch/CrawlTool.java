@@ -297,8 +297,10 @@ public class CrawlTool {
      */
     private void deleteURLTempFiles() {
         File urlFiles[] = new File(mURLDir.toString()).listFiles();
-        for (File urlFile : urlFiles) {
-            urlFile.delete();
+        if (urlFiles != null) {
+            for (File urlFile : urlFiles) {
+                urlFile.delete();
+            }
         }
     }
 
