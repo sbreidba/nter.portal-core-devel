@@ -222,6 +222,43 @@ footer {
 
 
 /* == specific content styles ==  */
+.portlet-msg, .portlet-msg-info, .portlet-msg-error, .portlet-msg-alert, .portlet-msg-success {
+    background: none no-repeat scroll 6px 50% #EEEEEE;
+    border: 1px solid #555555;
+    color: #34404F;
+    display: block;
+    font-weight: bold;
+    margin: 2px auto 14px;
+    padding: 6px 6px 6px 30px;
+    text-align: left;
+}
+.portlet-msg-alert, .portlet-msg-error {
+    background-position: 6px 6px;
+    margin: 0.5em 0 1.4em;
+}
+.portlet-msg-alert {
+    background-color: #FFFFCC;
+    background-image: url("../images/messages/alert.png");
+    background-position: 6px 20%;
+    border-color: #FFCC00;
+}
+.portlet-msg-error {
+    background-color: #FFDDDD;
+    background-image: url("../images/messages/error.png");
+    border-color: #FF0000;
+}
+.portlet-msg-info {
+    background-color: #DFF4FF;
+    background-image: url("../images/messages/info.png");
+    border-color: #A7CEDF;
+}
+.portlet-msg-success {
+    background-color: #F4FDEF;
+    background-image: url("../images/messages/success.png");
+    border-color: #ACDFA7;
+    color: #384F34;
+}
+
 .highlightbox {
 	padding: 5px;
 	margin: 0 0 1.4em;
