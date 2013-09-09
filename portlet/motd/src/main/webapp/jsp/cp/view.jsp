@@ -1,22 +1,22 @@
 <%--
-  National Training and Education Resource (NTER)
-  Copyright (C) 2012 SRI International
+National Training and Education Resource (NTER)
+Copyright (C) 2012 SRI International
 
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License as published by
-  the Free Software Foundation; either version 2 of the License, or (at
-  your option) any later version.
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2 of the License, or (at
+your option) any later version.
 
-  This program is distributed in the hope that it will be useful, but
-  WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-  General Public License for more details.
+This program is distributed in the hope that it will be useful, but
+WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+General Public License for more details.
 
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
-  02110-1301, USA.
-  --%>
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA
+02110-1301, USA.
+--%>
 
 <%@ include file="../init.jsp" %>
 
@@ -24,7 +24,7 @@
 <portlet:actionURL name="clearMaintenance" var="clearMaintenanceUrl" />
 
 <%
-    Calendar defaultDate = CalendarFactoryUtil.getCalendar(themeDisplay.getTimeZone(), themeDisplay.getLocale());
+    Calendar defaultDate = CalendarFactoryUtil.getCalendar(TimeZone.getTimeZone("UTC"));
     Date startDate = new Date();
 
     long companyId = themeDisplay.getCompanyId();
@@ -74,8 +74,8 @@
         (<%= defaultDate.getTimeZone().getDisplayName() %>)
     </aui:field-wrapper>
 
-    <aui:input name="duration" label='mw-duration' size="20"/>
-    <aui:input name="message" label='mw-message' size="45"/>
+    <aui:input name="duration" label="mw-duration" size="20"/>
+    <aui:input name="message" label='mw-message' size="80" />
 
     <aui:button-row>
         <aui:button type="submit" value='mw-submit-button'/>
