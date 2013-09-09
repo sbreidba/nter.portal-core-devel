@@ -33,6 +33,7 @@
 
 <%@ page import="java.util.Calendar" %>
 <%@ page import="java.util.Date" %>
+<%@ page import="java.util.TimeZone" %>
 
 <%@ page import="com.liferay.portal.kernel.language.LanguageUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.CalendarFactoryUtil" %>
