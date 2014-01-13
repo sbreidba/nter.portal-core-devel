@@ -27,6 +27,9 @@ import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
 import org.nterlearning.datamodel.catalog.model.Component;
+import org.nterlearning.datamodel.catalog.model.Courses_Components;
+import org.nterlearning.datamodel.catalog.service.CourseLocalServiceUtil;
+import org.nterlearning.datamodel.catalog.service.Courses_ComponentsLocalServiceUtil;
 import org.nterlearning.utils.PortalProperties;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.FileSystem;
@@ -331,6 +334,15 @@ public class CrawlTool {
                             FeedReferenceLocalServiceUtil.getFeedReference(component.getFeedReferenceId());
                     fullTextHref = URLDecoder.decode(component.getFullTextHref(), StringPool.UTF8);
 
+                    List<Courses_Components> courses_components =
+                            Courses_ComponentsLocalServiceUtil.findByComponentId(component.getComponentId());
+                    StringBuffer coursesTitle = new StringBuffer();
+                    for (Courses_Components courses_component : courses_components) {
+                        Course course = CourseLocalServiceUtil.findByCourseId(courses_component.getCourseId());
+                        coursesTitle.append(course.getTitle("en_US"));
+                        coursesTitle.append(" ");
+                    }
+
                     if (!(fullTextHref == null) && !(fullTextHref.equals(""))) {
                         // Note: Each meta tag must also be added to the urlmeta
                         // and db.parsemeta.to.crawldb properties in nutch-site.xml
@@ -340,6 +352,7 @@ public class CrawlTool {
                                         + "\t" + NutchConstants.CLASS_INDEX_TAG + "=" + Component.class.getName()
                                         + "\t" + NutchConstants.IRI_INDEX_TAG + "=" + component.getComponentIri()
                                         + "\t" + NutchConstants.TITLE_INDEX_TAG + "=" + component.getTitle()
+                                        + "\t" + NutchConstants.COURSE_TITLE_INDEX_TAG + "=" + coursesTitle.toString()
                                         + System.getProperty("line.separator"));
                     }
                 }

@@ -25,9 +25,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.*;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.LocalizationUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
@@ -41,8 +38,10 @@ import org.nterlearning.datamodel.catalog.model.Contributor;
 import org.nterlearning.datamodel.catalog.model.Course;
 import org.nterlearning.datamodel.catalog.service.CourseLocalServiceUtil;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.portlet.PortletURL;
 
@@ -84,9 +83,8 @@ public class CourseIndexer extends BaseIndexer {
 
 		try {
 			Course course = CourseLocalServiceUtil.getCourse(
-				GetterUtil.getLong(
-					doc.get(Field.ENTRY_CLASS_PK)));
-			String title = course.getTitle();
+				GetterUtil.getLong(doc.get(Field.ENTRY_CLASS_PK)));
+			String title = course.getTitle(locale);
 			String content = snippet;
 			if (Validator.isNull(content)) {
 				content = course.getDescription();
@@ -138,8 +136,6 @@ public class CourseIndexer extends BaseIndexer {
 		long groupId = getParentGroupId(scopeGroupId);
 		long userId = course.getUserId();
 		long courseId = course.getCourseId();
-		String title = course.getTitle();
-		String description = course.getDescription();
 
 		long[] assetCategoryIds = AssetCategoryLocalServiceUtil.getCategoryIds(
 			Course.class.getName(), courseId);
@@ -150,7 +146,8 @@ public class CourseIndexer extends BaseIndexer {
 
 		Document doc = new DocumentImpl();
 		doc.addUID(PORTLET_ID, courseId);
-		doc.addModifiedDate(course.getUpdatedDate());
+        doc.addDate("createDate", course.getCreateDate());
+		doc.addDate("modified", course.getUpdatedDate());
 		doc.addKeyword(Field.COMPANY_ID, companyId);
 		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
 		doc.addKeyword(Field.GROUP_ID, groupId);
@@ -162,39 +159,18 @@ public class CourseIndexer extends BaseIndexer {
 		doc.addKeyword(Field.ENTRY_CLASS_PK, courseId);
 		doc.addKeyword(Field.URL, course.getUrl());
 		doc.addKeyword(NterKeys.POPULARITY, course.getPopularWeight());
-		doc.addText(NterKeys.COURSE_IRI, course.getCourseIri());
+		doc.addKeyword(NterKeys.COURSE_IRI, course.getCourseIri());
 
-		// Strip out xml characters and add all localizations to title and
-		// description
-		String localeTitle = StringPool.BLANK;
-		for (String localeId : LocalizationUtil.getAvailableLocales(title)) {
-			localeTitle = localeTitle.concat(
-				LocalizationUtil.getLocalization(
-					title, localeId) + StringPool.SPACE);
-		}
+        doc.addText(Field.TITLE, course.getTitle("en_US"));
+        doc.addLocalizedText(Field.TITLE, course.getTitleMap());
+        doc.addText(Field.DESCRIPTION, course.getDescription("en_US"));
+        doc.addLocalizedText(Field.DESCRIPTION, course.getDescriptionMap());
 
-		String localeDescription = StringPool.BLANK;
-		for (String localeId : LocalizationUtil.getAvailableLocales(title)) {
-			localeDescription = localeDescription.concat(
-				LocalizationUtil.getLocalization(
-					description, localeId) + StringPool.SPACE);
-		}
-
-        StringBuffer localeCategoryTitles = new StringBuffer();
+        Map<Locale, String> categoryTitleMap = new HashMap<Locale, String>();
 		for (AssetCategory assetCategory : assetCategories) {
-			String categoryTitle = assetCategory.getTitle();
-            StringBuffer localeCategoryTitle = new StringBuffer(StringPool.BLANK);
-			for (String localeId : LocalizationUtil.getAvailableLocales(
-				categoryTitle)) {
-                localeCategoryTitle.append(LocalizationUtil.getLocalization(categoryTitle, localeId));
-                localeCategoryTitle.append(StringPool.SPACE);
-			}
-			localeCategoryTitles.append(localeCategoryTitle);
+			categoryTitleMap.putAll(assetCategory.getTitleMap());
 		}
 
-		doc.addText(Field.COMMENTS, localeCategoryTitles.toString());
-		doc.addText(Field.TITLE, localeTitle);
-		doc.addText(Field.DESCRIPTION, localeDescription);
 		doc.addText(NterKeys.OWNER_NAME, course.getOwnerName(companyId));
 
         List<Contributor> contributors = course.getContributors();
@@ -212,9 +188,9 @@ public class CourseIndexer extends BaseIndexer {
 	}
 
 	@Override
-	public void postProcessSearchQuery(
-		BooleanQuery searchQuery, SearchContext searchContext)
+	public void postProcessSearchQuery(BooleanQuery searchQuery, SearchContext searchContext)
 		throws Exception {
+
         String ownerName = searchContext.getKeywords();
         // ensure an owner name is present, and that it does not represent a
         // field query (field:keyword)
@@ -227,6 +203,12 @@ public class CourseIndexer extends BaseIndexer {
 				searchQuery.addTerm(NterKeys.OWNER_NAME, ownerName, true);
 			}
 		}
+
+        addSearchTerm(searchQuery, searchContext, Field.TITLE, false);
+        addLocalizedSearchTerm(searchQuery, searchContext, Field.TITLE, false);
+
+        addSearchTerm(searchQuery, searchContext, Field.DESCRIPTION, false);
+        addLocalizedSearchTerm(searchQuery, searchContext, Field.DESCRIPTION, false);
 	}
 
 	@Override
@@ -237,7 +219,7 @@ public class CourseIndexer extends BaseIndexer {
 
 		if (course.isIndexable()) {
 			Document doc = getDocument(course);
-			SearchEngineUtil.updateDocument(course.getCompanyId(), doc);
+			SearchEngineUtil.updateDocument(getSearchEngineId(), course.getCompanyId(), doc);
 		}
 		else {
 			delete(course);
@@ -257,11 +239,10 @@ public class CourseIndexer extends BaseIndexer {
 		throws Exception {
 		for (String id : ids) {
 			long companyId = GetterUtil.getLong(id);
-			List<Course> courses = CourseLocalServiceUtil.findByCompanyId(
-				companyId);
+			List<Course> courses = CourseLocalServiceUtil.findByCompanyId(companyId);
 
 			for (Course course : courses) {
-				reindex(course);
+				doReindex(course);
 			}
 		}
 	}
