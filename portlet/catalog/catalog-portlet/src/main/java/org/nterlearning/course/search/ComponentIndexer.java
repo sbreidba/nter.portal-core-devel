@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.search.*;
 import com.liferay.portal.kernel.util.*;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.User;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
@@ -41,7 +40,6 @@ import org.nterlearning.datamodel.catalog.model.Contributor;
 import org.nterlearning.datamodel.catalog.service.ComponentLocalServiceUtil;
 
 import javax.portlet.PortletURL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -108,8 +106,7 @@ public class ComponentIndexer extends BaseIndexer {
         Component component = (Component) obj;
         Document doc = new DocumentImpl();
         doc.addUID(PORTLET_ID, component.getComponentId());
-        SearchEngineUtil.deleteDocument(component.getCompanyId(),
-                                        doc.get(Field.UID));
+        SearchEngineUtil.deleteDocument(component.getCompanyId(), doc.get(Field.UID));
     }
 
 
@@ -147,7 +144,8 @@ public class ComponentIndexer extends BaseIndexer {
 
         Document doc = new DocumentImpl();
         doc.addUID(PORTLET_ID, componentId);
-        doc.addModifiedDate(component.getUpdatedDate());
+        doc.addDate("createDate", component.getCreateDate());
+        doc.addDate("modified", component.getUpdatedDate());
         doc.addKeyword(Field.ASSET_CATEGORY_IDS, assetCategoryIds);
         doc.addKeyword(Field.ASSET_TAG_NAMES, assetTagNames);
         doc.addKeyword(Field.COMPANY_ID, component.getCompanyId());
@@ -241,5 +239,8 @@ public class ComponentIndexer extends BaseIndexer {
 				searchQuery.addTerm(NterKeys.OWNER_NAME, ownerName, true);
 			}
 		}
+
+        addSearchTerm(searchQuery, searchContext, Field.TITLE, true);
+        addSearchTerm(searchQuery, searchContext, Field.DESCRIPTION, true);
     }
 }

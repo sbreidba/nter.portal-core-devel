@@ -32,16 +32,19 @@ public class NutchConstants {
     public final static String SOLR_AUTH_PASSWORD_PROPERTY = "solr.auth.password";
 
     // Custom Nutch index fields
-    public static final String CLASS_INDEX_TAG = "entryClassName";
-    public static final String CLASS_PK_TAG = "entryClassPK";
-    public static final String COURSE_DETAILS_INDEX_TAG = "courseDetail";
-    public static final String FEED_IRI_INDEX_TAG = "feedIri";
-    public static final String IRI_INDEX_TAG = "entryIri";
-    public static final String TITLE_INDEX_TAG = "entryTitle";
+    // Each field must be prefixed with 'nter_' for solr to automatically detect them
+    public static final String CLASS_INDEX_TAG = "nter_entryClassName";
+    public static final String CLASS_PK_TAG = "nter_entryClassPK";
+    public static final String COURSE_DETAILS_INDEX_TAG = "nter_courseDetail";
+    public static final String FEED_IRI_INDEX_TAG = "nter_feedIri";
+    public static final String IRI_INDEX_TAG = "nter_entryIri";
+    public static final String TITLE_INDEX_TAG = "nter_entryTitle";
+    public static final String COURSE_TITLE_INDEX_TAG = "nter_courseTitle";
 
     // Nutch directory names
     public static final String NUTCH_CRAWLDB = "crawldb";
     public static final String NUTCH_LINKDB = "linkdb";
     public static final String NUTCH_SEGMENTS = "segments";
     public static final String NUTCH_URL = "urls";
+
 }
