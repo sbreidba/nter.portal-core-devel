@@ -22,6 +22,7 @@ package org.nterlearning.crawl.nutch;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Field;
 import org.nterlearning.crawl.nutch.indexer.IndexServer;
 import org.nterlearning.crawl.nutch.indexer.IndexServerFactory;
 import org.nterlearning.datamodel.catalog.model.Component;
@@ -89,7 +90,7 @@ public class IndexTool {
         }
 
         Query queries[] =
-                {(new TermQuery(new Term(NutchConstants.CLASS_INDEX_TAG,
+                {(new TermQuery(new Term(Field.ENTRY_CLASS_NAME,
                         QueryParser.escape(Course.class.getName())))),
                  (new TermQuery(new Term(NutchConstants.IRI_INDEX_TAG,
                          QueryParser.escape(course.getCourseIri()))))};
@@ -111,7 +112,7 @@ public class IndexTool {
         }
 
         Query queries[] =
-                {(new TermQuery(new Term(NutchConstants.CLASS_INDEX_TAG,
+                {(new TermQuery(new Term(Field.ENTRY_CLASS_NAME,
                         QueryParser.escape(Component.class.getName())))),
                  (new TermQuery(new Term(NutchConstants.IRI_INDEX_TAG,
                          QueryParser.escape(component.getComponentIri()))))};

@@ -120,9 +120,9 @@
         <field name="cc" type="string" stored="true" indexed="true" multiValued="true"/>
 
         <!-- fields for NTER -->
-        <field name="nter_feedIri" type="string" stored="true" indexed="false" multiValued="false"/>
-        <field name="nter_entryClassName" type="string" stored="true" indexed="false" multiValued="false"/>
-        <field name="nter_entryIri" type="string" stored="true" indexed="false" multiValued="false"/>
+        <field name="entryClassName" type="string" stored="true" indexed="true" multiValued="false"/>
+        <field name="nter_feedIri" type="string" stored="true" indexed="true" multiValued="false"/>
+        <field name="nter_entryIri" type="string" stored="true" indexed="true" multiValued="false"/>
         <field name="nter_entryTitle" type="text" stored="true" indexed="true" multiValued="false"/>
         <field name="nter_courseDetail" type="string" stored="true" indexed="false" multiValued="false"/>
         <field name="nter_courseTitle" type="text" stored="true" indexed="true" multiValued="false"/>

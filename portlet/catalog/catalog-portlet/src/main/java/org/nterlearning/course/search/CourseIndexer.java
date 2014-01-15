@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.search.*;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.asset.model.AssetCategory;
 import com.liferay.portlet.asset.service.AssetCategoryLocalServiceUtil;
@@ -161,10 +162,8 @@ public class CourseIndexer extends BaseIndexer {
 		doc.addKeyword(NterKeys.POPULARITY, course.getPopularWeight());
 		doc.addKeyword(NterKeys.COURSE_IRI, course.getCourseIri());
 
-        doc.addText(Field.TITLE, course.getTitle("en_US"));
-        doc.addLocalizedText(Field.TITLE, course.getTitleMap());
-        doc.addText(Field.DESCRIPTION, course.getDescription("en_US"));
-        doc.addLocalizedText(Field.DESCRIPTION, course.getDescriptionMap());
+        doc.addText(Field.TITLE, convertLocalizedText(course.getTitleMap()));
+        doc.addText(Field.DESCRIPTION, convertLocalizedText(course.getDescriptionMap()));
 
         Map<Locale, String> categoryTitleMap = new HashMap<Locale, String>();
 		for (AssetCategory assetCategory : assetCategories) {
@@ -203,12 +202,6 @@ public class CourseIndexer extends BaseIndexer {
 				searchQuery.addTerm(NterKeys.OWNER_NAME, ownerName, true);
 			}
 		}
-
-        addSearchTerm(searchQuery, searchContext, Field.TITLE, false);
-        addLocalizedSearchTerm(searchQuery, searchContext, Field.TITLE, false);
-
-        addSearchTerm(searchQuery, searchContext, Field.DESCRIPTION, false);
-        addLocalizedSearchTerm(searchQuery, searchContext, Field.DESCRIPTION, false);
 	}
 
 	@Override
@@ -257,6 +250,17 @@ public class CourseIndexer extends BaseIndexer {
         }
 
         searchQuery.addTerms(COURSE_KEYWORDS_FIELDS, keywords);
+    }
+
+
+    private String convertLocalizedText(Map<Locale, String> text) {
+        StringBuffer fullText = new StringBuffer();
+        for (Map.Entry<Locale, String> entry : text.entrySet()) {
+            fullText.append(entry.getValue());
+            fullText.append(StringPool.SPACE);
+        }
+
+        return fullText.toString();
     }
 
 	private static final Log _log = LogFactoryUtil.getLog(CourseIndexer.class);

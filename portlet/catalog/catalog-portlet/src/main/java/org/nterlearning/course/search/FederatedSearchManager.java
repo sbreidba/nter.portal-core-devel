@@ -227,14 +227,15 @@ public class FederatedSearchManager {
 	private boolean isEntryInvalidCourse(Element el, String portletId,
                                          List<Course> validCourses) {
 
-        String elementClass = el.elementText(NutchConstants.CLASS_INDEX_TAG);
+        String elementClass = el.elementText(Field.ENTRY_CLASS_NAME);
 
-        if (elementClass.equals(Course.class.getName())) {
+        if ((elementClass != null) &&
+                elementClass.equals(Course.class.getName())) {
             String id = null;
             Course course;
             try {
                 if (portletId.equals(NterKeys.COURSE_SEARCH_PORTLET)) {
-                    id = el.elementText(NutchConstants.CLASS_PK_TAG);
+                    id = el.elementText(Field.ENTRY_CLASS_PK);
                     course = CourseLocalServiceUtil.getCourse(Long.valueOf(id));
                 }
                 else {
@@ -270,14 +271,15 @@ public class FederatedSearchManager {
      */
     private boolean isEntryInvalidComponent(Element el, String portletId) {
 
-        String elementClass = el.elementText(NutchConstants.CLASS_INDEX_TAG);
+        String elementClass = el.elementText(Field.ENTRY_CLASS_NAME);
 
-        if (elementClass.equals(Component.class.getName())) {
+        if ((elementClass != null) &&
+                elementClass.equals(Component.class.getName())) {
             Component component;
             String id = null;
             try {
                 if (portletId.equals(NterKeys.COMPONENT_SEARCH_PORTLET)) {
-                    id = el.elementText(NutchConstants.CLASS_PK_TAG);
+                    id = el.elementText(Field.ENTRY_CLASS_PK);
                     component = ComponentLocalServiceUtil.getComponent(Long.valueOf(id));
                 }
                 else {
@@ -364,12 +366,12 @@ public class FederatedSearchManager {
 
         List<OpenSearchResult> results = new ArrayList<OpenSearchResult>();
 
-        String entryClassName = el.elementText("entryClassName");
-        long entryClassPK = GetterUtil.getLong(el.elementText("entryClassPK"));
+        String entryClassName = el.elementText(Field.ENTRY_CLASS_NAME);
+        long entryClassPK = GetterUtil.getLong(el.elementText(Field.ENTRY_CLASS_PK));
         String entryClassIri;
 
         // common result information
-        String entryTitle = el.elementTextTrim("title");
+        String entryTitle = el.elementTextTrim(Field.TITLE);
         String summary = el.elementTextTrim("summary");
 
         String entryHref = (el.element("link") != null)
