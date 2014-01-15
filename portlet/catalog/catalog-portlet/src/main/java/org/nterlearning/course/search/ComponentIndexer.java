@@ -140,6 +140,7 @@ public class ComponentIndexer extends BaseIndexer {
         StringBuffer localeCategoryTitles = new StringBuffer(StringPool.BLANK);
         for (AssetCategory assetCategory : assetCategories) {
             localeCategoryTitles.append(assetCategory.getTitle());
+            localeCategoryTitles.append(StringPool.SPACE);
         }
 
         Document doc = new DocumentImpl();
@@ -228,7 +229,7 @@ public class ComponentIndexer extends BaseIndexer {
             throws Exception {
 
         String ownerName = searchContext.getKeywords();
-        // ensure an ownername is present, and that it does not represent a
+        // ensure an owner name is present, and that it does not represent a
         // field query (field:keyword)
 		if (Validator.isNotNull(ownerName) && (!ownerName.contains(":"))) {
 			if (searchContext.isAndSearch()) {
@@ -239,8 +240,5 @@ public class ComponentIndexer extends BaseIndexer {
 				searchQuery.addTerm(NterKeys.OWNER_NAME, ownerName, true);
 			}
 		}
-
-        addSearchTerm(searchQuery, searchContext, Field.TITLE, true);
-        addSearchTerm(searchQuery, searchContext, Field.DESCRIPTION, true);
     }
 }

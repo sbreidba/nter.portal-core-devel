@@ -23,6 +23,7 @@ package org.nterlearning.crawl.nutch;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -349,7 +350,7 @@ public class CrawlTool {
                         urlOut.write(
                                 fullTextHref
                                         + "\t" + NutchConstants.FEED_IRI_INDEX_TAG + "=" + feedRef.getFeedIri()
-                                        + "\t" + NutchConstants.CLASS_INDEX_TAG + "=" + Component.class.getName()
+                                        + "\t" + Field.ENTRY_CLASS_NAME + "=" + Component.class.getName()
                                         + "\t" + NutchConstants.IRI_INDEX_TAG + "=" + component.getComponentIri()
                                         + "\t" + NutchConstants.TITLE_INDEX_TAG + "=" + component.getTitle()
                                         + "\t" + NutchConstants.COURSE_TITLE_INDEX_TAG + "=" + coursesTitle.toString()
@@ -374,7 +375,7 @@ public class CrawlTool {
                         urlOut.write(
                                 fullTextHref
                                 + "\t" + NutchConstants.FEED_IRI_INDEX_TAG + "=" + feedRef.getFeedIri()
-                                + "\t" + NutchConstants.CLASS_INDEX_TAG + "=" + Course.class.getName()
+                                + "\t" + Field.ENTRY_CLASS_NAME + "=" + Course.class.getName()
                                 + "\t" + NutchConstants.IRI_INDEX_TAG + "=" + course.getCourseIri()
                                 + "\t" + NutchConstants.TITLE_INDEX_TAG + "=" + course.getTitle()
                                 + "\t" + NutchConstants.COURSE_DETAILS_INDEX_TAG + "=http://" + guestUrl + "/course-details?cid=" + course.getCourseId()

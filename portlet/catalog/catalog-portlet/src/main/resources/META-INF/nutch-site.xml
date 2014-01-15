@@ -52,7 +52,7 @@
     </property>
     <property>
         <name>db.parsemeta.to.crawldb</name>
-        <value>lang,nter_entryClassName,nter_entryIri,nter_entryTitle,nter_feedIri,nter_courseDetail,nter_courseTitle</value>
+        <value>lang,entryClassName,nter_entryIri,nter_entryTitle,nter_feedIri,nter_courseDetail,nter_courseTitle</value>
     </property>
     <property>
         <name>db.score.link.external</name>
@@ -98,7 +98,7 @@
     </property>
     <property>
         <name>urlmeta.tags</name>
-        <value>lang,nter_entryClassName,nter_entryIri,nter_entryTitle,nter_feedIri,nter_courseDetail,nter_courseTitle</value>
+        <value>lang,entryClassName,nter_entryIri,nter_entryTitle,nter_feedIri,nter_courseDetail,nter_courseTitle</value>
     </property>
 
     <!-- parser properties -->

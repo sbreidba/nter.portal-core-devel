@@ -32,9 +32,7 @@ public class NutchConstants {
     public final static String SOLR_AUTH_PASSWORD_PROPERTY = "solr.auth.password";
 
     // Custom Nutch index fields
-    // Each field must be prefixed with 'nter_' for solr to automatically detect them
-    public static final String CLASS_INDEX_TAG = "nter_entryClassName";
-    public static final String CLASS_PK_TAG = "nter_entryClassPK";
+    // These must be prefixed with 'nter_' to be indexed correctly
     public static final String COURSE_DETAILS_INDEX_TAG = "nter_courseDetail";
     public static final String FEED_IRI_INDEX_TAG = "nter_feedIri";
     public static final String IRI_INDEX_TAG = "nter_entryIri";
