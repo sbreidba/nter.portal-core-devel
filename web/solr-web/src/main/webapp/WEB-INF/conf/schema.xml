@@ -65,8 +65,8 @@
 
         <!-- NTER fields -->
         <field name="contributor" type="text" indexed="true" stored="true" multiValued="true"/>
-        <field name="componentIri" type="string" indexed="true" stored="false" multiValued="false"/>
-        <field name="courseIri" type="string" indexed="true" stored="false" multiValued="false"/>
+        <field name="componentIri" type="string" indexed="false" stored="true" multiValued="false"/>
+        <field name="courseIri" type="string" indexed="false" stored="true" multiValued="false"/>
 
 		<!-- dynamic fields -->
 		<dynamicField name="*" type="string" indexed="true" stored="true" multiValued="true" />
